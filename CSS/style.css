@@ -1,65 +1,66 @@
 *{
     padding: 0;
     margin: 0;
-    }
+}
     
-    header{
+header{
     height: 45px;
-    }
-    header nav ul{
+}
+header nav ul{
     display: flex;
     margin-left: 70%;
     list-style: none;
-    }
+}
     
-    header nav ul li{
+header nav ul li{
     padding-left: 10%;
-    }
+}
     
-    header a{
-    text-decoration: none;
-    color: rgb(179, 0, 255);
+header a{
+    text-decoration: underline;
+    color:#8a2be2;
     
-    }
+}
     
-    section{
+section{
     height: 100vh;
     border: 1px solid grey;
     display: flex;
     justify-content: center;
     align-items: center;
-    }
+}
     
-    .Container img{
+.Container img{
     height: 300px;
     border-radius: 50%;
-    }
+}
     
-    .Container h2{
+.Container h2{
     margin-top: 2%;
     font-size: 3em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
-    .Container p, ul{
+}
+
+.Container p, ul{
     margin-top: 2%;
     font-size: 1.5rem;
-    }
+}
     
-    footer {
+footer {
     line-height: 40px;
     display: flex;
     justify-content: center;
     font-size: 1rem;
     
-    }
+}
 
-    #intro {
-        background-image: url("../Images/Mandala.jpg");
-        background-repeat: round;
-        }
-    #about{
-        background-color: bisque;
-        }
-    #contact{
-        background-color: blanchedalmond;
-        }
+#intro {
+    background-image: url("../Images/Mandala.jpg");
+    background-repeat: round;
+}
+#about{
+    background-color: bisque;
+}
+#contact{
+    background-color: blanchedalmond;
+}
