@@ -24,37 +24,23 @@ header a{
     color:#8a2be2;
     
 }
-    
-section{
-    height: 100vh;
-    border: 1px solid grey;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-    
-.Container img{
-    height: 300px;
-    border-radius: 50%;
-}
-    
-.Container h2{
+
+body h1 h2 h3 h4 p{
     margin-top: 2%;
-    font-size: 3em;
+    font-size: 1rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.Container p, ul{
+ul{
     margin-top: 2%;
     font-size: 1.25rem;
 }
     
-footer {
-    line-height: 40px;
+footer p {
+    line-height: 10px;
     display: flex;
     justify-content: center;
-    font-size: 1rem;
-    
+    font-size: 10px;
 }
 
 #intro {
