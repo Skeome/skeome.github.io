@@ -1,6 +1,9 @@
 *{
     padding: 0;
     margin: 0;
+    text-align: center;
+    align-items: center;
+    align-content: center;
 }
 
 @media (max-width: 600px) {
