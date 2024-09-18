@@ -63,9 +63,15 @@ footer p {
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
-    background-color: #7F7F7F;
-    color:#d400ff;
+    background-color: #ff00ff;
+    color:#000000;
     border: none;
+}
+
+.button:hover {
+    background-color: #FF00FF;
+    color: #FFFFFF;
+
 }
 
 #intro {
