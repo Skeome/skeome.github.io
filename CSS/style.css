@@ -12,12 +12,17 @@
     height: 400;
 }
 header{
-    height: 45px;
+    height: 50px;
 }
+
+header nav{
+    background-color: lavender;
+}
+
 header nav ul{
     display: inline-flex;
     list-style: none;
-    text-align: center;
+    margin: auto;
 }
     
 header nav ul li{
