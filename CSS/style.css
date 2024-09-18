@@ -59,8 +59,7 @@ footer p {
     background-repeat: round;
 }
 #about{
-    background-image: url("../Images/Mandala.jpg");
-    background-repeat: round;
+    background-color: bisque;
 }
 #contact{
     background-color: blanchedalmond;
