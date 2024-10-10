@@ -2,7 +2,7 @@ let song;
 let amp;
 
 function preload() {
-    song=loadSound('Media/Audio/Journey to Another World.wav');
+    song=loadSound('Media/Audio/Journey to Another World.ogg');
 }
 
 function setup(){
