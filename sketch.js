@@ -1,21 +1,24 @@
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-    audioContext = new AudioContext();
-    analyzer = new AnalyserNode(audioContext);
-    source = new AudioContext.createMediaElementSource(document.getElementById('audio-file'));
-    source.connect(analyzer);
-    analyzer.connect(audioContext.destination);
-    fft = new FFT(analyzer.fftSize);
+let song;
+let fft; let smoothing = 0.8; let bins = 512;
+let waveform = []; let r = 100;
+
+function preload(){
+    song = loadSound("Media/Audio/Journey-to-Another-World.wav");
 }
 
-function draw() {
-    background(0);
-    fft.analyze();
+function setup(){
+    createCanvas(400, 400);
+    song.play();
+    fft = new p5.FFT(smoothing, bins);
+}
 
-    for (let i = 0; i < fft.spectrum.length; i++) {
-        let amplitude = fft.spectrum[i];
-        let barHeight = map(amplitude, 0, 255, 0, height);
-        fill(255, 0, 0);
-        rect(i * (width / fft.spectrum.length), height - barHeight, width / fft.spectrum.length, barHeight);
+function draw(){
+    background(220);
+    waveform = fft.waveform();
+    
+    for(let i=0; i<waveform.length; i++) {
+        let y = height/2 + map(waveform[i], -1, 1, -removeEventListener, r);
+        ellipse(i, y, 1, 1);
     }
+
 }
