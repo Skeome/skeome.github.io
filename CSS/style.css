@@ -4,19 +4,27 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
 .container img {
     width: 100%;
     max-width: 300px;
     height: auto;
+    border-radius: 50%;
 }
 
 header {
     width: 100%;
     height: auto;
+    background-color: lavender;
+    padding: 10px 0;
 }
 
 header nav {
-    background-color: lavender;
     width: 100%;
 }
 
@@ -33,28 +41,35 @@ header nav ul li {
 }
 
 header a {
-    text-decoration: underline;
+    text-decoration: none;
     color: #8a2be2;
+    font-weight: bold;
 }
 
-body h1, body h2, body h3, body h4, body p {
-    margin-top: 2%;
-    font-size: 1rem;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+header a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, p {
+    margin: 20px 0;
+    text-align: center;
 }
 
 ul {
     padding: 0;
     list-style: none;
-    margin-top: 2%;
+    margin: 20px 0;
     font-size: 1.25rem;
+    text-align: center;
 }
 
 footer p {
-    line-height: 10px;
+    line-height: 1.5;
     display: flex;
     justify-content: center;
-    font-size: 10px;
+    font-size: 0.875rem;
+    padding: 10px 0;
+    background-color: #f1f1f1;
 }
 
 .button {
@@ -63,12 +78,13 @@ footer p {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 10px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
     background-color: #ff00ff;
     color: #000000;
     border: none;
+    border-radius: 5px;
 }
 
 .button:hover {
@@ -78,9 +94,12 @@ footer p {
 
 #intro, #about, #contact, #media {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
     min-height: 100vh; /* Ensure sections take full viewport height */
+    padding: 20px;
 }
 
 #intro {
