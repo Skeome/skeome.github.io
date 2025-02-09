@@ -76,6 +76,14 @@ footer p {
     color: #FFFFFF;
 }
 
+#intro, #about, #contact, #media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh; /* Ensure sections take full viewport height */
+}
+
 #intro {
     background-image: url("../Media/Images/Mandala.jpg");
     background-repeat: round;
