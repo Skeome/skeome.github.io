@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL SCHOLARSHIP :: EGYPTOLOGY WIKI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .egypt-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .egypt-header-color {
+            color: #d4af37;
+            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+        }
+        .egypt-text-color {
+            color: #f0e68c;
+        }
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            margin: 3rem 0;
+        }
+        .nav-link {
+            color: #00d1ff;
+            text-decoration: underline;
+        }
+        .nav-link:hover {
+            color: #00ffae;
+        }
+        .repo-card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-black egypt-bg">
+
+    <div class="container mx-auto py-8">
+        <header class="text-center py-8">
+            <h1 class="text-4xl egypt-header-color font-bold mb-4">DIGITAL SCHOLARSHIP</h1>
+            <p class="text-gray-500 egypt-text-color">// THE DIGITAL SCRIBE'S ARSENAL //</p>
+        </header>
+
+        <main class="text-gray-300 egypt-text-color px-4">
+            <nav class="mb-8 text-sm">
+                <a href="index.html" class="nav-link">Wiki Home</a> > Digital Scholarship
+            </nav>
+
+            <section class="mb-12">
+                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Institutional Foundations</h2>
+                <p class="mb-4">
+                    Modern Egyptology is rooted in the convergence of archaeological rigor and digital accessibility. These repositories provide high-resolution imagery and translated primary sources essential for the <a href="../index.html" class="nav-link">Egyptology Research Project</a>.
+                </p>
+            </section>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-12">
+                <div class="repo-card">
+                    <h4 class="font-bold text-amber-400">UCLA (UEE)</h4>
+                    <p class="text-xs opacity-70 mb-2">Encyclopedic repository of peer-reviewed articles.</p>
+                    <a href="https://uee.ucla.edu/" target="_blank" class="nav-link text-xs">Access Portal</a>
+                </div>
+                <div class="repo-card">
+                    <h4 class="font-bold text-amber-400">TLA</h4>
+                    <p class="text-xs opacity-70 mb-2">Thesaurus Linguae Aegyptiae: Searchable text database.</p>
+                    <a href="https://thesaurus-linguae-aegyptiae.de/" target="_blank" class="nav-link text-xs">Access Portal</a>
+                </div>
+                <div class="repo-card">
+                    <h4 class="font-bold text-amber-400">PAPYRI.INFO</h4>
+                    <p class="text-xs opacity-70 mb-2">High-res images and transcriptions of papyrus documents.</p>
+                    <a href="https://papyri.info/" target="_blank" class="nav-link text-xs">Access Portal</a>
+                </div>
+                <div class="repo-card">
+                    <h4 class="font-bold text-amber-400">JSESH</h4>
+                    <p class="text-xs opacity-70 mb-2">Professional-standard word processor for Hieroglyphs.</p>
+                    <a href="https://jsesh.qenherkhopeshef.org/" target="_blank" class="nav-link text-xs">Download Tool</a>
+                </div>
+            </div>
+
+            <section class="mb-12">
+                <h2 class="text-2xl egypt-header-color mb-4">Museum Collections</h2>
+                <p class="mb-4">
+                    The physical evidence of Kemet is preserved in global archives. The <b>British Museum</b> and the <b>Metropolitan Museum of Art</b> offer comprehensive digital catalogs of stelae, statues, and ritual objects.
+                </p>
+            </section>
+
+            <hr class="section-divider">
+
+            <section class="mb-12">
+                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
+                <ul class="list-disc list-inside">
+                    <li><a href="medical-papyri.html" class="nav-link">Medical Papyri (Ebers & Smith)</a></li>
+                    <li><a href="funerary-texts.html" class="nav-link">Funerary Corpus (Online Translations)</a></li>
+                    <li><a href="scripts-evolution.html" class="nav-link">Scripts Evolution (Paleography)</a></li>
+                </ul>
+            </section>
+
+            <section class="text-center">
+                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
+            </section>
+        </main>
+
+        <footer class="text-center py-8 mt-8">
+            <p class="text-gray-600">// DATA INTEGRITY: VERIFIED // <span class="egypt-text-color">𓋹</span></p>
+        </footer>
+    </div>
+
+</body>
+</html>
