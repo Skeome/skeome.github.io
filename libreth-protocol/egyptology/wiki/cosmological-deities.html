@@ -3,104 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSMOLOGICAL DEITIES :: EGYPTOLOGY WIKI</title>
+    <title>COSMOLOGICAL DEITIES :: PILLARS OF EXISTENCE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓇯 𓇃 𓇶 𓆣';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">COSMOLOGICAL DEITIES</h1>
-            <p class="text-gray-500 egypt-text-color">// THE PILLARS OF EXISTENCE: EARTH, SKY, AND TRANSFORMATION //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">COSMOLOGICAL DEITIES</h1>
+        <p class="page-subtitle">// THE PILLARS OF EXISTENCE :: EARTH, SKY, AND BECOMING //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="pantheon.html" class="nav-link">The Pantheon</a> > Cosmological Deities
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="pantheon.html">THE PANTHEON</a> &gt; COSMOLOGICAL DEITIES
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Earth and Sky: Geb and Nut</h2>
-                <p class="mb-4">
-                    The fundamental duality of the physical universe is represented by the siblings <b>Geb</b> (Earth) and <b>Nut</b> (Sky). In Egyptian art, Nut is shown arched over Geb, her body covered in stars, representing the vault of heaven, while Geb lies below, symbolizing the fertile land.
-                </p>
-                <div class="grid md:grid-cols-2 gap-4 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Nut: The Celestial Mother</h4>
-                        <p class="text-sm">Nut swallows the sun each evening and births it each morning, a cycle that directly parallels the <a href="solar-barque.html" class="nav-link">Solar Barque’s</a> journey. She is the cosmic container of time and reality.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Geb: The Great Cackler</h4>
-                        <p class="text-sm">The earth god, whose laughter was believed to cause earthquakes. He is the material foundation and the seat of the throne of Egypt.</p>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Moment of Creation: The Benben</h2>
-                <p class="mb-4">
-                    The transition from the unstructured potential of <a href="maat-isfet.html" class="nav-link">Nun</a> to the ordered world began with the emergence of the <b>Benben</b>—the primordial mound. This event was signaled by the arrival of the <b>Benu Bird</b> (the Egyptian phoenix), who alighted upon the mound and let out a primary cry, the <b>cosmic vibration</b> that initiated the beginning of Time (<i>Zep Tepi</i>).
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Khepri: The Principle of Becoming</h4>
-                    <p class="text-sm">Represented by the scarab beetle, <b>Khepri</b> is the morning aspect of the sun god. He embodies the principle of <i>Kheper</i>—perpetual transformation and self-generation. He is the active force that rolls the sun across the awareness field, ensuring that reality is never static but always in a state of creative evolution.</p>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="ennead-ogdoad.html" class="nav-link">The Ennead and Ogdoad</a></li>
-                    <li><a href="pantheon.html" class="nav-link">Individual Deity Directory</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Composite Soul & the Ka</a></li>
-                    <li><a href="solar-barque.html" class="nav-link">The Solar Barque</a></li>
-                    <li><a href="osiris-myth.html" class="nav-link">The Myth of Osiris and Set</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// COSMOLOGICAL AXIS: ALIGNED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Space — Geb and Nut</a></li>
+            <li><a href="#zep-tepi">II. Zep Tepi — The First Time and the Benben</a></li>
+            <li><a href="#transformation">III. Kheper — The Principle of Becoming</a></li>
+            <li><a href="#primordial">IV. Nun — The Waters of Potential</a></li>
+            <li><a href="#shune">V. Shu and Tefnut — The Creative Breath</a></li>
+            <li><a href="#ptah">VI. Ptah — The Architect of Form</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Space — Geb and Nut</h2>
+        <p>
+            In the Kemetic cosmological framework, the physical universe is defined by the fundamental duality of <strong>Geb</strong> (the Earth) and <strong>Nut</strong> (the Sky). Unlike many other ancient cultures where the earth is feminine and the sky masculine, the Egyptians viewed the Earth as a masculine principle and the Sky as feminine.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>NUT: THE CELESTIAL CONTAINER</h4>
+                <p>Nut is typically depicted arched over the earth, her body covered in stars. She is the cosmic container of time and reality, swallowing the sun each evening and birthing it each morning. She represents the limit of the manifest universe.</p>
+            </div>
+            <div class="info-card">
+                <h4>GEB: THE MATERIAL FOUNDATION</h4>
+                <p>Geb lies beneath his sister Nut, representing the fertile land and the physical world. His laughter was believed to cause earthquakes, and he was the father of the Osirian generation of gods. He is the seat of the Pharaoh's authority.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: ZEP TEPI -->
+    <section id="zep-tepi">
+        <h2 class="section-head">II. Zep Tepi — The First Time and the Benben</h2>
+        <p>
+            The moment of creation, or <strong>Zep Tepi</strong> ("The First Time"), began with the emergence of the <strong>Benben</strong> mound from the primordial waters. This primordial mound represents the first point of stable matter within the awareness field.
+        </p>
+        <p>
+            The <strong>Benu Bird</strong> (the Egyptian phoenix) alighted upon the Benben and let out a primary cry — the cosmic vibration that initiated the flow of time. This event alchemically transformed unstructured potential into ordered reality. The pyramidal shape of the <i>benben-stone</i> served as the prototype for the capstones of obelisks and pyramids.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: TRANSFORMATION -->
+    <section id="transformation">
+        <h2 class="section-head">III. Kheper — The Principle of Becoming</h2>
+        <p>
+            <strong>Khepri</strong>, represented by the scarab beetle, is the morning aspect of the sun god and the personification of the principle of <strong>Kheper</strong> (Becoming). He represents the active, transformative force that allows potential to become actual.
+        </p>
+        <p>
+            In the internal path of <a href="alchemy.html" class="nl">Alchemy</a>, Khepri is the principle of self-generation. Just as the scarab was believed to be born from its own substance, the initiate must use <strong>Heka</strong> to generate their own transfigured body (the Akh) from the base materials of their physical existence.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: PRIMORDIAL -->
+    <section id="primordial">
+        <h2 class="section-head">IV. Nun — The Waters of Potential</h2>
+        <p>
+            Before creation, and surrounding the ordered world, is <strong>Nun</strong> — the primordial waters of absolute potential. Nun is not "nothingness," but rather "everythingness" in an unstructured, non-manifest state. It is the repository of all possible frequencies.
+        </p>
+        <p>
+            While the ordered world is governed by <a href="maat-isfet.html" class="nl">Ma'at</a>, Nun remains the source of the raw energy (Heka) that must be continuously drawn upon to sustain that order. The temple lakes of Ancient Egypt were physical resonators for this primordial ocean.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓇯 𓇃 𓇶 𓆣</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="ennead-ogdoad.html">The Ennead & Ogdoad</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="solar-barque.html">The Solar Barque</a></li>
+            <li><a href="memphite-theology.html">Memphite Theology</a></li>
+            <li><a href="alchemy.html">Alchemy & Kemet</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="pantheon.html">The Pantheon Directory</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    COSMOLOGICAL AXIS: ALIGNED</p>
+</footer>
 
 </body>
 </html>
