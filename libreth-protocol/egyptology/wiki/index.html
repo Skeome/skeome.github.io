@@ -5,375 +5,746 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EGYPTOLOGY WIKI :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(0,80,160,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .wiki-link {
+        .page-header::before {
+            content: '𓏲𓏴'; /* Scroll/Book symbol */
             display: block;
-            padding: 1rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            font-size: 2.5rem;
+            color: var(--gold-dim);
             margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(20, 20, 20, 0.5);
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
         }
-        .wiki-link:hover {
-            border-color: #d4af37;
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateX(10px);
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
         }
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS - Not used on index, but keeping styles consistent */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+        .toc-list .toc-sub { padding-left: 1.5rem; opacity: 0.8; font-size: 0.88rem; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+        h4.mini-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            margin: 1.5rem 0 0.5rem;
+            letter-spacing: 0.05em;
+            opacity: 0.9;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-left: 3px solid var(--gold);
+            padding: 1rem 1.5rem;
             margin: 2rem 0;
+            background: rgba(212,175,55,0.04);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-bright);
+        }
+        .pull-quote cite {
+            display: block;
+            font-style: normal;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            font-family: 'VT323', monospace;
+            letter-spacing: 0.08em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+        @media(max-width:780px) { .card-grid-3 { grid-template-columns: 1fr 1fr; } }
+        @media(max-width:500px) { .card-grid-3 { grid-template-columns: 1fr; } }
+
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+            transition: border-color 0.3s;
+        }
+        .info-card:hover { border-color: rgba(212,175,55,0.5); }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        .info-card.cyan-accent { border-color: rgba(0,180,220,0.25); }
+        .info-card.cyan-accent h4 { color: var(--cyan); }
+        .info-card.cyan-accent:hover { border-color: rgba(0,180,220,0.5); }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+        .data-table tr:hover td { background: rgba(212,175,55,0.03); }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
+            margin: 3rem 0;
+        }
+
+        /* GLYPH MARKER */
+        .glyph-marker {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold-dim);
+            opacity: 0.4;
+            letter-spacing: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
+        }
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        @media(max-width:700px) { .sidebar-note { float: none; width: 100%; margin: 1rem 0; } }
+
+        /* PRACTICAL NOTE */
+        .practical-note {
+            border: 1px solid rgba(0,210,100,0.2);
+            background: rgba(0,30,15,0.6);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .practical-note .pn-title {
+            font-family: 'Cinzel', serif;
+            color: #00e87a;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        .practical-note p { font-size: 0.93rem; margin: 0; }
+
+        /* WARNING/CAUTION */
+        .caution-note {
+            border: 1px solid rgba(200,100,0,0.3);
+            background: rgba(30,15,0,0.7);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .caution-note .cn-title {
+            font-family: 'Cinzel', serif;
+            color: #e8800a;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* RELATED LINKS */
+        .related-links {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 1.5rem 2rem;
+            margin-top: 3rem;
+        }
+        .related-links h3 {
+            font-family: 'VT323', monospace;
+            color: var(--gold-dim);
+            letter-spacing: 0.15em;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .related-links ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+        @media(max-width:600px) { .related-links ul { grid-template-columns: 1fr; } }
+        .related-links a { color: var(--cyan); text-decoration: none; font-size: 0.92rem; }
+        .related-links a:hover { color: #00ffae; }
+        .related-links a::before { content: '→ '; opacity: 0.5; }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        /* NAV LINK INLINE */
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
+
+        /* Specific Wiki Index Styles */
+        .wiki-link-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better responsiveness */
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .wiki-link-item {
+            display: block;
+            padding: 1.1rem 1.2rem;
+            border: 1px solid rgba(0,180,220,0.2); /* Cyan border */
+            background: rgba(0,20,30,0.7); /* Dark blue/cyan background */
+            transition: all 0.2s ease-out;
+            text-decoration: none;
+        }
+        .wiki-link-item:hover {
+            border-color: var(--cyan);
+            background: rgba(0,180,220,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,209,255,0.1);
+        }
+        .wiki-link-item .title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--cyan); /* Cyan title */
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        .wiki-link-item .description {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.4;
+            display: block;
+        }
+        .category-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr; /* Default to single column */
+        }
+        @media (min-width: 768px) { /* md */
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens and up */
+            }
+        }
+        @media (min-width: 1024px) { /* lg */
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr); /* Four columns on large screens and up */
+            }
         }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">EGYPTOLOGY WIKI :: LIBRETH ARCHIVE</h1>
-            <p class="text-gray-500 egypt-text-color">// SYSTEMATIC INDEX OF KEMETIC METAPHYSICS //</p>
-        </header>
+<div class="page-wrap">
+    <!-- Header -->
+    <header class="page-header">
+        <h1 class="page-title">EGYPTOLOGY WIKI</h1>
+        <p class="page-subtitle">// SYSTEMATIC INDEX OF KEMETIC METAPHYSICS // LIBRETH ARCHIVE</p>
+        <p class="page-epithet">
+            "The tapestry of Kemet unrolls: every thread a story, every pattern a truth. Explore the wisdom woven into the fabric of time."
+        </p>
+    </header>
 
-        <main class="px-4">
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Archival Categories</h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Column 1: Metaphysics -->
-                    <div>
-                        <h3 class="text-2xl egypt-header-color mb-4">Metaphysical Systems</h3>
-                        <a href="heka.html" class="wiki-link">
-                            <span class="font-bold block">HEKA</span>
-                            <span class="text-sm opacity-70">The primordial force of magic and creation.</span>
+    <!-- Main Content -->
+    <main class="text-gray-300 px-4">
+        <section class="mb-12">
+            <h2 class="section-head">Archival Categories</h2>
+
+            <div class="category-grid">
+                <!-- Column 1: Metaphysics -->
+                <div>
+                    <h3 class="sub-head">Metaphysical Systems</h3>
+                    <div class="wiki-link-container">
+                        <a href="heka.html" class="wiki-link-item">
+                            <span class="title">HEKA</span>
+                            <span class="description">The primordial force of magic and creation.</span>
                         </a>
-                        <a href="sia.html" class="wiki-link">
-                            <span class="font-bold block">SIA</span>
-                            <span class="text-sm opacity-70">Divine Perception and the conceptual heart.</span>
+                        <a href="sia.html" class="wiki-link-item">
+                            <span class="title">SIA</span>
+                            <span class="description">Divine Perception and the conceptual heart.</span>
                         </a>
-                        <a href="hu.html" class="wiki-link">
-                            <span class="font-bold block">HU</span>
-                            <span class="text-sm opacity-70">Authoritative Utterance and the creative Word.</span>
+                        <a href="hu.html" class="wiki-link-item">
+                            <span class="title">HU</span>
+                            <span class="description">Authoritative Utterance and the creative Word.</span>
                         </a>
-                        <a href="maat-isfet.html" class="wiki-link">
-                            <span class="font-bold block">MA'AT & ISFET</span>
-                            <span class="text-sm opacity-70">Cosmic order versus primordial chaos.</span>
+                        <a href="maat-isfet.html" class="wiki-link-item">
+                            <span class="title">MA'AT & ISFET</span>
+                            <span class="description">Cosmic order versus primordial chaos.</span>
                         </a>
-                        <a href="composite-soul.html" class="wiki-link">
-                            <span class="font-bold block">THE COMPOSITE SOUL</span>
-                            <span class="text-sm opacity-70">Analysis of the Khat, Ka, Ba, Akh, and Ren.</span>
+                        <a href="composite-soul.html" class="wiki-link-item">
+                            <span class="title">THE COMPOSITE SOUL</span>
+                            <span class="description">Analysis of the Khat, Ka, Ba, Akh, and Ren.</span>
                         </a>
-                        <a href="ren-power-names.html" class="wiki-link">
-                            <span class="font-bold block">THE POWER OF NAMES</span>
-                            <span class="text-sm opacity-70">Ontological significance of the Ren.</span>
+                        <a href="ren-power-names.html" class="wiki-link-item">
+                            <span class="title">THE POWER OF NAMES</span>
+                            <span class="description">Ontological significance of the Ren.</span>
                         </a>
-                        <a href="color-symbolism.html" class="wiki-link">
-                            <span class="font-bold block">COLOR SYMBOLISM</span>
-                            <span class="text-sm opacity-70">The theological language of iwn.</span>
+                        <a href="color-symbolism.html" class="wiki-link-item">
+                            <span class="title">COLOR SYMBOLISM</span>
+                            <span class="description">The theological language of iwn.</span>
                         </a>
-                        <a href="sacred-geography.html" class="wiki-link">
-                            <span class="font-bold block">SACRED GEOGRAPHY</span>
-                            <span class="text-sm opacity-70">The Nile as the axis of creation.</span>
+                        <a href="sacred-geography.html" class="wiki-link-item">
+                            <span class="title">SACRED GEOGRAPHY</span>
+                            <span class="description">The Nile as the axis of creation.</span>
                         </a>
-                        <a href="pantheon.html" class="wiki-link">
-                            <span class="font-bold block">THE PANTHEON</span>
-                            <span class="text-sm opacity-70">Directory of deities and their magical domains.</span>
+                        <a href="pantheon.html" class="wiki-link-item">
+                            <span class="title">THE PANTHEON</span>
+                            <span class="description">Directory of deities and their magical domains.</span>
                         </a>
-                        <a href="ennead-ogdoad.html" class="wiki-link">
-                            <span class="font-bold block">THE ENNEAD & OGDOAD</span>
-                            <span class="text-sm opacity-70">Cosmological groupings: Heliopolis & Hermopolis.</span>
+                        <a href="ennead-ogdoad.html" class="wiki-link-item">
+                            <span class="title">THE ENNEAD & OGDOAD</span>
+                            <span class="description">Cosmological groupings: Heliopolis & Hermopolis.</span>
                         </a>
-                        <a href="hathor.html" class="wiki-link">
-                            <span class="font-bold block">HATHOR</span>
-                            <span class="text-sm opacity-70">The Eye of Ra: Love, Music, and Joy.</span>
+                        <a href="hathor.html" class="wiki-link-item">
+                            <span class="title">HATHOR</span>
+                            <span class="description">The Eye of Ra: Love, Music, and Joy.</span>
                         </a>
-                        <a href="anubis.html" class="wiki-link">
-                            <span class="font-bold block">ANUBIS</span>
-                            <span class="text-sm opacity-70">Master of Secrets: Mummification and Psychopomp.</span>
+                        <a href="anubis.html" class="wiki-link-item">
+                            <span class="title">ANUBIS</span>
+                            <span class="description">Master of Secrets: Mummification and Psychopomp.</span>
                         </a>
-                        <a href="cosmological-deities.html" class="wiki-link">
-                            <span class="font-bold block">COSMOLOGICAL DEITIES</span>
-                            <span class="text-sm opacity-70">Khnum, Sobek, Khepri, Nut, and Geb.</span>
+                        <a href="cosmological-deities.html" class="wiki-link-item">
+                            <span class="title">COSMOLOGICAL DEITIES</span>
+                            <span class="description">Khnum, Sobek, Khepri, Nut, and Geb.</span>
                         </a>
-                        <a href="apep.html" class="wiki-link">
-                            <span class="font-bold block">APEP (APOPHIS)</span>
-                            <span class="text-sm opacity-70">The serpent of chaos and entropy.</span>
+                        <a href="apep.html" class="wiki-link-item">
+                            <span class="title">APEP (APOPHIS)</span>
+                            <span class="description">The serpent of chaos and entropy.</span>
                         </a>
-                        <a href="solar-barque.html" class="wiki-link">
-                            <span class="font-bold block">THE SOLAR BARQUE</span>
-                            <span class="text-sm opacity-70">Ra's nocturnal journey through the Duat.</span>
+                        <a href="solar-barque.html" class="wiki-link-item">
+                            <span class="title">THE SOLAR BARQUE</span>
+                            <span class="description">Ra's nocturnal journey through the Duat.</span>
                         </a>
-                        <a href="weighing-of-the-heart.html" class="wiki-link">
-                            <span class="font-bold block">THE WEIGHING OF THE HEART</span>
-                            <span class="text-sm opacity-70">Psychostasia in the Hall of Two Truths.</span>
+                        <a href="weighing-of-the-heart.html" class="wiki-link-item">
+                            <span class="title">THE WEIGHING OF THE HEART</span>
+                            <span class="description">Psychostasia in the Hall of Two Truths.</span>
                         </a>
-                        <a href="osiris-myth.html" class="wiki-link">
-                            <span class="font-bold block">THE OSIRIS MYTH</span>
-                            <span class="text-sm opacity-70">Foundational paradigm of death and resurrection.</span>
+                        <a href="osiris-myth.html" class="wiki-link-item">
+                            <span class="title">THE OSIRIS MYTH</span>
+                            <span class="description">Foundational paradigm of death and resurrection.</span>
                         </a>
-                        <a href="memphite-theology.html" class="wiki-link">
-                            <span class="font-bold block">MEMPHITE THEOLOGY</span>
-                            <span class="text-sm opacity-70">Ptah and the creation through Heart and Tongue.</span>
+                        <a href="memphite-theology.html" class="wiki-link-item">
+                            <span class="title">MEMPHITE THEOLOGY</span>
+                            <span class="description">Ptah and the creation through Heart and Tongue.</span>
                         </a>
-                        <a href="wisdom-literature.html" class="wiki-link">
-                            <span class="font-bold block">WISDOM LITERATURE</span>
-                            <span class="text-sm opacity-70">Sebayt: The ethical instructions of Ma'at.</span>
+                        <a href="wisdom-literature.html" class="wiki-link-item">
+                            <span class="title">WISDOM LITERATURE</span>
+                            <span class="description">Sebayt: The ethical instructions of Ma'at.</span>
                         </a>
                     </div>
 
-                    <!-- Column 2: History & Framework -->
+                    <!-- Column 2: Chronological Framework -->
                     <div>
-                        <h3 class="text-2xl egypt-header-color mb-4">Chronological Framework</h3>
-                        <a href="timeline.html" class="wiki-link">
-                            <span class="font-bold block">CHRONOLOGICAL INDEX</span>
-                            <span class="text-sm opacity-70">Overview of spiritual and political epochs.</span>
-                        </a>
-                        <a href="predynastic.html" class="wiki-link">
-                            <span class="font-bold block">PREDYNASTIC PERIOD</span>
-                            <span class="text-sm opacity-70">Cultural roots and the Nekhen brewery.</span>
-                        </a>
-                        <a href="early-dynastic.html" class="wiki-link">
-                            <span class="font-bold block">EARLY DYNASTIC</span>
-                            <span class="text-sm opacity-70">Unification and the Narmer Palette.</span>
-                        </a>
-                        <a href="old-kingdom.html" class="wiki-link">
-                            <span class="font-bold block">OLD KINGDOM</span>
-                            <span class="text-sm opacity-70">The Pyramid Age and solar theology.</span>
-                        </a>
-                        <a href="first-intermediate.html" class="wiki-link">
-                            <span class="font-bold block">1ST INTERMEDIATE</span>
-                            <span class="text-sm opacity-70">Decentralization and the Coffin Texts.</span>
-                        </a>
-                        <a href="middle-kingdom.html" class="wiki-link">
-                            <span class="font-bold block">MIDDLE KINGDOM</span>
-                            <span class="text-sm opacity-70">The Classical Age and Amun-Ra.</span>
-                        </a>
-                        <a href="second-intermediate-period.html" class="wiki-link">
-                            <span class="font-bold block">2ND INTERMEDIATE</span>
-                            <span class="text-sm opacity-70">Fragmentation and the age of five powers.</span>
-                        </a>
-                        <a href="hyksos-exchange.html" class="wiki-link">
-                            <span class="font-bold block">HYKSOS EXCHANGE</span>
-                            <span class="text-sm opacity-70">Technological shifts and text preservation.</span>
-                        </a>
-                        <a href="new-kingdom.html" class="wiki-link">
-                            <span class="font-bold block">NEW KINGDOM</span>
-                            <span class="text-sm opacity-70">Imperial peak and the Book of the Dead.</span>
-                        </a>
-                        <a href="amarna-period.html" class="wiki-link">
-                            <span class="font-bold block">AMARNA PERIOD</span>
-                            <span class="text-sm opacity-70">Akhenaten's heresy and Atenism.</span>
-                        </a>
-                        <a href="third-intermediate-period.html" class="wiki-link">
-                            <span class="font-bold block">3RD INTERMEDIATE</span>
-                            <span class="text-sm opacity-70">Fragmentation and the Kushite Revival.</span>
-                        </a>
-                        <a href="late-period.html" class="wiki-link">
-                            <span class="font-bold block">LATE PERIOD</span>
-                            <span class="text-sm opacity-70">Saite Renaissance and archaism.</span>
-                        </a>
-                        <a href="kushite-revival.html" class="wiki-link">
-                            <span class="font-bold block">KUSHITE REVIVAL</span>
-                            <span class="text-sm opacity-70">Nubian pharaohs as restorers of Ma'at.</span>
-                        </a>
-                        <a href="ptolemaic-period.html" class="wiki-link">
-                            <span class="font-bold block">PTOLEMAIC PERIOD</span>
-                            <span class="text-sm opacity-70">Greco-Egyptian synthesis in Alexandria.</span>
-                        </a>
-                        <a href="roman-period.html" class="wiki-link">
-                            <span class="font-bold block">ROMAN PERIOD</span>
-                            <span class="text-sm opacity-70">The final hieroglyphs and Hermeticism.</span>
-                        </a>
-                        <a href="sed-festival.html" class="wiki-link">
-                            <span class="font-bold block">SED FESTIVAL</span>
-                            <span class="text-sm opacity-70">The royal jubilee and ritual renewal.</span>
-                        </a>
+                        <h3 class="sub-head">Chronological Framework</h3>
+                        <div class="wiki-link-container">
+                            <a href="timeline.html" class="wiki-link-item">
+                                <span class="title">CHRONOLOGICAL INDEX</span>
+                                <span class="description">Overview of spiritual and political epochs.</span>
+                            </a>
+                            <a href="predynastic.html" class="wiki-link-item">
+                                <span class="title">PREDYNASTIC PERIOD</span>
+                                <span class="description">Cultural roots and the Nekhen brewery.</span>
+                            </a>
+                            <a href="early-dynastic.html" class="wiki-link-item">
+                                <span class="title">EARLY DYNASTIC</span>
+                                <span class="description">Unification and the Narmer Palette.</span>
+                            </a>
+                            <a href="old-kingdom.html" class="wiki-link-item">
+                                <span class="title">OLD KINGDOM</span>
+                                <span class="description">The Pyramid Age and solar theology.</span>
+                            </a>
+                            <a href="first-intermediate.html" class="wiki-link-item">
+                                <span class="title">1ST INTERMEDIATE</span>
+                                <span class="description">Decentralization and the Coffin Texts.</span>
+                            </a>
+                            <a href="middle-kingdom.html" class="wiki-link-item">
+                                <span class="title">MIDDLE KINGDOM</span>
+                                <span class="description">The Classical Age and Amun-Ra.</span>
+                            </a>
+                            <a href="second-intermediate-period.html" class="wiki-link-item">
+                                <span class="title">2ND INTERMEDIATE</span>
+                                <span class="description">Fragmentation and the age of five powers.</span>
+                            </a>
+                            <a href="hyksos-exchange.html" class="wiki-link-item">
+                                <span class="title">HYKSOS EXCHANGE</span>
+                                <span class="description">Technological shifts and text preservation.</span>
+                            </a>
+                            <a href="new-kingdom.html" class="wiki-link-item">
+                                <span class="title">NEW KINGDOM</span>
+                                <span class="description">Imperial peak and the Book of the Dead.</span>
+                            </a>
+                            <a href="amarna-period.html" class="wiki-link-item">
+                                <span class="title">AMARNA PERIOD</span>
+                                <span class="description">Akhenaten's heresy and Atenism.</span>
+                            </a>
+                            <a href="third-intermediate-period.html" class="wiki-link-item">
+                                <span class="title">3RD INTERMEDIATE</span>
+                                <span class="description">Fragmentation and the Kushite Revival.</span>
+                            </a>
+                            <a href="late-period.html" class="wiki-link-item">
+                                <span class="title">LATE PERIOD</span>
+                                <span class="description">Saite Renaissance and archaism.</span>
+                            </a>
+                            <a href="kushite-revival.html" class="wiki-link-item">
+                                <span class="title">KUSHITE REVIVAL</span>
+                                <span class="description">Nubian pharaohs as restorers of Ma'at.</span>
+                            </a>
+                            <a href="ptolemaic-period.html" class="wiki-link-item">
+                                <span class="title">PTOLEMAIC PERIOD</span>
+                                <span class="description">Greco-Egyptian synthesis in Alexandria.</span>
+                            </a>
+                            <a href="roman-period.html" class="wiki-link-item">
+                                <span class="title">ROMAN PERIOD</span>
+                                <span class="description">The final hieroglyphs and Hermeticism.</span>
+                            </a>
+                            <a href="sed-festival.html" class="wiki-link-item">
+                                <span class="title">SED FESTIVAL</span>
+                                <span class="description">The royal jubilee and ritual renewal.</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Column 3: Alchemical Transmission -->
                     <div>
-                        <h3 class="text-2xl egypt-header-color mb-4">Alchemical Transmission</h3>
-                        <a href="chain-of-philosophy.html" class="wiki-link">
-                            <span class="font-bold block">THE UNBROKEN CHAIN</span>
-                            <span class="text-sm opacity-70">Perennial philosophy from Kemet to present.</span>
-                        </a>
-                        <a href="hermeticism.html" class="wiki-link">
-                            <span class="font-bold block">HERMETICISM</span>
-                            <span class="text-sm opacity-70">The convergence of Greek and Egyptian thought.</span>
-                        </a>
-                        <a href="gnosticism.html" class="wiki-link">
-                            <span class="font-bold block">GNOSTICISM</span>
-                            <span class="text-sm opacity-70">Esoteric synthesis in Roman Egypt.</span>
-                        </a>
-                        <a href="neoplatonism.html" class="wiki-link">
-                            <span class="font-bold block">NEOPLATONISM</span>
-                            <span class="text-sm opacity-70">Plotinus and the philosophical bridge.</span>
-                        </a>
-                        <a href="corpus-hermeticum.html" class="wiki-link">
-                            <span class="font-bold block">CORPUS HERMETICUM</span>
-                            <span class="text-sm opacity-70">Analysis of the seventeen Greek treatises.</span>
-                        </a>
-                        <a href="thoth-hermes.html" class="wiki-link">
-                            <span class="font-bold block">THOTH & HERMES</span>
-                            <span class="text-sm opacity-70">The evolution of the Thrice-Greatest Sage.</span>
-                        </a>
-                        <a href="alchemy.html" class="wiki-link">
-                            <span class="font-bold block">ALCHEMY & KEMET</span>
-                            <span class="text-sm opacity-70">Root traditions of the Black Land.</span>
-                        </a>
-                        <a href="newton-alchemy.html" class="wiki-link">
-                            <span class="font-bold block">ISAAC NEWTON</span>
-                            <span class="text-sm opacity-70">The alchemical work of the last magician.</span>
-                        </a>
-                        <a href="potable-gold-white-powder.html" class="wiki-link">
-                            <span class="font-bold block">POTABLE GOLD & WHITE POWDER</span>
-                            <span class="text-sm opacity-70">Regeneration and its biological limits.</span>
-                        </a>
-                        <a href="modern-alchemy.html" class="wiki-link">
-                            <span class="font-bold block">MODERN ALCHEMY</span>
-                            <span class="text-sm opacity-70">Contemporary re-activation of the Sacred Art.</span>
-                        </a>
-                        <a href="imhotep.html" class="wiki-link">
-                            <span class="font-bold block">IMHOTEP</span>
-                            <span class="text-sm opacity-70">Architect, Sage, and God of Medicine.</span>
-                        </a>
+                        <h3 class="sub-head">Alchemical Transmission</h3>
+                        <div class="wiki-link-container">
+                            <a href="chain-of-philosophy.html" class="wiki-link-item">
+                                <span class="title">THE UNBROKEN CHAIN</span>
+                                <span class="description">Perennial philosophy from Kemet to present.</span>
+                            </a>
+                            <a href="hermeticism.html" class="wiki-link-item">
+                                <span class="title">HERMETICISM</span>
+                                <span class="description">The convergence of Greek and Egyptian thought.</span>
+                            </a>
+                            <a href="gnosticism.html" class="wiki-link-item">
+                                <span class="title">GNOSTICISM</span>
+                                <span class="description">Esoteric synthesis in Roman Egypt.</span>
+                            </a>
+                            <a href="neoplatonism.html" class="wiki-link-item">
+                                <span class="title">NEOPLATONISM</span>
+                                <span class="description">Plotinus and the philosophical bridge.</span>
+                            </a>
+                            <a href="corpus-hermeticum.html" class="wiki-link-item">
+                                <span class="title">CORPUS HERMETICUM</span>
+                                <span class="description">Analysis of the seventeen Greek treatises.</span>
+                            </a>
+                            <a href="thoth-hermes.html" class="wiki-link-item">
+                                <span class="title">THOTH & HERMES</span>
+                                <span class="description">The evolution of the Thrice-Greatest Sage.</span>
+                            </a>
+                            <a href="alchemy.html" class="wiki-link-item">
+                                <span class="title">ALCHEMY & KEMET</span>
+                                <span class="description">Root traditions of the Black Land.</span>
+                            </a>
+                            <a href="newton-alchemy.html" class="wiki-link-item">
+                                <span class="title">ISAAC NEWTON</span>
+                                <span class="description">The alchemical work of the last magician.</span>
+                            </a>
+                            <a href="potable-gold-white-powder.html" class="wiki-link-item">
+                                <span class="title">POTABLE GOLD & WHITE POWDER</span>
+                                <span class="description">Regeneration and its biological limits.</span>
+                            </a>
+                            <a href="modern-alchemy.html" class="wiki-link-item">
+                                <span class="title">MODERN ALCHEMY</span>
+                                <span class="description">Contemporary re-activation of the Sacred Art.</span>
+                            </a>
+                            <a href="imhotep.html" class="wiki-link-item">
+                                <span class="title">IMHOTEP</span>
+                                <span class="description">Architect, Sage, and God of Medicine.</span>
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Column 4: Language & Artifacts -->
+                    <!-- Column 4: Language & Modern Context -->
                     <div>
-                        <h3 class="text-2xl egypt-header-color mb-4">Language & Modern Context</h3>
-                        <a href="scripts-evolution.html" class="wiki-link">
-                            <span class="font-bold block">SCRIPTS EVOLUTION</span>
-                            <span class="text-sm opacity-70">Development of the Medu Netjer systems.</span>
-                        </a>
-                        <a href="coptic.html" class="wiki-link">
-                            <span class="font-bold block">COPTIC</span>
-                            <span class="text-sm opacity-70">The living bridge: final stage of the language.</span>
-                        </a>
-                        <a href="demotic.html" class="wiki-link">
-                            <span class="font-bold block">DEMOTIC</span>
-                            <span class="text-sm opacity-70">The cursive script of the people.</span>
-                        </a>
-                        <a href="decipherment-history.html" class="wiki-link">
-                            <span class="font-bold block">DECIPHERMENT HISTORY</span>
-                            <span class="text-sm opacity-70">The story of the Rosetta Stone and Champollion.</span>
-                        </a>
-                        <a href="phonology-voice.html" class="wiki-link">
-                            <span class="font-bold block">PHONOLOGY & VOICE</span>
-                            <span class="text-sm opacity-70">Reconstructing the ancient spoken word.</span>
-                        </a>
-                        <a href="../hieroglyphs.html" class="wiki-link">
-                            <span class="font-bold block">MEDU NETJER</span>
-                            <span class="text-sm opacity-70">Hieroglyph training and phonetic values.</span>
-                        </a>
-                        <a href="temple-architecture.html" class="wiki-link">
-                            <span class="font-bold block">TEMPLE ARCHITECTURE</span>
-                            <span class="text-sm opacity-70">The microcosmic house of the gods.</span>
-                        </a>
-                        <a href="math-astronomy.html" class="wiki-link">
-                            <span class="font-bold block">MATH & ASTRONOMY</span>
-                            <span class="text-sm opacity-70">Aligning the earth with the stars.</span>
-                        </a>
-                        <a href="house-of-life.html" class="wiki-link">
-                            <span class="font-bold block">THE HOUSE OF LIFE</span>
-                            <span class="text-sm opacity-70">Per Ankh: Institutional center of knowledge.</span>
-                        </a>
-                        <a href="medical-papyri.html" class="wiki-link">
-                            <span class="font-bold block">MEDICAL PAPYRI</span>
-                            <span class="text-sm opacity-70">Healing arts: Ebers and Edwin Smith.</span>
-                        </a>
-                        <a href="hebrew-connections.html" class="wiki-link">
-                            <span class="font-bold block">HEBREW CONNECTIONS</span>
-                            <span class="text-sm opacity-70">Moses, Merkabah, and Wisdom Literature.</span>
-                        </a>
-                        <a href="christian-influences.html" class="wiki-link">
-                            <span class="font-bold block">CHRISTIAN INFLUENCES</span>
-                            <span class="text-sm opacity-70">Isis/Mary parallels and monasticism.</span>
-                        </a>
-                        <a href="islamic-egyptology.html" class="wiki-link">
-                            <span class="font-bold block">ISLAMIC EGYPTOLOGY</span>
-                            <span class="text-sm opacity-70">Medieval Arabic decipherment and Sufism.</span>
-                        </a>
-                        <a href="esoteric-orders.html" class="wiki-link">
-                            <span class="font-bold block">ESOTERIC ORDERS</span>
-                            <span class="text-sm opacity-70">Rosicrucianism and Freemasonry influences.</span>
-                        </a>
-                        <a href="funerary-texts.html" class="wiki-link">
-                            <span class="font-bold block">FUNERARY CORPUS</span>
-                            <span class="text-sm opacity-70">Pyramid, Coffin, and Book of the Dead texts.</span>
-                        </a>
-                        <a href="netherworld-books.html" class="wiki-link">
-                            <span class="font-bold block">NETHERWORLD BOOKS</span>
-                            <span class="text-sm opacity-70">The Amduat and solar barque journey.</span>
-                        </a>
-                        <a href="ritual-practice.html" class="wiki-link">
-                            <span class="font-bold block">RITUAL PRACTICE</span>
-                            <span class="text-sm opacity-70">Dream incubation, amulets, and PGM magic.</span>
-                        </a>
-                        <a href="opening-of-the-mouth.html" class="wiki-link">
-                            <span class="font-bold block">OPENING OF THE MOUTH</span>
-                            <span class="text-sm opacity-70">The ritual of sacred animation.</span>
-                        </a>
-                        <a href="amulets-talismans.html" class="wiki-link">
-                            <span class="font-bold block">AMULETS & TALISMANS</span>
-                            <span class="text-sm opacity-70">Portable heka and sacred forms.</span>
-                        </a>
-                        <a href="dream-incubation.html" class="wiki-link">
-                            <span class="font-bold block">DREAM INCUBATION</span>
-                            <span class="text-sm opacity-70">Sacred sleep and temple oracles.</span>
-                        </a>
-                        <a href="shabtis.html" class="wiki-link">
-                            <span class="font-bold block">SHABTIS & USHABTIS</span>
-                            <span class="text-sm opacity-70">The answerers in the afterlife.</span>
-                        </a>
-                        <a href="greek-magical-papyri.html" class="wiki-link">
-                            <span class="font-bold block">MAGICAL PAPYRI (PGM)</span>
-                            <span class="text-sm opacity-70">The magical corpus of Roman Egypt.</span>
-                        </a>
-                        <a href="repatriation-ethics.html" class="wiki-link">
-                            <span class="font-bold block">REPATRIATION & ETHICS</span>
-                            <span class="text-sm opacity-70">UNESCO 1970 and heritage debates.</span>
-                        </a>
-                        <a href="digital-scholarship.html" class="wiki-link">
-                            <span class="font-bold block">DIGITAL SCHOLARSHIP</span>
-                            <span class="text-sm opacity-70">Repositories and tools for the digital scribe.</span>
-                        </a>
-                        <a href="deir-el-medina.html" class="wiki-link">
-                            <span class="font-bold block">DEIR EL-MEDINA</span>
-                            <span class="text-sm opacity-70">The Workmen's Village and private magic.</span>
-                        </a>
-                        <a href="scribal-arts.html" class="wiki-link">
-                            <span class="font-bold block">THE SCRIBAL ARTS</span>
-                            <span class="text-sm opacity-70">The tools and profession of the Sesh.</span>
-                        </a>
+                        <h3 class="sub-head">Language & Modern Context</h3>
+                        <div class="wiki-link-container">
+                            <a href="scripts-evolution.html" class="wiki-link-item">
+                                <span class="title">SCRIPTS EVOLUTION</span>
+                                <span class="description">Development of the Medu Netjer systems.</span>
+                            </a>
+                            <a href="coptic.html" class="wiki-link-item">
+                                <span class="title">COPTIC</span>
+                                <span class="description">The living bridge: final stage of the language.</span>
+                            </a>
+                            <a href="demotic.html" class="wiki-link-item">
+                                <span class="title">DEMOTIC</span>
+                                <span class="description">The cursive script of the people.</span>
+                            </a>
+                            <a href="decipherment-history.html" class="wiki-link-item">
+                                <span class="title">DECIPHERMENT HISTORY</span>
+                                <span class="description">The story of the Rosetta Stone and Champollion.</span>
+                            </a>
+                            <a href="phonology-voice.html" class="wiki-link-item">
+                                <span class="title">PHONOLOGY & VOICE</span>
+                                <span class="description">Reconstructing the ancient spoken word.</span>
+                            </a>
+                            <a href="../hieroglyphs.html" class="wiki-link-item">
+                                <span class="title">MEDU NETJER</span>
+                                <span class="description">Hieroglyph training and phonetic values.</span>
+                            </a>
+                            <a href="temple-architecture.html" class="wiki-link-item">
+                                <span class="title">TEMPLE ARCHITECTURE</span>
+                                <span class="description">The microcosmic house of the gods.</span>
+                            </a>
+                            <a href="math-astronomy.html" class="wiki-link-item">
+                                <span class="title">MATH & ASTRONOMY</span>
+                                <span class="description">Aligning the earth with the stars.</span>
+                            </a>
+                            <a href="house-of-life.html" class="wiki-link-item">
+                                <span class="title">THE HOUSE OF LIFE</span>
+                                <span class="description">Per Ankh: Institutional center of knowledge.</span>
+                            </a>
+                            <a href="medical-papyri.html" class="wiki-link-item">
+                                <span class="title">MEDICAL PAPYRI</span>
+                                <span class="description">Healing arts: Ebers and Edwin Smith.</span>
+                            </a>
+                            <a href="hebrew-connections.html" class="wiki-link-item">
+                                <span class="title">HEBREW CONNECTIONS</span>
+                                <span class="description">Moses, Merkabah, and Wisdom Literature.</span>
+                            </a>
+                            <a href="christian-influences.html" class="wiki-link-item">
+                                <span class="title">CHRISTIAN INFLUENCES</span>
+                                <span class="description">Isis/Mary parallels and monasticism.</span>
+                            </a>
+                            <a href="islamic-egyptology.html" class="wiki-link-item">
+                                <span class="title">ISLAMIC EGYPTOLOGY</span>
+                                <span class="description">Medieval Arabic decipherment and Sufism.</span>
+                            </a>
+                            <a href="esoteric-orders.html" class="wiki-link-item">
+                                <span class="title">ESOTERIC ORDERS</span>
+                                <span class="description">Rosicrucianism and Freemasonry influences.</span>
+                            </a>
+                            <a href="funerary-texts.html" class="wiki-link-item">
+                                <span class="title">FUNERARY CORPUS</span>
+                                <span class="description">Pyramid, Coffin, and Book of the Dead texts.</span>
+                            </a>
+                            <a href="netherworld-books.html" class="wiki-link-item">
+                                <span class="title">NETHERWORLD BOOKS</span>
+                                <span class="description">The Amduat and solar barque journey.</span>
+                            </a>
+                            <a href="ritual-practice.html" class="wiki-link-item">
+                                <span class="title">RITUAL PRACTICE</span>
+                                <span class="description">Dream incubation, amulets, and PGM magic.</span>
+                            </a>
+                            <a href="opening-of-the-mouth.html" class="wiki-link-item">
+                                <span class="title">OPENING OF THE MOUTH</span>
+                                <span class="description">The ritual of sacred animation.</span>
+                            </a>
+                            <a href="amulets-talismans.html" class="wiki-link-item">
+                                <span class="title">AMULETS & TALISMANS</span>
+                                <span class="description">Portable heka and sacred forms.</span>
+                            </a>
+                            <a href="dream-incubation.html" class="wiki-link-item">
+                                <span class="title">DREAM INCUBATION</span>
+                                <span class="description">Sacred sleep and temple oracles.</span>
+                            </a>
+                            <a href="shabtis.html" class="wiki-link-item">
+                                <span class="title">SHABTIS & USHABTIS</span>
+                                <span class="description">The answerers in the afterlife.</span>
+                            </a>
+                            <a href="greek-magical-papyri.html" class="wiki-link-item">
+                                <span class="title">MAGICAL PAPYRI (PGM)</span>
+                                <span class="description">The magical corpus of Roman Egypt.</span>
+                            </a>
+                            <a href="repatriation-ethics.html" class="wiki-link-item">
+                                <span class="title">REPATRIATION & ETHICS</span>
+                                <span class="description">UNESCO 1970 and heritage debates.</span>
+                            </a>
+                            <a href="digital-scholarship.html" class="wiki-link-item">
+                                <span class="title">DIGITAL SCHOLARSHIP</span>
+                                <span class="description">Repositories and tools for the digital scribe.</span>
+                            </a>
+                            <a href="deir-el-medina.html" class="wiki-link-item">
+                                <span class="title">DEIR EL-MEDINA</span>
+                                <span class="description">The Workmen's Village and private magic.</span>
+                            </a>
+                            <a href="scribal-arts.html" class="wiki-link-item">
+                                <span class="title">THE SCRIBAL ARTS</span>
+                                <span class="description">The tools and profession of the Sesh.</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
             <section class="text-center">
-                <a href="../index.html" class="inline-block px-6 py-3 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">RETURN TO MAIN RESEARCH HUB</a>
+                <a href="../index.html" class="back-btn">← RETURN TO MAIN RESEARCH HUB</a>
             </section>
         </main>
 
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// ARCHIVE STATUS: SYSTEMATIC // <span class="egypt-text-color">𓋹</span></p>
+        <footer>
+            <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+            <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹</span><br>
+            ARCHIVE STATUS: SYSTEMATIC</p>
         </footer>
     </div>
 

@@ -3,494 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANCIENT KEMET :: EGYPTOLOGY RESEARCH</title>
+    <title>ANCIENT KEMET :: EGYPTOLOGY RESEARCH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* Specific styles for Egyptology theme */
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/vertical-inscription.png'); /* Using an existing image */
-            background-size: cover;
-            background-position: center;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #050505;
+            --bg2: #0a0a0a;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 209, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
             background-attachment: fixed;
         }
-        .egypt-header-color {
-            color: #d4af37; /* Gold */
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER - Terminal to Temple Transition */
+        .page-header {
+            text-align: center;
+            padding: 5rem 0 4rem;
+            border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+            margin-bottom: 4rem;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(0,20,30,0.3) 0%, transparent 100%);
         }
-        .egypt-text-color {
-            color: #f0e68c; /* Khaki */
+        .page-header::before {
+            content: '𓉐𓉻 𓈖 𓎛𓎡𓎠';
+            display: block;
+            font-size: 2rem;
+            color: var(--gold-dim);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.8rem;
+            opacity: 0.6;
         }
-        .hieroglyph-example {
-            font-family: 'Segoe UI Historic', 'Noto Sans Egyptian Hieroglyphs', sans-serif; /* Fallback fonts for hieroglyphs */
-            font-size: 2.5rem;
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212,175,55,0.3);
+            letter-spacing: 0.12em;
             line-height: 1.2;
-            color: #e6b800;
+            text-transform: uppercase;
         }
-        .section-divider {
-            border: 0;
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.25rem;
+            color: var(--cyan);
+            margin-top: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 4rem 0 2rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2.5rem 0 1.2rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.5rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        
+        /* DATA TABLE */
+        .data-table-wrapper { overflow-x: auto; margin: 2rem 0; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            background: rgba(10,10,10,0.6);
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.1);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+        .data-table tr:hover td { background: rgba(212,175,55,0.05); }
+
+        /* BUTTONS */
+        .nav-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: all 0.3s;
+            background: rgba(20,18,10,0.4);
+            text-transform: uppercase;
+        }
+        .nav-btn:hover {
+            background: var(--gold-glow);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212,175,55,0.2);
+        }
+        .nav-btn.terminal {
+            border-color: var(--cyan-dim);
+            color: var(--cyan);
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+        }
+        .nav-btn.terminal:hover {
+            background: rgba(0, 209, 255, 0.1);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 209, 255, 0.2);
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent);
             margin: 4rem 0;
         }
+
+        /* WORKS CITED */
         .works-cited ul {
-            list-style: decimal;
-            text-align: left;
-            margin-left: 2rem;
-            margin-bottom: 2rem;
+            list-style: none;
+            padding: 0;
         }
-        .works-cited ul li {
-            margin-bottom: 0.5rem;
+        .works-cited li {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .works-cited li::before {
+            content: '>>';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-dim);
+            font-family: 'VT323', monospace;
+        }
+        .works-cited a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+        .works-cited a:hover {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            margin-top: 4rem;
+        }
+
+        /* ANIMATION */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: rgba(0, 209, 255, 0.05);
+            opacity: 0.2;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+            z-index: 100;
         }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+    <div class="scanline"></div>
+    <div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <!-- Header -->
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">ANCIENT KEMET :: EGYPTOLOGY RESEARCH</h1>
-            <p class="text-gray-500 egypt-text-color">// DECIPHERING THE RIVER OF TIME //</p>
+        <!-- HEADER -->
+        <header class="page-header">
+            <h1 class="page-title">Ancient Kemet</h1>
+            <p class="page-subtitle">// Egyptology Research Archive //</p>
+            <div style="font-family:'VT323',monospace; color:var(--cyan-dim); margin-top:1.5rem; font-size:0.9rem; opacity:0.6;">
+                SESSION_INIT :: RESONANCE_STABLE :: DECIPHERING THE RIVER OF TIME
+            </div>
         </header>
 
         <!-- Main Content -->
-        <main class="text-gray-300 egypt-text-color px-4">
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Introduction to Ancient Kemet and Esoteric Traditions</h2>
-                <p class="mb-4">
-                    Within the broader framework of the Libreth Protocol, understanding the foundational symbolic systems of antiquity is crucial. Ancient Kemet, or Egypt, stands as a beacon of advanced spiritual, scientific, and linguistic knowledge, much of which remains encrypted in its monumental architecture, sacred texts, and intricate hieroglyphic script. This module serves as a landing pad for in-depth research into Egyptology, providing a contextual overview and essential resources for further study.
-                </p>
-                <p class="mb-4">
-                    The historical trajectory of Ancient Egypt represents a continuous development of social, political, and spiritual structures that spanned more than three millennia, providing the cultural vessel for some of the most enduring esoteric traditions in Western thought. To understand the sophisticated emergence of Heka and the later synthesis of Hermetic philosophy, one must first analyze the chronological framework that governed the Nile Valley. This environment was defined by the rhythmic inundation of the river, fostering a worldview centered on the tension between cosmic order, known as Ma’at, and the primordial chaos of Isfet.
+        <main>
+            <section>
+                <h2 class="section-head">Introduction to Ancient Kemet and Esoteric Traditions</h2>
+                <p>
+                    Within the broader framework of the <b>Libreth Protocol</b>, understanding the foundational symbolic systems of antiquity is crucial. Ancient Kemet, or Egypt, stands as a beacon of advanced spiritual, scientific, and linguistic knowledge, much of which remains encrypted in its monumental architecture, sacred texts, and intricate hieroglyphic script. This module serves as a landing pad for in-depth research into Egyptology, providing a contextual overview and essential resources for further study.
                 </p>
                 <p>
-                    By engaging with the historical, philological, and esoteric aspects of ancient Egypt, we aim to re-activate latent knowledge streams and develop the interpretive faculties necessary for navigating complex information matrices. Hieroglyphs, the sacred writing system of Kemet, are a primary example of such a symbolic system, offering profound insights into ancient thought. For a comprehensive dive into hieroglyph training, please proceed to the dedicated module.
+                    The historical trajectory of Ancient Egypt represents a continuous development of social, political, and spiritual structures that spanned more than three millennia, providing the cultural vessel for some of the most enduring esoteric traditions in Western thought. To understand the sophisticated emergence of <b>Heka</b> and the later synthesis of Hermetic philosophy, one must first analyze the chronological framework that governed the Nile Valley. This environment was defined by the rhythmic inundation of the river, fostering a worldview centered on the tension between cosmic order, known as <b>Ma’at</b>, and the primordial chaos of <b>Isfet</b>.
                 </p>
-                <div class="flex flex-wrap gap-4 mt-4">
-                    <a href="hieroglyphs.html" class="inline-block px-6 py-3 border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black transition-colors uppercase font-bold">Hieroglyph Training Module</a>
-                    <a href="wiki/index.html" class="inline-block px-6 py-3 border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black transition-colors uppercase font-bold">Access Egyptology Wiki</a>
+                <p>
+                    By engaging with the historical, philological, and esoteric aspects of ancient Egypt, we aim to re-activate latent knowledge streams and develop the interpretive faculties necessary for navigating complex information matrices. Hieroglyphs, the sacred writing system of Kemet, are a primary example of such a symbolic system, offering profound insights into ancient thought.
+                </p>
+                <div class="flex flex-wrap gap-6 mt-8">
+                    <a href="hieroglyphs.html" class="nav-btn terminal">Hieroglyph Training Module</a>
+                    <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
                 </div>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Chronological Framework of Pharaonic Civilization</h2>
-                <p class="mb-4">
-                    The development of the Egyptian state began long before the formal unification of the land, rooted in the Predynastic Period which extended back to approximately 4300 B.C.E. This era, divided into the Naqada I (Amratian), Naqada II (Gerzean), and Naqada III (Semainean) phases, saw the transition from nomadic lifestyles to settled agricultural communities along the Nile banks. During the Naqada III period, also referred to as Dynasty 0, the essential elements of Egyptian iconography and the earliest precursors to hieroglyphic writing emerged, establishing a grid system for artistic proportions and symbolic representations that would remain remarkably stable for three thousand years.
-                </p>
-                <p class="mb-4">
-                    The Early Dynastic Period, spanning approximately 3000 to 2675 B.C.E., witnessed the formal unification of Upper and Lower Egypt under the first pharaoh, often identified as Menes or Narmer. This era established Memphis as the capital and saw the rise of a centralized government that supported a burgeoning class of scribes and artists. These professionals were tasked with creating the royal iconography required to express the ideology of divine kingship, wherein the pharaoh acted as the earthly manifestation of the sky god Horus.
+            <section>
+                <h2 class="section-head">The Chronological Framework of Pharaonic Civilization</h2>
+                <p>
+                    The development of the Egyptian state began long before the formal unification of the land, rooted in the <b>Predynastic Period</b> which extended back to approximately 4300 B.C.E. This era saw the transition from nomadic lifestyles to settled agricultural communities along the Nile banks. During the Naqada III period, also referred to as Dynasty 0, the essential elements of Egyptian iconography and the earliest precursors to hieroglyphic writing emerged, establishing a grid system for artistic proportions and symbolic representations that would remain remarkably stable for three thousand years.
                 </p>
 
-                <div class="overflow-x-auto mb-8">
-                    <table class="min-w-full bg-gray-900 border border-gray-700">
+                <div class="data-table-wrapper">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Historical Period</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Approximate Dates</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Key Dynasties and Rulers</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Major Cultural and Political Developments</th>
+                                <th>Historical Period</th>
+                                <th>Approximate Dates</th>
+                                <th>Key Dynasties and Rulers</th>
+                                <th>Major Developments</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Predynastic</td>
-                                <td class="py-2 px-4 border-b border-gray-800">4300–3100 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Naqada I–III, Dynasty 0</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Settlement of the Nile Valley; invention of early hieroglyphic signs; establishment of two-dimensional imagery.</td>
+                                <td><b>Predynastic</b></td>
+                                <td>4300–3100 B.C.E.</td>
+                                <td>Naqada I–III, Dynasty 0</td>
+                                <td>Settlement of the Nile Valley; invention of early hieroglyphic signs.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Early Dynastic</td>
-                                <td class="py-2 px-4 border-b border-gray-800">3100–2686 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 1–2; Narmer, Den, Khasekhemwy</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Unification of Egypt; establishment of Memphis; development of royal iconography and scribal culture.</td>
+                                <td><b>Early Dynastic</b></td>
+                                <td>3100–2686 B.C.E.</td>
+                                <td>Dynasties 1–2; Narmer, Den</td>
+                                <td>Unification of Egypt; establishment of Memphis; royal iconography.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Old Kingdom</td>
-                                <td class="py-2 px-4 border-b border-gray-800">2686–2181 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 3–6; Djoser, Sneferu, Khufu, Khafre</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Construction of the Step Pyramid and Great Pyramids of Giza; creation of the Pyramid Texts; development of solar theology.</td>
+                                <td><b>Old Kingdom</b></td>
+                                <td>2686–2181 B.C.E.</td>
+                                <td>Dynasties 3–6; Djoser, Khufu</td>
+                                <td>Age of Pyramids; Creation of the Pyramid Texts; solar theology.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">First Intermediate</td>
-                                <td class="py-2 px-4 border-b border-gray-800">2181–2055 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 7–11 (part); Neferkara, Khety</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Collapse of central authority; regionalization of art styles; rise of the cult of Osiris.</td>
+                                <td><b>First Intermediate</b></td>
+                                <td>2181–2055 B.C.E.</td>
+                                <td>Dynasties 7–11 (part)</td>
+                                <td>Collapse of central authority; rise of the cult of Osiris.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Middle Kingdom</td>
-                                <td class="py-2 px-4 border-b border-gray-800">2055–1650 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 11–13; Mentuhotep II, Senusret III</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Reunification; emergence of classical Middle Egyptian literature; expansion of the Coffin Texts.</td>
+                                <td><b>Middle Kingdom</b></td>
+                                <td>2055–1650 B.C.E.</td>
+                                <td>Dynasties 11–13; Senusret III</td>
+                                <td>Reunification; classical Middle Egyptian literature; Coffin Texts.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Second Intermediate</td>
-                                <td class="py-2 px-4 border-b border-gray-800">1650–1550 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 14–17; Salitis, Kamose</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Hyksos rule in the north; fragmented control; eventual Theban war of liberation.</td>
+                                <td><b>Second Intermediate</b></td>
+                                <td>1650–1550 B.C.E.</td>
+                                <td>Dynasties 14–17; Salitis</td>
+                                <td>Hyksos rule in the north; Theban war of liberation.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">New Kingdom</td>
-                                <td class="py-2 px-4 border-b border-gray-800">1550–1075 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 18–20; Ahmose I, Thutmose III, Akhenaten, Ramesses II</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Imperial expansion; creation of the Book of the Dead; peak of temple construction at Karnak and Luxor.</td>
+                                <td><b>New Kingdom</b></td>
+                                <td>1550–1075 B.C.E.</td>
+                                <td>Dynasties 18–20; Ramesses II</td>
+                                <td>Imperial expansion; Book of the Dead; peak of temple construction.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Third Intermediate</td>
-                                <td class="py-2 px-4 border-b border-gray-800">1075–656 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 21–25; Smendes, Sheshonq I, Piy</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Rule by Libyan and Nubian dynasties; political instability; High Priests of Amun gain autonomy.</td>
+                                <td><b>Third Intermediate</b></td>
+                                <td>1075–656 B.C.E.</td>
+                                <td>Dynasties 21–25; Piy</td>
+                                <td>Rule by Libyan and Nubian dynasties; political instability.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Late Period</td>
-                                <td class="py-2 px-4 border-b border-gray-800">664–332 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Dynasties 26–31; Psamtek I, Nectanebo II</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Saite Renaissance; Persian conquests; final indigenous dynasties.</td>
+                                <td><b>Late Period</b></td>
+                                <td>664–332 B.C.E.</td>
+                                <td>Dynasties 26–31; Psamtek I</td>
+                                <td>Saite Renaissance; Persian conquests; final indigenous dynasties.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Ptolemaic Period</td>
-                                <td class="py-2 px-4 border-b border-gray-800">332–30 B.C.E.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Macedonian/Lagid; Ptolemy I–Cleopatra VII</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Synthesis of Greek and Egyptian cultures; birth of Hermetic philosophy; Rosetta Stone inscribed.</td>
+                                <td><b>Ptolemaic Period</b></td>
+                                <td>332–30 B.C.E.</td>
+                                <td>Ptolemy I–Cleopatra VII</td>
+                                <td>Synthesis of Greek and Egyptian cultures; birth of Hermeticism.</td>
                             </tr>
                             <tr>
-                                <td class="py-2 px-4">Roman Period</td>
-                                <td class="py-2 px-4">30 B.C.E.–395 C.E.</td>
-                                <td class="py-2 px-4">Roman Emperors as Pharaohs</td>
-                                <td class="py-2 px-4">Final hieroglyphic inscriptions; rise of Christianity and Coptic culture; peak of Hermeticism.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="mb-4">
-                    The Old Kingdom is frequently characterized as the age of the pyramids, beginning with the 3rd Dynasty and reaching its zenith during the 4th Dynasty with the construction of the Giza plateau monuments. This period saw the formalization of the Pyramid Texts, the earliest known body of religious and magical spells, which were inscribed on the interior walls of royal tombs to facilitate the king's ascent to the stars. The collapse of this central authority toward the end of the 6th Dynasty led to the First Intermediate Period, a time of decentralization that paradoxically allowed for the "democratization" of the afterlife, as funerary privileges previously reserved for royalty began to be adopted by local elites.
-                </p>
-                <p>
-                    Reunification occurred during the Middle Kingdom, which is often considered the classical age of Egyptian culture and language. This era saw the rise of the god Amun-Ra to prominence and the expansion of the Coffin Texts, which provided a wider range of individuals with the magical protections needed to navigate the Duat. The New Kingdom subsequently followed a period of foreign occupation by the Hyksos, ushering in an era of imperial power and the composition of the Book of the Dead, a collection of over 200 utterances designed to ensure the soul's successful passage through the Hall of Judgment.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Metaphysics and Application of Heka</h2>
-                <p class="mb-4">
-                    In the ancient Egyptian worldview, the concept of magic was not viewed as an auxiliary to religion but as the fundamental force that permitted the gods and humans to maintain the order of the cosmos. The term <i>ḥkꜣ</i> refers to both the abstract primordial energy used in the creation of the universe and the personified deity who embodied this power. Heka was considered the <i>ka</i> (vital life force) or <i>ba</i> (physical manifestation) of the sun god Re himself, and it was through the mobilization of this energy that the sun was able to navigate the underworld and defeat the serpent Apep each night.
-                </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">The Ontology of the Creative Force</h3>
-                <p class="mb-4">
-                    Heka was perceived as a morally neutral force, comparable to a natural law of physics. Its ethical valence was determined entirely by the intentions of the practitioner and whether their actions served to uphold Ma’at or foster Isfet. The creator god provided Heka to humanity as a defensive weapon to "ward off the blow of events," suggesting that magic was a legitimate tool for survival in a volatile world.
-                </p>
-                <p class="mb-4">
-                    The mobilization of Heka was achieved through the integration of the spoken word, ritual action, and physical implements. For the Egyptians, to speak a name or a spell was to bring it into material reality; this concept is rooted in the belief that the universe was originally called into existence through the divine utterance of the creator. Practitioners such as Lector Priests (<i>Kher-Heb</i>) were specialists in this field, trained in the "House of Life" to read sacred scrolls and execute complex rituals that synchronized the physical world with the mythological past.
-                </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">The Composite Nature of the Soul</h3>
-                <p class="mb-4">
-                    Understanding the mechanics of magic requires a nuanced grasp of the Egyptian conception of the soul, which was viewed as a composite of several distinct spiritual bodies. Each part played a specific role in the individual's existence and their journey through the afterlife:
-                </p>
-                <div class="overflow-x-auto mb-8">
-                    <table class="min-w-full bg-gray-900 border border-gray-700">
-                        <thead>
-                            <tr>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Component</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Egyptian Name</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Description and Function</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Physical Form</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Khat</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The corporeal body, subject to decay but preserved through mummification to serve as an anchor for the soul.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Vitality / Double</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Ka</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The life force born with a person, requiring food and drink offerings after death for continued sustenance.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Personality / Soul</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Ba</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Represented as a human-headed hawk; it represents the individual's character and can travel between worlds.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Radiant Body</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Akh (Akhu)</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The immortal, transfigured spirit created when the Ka and Ba are successfully united through proper ritual.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Shadow Body</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Khaibit</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The shadow, an integral part of the person capable of independent movement and representing the subconscious.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Name</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Ren</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The true name, holding the essence and identity of the being. Erasing a name was considered a second death.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Personal Power</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Sekhem</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The ethereal personification of life force, representing the ability to overcome obstacles and exert will.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4">Heart</td>
-                                <td class="py-2 px-4">Ab</td>
-                                <td class="py-2 px-4">The seat of intelligence and emotion; it was the only organ left inside the body during mummification to be weighed.</td>
+                                <td><b>Roman Period</b></td>
+                                <td>30 B.C.E.–395 C.E.</td>
+                                <td>Roman Emperors</td>
+                                <td>Final hieroglyphic inscriptions; rise of Coptic culture.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h3 class="text-2xl egypt-header-color mb-3">Ritual Implements and Practitioners</h3>
-                <p class="mb-4">
-                    The practice of magic involved a sophisticated array of tools designed to channel Heka effectively. Wands and rods, often crafted from ivory and depicting apotropaic figures, were used to establish protective zones around infants or the deceased. Amulets were central to daily life, serving as wearable magic that utilized the properties of specific materials, colors, and shapes to attract favor or repel malevolent spirits.
+                <p>
+                    The <b>Old Kingdom</b> is frequently characterized as the age of the pyramids, reaching its zenith during the 4th Dynasty. This period saw the formalization of the <b>Pyramid Texts</b>, the earliest known body of religious and magical spells, designed to facilitate the king's ascent to the stars. The collapse of this central authority led to the <b>First Intermediate Period</b>, which paradoxically allowed for the "democratization" of the afterlife.
                 </p>
                 <p>
-                    Professional magicians were typically members of the priesthood. The Lector Priest was the primary specialist, responsible for managing the temple’s collection of magical documents and reciting spells during official state ceremonies and private funerals. Healing was also a magical endeavor; physicians associated with the goddess Sekhmet combined herbal remedies with incantations to neutralize the spiritual causes of illness.
+                    Reunification occurred during the <b>Middle Kingdom</b>, the classical age of Egyptian culture. This era saw the rise of the god Amun-Ra and the expansion of the <b>Coffin Texts</b>. The <b>New Kingdom</b> followed a period of foreign occupation by the Hyksos, ushering in an era of imperial power and the composition of the <b>Book of the Dead</b>, a collection of utterances designed to ensure the soul's successful passage through the Hall of Judgment.
                 </p>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Mythological Paradigm: Osiris, Isis, and the First Magic</h2>
-                <p class="mb-4">
-                    The Osiris myth cycle serves as the foundational narrative for Egyptian funerary practices and the use of magic as a restorative force. The story details the reign of Osiris, a benevolent king who brought civilization to Egypt, and his subsequent betrayal by his brother Set. Set's murder of Osiris and the scattering of his body across the land represented a total collapse of cosmic order.
+            <section>
+                <h2 class="section-head">The Metaphysics and Application of Heka</h2>
+                <p>
+                    In the ancient Egyptian worldview, magic was the fundamental force that permitted the gods and humans to maintain the order of the cosmos. The term <b>ḥkꜣ</b> (Heka) refers to both the abstract primordial energy used in creation and the personified deity who embodied this power. Heka was considered the <i>ka</i> (vital life force) of the sun god Re himself.
                 </p>
-                <p class="mb-4">
-                    Isis, the wife of Osiris and a powerful magician, embarked on a quest to recover the pieces of her husband. With the assistance of Nephthys, Thoth, and Anubis, she reassembled the body and performed the first rites of mummification. Through her spoken words of power—knowledge she had obtained from the god Thoth—she was able to breathe life into Osiris long enough to conceive their son, Horus.
+
+                <h3 class="sub-head">The Ontology of the Creative Force</h3>
+                <p>
+                    Heka was perceived as a morally neutral force, comparable to a natural law of physics. Its ethical valence was determined by the intentions of the practitioner—whether their actions served to uphold Ma’at or foster Isfet. The creator god provided Heka to humanity as a defensive weapon to "ward off the blow of events."
                 </p>
                 <p>
-                    Horus was raised in the thickets of the Nile Delta, where Isis used her magic to protect him from the hazards of the swamp and the reach of Set. As an adult, Horus challenged Set for the throne in a series of legal and physical contests. The resolution of their conflict, which required the intervention of the divine court, eventually restored Horus to his father’s throne and established Osiris as the ruler of the dead in the underworld. This myth established the prototype for the "Opening of the Mouth" ceremony and the belief that every deceased person could become an "Osiris" through proper ritual intervention.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Hermeticism: The Synthesis of Greco-Egyptian Thought</h2>
-                <p class="mb-4">
-                    The conquest of Egypt by Alexander the Great and the subsequent Ptolemaic dynasty created a unique environment in Alexandria, where Egyptian and Hellenic intellectual traditions intersected. This syncretism gave rise to Hermeticism, a philosophical and religious tradition attributed to the legendary figure of Hermes Trismegistus, a fusion of the Egyptian Thoth and the Greek Hermes.
+                    The mobilization of Heka was achieved through the integration of the spoken word, ritual action, and physical implements. For the Egyptians, to speak a name or a spell was to bring it into material reality. Practitioners such as Lector Priests (<i>Kher-Heb</i>) were specialists trained in the <b>House of Life</b> to read sacred scrolls and execute complex rituals.
                 </p>
 
-                <h3 class="text-2xl egypt-header-color mb-3">The Evolution of Hermes Trismegistus</h3>
-                <p class="mb-4">
-                    The epithet "Trismegistus" (thrice-greatest) is rooted in an Egyptian linguistic convention found as early as 172 B.C.E., where Thoth was described as "the greatest and greatest god, great Hermes". This title reflected his status as the premier philosopher, priest, and king. Both Thoth and Hermes shared attributes as scribes of the gods, inventors of writing, and psychopomps who guided souls between realms.
-                </p>
-                <p class="mb-4">
-                    Hermeticism emerged from intimate circles of initiates in Roman Egypt who sought "cosmic illumination" and direct spiritual experience of the divine, referred to as Gnosis. The tradition emphasized that the universe was a unified whole, characterized by a series of correspondences between the microcosm (man) and the macrocosm (the universe).
-                </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">The Hermetic Corpus and Philosophical Tenets</h3>
-                <p class="mb-4">
-                    The primary literature of this tradition is the <i>Corpus Hermeticum</i>, a collection of seventeen Greek treatises written between 100 and 300 C.E.. These texts explore the nature of God, the origin of the cosmos, and the spiritual ascent of the soul. A central theme is that the individual is fundamentally identical to the supreme divine intellect, or <i>Nous</i>, and that realization of this truth constitutes a "second birth".
-                </p>
-                <div class="overflow-x-auto mb-8">
-                    <table class="min-w-full bg-gray-900 border border-gray-700">
+                <h3 class="sub-head">The Composite Nature of the Soul</h3>
+                <div class="data-table-wrapper">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Core Principle</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Hermetic Definition and Implication</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Source Context</th>
+                                <th>Component</th>
+                                <th>Egyptian Name</th>
+                                <th>Description and Function</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr><td><b>Physical Form</b></td><td>Khat</td><td>The corporeal body, preserved through mummification as an anchor.</td></tr>
+                            <tr><td><b>Vitality / Double</b></td><td>Ka</td><td>The life force requiring sustenance after death.</td></tr>
+                            <tr><td><b>Personality / Soul</b></td><td>Ba</td><td>Represented as a human-headed hawk; can travel between worlds.</td></tr>
+                            <tr><td><b>Radiant Body</b></td><td>Akh</td><td>The immortal, transfigured spirit created when Ka and Ba unite.</td></tr>
+                            <tr><td><b>Shadow Body</b></td><td>Khaibit</td><td>Representing the subconscious, capable of independent movement.</td></tr>
+                            <tr><td><b>Name</b></td><td>Ren</td><td>The true name holding the essence and identity of the being.</td></tr>
+                            <tr><td><b>Personal Power</b></td><td>Sekhem</td><td>The ethereal personification of life force and will.</td></tr>
+                            <tr><td><b>Heart</b></td><td>Ab</td><td>The seat of intelligence and emotion; weighed in judgment.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-head">Ritual Implements and Practitioners</h3>
+                <p>
+                    The practice of magic involved a sophisticated array of tools. Wands and rods, often crafted from ivory, were used to establish protective zones. Amulets were central to daily life, utilizing materials, colors, and shapes to attract favor or repel malevolent spirits. Professional magicians were typically members of the priesthood, specialists in managing sacred documents.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <section>
+                <h2 class="section-head">The Mythological Paradigm: Osiris, Isis, and the First Magic</h2>
+                <p>
+                    The Osiris myth cycle serves as the foundational narrative for Egyptian funerary practices. The story details the reign of Osiris and his betrayal by his brother Set. Set's murder of Osiris and the scattering of his body represented a total collapse of cosmic order.
+                </p>
+                <p>
+                    <b>Isis</b>, the wife of Osiris and a powerful magician, recovered the pieces and performed the first rites of mummification. Through her spoken words of power—knowledge obtained from Thoth—she breathed life into Osiris. This myth established the prototype for the <b>Opening of the Mouth</b> ceremony and the belief that every deceased person could become an "Osiris" through ritual intervention.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <section>
+                <h2 class="section-head">Hermeticism: The Synthesis of Greco-Egyptian Thought</h2>
+                <p>
+                    The conquest of Egypt by Alexander created a unique environment in Alexandria where Egyptian and Hellenic intellectual traditions intersected. This syncretism gave rise to <b>Hermeticism</b>, attributed to <b>Hermes Trismegistus</b>, a fusion of the Egyptian Thoth and the Greek Hermes.
+                </p>
+
+                <h3 class="sub-head">The Hermetic Corpus and Philosophical Tenets</h3>
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Correspondence</td>
-                                <td class="py-2 px-4 border-b border-gray-800">"As above, so below"; the microcosm reflects the macrocosm.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The Emerald Tablet.</td>
+                                <th>Core Principle</th>
+                                <th>Definition and Implication</th>
+                                <th>Source</th>
                             </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Mentalism</td>
-                                <td class="py-2 px-4 border-b border-gray-800">"The All is Mind; the universe is mental."</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The Kybalion and Corpus Hermeticum.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Polarity</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Everything contains its opposite; extremes meet.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Hermetic philosophy and daily rhythms.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Rhythm</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Everything flows in and out; the pendulum swing manifests in all.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">The dynamic tension of nature.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4">The Three Worlds</td>
-                                <td class="py-2 px-4">Hierarchy of God, the Cosmos (Son), and Man (Grandson).</td>
-                                <td class="py-2 px-4">Structure of the Corpus Hermeticum.</td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><b>Correspondence</b></td><td>"As above, so below"; the microcosm reflects the macrocosm.</td><td>Emerald Tablet</td></tr>
+                            <tr><td><b>Mentalism</b></td><td>"The All is Mind; the universe is mental."</td><td>The Kybalion</td></tr>
+                            <tr><td><b>Polarity</b></td><td>Everything contains its opposite; extremes meet.</td><td>Hermetic Philosophy</td></tr>
+                            <tr><td><b>Rhythm</b></td><td>Everything flows in and out; the pendulum swing manifests in all.</td><td>Nature's Rhythms</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <p>
-                    The Hermetic tradition fell into obscurity in Europe following the linguistic critique by Isaac Casaubon in 1614, who proved that the <i>Corpus Hermeticum</i> was a product of the early Christian era rather than ancient Egypt. However, the 1945 discovery of the Nag Hammadi library, which included Hermetic texts like the <i>Discourse on the Ogdoad and Ennead</i>, confirmed that these writings were based on actual initiatory practices conducted by organized communities in late antiquity.
+                    The 1945 discovery of the <b>Nag Hammadi library</b> confirmed that these writings were based on actual initiatory practices conducted by organized communities in late antiquity, bridging the gap between pharaonic tradition and late antique philosophy.
                 </p>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Ethical Considerations and the Future of Egyptology</h2>
-                <p class="mb-4">
-                    The field of Egyptology in the 21st century is increasingly defined by the debate over the repatriation of artifacts removed during periods of colonization. Iconic treasures such as the Rosetta Stone (London), the bust of Nefertiti (Berlin), and the Dendera Zodiac (Paris) remain outside Egypt, despite ongoing efforts by the Egyptian government to secure their return.
+            <section>
+                <h2 class="section-head">Ethical Considerations and the Future of Egyptology</h2>
+                <p>
+                    The field of Egyptology in the 21st century is increasingly defined by the debate over the <b>repatriation</b> of artifacts removed during periods of colonization. Iconic treasures such as the Rosetta Stone, the bust of Nefertiti, and the Dendera Zodiac remain outside Egypt.
                 </p>
-                <p class="mb-4">
-                    The primary legal hurdle is the <b>1970 UNESCO Convention</b>, which aims to prohibit the illicit transfer of cultural property but is not retroactive. Many colonial-era acquisitions occurred before 1970 and were technically "legal" under the laws of that time, which often permitted "partage"—the division of archaeological finds between foreign excavators and the host nation.
-                </p>
-                <div class="overflow-x-auto mb-8">
-                    <table class="min-w-full bg-gray-900 border border-gray-700">
+                <div class="data-table-wrapper">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Artifact</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Current Location</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Removal Context</th>
-                                <th class="py-3 px-4 border-b border-gray-700 text-left text-amber-400">Current Status</th>
+                                <th>Artifact</th>
+                                <th>Location</th>
+                                <th>Removal Context</th>
+                                <th>Current Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Rosetta Stone</td>
-                                <td class="py-2 px-4 border-b border-gray-800">British Museum</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Seized by British forces from the French in 1801.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Central to repatriation claims by SCA.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Nefertiti Bust</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Neues Museum, Berlin</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Excavated in 1912; allegedly misrepresented during division.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Repeatedly requested by Egypt; denied by Germany.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-800">Dendera Zodiac</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Louvre, Paris</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Removed from temple ceiling in 1821 using explosives.</td>
-                                <td class="py-2 px-4 border-b border-gray-800">Part of the "Big Three" high-priority claims.</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4">Gilded Coffin</td>
-                                <td class="py-2 px-4">Egypt (recently returned)</td>
-                                <td class="py-2 px-4">Looted during political unrest; repatriated from Belgium in 2025.</td>
-                                <td class="py-2 px-4">Success story of modern diplomatic efforts.</td>
-                            </tr>
+                            <tr><td><b>Rosetta Stone</b></td><td>British Museum</td><td>Seized by British forces in 1801.</td><td>Claimed by SCA.</td></tr>
+                            <tr><td><b>Nefertiti Bust</b></td><td>Berlin</td><td>Excavated in 1912; disputed division.</td><td>Repeatedly requested.</td></tr>
+                            <tr><td><b>Dendera Zodiac</b></td><td>Louvre</td><td>Removed from temple ceiling in 1821.</td><td>High-priority claim.</td></tr>
+                            <tr><td><b>Gilded Coffin</b></td><td>Egypt</td><td>Looted during unrest; returned 2025.</td><td>Success story.</td></tr>
                         </tbody>
                     </table>
                 </div>
-                <p>
-                    Current developments in 2025 and 2026 show an increased coordination among "Ancient Civilizations" (including Greece, Iraq, and China) to pressure UNESCO to reconsider the 1970 cut-off date. Furthermore, the opening of the Grand Egyptian Museum (GEM) has undermined arguments that Egypt lacks the facility to safely house these artifacts.
-                </p>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Practical Curriculum for Independent Study</h2>
-                <p class="mb-4">
-                    For students seeking to deepen their knowledge of these subjects, a wealth of free, academic-grade resources is available online. These materials provide the same foundation used by professional researchers in the field.
+            <section>
+                <h2 class="section-head">Practical Curriculum for Independent Study</h2>
+                <p>
+                    A wealth of free, academic-grade resources is available online for students seeking to deepen their knowledge of these subjects.
                 </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">Linguistic and Textual Syllabi</h3>
-                <ul class="list-disc list-inside mb-4">
-                    <li><b>Grammar Foundation:</b> James P. Allen’s <i>Middle Egyptian: An Introduction to the Language and Culture of Hieroglyphs</i> is widely regarded as the most accessible modern textbook for self-study. It includes 26 lessons with exercises and an answer key.</li>
-                    <li><b>Reference Lexicons:</b> The <i>Thesaurus Linguae Aegyptiae (TLA)</i> is a massive digital project providing searchable texts from all stages of the language with definitions in English and German.</li>
-                    <li><b>Papyrological Research:</b> <i>Papyri.info</i> serves as a primary portal for high-resolution images and transcriptions of papyrus documents, focusing on Greek and Demotic materials.</li>
+                <h3 class="sub-head">Linguistic and Textual Syllabi</h3>
+                <ul style="list-style-type: square; padding-left: 2rem; margin-bottom: 2rem;">
+                    <li style="margin-bottom: 0.5rem;"><b>Grammar Foundation:</b> James P. Allen’s <i>Middle Egyptian</i>.</li>
+                    <li style="margin-bottom: 0.5rem;"><b>Reference Lexicons:</b> <i>Thesaurus Linguae Aegyptiae (TLA)</i>.</li>
+                    <li><b>Papyrological Research:</b> <i>Papyri.info</i> for high-resolution images.</li>
                 </ul>
 
-                <h3 class="text-2xl egypt-header-color mb-3">Archaeological and Esoteric Archives</h3>
-                <ul class="list-disc list-inside mb-4">
-                    <li><b>Contextual Archaeology:</b> <i>Osirisnet</i> offers exhaustive photographic coverage and analysis of Egyptian tombs, updated regularly by scholars.</li>
-                    <li><b>Theban Mapping Project:</b> This resource provides the standard digital archive for the royal tombs in the Valley of the Kings, including architectural plans and visual tours.</li>
-                    <li><b>Hermetic Texts:</b> Primary translations of the <i>Corpus Hermeticum</i> and <i>Asclepius</i> by scholars like Brian Copenhaver and Clement Salaman are essential for separating historical Hermetism from later occult distortions.</li>
-                </ul>
-
-                <h3 class="text-2xl egypt-header-color mb-3">Educational Platforms and Courses</h3>
-                <ul class="list-disc list-inside mb-4">
-                    <li><b>University of Pennsylvania (Coursera):</b> Dr. David Silverman provides massive open online courses (MOOCs) such as <i>Introduction to Ancient Egypt and Its Civilization</i>, covering art, language, and religion in depth.</li>
-                    <li><b>UCLA Encyclopedia of Egyptology (UEE):</b> This peer-reviewed encyclopedia offers thousands of open-access articles on specialized topics from royal inscriptions to ancient medicine.</li>
+                <h3 class="sub-head">Archaeological and Esoteric Archives</h3>
+                <ul style="list-style-type: square; padding-left: 2rem; margin-bottom: 2rem;">
+                    <li style="margin-bottom: 0.5rem;"><b>Contextual Archaeology:</b> <i>Osirisnet</i> (tombs coverage).</li>
+                    <li style="margin-bottom: 0.5rem;"><b>Theban Mapping Project:</b> Digital archive for the Valley of the Kings.</li>
+                    <li><b>Hermetic Texts:</b> Translations by Brian Copenhaver and Clement Salaman.</li>
                 </ul>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Synthesis of Practice: Meditation and Mental Discipline</h2>
-                <p class="mb-4">
-                    The Hermetic and Egyptian traditions both emphasize that knowledge (<i>gnosis</i>) is not merely intellectual but must be experienced through the training of the mind and body. Practical exercises from these traditions focus on the concentration of will and the regulation of the soul’s energy.
-                </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">The Heart Center Concentration</h3>
-                <p class="mb-4">
-                    Elementary meditative exercises from a Hermetic perspective often utilize the "Separatio-Conjuctio" technique to detach from physical sensations and touch upon the spiritual essence of the self. One recommended practice involves sitting or lying in a quiet, dark room and becoming conscious of the rhythmic beating of the heart. Once focused, the practitioner visualizes the heart at the center of a lemniscate (figure-eight), imagining a current of energy that flows upward to the cosmos and returns with spiritual nourishment, while a lower loop carries this energy into the soul’s depths.
-                </p>
-
-                <h3 class="text-2xl egypt-header-color mb-3">Breath and the Regulation of the Ka</h3>
+            <section>
+                <h2 class="section-head">Synthesis of Practice: Meditation and Mental Discipline</h2>
                 <p>
-                    Concentration is inextricably linked to energy regulation. Measured breathing exercises—such as inhaling slowly for a count of ten, holding the breath, and exhaling equally—are used to calm the "shadow body" and focus the mind. Advanced practices involve internalizing this energy at the "spiritual eye" (third eye), a technique designed to move the consciousness from the physical level into the state of soul awareness.
+                    The Hermetic and Egyptian traditions both emphasize that knowledge (<i>gnosis</i>) must be experienced through the training of the mind and body.
                 </p>
+                <h3 class="sub-head">The Heart Center Concentration</h3>
                 <p>
-                    Through the combination of historical study, linguistic analysis, and mental discipline, the modern reader can approach the "Divine Words" of Ancient Egypt as more than just relics of the past. These systems of thought continue to provide a framework for understanding the human condition and the relationship between the material world and the vast, invisible domains of the spirit.
+                    Elementary meditative exercises often utilize the "Separatio-Conjuctio" technique. One practice involves sitting in a quiet room and becoming conscious of the rhythmic heartbeat, visualizing it as a current of energy flowing between the cosmos and the soul’s depths.
+                </p>
+                <h3 class="sub-head">Breath and the Regulation of the Ka</h3>
+                <p>
+                    Measured breathing exercises—inhaling, holding, and exhaling equally—are used to calm the "shadow body" and focus the mind. Advanced practices involve internalizing this energy at the "spiritual eye," moving consciousness into the state of soul awareness.
                 </p>
             </section>
 
-            <hr class="section-divider">
+            <hr class="divider">
 
-            <section class="mb-12 works-cited">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Works Cited / Research Links</h2>
+            <section class="works-cited">
+                <h2 class="section-head">Works Cited / Research Links</h2>
                 <ul>
-                    <li><a href="https://preview.memphis.edu/egypt/resources/timeline.php" target="_blank" class="text-blue-400 hover:underline">1. Timeline of Ancient Egypt - Institute of Egyptian Art & Archaeology - The University of Memphis</a></li>
-                    <li><a href="https://www.britishmuseum.org/learn/schools/ages-7-11/ancient-egypt/timeline-ancient-egypt" target="_blank" class="text-blue-400 hover:underline">2. Timeline of ancient Egypt | British Museum</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Osiris_myth" target="_blank" class="text-blue-400 hover:underline">3. Osiris myth - Wikipedia</a></li>
-                    <li><a href="https://egyptfuntours.com/blog/ancient-egyptian-magic-spells-and-mystical-power-of-ancient-egypt/" target="_blank" class="text-blue-400 hover:underline">4. Ancient Egyptian Magic: A Guide to Heka, Spells & Rituals | Egypt Fun Tours 2026</a></li>
-                    <li><a href="https://www.egiptoexclusivo.com/en/culture/ancient-egypt/egyptian-dynasties/" target="_blank" class="text-blue-400 hover:underline">5. Egyptian Dynasties: Pharaohs' chronology | Egipto Exclusivo</a></li>
-                    <li><a href="https://australian.museum/learn/cultures/international-collection/ancient-egyptian/ancient-egyptian-timeline/" target="_blank" class="text-blue-400 hover:underline">6. Ancient Egyptian Timeline - The Australian Museum</a></li>
-                    <li><a href="https://www.historyextra.com/period/ancient-egypt/timeline-ancient-egypt-dynasties-in-order/" target="_blank" class="text-blue-400 hover:underline">7. Timeline: the pharaohs and dynasties that ruled ancient Egypt - HistoryExtra</a></li>
-                    <li><a href="https://www.britannica.com/topic/Hermes-Trismegistos-Egyptian-god" target="_blank" class="text-blue-400 hover:underline">8. Hermes Trismegistus | Meaning, Writings, Thoth, & Alchemy - Britannica</a></li>
-                    <li><a href="https://egyptology.indiana.edu/resources/index.html" target="_blank" class="text-blue-400 hover:underline">9. Resources: Egyptology: Indiana University Bloomington</a></li>
-                    <li><a href="https://publish.obsidian.md/scrolls-of-djehuty/The+Scrolls+Of+Djehuty/Heka(Magic)" target="_blank" class="text-blue-400 hover:underline">10. Heka(Magic) - The Scrolls Of Djehuty - Obsidian Publish</a></li>
-                    <li><a href="https://www.egypttoursportal.com/en-us/the-egyptian-mythology-story-of-osiris/" target="_blank" class="text-blue-400 hover:underline">11. The Egyptian Mythology Story of Osiris - Egypt Tours Portal</a></li>
-                    <li><a href="https://www.britannica.com/topic/heka" target="_blank" class="text-blue-400 hover:underline">12. Heka | Magic, Rituals & Spells - Britannica</a></li>
-                    <li><a href="https://www.thetorah.com/article/heka-understanding-egyptian-magic-on-its-own-terms" target="_blank" class="text-blue-400 hover:underline">13. Ḥeka: Understanding Egyptian Magic on Its Own Terms - TheTorah.com</a></li>
-                    <li><a href="https://brill.com/display/book/edcoll/9789004390751/BP000018.xml" target="_blank" class="text-blue-400 hover:underline">14. Chapter 6 Egypt in: Guide to the Study of Ancient Magic - Brill</a></li>
-                    <li><a href="https://connectparanormal.net/2024/09/25/heka-the-deity-behind-egyptian-magic-and-healing/" target="_blank" class="text-blue-400 hover:underline">15. Heka: The Deity Behind Egyptian Magic and Healing - Connect Paranormal Blog</a></li>
-                    <li><a href="https://www.egypttoursportal.com/blog/ancient-egyptian-civilization/ancient-egyptian-priests/" target="_blank" class="text-blue-400 hover:underline">16. Ancient Egypt Priests and Their Sacred Role in Temple Life</a></li>
-                    <li><a href="https://www.thecollector.com/magic-ancient-egypt-influence-daily-life/" target="_blank" class="text-blue-400 hover:underline">17. Magic in Ancient Egypt: How Did It Influence Daily Life? - TheCollector</a></li>
-                    <li><a href="https://mhcc.pressbooks.pub/app/uploads/sites/28/2021/02/ENG250_Egyptian_Myth.pdf" target="_blank" class="text-blue-400 hover:underline">18. OSIRIS, ISIS, AND HORUS - MHCC Library Press</a></li>
-                    <li><a href="https://www.laits.utexas.edu/cairo/teachers/osiris.pdf" target="_blank" class="text-blue-400 hover:underline">19. The Story of Osiris, Isis and Horus: The Egyptian Myth of Creation - LAITS</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Hermeticism" target="_blank" class="text-blue-400 hover:underline">20. Hermeticism - Wikipedia</a></li>
-                    <li><a href="https://eternalisedofficial.com/2023/02/07/hermeticism/" target="_blank" class="text-blue-400 hover:underline">21. Hermeticism: The Ancient Wisdom of Hermes Trismegistus</a></li>
-                    <li><a href="https://study.com/academy/lesson/hermeticism-overview-history-symbols.html" target="_blank" class="text-blue-400 hover:underline">22. Hermeticism History, Philosophy & Symbols - Study.com</a></li>
-                    <li><a href="https://www.thecollector.com/hermes-trismegistus-hermeticism/" target="_blank" class="text-blue-400 hover:underline">23. The Elusive Hermes Trismegistus & the Founding of Hermeticism - TheCollector</a></li>
-                    <li><a href="https://www.siamcostumes.com/cutters_guides/pdf/middle-egyptian-an-introduction-to-the-language-and-culture%20of-hieroglyphs-james-p-allen.pdf" target="_blank" class="text-blue-400 hover:underline">24. Middle Egyptian - Siam Costumes</a></li>
-                    <li><a href="https://www.egyptologyforum.org/glyphs.html" target="_blank" class="text-blue-400 hover:underline">25. Glyphs and Grammars - Egyptologists' Electronic Forum</a></li>
-                    <li><a href="https://www.principiaparva.co.uk/post/introduction-to-ten-minute-hieroglyphs-a-free-blog-series-of-mini-lessons-for-beginners" target="_blank" class="text-blue-400 hover:underline">26. Introduction to 'Ten-minute hieroglyphs' - A free blog series of mini-lessons for beginners</a></li>
-                    <li><a href="https://www.ebsco.com/research-starters/history/discovery-rosetta-stone" target="_blank" class="text-blue-400 hover:underline">27. Discovery of the Rosetta Stone | History | Research Starters - EBSCO</a></li>
-                    <li><a href="https://arce.org/resource/rosetta-stone-unlocking-ancient-egyptian-language/" target="_blank" class="text-blue-400 hover:underline">28. The Rosetta Stone: Unlocking the Ancient Egyptian Language - ARCE</a></li>
-                    <li><a href="https://egyptra.pro/egyptian-hieroglyphs" target="_blank" class="text-blue-400 hover:underline">29. Egyptian Hieroglyphs & Hieroglyphics: Translator & Alphabet - Egyptra Travel</a></li>
-                    <li><a href="https://blog.hmns.org/2013/07/cracking-the-code-deciphering-ancient-egyptian-hieroglyphs-with-the-rosetta-stone/" target="_blank" class="text-blue-400 hover:underline">30. Cracking the code: Deciphering ancient Egyptian hieroglyphs with the Rosetta Stone</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Rosetta_Stone" target="_blank" class="text-blue-400 hover:underline">31. Rosetta Stone - Wikipedia</a></li>
-                    <li><a href="https://isac.uchicago.edu/research/research-archives-library/online-resources-egyptology" target="_blank" class="text-blue-400 hover:underline">32. Online Resources for Egyptology - Institute for the Study of Ancient Cultures</a></li>
-                    <li><a href="https://ancientegyptonline.co.uk/hieroglyphs-word-order/" target="_blank" class="text-blue-400 hover:underline">33. Hieroglyphs Tutorial: Word Order | Ancient Egypt Online</a></li>
-                    <li><a href="https://www.egyptianhieroglyphs.net/egyptian-hieroglyphs/lesson-1/" target="_blank" class="text-blue-400 hover:underline">34. Egyptian Hieroglyphs: Lesson 1 – Egyptian Hieroglyphs</a></li>
-                    <li><a href="https://www.ancientegyptblog.com/?p=2129" target="_blank" class="text-blue-400 hover:underline">35. Common Hieroglyphic Phrases - Ancient Egypt Blog</a></li>
-                    <li><a href="https://mals.org.au/wp-content/uploads/2019/05/Hieroglyphic_Egyptian_Experienced_Beginners.pdf" target="_blank" class="text-blue-400 hover:underline">36. MACQUARIE UNIVERSITY ANCIENT LANGUAGES WINTER SCHOOL - MALS</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Egyptian_hieroglyphs" target="_blank" class="text-blue-400 hover:underline">37. Egyptian hieroglyphs - Wikipedia</a></li>
-                    <li><a href="https://www.newarab.com/features/long-fight-bring-egypts-stolen-antiquities-back-home" target="_blank" class="text-blue-400 hover:underline">38. The long fight to bring Egypt's stolen antiquities back home</a></li>
-                    <li><a href="https://sites.law.duq.edu/juris/2025/11/23/home-at-last-how-egypts-repatriation-efforts-are-bringing-back-looted-artifacts/" target="_blank" class="text-blue-400 hover:underline">39. Home at Last: How Egypt's Repatriation Efforts are Bringing Back Looted Artifacts - About</a></li>
-                    <li><a href="https://digitalcommons.andrews.edu/cgi/viewcontent.cgi?article=2807&context=auss" target="_blank" class="text-blue-400 hover:underline">40. Middle Egyptian: An Introduction to the Language and Culture of Hieroglyphs [review] / James P. Allen.</a></li>
-                    <li><a href="https://www.academia.edu/94328517/Middle_Egyptian_an_introduction_to_the_language_and_culture_of_Hieroglyphs" target="_blank" class="text-blue-400 hover:underline">41. Middle Egyptian: an introduction to the language and culture of Hieroglyphs - Academia.edu</a></li>
-                    <li><a href="https://archive.org/details/middleegyptianin0000alle" target="_blank" class="text-blue-400 hover:underline">42. Middle Egyptian : an introduction to the language and culture of hieroglyphs : Allen, James P., 1945 - Internet Archive</a></li>
-                    <li><a href="https://www.penn.museum/about/press-room/press-releases/wonders-of-the-ancient-egypt-new-free-online-course" target="_blank" class="text-blue-400 hover:underline">43. Wonders of the Ancient Egypt, New Free Online Course - Penn Museum</a></li>
-                    <li><a href="https://www.classcentral.com/tag/ancient-egypt" target="_blank" class="text-blue-400 hover:underline">44. 330+ Ancient egypt Courses [2026] | Learn Online for Free - Class Central</a></li>
-                    <li><a href="https://stars.library.ucf.edu/ancientneareast/74/" target="_blank" class="text-blue-400 hover:underline">45. "UCLA Encyclopedia of Egyptology" - ucf stars</a></li>
-                    <li><a href="https://uee.ucla.edu/" target="_blank" class="text-blue-400 hover:underline">46. UCLA Encyclopedia of Egyptology</a></li>
-                    <li><a href="https://escholarship.org/uc/nelc_uee" target="_blank" class="text-blue-400 hover:underline">47. UCLA Encyclopedia of Egyptology - eScholarship</a></li>
-                    <li><a href="https://www.alchemywebsite.com/medit08.html" target="_blank" class="text-blue-400 hover:underline">48. Hermetic/alchemical meditation - The Alchemy Web Site</a></li>
-                    <li><a href="https://www.kabbalahempowerment.com/the-simple-guide-on-concentration-meditation-and-breathwork-for-the-perplexed/" target="_blank" class="text-blue-400 hover:underline">49. The Simple Guide On Concentration, Meditation And Breathwork For The Perplexed</a></li>
-                    <li><a href="https://www.msia.org/experience/meditation-spiritual-exercises" target="_blank" class="text-blue-400 hover:underline">50. Active Meditation | Spiritual Exercises - MSIA</a></li>
+                    <li><a href="https://preview.memphis.edu/egypt/resources/timeline.php" target="_blank">1. Timeline of Ancient Egypt - University of Memphis</a></li>
+                    <li><a href="https://www.britishmuseum.org/learn/schools/ages-7-11/ancient-egypt/timeline-ancient-egypt" target="_blank">2. Timeline of ancient Egypt | British Museum</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Osiris_myth" target="_blank">3. Osiris myth - Wikipedia</a></li>
+                    <li><a href="https://egyptfuntours.com/blog/ancient-egyptian-magic-spells-and-mystical-power-of-ancient-egypt/" target="_blank">4. Ancient Egyptian Magic Guide | Egypt Fun Tours 2026</a></li>
+                    <li><a href="https://publish.obsidian.md/scrolls-of-djehuty/The+Scrolls+Of+Djehuty/Heka(Magic)" target="_blank">5. Heka(Magic) - The Scrolls Of Djehuty</a></li>
+                    <li><a href="https://www.britannica.com/topic/heka" target="_blank">6. Heka | Magic, Rituals & Spells - Britannica</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Hermeticism" target="_blank">7. Hermeticism - Wikipedia</a></li>
+                    <li><a href="https://uee.ucla.edu/" target="_blank">8. UCLA Encyclopedia of Egyptology</a></li>
+                    <li><a href="https://www.alchemywebsite.com/medit08.html" target="_blank">9. Hermetic/alchemical meditation - The Alchemy Web Site</a></li>
                 </ul>
             </section>
+        </main>
+
+        <footer>
+            <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+            <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+            RESONANCE INTEGRITY: STABLE</p>
+        </footer>
+
+    </div><!-- /page-wrap -->
+</body>
+</html>
