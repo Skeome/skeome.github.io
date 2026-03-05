@@ -3,100 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE AMARNA PERIOD :: EGYPTOLOGY WIKI</title>
+    <title>THE AMARNA PERIOD [ꜣḫ-n-jtn] :: THE HERETICAL INTERLUDE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+            --sun: #ffcc33;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 50% 10%, rgba(255,204,51,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓇶 𓐍 𓈖 𓇋 𓈖 𓇹';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(255,204,51,0.3), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-left: 3px solid var(--sun);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(255,204,51,0.04);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-bright);
+        }
+        .pull-quote cite {
+            display: block;
+            font-style: normal;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            font-family: 'VT323', monospace;
+            letter-spacing: 0.08em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE AMARNA PERIOD</h1>
-            <p class="text-gray-500 egypt-text-color">// THE HERETICAL INTERLUDE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE AMARNA PERIOD</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">ꜣḫ-n-jtn</div>
+        <p class="page-subtitle">// THE HERETICAL INTERLUDE :: THE REIGN OF THE ATEN //</p>
+        <p class="page-epithet">
+            "Thou appearest beautifully on the horizon of heaven, Thou living Aten, the beginning of life! When thou art risen on the eastern horizon, Thou hast filled every land with thy beauty."
+            <br><span style="font-size:0.85rem;opacity:0.5;">— Great Hymn to the Aten, c. 1350 BCE</span>
+        </p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > Amarna Period
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; AMARNA PERIOD
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Atenist Revolution</h2>
-                <p class="mb-4">
-                    The reign of Amenhotep IV, who renamed himself <b>Akhenaten</b> (c. 1353–1336 BCE), represents the most dramatic theological rupture in Egyptian history. He abandoned the capital at Thebes and founded a new city in the desert, <b>Akhetaten</b> ("Horizon of the Aten," modern Amarna), where he established a near-monotheistic cult centered on the <b>Aten</b> (the solar disc).
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400">The Great Hymn to the Aten</h4>
-                    <p class="text-sm">Found in the tomb of the vizier Ay, this hymn is the primary statement of Amarna theology. It describes the Aten as the sole creator of all life, whose withdrawal brings darkness/death and whose presence brings life. It contains striking parallels to <b>Psalm 104</b> in the Bible.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">A Shift in Reality</h3>
-                <p class="mb-4">
-                    The traditional application of <a href="heka.html" class="nav-link">Heka</a> was suppressed. There were no underworld books, no weighing of the heart, and no independent status for other gods. The king and his queen, <b>Nefertiti</b>, were the sole intermediaries. This period also produced the <b>Amarna Letters</b>—a massive archive of diplomatic correspondence revealing the complex international politics of the era.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Restoration of Ma'at</h2>
-                <p class="mb-4">
-                    Upon the death of Akhenaten, his young successor <b>Tutankhamun</b> (originally Tutankhaten) was forced by the priesthood to return to Thebes. He issued the <b>Restoration Stele</b>, which described Egypt as being in a state of spiritual decay and claimed that his restoration of the gods' temples would return the favor of the divine.
-                </p>
-                <p class="mb-4">
-                    The subsequent rulers, Horemheb and the early Ramessides, performed a systematic <b>Damnatio Memoriae</b>, dismantling Akhetaten and erasing Akhenaten's name (<a href="composite-soul.html" class="nav-link">Ren</a>) from all official king lists to purge the heresy from the timeline.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="timeline.html" class="nav-link">Timeline: New Kingdom</a></li>
-                    <li><a href="maat-isfet.html" class="nav-link">Ma'at: The Restored Order</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Ren (Name and Identity)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// DEVIATION DETECTED :: CORRECTING... // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#revolution">I. The Atenist Revolution — A Rupture in Time</a></li>
+            <li><a href="#akhetaten">II. Akhetaten — The Horizon of the Disc</a></li>
+            <li><a href="#theology">III. Amarna Theology — The Suppression of Heka</a></li>
+            <li><a href="#art">IV. The Amarna Style — Naturalism and Distortions</a></li>
+            <li><a href="#family">V. The Royal Family — Nefertiti and the Daughters</a></li>
+            <li><a href="#politics">VI. International Politics — The Amarna Letters</a></li>
+            <li><a href="#restoration">VII. The Restoration — Tutankhamun and the Priesthood</a></li>
+            <li><a href="#damnatio">VIII. Damnatio Memoriae — Erasing the Heresy</a></li>
+            <li><a href="#legacy">IX. Legacy and Speculation — The Roots of Monotheism?</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: REVOLUTION -->
+    <section id="revolution">
+        <h2 class="section-head">I. The Atenist Revolution — A Rupture in Time</h2>
+        <p>
+            The reign of <strong>Amenhotep IV</strong>, who later renamed himself <strong>Akhenaten</strong> ("Beneficial to the Aten"), represents the most significant theological and political rupture in the three-thousand-year history of Ancient Kemet. Ascending the throne around 1353 BCE during the peak of the New Kingdom's power, the young pharaoh initiated a series of radical reforms that challenged the very foundations of Egyptian civilization: the primacy of the god Amun-Ra and the power of the Theban priesthood.
+        </p>
+        <p>
+            By his fifth regnal year, the pharaoh had moved beyond mere religious preference to a systematic suppression of the traditional pantheon. He elevated the <strong>Aten</strong> — the physical disc of the sun — from a minor aspect of the solar deity to the status of the sole creator and sustainer of life. This was not merely a change in worship; it was a total restructuring of the cosmic interface.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: AKHETATEN -->
+    <section id="akhetaten">
+        <h2 class="section-head">II. Akhetaten — The Horizon of the Disc</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// SITE LOCATION //</div>
+            <p style="font-size:0.85rem;">Modern Tell el-Amarna, located on the east bank of the Nile in Middle Egypt. The site was chosen specifically because it was 'virgin soil,' belonging to no previous god or goddess.</p>
+        </div>
+        <p>
+            The physical manifestation of the revolution was the construction of a new capital city: <strong>Akhetaten</strong> ("Horizon of the Aten"). Built with unprecedented speed using <i>talatat</i> (small, standardized limestone blocks that could be carried by a single worker), the city was designed as a sacred stage for the Aten's daily appearance.
+        </p>
+        <p>
+            Unlike traditional Egyptian temples, which were dark, enclosed, and accessible only to high-ranking priests, the temples of Akhetaten were open to the sky. Thousands of offering tables were laid out in the sun, reflecting a theology of direct, unmediated contact between the source of light and the material world.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: THEOLOGY -->
+    <section id="theology">
+        <h2 class="section-head">III. Amarna Theology — The Suppression of Heka</h2>
+        <p>
+            The most profound impact of Atenism was the systematic suppression of <strong>Heka</strong> (Magic) and the traditional mortuary cult. In Akhenaten's worldview, there was no independent underworld, no weighing of the heart, and no independent status for the complex host of deities who managed the transitions of the soul.
+        </p>
+        <p>
+            The <b>Great Hymn to the Aten</b>, likely composed by the king himself, describes a universe where all life is dependent on the presence of the solar disc. When the sun sets, the world falls into a state of 'death-like' sleep; when it rises, the world is 'reborn.' In this system, the king and his queen, Nefertiti, were the only intermediaries through whom the Aten could be reached. The democratization of the afterlife seen in the Middle Kingdom was effectively revoked.
+        </p>
+
+        <div class="pull-quote">
+            "Thou art in my heart, there is no other that knoweth thee, save thy son Akhenaten."
+            <cite>— Great Hymn to the Aten</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: ART -->
+    <section id="art">
+        <h2 class="section-head">IV. The Amarna Style — Naturalism and Distortions</h2>
+        <p>
+            The theological shift produced a corresponding revolution in artistic expression. The idealized, static proportions of traditional Egyptian art were replaced by a style characterized by fluid lines, intimate family scenes, and startling anatomical distortions.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>NATURALISM</h4>
+                <p>For the first time, the royal family was depicted in informal, affectionate poses — playing with their children, eating together, and expressing emotion. This reflected the Atenist focus on the "Ma'at of the moment" — the truth of living existence under the sun.</p>
+            </div>
+            <div class="info-card">
+                <h4>ELONGATED FORMS</h4>
+                <p>The pharaoh was depicted with a distended belly, thin neck, elongated skull, and heavy hips. Scholars debate whether this represented a real physical condition (such as Marfan syndrome) or was a symbolic choice to represent the pharaoh as a primordial, androgynous creator figure encompassing both male and female traits.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: RESTORATION -->
+    <section id="restoration">
+        <h2 class="section-head">VII. The Restoration — Tutankhamun and the Priesthood</h2>
+        <p>
+            Following Akhenaten's death, his successor — the young <b>Tutankhaten</b> — was quickly moved back to Thebes by the traditionalist faction led by the vizier Ay and the general Horemheb. Under pressure from the Amun priesthood, the king changed his name to <strong>Tutankhamun</strong> ("Living Image of Amun") and issued the <b>Restoration Stele</b>.
+        </p>
+        <p>
+            This document presented a bleak view of the Amarna years, claiming that because the gods had been ignored, they had turned their backs on Egypt, leading to military failure and domestic decay. The temples were reopened, the capital at Akhetaten was abandoned, and the old order was restored with a vengeance.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VIII: DAMNATIO MEMORIAE -->
+    <section id="damnatio">
+        <h2 class="section-head">VIII. Damnatio Memoriae — Erasing the Heresy</h2>
+        <p>
+            The reaction against the Amarna period eventually escalated into a systematic <strong>Damnatio Memoriae</strong> (condemnation of memory). Under the 19th Dynasty rulers, Akhenaten was referred to only as "that criminal" or "the rebel." His name was struck from the official king lists, his statues were smashed, and the city of Akhetaten was dismantled.
+        </p>
+        <p>
+            The stones of his temples were reused as 'filler' in the construction of new monuments at Karnak and elsewhere. Ironically, it was this reuse that preserved thousands of <i>talatat</i>, allowing modern archaeologists to reconstruct the scenes and inscriptions of the "heretic pharaoh's" lost capital.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IX: LEGACY -->
+    <section id="legacy">
+        <h2 class="section-head">IX. Legacy and Speculation — The Roots of Monotheism?</h2>
+        <p>
+            The Amarna period has fascinated scholars and esotericists alike for over a century. Sigmund Freud, in his work <i>Moses and Monotheism</i>, famously speculated that the biblical Moses was an Atenist priest who carried Akhenaten's revolutionary ideas out of Egypt. While historically difficult to prove, the striking parallels between the <b>Hymn to the Aten</b> and <b>Psalm 104</b> suggest at least a shared cultural-literary environment.
+        </p>
+        <p>
+            In the context of the Libreth Protocol, the Amarna period represents a high-risk attempt at "total system re-initialization." Akhenaten attempted to overwrite a deeply embedded symbolic operating system with a single, absolute frequency. The failure of this attempt and the subsequent violent "system rollback" provide a profound lesson in the stability and inertia of established metaphysical structures.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓇶 𓈖 𓇋 𓈖 𓇹</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="new-kingdom.html">New Kingdom Overview</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="composite-soul.html">The Ren (Name and Power)</a></li>
+            <li><a href="heka.html">Heka (Magic)</a></li>
+            <li><a href="solar-barque.html">Solar Theology</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ARCHIVE STATUS: RESTORED</p>
+</footer>
 
 </body>
 </html>

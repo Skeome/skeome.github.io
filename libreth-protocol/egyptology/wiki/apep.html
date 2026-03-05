@@ -3,100 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APEP (APOPHIS) :: EGYPTOLOGY WIKI</title>
+    <title>APEP (APOPHIS) [ꜥꜣpp] :: THE SERPENT OF CHAOS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+            --chaos-red: #8b0000;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(139,0,0,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--chaos-red); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(139,0,0,0.3);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓇋 𓏏 𓈖 𓐍 𓆙';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--chaos-red);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ff4500;
+            text-shadow: 0 0 30px rgba(139,0,0,0.5), 0 0 60px rgba(139,0,0,0.2);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--chaos-red);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(255,69,0,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(139,0,0,0.3);
+            background: rgba(20,5,5,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: #ff4500;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: #ff4500;
+            border-bottom: 1px solid rgba(139,0,0,0.3);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-left: 3px solid var(--chaos-red);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(139,0,0,0.05);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-bright);
+        }
+        .pull-quote cite {
+            display: block;
+            font-style: normal;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            font-family: 'VT323', monospace;
+            letter-spacing: 0.08em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,5,5,0.9);
+            border: 1px solid rgba(139,0,0,0.3);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: #ff4500; font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(139,0,0,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(139,0,0,0.3);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(139,0,0,0.1);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">APEP (APOPHIS) [ꜥꜣpp]</h1>
-            <p class="text-gray-500 egypt-text-color">// THE SERPENT OF CHAOS: ENTROPY AND THE VOID //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">APEP</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--chaos-red);letter-spacing:0.3em;margin-top:0.5rem;">ꜥꜣpp</div>
+        <p class="page-subtitle">// THE SERPENT OF CHAOS :: ENTROPY AND THE VOID :: NON-BEING //</p>
+        <p class="page-epithet">
+            "The Great Rebel, the Evil-Sting, the Roaring One. He who swallows the sun and returns the world to the silence of the Nun."
+        </p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="pantheon.html" class="nav-link">The Pantheon</a> > Apep
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="pantheon.html">THE PANTHEON</a> &gt; APEP
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Ultimate Adversary</h2>
-                <p class="mb-4">
-                    Apep, known as <b>Apophis</b> in Greek, is the embodiment of <a href="maat-isfet.html" class="nav-link">Isfet</a> (primordial chaos). Depicted as a giant serpent, he exists in the darkness of the underworld (Duat) and seeks to swallow the sun god Ra each night as he travels through the twelve hours of darkness.
-                </p>
-                <p class="mb-4">
-                    Unlike Set, who is a complex deity representing necessary chaos within the system of Ma'at, Apep represents the total destruction of the system itself—the return to the non-existence (non-being) of the primordial void before creation.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Battle of Ra's Barque</h3>
-                <p class="mb-4">
-                    Each night, Ra's solar barque must navigate the Duat. Apep uses his hypnotic gaze to paralyze the crew, but the god <b>Set</b>, standing at the prow of the boat, is the only one strong enough to resist the serpent's power and spear it. This nightly victory is not guaranteed; it requires the active participation of humanity through ritual.
-                </p>
-                <div class="p-6 border border-red-900 bg-red-950/20 mb-8">
-                    <h4 class="font-bold text-red-500 uppercase mb-2">The Book of Overthrowing Apep</h4>
-                    <p class="text-sm">Found in the <b>Bremner-Rhind Papyrus</b>, this text contains a major collection of ritual spells designed to magically weaken the serpent. The rituals were performed daily in the Temple of Amun-Ra at Karnak. They involved creating wax models of Apep, binding them with red thread, spitting upon them, and burning them in a fire of <i>bryony</i>. This is the supreme example of <b>sympathetic magic</b> used to maintain the structural integrity of the cosmos against the pressure of the void.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Symbolism and Entropy</h2>
-                <p class="mb-4">
-                    In modern esoteric interpretation, Apep can be understood as the principle of <b>entropy</b>—the tendency of all organized systems to dissolve into disorder. The daily struggle against Apep represents the constant effort required to maintain consciousness and order in the face of the encroaching unconsciousness and void.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="maat-isfet.html" class="nav-link">Ma'at vs Isfet</a></li>
-                    <li><a href="solar-barque.html" class="nav-link">The Solar Barque (Mesektet)</a></li>
-                    <li><a href="ritual-practice.html" class="nav-link">Defensive Magic (Heka)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// ADVERSARY STATUS: CONTAINED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Chaos — Apep vs. Set</a></li>
+            <li><a href="#cosmogony">II. Apep in the Cosmogony — The Enemy of Light</a></li>
+            <li><a href="#battle">III. The Nightly Battle — Ra's Barque in the Duat</a></li>
+            <li><a href="#ritual">IV. The Book of Overthrowing Apep — Defensive Heka</a></li>
+            <li><a href="#entropy">V. Metaphysical Analysis — Entropy and Non-Being</a></li>
+            <li><a href="#hypnosis">VI. The Hypnotic Gaze — Paralysis of the Soul</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Chaos — Apep vs. Set</h2>
+        <p>
+            In Kemetic theology, it is critical to distinguish between <strong>Set</strong> and <strong>Apep</strong>. While Set represents "necessary chaos" — the storm, the desert, the foreign lands, and the aggressive force required to defend the sun — <strong>Apep</strong> (Apophis) represents <strong>Isfet</strong> in its absolute form: the total destruction of the cosmic order and the return to the non-existence of the primordial void.
+        </p>
+        <p>
+            Apep was never worshiped; he had no cult centers, only centers of execration. He was the only deity in the Egyptian pantheon who was considered entirely malevolent and beyond the reach of Ma'at. He does not participate in the cycle of life and death; he seeks only the termination of the cycle itself.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: BATTLE -->
+    <section id="battle">
+        <h2 class="section-head">III. The Nightly Battle — Ra's Barque in the Duat</h2>
+        <p>
+            Each night, as the solar barque (the <i>Mesektet</i>) travels through the twelve hours of the Duat, it is intercepted by Apep. The serpent attempts to swallow the sun, using his massive coils to choke the celestial river and his hypnotic gaze to paralyze the crew.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>SET AT THE PROW</h4>
+                <p>Paradoxically, it is the god <strong>Set</strong> who stands at the prow of Ra's boat. Only Set possesses the strength and the immunity to Apep's hypnosis required to spear the serpent and allow the sun to pass. This highlights the Kemetic view that "contained chaos" (Set) is the only weapon against "absolute chaos" (Apep).</p>
+            </div>
+            <div class="info-card">
+                <h4>THE SAND-BANK OF APEP</h4>
+                <p>In the seventh hour of the night, Ra encounters Apep at a place called the 'Sand-bank of Apep.' Here, the serpent's body is so large that it fills the river, and the sun must be transformed into a cat (the <i>Great Cat of Heliopolis</i>) to decapitate the enemy.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: RITUAL -->
+    <section id="ritual">
+        <h2 class="section-head">IV. The Book of Overthrowing Apep — Defensive Heka</h2>
+        <p>
+            The struggle against Apep was not considered a purely mythological event; it was a real-time crisis that required the active participation of humanity. The <b>Book of Overthrowing Apep</b> (contained in the <i>Bremner-Rhind Papyrus</i>) details the systematic magical operations performed daily at the Temple of Amun-Ra at Karnak.
+        </p>
+        <div class="pull-quote">
+            "Fell him with the knife! Put him in the fire! Trample him underfoot! Let his name be erased from the world!"
+            <cite>— Execration Formula, Papyrus Bremner-Rhind</cite>
+        </div>
+        <p>
+            These rituals utilized <strong>sympathetic magic</strong>:
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li>Creating wax or clay models of the serpent.</li>
+            <li>Inscribing the enemy's name in green ink (the color of life, used here to 'trap' the life-force).</li>
+            <li>Binding the models with red thread.</li>
+            <li>Spitting upon, stabbing, and finally burning the effigies in a fire of <i>bryony</i>.</li>
+        </ul>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: METAPHYSICAL ANALYSIS -->
+    <section id="entropy">
+        <h2 class="section-head">V. Metaphysical Analysis — Entropy and Non-Being</h2>
+        <p>
+            In the context of the Libreth Protocol, Apep can be understood as the personification of <strong>Entropy</strong> — the inevitable tendency of all organized information and energy systems to dissolve into noise and disorder. The nightly battle is a metaphor for the constant effort required to maintain <strong>Awareness</strong> and <strong>Coherence</strong> in the face of the encroaching void.
+        </p>
+        <p>
+            Apep's primary weapon is <strong>Stasis</strong>. By drinking the water of the celestial river, he seeks to stop the flow of time and the movement of the sun. In the psychological domain, Apep represents the "death of the will" and the descent into absolute unconsciousness.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓇋 𓏏 𓈖 𓐍 𓆙</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="maat-isfet.html">Ma'at & Isfet — The Cosmic Polarity</a></li>
+            <li><a href="solar-barque.html">The Solar Barque — Ra's Journey</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Typology</a></li>
+            <li><a href="netherworld-books.html">The Netherworld Books</a></li>
+            <li><a href="cosmological-deities.html">Set — The Storm God</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ADVERSARY STATUS: CONTAINED</p>
+</footer>
 
 </body>
 </html>

@@ -3,140 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMULETS & TALISMANS :: EGYPTOLOGY WIKI</title>
+    <title>AMULETS & TALISMANS :: PORTABLE HEKA :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+            --red-jasper: #a52a2a;
+            --lapis: #2a52be;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓊽 𓋹 𓎛 𓅓 𓂝';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-left: 3px solid var(--gold);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(212,175,55,0.04);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-bright);
+        }
+        .pull-quote cite {
+            display: block;
+            font-style: normal;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+            font-family: 'VT323', monospace;
+            letter-spacing: 0.08em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">AMULETS & TALISMANS</h1>
-            <p class="text-gray-500 egypt-text-color">// PORTABLE HEKA: PROTECTION AND EMPOWERMENT //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">AMULETS & TALISMANS</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">mkt</div>
+        <p class="page-subtitle">// PORTABLE HEKA :: INSTRUMENTS OF PROTECTION AND RESONANCE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="ritual-practice.html" class="nav-link">Ritual Practice</a> > Amulets & Talismans
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="ritual-practice.html">RITUAL PRACTICE</a> &gt; AMULETS & TALISMANS
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Magic of Form and Material</h2>
-                <p class="mb-4">
-                    Amulets (Ancient Egyptian <i>mkt</i>, "protection") were an essential part of daily and funerary life in Ancient Egypt. These small objects were designed to utilize the power of <b>Heka</b> (magic) through their specific shape, color, and the material from which they were crafted.
-                </p>
-                <p class="mb-4">
-                    The efficacy of an amulet was often enhanced by a spoken incantation during its creation or consecration. Their primary function was to attract divine favor, ensure fertility, and provide protection against malevolent forces (both physical and spiritual).
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Principal Amuletic Forms</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Udjat Eye (Eye of Horus)</h4>
-                        <p class="text-sm">Symbol of healing and wholeness. The restored Eye is a masterpiece of mathematical theology: its component parts correspond to fractions of the <b>heqat</b> grain measure (Inner corner: 1/2, Pupil: 1/4, Eyebrow: 1/8, Outer corner: 1/16, Curved tail: 1/32, Tear track: 1/64). The sum equals 63/64—the missing 1/64 was believed to be supplied by the magic of Thoth. <a href="math-astronomy.html" class="nav-link">[Mathematical Details]</a></p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Menat Necklace</h4>
-                        <p class="text-sm">A heavy, beaded necklace with a counterweight (<i>mnyt</i>) sacred to <a href="hathor.html" class="nav-link">Hathor</a>. More than jewelry, it was a ritual percussion instrument used to rattle and soothe the gods, transmitting the goddess's maternal protection.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Sema-Tawy</h4>
-                        <p class="text-sm">The symbol of the "Union of the Two Lands"—a lung and windpipe entwined with papyrus and lotus. As an amulet, it ensured the harmonious integration of the dualities within the soul's anatomy.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Headrest Amulet (Wer)</h4>
-                        <p class="text-sm">Invokes <b>Spell 166</b> of the Book of the Dead: <i>"They lift up your head... you shall not be destroyed for eternity."</i> It ensures the physical and spiritual integrity of the deceased, magically preventing the "decapitation" of the soul in the Duat.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Tyet (Knot of Isis)</h4>
-                        <p class="text-sm">Also known as the "Blood of Isis," it symbolizes protection and the magical power of the goddess. Usually crafted from red jasper to resonate with life-giving solar fire.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Taweret & Bes</h4>
-                        <p class="text-sm">Household protectors. <b>Taweret</b> (hippo/lion/croc composite) shielded pregnant women. <b>Bes</b> images were often <b>tattooed</b> on the thighs of dancers as living, apotropaic magic.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Ritual of Binding (Ar-mkt)</h2>
-                <p class="mb-4">
-                    The effectiveness of an amulet was not inherent in its form alone; it required the ritual of <b>Ar-mkt</b> ("Binding the Protection"). A magician-priest would recite specific incantations while knotting a cord or anointing the object, effectively "locking" the desired frequency into the material resonator.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Theology of Material & Color</h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-black/40 border border-gray-700 text-sm">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b border-gray-700 text-left text-amber-400">Amulet</th>
-                                <th class="py-2 px-4 border-b border-gray-700 text-left text-amber-400">Prescribed Material</th>
-                                <th class="py-2 px-4 border-b border-gray-700 text-left text-amber-400">Metaphysical Frequency</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td class="py-1 px-4">Heart Scarab</td><td class="py-1 px-4">Green Feldspar/Basalt</td><td class="py-1 px-4">Regeneration; Earth life force</td></tr>
-                            <tr><td class="py-1 px-4">Tyet Knot</td><td class="py-1 px-4">Red Jasper/Glass</td><td class="py-1 px-4">Vital Blood; Protective solar fire</td></tr>
-                            <tr><td class="py-1 px-4">Djed Pillar</td><td class="py-1 px-4">Blue Faience/Lapis</td><td class="py-1 px-4">Celestial Stability; The Spine of God</td></tr>
-                            <tr><td class="py-1 px-4">Udjat Eye</td><td class="py-1 px-4">Gold/Silver/Faience</td><td class="py-1 px-4">Solar/Lunar Vision; Mathematical order</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="ritual-practice.html" class="nav-link">General Ritual Practice</a></li>
-                    <li><a href="heka.html" class="nav-link">The Nature of Heka</a></li>
-                    <li><a href="weighing-of-the-heart.html" class="nav-link">The Weighing of the Heart</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// AMULETIC SHIELD: ACTIVE // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Amulets — mkt and sAw</a></li>
+            <li><a href="#material">II. The Magic of Material and Color</a></li>
+            <li><a href="#principal-forms">III. Principal Amuletic Forms and Their Functions</a></li>
+            <li><a href="#binding">IV. The Ritual of Binding — Ar-mkt</a></li>
+            <li><a href="#funerary">V. Funerary Amulets — Navigation of the Duat</a></li>
+            <li><a href="#household">VI. Household Protection — Bes and Taweret</a></li>
+            <li><a href="#math">VII. The Udjat — Mathematical Theology</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Amulets — mkt and sAw</h2>
+        <p>
+            In the ancient Egyptian worldview, an amulet was not a passive symbol or a lucky charm. It was an active vessel of <strong>Heka</strong> (Magic), designed to protect (<i>mkt</i>) or to guard (<i>sAw</i>) the wearer from malevolent forces, both physical and spiritual. The term <i>mkt</i> specifically implies a protective shield or a covering, suggesting that an amulet established a magical perimeter around the individual's composite soul.
+        </p>
+        <p>
+            The effectiveness of an amulet was believed to result from a convergence of four factors: the <strong>form</strong> (the specific shape or image), the <strong>material</strong> (the inherent properties of the stone or metal), the <strong>color</strong> (the theological frequency of the hue), and the <strong>ritual</strong> (the spoken incantations and actions used to 'bind' the power to the object).
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: MATERIAL -->
+    <section id="material">
+        <h2 class="section-head">II. The Magic of Material and Color</h2>
+        <p>
+            Ancient Egyptians were sophisticated observers of the natural world, assigning specific metaphysical properties to different substances. Color (<i>iwn</i>) was considered an integral part of a being's essence, not merely an external attribute.
+        </p>
+        <div class="data-table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Material</th>
+                        <th>Color</th>
+                        <th>Metaphysical Association</th>
+                        <th>Typical Amulets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Red Jasper</strong></td><td>Red</td><td>Blood of Isis, vital energy, solar fire</td><td>Tyet (Knot of Isis)</td></tr>
+                    <tr><td><strong>Lapis Lazuli</strong></td><td>Deep Blue</td><td>The night sky, the hair of the gods, Nun</td><td>Udjat Eye, Heart Scarab</td></tr>
+                    <tr><td><strong>Green Feldspar</strong></td><td>Green</td><td>Vegetation, rebirth, the power of Osiris</td><td>Wadj Scepter, Papyrus Column</td></tr>
+                    <tr><td><strong>Gold</strong></td><td>Gold</td><td>Flesh of the gods, the sun, immortality</td><td>Solar discs, royal amulets</td></tr>
+                    <tr><td><strong>Faience</strong></td><td>Turquoise</td><td>Celestial light, the Nile, renewal</td><td>Apotropaic figures, beads</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: PRINCIPAL FORMS -->
+    <section id="principal-forms">
+        <h2 class="section-head">III. Principal Amuletic Forms and Their Functions</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE UDJAT (EYE OF HORUS)</h4>
+                <p>The symbol of healing, wholeness, and protection. It represents the restored eye of Horus, synthesized through the mathematical integration of its component parts. It was the most common amulet for both the living and the dead.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE TYET (KNOT OF ISIS)</h4>
+                <p>Often called the 'Blood of Isis,' this amulet resembles an ankh with its side arms folded down. Usually made of red jasper, it invokes the protective power and regenerative blood of the goddess.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE DJED PILLAR</h4>
+                <p>Symbolizing the spine of Osiris, it represents stability, endurance, and the capacity for resurrection. It was often placed on the back of the mummy to ensure verticality in the afterlife.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE HEART SCARAB</h4>
+                <p>Placed over the heart of the deceased, it was inscribed with <b>Spell 30B</b> from the Book of the Dead, pleading with the heart not to testify against the individual in the Hall of Judgment.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: BINDING -->
+    <section id="binding">
+        <h2 class="section-head">IV. The Ritual of Binding — Ar-mkt</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// RITUAL ACTION //</div>
+            <p style="font-size:0.85rem;">The magician-priest would recite the words of power seven times over the amulet, often knotting a cord or anointing the object with sacred oils to 'lock' the Heka into the material.</p>
+        </div>
+        <p>
+            The effectiveness of an amulet was not inherent in its form alone; it required the ritual of <b>Ar-mkt</b> ("Binding the Protection"). This process turned a physical object into a magical resonator. The priest (usually a <i>Kher-Heb</i> or a <i>Sau</i> specialist) would align his own <i>Sekhem</i> (power) with the divine frequency being invoked.
+        </p>
+        <p>
+            Amulets were often described as being 'charged' or 'animated' through these rites. In the funerary context, the <b>Opening of the Mouth</b> ceremony was the ultimate expression of this animation, transforming the entire tomb and its contents into a living magical environment.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: THE UDJAT -->
+    <section id="math">
+        <h2 class="section-head">VII. The Udjat — Mathematical Theology</h2>
+        <p>
+            The <strong>Udjat Eye</strong> is a masterpiece of mathematical theology. Its component parts correspond to fractions of the <b>heqat</b> grain measure:
+        </p>
+        <ul style="list-style: none; padding-left: 2rem;">
+            <li>𓂂 Inner corner: 1/2</li>
+            <li>𓂂 Pupil: 1/4</li>
+            <li>𓂂 Eyebrow: 1/8</li>
+            <li>𓂂 Outer corner: 1/16</li>
+            <li>𓂂 Curved tail: 1/32</li>
+            <li>𓂂 Tear track: 1/64</li>
+        </ul>
+        <p>
+            The sum of these fractions is 63/64. According to myth, the missing 1/64 — the final piece required for total wholeness — was supplied by the magic of <strong>Thoth</strong>. This indicates that in the Kemetic view, mathematical order is fundamental, but magic is the final ingredient that permits total completion.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓊽 𓋹 𓎛 𓅓 𓂝</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Overview</a></li>
+            <li><a href="composite-soul.html">The Composite Soul</a></li>
+            <li><a href="weighing-of-the-heart.html">The Hall of Judgment</a></li>
+            <li><a href="math-astronomy.html">Mathematical Theology</a></li>
+            <li><a href="hathor.html">Hathor — Lady of Malachite</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    AMULETIC SHIELD: ACTIVE</p>
+</footer>
 
 </body>
 </html>

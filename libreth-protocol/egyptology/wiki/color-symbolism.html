@@ -3,132 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COLOR SYMBOLISM :: EGYPTOLOGY WIKI</title>
+    <title>COLOR SYMBOLISM [iwn] :: THEOLOGICAL FREQUENCIES :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
-            margin: 3rem 0;
+        .page-header::before {
+            content: '𓏞 𓈖 𓇋 𓈓 𓈖';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
         }
-        .color-box {
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        .color-preview {
             width: 100%;
             height: 40px;
-            margin-bottom: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
         }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
+            margin: 3rem 0;
+        }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">COLOR SYMBOLISM [iwn]</h1>
-            <p class="text-gray-500 egypt-text-color">// THE THEOLOGICAL LANGUAGE: SACRED FREQUENCIES AND THEIR MEANINGS //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">COLOR SYMBOLISM</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">iwn</div>
+        <p class="page-subtitle">// THE THEOLOGICAL LANGUAGE :: SACRED FREQUENCIES AND RESONANCE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="ritual-practice.html" class="nav-link">Ritual Practice</a> > Color Symbolism
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="ritual-practice.html">RITUAL PRACTICE</a> &gt; COLOR SYMBOLISM
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Overview</h2>
-                <p class="mb-4">
-                    In Ancient Egypt, color was not merely an aesthetic choice but a theological language. The term <b>iwn</b> could refer to "color," "nature," "being," or "disposition." Each color possessed a specific vibration and was associated with particular deities, cosmological concepts, and magical properties.
-                </p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <!-- Black -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-black"></div>
-                        <h4 class="font-bold text-amber-400">Black (Kem)</h4>
-                        <p class="text-sm">Symbol of <b>rebirth</b> and <b>fertility</b>. It represents the rich silt of the Nile and is associated with <b>Osiris</b> (as the "Black One") and <b>Anubis</b>. Mineral: <b>Galena</b> or <b>Carbon</b>. It is the frequency of the "hidden sun" during the twelve hours of night.</p>
-                    </div>
-                    <!-- Red -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-red-800"></div>
-                        <h4 class="font-bold text-amber-400">Red (Desher)</h4>
-                        <p class="text-sm">Associated with <b>danger</b>, <b>power</b>, and <b>Set</b>. Mineral: <b>Red Jasper</b> or <b>Carnelian</b>. It represents the dynamic, chaotic energy required for protection and the destruction of enemies. It is the frequency of the desert sun.</p>
-                    </div>
-                    <!-- White -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-white"></div>
-                        <h4 class="font-bold text-black">White (Hedj)</h4>
-                        <p class="text-sm">Symbol of <b>purity</b> and <b>holiness</b>. Mineral: <b>Silver</b> or <b>Limestone</b>. Used for ritual tools and priestly garments. It represents the clarified state of the soul after the <a href="opening-of-the-mouth.html" class="nav-link">Opening of the Mouth</a>.</p>
-                    </div>
-                    <!-- Green -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-green-700"></div>
-                        <h4 class="font-bold text-amber-400">Green (Wadj)</h4>
-                        <p class="text-sm">Symbol of <b>vegetation</b>, <b>growth</b>, and <b>eternal life</b>. Mineral: <b>Malachite</b>. Associated with Osiris as the god of renewal. It represents the "flourishing" of the spirit within the divine order.</p>
-                    </div>
-                    <!-- Blue -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-blue-800"></div>
-                        <h4 class="font-bold text-amber-400">Blue (Irtyu)</h4>
-                        <p class="text-sm">Symbol of the <b>sky</b> and <b>divinity</b>. Mineral: <b>Lapis Lazuli</b>. Deep blue represents the night sky and the <a href="hathor.html" class="nav-link">Milky Way</a>; it is the frequency of the celestial waters from which creation emerges.</p>
-                    </div>
-                    <!-- Gold -->
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <div class="color-box bg-yellow-500"></div>
-                        <h4 class="font-bold text-amber-400">Yellow/Gold (Khenet)</h4>
-                        <p class="text-sm">The "flesh of the gods." Material: <b>Gold</b>. Symbol of <b>immortality</b> and the unchanging nature of divine beings. It represents the perfected, incorruptible state of the transfigured <a href="composite-soul.html" class="nav-link">Akh</a>.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Application in Heka</h2>
-                <p class="mb-4">
-                    The choice of color for <a href="amulets-talismans.html" class="nav-link">amulets and ritual implements</a> was critical, as the material's color governed its metaphysical resonance. A red carnelian amulet was used to channel the dynamic energy of Set, while a green faience scarab was used to attract the restorative power of Osiris.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="amulets-talismans.html" class="nav-link">Amulets & Talismans</a></li>
-                    <li><a href="osiris.html" class="nav-link">Osiris: The Green & Black One</a></li>
-                    <li><a href="anubis.html" class="nav-link">Anubis: The Black Jackal</a></li>
-                    <li><a href="hathor.html" class="nav-link">Hathor: Lady of the Milky Way</a></li>
-                    <li><a href="heka.html" class="nav-link">Heka: Magical Resonance</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SPECTRAL INTEGRITY: LOCKED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Color — iwn as Essence</a></li>
+            <li><a href="#black">II. Black (Kem) — Rebirth and Fertility</a></li>
+            <li><a href="#red">III. Red (Desher) — Danger and Power</a></li>
+            <li><a href="#white">IV. White (Hedj) — Purity and Holiness</a></li>
+            <li><a href="#green">V. Green (Wadj) — Growth and Eternal Life</a></li>
+            <li><a href="#blue">VI. Blue (Irtyu) — Divinity and the Sky</a></li>
+            <li><a href="#gold">VII. Yellow/Gold (Khenet) — The Flesh of the Gods</a></li>
+            <li><a href="#heka">VIII. Application in Heka and Alchemy</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Color — iwn as Essence</h2>
+        <p>
+            In Ancient Egypt, color was not merely an aesthetic attribute but a theological language. The term <strong>iwn</strong> referred not only to "color" but also to the "nature," "being," or "disposition" of a person or object. To change the color of something was to fundamentally alter its ontological state.
+        </p>
+        <p>
+            Each color possessed a specific <strong>vibration</strong> and was associated with particular deities, cosmological concepts, and magical properties. The selection of materials for amulets and ritual tools was governed by these correspondences, ensuring that the physical object resonated with the desired divine frequency.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: BLACK -->
+    <section id="#black">
+        <h2 class="section-head">II. Black (Kem) — Rebirth and Fertility</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <div class="color-preview" style="background-color: #000;"></div>
+                <h4>KEM (BLACK)</h4>
+                <p>Contrary to many modern cultures, black was a positive color in Kemet. It symbolized the rich silt deposited by the Nile flood — the source of all life and fertility. It was the color of <strong>Osiris</strong> (the "Black One") and <strong>Anubis</strong>.</p>
+            </div>
+            <div class="info-card">
+                <h4>METAPHYSICAL FREQUENCY</h4>
+                <p>Black represents the stage of <strong>Nigredo</strong> in the alchemical process: the fertile darkness of the womb/tomb from which new life emerge. It is the frequency of the "hidden sun" during its nocturnal journey through the Duat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION III: RED -->
+    <section id="#red">
+        <h2 class="section-head">III. Red (Desher) — Danger and Power</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <div class="color-preview" style="background-color: #8b0000;"></div>
+                <h4>DESHER (RED)</h4>
+                <p>Associated with <strong>Set</strong>, the desert sun, and dynamic, chaotic energy. It was the color of blood and fire, representing both destruction and the protective force required to defeat Apep.</p>
+            </div>
+            <div class="info-card">
+                <h4>METAPHYSICAL FREQUENCY</h4>
+                <p>Red is the frequency of <strong>vitality</strong> and <strong>will</strong>. While it could represent "evil" or danger, it was essential for apotropaic magic. Red jasper and carnelian were used to channel this aggressive, protective Heka.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION IV: WHITE -->
+    <section id="#white">
+        <h2 class="section-head">IV. White (Hedj) — Purity and Holiness</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <div class="color-preview" style="background-color: #ffffff;"></div>
+                <h4>HEDJ (WHITE)</h4>
+                <p>The color of <strong>purity</strong>, holiness, and the clarified state of the soul. White linen was the standard garment for priests and the deceased. It was associated with the moon and the goddess Nekhbet.</p>
+            </div>
+            <div class="info-card">
+                <h4>METAPHYSICAL FREQUENCY</h4>
+                <p>White represents the <strong>Albedo</strong> stage of alchemy — the purification of the self. It is the frequency of the "shining one" (the Akh) who has successfully navigated the judgment of Ma'at.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VIII: HEKA -->
+    <section id="heka">
+        <h2 class="section-head">VIII. Application in Heka and Alchemy</h2>
+        <p>
+            In practical <a href="heka.html" class="nl">Heka</a>, color functioned as a <strong>frequency-modulator</strong>. When creating a <a href="amulets-talismans.html" class="nl">talisman</a>, the material's color was the primary factor in determining its resonance.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>ALCHEMICAL COLOR STAGES</h4>
+                <p>The alchemical Great Work (<i>Opus Magnum</i>) follows the spectral sequence of Kemetic theology: Nigredo (Black), Albedo (White), Citrinitas (Yellow), and Rubedo (Red). This sequence represents the progressive refinement of the soul's vibration.</p>
+            </div>
+            <div class="info-card">
+                <h4>MATERIAL CORRESPONDENCES</h4>
+                <p>Lapis Lazuli (Blue) was used to invoke the celestial waters; Red Jasper (Red) for the blood of Isis; Malachite (Green) for Osirian renewal; and Gold (Yellow) for the incorruptible flesh of the gods.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glyph-marker">𓏞 𓈖 𓇋 𓈓 𓈖</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="amulets-talismans.html">Amulets & Talismans</a></li>
+            <li><a href="alchemy.html">Alchemy & Kemet</a></li>
+            <li><a href="heka.html">Heka — The Operative Force</a></li>
+            <li><a href="osiris.html">Osiris — The Green & Black One</a></li>
+            <li><a href="anubis.html">Anubis — The Black Jackal</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="composite-soul.html">The Composite Soul</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SPECTRAL INTEGRITY: LOCKED</p>
+</footer>
 
 </body>
 </html>
