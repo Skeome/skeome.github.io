@@ -3,119 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEIR EL-MEDINA :: EGYPTOLOGY WIKI</title>
+    <title>DEIR EL-MEDINA [st-mꜣꜥt] :: THE PLACE OF TRUTH :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓊖 𓊃 𓏏 𓌶 𓂝 𓏏';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">DEIR EL-MEDINA (SET-MA'AT)</h1>
-            <p class="text-gray-500 egypt-text-color">// THE WORKMEN'S VILLAGE: PRIVATE RELIGION AND MAGIC //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">DEIR EL-MEDINA</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">st-mꜣꜥt</div>
+        <p class="page-subtitle">// THE PLACE OF TRUTH :: ARTISANS OF THE AFTERLIFE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Deir el-Medina
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; DEIR EL-MEDINA
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Place of Truth</h2>
-                <p class="mb-4">
-                    <b>Deir el-Medina</b> (Ancient name: <i>Set-Ma'at</i>, "The Place of Truth") was the village of the artisans who dug and decorated the royal tombs in the Valley of the Kings. Because of the high literacy rate of its inhabitants, it provides the most complete record of daily life, private law, and personal religion in the ancient world.
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">The First Strike in History (1159 BCE)</h4>
-                    <p class="text-sm">During the reign of Ramesses III, the workmen of Deir el-Medina organized the first recorded labor strike when their grain rations were delayed. They marched to the royal mortuary temples, shouting: <i>"We have come here because of hunger and thirst!"</i> This event reveals the practical limits of Pharaonic authority and the high value placed on the maintenance of Ma'at through the proper distribution of resources.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Artisans' Guilds</h3>
-                <p class="mb-4">
-                    The village was divided into two "sides"—the Left and the Right—corresponding to the crews working on each side of the royal tomb. These crews were highly organized guilds of stone-cutters, draftsmen, and painters. They were not merely laborers but <b>Sacred Technicians</b>, responsible for manifesting the <a href="netherworld-books.html" class="nav-link">Netherworld Books</a> into physical stone to enable the king's transfiguration.
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Kenherkhopshef: The Scribe of the Tomb</h4>
-                    <p class="text-sm">One of the village's most famous residents, the scribe <b>Kenherkhopshef</b>, owned a vast personal library. This included the famous <b>Dream Papyrus</b> (Papyrus Chester Beatty III), proving that high-level <a href="dream-incubation.html" class="nav-link">Oneiromancy</a> was practiced and studied within the domestic sphere of the tomb-builders.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Private Magic and Ancestor Worship</h3>
-                <p class="mb-4">
-                    The villagers practiced a form of domestic religion distinct from the state temples.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Wise Woman (Ta-Rekhet)</h4>
-                        <p class="text-sm">Local seers, often women, who acted as mediums for the ancestors. They could identify the spiritual cause of illness or misfortune (often an angry deity or ghost) and prescribe expiation.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Ancestor Busts</h4>
-                        <p class="text-sm">The <i>Akhu-iqer-en-Ra</i> ("The Able Spirit of Ra"). Villagers kept limestone busts of deceased relatives in niches in their homes, offering food and prayer to solicit their aid in daily affairs.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Cult of Amenhotep I</h2>
-                <p class="mb-4">
-                    The village had its own patron deities: the deified King <b>Amenhotep I</b> and his mother <b>Ahmose-Nefertari</b>. Their statues were used as oracles during processions, settling legal disputes among the workmen—a rare example of "democratized" divine justice.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="heka.html" class="nav-link">Heka (Private Magic)</a></li>
-                    <li><a href="dream-incubation.html" class="nav-link">Dream Incubation (Oracles)</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Akh (Ancestral Spirit)</a></li>
-                    <li><a href="amulets-talismans.html" class="nav-link">Amulets & Domestic Protection</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SOCIAL HISTORY: UNCOVERED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Set-Ma'at — The Place of Truth</a></li>
+            <li><a href="#technicians">II. Sacred Technicians — The Artisans' Guilds</a></li>
+            <li><a href="#private-religion">III. Private Religion and Domestic Heka</a></li>
+            <li><a href="#wise-woman">IV. The Ta-Rekhet — The Wise Woman of the Village</a></li>
+            <li><a href="#ancestors">V. Ancestor Worship — The Able Spirits of Ra</a></li>
+            <li><a href="#social">VI. Social History — The First Labor Strike</a></li>
+            <li><a href="#oracles">VII. Oracular Justice — The Cult of Amenhotep I</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Set-Ma'at — The Place of Truth</h2>
+        <p>
+            <strong>Deir el-Medina</strong> (Ancient Egyptian: <i>Set-Ma'at</i>, "The Place of Truth") was a highly specialized, restricted community of artisans who excavated and decorated the royal tombs in the Valley of the Kings and the Valley of the Queens during the New Kingdom.
+        </p>
+        <p>
+            This village represents a unique <strong>socio-magical environment</strong>. Because of the critical nature of their work — manifesting the sacred maps of the afterlife into physical stone — the inhabitants were among the most literate and spiritually sophisticated non-priestly classes in Kemet. Deir el-Medina provides our most detailed records of private law, domestic magic, and personal devotion.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: TECHNICIANS -->
+    <section id="technicians">
+        <h2 class="section-head">II. Sacred Technicians — The Artisans' Guilds</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// THE TWO SIDES //</div>
+            <p style="font-size:0.85rem;">The workmen were divided into two 'sides' (<i>iswt</i>) — the Left and the Right — mirroring the structure of the tomb and the celestial geography they were tasked with creating.</p>
+        </div>
+        <p>
+            The workmen of Set-Ma'at were not merely laborers; they were <strong>Sacred Technicians</strong>. Their task was to materialize the <a href="netherworld-books.html" class="nl">Netherworld Books</a> (such as the Amduat and the Book of Gates) to enable the King's successful transfiguration into an <strong>Akh</strong>.
+        </p>
+        <p>
+            This required mastery of geometry, hieroglyphic script, and theological iconography. Every stroke of the brush and every chip of the chisel was an act of applied <strong>Heka</strong>, contributing to the construction of a permanent magical resonator for the royal soul.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: PRIVATE RELIGION -->
+    <section id="private-religion">
+        <h2 class="section-head">III. Private Religion and Domestic Heka</h2>
+        <p>
+            While state religion focused on the maintenance of cosmic order through temple ritual, the inhabitants of Deir el-Medina practiced a vibrant form of <strong>domestic religion</strong>.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE WISE WOMAN (TA-REKHET)</h4>
+                <p>Local seers, often women, acted as mediums for the ancestors. They could diagnose the spiritual cause of illness — often attributed to an angry ghost or deity — and prescribe specific Heka operations or offerings to restore balance.</p>
+            </div>
+            <div class="info-card">
+                <h4>ANCESTOR BUSTS</h4>
+                <p>Villagers kept limestone busts of deceased relatives (the <i>Akhu-iqer-en-Ra</i>, "Able Spirits of Ra") in niches within their homes. These ancestors were believed to be powerful magical agents capable of intervening in the affairs of the living.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: SOCIAL HISTORY -->
+    <section id="social">
+        <h2 class="section-head">VI. Social History — The First Labor Strike</h2>
+        <p>
+            In the 29th year of the reign of <strong>Ramesses III</strong> (c. 1159 BCE), the workmen of Deir el-Medina organized the first recorded labor strike in history. When their grain rations were delayed due to administrative corruption, the artisans laid down their tools and marched to the royal mortuary temples.
+        </p>
+        <p>
+            Their protest — <i>"We have come here because of hunger and thirst!"</i> — was not merely a demand for food, but a demand for the restoration of <strong>Ma'at</strong>. In Kemetic thought, the Pharaonic state was divinely obligated to provide for those who maintained the sacred infrastructure. The strike demonstrated that even in a divinely ordained kingdom, the social contract was conditional upon the maintenance of order and justice.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓊖 𓊃 𓏏 𓌶 𓂝 𓏏</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="heka.html">Heka — Private & State Magic</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="composite-soul.html">The Akh (Ancestral Spirit)</a></li>
+            <li><a href="netherworld-books.html">The Netherworld Books</a></li>
+            <li><a href="new-kingdom.html">The New Kingdom Era</a></li>
+            <li><a href="dream-incubation.html">Dream Incubation & Oracles</a></li>
+            <li><a href="amulets-talismans.html">Domestic Protection</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SOCIAL RESONANCE: STABLE</p>
+</footer>
 
 </body>
 </html>

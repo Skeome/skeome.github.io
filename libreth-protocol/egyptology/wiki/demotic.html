@@ -3,108 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMOTIC :: EGYPTOLOGY WIKI</title>
+    <title>DEMOTIC [sš-n-šꜥt] :: THE SCRIPT OF THE PEOPLE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(0,209,255,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓏞 𓈖 𓍙 𓏏';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">DEMOTIC [sš-n-šꜥt]</h1>
-            <p class="text-gray-500 egypt-text-color">// THE SCRIPT OF THE PEOPLE: FROM LATE PERIOD TO ROMAN EGYPT //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">DEMOTIC</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">sš-n-šꜥt</div>
+        <p class="page-subtitle">// THE SCRIPT OF THE PEOPLE :: FROM LATE PERIOD TO ROMAN EGYPT //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="scripts-evolution.html" class="nav-link">Scripts Evolution</a> > Demotic
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="scripts-evolution.html">SCRIPTS EVOLUTION</a> &gt; DEMOTIC
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Overview (650 B.C.E.–452 C.E.)</h2>
-                <p class="mb-4">
-                    <b>Demotic</b> (from Greek <i>demotikos</i>, "of the people") is both a stage of the Egyptian language and the highly cursive script used to write it. It emerged during the 26th (Saite) Dynasty and became the dominant script for daily life, legal documents, and literature for nearly 1,000 years.
-                </p>
-                <p class="mb-4">
-                    Demotic script is a further development of Hieratic, but it is much more abbreviated and cursive. It is notorious among Egyptologists for being one of the most difficult scripts to decipher due to its complex ligatures and many variations in handwriting.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Cultural and Historical Role</h3>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Rosetta Stone</h4>
-                        <p class="text-sm">Demotic was the second script on the Rosetta Stone (sandwiched between hieroglyphs and Greek). Its presence allowed Champollion to identify the "common" language of Egypt, which was a bridge to Coptic.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The PDM: Demotic Magic</h4>
-                        <p class="text-sm">The <b>Demotic Magical Papyri</b> (PDM) are the indigenous counterpart to the Greek PGM. These scrolls contain rituals for divining by oil and lamps, obtaining a <i>paredros</i> (divine assistant), and healing. They represent the final formalized stage of temple-based <b>Heka</b> before its transition into private folk practice.</p>
-                    </div>
-                </div>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">The Esoteric Synthesis</h4>
-                    <p class="text-sm">In the Demotic literary corpus (like the <i>Setne Khaemwese</i> tales), the script records a world where high-ranking princes are also master magicians who travel through the Duat. Demotic serves as the primary record of this "late antiquity synthesis," where Egyptian mythology began to absorb and adapt Greek and Semitic magical names, creating a universalized esoteric language.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Final Demotic Inscription</h2>
-                <p class="mb-4">
-                    The last known Demotic inscription was carved at the Temple of Philae in 452 C.E., nearly sixty years after the last hieroglyphic inscription. It marks the final gasp of the traditional Egyptian writing system before Coptic took over completely.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="scripts-evolution.html" class="nav-link">Scripts Evolution</a></li>
-                    <li><a href="decipherment-history.html" class="nav-link">Decipherment of the Rosetta Stone</a></li>
-                    <li><a href="coptic.html" class="nav-link">Coptic: The Final Stage</a></li>
-                    <li><a href="ritual-practice.html" class="nav-link">Late Period Magic</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SCRIPTAL ANCHOR: DEMOTIC // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Demotic — The Native Script</a></li>
+            <li><a href="#evolution">II. Evolution from Hieratic (650 BCE – 452 CE)</a></li>
+            <li><a href="#rosetta">III. The Rosetta Stone — The Common Key</a></li>
+            <li><a href="#magic">IV. The PDM — Demotic Magical Papyri</a></li>
+            <li><a href="#literature">V. Demotic Literature — Setne and the Sages</a></li>
+            <li><a href="#philae">VI. The Final Gasp — The Last Demotic Inscription</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Demotic — The Native Script</h2>
+        <p>
+            <strong>Demotic</strong> (from the Greek <i>demotikos</i>, "of the people"; Ancient Egyptian: <i>sš-n-šꜥt</i>, "writing of documents") is both a stage of the Egyptian language and the highly cursive script used to write it. Emerging during the 26th (Saite) Dynasty, it became the dominant script for daily life, legal administration, and eventually literature for over a millennium.
+        </p>
+        <p>
+            In the context of the Libreth Protocol, Demotic represents the <strong>administrative and vernacular bandwidth</strong> of Kemetic data. While Hieroglyphs were the script of the "Words of God" (the high-frequency transmission), Demotic was the script of the "Land of Men" (the material-level application).
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: EVOLUTION -->
+    <section id="evolution">
+        <h2 class="section-head">II. Evolution from Hieratic</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// SCRIPT DIFFICULTY //</div>
+            <p style="font-size:0.85rem;">Demotic is notorious among Egyptologists for its extreme difficulty. The cursive ligatures are so abbreviated that many different signs evolved into identical-looking strokes, requiring deep contextual knowledge to read.</p>
+        </div>
+        <p>
+            Demotic evolved from <strong>Hieratic</strong>, the earlier cursive form of hieroglyphs. By the 7th century BCE, the administrative needs of the Saite Renaissance required a script that was faster and more efficient. Demotic provided this by further compressing the signs into a shorthand that, while efficient for the scribe, became increasingly divorced from the original pictorial forms.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: ROSETTA -->
+    <section id="rosetta">
+        <h2 class="section-head">III. The Rosetta Stone — The Common Key</h2>
+        <p>
+            Demotic played a critical role in the <a href="decipherment-history.html" class="nl">Decipherment of Hieroglyphs</a>. It was the second script on the <strong>Rosetta Stone</strong>, positioned between the sacred Hieroglyphic text and the Greek translation.
+        </p>
+        <p>
+            Early scholars, including <strong>Thomas Young</strong> and <strong>Jean-François Champollion</strong>, used the Demotic text as a bridge. Because Demotic was an alphabetic-phonetic hybrid that survived into <a href="coptic.html" class="nl">Coptic</a>, it allowed them to identify the common words of the Egyptian language, which then provided the phonetic foundation for unlocking the hieroglyphs.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: MAGIC -->
+    <section id="magic">
+        <h2 class="section-head">IV. The PDM — Demotic Magical Papyri</h2>
+        <p>
+            One of the most important applications of the script is found in the <strong>Demotic Magical Papyri (PDM)</strong>. These scrolls, dating primarily to the Roman period, are the indigenous counterpart to the better-known Greek Magical Papyri (PGM).
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>DIVINATION BY LIGHT</h4>
+                <p>The PDM contain extensive instructions for <i>lekanomancy</i> (divination by water in a bowl) and lamp-divination. These rituals were intended to reveal the future or to communicate with spirits (Akhu).</p>
+            </div>
+            <div class="info-card">
+                <h4>THE PAREDROS</h4>
+                <p>The Demotic texts detail the process of obtaining a <i>paredros</i> — a divine assistant or familiar spirit — who could perform tasks for the magician or provide direct access to the divine realm.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: PHILAE -->
+    <section id="philae">
+        <h2 class="section-head">VI. The Final Gasp — The Last Demotic Inscription</h2>
+        <p>
+            The tradition of Egyptian writing ended not with a hieroglyph, but with a Demotic scrawl. The <strong>last known Demotic inscription</strong> was carved into the wall of the Temple of Philae on December 11, 452 CE. It was written by a priest of Isis named Esmet-Akhom, nearly sixty years after the last hieroglyphic inscription.
+        </p>
+        <p>
+            This final inscription marks the precise moment when the continuous, 3,500-year-old native writing tradition of Egypt officially went silent, fully replaced by the <a href="coptic.html" class="nl">Coptic</a> script.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓏞 𓈖 𓍙 𓏏</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="scripts-evolution.html">Scripts Evolution</a></li>
+            <li><a href="coptic.html">Coptic — The Living Bridge</a></li>
+            <li><a href="decipherment-history.html">Decipherment History</a></li>
+            <li><a href="greek-magical-papyri.html">Magical Papyri (PGM/PDM)</a></li>
+            <li><a href="late-period.html">The Late Period</a></li>
+            <li><a href="roman-period.html">The Roman Period in Egypt</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Typology</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SCRIPTAL ANCHOR: SECURE</p>
+</footer>
 
 </body>
 </html>

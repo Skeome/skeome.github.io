@@ -3,100 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE FIRST INTERMEDIATE PERIOD :: EGYPTOLOGY WIKI</title>
+    <title>THE FIRST INTERMEDIATE PERIOD :: DEMOCRATIZATION :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓊃 𓈖 𓏏 𓏴 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE FIRST INTERMEDIATE PERIOD</h1>
-            <p class="text-gray-500 egypt-text-color">// DEMOCRATIZATION OF THE AFTERLIFE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">FIRST INTERMEDIATE PERIOD</h1>
+        <p class="page-subtitle">// THE THEOLOGICAL EARTHQUAKE :: DEMOCRATIZATION OF THE AFTERLIFE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > First Intermediate
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; FIRST INTERMEDIATE PERIOD
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Theological Earthquake (c. 2181–2055 BCE)</h2>
-                <p class="mb-4">
-                    The collapse of centralized Old Kingdom authority was a trauma recorded in texts like the <b>Admonitions of Ipuwer</b>: <i>"The bowman is ready. The wrongdoer is everywhere."</i> This was not just political chaos but a crisis of <a href="maat-isfet.html" class="nav-link">Ma'at</a>. If the pharaoh was no longer the sole guarantor of order, the individual had to secure their own survival.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Rise of the Nomarchs</h3>
-                <p class="mb-4">
-                    Power shifted to local governors (nomarchs). The autobiography of <b>Ankhtifi of Mo'alla</b> boasts of his ability to feed his people while others starved, replacing the king as the provider. This shift in biography—from "I served the king" to "I saved my city"—marked a new era of individualism.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Political Realism: The Teaching for Merikare</h3>
-                <p class="mb-4">
-                    The <b>Teaching for King Merikare</b> is a seminal text from this period, written by a Herakleopolitan king to his son. It is a work of startling political realism, advising on how to suppress rebellion, secure borders, and deal with the "wretched Asiatic." It marks a shift from the divine confidence of the Old Kingdom to a pragmatic, hard-edged statecraft.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Democratization of the Afterlife</h2>
-                <p class="mb-4">
-                    Funerary privileges previously reserved for royalty were adopted by local elites. The <b>Coffin Texts</b> appeared, adapting the royal Pyramid Texts for private use. This democratization meant that <i>any</i> deceased person who could afford the rituals could become an <b>Osiris</b> and achieve <a href="composite-soul.html" class="nav-link">Akh</a> status, provided they passed the tribunal of the gods.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="funerary-texts.html" class="nav-link">Funerary Corpus (Coffin Texts)</a></li>
-                    <li><a href="osiris-myth.html" class="nav-link">The Cult of Osiris</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Akh: Radiant Spirit</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// DECENTRALIZED RESONANCE: ACTIVE // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Chaos — The Crisis of Ma'at</a></li>
+            <li><a href="#admonitions">II. The Admonitions of Ipuwer — Records of Trauma</a></li>
+            <li><a href="#nomarchs">III. Rise of the Nomarchs — Decentralized Power</a></li>
+            <li><a href="#merikare">IV. The Teaching for Merikare — Political Realism</a></li>
+            <li><a href="#democratization">V. Democratization of the Afterlife — The Coffin Texts</a></li>
+            <li><a href="#resolution">VI. Resolution — The Theban Reunification</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Chaos — The Crisis of Ma'at</h2>
+        <p>
+            The <strong>First Intermediate Period</strong> (c. 2181–2055 BCE) represents a profound disruption in the Kemetic awareness field. Following the collapse of the Old Kingdom's centralized authority, Egypt entered an era of political fragmentation and environmental crisis.
+        </p>
+        <p>
+            This was not merely a political failure but a <strong>metaphysical trauma</strong>. If the Pharaoh was the sole guarantor of <a href="maat-isfet.html" class="nl">Ma'at</a>, his inability to maintain order suggested a fundamental breakdown in the cosmic interface. The population was forced to confront <strong>Isfet</strong> (Chaos) directly, leading to a radical restructuring of religious and social values.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: ADMONITIONS -->
+    <section id="admonitions">
+        <h2 class="section-head">II. The Admonitions of Ipuwer — Records of Trauma</h2>
+        <p>
+            Literary texts from this period, such as the <i>Admonitions of Ipuwer</i>, record the psychological impact of the collapse. The narrator describes a world turned upside down: <i>"The bowman is ready... the wrongdoer is everywhere. There is no man of yesterday."</i> These "Lamentations" provided the linguistic framework for processing the experience of systemic entropy.
+        </p>
+    </section>
+
+    <!-- SECTION III: NOMARCHS -->
+    <section id="nomarchs">
+        <h2 class="section-head">III. Rise of the Nomarchs — Decentralized Power</h2>
+        <p>
+            With the decline of Memphis, power shifted to local governors known as <strong>Nomarchs</strong>. In their autobiographies, these men replaced the King as the primary provider and protector.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>ANKHTIFI OF MO'ALLA</h4>
+                <p>Ankhtifi's tomb inscriptions boast of his ability to feed his entire province during a famine while the rest of Egypt starved. This shift from "I served the King" to "I saved my city" marks the birth of a new, localized individualism.</p>
+            </div>
+            <div class="info-card">
+                <h4>PROVINCIAL ART</h4>
+                <p>The decentralization led to a flowering of regional artistic styles. Without the rigid control of the royal workshops, local artisans developed unique, often more expressive, visual languages.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: DEMOCRATIZATION -->
+    <section id="democratization">
+        <h2 class="section-head">V. Democratization of the Afterlife — The Coffin Texts</h2>
+        <p>
+            The most significant development of this era was the <strong>Democratization of the Afterlife</strong>. Funerary privileges previously reserved for the Pharaoh (the <a href="funerary-texts.html" class="nl">Pyramid Texts</a>) were adopted by the provincial elites.
+        </p>
+        <p>
+            This led to the emergence of the <strong>Coffin Texts</strong> — magical spells inscribed on the interior of private wooden coffins. This democratization meant that <i>any</i> individual who could pass the tribunal of the gods could become an <strong>Osiris</strong> and achieve the transfigured state of an <strong>Akh</strong>. The "Radiant Body" was no longer a royal monopoly.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓊃 𓈖 𓏏 𓏴 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="old-kingdom.html">The Old Kingdom Collapse</a></li>
+            <li><a href="middle-kingdom.html">The Middle Kingdom Restoration</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="funerary-texts.html">The Coffin Texts</a></li>
+            <li><a href="osiris-myth.html">The Cult of Osiris</a></li>
+            <li><a href="composite-soul.html">The Akh (Radiant Spirit)</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ONTOLOGICAL STATUS: DECENTRALIZED</p>
+</footer>
 
 </body>
 </html>
