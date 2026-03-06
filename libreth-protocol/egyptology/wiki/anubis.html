@@ -33,15 +33,12 @@
                 radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
 
-        /* SCROLLBAR */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
 
-        /* LAYOUT */
         .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
 
-        /* HEADER */
         .page-header {
             text-align: center;
             padding: 4rem 0 3rem;
@@ -84,7 +81,6 @@
             margin-right: auto;
         }
 
-        /* NAV */
         .breadcrumb {
             font-family: 'VT323', monospace;
             font-size: 1rem;
@@ -95,7 +91,6 @@
         .breadcrumb a { color: var(--cyan); text-decoration: none; }
         .breadcrumb a:hover { color: #00ffae; }
 
-        /* TABLE OF CONTENTS */
         .toc-block {
             border: 1px solid rgba(212,175,55,0.25);
             background: rgba(20,18,10,0.8);
@@ -121,7 +116,6 @@
         }
         .toc-list a:hover { color: #00ffae; }
 
-        /* SECTION HEADERS */
         h2.section-head {
             font-family: 'Cinzel', serif;
             font-size: 1.9rem;
@@ -139,12 +133,10 @@
             letter-spacing: 0.03em;
         }
 
-        /* BODY TEXT */
         p { margin-bottom: 1.1rem; }
         b, strong { color: var(--text-bright); font-weight: 600; }
         em, i { color: rgba(240,230,140,0.8); }
 
-        /* PULL QUOTE */
         .pull-quote {
             border-left: 3px solid var(--gold);
             padding: 1rem 1.5rem;
@@ -164,9 +156,9 @@
             letter-spacing: 0.08em;
         }
 
-        /* INFO CARDS */
         .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
         @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+
         .info-card {
             background: rgba(15,13,8,0.9);
             border: 1px solid rgba(212,175,55,0.2);
@@ -175,7 +167,9 @@
         .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
         .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
 
-        /* TABLE */
+        .dark-card { border-color: rgba(30,30,30,0.8); background: rgba(8,6,2,0.97); }
+        .dark-card h4 { color: #aaa8a0; }
+
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -197,8 +191,8 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
             vertical-align: top;
         }
+        .data-table tr:hover td { background: rgba(212,175,55,0.03); }
 
-        /* DIVIDER */
         .divider {
             border: none;
             height: 1px;
@@ -206,7 +200,15 @@
             margin: 3rem 0;
         }
 
-        /* SIDEBAR NOTE */
+        .glyph-marker {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold-dim);
+            opacity: 0.4;
+            letter-spacing: 0.5rem;
+            margin: 2rem 0;
+        }
+
         .sidebar-note {
             float: right;
             width: 260px;
@@ -223,8 +225,98 @@
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
         }
+        .sidebar-note p { margin-bottom: 0.4rem; }
+        .sidebar-note p:last-child { margin-bottom: 0; }
 
-        /* BACK BTN */
+        .blue-block {
+            border: 1px solid rgba(0,100,200,0.3);
+            background: rgba(0,15,50,0.6);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .blue-block .bb-title {
+            font-family: 'Cinzel', serif;
+            color: #6090ff;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .blue-block p { margin-bottom: 0.5rem; }
+        .blue-block p:last-child { margin-bottom: 0; }
+
+        .black-block {
+            border: 1px solid rgba(80,70,50,0.4);
+            background: rgba(5,4,2,0.98);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .black-block .bk-title {
+            font-family: 'Cinzel', serif;
+            color: #888070;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.7rem;
+            text-transform: uppercase;
+        }
+        .black-block p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .black-block p:last-child { margin-bottom: 0; }
+
+        .practical-note {
+            border: 1px solid rgba(0,210,100,0.2);
+            background: rgba(0,30,15,0.6);
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+        }
+        .practical-note .pn-title {
+            font-family: 'Cinzel', serif;
+            color: #00e87a;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .practical-note p { font-size: 0.93rem; margin-bottom: 0.5rem; }
+        .practical-note p:last-child { margin-bottom: 0; }
+
+        /* Epithet table */
+        .epithet-block {
+            margin: 1.5rem 0;
+        }
+        .epithet-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 2fr;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.7rem 0;
+        }
+        .epithet-row:first-child {
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .epithet-row:first-child span { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.08em; }
+        .epithet-eg { font-style: italic; color: rgba(240,230,140,0.7); font-size: 0.9rem; }
+        .epithet-tr { font-size: 0.9rem; padding: 0 0.5rem; }
+        .epithet-exp { font-size: 0.88rem; opacity: 0.8; }
+
+        .related-links {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 1.5rem 2rem;
+            margin-top: 3rem;
+        }
+        .related-links h3 {
+            font-family: 'VT323', monospace;
+            color: var(--gold-dim);
+            letter-spacing: 0.15em;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .related-links ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+        @media(max-width:600px) { .related-links ul { grid-template-columns: 1fr; } }
+        .related-links a { color: var(--cyan); text-decoration: none; font-size: 0.92rem; }
+        .related-links a:hover { color: #00ffae; }
+        .related-links a::before { content: '→ '; opacity: 0.5; }
+
         .back-btn {
             display: inline-block;
             padding: 0.6rem 1.8rem;
@@ -237,12 +329,8 @@
             transition: all 0.3s;
             margin-top: 2rem;
         }
-        .back-btn:hover {
-            background: rgba(212,175,55,0.1);
-            border-color: var(--gold);
-        }
+        .back-btn:hover { background: rgba(212,175,55,0.1); border-color: var(--gold); }
 
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 3rem 0 2rem;
@@ -257,9 +345,9 @@
         a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
         a.nl:hover { color: #00ffae; }
 
-        /* ANIMATION */
         @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
         .page-header { animation: fadeIn 0.8s ease forwards; }
+        .clearfix::after { content: ''; display: table; clear: both; }
     </style>
 </head>
 <body>
@@ -268,10 +356,12 @@
     <!-- HEADER -->
     <header class="page-header">
         <h1 class="page-title">ANUBIS</h1>
-        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">jnpw</div>
-        <p class="page-subtitle">// THE MASTER OF SECRETS :: MUMMIFICATION AND PSYCHOPOMP //</p>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">jnpw · Inpu · Anpu</div>
+        <p class="page-subtitle">// MASTER OF SECRETS :: GUARDIAN OF THE THRESHOLD :: KEEPER OF THE BALANCE //</p>
         <p class="page-epithet">
-            "He who is upon his mountain, the Lord of the Sacred Land, the foremost of the Westerners. He leads the righteous through the gates of the underworld."
+            "He who is upon his mountain, the Lord of the Sacred Land, the Foremost of the Westerners —
+            he who opens the road for those who dwell in the horizon."
+            <br><span style="font-size:0.85rem;opacity:0.5;">— Pyramid Text Utterance 535</span>
         </p>
     </header>
 
@@ -284,88 +374,380 @@
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#ontology">I. The Jackal God — Pre-Osirian Supremacy</a></li>
-            <li><a href="#mummification">II. The Inventor of Embalming — The Weryt</a></li>
-            <li><a href="#psychopomp">III. Psychopomp and the Hall of Judgment</a></li>
-            <li><a href="#epithets">IV. Divine Epithets and Titles</a></li>
-            <li><a href="#wepwawet">V. Anubis and Wepwawet — The Opener of Ways</a></li>
-            <li><a href="#pgm">VI. Anubis in the Greek Magical Papyri (PGM)</a></li>
-            <li><a href="#alchemy">VII. Alchemical Associations</a></li>
+            <li><a href="#ontology">I. The Jackal God — Pre-Osirian Supremacy and the Colour of Transformation</a></li>
+            <li><a href="#parentage">II. Divine Parentage — The Contested Origin</a></li>
+            <li><a href="#mummification">III. The Inventor of Embalming — Sacred Alchemy of the Weryt</a></li>
+            <li><a href="#psychopomp">IV. Psychopomp and the Hall of Judgment</a></li>
+            <li><a href="#epithets">V. Divine Epithets and Titles</a></li>
+            <li><a href="#wepwawet">VI. Anubis and Wepwawet — The Two Openers of Ways</a></li>
+            <li><a href="#pgm">VII. Anubis in the Greek Magical Papyri — Hermanubis</a></li>
+            <li><a href="#alchemy">VIII. Alchemical and Esoteric Associations</a></li>
+            <li><a href="#working">IX. Working with Anubis — The Living Tradition</a></li>
         </ul>
     </div>
 
     <!-- SECTION I: ONTOLOGY -->
     <section id="ontology">
-        <h2 class="section-head">I. The Jackal God — Pre-Osirian Supremacy</h2>
+        <h2 class="section-head">I. The Jackal God — Pre-Osirian Supremacy and the Colour of Transformation</h2>
         <p>
-            <strong>Anubis</strong> (Ancient Egyptian: <i>Inpu</i>) is one of the oldest and most consistently venerated deities in the Kemetic pantheon. Depicted as a jackal or a jackal-headed man, he was originally the supreme <strong>Lord of the Dead</strong> during the Early Dynastic period and the Old Kingdom. His title, <i>Khenty-Imentiu</i> ("Foremost of the Westerners"), marked him as the presiding authority over the necropolis and the transition of the soul.
+            <strong>Anubis</strong> — Ancient Egyptian <em>Inpu</em> or <em>Anpu</em> (𓇋𓈖𓄿𓊪𓅱𓃣) — is among the oldest continuously venerated deities in the Kemetic pantheon, his image appearing in the earliest known funerary contexts of the Predynastic and Early Dynastic periods (c. 3100 BCE and before). Long before <a href="osiris.html" class="nl">Osiris</a> rose to prominence as the supreme Lord of the Dead — a process substantially complete by the Middle Kingdom — Anubis held that title alone. His Old Kingdom epithet <em>Khenty-Imentiu</em> (<em>"Foremost of the Westerners"</em>) identified him as the presiding authority over all who had journeyed to the West — the direction of the setting sun and of death — and over the necropoleis that lined the desert edges of the Nile valley.
         </p>
         <p>
-            His signature black color was not a literal representation of jackal fur (which is reddish-gold) but a theological statement. Black symbolized the fertile silt of the Nile and the transformative potential of decay — the promise that life would emerge from the darkness of the tomb. Anubis is thus the god of <strong>transmutation</strong>, overseeing the threshold between the physical and the spiritual.
+            The <strong>jackal</strong> was not an arbitrary choice of form. Jackals were conspicuous inhabitants of the boundary between the cultivated Black Land (<em>Kemet</em>) and the Red Land (<em>Deshret</em>) of the desert — scavengers who haunted the margins of burial grounds, digging at the edges of shallow graves. Rather than responding to this association with aversion, the Egyptians with characteristic theological sophistication recruited the jackal's power into protective service: Anubis, depicted as the jackal or jackal-headed man who watched over the dead, conscripted the very animal that would otherwise desecrate the grave into its fiercest protector. The creature that scavenged became the guardian that prevented scavenging.
         </p>
+        <p>
+            His canonical <strong>black colouration</strong> requires specific attention. The jackal's actual fur ranges from reddish-gold to grey-brown — never black. The choice of black was deliberate and theologically loaded. In the Kemetic colour-essence system (<em>iwn</em>), black held a dual significance simultaneously opposed to Western interpretations: it was the colour of the fertile Nile silt, the <em>kemet</em> itself, the rich dark earth that yielded all life. It was also the colour of the decomposing body — the Nigredo state — from which the resurrection would emerge. Black in the Egyptian system was not death as termination but death as the fertile void from which new life always emerges. To depict Anubis in black was to identify him with the deepest transformative potential of the death-state: the darkness that is full of generative power, the compost from which the next cycle grows.
+        </p>
+
+        <div class="black-block">
+            <div class="bk-title">// THE ANCIENT SUPREMACY — WHAT ANUBIS WAS BEFORE OSIRIS //</div>
+            <p>The shift of the supreme funerary role from Anubis to Osiris — which occurred gradually from the Old Kingdom through the Middle Kingdom as the Osirian theological complex expanded — is one of the most significant transformations in Egyptian religious history. In the earliest Pyramid Texts (c. 2400 BCE), Anubis is the primary funerary deity; Osiris appears but does not yet dominate. By the time of the Coffin Texts (c. 2000 BCE), the roles have begun to reverse. By the New Kingdom Book of the Dead, Osiris presides over the Hall of Judgment and Anubis has been repositioned as the master technician within the broader Osirian system.</p>
+            <p>This repositioning was not a demotion but a functional refinement. Anubis retained and deepened his specific domain — the precise management of the threshold between death and afterlife — while Osiris absorbed the monarchical, judicial, and agricultural dimensions of the lord-of-the-dead role. The result was a more sophisticated system: Anubis as the expert practitioner of transition technology, Osiris as the ultimate judge and sovereign. Their functions are complementary, not competitive, in the mature theology.</p>
+        </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: MUMMIFICATION -->
-    <section id="mummification">
-        <h2 class="section-head">II. The Inventor of Embalming — The Weryt</h2>
-        <div class="sidebar-note">
-            <div class="note-title">// TEXTUAL CONTEXT //</div>
-            <p style="font-size:0.85rem;">The Osiris myth attributes the first mummification to Anubis, who reassembled the body of the murdered king, establishing the prototype for all subsequent funerary rites.</p>
-        </div>
+    <!-- SECTION II: PARENTAGE -->
+    <section id="parentage">
+        <h2 class="section-head">II. Divine Parentage — The Contested Origin</h2>
         <p>
-            Anubis presided over the <strong>Weryt</strong> ("The Place of Pure Embalming"). In Kemetic thought, mummification was not merely a means of body preservation; it was a high-level alchemical operation designed to transform the rotting <i>Khat</i> (physical body) into an eternal, transfigured vessel capable of anchoring the <i>Ka</i> and <i>Ba</i>.
+            The question of Anubis's parentage was genuinely contested in the Egyptian textual tradition, with different sources proposing different genealogies — a reflection of his extreme antiquity and the integration of originally distinct regional traditions into a unified theological system.
         </p>
+
         <div class="card-grid">
             <div class="info-card">
-                <h4>THE 70-DAY CYCLE</h4>
-                <p>The embalming process lasted exactly 70 days, corresponding to the period during which the star Sirius (Sothis) was absent from the night sky before its heliacal rising. This synchronized the work of the embalmer with the cosmic rhythm of death and rebirth.</p>
+                <h4>OSIRIS AND NEPHTHYS — THE CANONICAL VERSION</h4>
+                <p>The most widely attested genealogy in the developed Osirian mythology makes Anubis the son of <strong>Osiris</strong> and <strong>Nephthys</strong> — conceived when Nephthys (Set's wife) disguised herself as Isis and lay with Osiris. This parentage places Anubis in the second generation of the Ennead and explains his presence at Osiris's mummification: he assists his father-figure's transition while also being, cosmologically, the product of a transgression that prefigures the broader disruption Set introduces. Isis, discovering the infant, adopted and raised him — reinforcing the Osirian family network while adding an adoptive-maternal dimension to Anubis's connection to Isis's powerful magical legacy.</p>
+            </div>
+            <div class="info-card">
+                <h4>RE AS FATHER — THE OLDER TRADITION</h4>
+                <p>Earlier Pyramid Text sources assign Anubis a solar rather than an Osirian parentage — identifying him as the son of <strong>Re</strong> himself, placing him among the first generation of divine offspring and giving him a more cosmologically senior status. This tradition reflects his pre-Osirian supremacy; a deity who presided over all the dead before Osiris existed logically required a genealogy that predated the Osirian family structure. The tension between these two genealogies was never fully resolved — later theology generally adopted the Nephthys-born version for narrative coherence while implicitly acknowledging the older solar connection through Anubis's continued association with the cyclic solar journey through the Duat.</p>
+            </div>
+            <div class="info-card">
+                <h4>HESAT AS MOTHER</h4>
+                <p>Some sources identify <strong>Hesat</strong> — a cow goddess associated with nourishment and the milk of divine sustenance — as Anubis's mother, with Re as father. Hesat is a relatively obscure deity whose primary mythological role was as the divine cow who suckled sacred animals and humans with her life-giving milk. The mother-as-nurturer dimension this adds to Anubis is interesting theologically: it positions the god of death as himself having been tenderly nourished into existence, conferring on him a quality of genuine care for the souls he manages through their vulnerable transition.</p>
+            </div>
+            <div class="info-card">
+                <h4>THEOLOGICAL IMPLICATION OF THE AMBIGUITY</h4>
+                <p>The contested parentage is not a confusion or an error — it is a theological statement in the form of preserved plurality. Egyptian religion was not a monolithic creed but a living tradition that absorbed regional variants. Anubis's multiple genealogies reflect his genuine antiquity (predating any fixed mythological system), his functional importance across different theological frameworks, and the characteristic Egyptian willingness to hold multiple truths simultaneously without demanding a single authoritative resolution. He is both older than Osiris and of Osiris's family. Both are true at different levels of the myth.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: MUMMIFICATION -->
+    <section id="mummification">
+        <h2 class="section-head">III. The Inventor of Embalming — Sacred Alchemy of the Weryt</h2>
+
+        <div class="sidebar-note">
+            <div class="note-title">// THE WERYT //</div>
+            <p><em>Weryt</em> — "The Place of Pure Embalming" — was the designated sacred space where the embalming operation was performed. It was structurally separate from the tomb itself, often a tent or temporary pavilion of pure white linen. The chief embalmer wore an Anubis mask during the most sacred phases of the operation, literally becoming the god.</p>
+        </div>
+
+        <p class="clearfix">
+            In the <a href="osiris-myth.html" class="nl">Osiris myth</a>, the first act of mummification was performed by Anubis — working alongside Isis, Nephthys, and Thoth — when he reassembled the scattered body of the slain king, wrapped it in linen, and prepared it for its passage into the Duat. This mythological prototype established the template for all subsequent funerary practice. Every Egyptian embalming was a re-enactment of Anubis's original operation on Osiris; every embalmed corpse was, ritually, Osiris's body; every embalmer was, in the moments of most sacred operation, Anubis himself.
+        </p>
+        <p>
+            The Kemetic understanding of mummification was not primarily about body preservation as an end in itself. It was an operative alchemical transformation of the highest order — the conversion of the decaying <strong>Khat</strong> (physical body) into an eternal, transfigured vessel, the <strong>Sahu</strong> (glorified body), capable of serving as an anchor point for the returning Ka and Ba across the cycles of the afterlife. The physical chemistry of decay was the raw material; Anubis's technical mastery was the catalyst; the Sahu was the gold.
+        </p>
+
+        <h3 class="sub-head">The 70-Day Process — Astronomical and Alchemical Dimensions</h3>
+        <p>
+            The embalming process lasted exactly <strong>70 days</strong> — a number that was not arbitrary but astronomically precise. 70 days is the period during which the star <strong>Sirius</strong> (<em>Sopdet</em>, identified with Isis) disappears below the Egyptian horizon before its annual heliacal rising, which marked the beginning of the Nile flood and the Egyptian New Year. The 70-day embalming thus synchronised the preparation of the body with the cosmic rhythm of Sirius's own death and rebirth — the deceased's transformation occurring in parallel with the star of Isis's annual passage through the Duat.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>NATRON — THE PURIFYING SALT</h4>
+                <p>The body was packed in dry natron — a naturally occurring sodium carbonate compound from Wadi Natrun — for approximately 40 days. Natron achieved desiccation (the removal of moisture that bacteria require for decomposition) while simultaneously performing a ritual function: natron was the supreme purification substance of the Egyptian system, used in priestly purification baths, in temple cleansing, and in the preparation of ritual implements. The body was being simultaneously preserved and purified — rendered chemically stable and ritually clean for its transformation.</p>
+            </div>
+            <div class="info-card">
+                <h4>ORGAN REMOVAL AND THE CANOPIC SYSTEM</h4>
+                <p>The visceral organs — liver, lungs, stomach, intestines — were removed through an incision in the left flank (the embalmer's flint knife was ritually thrown into the Nile afterward, as cutting a sacred body was a technically transgressive act requiring purification). The organs were treated separately, wrapped, and placed in four <strong>canopic jars</strong> presided over by the Four Sons of Horus (Imsety, Hapy, Duamutef, Qebehsenuef). The heart — the seat of the Ib and the organ of judgment — was the single exception: it was replaced within the body, as it would be needed for the Weighing.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE BRAIN — DISCARDED INTELLIGENCE</h4>
+                <p>The brain was removed via the nostrils using a hooked instrument and discarded — the Egyptians located thought, emotion, and moral discernment in the heart (<em>Ib</em>), not the head. The brain was considered functionally irrelevant to the afterlife, an embarrassing fact for modern interpreters but entirely consistent with the Kemetic philosophical framework. This is not ignorance but a different (and arguably more phenomenologically sophisticated) model of where the core of personhood resides.</p>
+            </div>
+            <div class="info-card">
+                <h4>WRAPPING, AMULETS, AND ANIMATION</h4>
+                <p>After desiccation, the body was anointed with sacred resins and oils, stuffed with linen and fragrant substances, and wrapped in fine linen bandages in a specific sequence. As each layer was applied, <a href="amulets-talismans.html" class="nl">amulets</a> were placed at anatomically precise locations — the Udjat eye over the embalming incision, the Tyet at the throat, the Djed at the spine, the Heart Scarab over the heart. The wrapping itself was a Heka operation, each layer adding protection and reinforcing the identification of the body with the transfigured Osirian form.</p>
             </div>
             <div class="info-card">
                 <h4>THE IMIUT FETISH</h4>
-                <p>A sacred object consisting of a stuffed animal skin attached to a pole, held in a vessel. It was a potent symbol of Anubis's power to regenerate life from the remnants of death, present in every royal tomb.</p>
+                <p>A distinctive sacred object found in royal tombs — consisting of a stuffed, headless animal skin (possibly feline or bovine) attached to a pole and inserted into a jar — the Imiut (<em>jmjwt</em>, "that which is in its wrappings") was specifically sacred to Anubis and was present at every royal embalming. Its exact operative function is debated, but it appears to represent the boundary between the animal body and the transfigured form — the skin left behind when the essence departs — and to concentrate Anubis's presence and protective power in the embalming space.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE EMBALMER AS ANUBIS</h4>
+                <p>The chief embalmer — titled the <em>Hery-seshta</em> ("Master of Secrets") — wore a full Anubis mask during the most sacred phases of the preparation, particularly during the removal of the organs and the final wrapping. This was not theatrical costume but operative identification: by wearing the god's face, the practitioner literally became the vessel through which Anubis operated. The mask collapsed the distinction between human technician and divine patron, ensuring that the most critical operations were performed by the god himself, channelled through a trained human instrument.</p>
+            </div>
+        </div>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE OPENING OF THE MOUTH — ANUBIS AS ACTIVATOR //</div>
+            <p>At the conclusion of the 70-day process, the completed mummy was brought to the tomb for the <a href="opening-of-the-mouth.html" class="nl">Opening of the Mouth</a> ceremony — the final step that transformed the prepared Khat into a fully animated Sahu. While Anubis is not the primary officiant of this ritual (that role belongs to the Sem-Priest in the guise of Horus), his preparation of the body made the ceremony possible. The Opening of the Mouth animated what Anubis had prepared. Without Anubis's 70-day alchemy, there would be nothing for the <em>wp-r</em> to animate. The two rituals are complementary operations: Anubis creates the vessel; the Opening of the Mouth fills it.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: PSYCHOPOMP -->
+    <section id="psychopomp">
+        <h2 class="section-head">IV. Psychopomp and the Hall of Judgment</h2>
+        <p>
+            Anubis's role as psychopomp — the divine conductor of souls between the living world and the afterlife — is one of his most ancient and continuously attested functions. In the Pyramid Texts, he leads the deceased king through the gates of the horizon; in the Middle Kingdom Coffin Texts, he guides any person of sufficient ritual preparation; in the New Kingdom Book of the Dead and the illustrated Papyri of Ani and Hunefer, he is the visible hand that escorts the soul into the Hall of Two Truths.
+        </p>
+        <p>
+            The iconic psychopomp image from the <strong>Papyrus of Hunefer</strong> (British Museum, c. 1275 BCE) shows Anubis with his left hand on the wrist of Hunefer — not grasping, not pulling, but accompanying with a gentle precision that communicates both authority and care. This gesture is the definitive image of the Anubis relationship: he knows exactly where the soul needs to go; he ensures it gets there; but the accompaniment is not coercive. He is the guide who cannot be refused but who does not need to use force.
+        </p>
+
+        <h3 class="sub-head">The Weighing of the Heart — Anubis as Keeper of the Balance</h3>
+        <p>
+            Within the <a href="weighing-of-the-heart.html" class="nl">Hall of Two Truths</a>, Anubis performs the most technically exacting operation of the entire judgment process: he places the deceased's heart in one pan of the balance scale and the feather of <a href="maat-isfet.html" class="nl">Ma'at</a> in the other, then reads the indicator needle with absolute precision. Thoth records the result; Osiris presides as judge; Ammit waits. But the actual measurement is Anubis's.
+        </p>
+        <p>
+            The fitness of Anubis for this role is theologically elegant. The god who spent 70 days managing the most delicate physical transformation of mortal matter — weighing the precise amounts of natron, timing the removal of organs, judging the correct degree of desiccation — is exactly the being whose precision you want operating the cosmic scales at the moment of final accountability. His capacity for exact measurement is not a new skill acquired for the Hall; it is the same skill he has always exercised, applied at the highest possible stakes.
+        </p>
+
+        <div class="pull-quote">
+            "Anubis, who is upon his mountain, who is in the place of embalming, the lord of the Sacred Land, weighed the heart of the justified one against the feather, and found it true."
+            <cite>— After Book of the Dead Spell 125, standard Negative Confession context</cite>
+        </div>
+
+        <h3 class="sub-head">Keeper of the Duat's Gates</h3>
+        <p>
+            Beyond the Hall itself, Anubis is described in the <a href="netherworld-books.html" class="nl">Netherworld Books</a> as the master of the threshold — the one who holds the passwords to each of the 42 gates of the Duat, knows the secret names of their guardians, and can ensure a soul's passage through the complex topography of the afterlife. In the <em>Book of Gates</em> specifically, Anubis appears at critical thresholds as the gatekeeper whose permission is required for passage. His knowledge of the Duat is total — not merely its dangerous passages but its geometry, its guardians, its logic.
+        </p>
+        <p>
+            This comprehensive knowledge of death's landscape is inseparable from his other roles: a deity who invented mummification necessarily understands where the mummy's soul will travel; a psychopomp who escorts every soul to the Hall has traversed every path of the Duat countless times. Anubis's mastery of the threshold is not theoretical but experiential — he has walked every route, spoken every password, negotiated every gate, in service of the souls he has guided.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: EPITHETS -->
+    <section id="epithets">
+        <h2 class="section-head">V. Divine Epithets and Titles</h2>
+        <p>
+            Egyptian divine epithets are not merely honorific titles — they are operative descriptions of specific functional aspects of the deity's power. Each epithet of Anubis encodes a precise theological statement about one dimension of his role in the cosmic system. The full roster of his attested epithets reveals the extraordinary breadth of the Anubis principle.
+        </p>
+
+        <div class="epithet-block">
+            <div class="epithet-row">
+                <span>EGYPTIAN</span>
+                <span>TRANSLATION</span>
+                <span>THEOLOGICAL SIGNIFICANCE</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Khenty-Imentiu (ḫntj-jmntjw)</span>
+                <span class="epithet-tr">"Foremost of the Westerners"</span>
+                <span class="epithet-exp">His oldest known title — pre-Osirian supremacy over all who have died and journeyed to the West (the direction of the setting sun and of the dead). The Westerners are all the deceased; Anubis is their foremost leader and protector.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Neb-ta-djeser (nb-tA-ḏsr)</span>
+                <span class="epithet-tr">"Lord of the Sacred Land"</span>
+                <span class="epithet-exp">The necropolis is the <em>ta-djeser</em> — the holy, set-apart land of the dead at the desert's edge. Anubis is its lord and sovereign. This title emphasises his governance of sacred funerary space itself.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Imy-ut (jmj-wt)</span>
+                <span class="epithet-tr">"He who is in the place of embalming" / "He who is in his wrappings"</span>
+                <span class="epithet-exp">Associated directly with the Imiut fetish and with the embalming tent (<em>Weryt</em>). Marks Anubis as the presiding intelligence of the embalming operation, present in the sacred space where transformation occurs.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Hery-seshta (ḥrj-sštA)</span>
+                <span class="epithet-tr">"Master of Secrets" / "He who is over the mysteries"</span>
+                <span class="epithet-exp">The title also given to the human chief embalmer who wore Anubis's mask. Refers both to the secrets of mummification technology and to the mysteries of the Duat — the hidden knowledge of death's geography and the techniques of successful navigation.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Neb-qesu (nb-qsw)</span>
+                <span class="epithet-tr">"Lord of the Mummy Wrappings"</span>
+                <span class="epithet-exp">Specific authority over the linen wrappings that constitute the mummy's external protective layer — the interface between the prepared body and the outside world. Suggests Anubis's governance of boundaries and enveloping protection.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Tepy-dju-ef (tpj-ḏw=f)</span>
+                <span class="epithet-tr">"He who is upon his mountain"</span>
+                <span class="epithet-exp">Depicts Anubis as the watchful guardian stationed on the desert cliffs above the necropolis — looking down over the burial ground like a sentinel, alert to any threat. The mountain-dwelling aspect aligns with the actual behaviour of jackals in Egyptian desert terrain.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Sed-neter (sd-nṯr)</span>
+                <span class="epithet-tr">"He who is the companion/tail of the god"</span>
+                <span class="epithet-exp">A more obscure epithet suggesting Anubis as an intimate companion of the divine order — following closely, inseparable from the main body of divine activity. Implies a faithful proximity to the gods' work that needs no independent validation.</span>
+            </div>
+            <div class="epithet-row">
+                <span class="epithet-eg">Maat-ef-em-sekhem-ef</span>
+                <span class="epithet-tr">"He who sees his father with his power"</span>
+                <span class="epithet-exp">References the filial piety dimension of Anubis's mummification of Osiris — the son who cares for his father's body with perfect precision and devoted power. This epithet foregrounds the personal, relational quality of his funerary service.</span>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION III: PSYCHOPOMP -->
-    <section id="psychopomp">
-        <h2 class="section-head">III. Psychopomp and the Hall of Judgment</h2>
+    <!-- SECTION VI: WEPWAWET -->
+    <section id="wepwawet">
+        <h2 class="section-head">VI. Anubis and Wepwawet — The Two Openers of Ways</h2>
         <p>
-            As the <strong>Guardian of the Scales</strong>, Anubis plays a critical role in the <a href="weighing-of-the-heart.html" class="nl">Weighing of the Heart</a> ceremony. He is the one who leads the deceased into the Hall of Two Truths, checks the balance of the scales against the feather of Ma'at, and ensures that the judgment is performed with absolute precision.
+            <strong>Wepwawet</strong> (<em>Wp-wAwt</em>, "Opener of Ways") is a deity so closely associated with Anubis that ancient and modern interpreters have repeatedly confused or conflated them. Both are depicted as black or grey canids — Wepwawet as a wolf or wolf-headed man, Anubis as a jackal or jackal-headed man — both preside over the transition of souls, and both appear together in funerary processions and at the heads of royal expeditions. Understanding their distinction is essential to understanding both.
         </p>
-        <p>
-            Unlike many other psychopomps who merely guide, Anubis is an active arbiter. He protects the deceased from the 'Second Death' and guards the entrance to the Duat. He is the master of the <strong>Threshold</strong>, the one who knows the passwords to every gate and the secret names of the guardians.
-        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>WEPWAWET — THE WAY-OPENER</h4>
+                <p>Wepwawet's name is his function: he opens the way. His role is specifically the dissolution of obstacles — the clearing of the path before the main party arrives. In funerary processions, the Wepwawet standard was carried at the front, preceding the coffin. In royal military expeditions, Wepwawet led the way before the king's army. He is the advance scout, the pathfinder, the being who goes ahead to clear, test, and mark the route. His origin is at Asyut (ancient Lycopolis — "City of the Wolf") in Upper Egypt.</p>
+            </div>
+            <div class="info-card">
+                <h4>ANUBIS — THE GUARDIAN AND GUIDE</h4>
+                <p>Where Wepwawet opens the way, Anubis ensures the traveller completes it correctly. Anubis accompanies the soul, manages its transition at each threshold, performs the weighing at the Hall, and monitors the soul's integrity throughout the journey. His role is not to clear the path but to shepherd the person through a path already laid out — ensuring it is navigated with the precision the system demands. Together, they constitute a complete transition technology: Wepwawet prepares the road; Anubis guides the soul along it.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE SED FESTIVAL CONNECTION</h4>
+                <p>In the royal <a href="sed-festival.html" class="nl">Sed Festival</a> — the pharaoh's 30-year ritual renewal — it was specifically the <em>Wepwawet standard</em> that led the processional, opening the way for the king's passage between the two thrones of Upper and Lower Egypt. This positioning confirms Wepwawet's role as the herald and path-opener in royal ceremonial contexts, while Anubis presided over the more intimate, interior dimension of the king's spiritual renewal.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE CANID CONFUSION</h4>
+                <p>The persistent confusion between the two deities in popular sources often reflects the genuine ambiguity that existed even in ancient Egypt. Some texts show their functions bleeding into each other; some images could be identified as either deity depending on context. The ambiguity is not error but theological depth: both express aspects of the same fundamental principle of threshold management, differentiated by emphasis (way-opening vs. way-guiding). They are two resonances of the same divine frequency, not two entirely separate entities.</p>
+            </div>
+        </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION VI: PGM -->
+    <!-- SECTION VII: PGM -->
     <section id="pgm">
-        <h2 class="section-head">VI. Anubis in the Greek Magical Papyri (PGM)</h2>
+        <h2 class="section-head">VII. Anubis in the Greek Magical Papyri — Hermanubis</h2>
         <p>
-            The veneration of Anubis persisted well into the Roman period, where he was often syncretized with Hermes to form <strong>Hermanubis</strong>. In the <a href="greek-magical-papyri.html" class="nl">Greek Magical Papyri</a>, Anubis is a primary <i>paredros</i> (magical assistant). He is invoked by magicians to:
+            The veneration of Anubis not only survived the Greek and Roman conquest of Egypt but flourished in new forms, acquiring a rich second life in the Greco-Roman religious and magical world. By the Ptolemaic and Roman periods, Anubis had become one of the most widely recognised Egyptian deities in the Mediterranean world — depicted on coins, worshipped in Isiac temples throughout the empire, and extensively invoked in the operative magical literature that became the <a href="greek-magical-papyri.html" class="nl">Greek Magical Papyri</a> (PGM).
         </p>
-        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
-            <li>Fetch the <i>Ba</i> of a spirit for communication.</li>
-            <li>Reveal hidden treasures or secrets.</li>
-            <li>Bind malevolent forces through his authority over the dead.</li>
-            <li>Provide protection during theurgical operations.</li>
-        </ul>
+
+        <h3 class="sub-head">Hermanubis — The Syncretic Synthesis</h3>
+        <p>
+            The syncretic fusion of Anubis with <strong>Hermes</strong> — forming <strong>Hermanubis</strong> (<em>Ἑρμανοῦβις</em>) — was one of the most theologically coherent syncretisms of the Hellenistic period. Both deities served as psychopomps — guides of souls between the living world and the realm of the dead. Both were associated with wisdom, with hidden knowledge, and with the communication between divine and human realms. Both were depicted with caduceus-adjacent symbols in syncretic imagery. The merger was not imposed but emerged naturally from the genuine resonance between two traditions' approaches to the same divine function.
+        </p>
+        <p>
+            Hermanubis was depicted as a youthful figure combining the jackal head of Anubis with the caduceus and winged sandals of Hermes — or as a fully human figure with simply the addition of a small jackal head as a crown element. His worship spread throughout the Roman Empire alongside the Isiac religious complex, with which Anubis had always been intimately associated. The Emperor Commodus (reigned 177–192 CE) reportedly participated in Isiac processional rites wearing an Anubis mask — evidence of how deeply the god had penetrated Roman religious practice.
+        </p>
+
+        <h3 class="sub-head">PGM Invocations — Anubis as Operative Ally</h3>
+        <p>
+            In the PGM corpus (c. 2nd century BCE to 5th century CE), Anubis appears as a primary <em>paredros</em> — a divine magical assistant who can be ritually engaged for specific operative purposes. The PGM invocations of Anubis draw on his traditional attributes while extending them into new applications consistent with the Greco-Roman magical framework:
+        </p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>PGM Application</th><th>Operative Mechanism</th><th>Source Reference</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Spirit Communication</strong></td>
+                    <td>Invoking Anubis to fetch the <em>Ba</em> of a specific deceased person for consultation — drawing on his role as psychopomp and master of the Duat's geography to locate and summon a specific soul from the afterlife.</td>
+                    <td>PGM IV.1872–1927; PGM VIII.1–63</td>
+                </tr>
+                <tr>
+                    <td><strong>Dream Oracle (Oneiromancy)</strong></td>
+                    <td>Ritual preparation and invocation of Anubis to send a prophetic dream — connecting his knowledge of the threshold between life and death (the same threshold traversed in sleep) to the divinatory tradition of <a href="dream-incubation.html" class="nl">dream incubation</a>.</td>
+                    <td>PGM VII.359–369; various</td>
+                </tr>
+                <tr>
+                    <td><strong>Protection and Binding</strong></td>
+                    <td>Authority over the dead gave Anubis the power to bind malevolent entities and hostile spirits through his sovereign jurisdiction. Curse tablets (<em>defixiones</em>) frequently invoked Anubis to "hold" a targeted enemy in the same way he holds the dead.</td>
+                    <td>Multiple PGM defixio tablets</td>
+                </tr>
+                <tr>
+                    <td><strong>Revelation of Secrets</strong></td>
+                    <td>As <em>Hery-seshta</em> (Master of Secrets), Anubis could be invoked to reveal hidden knowledge — of buried treasure, of the identity of enemies, of the hidden truth of a situation — drawing on his comprehensive knowledge of what lies beneath the surface of ordinary reality.</td>
+                    <td>PGM IV; Demotic Magic Papyrus</td>
+                </tr>
+                <tr>
+                    <td><strong>Theurgical Protection</strong></td>
+                    <td>Invoked as a guardian during rituals that opened the practitioner to contact with potentially dangerous entities — Anubis's role as keeper of the Duat's boundaries qualified him as the protector of anyone navigating the liminal zone between the ordinary world and the spirit realm.</td>
+                    <td>PGM XII; various</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="blue-block">
+            <div class="bb-title">// A TYPICAL PGM INVOCATION OF ANUBIS — STRUCTURAL ANALYSIS //</div>
+            <p>PGM invocations of Anubis follow a consistent structural pattern: an opening sequence of voces magicae (barbarous names — strings of vowels and divine names in Egyptian, Greek, and Coptic), followed by a direct address to Anubis by his accumulated epithets ("You who dwell in the sacred land, you who guard the embalmed..."), then a statement of the practitioner's purpose and a specific request. The ritual often involves the burning of specific incense (kyphi and myrrh are most commonly specified — both with strong Egyptian funerary associations), the drawing of a seal or image of the canid deity, and sometimes the use of a dog's skull or bone as a material link.</p>
+            <p>The multilingual, multi-traditional character of these texts — moving between Greek, Demotic Egyptian, and Coptic within a single papyrus — is direct evidence that Anubis survived the cultural transitions not by being simplified into a foreign framework but by being genuinely recognized as carrying real operative power that transcended any single linguistic or cultural expression.</p>
+        </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION VII: ALCHEMY -->
+    <!-- SECTION VIII: ALCHEMY -->
     <section id="alchemy">
-        <h2 class="section-head">VII. Alchemical Associations</h2>
+        <h2 class="section-head">VIII. Alchemical and Esoteric Associations</h2>
+
+        <h3 class="sub-head">Anubis as the Nigredo — The Black Work</h3>
         <p>
-            In the context of the <a href="alchemy.html" class="nl">Alchemy</a> entry, Anubis is the personification of the <strong>Nigredo</strong> (the Black Work). He represents the stage of putrefaction and dissolution that must precede purification and rebirth. His mastery over the preservation of the body mirrors the alchemical goal of creating 'incorruptible matter.'
+            In the <a href="alchemy.html" class="nl">alchemical</a> framework — which draws directly on Egyptian funerary symbolism for its foundational stage-map — Anubis is the presiding intelligence of the <strong>Nigredo</strong> (the Black Work): the first and most essential stage of the Great Work, characterised by dissolution, putrefaction, and the breaking down of all established structures. The Nigredo is not an obstacle to transformation; it is transformation's necessary precondition. You cannot build the Philosopher's Stone on unrefined material. The existing form must first be reduced to its prima materia — its fundamental, undifferentiated substance — before the reconstruction into a higher form becomes possible.
         </p>
+        <p>
+            Anubis's black colouration identifies him directly with this stage. His 70-day embalming process is itself an alchemical operation: the Nigredo (natron desiccation — decomposition arrested and redirected), followed by the preparation for Albedo (the purification and linen-wrapping phase), leading ultimately to the Rubedo of the Opening of the Mouth (the animation of the fully prepared vessel). The entire mummification sequence maps onto the alchemical color stages with a precision that is not coincidental — both the alchemists and the embalmers were working from the same understanding of how matter must be processed to achieve permanent transformation.
+        </p>
+
+        <div class="card-grid">
+            <div class="dark-card info-card">
+                <h4>NIGREDO — THE DISSOLUTION</h4>
+                <p>The death of the old form. In mummification: the removal of organs, the packing in natron, the surrender of the body's biological integrity to a controlled process of dissolution. In inner work: the collapse of the old identity structure, the disorientation of established reference points, the "dark night" before the new form becomes visible. Anubis presides as the witness who does not flinch from the dissolution process — who sees its necessity and its dignity.</p>
+            </div>
+            <div class="dark-card info-card">
+                <h4>THE INCORRUPTIBLE MATTER</h4>
+                <p>The alchemical goal of creating matter that cannot be further degraded — <em>incorruptible gold</em> — directly mirrors the mummification goal of creating a body that cannot further decay. Both are attempts to stabilise a physical substrate at its highest possible frequency, permanently arresting the cycle of degeneration. Anubis's mastery of this process in the funerary domain is the original template from which the alchemical concept was derived.</p>
+            </div>
+        </div>
+
+        <h3 class="sub-head">Anubis in Esoteric Tradition — The Threshold Keeper</h3>
+        <p>
+            In the Western esoteric tradition that descended from Hermetic and Neoplatonic engagement with Egyptian theology, Anubis occupies a specific functional position: he is the principle of <strong>discernment at the threshold</strong>. Before the soul can enter any higher domain — the Hall of Judgment, the fields of Iaru, the solar realm — it must first pass through Anubis's assessment. He does not judge in the way Osiris judges; he assesses readiness, manages the transition, and ensures that what passes through the threshold is what it claims to be.
+        </p>
+        <p>
+            This threshold-discernment function maps onto the esoteric concept of the <em>Guardian of the Threshold</em> — the figure encountered at the boundary between ordinary consciousness and higher states of awareness, who tests the sincerity and preparation of the aspirant before permitting access to the next level of initiation. In Theosophical and Rosicrucian frameworks specifically, this Guardian role was often illustrated using imagery drawn directly from the Anubis tradition, even when the connection was not explicitly acknowledged.
+        </p>
+
+        <div class="black-block">
+            <div class="bk-title">// THE JACKAL AND THE NAVIGATOR — METAPHYSICAL READING //</div>
+            <p>From the perspective of this archive's operative framework, Anubis represents a specific quality of consciousness that is essential to any deep transformative work: the willingness to be fully present at the threshold of dissolution without retreating, combined with the technical competence to manage the dissolution process precisely rather than allowing it to become chaotic. He is the difference between controlled alchemical dissolution and uncontrolled decomposition — the intelligence that keeps the Nigredo on track, preventing it from collapsing into mere destruction while also preventing premature closure before the dissolution is complete.</p>
+            <p>The practitioner who invokes Anubis is asking for this quality: the capacity to witness dissolution without panic; the precision to know when to intervene and when to allow the process to continue; and the navigational knowledge to move through the transformed material to its proper destination. These are not metaphors for psychological processes alone — they describe the actual technical requirements of any genuine threshold-crossing work, whether in inner development, shamanic practice, or operative ritual.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IX: WORKING -->
+    <section id="working">
+        <h2 class="section-head">IX. Working with Anubis — The Living Tradition</h2>
+        <p>
+            Anubis remains one of the most consistently approached deities in contemporary Kemetic practice — and one of the most misunderstood. His popular image as a "death god" in the morbid, Western Halloween sense profoundly misrepresents his actual character. He is not the bringer of death, not its personification, and not a dangerous or malevolent intelligence to be approached with fear. He is the world's most competent and caring transition manager — a being of extraordinary precision, genuine compassion, and absolute reliability at the moment of greatest vulnerability.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>WHEN TO APPROACH ANUBIS</h4>
+                <p>Anubis is appropriately invoked in any context involving: the death or dying of loved ones (to ensure safe passage and proper transition); grief work (he witnessed the first grief, attended the first mourning); transitions and life thresholds (career change, relationship endings, major identity shifts); shadow work and Nigredo-stage inner alchemy; navigation of the liminal zone in shamanic or dream work; and any situation requiring honest assessment of what has ended and what remains.</p>
+            </div>
+            <div class="info-card">
+                <h4>TRADITIONAL OFFERINGS</h4>
+                <p>Historically attested offerings to Anubis include: black candles or oil lamps; myrrh incense (the pre-eminent funerary resin); natron or salt; fresh water; black obsidian or jet; images of jackals or dogs. The colour black in materials is appropriate — not as morbid aesthetic but as participation in Anubis's own transformative darkness. Dogs and jackals as household animals were understood as his earthly representatives; kindness to dogs was considered respectful to Anubis.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE QUALITY OF HIS ATTENTION</h4>
+                <p>Experienced practitioners consistently report Anubis's presence as characterised by an extremely precise, unhurried attentiveness — the sense of being seen clearly and completely without judgment, assessed with absolute accuracy rather than reassured with comfortable imprecision. He is not a deity of soft comfort but of honest accompaniment. His care is expressed through precision rather than sentiment. Approaching him with false presentation or incomplete honesty typically results in his attention going elsewhere; he has no interest in appearances.</p>
+            </div>
+            <div class="info-card">
+                <h4>DISCERNMENT NOTE</h4>
+                <p>Contemporary popular occultism has attached Anubis to a range of aesthetics and frameworks — "dark god" energy, death magic, necromancy — that partially capture but substantially distort his character. The Egyptian Anubis was not dangerous, not unpredictable, and not associated with cursing, harm, or the raising of hostile dead. He was the most reliable, most precise, and most caring guardian of the transition process. Contact that feels threatening, unpredictable, or chaotic is unlikely to be genuine Anubis resonance.</p>
+            </div>
+        </div>
+
+        <div class="practical-note">
+            <div class="pn-title">// SCHOLARLY RESOURCES //</div>
+            <p><strong>Primary sources:</strong> The Papyrus of Ani (British Museum EA 10470) contains the most complete illustrated rendering of Anubis in his Hall of Judgment role. Available in facsimile and full translation via the British Museum Press. The Pyramid Texts (Faulkner translation, Oxford University Press) contain Anubis's oldest invocations.</p>
+            <p><strong>Academic study:</strong> Salima Ikram, <em>Divine Creatures: Animal Mummies in Ancient Egypt</em> (2005) — contextualises Anubis within the broader canid sacred animal tradition. John Gee, <em>A Guide to the Book of the Dead</em> (2019) — for Anubis's Hall of Judgment role in the fullest canonical context.</p>
+            <p><strong>For the PGM material:</strong> Hans Dieter Betz (ed.), <em>The Greek Magical Papyri in Translation</em> (University of Chicago Press, 1986/1992) — the standard scholarly edition. Index references to Anubis/Hermanubis invocations provide immediate access to the operative texts.</p>
+        </div>
     </section>
 
     <div class="glyph-marker">𓇋 𓈖 𓄿 𓊪 𓅱 𓃣</div>
@@ -375,12 +757,19 @@
         <h3>// RELATED ARCHIVES //</h3>
         <ul>
             <li><a href="osiris-myth.html">The Osiris Myth</a></li>
+            <li><a href="osiris.html">Osiris — The God Himself</a></li>
             <li><a href="weighing-of-the-heart.html">The Weighing of the Heart</a></li>
             <li><a href="composite-soul.html">The Composite Soul</a></li>
-            <li><a href="mummification.html">The Art of Embalming</a></li>
-            <li><a href="greek-magical-papyri.html">Greek Magical Papyri</a></li>
-            <li><a href="alchemy.html">Alchemy & Kemet</a></li>
+            <li><a href="opening-of-the-mouth.html">Opening of the Mouth</a></li>
+            <li><a href="amulets-talismans.html">Amulets — Heart Scarab &amp; Mummy Amulets</a></li>
             <li><a href="funerary-texts.html">The Funerary Corpus</a></li>
+            <li><a href="netherworld-books.html">The Netherworld Books</a></li>
+            <li><a href="greek-magical-papyri.html">Greek Magical Papyri</a></li>
+            <li><a href="alchemy.html">Alchemy — The Nigredo</a></li>
+            <li><a href="heka.html">Heka — The Operative Force</a></li>
+            <li><a href="sed-festival.html">The Sed Festival — Wepwawet</a></li>
+            <li><a href="dream-incubation.html">Dream Incubation</a></li>
+            <li><a href="thoth-hermes.html">Thoth-Hermes — The Recorder</a></li>
         </ul>
     </div>
 
