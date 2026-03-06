@@ -60,11 +60,11 @@ body {
 }
 .page-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size: clamp(1.3rem, 7.5vw, 3rem);
     font-weight: 700;
     color: var(--gold);
     text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.08em;
     line-height: 1.1;
     word-wrap: break-word;
     padding: 0 10px;
@@ -72,28 +72,29 @@ body {
 }
 .page-subtitle {
     font-family: 'VT323', monospace;
-    font-size: clamp(0.9rem, 4vw, 1.25rem);
+    font-size: clamp(0.8rem, 3.5vw, 1.05rem);
     color: var(--cyan-dim);
     margin-top: 1rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     padding: 0 1rem;
     text-transform: uppercase;
 }
 .page-epithet {
     font-style: italic;
     color: rgba(212,175,55,0.6);
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-top: 1.5rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+    line-height: 1.6;
 }
 
 /* NAV */
 .breadcrumb {
     font-family: 'VT323', monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--cyan-dim);
     margin-bottom: 2rem;
     letter-spacing: 0.05em;
@@ -105,7 +106,7 @@ body {
 .toc-block {
     border: 1px solid rgba(212,175,55,0.25);
     background: rgba(20,18,10,0.8);
-    padding: 1.5rem 2rem;
+    padding: 1.2rem 1.5rem;
     margin-bottom: 3rem;
     text-align: left;
     max-width: 800px;
@@ -115,8 +116,8 @@ body {
 .toc-title {
     font-family: 'Cinzel', serif;
     color: var(--gold);
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
     opacity: 0.8;
@@ -126,27 +127,27 @@ body {
 .toc-list a {
     color: var(--cyan);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: color 0.2s;
 }
 .toc-list a:hover { color: #00ffae; }
-.toc-list .toc-sub { padding-left: 1.5rem; opacity: 0.8; font-size: 0.88rem; }
+.toc-list .toc-sub { padding-left: 1.2rem; opacity: 0.8; font-size: 0.85rem; }
 
 /* SECTION HEADERS */
 h2.section-head {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.5rem, 6vw, 1.9rem);
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem);
     color: var(--gold);
     border-bottom: 1px solid rgba(212,175,55,0.2);
     padding-bottom: 0.5rem;
-    margin: 4rem 0 2rem;
+    margin: 3.5rem 0 1.5rem;
     letter-spacing: 0.05em;
 }
 h3.sub-head {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.1rem, 5vw, 1.3rem);
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
     color: var(--text-bright);
-    margin: 2rem 0 1.5rem;
+    margin: 2rem 0 1.2rem;
     letter-spacing: 0.03em;
 }
 h4.mini-head {
