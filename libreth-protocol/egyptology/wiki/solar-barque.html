@@ -3,120 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE SOLAR BARQUE :: EGYPTOLOGY WIKI</title>
+    <title>THE SOLAR BARQUE :: RA'S NOCTURNAL ASCENT :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 50% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓇳 𓊛 𓈗 𓇽 𓊛';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* HOUR CARD */
+        .hour-card {
+            border-left: 3px solid var(--gold-dim);
+            background: rgba(15,13,8,0.9);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.92rem;
+        }
+        .hour-card b { color: var(--gold); }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE SOLAR BARQUE</h1>
-            <p class="text-gray-500 egypt-text-color">// RA'S NOCTURNAL JOURNEY THROUGH THE DUAT //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE SOLAR BARQUE</h1>
+        <p class="page-subtitle">// THE DIVINE VESSELS :: THE NOCTURNAL AND DIURNAL CYCLES //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="pantheon.html" class="nav-link">The Pantheon</a> > The Solar Barque
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="pantheon.html">THE PANTHEON</a> &gt; THE SOLAR BARQUE
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Mandjet and Mesektet</h2>
-                <p class="mb-4">
-                    The solar barque is the divine vessel used by the sun god Ra to traverse the sky and the underworld. The journey is divided into two phases: the <b>Mandjet</b> (the Day Barque), which sails across the sky from dawn to dusk, and the <b>Mesektet</b> (the Night Barque), which navigates the twelve hours of the Duat.
-                </p>
-                <div class="grid md:grid-cols-2 gap-4 mb-8">
-                    <div class="p-4 border border-blue-900 bg-blue-950/20">
-                        <h4 class="font-bold text-blue-400">The Day Journey</h4>
-                        <p class="text-sm">Representing the manifestation of life, light, and order. Ra sails across the celestial river (the Nile's heavenly counterpart) as a symbol of growth and consciousness.</p>
-                    </div>
-                    <div class="p-4 border border-purple-900 bg-purple-950/20">
-                        <h4 class="font-bold text-purple-400">The Night Journey</h4>
-                        <p class="text-sm">The perilous journey through the Duat. Each hour presents a unique obstacle, representing the transformation and regeneration of the sun's energy in the darkness.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Twelve Hours of Darkness</h2>
-                <p class="mb-4">
-                    The nocturnal journey is meticulously documented in the <a href="netherworld-books.html" class="nav-link">Netherworld Books</a>. Each hour represents a specific threshold within the Duat, requiring the crew to utilize <a href="heka.html" class="nav-link">Heka</a> and the knowledge of secret names to pass.
-                </p>
-                <div class="space-y-4">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Sixth Hour: The Midnight Union</h4>
-                        <p class="text-sm">The critical moment of <b>"Ra in Osiris, Osiris in Ra."</b> The active solar spirit unites with the inert body of the underworld lord, triggering the chemical reaction of regeneration.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Seventh Hour: The Crisis of Apep</h4>
-                        <p class="text-sm">The most perilous moment. The serpent <a href="apep.html" class="nav-link">Apep</a> drains the celestial river to ground the barque. <a href="isis.html" class="nav-link">Isis</a> uses her "Words of Power" to bind the serpent, while Set spears him from the prow.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Mehen Serpent</h4>
-                        <p class="text-sm">A protective coiled serpent that envelops the naos of Ra on the barque. Mehen represents the "enveloping" frequency that shields the divine essence from the entropic radiation of the underworld.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Metaphor of the Soul</h3>
-                <p class="mb-4">
-                    The journey of the solar barque is the macrocosmic prototype for the journey of the individual soul (the <a href="composite-soul.html" class="nav-link">Ba</a>) after death. By aligning with Ra's barque, the deceased can successfully navigate the trials of the Duat and achieve the state of an <b>Akh</b> (immortal spirit).
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="netherworld-books.html" class="nav-link">The Netherworld Books</a></li>
-                    <li><a href="apep.html" class="nav-link">Apep: The Adversary</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Journey of the Soul</a></li>
-                    <li><a href="hathor.html" class="nav-link">Hathor: Mistress of the Western Horizon</a></li>
-                    <li><a href="cosmological-deities.html" class="nav-link">Cosmological Deities (Nut Swallowing Ra)</a></li>
-                    <li><a href="ennead-ogdoad.html" class="nav-link">The Ennead & Ogdoad (Primordial Gods)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// NAVIGATION VECTOR: REGENERATION // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Barque — The Celestial Circuit</a></li>
+            <li><a href="#mandjet">II. The Mandjet — The Day Barque of Manifestation</a></li>
+            <li><a href="#mesektet">III. The Mesektet — The Night Barque of Regeneration</a></li>
+            <li><a href="#crew">IV. The Divine Crew — Sia, Hu, and Heka</a></li>
+            <li><a href="#sixth-hour">V. The Sixth Hour — The Midnight Union</a></li>
+            <li><a href="#crisis">VI. The Seventh Hour — The Crisis of Apep</a></li>
+            <li><a href="#mehen">VII. Mehen the Enveloper — Protective Geometry</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Barque — The Celestial Circuit</h2>
+        <p>
+            The <strong>Solar Barque</strong> is the primary divine vehicle utilized by the sun god <strong>Re</strong> to traverse the sky and the underworld. The journey is a continuous, twelve-hour cycle that ensures the maintenance of <a href="maat-isfet.html" class="nl">Ma'at</a> and the perpetual rebirth of the universe.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, the Barque is viewed as a <strong>coherent energy-envelope</strong>. It is the vessel that protects the divine essence (the solar frequency) as it passes through the diverse densities and dangers of the awareness field.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: MANDJET -->
+    <section id="mandjet">
+        <h2 class="section-head">II. The Mandjet — The Day Barque</h2>
+        <p>
+            The <strong>Mandjet</strong> is the vessel of the rising and midday sun. It sails across the celestial river (the sky) from dawn to dusk. This phase represents the <strong>Diurnal Bandwidth</strong> — the time of manifest light, growth, and the established order of the Pharaonic state.
+        </p>
+    </section>
+
+    <!-- SECTION III: MESEKTET -->
+    <section id="mesektet">
+        <h2 class="section-head">III. The Mesektet — The Night Barque</h2>
+        <p>
+            The <strong>Mesektet</strong> is the vessel of the setting and nocturnal sun. As the sun enters the western horizon, it transitions into the Duat. This phase represents the <strong>Nocturnal Bandwidth</strong> — the time of hidden transformation, the processing of data from the day, and the perilous work of regeneration.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: CREW -->
+    <section id="crew">
+        <h2 class="section-head">IV. The Divine Crew</h2>
+        <p>
+            The Solar Barque is steered and defended by a crew of deities representing the creator's essential faculties:
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>SIA & HU</h4>
+                <p><strong>Sia</strong> (Perception) stands at the prow as the lookout, while <strong>Hu</strong> (Authoritative Utterance) provides the commands. Together, they navigate the barque through the thresholds of the night. See <a href="memphite-theology.html" class="nl">Memphite Theology</a>.</p>
+            </div>
+            <div class="info-card">
+                <h4>HEKA</h4>
+                <p>The personification of <strong>Magical Power</strong>. Heka provides the underlying energy that permits the barque to alter the fabric of the Duat and repel the forces of entropy. See <a href="heka.html" class="nl">Heka</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: SIXTH HOUR -->
+    <section id="sixth-hour">
+        <h2 class="section-head">V. The Sixth Hour — The Midnight Union</h2>
+        <p>
+            The deepest point of the nocturnal journey occurs in the <strong>Sixth Hour</strong>. Here, the "corpse" of Re and the "soul" of Osiris unite.
+        </p>
+        <div class="hour-card">
+            <p><b>RA IN OSIRIS, OSIRIS IN RA:</b> This is the <strong>Alchemical Wedding</strong> of the solar and chthonic principles. The union triggers a chemical-spiritual reaction that generates the necessary spark for the sun's rebirth at dawn. It is the moment when "Potential" and "Actuality" become one.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: MEHEN -->
+    <section id="mehen">
+        <h2 class="section-head">VII. Mehen the Enveloper — Protective Geometry</h2>
+        <p>
+            The <i>naos</i> (shrine) of Re on the barque is protected by the coiled serpent <strong>Mehen</strong>. This deity envelops the sun in its massive coils, acting as a <strong>Faraday cage</strong> for the divine essence. Mehen represents the protective geometry required to shield high-frequency information from the entropic radiation of the underworld.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓇳 𓊛 𓈗 𓇽 𓊛</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="netherworld-books.html">Netherworld Books & Maps</a></li>
+            <li><a href="apep.html">Apep — The Serpent of Chaos</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="sia.html">Sia — Divine Perception</a></li>
+            <li><a href="hu.html">Hu — Authoritative Utterance</a></li>
+            <li><a href="osiris.html">Osiris — Lord of the Duat</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="cosmological-deities.html">Cosmological Deities (Nut)</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    NAVIGATION VECTOR: REGENERATION</p>
+</footer>
 
 </body>
 </html>

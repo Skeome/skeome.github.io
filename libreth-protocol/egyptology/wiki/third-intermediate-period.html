@@ -3,106 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THIRD INTERMEDIATE PERIOD :: EGYPTOLOGY WIKI</title>
+    <title>THIRD INTERMEDIATE PERIOD :: SYSTEMIC FRAGMENTATION :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓋴 𓐍 𓅓 𓂝 𓏏 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THIRD INTERMEDIATE PERIOD</h1>
-            <p class="text-gray-500 egypt-text-color">// DYNASTIES 21–25: THE AGE OF FRAGMENTATION AND NUBIAN REVIVAL //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THIRD INTERMEDIATE</h1>
+        <p class="page-subtitle">// SYSTEMIC FRAGMENTATION :: THE THEBAN THEOCRACY // LIBRETH ARCHIVE</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > Third Intermediate Period
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; THIRD INTERMEDIATE PERIOD
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Overview (1075–656 B.C.E.)</h2>
-                <p class="mb-4">
-                    The Third Intermediate Period followed the death of Ramesses XI and the collapse of the New Kingdom. It is characterized by a lack of a single centralized authority, with power divided between the pharaohs ruling from Tanis in the north and the High Priests of Amun at Thebes in the south. This era saw the rise of Libyan (Meshwesh) and later Nubian (Kushite) dynasties.
-                </p>
-                <p class="mb-4">
-                    Despite the political fragmentation, this period was a time of significant cultural and religious development. The "Theban Theocracy" represented a unique moment where the god Amun was considered the true king of Egypt, ruling through oracles.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Key Dynasties</h3>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Libyan Dynasties (22nd–24th)</h4>
-                        <p class="text-sm">Descendants of <b>Meshwesh</b> (Libyan) mercenaries who had settled in the Delta. Shoshenq I (Biblical Shishak) famously campaigned in the Levant and sacked Jerusalem. The Libyan rulers introduced a "tribal" feudal structure, with multiple family members holding local principalities while acknowledging a nominal High King at Tanis.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Kushite Dynasty (25th)</h4>
-                        <p class="text-sm">Rulers from Napata (modern Sudan) who conquered Egypt to restore Ma'at. Figures like Piye and Taharqa oversaw a major cultural renaissance and temple construction, viewing themselves as more Egyptian than the Libyan rulers. <a href="kushite-revival.html" class="nav-link">[Detailed Archive]</a></p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Theban Theocracy & The Cachette</h2>
-                <p class="mb-4">
-                    In the south, the High Priests of Amun at Thebes became de facto rulers, forming a parallel state. This period saw the <b>"Cachette"</b> of royal mummies—the systematic re-wrapping and hiding of New Kingdom pharaohs (like Ramesses II and Thutmose III) in secret locations like <b>DB320</b> and the tomb of Amenhotep II (KV35) to protect them from widespread tomb robbery.
-                </p>
-                <p class="mb-4">
-                    This "Theocracy" was a unique theological state where <b>Amun-Ra</b> was the actual king, and political decisions were made via public oracles. The pharaoh in the north was often linked to the Theban priests through marriage or the appointment of "God’s Wives of Amun."
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="kushite-revival.html" class="nav-link">The Kushite Revival</a></li>
-                    <li><a href="new-kingdom.html" class="nav-link">Collapse of the New Kingdom</a></li>
-                    <li><a href="late-period.html" class="nav-link">Transition to the Late Period</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// CHRONOLOGICAL ANCHOR: DYNASTY 21-25 // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Fragmentation — Systemic Decoherence</a></li>
+            <li><a href="#tanis-thebes">II. Tanis and Thebes — The Northern and Southern Nodes</a></li>
+            <li><a href="#theocracy">III. The Theban Theocracy — Amun as King</a></li>
+            <li><a href="#libyan">IV. The Libyan Dynasties — Tribal Feudalism</a></li>
+            <li><a href="#cachette">V. The Royal Cachette — Archival Protection</a></li>
+            <li><a href="#revival">VI. Transition to the Kushite Revival</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Fragmentation — Systemic Decoherence</h2>
+        <p>
+            The <strong>Third Intermediate Period</strong> (c. 1075–656 BCE) represents a prolonged phase of <strong>systemic decoherence</strong> following the collapse of the New Kingdom empire. The centralized Pharaonic operating system was partitioned into regional bandwidths, with power shared between the secular rulers at Tanis and the sacerdotal rulers at Thebes.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, this era is viewed as a <strong>data-preservation cycle</strong>. While the political hardware was fractured, the priesthood engaged in intensive efforts to wrap and hide the sacred artifacts and mummies of the past, ensuring that the Kemetic initiatory frequencies would survive the impending periods of foreign rule.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: THEOCRACY -->
+    <section id="theocracy">
+        <h2 class="section-head">III. The Theban Theocracy — Amun as King</h2>
+        <p>
+            In the south, the High Priests of Amun established a unique <strong>Theocratic State</strong>. The god Amun-Ra was considered the actual, reigning monarch of Egypt. Political decisions, legal verdicts, and administrative appointments were made through <strong>Divine Oracles</strong>.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>ORACULAR GOVERNMENT</h4>
+                <p>During festivals, the divine barque of Amun was carried by priests. The god's "answers" to petitions were interpreted through the movements of the barque, effectively placing the state's decision-making process into the <strong>Awareness Field</strong>.</p>
+            </div>
+            <div class="info-card">
+                <h4>GOD'S WIFE OF AMUN</h4>
+                <p>The role of the "God's Wife of Amun" (a celibate royal princess) became the primary point of integration between the Northern Throne and the Southern Temple, holding the highest spiritual authority in the land.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: CACHETTE -->
+    <section id="cachette">
+        <h2 class="section-head">V. The Royal Cachette — Archival Protection</h2>
+        <p>
+            Facing widespread tomb robbery and civil unrest, the Theban priesthood initiated a systematic <strong>salvage operation</strong>. They removed the mummies of the great New Kingdom Pharaohs (including Ramesses II and Thutmose III) from their looted tombs.
+        </p>
+        <p>
+            These mummies were re-wrapped, identified with high-fidelity labels, and hidden in secret communal repositories (such as <strong>DB320</strong> and <strong>KV35</strong>). This act of "archival wrapping" preserved the physical nodes of the royal data-stream for nearly three millennia until their rediscovery in the 19th century.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓋴 𓐍 𓅓 𓂝 𓏏 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="new-kingdom.html">The New Kingdom Collapse</a></li>
+            <li><a href="kushite-revival.html">The Kushite Revival</a></li>
+            <li><a href="late-period.html">Transition to Late Period</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="ritual-practice.html">Oracles & Dream Incubation</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    CHRONOLOGICAL ANCHOR: DYNASTY 21-25</p>
+</footer>
 
 </body>
 </html>

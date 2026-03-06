@@ -3,111 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHABTIS & USHABTIS :: EGYPTOLOGY WIKI</title>
+    <title>SHABTIS & USHABTIS :: THE ANSWERERS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓅱 𓈙 𓃀 𓏏 𓏭 𓀾';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">SHABTIS & USHABTIS</h1>
-            <p class="text-gray-500 egypt-text-color">// DIVINE SERVANTS: THE ANSWERERS IN THE AFTERLIFE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">SHABTIS</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">wšbtj</div>
+        <p class="page-subtitle">// THE ANSWERERS :: SURROGATES IN THE AFTERLIFE :: LABOR AUTOMATION //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="ritual-practice.html" class="nav-link">Ritual Practice</a> > Shabtis
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="ritual-practice.html">RITUAL PRACTICE</a> &gt; SHABTIS
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">What is a Shabti?</h2>
-                <p class="mb-4">
-                    A <b>shabti</b> (also <i>shawabti</i> or <i>ushabti</i>) is a small anthropoid figurine found in many Egyptian tombs. Their purpose was to perform manual labor on behalf of the deceased in the afterlife, particularly agricultural work in the <b>Field of Reeds</b> (Aaru).
-                </p>
-                <p class="mb-4">
-                    The name <i>ushabti</i> (Ancient Egyptian <i>wšbtj</i>) means "the one who answers," referring to the figurine's role in responding to the deceased's call for help.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Evolution of the Divine Set</h3>
-                <p class="mb-4">
-                    The use of shabtis grew from solitary figurines in the Middle Kingdom to standardized sets. A complete elite set eventually consisted of <b>401 figurines</b>: one worker for each of the 365 days of the year, plus 36 <b>Overseer (Rais)</b> figures.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Overseer Shabtis</h4>
-                        <p class="text-sm">Unlike the worker shabtis (shown mummiform), overseers were depicted wearing the "kilts of the living" and holding whips. Their function was to magically organize the <i>Ka</i> of the worker figures, ensuring the labor in the Field of Reeds was executed efficiently.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Tools of the Afterlife</h4>
-                        <p class="text-sm">Worker shabtis are carved holding <b>hoes</b> and carrying <b>baskets</b> on their backs. These tools were symbolic resonators—bringing the mundane labor of the physical Nile into the sacred frequency of the celestial Nile (Aaru).</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Spell 6: The Activation</h2>
-                <p class="mb-4">
-                    The shabti figurine was brought to life by the recitation of <b>Spell 6 of the Book of the Dead</b>, which was often inscribed directly onto the body of the figure:
-                </p>
-                <div class="p-6 border border-amber-400 bg-amber-400/10 mb-8 italic">
-                    <p class="text-sm italic">"O shabti, if the Osiris [Name] is called upon to do any work in the god’s domain—to cultivate the fields, to water the banks, to transport sand from east to west—‘Here am I’ you shall say, whenever you are called."</p>
-                </div>
-                <p>This spell magically transferred the obligation of agricultural labor in the <a href="weighing-of-the-heart.html" class="nav-link">Field of Reeds (Sekhet-Aaru)</a> from the soul of the deceased to the figurine.</p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="funerary-texts.html" class="nav-link">The Funerary Corpus</a></li>
-                    <li><a href="ritual-practice.html" class="nav-link">Ritual Practice & Heka</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Journey of the Soul (Ba)</a></li>
-                    <li><a href="weighing-of-the-heart.html" class="nav-link">The Weighing of the Heart & Sekhet-Aaru</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SERVICE STATUS: READY // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Shabti — The Answerer</a></li>
+            <li><a href="#spell-6">II. Spell 6 of the Book of the Dead — The Activation</a></li>
+            <li><a href="#evolution">III. Evolution of the Divine Set — From 1 to 401</a></li>
+            <li><a href="#overseers">IV. The Rais — Magical Management</a></li>
+            <li><a href="#materials">V. Materials and Frequencies — Faience vs. Wood</a></li>
+            <li><a href="#modern">VI. Metaphysical Parallel — AI and Automation</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Shabti — The Answerer</h2>
+        <p>
+            A <strong>Shabti</strong> (also <i>shawabti</i> or <i>ushabti</i>) is a small anthropoid figurine found in Kemetic tombs. Their name, <i>wšbtj</i>, literally means "The Answerer." Their function was to perform manual labor on behalf of the deceased in the afterlife, specifically agricultural work in the <strong>Field of Reeds</strong> (Aaru).
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, shabtis are viewed as <strong>delegated sub-processes</strong>. They are functional magical surrogates designed to handle the material-level maintenance of the afterlife, freeing the transfigured <a href="composite-soul.html" class="nl">Akh</a> to focus on higher-dimensional navigation and resonance.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: SPELL 6 -->
+    <section id="spell-6">
+        <h2 class="section-head">II. Spell 6 of the Book of the Dead — The Activation</h2>
+        <p>
+            The shabti was brought to life through the recitation of <strong>Spell 6</strong> from the <a href="funerary-texts.html" class="nl">Book of the Dead</a>, which was often inscribed directly on the figurine's body.
+        </p>
+        <div class="info-card" style="font-style:italic;">
+            <p>"O shabti, if the Osiris [Name] is called upon to do any work in the god’s domain... ‘Here am I’ you shall say, whenever you are called."</p>
+        </div>
+        <p>
+            This formula magically transfers the <strong>obligation of labor</strong> from the individual's soul to the physical vessel of the shabti. It utilizes <strong>Heka</strong> to bind a portion of the user's <a href="composite-soul.html" class="nl">Ka</a> to the figurine, creating a functional automaton.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: EVOLUTION -->
+    <section id="evolution">
+        <h2 class="section-head">III. Evolution of the Divine Set</h2>
+        <p>
+            The use of shabtis evolved from solitary figurines in the Middle Kingdom to standardized "industrial" sets in the New Kingdom and Late Period.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE 401 UNIT ARRAY</h4>
+                <p>A complete elite set consisted of 401 figurines: one worker for each of the 365 days of the year, plus 36 <strong>Overseer</strong> (<i>Rais</i>) figures to manage them in groups of ten.</p>
+            </div>
+            <div class="info-card">
+                <h4>TOOLS OF THE TRADE</h4>
+                <p>Worker shabtis are depicted holding hoes and baskets. These are <strong>symbolic resonators</strong>, ensuring that the labor performed in the celestial realm is correctly mapped to the agricultural cycles of the Nile.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: MATERIALS -->
+    <section id="materials">
+        <h2 class="section-head">V. Materials and Frequencies</h2>
+        <p>
+            The material of the shabti determined its <strong>resonant quality</strong>.
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li><strong>Faience (Blue/Green):</strong> The most common material, its color symbolized <strong>rebirth</strong> and celestial light. It established a stable, life-giving frequency.</li>
+            <li><strong>Wood:</strong> Linked to the regenerative power of Osiris and the cycle of the seasons.</li>
+            <li><strong>Stone (Steatite/Alabaster):</strong> Used for high-bandwidth royal shabtis, designed for maximum durability and "eternal" service.</li>
+        </ul>
+    </section>
+
+    <div class="glyph-marker">𓅱 𓈙 𓃀 𓏏 𓏭 𓀾</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="funerary-texts.html">Funerary Corpus Overview</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="composite-soul.html">The Ka (Vital Life Force)</a></li>
+            <li><a href="weighing-of-the-heart.html">Sekhet-Aaru (Field of Reeds)</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Typology</a></li>
+            <li><a href="osiris.html">Osiris — Lord of the Dead</a></li>
+            <li><a href="deir-el-medina.html">Set-Ma'at Artisans</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SERVICE STATUS: READY</p>
+</footer>
 
 </body>
 </html>

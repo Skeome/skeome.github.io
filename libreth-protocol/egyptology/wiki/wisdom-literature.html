@@ -3,134 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WISDOM LITERATURE (SEBAYT) :: EGYPTOLOGY WIKI</title>
+    <title>WISDOM LITERATURE :: SEBAYT :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓋴 𓃀 𓄿 𓇋 𓏏 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* TEXT CARDS */
+        .text-card {
+            border-left: 3px solid var(--gold-dim);
+            background: rgba(15,13,8,0.9);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-right: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+        }
+        .text-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">WISDOM LITERATURE (SEBAYT)</h1>
-            <p class="text-gray-500 egypt-text-color">// THE INSTRUCTIONS: MA'AT IN ACTION //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">WISDOM LITERATURE</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">Sebayt · 𓋴 𓃀 𓄿 𓇋 𓏏 𓏲</div>
+        <p class="page-subtitle">// THE INSTRUCTIONS :: APPLIED MA'AT :: ETHICS OF THE SILENT MAN //</p>
+        <p class="page-epithet">
+            "Ma'at is great and its establishment is good; it has not been disturbed since the time of Osiris."
+        </p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Wisdom Literature
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; WISDOM LITERATURE
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Genre of "Teaching"</h2>
-                <p class="mb-4">
-                    <b>Sebayt</b> (literally "Teaching" or "Instruction") is one of the oldest and most significant genres of Egyptian literature. These texts are ethical manuals written by a father (usually a sage or vizier) to his son, providing guidance on how to live in accordance with <a href="maat-isfet.html" class="nav-link">Ma'at</a>.
-                </p>
-                <p class="mb-4">
-                    Unlike the ritual texts of the temples, Sebayt focuses on social behavior, self-control (the "Silent Man"), and the moral cultivation of the individual. They are the practical application of Egyptian metaphysics in daily life.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Key Texts</h3>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Instruction of Ptahhotep</h4>
-                        <p class="text-sm">Old Kingdom (Dynasty 5). The oldest complete book in the world. It emphasizes humility, listening, and the power of persuasive speech over brute force.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Instruction of Amenemope</h4>
-                        <p class="text-sm">New Kingdom (Dynasty 20). A masterpiece of personal piety. It contains 30 chapters on protecting the weak and respecting boundaries. It famously parallels <b>Proverbs 22:17–24:22</b> in the Bible.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Instruction of Any</h4>
-                        <p class="text-sm">New Kingdom (Dynasty 18). Written for the common man rather than the elite bureaucracy, focusing on domestic life and piety toward the gods.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Dialogue of a Man with his Soul</h4>
-                        <p class="text-sm">A Middle Kingdom psychological masterpiece. A man weary of life debates his <b>Ba</b> about the nature of existence. The Ba argues for the enjoyment of the physical world, while the man seeks the peace of the afterlife—a profound exploration of <b>Internal Dissonance</b>.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Eloquent Peasant</h4>
-                        <p class="text-sm">A narrative tale about the power of <b>Ma'at</b> and rhetoric, where a humble peasant uses superior speech to win justice from the high steward.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Ethics of the Scribe</h2>
-                <p class="mb-4">
-                    The <b>Sebayt</b> were the primary curriculum for student scribes. Beyond literacy, they taught <b>Discipline of the Heart</b>. The sage Kheti warns: <i>"The belly of a man is wider than a granary, and full of all kinds of greed."</i> The goal of wisdom was to "constrict the belly" and "expand the heart," aligning the individual with the structural laws of Ma'at.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Silent Man (Ger)</h2>
-                <p class="mb-4">
-                    A core ideal in Wisdom Literature is the <b>"Silent Man"</b> (<i>gr</i>). This does not mean one who does not speak, but one who possesses absolute self-mastery, controlling their heart (emotions) and tongue. This concept directly connects to the creative power of <a href="hu.html" class="nav-link">Hu</a>—words are too powerful to be wasted. The "Heated Man" (the impulsive, loud person) was seen as being in a state of chronic dissonance with Ma'at.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Instruction of Amenemhat I</h3>
-                <p class="mb-4">
-                    A unique sub-genre of Sebayt is the <b>Royal Instruction</b>. The <i>Instruction of Amenemhat I for his son Senusret I</i> was written after the king's assassination. It is a cynical, high-stakes manual on the dangers of power, famously warning: <i>"Trust no brother, know no friend, make for yourself no intimates."</i>
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Political Metaphysics</h4>
-                    <p class="text-sm">These texts reveal that <b>Ma'at</b> was not just a passive balance, but a dynamic and often brutal requirement of statecraft. The king had to impose order upon a recalcitrant world, often at great personal cost to his <a href="composite-soul.html" class="nav-link">Ba</a>. Wisdom was the armor required to survive the "dissonance of men."</p>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="maat-isfet.html" class="nav-link">Ma'at: The Moral Law</a></li>
-                    <li><a href="hu.html" class="nav-link">Hu: The Power of Speech</a></li>
-                    <li><a href="hebrew-connections.html" class="nav-link">Hebrew Connections (Proverbs)</a></li>
-                    <li><a href="house-of-life.html" class="nav-link">The House of Life (Scribal Training)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// ETHICAL INSTRUCTION: RECEIVED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Sebayt — Teaching as Integration</a></li>
+            <li><a href="#ptahhotep">II. Instruction of Ptahhotep — The Old Kingdom Model</a></li>
+            <li><a href="#amenemope">III. Instruction of Amenemope — The Piety of the Heart</a></li>
+            <li><a href="#silent-man">IV. The Ideal of the "Silent Man" (Ger)</a></li>
+            <li><a href="#scribal-ethics">V. The Ethics of the Scribe — Knowledge as Armor</a></li>
+            <li><a href="#hebrew">VI. Parallels with the Hebrew Wisdom Tradition</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Sebayt — Teaching as Integration</h2>
+        <p>
+            <strong>Sebayt</strong> (literally "Teaching" or "Instruction") is the primary genre of ethical literature in Ancient Egypt. These texts take the form of a legacy: a father (usually a sage, vizier, or king) transmitting the accumulated wisdom of his life to his son.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, Sebayt is viewed as <strong>applied metaphysics</strong>. While the temple rituals maintained Ma'at at the cosmic level, the Instructions provided the protocols for maintaining <strong>Ma'at at the individual level</strong>. Ethics was not seen as a subjective preference, but as a structural requirement for the soul's successful integration into the eternal order.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: PTAHHOTEP -->
+    <section id="ptahhotep">
+        <h2 class="section-head">II. Instruction of Ptahhotep — The Old Kingdom Model</h2>
+        <div class="text-card">
+            <h4>DYNASTY 5 (c. 2400 BCE)</h4>
+            <p>
+                Commonly called the "oldest book in the world," the Instruction of Ptahhotep emphasizes humility, active listening, and the power of precise speech. Ptahhotep warns that <i>"no limit can be set to art, nor is there any craftsman who has reached his full excellence,"</i> establishing the Kemetic ideal of <strong>perpetual refinement</strong>.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION III: AMENEMOPE -->
+    <section id="amenemope">
+        <h2 class="section-head">III. Instruction of Amenemope — The Piety of the Heart</h2>
+        <div class="text-card">
+            <h4>DYNASTY 20 (c. 1100 BCE)</h4>
+            <p>
+                Representing the peak of New Kingdom personal piety, Amenemope focuses on the internal state of the individual. It advocates for the protection of the weak and the absolute importance of integrity. It famously provides the structural and thematic source for <strong>Proverbs 22:17 – 24:22</strong> in the Bible.
+            </p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: SILENT MAN -->
+    <section id="silent-man">
+        <h2 class="section-head">IV. The Ideal of the "Silent Man" (Ger)</h2>
+        <p>
+            A core concept in all Wisdom Literature is the <strong>"Silent Man"</strong> (<i>gr</i>). This does not refer to literal silence, but to <strong>absolute self-mastery</strong>.
+        </p>
+        <p>
+            The Silent Man is the individual who has aligned his heart (Ib) and tongue (Hu) with Ma'at. He does not waste words, does not act on impulse, and remains poised even in the face of chaos. The "Heated Man" (the impulsive, ego-driven individual) is viewed as being in a state of chronic <strong>dissonance</strong>, a source of Isfet that will eventually be weighed and discarded by the scales of Osiris.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: SCRIBAL ETHICS -->
+    <section id="scribal-ethics">
+        <h2 class="section-head">V. The Ethics of the Scribe</h2>
+        <p>
+            The Sebayt were the primary curriculum for student scribes in the <a href="house-of-life.html" class="nl">House of Life</a>. Literacy was inseparable from moral discipline.
+        </p>
+        <p>
+            The sage Kheti warns student scribes that <i>"the belly of a man is wider than a granary, and full of all kinds of greed."</i> The goal of wisdom was to "constrict the belly" (limit desire) and "expand the heart" (increase perception and compassion). This discipline was the essential armor required to survive the "dissonance of men" and maintain the integrity of the state's data-streams.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓋴 𓃀 𓄿 𓇋 𓏏 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="hu.html">Hu — The Commanding Word</a></li>
+            <li><a href="hebrew-connections.html">Hebrew Connections (Proverbs)</a></li>
+            <li><a href="scribal-arts.html">The Scribal Arts</a></li>
+            <li><a href="house-of-life.html">The House of Life (Training)</a></li>
+            <li><a href="composite-soul.html">The Ib (Heart)</a></li>
+            <li><a href="middle-kingdom.html">Classical Literature Era</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ETHICAL RESONANCE: SECURE</p>
+</footer>
 
 </body>
 </html>

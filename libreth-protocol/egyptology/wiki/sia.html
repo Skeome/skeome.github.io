@@ -3,101 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIA :: EGYPTOLOGY WIKI</title>
+    <title>SIA [Sȝ] :: DIVINE PERCEPTION :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(0,209,255,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓇋 𓏏 𓇯 𓋴 𓐍 𓅓';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">SIA [Sȝ]</h1>
-            <p class="text-gray-500 egypt-text-color">// DIVINE PERCEPTION AND INTELLECT //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">SIA</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">Sȝ</div>
+        <p class="page-subtitle">// DIVINE PERCEPTION :: THE INTELLIGENCE OF THE HEART :: GNOSIS //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="heka.html" class="nav-link">Heka</a> > Sia
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="heka.html">HEKA</a> &gt; SIA
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Heart of Creation</h2>
-                <p class="mb-4">
-                    <b>Sia</b> represents the personification of perception, intellectual understanding, and divine knowledge. In the <a href="memphite-theology.html" class="nav-link">Memphite Theology</a>, Sia is the power of the heart—the seat of thought—that conceptualizes the universe before it is manifest.
-                </p>
-                <p class="mb-4">
-                    Sia is the cognitive spark that recognizes the patterns of <a href="maat-isfet.html" class="nav-link">Ma'at</a> within the primordial chaos of the <b>uncreated universe</b>. Without Sia, the creative force of <a href="heka.html" class="nav-link">Heka</a> would have no direction, and the authoritative utterance of <a href="hu.html" class="nav-link">Hu</a> would have no content.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Companion of Re: Navigating the Duat</h3>
-                <p class="mb-4">
-                    In the <a href="netherworld-books.html" class="nav-link">Netherworld Books</a> (like the <i>Amduat</i> and the <i>Book of Gates</i>), Sia is depicted standing at the prow of the solar barque. He is the <b>eyes and mind</b> of the sun god Re. While <a href="heka.html" class="nav-link">Heka</a> provides the power to repel enemies, Sia provides the <b>Perception</b> required to recognize the hidden names of the spirits guarding the thresholds.
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">The Recognition of Pattern</h4>
-                    <p class="text-sm">Sia is the faculty that allows the soul to distinguish between the illusions of chaos and the structural reality of Ma'at. In the midnight hour, it is Sia who first perceives the union of Re and Osiris, signaling the start of the transfiguration process. To possess Sia is to have the "Eye of the Heart" open and aligned with the <b>divine order of the cosmos</b>.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Hermetic Correspondence</h3>
-                <p class="mb-4">
-                    Sia is the direct Kemetic ancestor of the Hermetic <b>Nous</b> (Divine Mind). It is the faculty of direct spiritual apprehension—<b>Gnosis</b>—that allows the initiate to perceive the underlying unity of the cosmos.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="hu.html" class="nav-link">Hu (Authoritative Utterance)</a></li>
-                    <li><a href="heka.html" class="nav-link">Heka (Magical Power)</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Ab (Heart)</a></li>
-                    <li><a href="memphite-theology.html" class="nav-link">Memphite Theology</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// PERCEPTION THRESHOLD: CLEAR // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Sia — The Faculty of Perception</a></li>
+            <li><a href="#triad">II. The Ptah-Sia-Hu Triad — The Creative Circuit</a></li>
+            <li><a href="#solar-barque">III. Sia on the Solar Barque — The Eyes of Re</a></li>
+            <li><a href="#heart">IV. The Intelligence of the Heart — Ib and Sia</a></li>
+            <li><a href="#hermeticism">V. Hermetic Correspondence — The Divine Nous</a></li>
+            <li><a href="#practice">VI. Practical Application — Tuning the Perception</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Sia — The Faculty of Perception</h2>
+        <p>
+            <strong>Sia</strong> (Ancient Egyptian: <i>Sȝ</i>) is the personification of divine perception, intellectual understanding, and the faculty of the heart to conceptualize reality. He represents the <strong>Input</strong> side of the creative process.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, Sia is viewed as <strong>high-fidelity data-reception</strong>. It is the ability of the consciousness to recognize the underlying patterns of <a href="maat-isfet.html" class="nl">Ma'at</a> within the primordial noise of potential. Without Sia, the power of <a href="heka.html" class="nl">Heka</a> has no blueprint, and the command of <a href="hu.html" class="nl">Hu</a> has no content.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: TRIAD -->
+    <section id="triad">
+        <h2 class="section-head">II. The Ptah-Sia-Hu Triad — The Creative Circuit</h2>
+        <p>
+            In the <a href="memphite-theology.html" class="nl">Memphite Theology</a>, Sia is the power of the <strong>Heart</strong>. Ptah conceived the universe in his heart (Sia) before bringing it into being through his tongue (<a href="hu.html" class="nl">Hu</a>).
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>CONCEPTION (SIA)</h4>
+                <p>The act of mental formulation. The architect "seeing" the building in the mind's eye before the first stone is laid.</p>
+            </div>
+            <div class="info-card">
+                <h4>UTTERANCE (HU)</h4>
+                <p>The act of vocalization. The command that materializes the vision through the medium of the "Divine Words."</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: SOLAR BARQUE -->
+    <section id="solar-barque">
+        <h2 class="section-head">III. Sia on the Solar Barque — The Eyes of Re</h2>
+        <p>
+            In the <a href="netherworld-books.html" class="nl">Netherworld Books</a>, Sia is depicted standing at the prow of Re's solar barque during its journey through the 12 hours of the night.
+        </p>
+        <p>
+            Sia acts as the <strong>lookout of the soul</strong>. While Heka provides the power to repel the serpent <a href="apep.html" class="nl">Apep</a>, Sia provides the <strong>Perception</strong> required to navigate the thresholds and recognize the secret names of the gate-guardians. He is the faculty that allows the deceased to distinguish between the illusions of chaos and the structural reality of the path.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: HERMETICISM -->
+    <section id="hermeticism">
+        <h2 class="section-head">V. Hermetic Correspondence — The Divine Nous</h2>
+        <p>
+            Sia is the direct Kemetic ancestor of the Hermetic and Neoplatonic concept of the <strong>Nous</strong> (Divine Mind).
+        </p>
+        <p>
+            In the <i>Corpus Hermeticum</i>, the Nous is the faculty of direct spiritual apprehension — <strong>Gnosis</strong>. It is the part of the human composite soul that is identical to the divine intelligence, permitting the initiate to "perceive the All" through the training of the heart's perception.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓇋 𓏏 𓇯 𓋴 𓐍 𓅓</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="hu.html">Hu — Authoritative Utterance</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="memphite-theology.html">The Memphite Theology (Ptah)</a></li>
+            <li><a href="composite-soul.html">The Ib (Heart)</a></li>
+            <li><a href="gnosticism.html">Gnosticism & Gnosis</a></li>
+            <li><a href="hermeticism.html">Hermeticism — Nous & Logos</a></li>
+            <li><a href="netherworld-books.html">Navigation of the Duat</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    PERCEPTION THRESHOLD: CLEAR</p>
+</footer>
 
 </body>
 </html>

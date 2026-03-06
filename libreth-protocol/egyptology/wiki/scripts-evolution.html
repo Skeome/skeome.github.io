@@ -3,133 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVOLUTION OF SCRIPTS :: EGYPTOLOGY WIKI</title>
+    <title>EVOLUTION OF SCRIPTS :: THE DIVINE WORDS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓏞 𓈖 𓊹 𓌃 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* DATA TABLE */
+        .data-table-wrapper { overflow-x: auto; margin: 2rem 0; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            background: rgba(10,10,10,0.6);
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
-        .script-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
         }
-        .script-table th {
-            color: #d4af37;
-            text-align: left;
-            padding: 0.75rem;
-            border-bottom: 2px solid #d4af37;
-        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">EVOLUTION OF SCRIPTS</h1>
-            <p class="text-gray-500 egypt-text-color">// FROM DIVINE WORDS TO LIVING VOICE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">EVOLUTION OF SCRIPTS</h1>
+        <p class="page-subtitle">// THE MEDU NETJER AND ITS CURSIVES :: FROM STONE TO VOICE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Scripts
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; EVOLUTION OF SCRIPTS
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Medu Netjer and its Cursives</h2>
-                <p class="mb-4">
-                    The Egyptian language was recorded through several distinct script systems over its 3,500-year history. The term <b>Medu Netjer</b> (Divine Words) refers specifically to the hieroglyphic system, which was believed to be an ontological reality—writing a thing was an act of <a href="heka.html" class="nav-link">Heka</a> that brought that thing into manifest existence.
-                </p>
-                <p class="mb-4">
-                    While Hieroglyphs remained the sacred monumental script for "eternity," cursive forms evolved for the practical needs of the <a href="house-of-life.html" class="nav-link">House of Life</a> and the state administration.
-                </p>
-            </section>
-
-            <div class="overflow-x-auto mb-12">
-                <table class="script-table min-w-full bg-black/40">
-                    <thead>
-                        <tr>
-                            <th>Script</th>
-                            <th>Period</th>
-                            <th>Primary Function</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="font-bold">Hieroglyphic</td>
-                            <td>3100 BCE – 394 CE</td>
-                            <td>Monumental inscriptions, sacred iconography. The "formal" voice of the gods.</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">Hieratic</td>
-                            <td>3100 BCE – 200 CE</td>
-                            <td><b>Priestly Shorthand.</b> A cursive form of hieroglyphs used for papyrus documents, literary tales, and medical treatises. It maintained a one-to-one correspondence with hieroglyphic signs but was optimized for speed.</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">Demotic</td>
-                            <td>650 BCE – 452 CE</td>
-                            <td><b>Popular Script.</b> A highly abbreviated cursive that obscured the original pictographic roots. Used for legal contracts and the <a href="greek-magical-papyri.html" class="nav-link">PDM magical texts</a>.</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">Coptic</td>
-                            <td>200 CE – Present</td>
-                            <td><b>The Living Voice.</b> The final stage of the language, utilizing the Greek alphabet. It is the only script to record vowels, providing the key to ancient phonology.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Coptic: The Bridge to Sound</h3>
-                <p class="mb-4">
-                    Coptic is the final stage of the Egyptian language and the only stage that preserves vowels systematically. This makes it invaluable for reconstructing the pronunciation of hieroglyphic texts. Coptic Christianity in the Egyptian desert (the Desert Fathers) reflects a transformation of earlier Egyptian temple spirituality into a new initiatory context.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="../hieroglyphs.html" class="nav-link">Hieroglyph Training Module</a></li>
-                    <li><a href="house-of-life.html" class="nav-link">The House of Life (Scriptoria)</a></li>
-                    <li><a href="thoth-hermes.html" class="nav-link">Thoth: Inventor of Writing</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// LINGUISTIC CONTINUITY: VERIFIED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Script — Medu Netjer</a></li>
+            <li><a href="#hieroglyphs">II. Hieroglyphic — The Sacred Monumental Voice</a></li>
+            <li><a href="#hieratic">III. Hieratic — The Cursive of the Priesthood</a></li>
+            <li><a href="#demotic">IV. Demotic — The Popular Shorthand</a></li>
+            <li><a href="#coptic">V. Coptic — The First Record of Vowels</a></li>
+            <li><a href="#decipherment">VI. Systematic Unlocking — Decipherment History</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Script — Medu Netjer</h2>
+        <p>
+            The term <strong>Medu Netjer</strong> (Divine Words) refers to the hieroglyphic system of Ancient Kemet. For the Egyptian priesthood, writing was not merely a representation of sound or thought; it was an <strong>ontological reality</strong>. To write a thing was an act of <a href="heka.html" class="nl">Heka</a> that brought that thing into manifest existence within the awareness field.
+        </p>
+        <p>
+            Over its 3,500-year history, the Egyptian language migrated through four distinct script systems, each representing a different <strong>bandwidth</strong> or level of access within the Pharaonic operating system.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: TABLE -->
+    <section id="table">
+        <h2 class="section-head">II. The Scriptual Progression</h2>
+        <div class="data-table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Script</th>
+                        <th>Historical Range</th>
+                        <th>Primary Function and Resonant Domain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hieroglyphic</strong></td>
+                        <td>3100 BCE – 394 CE</td>
+                        <td>Monumental inscriptions and sacred iconography. The <strong>Eternal Voice</strong> used for communicating with the Netjeru.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hieratic</strong></td>
+                        <td>3100 BCE – 200 CE</td>
+                        <td>Priestly shorthand for papyrus. Used for literature, <a href="medical-papyri.html" class="nl">medical treatises</a>, and temple administrative logs.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Demotic</strong></td>
+                        <td>650 BCE – 452 CE</td>
+                        <td>Popular script for daily life and legal contracts. A highly compressed cursive that obscured the pictographic origins. See <a href="demotic.html" class="nl">Demotic</a>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coptic</strong></td>
+                        <td>200 CE – Present</td>
+                        <td>The <strong>Living Voice</strong>. Utilizes the Greek alphabet with Demotic supplements. The first script to record vowels systematically. See <a href="coptic.html" class="nl">Coptic</a>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: COPTIC -->
+    <section id="coptic">
+        <h2 class="section-head">V. Coptic — The First Record of Vowels</h2>
+        <p>
+            The transition to <strong>Coptic</strong> marked a fundamental shift in the Kemetic data-stream. By adopting an alphabetic system, the Egyptians were able to record the <strong>precise vocalic frequencies</strong> of their language for the first time.
+        </p>
+        <p>
+            This makes Coptic the essential tool for <a href="phonology-voice.html" class="nl">Phonological Reconstruction</a>. Without the Coptic survival, the "Divine Words" of the hieroglyphs would have remained phonetically inaccessible, preventing the re-activation of the ancient ritual vibrations.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓏞 𓈖 𓊹 𓌃 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="../hieroglyphs.html">Hieroglyph Training Module</a></li>
+            <li><a href="coptic.html">Coptic — The Final Stage</a></li>
+            <li><a href="demotic.html">Demotic — The Native Cursive</a></li>
+            <li><a href="decipherment-history.html">Decipherment History</a></li>
+            <li><a href="phonology-voice.html">Phonology & Voice</a></li>
+            <li><a href="scribal-arts.html">The Scribal Arts</a></li>
+            <li><a href="house-of-life.html">The House of Life (Scriptoria)</a></li>
+            <li><a href="thoth-hermes.html">Thoth — Inventor of Writing</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    LINGUISTIC CONTINUITY: VERIFIED</p>
+</footer>
 
 </body>
 </html>
