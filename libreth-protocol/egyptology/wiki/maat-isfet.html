@@ -7,410 +7,314 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        :root{--gold:#d4af37;--gold-dim:#8a6e1e;--cyan:#00d1ff;--cyan-dim:#006f87;--bg:#080808;--text:#ccc8b8;--text-bright:#f0e68c;--maat:#c8a830;--isfet:#8b2020;}
-        *{box-sizing:border-box;margin:0;padding:0;}
-        body{background-color:var(--bg);color:var(--text);font-family:'Crimson Pro',Georgia,serif;font-size:18px;line-height:1.8;background-image:radial-gradient(ellipse at 20% 15%,rgba(200,168,48,0.04) 0%,transparent 55%),radial-gradient(ellipse at 80% 85%,rgba(139,32,32,0.03) 0%,transparent 55%);}
-        ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#0a0a0a;}::-webkit-scrollbar-thumb{background:var(--gold-dim);}
-        .page-wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem 6rem;}
-        .page-header{text-align:center;padding:4rem 0 3rem;border-bottom:1px solid rgba(212,175,55,0.2);margin-bottom:3rem;}
-        .page-header::before{content:'𓇓𓏏𓅱𓀭 · 𓇼𓅱𓏏𓅮';display:block;font-size:1.8rem;color:var(--gold-dim);margin-bottom:1rem;letter-spacing:0.4rem;opacity:0.6;}
-        .page-title{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;color:var(--gold);text-shadow:0 0 30px rgba(212,175,55,0.4);letter-spacing:0.12em;}
-        .page-subtitle{font-family:'VT323',monospace;font-size:1.2rem;color:var(--cyan-dim);margin-top:0.75rem;letter-spacing:0.2em;}
-        .page-epithet{font-style:italic;color:rgba(212,175,55,0.6);font-size:1rem;margin-top:1.5rem;max-width:620px;margin-left:auto;margin-right:auto;}
-        .breadcrumb{font-family:'VT323',monospace;font-size:1rem;color:var(--cyan-dim);margin-bottom:2rem;}.breadcrumb a{color:var(--cyan);text-decoration:none;}.breadcrumb a:hover{color:#00ffae;}
-        .toc-block{border:1px solid rgba(212,175,55,0.25);background:rgba(20,18,10,0.8);padding:1.5rem 2rem;margin-bottom:3rem;}
-        .toc-title{font-family:'Cinzel',serif;color:var(--gold);font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;opacity:0.8;}
-        .toc-list{list-style:none;}.toc-list li{margin:0.3rem 0;}.toc-list a{color:var(--cyan);text-decoration:none;font-size:0.95rem;}.toc-list a:hover{color:#00ffae;}
-        h2.section-head{font-family:'Cinzel',serif;font-size:1.9rem;color:var(--gold);border-bottom:1px solid rgba(212,175,55,0.2);padding-bottom:0.5rem;margin:3rem 0 1.5rem;letter-spacing:0.05em;}
-        h3.sub-head{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--text-bright);margin:2rem 0 1rem;letter-spacing:0.03em;}
-        p{margin-bottom:1.1rem;}b,strong{color:var(--text-bright);font-weight:600;}em,i{color:rgba(240,230,140,0.8);}
-        .pull-quote{border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:2rem 0;background:rgba(212,175,55,0.04);font-style:italic;font-size:1.1rem;color:var(--text-bright);}
-        .pull-quote cite{display:block;font-style:normal;font-size:0.85rem;opacity:0.6;margin-top:0.5rem;font-family:'VT323',monospace;letter-spacing:0.08em;}
-        .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;}@media(max-width:640px){.card-grid{grid-template-columns:1fr;}}
-        .info-card{background:rgba(15,13,8,0.9);border:1px solid rgba(212,175,55,0.2);padding:1.2rem;transition:border-color 0.3s;}.info-card:hover{border-color:rgba(212,175,55,0.5);}
-        .info-card h4{color:var(--gold);font-family:'Cinzel',serif;font-size:0.9rem;margin-bottom:0.5rem;letter-spacing:0.05em;}.info-card p{font-size:0.92rem;margin:0;opacity:0.88;}
-        .maat-card{border-color:rgba(200,168,48,0.3);background:rgba(15,14,5,0.95);}.maat-card h4{color:var(--maat);}
-        .isfet-card{border-color:rgba(139,32,32,0.3);background:rgba(15,5,5,0.95);}.isfet-card h4{color:#e05050;}
-        .data-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.92rem;}
-        .data-table th{background:rgba(212,175,55,0.12);color:var(--gold);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.08em;padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid rgba(212,175,55,0.3);}
-        .data-table td{padding:0.6rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.05);vertical-align:top;}.data-table tr:hover td{background:rgba(212,175,55,0.03);}
-        .divider{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(212,175,55,0.4),transparent);margin:3rem 0;}
-        .glyph-marker{text-align:center;font-size:2rem;color:var(--gold-dim);opacity:0.4;letter-spacing:0.5rem;margin:2rem 0;}
-        .practical-note{border:1px solid rgba(0,210,100,0.2);background:rgba(0,30,15,0.6);padding:1.2rem 1.5rem;margin:2rem 0;}
-        .practical-note .pn-title{font-family:'Cinzel',serif;color:#00e87a;font-size:0.85rem;letter-spacing:0.1em;margin-bottom:0.5rem;opacity:0.9;}
-        .practical-note p{font-size:0.93rem;margin:0;}
-        .isfet-note{border:1px solid rgba(139,32,32,0.3);background:rgba(30,5,5,0.7);padding:1.2rem 1.5rem;margin:2rem 0;}
-        .isfet-note .in-title{font-family:'Cinzel',serif;color:#e05050;font-size:0.85rem;letter-spacing:0.1em;margin-bottom:0.5rem;}
-        .isfet-note p{font-size:0.93rem;margin:0;}
-        .confession-item{padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.95rem;}
-        .confession-item::before{content:'𓂝 ';color:var(--gold-dim);opacity:0.6;}
-        .related-links{background:rgba(15,13,8,0.9);border:1px solid rgba(212,175,55,0.15);padding:1.5rem 2rem;margin-top:3rem;}
-        .related-links h3{font-family:'VT323',monospace;color:var(--gold-dim);letter-spacing:0.15em;font-size:1.1rem;margin-bottom:1rem;}
-        .related-links ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;}@media(max-width:600px){.related-links ul{grid-template-columns:1fr;}}
-        .related-links a{color:var(--cyan);text-decoration:none;font-size:0.92rem;}.related-links a:hover{color:#00ffae;}.related-links a::before{content:'→ ';opacity:0.5;}
-        .back-btn{display:inline-block;padding:0.6rem 1.8rem;border:1px solid var(--gold-dim);color:var(--gold);font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.15em;text-decoration:none;transition:all 0.3s;margin-top:2rem;}
-        .back-btn:hover{background:rgba(212,175,55,0.1);border-color:var(--gold);}
-        footer{text-align:center;padding:3rem 0 2rem;font-family:'VT323',monospace;color:rgba(212,175,55,0.2);letter-spacing:0.2em;font-size:1rem;border-top:1px solid rgba(212,175,55,0.08);margin-top:4rem;}
-        a.nl{color:var(--cyan);text-decoration:underline;text-underline-offset:3px;}a.nl:hover{color:#00ffae;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
-        .page-header{animation:fadeIn 0.8s ease forwards;}
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .page-header::before {
+            content: '𓇓 𓏏 𓅱 𓀭 · 𓇼 𓅱 𓏏 𓅮';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
+            margin: 3rem 0;
+        }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
 <body>
 <div class="page-wrap">
 
+    <!-- HEADER -->
     <header class="page-header">
         <h1 class="page-title">MA'AT & ISFET</h1>
-        <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">Mꜣꜥt · Jsfṯ</div>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">Mꜣꜥt · Jsfṯ</div>
         <p class="page-subtitle">// THE COSMIC POLARITY :: ORDER AND CHAOS :: THE ARCHITECTURE OF EXISTENCE //</p>
         <p class="page-epithet">
-            "Ma'at is great and its establishment is good; it has not been disturbed since the time of Osiris, and he who violates its laws is punished. It lies as a path before even him who knows nothing."
-            <br><span style="font-size:0.85rem;opacity:0.5;">— The Instruction of Ptahhotep, c. 2400 BCE</span>
+            "Ma'at is great and its establishment is good; it has not been disturbed since the time of Osiris."
         </p>
     </header>
 
-    <nav class="breadcrumb"><a href="index.html">WIKI HOME</a> &gt; MA'AT & ISFET</nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; MA'AT & ISFET
+    </nav>
 
+    <!-- TABLE OF CONTENTS -->
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#framework">I. The Polarity That Sustains Reality</a></li>
-            <li><a href="#maat-ontology">II. Ma'at — Ontology, Iconography, and Nature</a></li>
-            <li><a href="#maat-dimensions">III. The Five Dimensions of Ma'at</a></li>
-            <li><a href="#maat-practice">IV. Ma'at in Practice — From Pharaoh to Individual</a></li>
-            <li><a href="#isfet-ontology">V. Isfet — Not Simply "Evil"</a></li>
-            <li><a href="#apep">VI. Apep — Isfet Personified</a></li>
-            <li><a href="#nun">VII. Nun and the Creative Dimension of Chaos</a></li>
-            <li><a href="#judgment">VIII. The Hall of Two Truths — Ma'at as Final Standard</a></li>
-            <li><a href="#negative-confession">IX. The Negative Confession in Full</a></li>
-            <li><a href="#wisdom">X. Ma'at in Wisdom Literature — The Living Ethics</a></li>
-            <li><a href="#magic-ethics">XI. Ma'at, Isfet, and the Ethics of Magic</a></li>
-            <li><a href="#correspondences">XII. Cross-Tradition Correspondences</a></li>
-            <li><a href="#practical">XIII. Ma'at as a Living Practice</a></li>
+            <li><a href="#ontology">I. The Ontology of the Polarity — Order vs. Entropy</a></li>
+            <li><a href="#maat">II. Ma'at — Truth, Balance, and Cosmic Law</a></li>
+            <li><a href="#isfet">III. Isfet — Primordial Chaos and Dissolution</a></li>
+            <li><a href="#pharaoh">IV. The Pharaoh as the Guarantee of Ma'at</a></li>
+            <li><a href="#judgment">V. The Hall of Judgment — The Final Accounting</a></li>
+            <li><a href="#alchemy">VI. Alchemical Parallel — The Fixed and the Volatile</a></li>
         </ul>
     </div>
 
-    <!-- I -->
-    <section id="framework">
-        <h2 class="section-head">I. The Polarity That Sustains Reality</h2>
-        <p>Egyptian theology was not organized around a simple good-versus-evil narrative. Its foundational polarity — <strong>Ma'at</strong> and <strong>Isfet</strong> — is far more philosophically sophisticated than that, and far more useful as a map of reality. Understanding this polarity correctly is prerequisite to understanding almost everything else about ancient Kemetic religion, magic, and ethics.</p>
-        <p>Ma'at and Isfet are not opposites in the sense of two equal and competing powers locked in eternal struggle. They are better understood as <em>order and the primordial substrate that precedes order</em> — two modes of the same underlying reality, related as a river to the source from which it flows and to which it might return. Ma'at is the ongoing achievement of structured, functioning reality. Isfet is the uncreated potential that was present before structure, that persists at the edges of creation, and that would reclaim everything if the work of maintaining Ma'at ceased.</p>
-        <p>This is a dynamic model, not a static one. The cosmos is not simply <em>ordered</em> — it is <em>being ordered, continuously</em>, through the sustained effort of gods, kings, priests, and ultimately every Egyptian who participates in the maintenance of the structured world. Ma'at is not a background condition; it is an active achievement that requires perpetual renewal.</p>
-
-        <div class="pull-quote">
-            "Egyptian civilization was not a culture that believed the world was naturally good. It was a culture that believed the world could be made good — and that the making required effort, knowledge, and the correct alignment of human will with cosmic principle."
-            <cite>— After Jan Assmann, <em>Ma'at: Gerechtigkeit und Unsterblichkeit im Alten Ägypten</em>, 1990</cite>
-        </div>
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Polarity — Order vs. Entropy</h2>
+        <p>
+            Ancient Egyptian theology is organized around the fundamental dynamic between <strong>Ma'at</strong> (Order) and <strong>Isfet</strong> (Chaos). This is not a simple good-vs-evil dualism, but a sophisticated model of <strong>cosmic maintenance</strong>.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, Ma'at represents <strong>coherence</strong> — the sustained effort required to keep information organized and functional. Isfet represents <strong>entropy</strong> — the natural tendency of all systems to dissolve into noise and primordial potential. Reality is the state of tension between these two forces.
+        </p>
     </section>
 
     <hr class="divider">
 
-    <!-- II -->
-    <section id="maat-ontology">
-        <h2 class="section-head">II. Ma'at — Ontology, Iconography, and Nature</h2>
-        <p>Ma'at is one of the most complex theological concepts in the Egyptian tradition, operating simultaneously on at least three distinct levels: as an <em>abstract cosmic principle</em>, as a <em>personified deity</em>, and as a <em>practical ethical standard</em>. All three levels are simultaneously active in any given reference to Ma'at — which is why translation into English is inherently reductive. The single word Ma'at encompasses: truth, justice, order, harmony, balance, right relationship, cosmic law, and the standard of divine judgment.</p>
-
-        <h3 class="sub-head">Iconography</h3>
-        <p>As a goddess, Ma'at is depicted as a seated woman wearing a single <strong>ostrich feather</strong> on her head — or sometimes simply as the feather itself. The ostrich feather (<em>shu</em>) was chosen as her symbol for reasons that remain somewhat debated but likely include: its extreme lightness (it serves as the counterweight to the human heart in the Hall of Two Truths, suggesting that truth weighs almost nothing — or that the ideal heart should weigh no more than truth), its perfect bilateral symmetry (as a visual expression of balance), and its association with the sky and air (Ma'at as the breath of life that animates the divine order).</p>
-        <p>She is also the <strong>daughter of Re</strong> — the creator god brought Ma'at into existence as part of the original creative act, establishing that cosmic order is inherent to creation itself, not an imposition upon it. She is simultaneously the <strong>wife of Thoth</strong> — which is theologically apt: the principle of divine record-keeping (Thoth) is naturally aligned with the principle of cosmic truth (Ma'at). Together they represent the two aspects of cosmic intelligence: perceiving reality as it is, and recording it accurately.</p>
-
+    <!-- SECTION II: MA'AT -->
+    <section id="maat">
+        <h2 class="section-head">II. Ma'at — Truth, Balance, and Cosmic Law</h2>
+        <p>
+            Ma'at is simultaneously a goddess, an abstract principle, and a practical ethical standard. She is the <strong>daughter of Re</strong> and the <strong>wife of Thoth</strong>, representing the inherent intelligibility of the universe.
+        </p>
         <div class="card-grid">
-            <div class="maat-card info-card">
-                <h4>MA'AT AS DAUGHTER OF RE</h4>
-                <p>The creator god produced Ma'at in the original creative act — she was not created later as a response to chaos, but was present at creation as its inherent organizing principle. This means cosmic order is not imposed on reality from outside; it is reality's own nature when correctly actualized. Maintaining Ma'at is not fighting against the nature of things — it is <em>with</em> the nature of things.</p>
+            <div class="info-card">
+                <h4>THE FEATHER OF TRUTH</h4>
+                <p>Ma'at is personified by the ostrich feather. It represents the perfect bilateral symmetry of the cosmos and the <strong>lightness</strong> required of the heart to survive the judgment of Osiris.</p>
             </div>
-            <div class="maat-card info-card">
-                <h4>MA'AT AS WIFE OF THOTH</h4>
-                <p>The marriage of Ma'at (cosmic truth) and Thoth (divine intelligence and accurate record) is theologically the most significant divine pairing in the intellectual sense. Together they represent the complete cognitive-ethical apparatus: to perceive reality accurately (Thoth's Sia) and to align one's actions with that perception (Ma'at). Deviation from either produces falsehood.</p>
-            </div>
-        </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- III -->
-    <section id="maat-dimensions">
-        <h2 class="section-head">III. The Five Dimensions of Ma'at</h2>
-        <p>Ma'at is not a single concept — it is a cluster of related but distinct principles that together constitute what the Egyptians understood as the correct ordering of reality. These can be analytically distinguished as five dimensions, though in practice they were understood as aspects of a single unified principle:</p>
-
-        <div class="card-grid">
-            <div class="maat-card info-card">
-                <h4>1. COSMIC ORDER (Cosmological Dimension)</h4>
-                <p>Ma'at governs the structure of the cosmos: the regular movement of the sun, the annual flooding of the Nile, the reliable succession of seasons, the predictable movements of the stars. When these regularities function correctly, Ma'at is maintained. Cosmic disruption — unexpected eclipses, famine, unusual floods — were interpreted as symptoms of Ma'at under pressure. The entire apparatus of Egyptian astronomy and calendrical calculation was in the service of maintaining cosmic Ma'at.</p>
-            </div>
-            <div class="maat-card info-card">
-                <h4>2. TRUTH AND HONESTY (Epistemic Dimension)</h4>
-                <p>Ma'at requires that things be called what they are. False testimony, false weights and measures, deceptive speech — all are violations of Ma'at. The 42 declarations of the Negative Confession include specific prohibitions against false witness, falsified measurements, and deceptive dealing. The Kemetic ethical tradition treats dishonesty not merely as a social problem but as a cosmological disturbance — a small contribution to Isfet.</p>
-            </div>
-            <div class="maat-card info-card">
-                <h4>3. JUSTICE AND RIGHT GOVERNANCE (Political Dimension)</h4>
-                <p>The pharaoh's primary obligation was to "establish Ma'at" — to govern justly, to ensure that the weak were not exploited, that borders were maintained, that temples were supported, that legal disputes were resolved correctly. Political injustice was not merely a social problem; it was a cosmic problem. An unjust ruler was generating Isfet at the highest possible level — poisoning the entire kingdom's relationship with divine order.</p>
-            </div>
-            <div class="maat-card info-card">
-                <h4>4. ETHICAL CONDUCT (Individual Dimension)</h4>
-                <p>At the individual level, Ma'at requires the daily practice of right action: honesty in dealing, care for the vulnerable, restraint of harmful impulses, fulfillment of one's obligations to family, community, and the gods. The Wisdom Literature (see below) is largely a manual of individual Ma'at practice. The Negative Confession's forty-two declarations represent the complete catalog of individual Ma'at requirements.</p>
-            </div>
-            <div class="maat-card info-card">
-                <h4>5. RITUAL CORRECTNESS (Liturgical Dimension)</h4>
-                <p>The correct performance of temple ritual — precise words, precise gestures, precisely timed operations — was itself a Ma'at function. Incorrect ritual introduced Isfet into the communication channel between humanity and the divine. This is why the training of priests was so extensive and why the penalty for ritual error was so severe: a mistaken ritual was not merely ineffective — it actively disrupted the cosmic order it was intended to maintain.</p>
+            <div class="info-card">
+                <h4>THE FIVE DIMENSIONS</h4>
+                <p>Ma'at governs: (1) Cosmic order (the sun's path), (2) Truth in speech, (3) Justice in law, (4) Ethical conduct, and (5) Ritual correctness.</p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- IV -->
-    <section id="maat-practice">
-        <h2 class="section-head">IV. Ma'at in Practice — From Pharaoh to Individual</h2>
-
-        <h3 class="sub-head">The King's Obligation: Ir-Maat</h3>
-        <p>The phrase <em>Ir-Maat</em> — "establishing Ma'at" or "doing Ma'at" — appears in royal texts from the Old Kingdom onward as the primary description of the pharaoh's role. The king was not merely a political administrator; he was the cosmic intermediary between divine order and human society — the living channel through which Ma'at descended from the divine realm into the material world.</p>
-        <p>Temple iconography consistently depicts the pharaoh presenting a small figure of Ma'at to the gods — offering them back their own principle, demonstrating that his governance has maintained the conditions they created. This ritual offering was performed daily in temples across Egypt and was understood as the most fundamental act of royal responsibility. The kings who failed to perform it — or who performed it hypocritically while governing unjustly — were understood to be generating Isfet at the institutional level.</p>
-
-        <h3 class="sub-head">The Individual's Obligation: A Ma'at Heart</h3>
-        <p>For the non-royal Egyptian, Ma'at was primarily an ethical orientation — a commitment to living in right relationship with oneself, one's community, and the cosmos. The Wisdom Literature provides the most systematic guidance on this, particularly the <em>Instruction of Ptahhotep</em> (c. 2400 BCE), the <em>Instruction of Amenemope</em> (c. 1300 BCE), and the <em>Instruction of Any</em> (c. 1300 BCE). These texts describe a life conducted according to Ma'at as the only genuine path to prosperity, dignity, and eventual spiritual liberation.</p>
-        <p>The individual's most fundamental Ma'at practice was the cultivation of a heart — an <strong>Ib</strong> — that weighed nothing against truth's feather. This was understood as the cumulative result of thousands of small daily choices: whether to be honest when dishonesty would be advantageous, whether to help the vulnerable when helping cost something, whether to restrain the impulse toward greed, anger, or cruelty when those impulses arose. Each correct choice made the heart lighter. Each violation made it heavier. The Weighing of the Heart was the final accounting.</p>
+    <!-- SECTION III: ISFET -->
+    <section id="isfet">
+        <h2 class="section-head">III. Isfet — Primordial Chaos and Dissolution</h2>
+        <p>
+            Isfet is the <strong>uncreated state</strong>. It existed before the first sunrise and surrounds the ordered world on all sides. It is personified by the serpent <a href="apep.html" class="nl">Apep</a>, who attempts to swallow the sun each night.
+        </p>
+        <p>
+            Isfet is not to be destroyed (which is impossible) but to be <strong>contained and directed</strong>. The controlled irruption of Isfet — such as the annual Nile flood — was recognized as a necessary source of renewal for the ordered world.
+        </p>
     </section>
 
     <hr class="divider">
 
-    <!-- V -->
-    <section id="isfet-ontology">
-        <h2 class="section-head">V. Isfet — Not Simply "Evil"</h2>
-        <p>The mistranslation of Isfet as simply "evil" is one of the most significant theological distortions in popular Egyptology. Isfet is something more ontologically interesting — and more philosophically challenging — than a personification of wickedness.</p>
-        <p>Isfet is, at its deepest level, the <em>primordial state of uncreated, undifferentiated potentiality</em> that preceded Ma'at. Before the creator spoke the first word, before the first structure arose from the primordial waters, there was Nun and there was Isfet — the formless, the boundless, the unordered. Creation did not destroy Isfet; it pushed Isfet back, established a structured domain within the infinite formlessness. Isfet remains at the edges of creation, pressing inward, and would reclaim the ordered world if the maintenance of Ma'at ceased.</p>
-
-        <div class="isfet-note">
-            <div class="in-title">// ISFET AS ENTROPY //</div>
-            <p>Modern physics's concept of entropy — the tendency of ordered systems to move toward disorder unless energy is continuously invested to maintain order — is a remarkably close parallel to the Kemetic understanding of Isfet's relationship to Ma'at. The cosmos is an ordered system that requires ongoing energetic investment (ritual, just governance, ethical action) to maintain its structure against the entropic tendency (Isfet) toward dissolution. The Egyptians were describing the same dynamic that thermodynamics would later formalize — in theological vocabulary.</p>
-        </div>
-
-        <h3 class="sub-head">The Multiple Faces of Isfet</h3>
-        <div class="card-grid">
-            <div class="isfet-card info-card">
-                <h4>ISFET AS COSMIC ENTROPY</h4>
-                <p>At the cosmological level, Isfet is the force that would return creation to undifferentiated Nun — the dissolution of all structure, the end of all distinction, the return to the formless potential. This is why the solar journey required Heka to sustain it: without the nightly magical working against the forces of dissolution (Apep), Re could not rise each morning.</p>
-            </div>
-            <div class="isfet-card info-card">
-                <h4>ISFET AS SOCIAL INJUSTICE</h4>
-                <p>At the political level, Isfet manifests as the exploitation of the weak by the powerful, the corruption of legal processes, the abuse of royal authority, and the breakdown of social obligations. The First Intermediate Period — when central royal authority collapsed and the country fragmented — was described by Egyptian writers as a time of Isfet, when the powerful took what they wanted and the weak had no recourse.</p>
-            </div>
-            <div class="isfet-card info-card">
-                <h4>ISFET AS PERSONAL CORRUPTION</h4>
-                <p>At the individual level, Isfet is the accumulation of wrong actions — the moral weight that builds up in the Ib through dishonesty, cruelty, greed, and neglect of obligation. A person who consistently acts against Ma'at is not merely "bad" — they are increasing the local density of Isfet, contributing to the cosmic drift toward disorder at the most intimate scale.</p>
-            </div>
-            <div class="isfet-card info-card">
-                <h4>ISFET AS NECESSARY TENSION</h4>
-                <p>Crucially, Isfet is not to be eliminated — it cannot be, and attempting to eliminate it would itself be a violation of cosmic order. The Nile flood — absolutely necessary for Egyptian agriculture — was a controlled irruption of Isfet into the ordered world. Sekhmet's destructive energy — essential for the solar barque's protection — was directed Isfet. The creative function of chaos required its presence; only its correct management was the issue.</p>
-            </div>
-        </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- VI -->
-    <section id="apep">
-        <h2 class="section-head">VI. Apep — Isfet Personified</h2>
-        <p>The great serpent <strong>Apep</strong> (Greek: Apophis) is Isfet's most dramatic and theologically important personification. He is depicted as an enormous serpent — sometimes of world-encompassing scale — who inhabits the Duat (the underworld) and attacks the solar barque of Re every night as it makes its passage through the twelve hours of darkness.</p>
-        <p>Apep is not merely a narrative monster. He represents the genuine threat that the ordered world faces continuously: the possibility that the sun will fail to rise, that the solar journey will be interrupted, that the structured cosmos will be swallowed by undifferentiated darkness. His attack on the barque is not figurative — in the Kemetic understanding, it was a real nightly crisis requiring real magical response.</p>
-
-        <h3 class="sub-head">The Daily Defense — An Ongoing Magical Operation</h3>
-        <p>The defense against Apep was one of the most elaborate and consistently maintained magical operations in Egyptian history. The primary text is the <strong>Book of Overthrowing Apep</strong> (sometimes called the Book of Apophis), preserved in several copies but perhaps most fully in a Ptolemaic-period papyrus now in the British Museum. The daily ritual included:</p>
-        <ul style="list-style:none;padding-left:0;">
-            <li class="confession-item" style="padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);">Drawing Apep's image on papyrus or modeling it in wax</li>
-            <li class="confession-item" style="padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);">Spitting upon the image and cursing it</li>
-            <li class="confession-item" style="padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);">Striking the image with a black staff</li>
-            <li class="confession-item" style="padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);">Binding the image with red cord</li>
-            <li class="confession-item" style="padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);">Burning the image and its ashes in a special brazier</li>
-            <li class="confession-item" style="padding:0.5rem 0;">Reciting the complete list of Apep's secret names to exhaust his power</li>
-        </ul>
-        <p style="margin-top:1rem;">This ritual was performed in temples daily — not as symbolic gesture but as a genuine magical working whose efficacy was trusted as absolutely as one would trust a structural repair on a building. The sun rose each morning, in part, because Egyptian priests had performed this working the night before.</p>
-
-        <div class="pull-quote">
-            "If Apep were ever to succeed — if the solar barque were ever truly stopped — creation would end. The nightly ritual was not merely symbolic. It was the most critical maintenance operation in the universe."
-            <cite>— After Joanna Komorowska, analysis of the Bremner-Rhind Papyrus</cite>
-        </div>
-
-        <h3 class="sub-head">Set's Role in the Defense Against Apep</h3>
-        <p>One of the most theologically sophisticated features of the Apep mythology is that <strong>Set</strong> — the god of chaos, the murderer of Osiris, the figure most associated with Isfet in many contexts — is also the primary defender of the solar barque against Apep. Set stands at the prow of Re's barque, armed with a spear, and drives back the serpent each night. This apparent contradiction is the core of the Kemetic understanding of Set's function: his chaotic, destructive energy is not inherently wrong — it is simply energy that must be correctly directed. Set's Isfet nature makes him the only being powerful enough to fight Isfet at cosmic scale.</p>
-    </section>
-
-    <hr class="divider">
-
-    <!-- VII -->
-    <section id="nun">
-        <h2 class="section-head">VII. Nun and the Creative Dimension of Chaos</h2>
-        <p>The primordial waters of <strong>Nun</strong> — the infinite, formless, undifferentiated potential from which all creation arose and which surrounds the structured cosmos on all sides — represent Isfet's most fundamental form: not evil chaos, but <em>pre-differentiation itself</em>. Nun is not hostile to Ma'at. Nun is simply what existed before Ma'at and what would exist if Ma'at ceased. It is the canvas, not the enemy of the painting.</p>
-        <p>This distinction is crucial for understanding why the annual Nile flood — a genuine disruption of the established order, destroying boundaries, drowning fields, submerging villages — was experienced not with fear and horror but with <em>gratitude and celebration</em>. The flood was the annual return of Nun into the ordered world — a controlled invasion of primordial chaos that refreshed the soil, restored the agricultural conditions for the coming year, and renewed the relationship between the structured and the unstructured dimensions of reality.</p>
-        <p>The theological insight here is profound: <em>creation requires periodic contact with what preceded it</em>. The structured cannot remain vital if it never touches its source. The annual flood was the cosmos's annual spiritual practice — the moment when Egypt consciously allowed the uncreated to flow through the created, and was renewed by the contact.</p>
-    </section>
-
-    <hr class="divider">
-
-    <!-- VIII -->
+    <!-- SECTION V: JUDGMENT -->
     <section id="judgment">
-        <h2 class="section-head">VIII. The Hall of Two Truths — Ma'at as Final Standard</h2>
-        <p>The climax of every Egyptian person's metaphysical journey was the <strong>Weighing of the Heart</strong> in the <strong>Hall of Two Truths</strong> (Iru-Maaty — "the two Ma'ats"). In this chamber, before Osiris as judge and forty-two divine assessors, the heart of the deceased was placed on one pan of a cosmic balance scale. On the other pan: the feather of Ma'at.</p>
-        <p>The balance was tended by Anubis; the verdict was recorded by Thoth; the potential consequence of failure was execution by Ammit — the composite devouring beast (crocodile, lion, hippopotamus) who stood waiting beside the scale. A heart heavier than Ma'at's feather was consumed by Ammit, and the soul ceased to exist — not punished in a hell, but annihilated from the record of being. This was the "second death" — the final, unrecoverable dissolution of individual identity.</p>
-        <p>A heart lighter than or equal to the feather allowed the soul to be declared <em>maa-kheru</em> ("true of voice," "justified") and to proceed into the paradise of the Field of Reeds — the afterlife domain where the blessed dead continued a glorified version of Egyptian life, working in gardens of impossible abundance, reunited with loved ones, and free from the trials that had characterized mortal existence.</p>
-        <p>See the dedicated entry: <a href="weighing-of-the-heart.html" class="nl">The Weighing of the Heart — Complete Analysis</a></p>
+        <h2 class="section-head">V. The Hall of Judgment — The Final Accounting</h2>
+        <p>
+            The climax of the soul's journey is the <strong>Weighing of the Heart</strong>. The heart (Ib), representing the individual's cumulative ethical frequency, is weighed against the feather of Ma'at.
+        </p>
+        <p>
+            A heart that is "True of Voice" (<i>Ma'at Kheru</i>) is light enough to permit the soul's transfiguration into an <strong>Akh</strong>. A heart heavy with Isfet is consumed by Ammit, resulting in the "Second Death" — total annihilation of the individual data-stream.
+        </p>
     </section>
 
-    <hr class="divider">
+    <div class="glyph-marker">𓇓 𓏏 𓅱 𓀭 · 𓇼 𓅱 𓏏 𓅮</div>
 
-    <!-- IX -->
-    <section id="negative-confession">
-        <h2 class="section-head">IX. The Negative Confession in Full — Ma'at's Complete Ethical Catalog</h2>
-        <p>Book of the Dead Spell 125 contains the <strong>Negative Confession</strong> (<em>Declarations of Innocence</em>) — forty-two statements made by the deceased before forty-two divine assessors, each identified with a specific Egyptian nome (administrative region) and specific transgression. This document represents the most complete surviving statement of Egyptian ethical requirements — essentially the complete catalog of what Ma'at demands of an individual.</p>
-        <p>It is called the "Negative" Confession because the declarations are phrased as statements of what the deceased has <em>not</em> done, rather than what they have done. This structure is deliberate: it frames the ethical life as one of restraint and non-violation, not merely active virtue. The full confession, when studied carefully, reveals the complete map of Kemetic ethical concern:</p>
-
-        <div style="border:1px solid rgba(212,175,55,0.15);padding:1.5rem;background:rgba(10,9,5,0.8);margin:1.5rem 0;">
-            <div style="font-family:'Cinzel',serif;color:var(--gold-dim);font-size:0.8rem;letter-spacing:0.15em;margin-bottom:1rem;">// SELECTED DECLARATIONS — BY CATEGORY //</div>
-
-            <h4 class="mini-head" style="font-family:'Cinzel',serif;color:var(--text-bright);font-size:0.95rem;margin:1rem 0 0.5rem;letter-spacing:0.04em;">Against the Gods and Cosmic Order</h4>
-            <div class="confession-item">I have not done wrong against the gods.</div>
-            <div class="confession-item">I have not been impious toward god.</div>
-            <div class="confession-item">I have not reviled the god of my city.</div>
-            <div class="confession-item">I have not neglected the appointed seasons and their festivals.</div>
-
-            <h4 class="mini-head" style="font-family:'Cinzel',serif;color:var(--text-bright);font-size:0.95rem;margin:1rem 0 0.5rem;letter-spacing:0.04em;">Against Other Persons</h4>
-            <div class="confession-item">I have not committed sin against people.</div>
-            <div class="confession-item">I have not mistreated people.</div>
-            <div class="confession-item">I have not been covetous.</div>
-            <div class="confession-item">I have not stolen.</div>
-            <div class="confession-item">I have not killed people.</div>
-            <div class="confession-item">I have not caused anyone to weep.</div>
-            <div class="confession-item">I have not committed adultery.</div>
-            <div class="confession-item">I have not falsely accused anyone.</div>
-            <div class="confession-item">I have not slandered a servant to his master.</div>
-            <div class="confession-item">I have not been aggressive.</div>
-
-            <h4 class="mini-head" style="font-family:'Cinzel',serif;color:var(--text-bright);font-size:0.95rem;margin:1rem 0 0.5rem;letter-spacing:0.04em;">Against Truth and Measurement</h4>
-            <div class="confession-item">I have not falsified the balance.</div>
-            <div class="confession-item">I have not tampered with the plummet of the balance.</div>
-            <div class="confession-item">I have not taken milk from the mouths of children.</div>
-            <div class="confession-item">I have not diverted the water at its proper season.</div>
-            <div class="confession-item">I have not built a dam against flowing water.</div>
-
-            <h4 class="mini-head" style="font-family:'Cinzel',serif;color:var(--text-bright);font-size:0.95rem;margin:1rem 0 0.5rem;letter-spacing:0.04em;">Against Living Beings</h4>
-            <div class="confession-item">I have not mistreated cattle.</div>
-            <div class="confession-item">I have not harmed the fields.</div>
-            <div class="confession-item">I have not raised my voice in a sacred place.</div>
-
-            <h4 class="mini-head" style="font-family:'Cinzel',serif;color:var(--text-bright);font-size:0.95rem;margin:1rem 0 0.5rem;letter-spacing:0.04em;">Against the Self</h4>
-            <div class="confession-item">I have not been deaf to words of truth.</div>
-            <div class="confession-item">I have not been hot-tempered.</div>
-            <div class="confession-item">I have not been proud beyond my station.</div>
-            <div class="confession-item">I have not cursed the king.</div>
-        </div>
-
-        <p>The scope of the Negative Confession reveals that Kemetic ethics was not merely interpersonal — it encompassed relationships with the gods, with animals, with water systems, with agricultural land, and with the self. Ma'at was a total orientation toward the correct functioning of all relationships, not a limited set of social rules.</p>
-    </section>
-
-    <hr class="divider">
-
-    <!-- X -->
-    <section id="wisdom">
-        <h2 class="section-head">X. Ma'at in Wisdom Literature — The Living Ethics</h2>
-        <p>The Egyptian <strong>Wisdom Literature</strong> — a genre of instructional texts produced by scribes, officials, and kings across more than two thousand years — provides the most accessible and practically applicable expression of Ma'at ethics in the entire Egyptian textual record. These texts are not theoretical treatises; they are practical guides written by experienced people for people beginning their adult lives, offering guidance on how to live correctly in a world that required constant navigation of competing obligations.</p>
-
-        <table class="data-table">
-            <thead><tr><th>Text</th><th>Date</th><th>Author / Context</th><th>Key Ma'at Teaching</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Instruction of Ptahhotep</strong></td><td>c. 2400 BCE (Old Kingdom)</td><td>Vizier Ptahhotep; instructions to his son</td><td>"How good and beautiful it is when a leader listens — listening is more advantageous to a man than anything else. How great is one who is great in hearing." Ma'at begins with listening accurately before speaking or acting.</td></tr>
-                <tr><td><strong>Instruction for Merikare</strong></td><td>c. 2100 BCE (First Intermediate)</td><td>A king to his son, written during political crisis</td><td>The most socially aware of the instructions: "Raise the great man from poverty, set the poor man on his feet... Ma'at will not forsake the state that practices it." Justice as political necessity, not merely personal virtue.</td></tr>
-                <tr><td><strong>Instruction of Amenemhat</strong></td><td>c. 1991 BCE (Middle Kingdom)</td><td>King Amenemhat I, posthumously to his son</td><td>Trust carefully earned; loyalty must be reciprocal. The cynical dimension of Ma'at — knowing that people will fail it, and building accordingly.</td></tr>
-                <tr><td><strong>Instruction of Amenemope</strong></td><td>c. 1300 BCE (New Kingdom)</td><td>An official to his son</td><td>The most philosophically developed of the instructions, showing strong parallels with the biblical Book of Proverbs. Key teaching: contentment with one's honest portion is greater than abundance achieved dishonestly. "Better is poverty in the hand of God than riches stored in a warehouse."</td></tr>
-                <tr><td><strong>Instruction of Any</strong></td><td>c. 1300 BCE</td><td>A middle-class scribe to his son</td><td>The most humanly accessible instruction: domestic ethics, the importance of honoring one's mother, care in choosing words, the folly of excessive drinking and late nights. Ma'at in everyday life.</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <hr class="divider">
-
-    <!-- XI -->
-    <section id="magic-ethics">
-        <h2 class="section-head">XI. Ma'at, Isfet, and the Ethics of Magic</h2>
-        <p>The relationship between Ma'at-Isfet and magical practice is one of the most practically important aspects of the entire Kemetic ethical framework — and one of the most frequently misunderstood. The key question is: does Ma'at prohibit certain kinds of magic (offensive magic, destructive magic, binding magic)? The answer, from the primary sources, is nuanced: <em>Ma'at does not prohibit magic based on its method. It evaluates magic based on its cosmic orientation.</em></p>
-        <p>Magic that serves Ma'at — that protects the innocent, restores what was disrupted, defends the just, punishes genuine wrongdoing through legitimate channels — is Ma'at-aligned regardless of how destructive its methods appear. The execration rituals conducted by the state priesthood, which involved the ritualistic destruction of enemies' images, were explicitly understood as Ma'at operations: they were maintaining cosmic order against Isfet-forces that threatened it.</p>
-        <p>Magic that serves Isfet — that exploits the vulnerable, disrupts legitimate relationships, enriches the practitioner at unjust cost to others, or operates from corrupt personal motivation — is Isfet-magic, and the Kemetic tradition was clear that it corrupted the practitioner's Ib and generated cosmic disorder, regardless of its technical correctness.</p>
-
-        <div class="practical-note">
-            <div class="pn-title">// THE MA'AT TEST FOR MAGICAL OPERATIONS //</div>
-            <p>Before performing any magical operation, the Kemetic ethical framework asks: <strong>(1) Does this restore balance, protect the vulnerable, or execute legitimate justice — or does it serve my ego, my greed, or my desire at unjust cost to another?</strong> (2) If I were to present this operation to Osiris's tribunal, could I declare it before the forty-two assessors without falsehood? (3) Does this operation require me to deceive anyone about its nature? (4) What is the actual weight it will add to my Ib? These are not abstract philosophical questions — they are practical pre-operational assessments that, in the Kemetic tradition, determined whether a magical working could succeed at all.</p>
-        </div>
-
-        <h3 class="sub-head">The Limit Case: Destructive Magic</h3>
-        <p>Kemetic practice explicitly included destructive and binding magic as legitimate categories. Execration rituals targeting genuine enemies, banishing operations against malevolent spiritual entities, and binding operations to prevent specific harms were all documented institutional practices. The Ma'at framework did not prohibit these — it required that the practitioner be genuinely certain about three things: (1) the target is actually causing the harm claimed; (2) the operation is proportionate to the harm; and (3) the motivation is the restoration of order, not personal vengeance dressed as justice. Getting these wrong was not merely an ethical error — it was an Isfet-generating act that would compound the original injustice.</p>
-    </section>
-
-    <hr class="divider">
-
-    <!-- XII -->
-    <section id="correspondences">
-        <h2 class="section-head">XII. Cross-Tradition Correspondences</h2>
-        <p>The Ma'at-Isfet polarity finds structural parallels in multiple other traditions, each illuminating a different facet of the Kemetic framework:</p>
-
-        <table class="data-table">
-            <thead><tr><th>Tradition</th><th>Order Principle</th><th>Chaos Principle</th><th>Key Parallel / Divergence</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Zoroastrianism</strong></td><td>Asha (cosmic truth/order)</td><td>Druj (falsehood/disorder)</td><td>Closest parallel: Asha and Ma'at are structurally nearly identical — both are simultaneously a goddess, an abstract cosmic principle, and an ethical standard. Both have a chaotic adversary. Key divergence: Zoroastrianism is strictly dualistic (two equal powers); Egypt is not (Isfet is secondary to Ma'at ontologically).</td></tr>
-                <tr><td><strong>Vedic/Hindu</strong></td><td>Ṛta (cosmic order, later: Dharma)</td><td>Anṛta (disorder, falsehood)</td><td>Ṛta and Ma'at are parallel concepts: both are cosmic principles that govern the correct ordering of both cosmic and social reality. Both are associated with truth-speech, correct ritual, and just governance. Dharma in later Hinduism becomes more individualized — closer to the personal Ma'at of the Wisdom Literature.</td></tr>
-                <tr><td><strong>Norse</strong></td><td>Wyrd/Order (through the Norns)</td><td>Chaos (Ginnungagap, the Void)</td><td>Less close parallel: the Norse void (Ginnungagap) has creative properties similar to Nun, and the Norns' weaving of fate has structural similarity to the Hall of Two Truths' accounting. But the Norse tradition lacks the Egyptian emphasis on individual ethical responsibility as cosmologically significant.</td></tr>
-                <tr><td><strong>Taoism</strong></td><td>Tao (the Way)</td><td>Chaos (departure from Tao)</td><td>Striking parallel in the non-dogmatic quality: the Tao, like Ma'at, is not a set of rules but a principle of alignment with the inherent order of things. "Acting in accordance with Tao" and "doing Ma'at" describe the same fundamental ethical orientation: not imposing a moral code on reality, but aligning with reality's own order.</td></tr>
-                <tr><td><strong>Hermetic</strong></td><td>Nous/Logos (divine intelligence/word)</td><td>Hyle (raw matter, chaos)</td><td>Direct derivation: the Hermetic framework translates the Kemetic Ma'at-Isfet dynamic into Greek philosophical vocabulary. Nous (= Ma'at as cosmic intelligence) organizes Hyle (= Nun/Isfet as primordial matter) through Logos (= Hu/Heka as creative word).</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <hr class="divider">
-
-    <!-- XIII -->
-    <section id="practical">
-        <h2 class="section-head">XIII. Ma'at as a Living Practice</h2>
-        <p>For practitioners approaching the Kemetic tradition as a living system, Ma'at is not a historical curiosity — it is the foundational ethical orientation that makes all other practice coherent and effective. The following framework synthesizes the textual tradition with the practical guidance emerging from the contemporary Kemetic community.</p>
-
-        <h3 class="sub-head">Daily Ma'at Practice — The Negative Confession as Examination</h3>
-        <p>One of the most practical applications of the Kemetic framework is using a selected set of the Negative Confession's forty-two declarations as a daily ethical examination — reviewing, at the end of each day, whether any of the declarations were violated. This is not about guilt or self-punishment; it is the equivalent of a skilled craftsperson reviewing their day's work to identify where technique needs refinement. The goal is a lighter Ib, achieved through honest self-assessment and behavioral correction.</p>
-
-        <div class="practical-note">
-            <div class="pn-title">// MA'AT AS MAGICAL PRACTICE //</div>
-            <p>In the Kemetic magical tradition, maintaining Ma'at is itself the most fundamental magical operation. A practitioner whose life is seriously misaligned with Ma'at — through chronic dishonesty, exploitation of others, or deliberate corruption of relationships — is generating Isfet at the source level, which will undermine even technically correct magical operations. The sequence is: establish personal Ma'at first, then build magical practice upon that foundation. Magical shortcuts that bypass personal ethics consistently produce unreliable results in the Kemetic tradition — not because of moral punishment, but because Isfet-generating behavior disrupts the practitioner's Sekhem (magical will-force) and pollutes the Ib that must be pure for the highest magical work.</p>
-        </div>
-
-        <h3 class="sub-head">Discerning Ma'at from Isfet in Contested Situations</h3>
-        <p>The hardest practical question is not "Is this right or wrong?" in simple cases — those are usually self-evident. The hard question is: "In this genuinely complex situation where competing obligations exist, which course of action is more aligned with Ma'at?" The Kemetic wisdom tradition offers a consistent heuristic: <em>ask whose Ib is protected by each course of action</em>. The action that makes the most people's hearts lighter — that reduces suffering, restores balance, and honors legitimate obligations in priority order — is more likely the Ma'at-aligned course. When you cannot identify such an action, the wisdom literature advises: silence, patience, and waiting for clarity before acting at all. Acting from Isfet-motivated urgency produces more Isfet. Ma'at can afford to wait.</p>
-    </section>
-
-    <div class="glyph-marker">𓇓 𓏏 𓅱 · 𓇼 𓏏 𓅮</div>
-
+    <!-- RELATED LINKS -->
     <div class="related-links">
         <h3>// RELATED ARCHIVES //</h3>
         <ul>
-            <li><a href="weighing-of-the-heart.html">Weighing of the Heart</a></li>
-            <li><a href="heka.html">Heka — The Moral Technology</a></li>
-            <li><a href="osiris.html">Osiris — Lord of Ma'at</a></li>
-            <li><a href="thoth-hermes.html">Thoth — Recorder of Judgment</a></li>
-            <li><a href="apep.html">Apep — Isfet's Champion</a></li>
-            <li><a href="composite-soul.html">The Ib — Heart of Ma'at</a></li>
-            <li><a href="wisdom-literature.html">Wisdom Literature — Ma'at in Practice</a></li>
-            <li><a href="funerary-texts.html">Funerary Texts — Ma'at's Navigation</a></li>
-            <li><a href="ritual-practice.html">Ritual Practice — Ma'at Through Action</a></li>
-            <li><a href="osiris-myth.html">Osirian Cycle — Ma'at Disrupted and Restored</a></li>
-            <li><a href="memphite-theology.html">Memphite Theology — Creation Through Ma'at</a></li>
-            <li><a href="solar-barque.html">Solar Barque — Maintaining Ma'at Daily</a></li>
+            <li><a href="weighing-of-the-heart.html">The Weighing of the Heart</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="osiris-myth.html">The Osiris Myth</a></li>
+            <li><a href="apep.html">Apep — The Serpent of Chaos</a></li>
+            <li><a href="composite-soul.html">The Composite Soul</a></li>
+            <li><a href="wisdom-literature.html">Wisdom Literature</a></li>
+            <li><a href="solar-barque.html">The Solar Barque</a></li>
         </ul>
     </div>
 
     <div style="text-align:center;margin-top:2rem;">
         <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
     </div>
-</div>
+
+</div><!-- /page-wrap -->
 
 <footer>
     <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
-    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓇓 𓏏 𓅱 𓀭</span><br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
     COSMIC WEIGHING: IN PROGRESS</p>
 </footer>
+
 </body>
 </html>

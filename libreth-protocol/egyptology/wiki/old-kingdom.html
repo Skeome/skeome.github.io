@@ -3,120 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE OLD KINGDOM :: EGYPTOLOGY WIKI</title>
+    <title>THE OLD KINGDOM :: THE PYRAMID AGE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 50% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓋴 𓐍 𓅓 𓂝 𓏏 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE OLD KINGDOM</h1>
-            <p class="text-gray-500 egypt-text-color">// THE AGE OF PYRAMIDS AND PYRAMID TEXTS //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE OLD KINGDOM</h1>
+        <p class="page-subtitle">// THE PYRAMID AGE :: CRYSTALLIZATION OF THE SOLAR IDEAL // LIBRETH ARCHIVE</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > Old Kingdom
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; OLD KINGDOM
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Golden Age of Solar Theology (c. 2686–2181 BCE)</h2>
-                <p class="mb-4">
-                    The Old Kingdom represents the first great crystallization of Kemetic theology into monumental form. Often called the "Age of Pyramids," it was a period where the state operated as a theological machine, with the pharaoh maintaining <a href="maat-isfet.html" class="nav-link">Ma'at</a> to ensure the sun rose and the Nile flooded.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Dynastic Progression</h3>
-                <div class="space-y-6">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">3rd Dynasty: The Stone Revolution</h4>
-                        <p class="text-sm">King <b>Djoser</b> and his architect <a href="imhotep.html" class="nav-link">Imhotep</a> built the Step Pyramid at Saqqara, turning the royal tomb from a mud-brick mastaba into a stone stairway to the stars. This marked the beginning of monumental stone architecture.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">4th Dynasty: The Giza Giants</h4>
-                        <p class="text-sm"><b>Sneferu</b> perfected the true pyramid form (Meidum, Bent, Red). His successors—<b>Khufu, Khafre, and Menkaure</b>—built the Giza plateau. This era saw the height of centralized royal power, with the king viewed as a living god.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">5th Dynasty: Sons of Re</h4>
-                        <p class="text-sm">A theological shift occurred. Kings began building <b>Sun Temples</b> at Abusir dedicated directly to Re. The pyramid size decreased, but the interior decoration—the <b>Pyramid Texts</b>—appeared under <b>Unas</b>.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">6th Dynasty: The Long Decline</h4>
-                        <p class="text-sm">The incredibly long reign of <b>Pepi II</b> (90+ years) saw the erosion of central authority. Governors (Nomarchs) became hereditary princes, leading to the fragmentation of the First Intermediate Period.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Pyramid Texts & Cannibal Hymn</h2>
-                <p class="mb-4">
-                    Appearing in the 5th Dynasty, the <b>Pyramid Texts</b> are the oldest religious corpus in history. They are not merely prayers but "transfiguration spells" designed to blast the king's soul into the celestial realm.
-                </p>
-                <div class="p-6 border border-amber-400 bg-amber-400/10 mb-8 italic">
-                    <p class="text-sm">"Unas is he who eats men and lives on the gods... Unas eats their magic and swallows their spirits. Their great ones are for his morning meal, their middle-sized ones for his evening meal..."</p>
-                    <p class="text-xs text-right mt-2">— The Cannibal Hymn (Utterance 273-274)</p>
-                </div>
-                <p>This fierce text demonstrates the raw, undiluted nature of Old Kingdom <a href="heka.html" class="nav-link">Heka</a>: the king literally consumes the divine essence to ensure his own immortality.</p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Administration: The Vizier</h3>
-                <p class="mb-4">
-                    The state was run by the <b>Tjati</b> (Vizier), the supreme judge and architect. Figures like Imhotep, Ptahhotep (author of the <a href="wisdom-literature.html" class="nav-link">Instruction of Ptahhotep</a>), and Kagemni set the standard for the "Silent Man"—the ethical bureaucrat who upheld Ma'at through silence and efficiency.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="funerary-texts.html" class="nav-link">Funerary Corpus (Pyramid Texts)</a></li>
-                    <li><a href="temple-architecture.html" class="nav-link">Temple & Pyramid Architecture</a></li>
-                    <li><a href="pantheon.html" class="nav-link">Solar Deities: Re & Atum</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SOLAR FREQUENCY: ATTAINED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Old Kingdom — Divine Monarchy</a></li>
+            <li><a href="#third">II. The 3rd Dynasty — The Stone Revolution</a></li>
+            <li><a href="#fourth">III. The 4th Dynasty — The Giza Plateau</a></li>
+            <li><a href="#fifth">IV. The 5th Dynasty — Sons of Re & Sun Temples</a></li>
+            <li><a href="#texts">V. The Pyramid Texts — Transfiguration Technology</a></li>
+            <li><a href="#vizier">VI. The Vizier — Ethical Governance</a></li>
+            <li><a href="#decline">VII. The Systemic Rollback — First Intermediate Transition</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Old Kingdom — Divine Monarchy</h2>
+        <p>
+            The <strong>Old Kingdom</strong> (c. 2686–2181 BCE) represents the first great "Steady-State" crystallization of Kemetic theology. During this era, the state operated as a vast theological engine, with the Pharaoh functioning as the sole interface between the divine and material domains.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, the Old Kingdom is the <strong>Primary Initialization Phase</strong>. It established the core symbolic operating system (Medu Netjer, Solar Theology, Ma'at ethics) that would remain the foundation of Egyptian civilization for the next three millennia. The monuments of this era were not mere tombs, but <strong>permanent physical anchors</strong> for cosmic order.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: THIRD -->
+    <section id="third">
+        <h2 class="section-head">II. The 3rd Dynasty — The Stone Revolution</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>DJOSER & IMHOTEP</h4>
+                <p>The construction of the Step Pyramid at Saqqara marked the transition from mud-brick to stone. As the architect <a href="imhotep.html" class="nl">Imhotep</a> realized, stone provided the "eternal bandwidth" required to preserve sacred proportions forever.</p>
+            </div>
+            <div class="info-card">
+                <h4>STAIRWAY TO THE STARS</h4>
+                <p>The stepped form of the pyramid was a functional magical engine — a celestial stairway designed to permit the King's <i>Ba</i> to ascend to the circumpolar "Imperishable Stars."</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: TEXTS -->
+    <section id="texts">
+        <h2 class="section-head">V. The Pyramid Texts — Transfiguration Technology</h2>
+        <p>
+            Appearing first in the tomb of King <strong>Unas</strong> (end of the 5th Dynasty), the <strong>Pyramid Texts</strong> are the oldest religious corpus in history. They were not "prayers" in the modern sense, but <strong>active transfiguration spells</strong>.
+        </p>
+        <div class="info-card">
+            <h4>THE CANNIBAL HYMN</h4>
+            <p>Utterance 273-274 describes the King "consuming" the gods to absorb their <strong>Heka</strong> and <i>Akh</i>. This represents the raw, high-vibrational power of early Kemetic magic, where the royal soul literally assimilates the divine essence to ensure its own immortality.</p>
+        </div>
+        <p>
+            These texts established the prototype for all subsequent funerary traditions, providing the soul with the passwords and frequencies required to navigate the gates of the sky.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: VIZIER -->
+    <section id="vizier">
+        <h2 class="section-head">VI. The Vizier — Ethical Governance</h2>
+        <p>
+            The administrative stability of the Old Kingdom was maintained by the <strong>Tjati</strong> (Vizier). High officials like <strong>Ptahhotep</strong> set the standard for the "Silent Man" — the ethical bureaucrat who maintained <strong>Ma'at</strong> through restraint, effective listening, and precise speech.
+        </p>
+        <p>
+            The <i>Instruction of Ptahhotep</i> is the foundational document of Kemetic <strong>Wisdom Literature</strong>, arguing that correct social relationship is a microcosmic reflection of cosmic harmony.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓋴 𓐍 𓅓 𓂝 𓏏 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="early-dynastic.html">Early Dynastic Origins</a></li>
+            <li><a href="first-intermediate.html">The Systemic Collapse</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="funerary-texts.html">The Pyramid Texts</a></li>
+            <li><a href="temple-architecture.html">Pyramid Construction</a></li>
+            <li><a href="imhotep.html">Imhotep — The Divine Architect</a></li>
+            <li><a href="wisdom-literature.html">Instruction of Ptahhotep</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SOLAR FREQUENCY: ATTAINED</p>
+</footer>
 
 </body>
 </html>

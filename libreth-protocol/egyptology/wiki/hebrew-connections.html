@@ -3,104 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EGYPT & THE HEBREW TRADITION :: EGYPTOLOGY WIKI</title>
+    <title>EGYPT & THE HEBREW TRADITION :: CROSS-CULTURAL RESONANCE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓏲 𓏴 𓈖 𓎛 𓎛';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">EGYPT & THE HEBREW TRADITION</h1>
-            <p class="text-gray-500 egypt-text-color">// CROSS-TRADITIONAL CORRESPONDENCES //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">EGYPT & THE HEBREW TRADITION</h1>
+        <p class="page-subtitle">// SYSTEMATIC RESONANCE :: CROSS-TRADITIONAL CORRESPONDENCES //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Hebrew Connections
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; HEBREW CONNECTIONS
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Mosaic Link</h2>
-                <p class="mb-4">
-                    The connections between ancient Kemet and early Judaism are complex and rich. The biblical narrative presents Moses as being "learned in all the wisdom of the Egyptians" (Acts 7:22), suggesting a direct transmission of priestly knowledge into the Hebrew system.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Wisdom Literature</h3>
-                <p class="mb-4">
-                    One of the most concrete parallels is found between the <b>Instruction of Amenemope</b> (c. 1300 BCE) and the biblical <b>Book of Proverbs</b> (22:17–23:11). The content and structure of the 30 chapters of Amenemope's wisdom text correspond so closely to the Hebrew "sayings of the wise" that a direct influence is widely acknowledged.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Merkabah Mysticism and the Duat</h3>
-                <p class="mb-4">
-                    The early Jewish mystical tradition of <b>Merkabah</b> (Chariot) mysticism involves the soul's ascent through heavenly palaces (hechalot). This process has strong structural parallels to the <a href="netherworld-books.html" class="nav-link">Netherworld Books</a> (e.g., Book of Gates), where the soul must know passwords and divine names to pass through various thresholds guarded by terrifying beings.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Temple Architecture & The Tabernacle</h3>
-                <p class="mb-4">
-                    The biblical description of the <b>Tabernacle</b> and the later <b>Temple of Solomon</b> reflects the layout of a New Kingdom Egyptian temple (like Luxor or Karnak). Both utilize a tripartite structure: an outer court, a holy place, and a "Holy of Holies" (Sanctuary) where the divine presence resided.
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">The Ark as a Portable Naos</h4>
-                    <p class="text-sm">The <b>Ark of the Covenant</b> shares striking physical similarities with the portable <b>naos</b> or barque-shrines used by Egyptian priests to transport the images of gods during festivals. The use of cherubim (protective winged beings) parallels the winged goddesses (Isis and Nephthys) who shielded the sacred shrines of Osiris.</p>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="netherworld-books.html" class="nav-link">The Netherworld Books (Ascent/Descent)</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Composite Soul (Ab/Heart)</a></li>
-                    <li><a href="house-of-life.html" class="nav-link">The House of Life (Sacred Scribes)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// RESONANCE MATCH: HIGH // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Connection — Shared Data-Streams</a></li>
+            <li><a href="#mosaic">II. The Mosaic Link — Wisdom of the Egyptians</a></li>
+            <li><a href="#wisdom">III. Wisdom Literature — Amenemope and Proverbs</a></li>
+            <li><a href="#mysticism">IV. Merkabah Mysticism and the Maps of the Duat</a></li>
+            <li><a href="#temple">V. Temple Architecture and the Tabernacle</a></li>
+            <li><a href="#ark">VI. The Ark of the Covenant as a Portable Naos</a></li>
+            <li><a href="#monotheism">VII. Atenism and the Origins of Monotheism</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Connection — Shared Data-Streams</h2>
+        <p>
+            The relationship between Ancient Kemet and the early Hebrew tradition represents one of the most significant <strong>transfers of initiatory data</strong> in the ancient world. In the framework of the Libreth Protocol, these two systems are viewed not as isolated religious phenomena, but as overlapping bandwidths within the Mediterranean awareness field.
+        </p>
+        <p>
+            The biblical record itself acknowledges this connection, stating that Moses was <i>"learned in all the wisdom of the Egyptians"</i> (Acts 7:22). This implies that the foundational legislation and cosmology of the Hebrew system were filtered through the initiatory structures of the Kemetic <a href="house-of-life.html" class="nl">House of Life</a>.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: WISDOM -->
+    <section id="wisdom">
+        <h2 class="section-head">III. Wisdom Literature — Amenemope and Proverbs</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// LITERARY PARALLEL //</div>
+            <p style="font-size:0.85rem;">The correspondence between Amenemope and Proverbs 22:17-23:11 is so precise that scholars widely accept a direct literary influence, marking a clear point of ideological transmission.</p>
+        </div>
+        <p>
+            One of the most concrete examples of Kemetic influence is the <strong>Instruction of Amenemope</strong> (c. 1300 BCE). The structure and content of this text correspond almost exactly to the biblical <strong>Book of Proverbs</strong>. Both emphasize the cultivation of the "silent man" — an individual of internal poise and integrity who maintains <a href="maat-isfet.html" class="nl">Ma'at</a> in the face of social and spiritual pressure.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: MYSTICISM -->
+    <section id="mysticism">
+        <h2 class="section-head">IV. Merkabah Mysticism and the Maps of the Duat</h2>
+        <p>
+            Early Jewish mystical traditions, particularly <strong>Merkabah</strong> (Chariot) mysticism, involve the soul's ascent through a series of heavenly palaces (<i>hechalot</i>). Each palace is guarded by terrifying angelic beings whose names must be known to permit passage.
+        </p>
+        <p>
+            This initiatory structure is functionally identical to the <a href="netherworld-books.html" class="nl">Netherworld Books</a> of the New Kingdom (such as the <i>Book of Gates</i>). In both traditions, the soul utilizes <strong>Heka</strong> (or divine names) as a frequency-key to unlock the thresholds of the spiritual domains and achieve unity with the divine presence.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: TEMPLE -->
+    <section id="temple">
+        <h2 class="section-head">V. Temple Architecture and the Tabernacle</h2>
+        <p>
+            The biblical description of the <strong>Tabernacle</strong> and the later <strong>Temple of Solomon</strong> reflects the standard tripartite design of a New Kingdom Egyptian temple.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE TRIPARTITE LAYOUT</h4>
+                <p>Both systems utilize a progression from an <strong>Outer Court</strong> (profane), to a <strong>Holy Place</strong> (initiatic), to the <strong>Holy of Holies</strong> (the Sanctuary/Naos), where the divine presence resided in absolute darkness.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE ARK AS NAOS</h4>
+                <p>The <strong>Ark of the Covenant</strong> shares striking physical and functional similarities with the portable <i>naos</i> or barque-shrines used by Egyptian priests. The protective wings of the cherubim mirror the winged goddesses Isis and Nephthys.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glyph-marker">𓏲 𓏴 𓈖 𓎛 𓎛</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+            <li><a href="netherworld-books.html">The Netherworld Books</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="composite-soul.html">The Composite Soul</a></li>
+            <li><a href="wisdom-literature.html">Wisdom Literature</a></li>
+            <li><a href="amarna-period.html">Atenism & Monotheism</a></li>
+            <li><a href="christian-influences.html">Christian-Kemetic Synthesis</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    RESONANCE MATCH: SECURE</p>
+</footer>
 
 </body>
 </html>

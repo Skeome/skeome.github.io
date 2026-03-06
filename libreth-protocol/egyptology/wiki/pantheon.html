@@ -3,167 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE PANTHEON :: EGYPTOLOGY WIKI</title>
+    <title>THE PANTHEON :: DIVINE RESONATORS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓊹 𓊹 𓊹 𓊹 𓊹 𓊹';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* DEITY CARDS */
+        .deity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+        @media(max-width:768px) { .deity-grid { grid-template-columns: 1fr; } }
+        .deity-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .deity-card:hover { border-color: var(--gold); background: rgba(20,18,10,0.95); }
+        .deity-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.1);
+            padding-bottom: 0.25rem;
+        }
+        .deity-card p { font-size: 0.9rem; line-height: 1.5; margin: 0; opacity: 0.85; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
-        .deity-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
         }
-        .deity-card h4 {
-            color: #d4af37;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            margin-bottom: 0.5rem;
-        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE PANTHEON</h1>
-            <p class="text-gray-500 egypt-text-color">// DEITIES AND THEIR MAGICAL DOMAINS //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE PANTHEON</h1>
+        <p class="page-subtitle">// DIVINE RESONATORS :: ARCHETYPES OF THE KEMETIC OPERATING SYSTEM //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Pantheon
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; THE PANTHEON
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Divine Manifestations & Syncretism</h2>
-                <p class="mb-4">
-                    Egyptian theology was not chaotic polytheism but a sophisticated system of overlapping divine functions. A central principle is <b>Syncretism</b>: the absorption of one deity's attributes by another (e.g., <b>Sobek-Re</b>, <b>Amun-Ra</b>, or the funerary triad <b>Ptah-Sokar-Osiris</b>). This was not theological confusion but a sophisticated statement about the underlying unity of cosmic principles, allowing different "frequencies" of divine power to be combined for specific ritual purposes.
-                </p>
-            </section>
-
-            <div class="grid md:grid-cols-2 gap-4 mb-12">
-                <div class="deity-card">
-                    <h4>ATUM-RE</h4>
-                    <p class="text-sm"><b>Domain:</b> Creator, the setting sun, self-generated being. The first act of Heka began with Atum's emergence from the primordial mound.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>SHU & TEFNUT</h4>
-                    <p class="text-sm"><b>Domain:</b> The first complementary duality. Shu (Air/Life) and Tefnut (Moisture/Order) were the first to emerge from the monad Atum.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>OSIRIS [Asar]</h4>
-                    <p class="text-sm"><b>Domain:</b> Death, resurrection, justice. The first to die and be resurrected; the prototype for all human resurrection.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>ISIS [Aset]</h4>
-                    <p class="text-sm"><b>Domain:</b> Magic, motherhood, healing. Known as the "Great of Magic" (Weret-Hekau), she extracted Re's secret name and resurrected Osiris.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>THOTH [Djehuty]</h4>
-                    <p class="text-sm"><b>Domain:</b> Writing, wisdom, magic, time. The scribe of the gods and patron of the <a href="house-of-life.html" class="nav-link">House of Life</a>.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>NEITH [Net]</h4>
-                    <p class="text-sm"><b>Domain:</b> Pre-Enneadic creator and cosmic weaver. Her primary cult center was at Sais. As the "First of the Gods," she was believed to have woven the universe on her cosmic loom. In her funerary aspect, she is one of the four guardians of the coffin, specifically protecting the viscera of the deceased.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>PTAH</h4>
-                    <p class="text-sm"><b>Domain:</b> Craftsmen, architects, creation through speech. In Memphite theology, he created the universe through his heart and tongue.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>MIN</h4>
-                    <p class="text-sm"><b>Domain:</b> Generator of fertility and the Eastern Desert. Often shown as ithyphallic, Min represented the primal, procreative power of the universe. His festivals, particularly the "Great Procession of Min," were essential for linking the pharaoh's political authority directly to the biological and agricultural vitality of the land. He is the master of the "living seed" within the cosmic order.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>SEKHMET</h4>
-                    <p class="text-sm"><b>Domain:</b> Plague, war, healing, solar fire. Known as the "Eye of Ra," her "arrows" were the contagious diseases of the summer months. Paradoxically, her priests were the finest physicians in Egypt, specializing in the pacification of malevolent energy. She represents the raw, entropic power of the sun that must be transmuted through ritual. <a href="hathor.html" class="nav-link">[Link: Distant Goddess Myth]</a></p>
-                </div>
-                <div class="deity-card">
-                    <h4>BES & TAWERET</h4>
-                    <p class="text-sm"><b>Domain:</b> Domestic magic and protection. <b>Bes</b>, the apotropaic dwarf, and <b>Taweret</b>, the hippo-lion-crocodile composite goddess, guarded the household and protected women during childbirth. Their magic operated outside the formal temple system, representing the "democratized" application of Heka for the preservation of daily life and the shielding of the vulnerable from unseen dissonant forces.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>SET</h4>
-                    <p class="text-sm"><b>Domain:</b> Storms, chaos, foreign lands. Often misunderstood as "evil," Set is the force of <b>necessary chaos</b>. He is the only deity strong enough to stand at the prow of the solar barque and repel the serpent <a href="apep.html" class="nav-link">Apep</a>. He represents the boundary-breaking energy required for dynamic change within the system of Ma'at.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>SERQET [Selkis]</h4>
-                    <p class="text-sm"><b>Domain:</b> Scorpion goddess and specialist in venomous bite healing. She is one of the four protectors of the canopic jars and plays a vital role in guarding the royal bloodline and the transition of the soul. She represents the controlled use of poison as medicine.</p>
-                </div>
-                <div class="deity-card">
-                    <h4>MA'AT</h4>
-                    <p class="text-sm"><b>Domain:</b> Truth, balance, cosmic order. The personification of the laws that govern both human and divine action.</p>
-                </div>
-            </div>
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Sacred Fauna: Biological Resonators</h2>
-                <p class="mb-4">
-                    Egyptian zoomorphism was not "animal worship" but the recognition that specific animals possessed a biological frequency that resonated with particular divine attributes. These animals were the <b>living ba</b> of the gods on earth.
-                </p>
-                <div class="grid md:grid-cols-3 gap-4 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Falcon (Horus)</h4>
-                        <p class="text-xs">Sharpness of vision and solar ascent. The falcon's ability to "pierce" the sky made it the perfect resonator for the active solar intellect.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Scarab (Khepri)</h4>
-                        <p class="text-xs">Self-generation and becoming. The beetle's habit of rolling a ball of dung mirrored the sun's journey through the awareness field.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Ibis (Thoth)</h4>
-                        <p class="text-xs">Precision and inquiry. The ibis's long beak searching the mud for food symbolized the scribe's search for truth in the records of the House of Life.</p>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="heka.html" class="nav-link">Heka: The Source of Power</a></li>
-                    <li><a href="maat-isfet.html" class="nav-link">Ma'at & Isfet</a></li>
-                    <li><a href="thoth-hermes.html" class="nav-link">Thoth & Hermes Trismegistus</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// DIVINE ALIGNMENT: CONFIRMED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Netjeru — Divine Principles</a></li>
+            <li><a href="#syncretism">II. Syncretism — The Overlap of Frequencies</a></li>
+            <li><a href="#major-deities">III. Directory of Major Netjeru</a></li>
+            <li><a href="#domestic">IV. Domestic Guardians — Bes and Taweret</a></li>
+            <li><a href="#zoomorphism">V. Sacred Fauna — Biological Resonators</a></li>
+            <li><a href="#practice">VI. Aligning with the Archetypes</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Netjeru — Divine Principles</h2>
+        <p>
+            The Egyptian gods (Ancient Egyptian: <i>Netjeru</i>) were not viewed as external "beings" in the modern sense, but as <strong>fundamental principles</strong> or <strong>divine frequencies</strong> that animate the cosmos. The term <i>Netjer</i> is related to the idea of renewal and functional integrity.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, the Pantheon is viewed as a <strong>modular symbolic operating system</strong>. Each deity represents a specific bandwidth of information and energy. By utilizing the correct icon (image), name (Ren), and ritual (Heka), the practitioner can achieve resonance with these archetypes to alter the local awareness field.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: SYNCRETISM -->
+    <section id="syncretism">
+        <h2 class="section-head">II. Syncretism — The Overlap of Frequencies</h2>
+        <p>
+            Egyptian theology utilized <strong>Syncretism</strong> — the temporary or permanent merging of two or more deities (e.g., Amun-Ra, Sobek-Re, Ptah-Sokar-Osiris). This was not theological confusion, but a sophisticated statement about the underlying unity of cosmic principles.
+        </p>
+        <p>
+            Syncretism allowed for the creation of <strong>complex resonances</strong>. By combining the attributes of "The Hidden One" (Amun) with "The Manifest Sun" (Ra), the priesthood established a more robust and expansive divine archetype capable of governing an empire.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: MAJOR DEITIES -->
+    <section id="major-deities">
+        <h2 class="section-head">III. Directory of Major Netjeru</h2>
+        <div class="deity-grid">
+            <div class="deity-card">
+                <h4>ATUM-RE</h4>
+                <p>The primordial Monad and the setting sun. The source from which all emanation begins. He is the self-generated one who exists before time.</p>
+            </div>
+            <div class="deity-card">
+                <h4>PTAH</h4>
+                <p>The supreme architect and craftsman. He created the world through <strong>Thought</strong> (Sia) and <strong>Speech</strong> (Hu). See <a href="memphite-theology.html" class="nl">Memphite Theology</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>OSIRIS [Asar]</h4>
+                <p>Lord of the Afterlife and the regenerative power of the earth. The prototype for all resurrection and the judge of the heart. See <a href="osiris.html" class="nl">Osiris</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>ISIS [Aset]</h4>
+                <p>Mistress of the Throne and Great of Magic (Weret-Hekau). The intelligence that reassembles the fragmented world. See <a href="isis.html" class="nl">Isis</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>THOTH [Djehuty]</h4>
+                <p>The scribe of the gods and master of all written knowledge. He is the keeper of the cosmic records and the patron of the <a href="house-of-life.html" class="nl">House of Life</a>. See <a href="thoth-hermes.html" class="nl">Thoth-Hermes</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>HATHOR</h4>
+                <p>Goddess of love, music, and the celestial sky. She represents the harmonic resonance of the universe and is the primary <strong>Eye of Ra</strong>. See <a href="hathor.html" class="nl">Hathor</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>HORUS</h4>
+                <p>The sky god and the archetype of divine kingship. He is the son of Isis and Osiris, representing the <strong>active victory of order</strong> over chaos.</p>
+            </div>
+            <div class="deity-card">
+                <h4>SET</h4>
+                <p>The god of storms, the desert, and <strong>necessary chaos</strong>. He is the force of dynamic change and the defender of the solar barque against <a href="apep.html" class="nl">Apep</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>ANUBIS</h4>
+                <p>The master of embalming and the psychopomp who leads the soul through the gates of the underworld. The guardian of the threshold. See <a href="anubis.html" class="nl">Anubis</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>SEKHMET</h4>
+                <p>The wrathful aspect of the Eye of Ra. The lioness goddess of war, plague, and solar fire. She represents raw entropic power redirected for protection.</p>
+            </div>
+            <div class="deity-card">
+                <h4>MA'AT</h4>
+                <p>The personification of truth, balance, and cosmic order. She is the standard by which all existence is weighed. See <a href="maat-isfet.html" class="nl">Ma'at & Isfet</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>NEITH</h4>
+                <p>The ancient weaver goddess who wove the universe on her cosmic loom. She is the mother of the sun and a primary guardian of the soul.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: ZOOMORPHISM -->
+    <section id="zoomorphism">
+        <h2 class="section-head">V. Sacred Fauna — Biological Resonators</h2>
+        <p>
+            Egyptian zoomorphism was the recognition that certain animals possess a <strong>biological frequency</strong> that resonates with specific divine principles. These animals were viewed as the living <i>Ba</i> (manifestation) of the gods on earth.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE FALCON (HORUS)</h4>
+                <p>Resonates with the active solar intellect and sharpness of vision. Its ability to "pierce" the sky represents the soul's celestial ascent.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE SCARAB (KHEPRI)</h4>
+                <p>Resonates with the principle of <strong>Becoming</strong> (Kheper). Its behavior of self-generation mirrors the sun's rebirth each dawn.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="glyph-marker">𓊹 𓊹 𓊹 𓊹 𓊹 𓊹</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="heka.html">Heka — The Source of Power</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="osiris.html">Osiris — Lord of the Dead</a></li>
+            <li><a href="isis.html">Isis — Great of Magic</a></li>
+            <li><a href="thoth-hermes.html">Thoth-Hermes</a></li>
+            <li><a href="anubis.html">Anubis — Master of Secrets</a></li>
+            <li><a href="hathor.html">Hathor — Lady of Joy</a></li>
+            <li><a href="ennead-ogdoad.html">The Ennead & Ogdoad</a></li>
+            <li><a href="memphite-theology.html">Memphite Theology (Ptah)</a></li>
+            <li><a href="solar-barque.html">The Solar Barque of Re</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    DIVINE ALIGNMENT: CONFIRMED</p>
+</footer>
 
 </body>
 </html>

@@ -3,131 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE OPENING OF THE MOUTH :: EGYPTOLOGY WIKI</title>
+    <title>THE OPENING OF THE MOUTH [wp-r] :: SACRED ANIMATION :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓂋 𓏞 𓈖 𓊹 𓌃';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE OPENING OF THE MOUTH [wp-r]</h1>
-            <p class="text-gray-500 egypt-text-color">// THE SACRED ANIMATION: THE RITUAL OF RESTORING THE SENSES //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">OPENING OF THE MOUTH</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">wp-r</div>
+        <p class="page-subtitle">// SACRED ANIMATION :: THE RITUAL OF RESTORING THE SENSES //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="ritual-practice.html" class="nav-link">Ritual Practice</a> > Opening of the Mouth
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="ritual-practice.html">RITUAL PRACTICE</a> &gt; OPENING OF THE MOUTH
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">What is the Wp-R Ritual?</h2>
-                <p class="mb-4">
-                    The <b>Opening of the Mouth</b> (Ancient Egyptian <i>wp-r</i>) is the central ritual of Egyptian funerary practice. Its purpose was to magically reanimate the mummy or a statue of the deceased, allowing the <a href="composite-soul.html" class="nav-link">Ba (personality)</a> and <a href="composite-soul.html" class="nav-link">Ka (vitality)</a> to recognize the body and for the senses (sight, hearing, speech, and eating) to be restored in the afterlife.
-                </p>
-                <p class="mb-4">
-                    The ritual was performed at the entrance to the tomb by a <b>Sem-priest</b>, often the eldest son of the deceased, using a series of specialized ritual tools. It transformed the "dead" object into a living, receptive vessel for the spirit.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The 75 Steps of the Liturgy</h2>
-                <p class="mb-4">
-                    The complete <i>Wp-R</i> ritual was an exhaustive liturgy consisting of approximately <b>75 distinct episodes</b> or steps. These included multiple purifications with water and incense, the slaughter of a sacrificial bull (the "Bull of Upper Egypt"), and the presentation of various ritual implements to the statue or mummy.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Sem-Priest</h4>
-                        <p class="text-sm">The primary officiant, distinguished by his <b>leopard-skin robe</b>. He represented the son of the deceased (Horus performing the rite for Osiris). His role was to transition from a state of trance-like sleep (simulating death) to active ritual command, bridging the two worlds.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Slaughter of the Bull</h4>
-                        <p class="text-sm">Not merely a sacrifice, the bull's foreleg was presented to the mummy's mouth while the animal was still alive. The <b>vital heat</b> and life-force of the animal were magically transferred to the deceased to jump-start the animation of the <a href="composite-soul.html#ka" class="nav-link">Ka</a>.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Tools of Animation: Celestial Iron</h3>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Adze (Netcherwy)</h4>
-                        <p class="text-sm">A forked blade of <b>meteoric iron</b> (known as <i>biȝ-n-pt</i>, "metal of heaven") used to touch the mouth and eyes of the mummy or statue. Because meteoric iron was literally "not of this world," it was believed to possess the high-frequency charge necessary to bridge the awareness gap between the material vessel and the celestial spirit.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Pesesh-Kef</h4>
-                        <p class="text-sm">A fish-tailed flint knife used to touch the jaw, restoring the ability to speak, eat, and breathe. Its origins date back to Predynastic birth rituals—its use in the funeral signifies the "birth" of the soul into the afterlife.</p>
-                    </div>
-                </div>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Aligning the Composite Soul</h4>
-                    <p class="text-sm">The <i>Wp-R</i> was the critical moment of <b>Soul Alignment</b>. By "opening" the senses of the <i>Khat</i> (body), the priest enabled the <a href="composite-soul.html#ba" class="nav-link">Ba</a> to recognize its physical anchor and the <a href="composite-soul.html#ka" class="nav-link">Ka</a> to receive the life-sustaining offerings. Without this ritual, the components of the soul would remain scattered and ineffective in the awareness field.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Metaphysical Impact</h2>
-                <p class="mb-4">
-                    By performing the Opening of the Mouth, the <a href="heka.html" class="nav-link">Heka (magic)</a> of the priest bridged the gap between the material and spiritual worlds. This ritual ensured that the deceased was not a "silent" mummy but a vibrant, "True of Voice" being capable of participating in the divine offerings and navigating the <a href="solar-barque.html" class="nav-link">Solar Barque</a>.
-                </p>
-                <div class="p-6 border border-amber-400 bg-amber-400/10 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Statue Animation</h4>
-                    <p class="text-sm">The ritual was also performed on cult statues of deities within the <b>House of Life</b>. This ensured that the god’s essence could inhabit the statue and interact with the physical world through temple services.</p>
-                </div>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="heka.html" class="nav-link">Heka: Primordial Force</a></li>
-                    <li><a href="composite-soul.html" class="nav-link">The Composite Soul</a></li>
-                    <li><a href="anubis.html" class="nav-link">Anubis: Master of Embalming</a></li>
-                    <li><a href="funerary-texts.html" class="nav-link">Funerary Texts</a></li>
-                    <li><a href="ritual-practice.html" class="nav-link">General Ritual Practice</a></li>
-                    <li><a href="temple-architecture.html" class="nav-link">Temple Architecture</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// VIBRATIONAL STATUS: ANIMATED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Animation — Restoring the Senses</a></li>
+            <li><a href="#liturgy">II. The 75 Steps of the Liturgy</a></li>
+            <li><a href="#priest">III. The Sem-Priest — The Bridge of the Leopard</a></li>
+            <li><a href="#tools">IV. The Tools of Animation — Celestial Iron</a></li>
+            <li><a href="#transfer">V. Transfer of Vitality — The Bull of Upper Egypt</a></li>
+            <li><a href="#statues">VI. Animation of Cult Statues in the House of Life</a></li>
+            <li><a href="#transfiguration">VII. Result — Transfiguration into an Akh</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Animation — Restoring the Senses</h2>
+        <p>
+            The <strong>Opening of the Mouth</strong> (Ancient Egyptian: <i>wp-r</i>) is the most critical ritual in Kemetic funerary and cult practice. Its purpose is the magical <strong>re-animation</strong> of an inert body (the mummy) or a material object (a statue), permitting it to function as a living vessel for the spirit.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, this ritual is viewed as <strong>hardware-software synchronization</strong>. By "opening" the eyes, ears, and mouth of the physical vessel (the Khat), the priest enables the <a href="composite-soul.html" class="nl">Ba and Ka</a> to interface correctly with the material plane, restoring the capacity for perception and authoritative utterance (Hu) in the afterlife.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: LITURGY -->
+    <section id="liturgy">
+        <h2 class="section-head">II. The 75 Steps of the Liturgy</h2>
+        <p>
+            The complete <i>wp-r</i> ritual was an exhaustive liturgy consisting of approximately 75 distinct episodes. These included:
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li>Multiple purifications with water and <strong>Natron</strong>.</li>
+            <li>The censing of the vessel with <i>senetjer</i> (incense).</li>
+            <li>The ritual slaughter of a bull to transfer vital heat.</li>
+            <li>The repeated touching of the face with specialized <strong>Heka</strong> tools.</li>
+        </ul>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: PRIEST -->
+    <section id="priest">
+        <h2 class="section-head">III. The Sem-Priest — The Bridge of the Leopard</h2>
+        <p>
+            The primary officiant was the <strong>Sem-Priest</strong>, distinguished by his leopard-skin robe. In the ritual drama, he represented Horus performing the rite for his father Osiris.
+        </p>
+        <p>
+            The Sem-Priest would often begin the ritual in a state of <strong>initiatic trance</strong>, simulating a journey to the spirit world to retrieve the <i>Ba</i> of the deceased. His return to wakeful consciousness signaled the successful bridging of the two domains.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: TOOLS -->
+    <section id="tools">
+        <h2 class="section-head">IV. The Tools of Animation — Celestial Iron</h2>
+        <p>
+            The effectiveness of the ritual depended on the use of specific ritual implements, many of which were crafted from <strong>meteoric iron</strong> (<i>bia-n-pt</i>, "metal of heaven").
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE ADZE (NETCHERWY)</h4>
+                <p>A forked tool used to touch the eyes and mouth. Because meteoric iron was "not of this world," it was believed to possess the high-frequency charge required to "shatter" the inertia of death.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE PESESH-KEF</h4>
+                <p>A fish-tailed flint knife used to touch the jaw. This tool has roots in Predynastic birth rituals — its use here signifies the "re-birth" of the soul into the eternal awareness field.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: STATUES -->
+    <section id="statues">
+        <h2 class="section-head">VI. Animation of Cult Statues</h2>
+        <p>
+            The Opening of the Mouth was not reserved for the dead. It was performed within the <a href="house-of-life.html" class="nl">House of Life</a> on every cult statue of a deity before it was placed in the temple sanctuary.
+        </p>
+        <p>
+            This <strong>animation protocol</strong> ensured that the statue was not a mere representation, but a functional resonator that the deity's essence could inhabit. This allowed the god to perceive the offerings and respond to the petitions of the priesthood, maintaining the active link between the divine and material realms.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓂋 𓏞 𓈖 𓊹 𓌃</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="composite-soul.html">The Composite Soul (Akh/Ba/Ka)</a></li>
+            <li><a href="funerary-texts.html">The Funerary Corpus</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Typology</a></li>
+            <li><a href="anubis.html">Anubis — Master of Embalming</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    VIBRATIONAL STATUS: ANIMATED</p>
+</footer>
 
 </body>
 </html>

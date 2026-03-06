@@ -3,109 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HU :: EGYPTOLOGY WIKI</title>
+    <title>HU [Ḥw] :: AUTHORITATIVE UTTERANCE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓂋 𓈖 𓊹 𓌃';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">HU [Ḥw]</h1>
-            <p class="text-gray-500 egypt-text-color">// AUTHORITATIVE UTTERANCE AND CREATIVE WORD //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">HU</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">ḥw</div>
+        <p class="page-subtitle">// AUTHORITATIVE UTTERANCE :: THE COMMANDING WORD :: THE LOGOS //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="heka.html" class="nav-link">Heka</a> > Hu
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="heka.html">HEKA</a> &gt; HU
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Tongue of the Creator</h2>
-                <p class="mb-4">
-                    <b>Hu</b> is the personification of the spoken word, the <b>Commanding Word</b> that brings the conceptualizations of the heart (<a href="sia.html" class="nav-link">Sia</a>) into material existence. In the <b>Memphite Theology</b>, Ptah conceived the universe in his heart (Sia) and then vocalized it through his tongue (Hu).
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">The Ptah-Sia-Hu Triad</h4>
-                    <p class="text-sm">This creative triad represents the first "circuit" of manifestation. Sia is the <b>input</b> (perception), Hu is the <b>output</b> (command), and <a href="heka.html" class="nav-link">Heka</a> is the <b>current</b> (energy) that makes the circuit operational. Hu ensures that the "Divine Words" (Medu Netjer) are not just sounds, but reality-altering vibrations.</p>
-                </div>
-                <p class="mb-4">
-                    Hu represents the <i>Logos</i> in its most active, vocalized form. It is the command that initiates the <b>Collapse</b> of potentiality into manifest reality. For the practitioner of <a href="heka.html" class="nav-link">Heka</a>, Hu is the mastery of the voice—ensuring that every spell is spoken with the authority of divine truth (<i>maat-kheru</i>).
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Functional Application</h3>
-                <p class="mb-4">
-                    The mobilization of Hu requires the physical organ of the tongue and the spiritual force of <b>Heka</b>. When a priest or scribe recites the "Divine Words" (<a href="../hieroglyphs.html" class="nav-link">Medu Netjer</a>), they are not merely transmitting information; they are performing an act of creation or restoration.
-                </p>
-                <p class="mb-4">
-                    Hu is essential for:
-                </p>
-                <ul class="list-disc list-inside space-y-2 opacity-80 ml-4">
-                    <li>The <b>Opening of the Mouth</b> ritual, animating statues and the deceased.</li>
-                    <li>The recitation of protective spells in the <a href="netherworld-books.html" class="nav-link">Netherworld</a>.</li>
-                    <li>The establishment of legal and cosmic decrees.</li>
-                </ul>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Hermetic Correspondence</h3>
-                <p class="mb-4">
-                    Hu corresponds to the Hermetic <b>Logos</b> (the Word). It is the bridge between the internal Mind (<a href="sia.html" class="nav-link">Nous</a>) and the external Universe. Through Hu, the unmanifested "All" expresses its nature in the structured cycles of Time and Space.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="sia.html" class="nav-link">Sia (Divine Perception)</a></li>
-                    <li><a href="heka.html" class="nav-link">Heka (Magical Power)</a></li>
-                    <li><a href="../hieroglyphs.html" class="nav-link">Medu Netjer (The Words of God)</a></li>
-                    <li><a href="memphite-theology.html" class="nav-link">Memphite Theology</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// UTTERANCE FREQUENCY: RESONATING // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Hu — The Tongue of God</a></li>
+            <li><a href="#triad">II. The Sia-Hu-Heka Triad — The Creative Circuit</a></li>
+            <li><a href="#application">III. Functional Application — Ritual and Decree</a></li>
+            <li><a href="#medu-netjer">IV. Medu Netjer — The Materialization of the Word</a></li>
+            <li><a href="#hermeticism">V. Hermetic Correspondence — The Logos</a></li>
+            <li><a href="#maat-kheru">VI. Ma'at Kheru — The True of Voice</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Hu — The Tongue of God</h2>
+        <p>
+            <strong>Hu</strong> (Ancient Egyptian: <i>ḥw</i>) is the personification of the spoken word, specifically the <strong>Commanding Word</strong> or "Authoritative Utterance." He represents the active power of the creator god to bring the conceptualizations of the mind into material existence through vocalization.
+        </p>
+        <p>
+            In the <a href="memphite-theology.html" class="nl">Memphite Theology</a>, Ptah conceived the universe in his heart (<a href="sia.html" class="nl">Sia</a>) and then gave it form and reality through his tongue (Hu). Hu is the bridge between the internal intention and the external manifestation. He is the force that turns a thought into a decree.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: TRIAD -->
+    <section id="triad">
+        <h2 class="section-head">II. The Sia-Hu-Heka Triad — The Creative Circuit</h2>
+        <p>
+            Hu does not operate in isolation. He is part of a <strong>Creative Triad</strong> that defines the mechanics of manifestation in the Kemetic universe:
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>SIA (PERCEPTION)</h4>
+                <p>The <strong>Input</strong>. Sia is the divine intelligence and the faculty of the heart to perceive and conceptualize the blueprint of creation.</p>
+            </div>
+            <div class="info-card">
+                <h4>HU (UTTERANCE)</h4>
+                <p>The <strong>Output</strong>. Hu is the commanding word that vocalizes the thought, initiating the collapse of potential into actualized form.</p>
+            </div>
+            <div class="info-card">
+                <h4>HEKA (POWER)</h4>
+                <p>The <strong>Current</strong>. Heka is the underlying energy that powers the circuit, permitting the thought and the word to alter reality.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: APPLICATION -->
+    <section id="application">
+        <h2 class="section-head">III. Functional Application — Ritual and Decree</h2>
+        <p>
+            In practical <a href="heka.html" class="nl">Heka</a>, the mobilization of Hu is essential for any operation. The priest or magician must not merely read a spell; they must <strong>utter it with authority</strong>.
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li><strong>The Opening of the Mouth:</strong> This ritual utilized Hu to animate statues and the deceased, restoring their faculties of perception and speech in the afterlife.</li>
+            <li><strong>Legal Decrees:</strong> In the Pharaonic state, the King's word was Hu. His decrees were not just laws but cosmic alignments that maintained Ma'at.</li>
+            <li><strong>Exorcism & Protection:</strong> Commands to spirits or malevolent forces required the "Voice of Hu" to be effective.</li>
+        </ul>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: HERMETICISM -->
+    <section id="hermeticism">
+        <h2 class="section-head">V. Hermetic Correspondence — The Logos</h2>
+        <p>
+            Hu corresponds directly to the Hermetic and Neoplatonic concept of the <strong>Logos</strong> (the Word). In the <i>Corpus Hermeticum</i>, the Word is the active agent of the Divine Mind (Nous), bringing structure and order to the chaotic elements of the material realm.
+        </p>
+        <p>
+            Through Hu, the unmanifested "All" expresses its nature in the structured cycles of Time and Space. The practitioner of Hermetic theurgy seeks to align their own voice with the "Word of the Shepherd," achieving the state of <strong>Authoritative Utterance</strong>.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓂋 𓈖 𓊹 𓌃</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="sia.html">Sia — Divine Perception</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="memphite-theology.html">Memphite Theology</a></li>
+            <li><a href="../hieroglyphs.html">Medu Netjer — Words of God</a></li>
+            <li><a href="opening-of-the-mouth.html">Opening of the Mouth</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="thoth-hermes.html">Thoth — Master of Scribes</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    UTTERANCE FREQUENCY: RESONATING</p>
+</footer>
 
 </body>
 </html>

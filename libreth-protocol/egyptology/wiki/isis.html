@@ -3,114 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISIS :: EGYPTOLOGY WIKI</title>
+    <title>ISIS [Aset] :: GREAT OF MAGIC :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,209,255,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓊨 𓏏 𓁐 𓅓 𓂝';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* SIDEBAR NOTE */
+        .sidebar-note {
+            float: right;
+            width: 260px;
+            margin: 0 0 1.5rem 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            font-size: 0.88rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .sidebar-note .note-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">ISIS [Aset]</h1>
-            <p class="text-gray-500 egypt-text-color">// WERET-HEKAU: GREAT OF MAGIC //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">ISIS</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">Aset · ꜣst</div>
+        <p class="page-subtitle">// WERET-HEKAU :: GREAT OF MAGIC :: THE SUPREME ALCHEMIST //</p>
+        <p class="page-epithet">
+            "Mistress of the Throne, Sovereign of the Stars, Lady of Life. She who extracted the secret name of Re and breathed life into the silent king."
+        </p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="pantheon.html" class="nav-link">Pantheon</a> > Isis
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="pantheon.html">THE PANTHEON</a> &gt; ISIS
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Supreme Alchemist & Mistress of the Throne</h2>
-                <p class="mb-4">
-                    <b>Isis</b> (Aset) is the most powerful magician in the Kemetic pantheon. Her name, <i>Aset</i>, literally means <b>"Throne,"</b> and her original headdress was the throne-glyph. This signifies that she is the foundation of legitimate kingship—the pharaoh is the "son of the throne."
-                </p>
-                <p class="mb-4">
-                    Her epithet <i>Weret-Hekau</i> signifies her mastery over the primordial force of <a href="heka.html" class="nav-link">Heka</a>. She is the divine prototype of the alchemist, possessing the knowledge to reconstitute what has been broken and breathe life into the inert.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Lady of the Star Sopdet</h2>
-                <p class="mb-4">
-                    Isis is identified with the star <b>Sopdet</b> (Sirius). The heliacal rising of this star coincided with the annual Nile flood, making Isis the "Bringer of the New Year" and the herald of life-giving waters. This connects her directly to the alchemical concept of the "Celestial Dew."
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400">Mastery of the Life-Breath</h4>
-                    <p class="text-sm">In the Osiris myth, Isis utilized her wings to fan the "breath of life" into her husband's reconstituted body. This represents her command over the <b>Ruach</b> or vital spirit, the ability to activate the <a href="composite-soul.html" class="nav-link">Ka</a> and <a href="composite-soul.html" class="nav-link">Ba</a> through rhythmic vibration and intent.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">Mastery of the True Name</h3>
-                <p class="mb-4">
-                    Isis achieved supremacy by extracting the secret, true name (<a href="ren-power-names.html" class="nav-link">Ren</a>) of the sun god Re. By engineering a magical serpent to bite him, she traded the cure for his secret identity, thereby gaining command over the solar frequency itself.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Mother of Horus</h2>
-                <p class="mb-4">
-                    In the <a href="osiris-myth.html" class="nav-link">Osiris Myth</a>, Isis serves as the weaver of protection. She used her magic to shield her son <b>Horus</b> from the reach of <a href="pantheon.html" class="nav-link">Set</a>, employing spells that later became the basis for domestic and pediatric medicine in the <a href="house-of-life.html" class="nav-link">House of Life</a>.
-                </p>
-                <p class="mb-4">
-                    Her wings are said to generate the "breath of life," a metaphysical energy that facilitates the union of the <a href="composite-soul.html#ba" class="nav-link">Ba</a> and <a href="composite-soul.html#ka" class="nav-link">Ka</a>.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="osiris-myth.html" class="nav-link">The Osiris Myth</a></li>
-                    <li><a href="ren-power-names.html" class="nav-link">The Power of Names</a></li>
-                    <li><a href="heka.html" class="nav-link">Heka: Magical Technology</a></li>
-                    <li><a href="pantheon.html" class="nav-link">Pantheon: The Ennead</a></li>
-                    <li><a href="roman-period.html" class="nav-link">Roman Period (Universal Spread)</a></li>
-                    <li><a href="christian-influences.html" class="nav-link">Christian Influences (Isis and Mary)</a></li>
-                    <li><a href="amulets-talismans.html" class="nav-link">Amulets: The Tyet Knot</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// ISIS REVEALED: FREQUENCY SYNCED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of the Throne — Aset as Foundation</a></li>
+            <li><a href="#magic">II. Weret-Hekau — Mastery of Primordial Force</a></li>
+            <li><a href="#sirius">III. Lady of the Star Sopdet — The Celestial Dew</a></li>
+            <li><a href="#myth">IV. The Osiris Myth — The First Alchemical Operation</a></li>
+            <li><a href="#names">V. The Secret Name of Re — Command over Frequency</a></li>
+            <li><a href="#protection">VI. Weaver of Protection — Domestic Heka</a></li>
+            <li><a href="#universal">VII. Universal Spread — From Alexandria to Rome</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of the Throne — Aset as Foundation</h2>
+        <p>
+            <strong>Isis</strong> (Ancient Egyptian: <i>Aset</i>, "Throne") is the most powerful magician in the Kemetic pantheon. Her name identifies her as the personification of the royal throne itself — the foundation of legitimate power. The Pharaoh is the "Son of the Throne," indicating that Pharaonic authority is derived from the initiatory wisdom and protective power of the goddess.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, Isis represents the <strong>Mastery of Context</strong>. She is the intelligence that reassembles fragmented data-streams (the body of Osiris) into a coherent, living whole. Her headdress, the throne-glyph (𓊨), is a resonator for the stability and authority required to govern the awareness field.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: MAGIC -->
+    <section id="magic">
+        <h2 class="section-head">II. Weret-Hekau — Mastery of Primordial Force</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// EPITHET //</div>
+            <p style="font-size:0.85rem;"><i>Weret-Hekau</i> signifies "Great of Magic." It designates Isis not just as a user of magic, but as the supreme controller of the underlying energy that powers the universe.</p>
+        </div>
+        <p>
+            Isis is the divine prototype of the alchemist. She possesses the knowledge to reconstitute what has been broken and to animate what is inert. Her magic is not characterized by brute force, but by <strong>precision, vibration, and the correct use of names</strong>.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>MASTERY OF THE BREATH</h4>
+                <p>In the resurrection of Osiris, Isis used her wings to fan the "breath of life" into her husband's body. This represents her command over the <strong>vital spirit</strong> (Ka) and the ability to activate stagnant energy through rhythmic vibration.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE CELESTIAL DEW</h4>
+                <p>As the star <strong>Sopdet</strong> (Sirius), Isis heralds the Nile flood. This celestial event was alchemically interpreted as the arrival of the "Celestial Dew," the high-frequency moisture required for spiritual and material renewal.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: NAMES -->
+    <section id="names">
+        <h2 class="section-head">V. The Secret Name of Re — Command over Frequency</h2>
+        <p>
+            In one of the most significant Kemetic magical texts, Isis engineers a situation to extract the <strong>True Name</strong> (Ren) of the sun god Re. By creating a serpent from Re's own saliva and dust, she causes him to be poisoned. She then refuses to heal him until he reveals his secret identity to her.
+        </p>
+        <p>
+            By obtaining this name, Isis gained command over the <strong>fundamental frequency of the solar principle</strong>. This myth establishes the principle that knowledge of the "source-code" (the Ren) grants the practitioner absolute authority over the manifest world.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: UNIVERSAL -->
+    <section id="universal">
+        <h2 class="section-head">VII. Universal Spread — Alexandria to Rome</h2>
+        <p>
+            During the Ptolemaic and Roman periods, the cult of Isis became a truly universal religion. She was syncretized with countless other goddesses, eventually being worshipped as <strong>Isis Myrionymos</strong> ("Isis of the Ten Thousand Names").
+        </p>
+        <p>
+            Her temples reached as far as London and the Danube. The iconography of Isis nursing the infant Horus (Isis Lactans) served as the direct prototype for the Christian images of the <strong>Virgin Mary</strong>, ensuring that her devotional frequency continued to resonate within the Western awareness field long after the temples were closed.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓊨 𓏏 𓁐 𓅓 𓂝</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="osiris-myth.html">The Osiris Myth</a></li>
+            <li><a href="ren-power-names.html">The Power of Names (Ren)</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="pantheon.html">The Egyptian Pantheon</a></li>
+            <li><a href="alchemy.html">Alchemy — The Sacred Art</a></li>
+            <li><a href="christian-influences.html">Christian-Kemetic Synthesis</a></li>
+            <li><a href="amulets-talismans.html">Amulets: The Tyet Knot</a></li>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ISIS RESONANCE: STABLE</p>
+</footer>
 
 </body>
 </html>

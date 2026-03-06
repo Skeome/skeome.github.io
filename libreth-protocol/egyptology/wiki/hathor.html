@@ -3,124 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HATHOR :: EGYPTOLOGY WIKI</title>
+    <title>HATHOR [ḥwt-ḥrw] :: THE HOUSE OF HORUS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
+            --hathor-green: #2e8b57;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(46,139,87,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓉗 𓏏 𓁐 𓈖 𓅃';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+        .page-epithet {
+            font-style: italic;
+            color: rgba(212,175,55,0.6);
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">HATHOR [ḥwt-ḥrw]</h1>
-            <p class="text-gray-500 egypt-text-color">// THE HOUSE OF HORUS: LOVE, MUSIC, AND THE EYE OF RA //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">HATHOR</h1>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">ḥwt-ḥrw</div>
+        <p class="page-subtitle">// THE HOUSE OF HORUS :: LOVE, MUSIC, AND THE EYE OF RA //</p>
+        <p class="page-epithet">
+            "Mistress of the Sky, Sovereign of the Stars, Lady of the West. She who pacifies the wrath of the sun and fills the land with joy."
+        </p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="pantheon.html" class="nav-link">The Pantheon</a> > Hathor
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="pantheon.html">THE PANTHEON</a> &gt; HATHOR
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Mistress of the Sky</h2>
-                <p class="mb-4">
-                    Hathor is one of the most important and complex goddesses in the Egyptian pantheon. Her name, <b>ḥwt-ḥrw</b>, means "The House of Horus," identifying her as the celestial space containing the sun god. She is often depicted as a woman with cow's horns and a sun disk, or as a cow itself, symbolizing her role as a maternal and nurturing deity.
-                </p>
-                <p class="mb-4">
-                    Hathor's domains are vast: she is the goddess of love, beauty, music, dance, motherhood, and joy. She also oversees the mining of precious stones and the western horizon where the sun sets and the dead enter the underworld.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Myth of the Distant Goddess</h3>
-                <p class="mb-4">
-                    In the powerful myth of the "Distant Goddess," the eye of Ra (Hathor) becomes enraged and flees into the Nubian desert in the form of the fierce lioness <b>Sekhmet</b>, threatening to destroy humanity. To pacify her, Ra sends Thoth to trick her with red-dyed beer, which she mistakes for blood. Upon drinking it, she becomes intoxicated and reverts to the benevolent, joyful Hathor.
-                </p>
-                <div class="p-6 border border-amber-900 bg-amber-950/20 mb-8">
-                    <h4 class="font-bold text-amber-400">The Alchemical Transformation</h4>
-                    <p class="text-sm">In esoteric terms, this myth represents the transmutation of uncontrolled, destructive energy into a refined, creative force—a process of <i>Nigredo</i> to <i>Albedo</i>. The pacification is achieved through music and the "sweetening" of the spirit.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Mistress of the West and the Seven Hathors</h2>
-                <p class="mb-4">
-                    Hathor is the <b>Mistress of the West</b> (Amentet), the guardian of the mountain through which the sun sets and the dead enter the underworld. In this aspect, she is often depicted as a cow emerging from the Theban cliffs, offering bread and water to the deceased and receiving the <a href="solar-barque.html" class="nav-link">Solar Barque</a> at the end of its day journey.
-                </p>
-                <div class="grid md:grid-cols-2 gap-4 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Seven Hathors</h4>
-                        <p class="text-sm">Hathor manifesting as seven distinct spirits of fate. They are present at birth to decree the <b>Sha</b> (destiny) of the child. In initiatory work, they represent the seven frequencies of emotional and spiritual mastery that must be harmonized.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Milky Way</h4>
-                        <p class="text-sm">Hathor was anciently identified with the <b>Milky Way</b>, seen as the celestial river of milk flowing from the cosmic cow, which the solar barque navigated in the nighttime sky.</p>
-                    </div>
-                </div>
-                <div class="p-6 border border-amber-900 bg-amber-950/20 mb-8">
-                    <h4 class="font-bold text-amber-400">Ritual of the Sistrum</h4>
-                    <p class="text-sm">The <b>Sistrum</b> (<i>sesheshet</i>) is Hathor's sacred instrument. Its metallic rattle was used to "drive away the clouds" from the mind and pacify the wrathful Eye. Esoterically, the sistrum's vibration was believed to maintain the structural integrity of the <b>divine order</b>, preventing it from collapsing into chaos.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Dendera and the Zodiac</h2>
-                <p class="mb-4">
-                    Hathor's primary cult center was the <b>Temple of Dendera</b>. This temple is home to the famous <a href="math-astronomy.html" class="nav-link">Dendera Zodiac</a>, a monumental ceiling relief that synthesizes Egyptian and Babylonian/Greek astronomical knowledge. The temple's architecture, including its unique "Hathor-headed" columns, was designed as a microcosmic resonator for the celestial harmonies of the goddess.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="pantheon.html" class="nav-link">The Egyptian Pantheon</a></li>
-                    <li><a href="math-astronomy.html" class="nav-link">Mathematics & Astronomy</a></li>
-                    <li><a href="solar-barque.html" class="nav-link">The Solar Barque (Mesektet)</a></li>
-                    <li><a href="apep.html" class="nav-link">Apep: The Adversary</a></li>
-                    <li><a href="alchemy.html" class="nav-link">Alchemy & Transformation</a></li>
-                    <li><a href="ritual-practice.html" class="nav-link">Sacred Music and Vibration</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// VIBRATIONAL ALIGNMENT: JOY // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Hathor — The Celestial Container</a></li>
+            <li><a href="#eye-of-ra">II. The Eye of Ra — Power and Pacification</a></li>
+            <li><a href="#distant-goddess">III. The Myth of the Distant Goddess</a></li>
+            <li><a href="#west">IV. Mistress of the West and the Seven Hathors</a></li>
+            <li><a href="#music">V. Ritual Music — The Sistrum and the Menat</a></li>
+            <li><a href="#dendera">VI. Dendera — Architecture of the Stars</a></li>
+            <li><a href="#alchemy">VII. Alchemical Transmutation of Wrath into Joy</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Hathor — The Celestial Container</h2>
+        <p>
+            <strong>Hathor</strong> (Ancient Egyptian: <i>ḥwt-ḥrw</i>, "The House of Horus") is one of the most multi-faceted and consistently venerated goddesses in Kemet. Her name identifies her as the <strong>celestial space</strong> — the womb of the sky — that contains and protects the sun god Horus. She is the divine feminine principle in its nurturing, creative, and erotic aspects.
+        </p>
+        <p>
+            Depicted as a cow, a woman with cow's horns and a sun disk, or a stylized female face with cow's ears, Hathor represents the underlying <strong>harmonic resonance</strong> of the universe. She is the goddess of love, beauty, music, and the western horizon where the day ends and the soul begins its nocturnal journey.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: EYE OF RA -->
+    <section id="eye-of-ra">
+        <h2 class="section-head">II. The Eye of Ra — Power and Pacification</h2>
+        <p>
+            Hathor functions as the primary <strong>Eye of Ra</strong> — the active, protective, and sometimes destructive force of the sun god. In this role, she is the defender of Ma'at, capable of manifesting as the fierce lioness <strong>Sekhmet</strong> to annihilate the enemies of order.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE WRATHFUL ASPECT</h4>
+                <p>When the Eye becomes enraged, she represents uncontrolled entropic force. This aspect must be pacified through ritual, music, and the "offering of the sistrum" to return the goddess to her benevolent, joyful state.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE LADY OF MALACHITE</h4>
+                <p>Hathor oversaw the mining of turquoise and malachite. These green stones were believed to be physical crystallizations of her life-giving power, used in amulets to attract fertility and renewal.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: DISTANT GODDESS -->
+    <section id="distant-goddess">
+        <h2 class="section-head">III. The Myth of the Distant Goddess</h2>
+        <p>
+            In this foundational myth, the Eye of Ra flees into the Nubian desert in the form of a wild lioness. Ra sends <strong>Thoth</strong> (the master of Sia/Perception) to find her. Through the use of stories and music, Thoth tricks her into drinking red-dyed beer, which she mistakes for blood.
+        </p>
+        <p>
+            Upon becoming intoxicated, she reverts to the joyful Hathor and returns to Egypt in a great procession. Esoterically, this myth represents the <strong>transmutation of base desire</strong> and aggression into refined creative energy — an alchemical shift from <i>Nigredo</i> to <i>Rubedo</i>.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: MUSIC -->
+    <section id="music">
+        <h2 class="section-head">V. Ritual Music — The Sistrum and the Menat</h2>
+        <p>
+            Music was not merely entertainment in Hathoric ritual; it was a <strong>vibrational technology</strong>.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE SISTRUM (SESHESHET)</h4>
+                <p>A metallic rattle used to "drive away the clouds" of the mind. Its sound was believed to mirror the cosmic hiss of creation and was used to pacify the gods and maintain the structural integrity of the divine order.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE MENAT NECKLACE</h4>
+                <p>A heavy, beaded necklace with a counterweight. When shaken, it produced a rhythmic sound that transmitted the goddess's maternal protection and ensured the stability of the physical body.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: DENDERA -->
+    <section id="dendera">
+        <h2 class="section-head">VI. Dendera — Architecture of the Stars</h2>
+        <p>
+            Hathor's primary cult center was the <strong>Temple of Dendera</strong> (<i>Iunet</i>). The temple was designed as a microcosmic resonator for celestial harmonies. Its ceiling contains the famous <strong>Dendera Zodiac</strong>, a monumental record of Kemetic and Hellenistic astronomical knowledge.
+        </p>
+        <p>
+            The "Hathor-headed" columns of the hypostyle hall represent the goddess as the pillar of the sky, supporting the vault of heaven and ensuring that the frequencies of the stars are correctly channeled into the earthly realm.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓉗 𓏏 𓁐 𓈖 𓅃</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="pantheon.html">The Egyptian Pantheon</a></li>
+            <li><a href="math-astronomy.html">Mathematical Theology</a></li>
+            <li><a href="solar-barque.html">The Solar Barque</a></li>
+            <li><a href="alchemy.html">Alchemy — The Transmutation</a></li>
+            <li><a href="ritual-practice.html">Sacred Music & Vibration</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="horus.html">Horus — The Sky God</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    VIBRATIONAL RESONANCE: HARMONIC</p>
+</footer>
 
 </body>
 </html>

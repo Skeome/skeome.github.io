@@ -3,108 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATHEMATICS & ASTRONOMY :: EGYPTOLOGY WIKI</title>
+    <title>MATHEMATICS & ASTRONOMY :: SACRED MEASURE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(0,209,255,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓏃 𓏄 𓏅 𓏆 𓏇 𓏈';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">MATHEMATICS & ASTRONOMY</h1>
-            <p class="text-gray-500 egypt-text-color">// THE MEASURE OF KEMET: ALIGNING THE EARTH WITH THE STARS //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">MATHEMATICS & ASTRONOMY</h1>
+        <p class="page-subtitle">// THE MEASURE OF KEMET :: SACRED GEOMETRY AND COSMIC TIMING //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="temple-architecture.html" class="nav-link">Temple Architecture</a> > Mathematics & Astronomy
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; MATHEMATICS & ASTRONOMY
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Egyptian Mathematics</h2>
-                <p class="mb-4">
-                    Egyptian mathematics was a practical, problem-solving system. A profound application of this science is found in the <a href="amulets-talismans.html" class="nav-link">Wedjat Eye amulet</a>, where the component parts of the eye correspond exactly to fractions of the <b>heqat</b> grain measure (1/2, 1/4, 1/8, 1/16, 1/32, 1/64), encoding sacred geometry into a protective talisman.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Rhind Papyrus (c. 1550 BCE)</h4>
-                        <p class="text-sm">The most extensive mathematical document, containing 84 problems. It includes the calculation of the area of a circle using a value for <b>Pi</b> (approximately 3.16), and the first systematic use of <b>Unit Fractions</b>—representing all fractions as the sum of reciprocals (e.g., 2/3 = 1/2 + 1/6).</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">The Moscow Papyrus (c. 1850 BCE)</h4>
-                        <p class="text-sm">Contains one of the most sophisticated achievements of ancient geometry: the formula for the volume of a <b>truncated pyramid</b> (frustum). This demonstrates a deep understanding of three-dimensional spatial awareness long before the Greeks.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Astronomy & The Decanal Clocks</h2>
-                <p class="mb-4">
-                    Astronomy was deeply integrated into Egyptian religion and <a href="temple-architecture.html" class="nav-link">temple orientation</a>. The Egyptians were the first to develop a <b>365-day solar calendar</b>, divided into three seasons (Akhet, Peret, and Shemu).
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Decans: The 36 Star Groups</h4>
-                    <p class="text-sm">The <b>36 Decans</b> were specific constellations that rose consecutively every ten days. These were used to create <b>Star Clocks</b> on the inside of coffin lids, allowing the deceased to tell the time in the night sky. Each Decan was associated with a specific deity and possessed a unique vibrational frequency used in the timing of <a href="heka.html" class="nav-link">Heka</a> rituals.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Dendera Zodiac</h2>
-                <p class="mb-4">
-                    The <b>Dendera Zodiac</b>, a bas-relief from the ceiling of the Temple of Hathor at Dendera, is one of the most famous astronomical artifacts from the Ptolemaic period. It represents a synthesis of traditional Egyptian decans and Babylonian/Greek zodiacal constellations, showing a sophisticated understanding of the night sky and the precession of the equinoxes.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="temple-architecture.html" class="nav-link">Temple Architecture</a></li>
-                    <li><a href="old-kingdom.html" class="nav-link">Pyramid Construction</a></li>
-                    <li><a href="hathor.html" class="nav-link">Hathor: Lady of Dendera</a></li>
-                    <li><a href="ptolemaic-period.html" class="nav-link">The Ptolemaic Synthesis</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// MATHEMATICAL PRECISION: ACTIVE // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Measure — Aligning Earth and Sky</a></li>
+            <li><a href="#wedjat">II. The Wedjat Eye — Mathematical Theology</a></li>
+            <li><a href="#papyri">III. Core Mathematical Papyri — Rhind and Moscow</a></li>
+            <li><a href="#geometry">IV. Sacred Geometry and Pyramidal Volume</a></li>
+            <li><a href="#decans">V. The 36 Decans — The Measurement of the Night</a></li>
+            <li><a href="#calendar">VI. The 365-Day Solar Calendar — Seasonal Rhythms</a></li>
+            <li><a href="#dendera">VII. The Dendera Zodiac — Late Synthesis</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Measure — Aligning Earth and Sky</h2>
+        <p>
+            In Ancient Kemet, mathematics and astronomy were not viewed as abstract sciences, but as the <strong>applied language of Ma'at</strong>. Measurement was a ritual act — a means of ensuring that the human-built world (architecture, irrigation, agriculture) was in perfect alignment with the divine blueprint of the cosmos.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, these disciplines represent <strong>precision tuning</strong>. By mastering the ratios of the earth and the movements of the stars, the Egyptians were able to establish stable "resonant fields" (temples and pyramids) that facilitated communication with higher-dimensional frequencies.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: WEDJAT -->
+    <section id="wedjat">
+        <h2 class="section-head">II. The Wedjat Eye — Mathematical Theology</h2>
+        <p>
+            One of the most profound applications of Kemetic mathematics is found in the <strong>Wedjat Eye</strong> (Eye of Horus). The component parts of the eye correspond precisely to fractions of the <i>heqat</i> grain measure:
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li>1/2: Inner corner</li>
+            <li>1/4: Pupil</li>
+            <li>1/8: Eyebrow</li>
+            <li>1/16: Outer corner</li>
+            <li>1/32: Curved tail</li>
+            <li>1/64: Tear track</li>
+        </ul>
+        <p>
+            The sum of these fractions is 63/64. The missing 1/64, which achieves total wholeness, represents <strong>Magic (Heka)</strong>. This illustrates the Kemetic view that while the world is mathematically structured, it requires a spiritual spark to achieve perfection.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: DECANS -->
+    <section id="decans">
+        <h2 class="section-head">V. The 36 Decans — The Measurement of the Night</h2>
+        <div class="sidebar-note">
+            <div class="note-title">// STAR CLOCKS //</div>
+            <p style="font-size:0.85rem;">Star clocks were often painted on the inside of coffin lids, providing the deceased with a celestial map to track the time in the night sky of the Duat.</p>
+        </div>
+        <p>
+            The Egyptians divided the celestial equator into 36 groups of stars known as <strong>Decans</strong>. Each decan rose consecutively every ten days, creating a "star clock" that allowed for the precise timekeeping of the night.
+        </p>
+        <p>
+            Each decan was associated with a specific deity and was believed to possess a unique vibrational frequency. The timing of <strong>Heka</strong> rituals was often synchronized with the rising of a particular decan to ensure that the magical operation was in resonance with the desired cosmic force.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: DENDERA -->
+    <section id="dendera">
+        <h2 class="section-head">VII. The Dendera Zodiac — Late Synthesis</h2>
+        <p>
+            The <strong>Dendera Zodiac</strong>, located on the ceiling of the Temple of <a href="hathor.html" class="nl">Hathor</a>, represents the final synthesis of Kemetic decanal astronomy with Babylonian and Greek zodiacal constellations.
+        </p>
+        <p>
+            It records a sophisticated understanding of the night sky, including the <strong>precession of the equinoxes</strong>. The Zodiac served as a microcosmic resonator, 'locking' the entire history of the heavens into the architecture of the temple, ensuring that the goddess's terrestrial house remained in sync with the cosmic cycles.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓏃 𓏄 𓏅 𓏆 𓏇 𓏈</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="temple-architecture.html">Temple Architecture</a></li>
+            <li><a href="old-kingdom.html">The Pyramid Age</a></li>
+            <li><a href="hathor.html">Hathor — Lady of Dendera</a></li>
+            <li><a href="ptolemaic-period.html">The Ptolemaic Period</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    MATHEMATICAL PRECISION: ACTIVE</p>
+</footer>
 
 </body>
 </html>

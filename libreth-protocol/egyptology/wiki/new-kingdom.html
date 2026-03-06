@@ -3,106 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE NEW KINGDOM :: EGYPTOLOGY WIKI</title>
+    <title>THE NEW KINGDOM :: THE IMPERIAL PEAK :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓋴 𓐍 𓅓 𓂝 𓏏 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE NEW KINGDOM</h1>
-            <p class="text-gray-500 egypt-text-color">// IMPERIAL EGYPT AND THE PEAK OF RITUAL //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE NEW KINGDOM</h1>
+        <p class="page-subtitle">// THE IMPERIAL PEAK :: THE GOLDEN AGE OF KEMET // LIBRETH ARCHIVE</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > New Kingdom
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; NEW KINGDOM
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Imperial Era (c. 1550–1075 BCE)</h2>
-                <p class="mb-4">
-                    The New Kingdom (Dynasties 18-20) represents the absolute peak of Egyptian power, wealth, and theological complexity. Having expelled the Hyksos, the pharaohs transformed Egypt into an international empire, extending control from the Euphrates in the north to the Fourth Cataract of the Nile in the south.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Hatshepsut & Thutmose III</h4>
-                        <p class="text-sm">The 18th Dynasty saw the rise of the female pharaoh <b>Hatshepsut</b>, who emphasized trade (the Punt expedition) and built her stunning mortuary temple at Deir el-Bahari. Her successor, <b>Thutmose III</b> (the "Napoleon of Egypt"), conducted 17 military campaigns, cementing Egypt as the world's superpower.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Ramesses II (The Great)</h4>
-                        <p class="text-sm">The 19th Dynasty was dominated by <b>Ramesses II</b>, whose 66-year reign saw the construction of Abu Simbel and the Ramesseum. He signed the world's first recorded peace treaty with the Hittites after the Battle of Kadesh.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Triumph of Amun-Ra</h3>
-                <p class="mb-4">
-                    The state god <b>Amun</b> of Thebes merged with the solar deity <b>Ra</b>, creating a supreme "King of the Gods." This synthesis represented the invisible spirit (Amun) manifesting through the visible sun (Ra). The High Priests of Amun at Karnak eventually became so wealthy and powerful that they rivaled the pharaohs themselves, eventually leading to the fragmentation of the Third Intermediate Period.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Funerary Transition</h2>
-                <p class="mb-4">
-                    Pyramids were abandoned in favor of hidden rock-cut tombs in the <b>Valley of the Kings</b>. This shift was motivated by security and a theological desire to place the royal body deep within the earth, mirroring the sun god's journey through the Duat.
-                </p>
-                <p class="mb-4">
-                    The <b>Book of the Dead</b> became the essential roadmap for this journey, emphasizing the <a href="weighing-of-the-heart.html" class="nav-link">Weighing of the Heart</a> as the ultimate test of integrity.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="funerary-texts.html" class="nav-link">Funerary Corpus (Book of the Dead)</a></li>
-                    <li><a href="amarna-period.html" class="nav-link">The Amarna Period</a></li>
-                    <li><a href="temple-architecture.html" class="nav-link">Temple Construction: Karnak & Luxor</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// IMPERIAL RESONANCE: PEAK // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Empire — The Warrior-God</a></li>
+            <li><a href="#eighteenth">II. The 18th Dynasty — Thutmosid Expansion</a></li>
+            <li><a href="#amarna">III. The Amarna Interlude — Theological Crisis</a></li>
+            <li><a href="#ramesside">IV. The 19th & 20th Dynasties — The Ramesside Era</a></li>
+            <li><a href="#amun-ra">V. The Priesthood of Amun-Ra — The State Within a State</a></li>
+            <li><a href="#valley">VI. The Valley of the Kings — Hidden Technology</a></li>
+            <li><a href="#decline">VII. The Great Fragmentation — Third Intermediate Transition</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Empire — The Warrior-God</h2>
+        <p>
+            The <strong>New Kingdom</strong> (c. 1550–1075 BCE) represents the absolute peak of Egyptian geopolitical power and theological complexity. After the trauma of the <a href="hyksos-exchange.html" class="nl">Hyksos</a> occupation, the Pharaonic state transformed itself into an expansive, military-oriented empire.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, this is the <strong>High-Bandwidth Expansion Phase</strong>. The Pharaonic ideal shifted from the "Shepherd-King" of the Middle Kingdom to the "Warrior-God," who actively pushed back the borders of <a href="maat-isfet.html" class="nl">Isfet</a> through military conquest and the construction of colossal monumental resonators (temples).
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: EIGHTEENTH -->
+    <section id="eighteenth">
+        <h2 class="section-head">II. The 18th Dynasty — Thutmosid Expansion</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>HATSHEPSUT</h4>
+                <p>One of the most effective female Pharaohs, she emphasized trade and divine legitimacy. Her mortuary temple at Deir el-Bahari is a masterpiece of architectural geometry, designed to align her reign with the primordial cycles of Hathor.</p>
+            </div>
+            <div class="info-card">
+                <h4>THUTMOSE III</h4>
+                <p>The "Napoleon of Egypt," he conducted 17 military campaigns, cementing control over the Levant and Nubia. His reign established the <strong>Karnak</strong> temple complex as the spiritual and economic engine of the world.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: AMUN-RA -->
+    <section id="amun-ra">
+        <h2 class="section-head">V. The Priesthood of Amun-Ra</h2>
+        <p>
+            The New Kingdom was defined by the supremacy of <strong>Amun-Ra</strong>, the "King of the Gods." The High Priests of Amun at Thebes eventually controlled more land and resources than the Pharaoh himself.
+        </p>
+        <p>
+            This <strong>institutional density</strong> permitted the development of the most sophisticated magical and theological systems in history, including the <a href="netherworld-books.html" class="nl">Netherworld Books</a> and the finalized <a href="funerary-texts.html" class="nl">Book of the Dead</a>. However, the resulting power struggle between the Throne and the Temple eventually led to the systemic collapse of the 20th Dynasty.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: VALLEY -->
+    <section id="valley">
+        <h2 class="section-head">VI. The Valley of the Kings — Hidden Technology</h2>
+        <p>
+            Abandoning the visible pyramids of the Old Kingdom, the New Kingdom Pharaohs hid their tombs deep within the limestone cliffs of the <strong>Biban el-Moluk</strong>.
+        </p>
+        <p>
+            This was a theological shift: the tomb was no longer a solar ladder, but a <strong>re-entry node</strong> into the chthonic depths of the Duat. The walls of these tombs were covered in functional magical diagrams designed to permit the King's <i>Ba</i> to navigate the 12 hours of the night and emerge as a transfigured <a href="composite-soul.html" class="nl">Akh</a> at dawn.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓋴 𓐍 𓅓 𓂝 𓏏 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="middle-kingdom.html">The Middle Kingdom Foundation</a></li>
+            <li><a href="amarna-period.html">The Amarna Revolution</a></li>
+            <li><a href="hyksos-exchange.html">The Hyksos Precursor</a></li>
+            <li><a href="netherworld-books.html">Netherworld Books & Maps</a></li>
+            <li><a href="funerary-texts.html">The Book of the Dead</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="temple-architecture.html">Temple Construction</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    IMPERIAL RESONANCE: PEAK</p>
+</footer>
 
 </body>
 </html>

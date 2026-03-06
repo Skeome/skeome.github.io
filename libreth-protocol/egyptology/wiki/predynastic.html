@@ -3,121 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE PREDYNASTIC PERIOD :: EGYPTOLOGY WIKI</title>
+    <title>THE PREDYNASTIC PERIOD :: THE PRIMORDIAL MOUND :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
-            margin: 3rem 0;
+        .page-header::before {
+            content: '𓊖 𓊃 𓏏 𓏴 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
         }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* PHASE CARDS */
         .phase-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-left: 3px solid var(--gold-dim);
+            background: rgba(15,13,8,0.9);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-right: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
         }
         .phase-card h4 {
-            color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.1em;
         }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
+            margin: 3rem 0;
+        }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE PREDYNASTIC PERIOD</h1>
-            <p class="text-gray-500 egypt-text-color">// FOUNDATIONS OF KEMETIC COSMOLOGY //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">PREDYNASTIC PERIOD</h1>
+        <p class="page-subtitle">// THE PRIMORDIAL MOUND :: ORIGINS OF THE KEMETIC OPERATING SYSTEM //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > Predynastic
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; PREDYNASTIC
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Cradle of Civilization (c. 4300–3100 BCE)</h2>
-                <p class="mb-4">
-                    The foundations of Egyptian cosmology were not invented overnight. They emerged over more than a millennium of pre-state cultural evolution known as the Predynastic Period. This era is divided into three main phases of the <b>Naqada Culture</b>, named after the type-site in Upper Egypt where the sequence was first identified.
-                </p>
-            </section>
-
-            <div class="space-y-6 mb-12">
-                <div class="phase-card">
-                    <h4>NAQADA I (Amratian) [4300–3650 BCE]</h4>
-                    <p class="text-sm">Characterized by black-topped red ware pottery. The first depictions of boats appear, possibly foreshadowing the <a href="solar-barque.html" class="nav-link">Solar Barque</a>. Ritual burials begin to show status differentiation.</p>
-                </div>
-
-                <div class="phase-card">
-                    <h4>NAQADA II (Gerzean) [3650–3300 BCE]</h4>
-                    <p class="text-sm">Expansion northwards. First narrative art (Tomb 100 at Hierakonpolis) showing the "Master of Animals" motif. Imported lapis lazuli signals long-distance trade. The layout of the cosmos begins to solidify in iconography.</p>
-                </div>
-
-                <div class="phase-card">
-                    <h4>NAQADA III / DYNASTY 0 [3300–3100 BCE]</h4>
-                    <p class="text-sm"><b>State Formation.</b> Emergence of the <b>Serekh</b> (palace façade) containing the Horus name of the king. Key centers like <b>Nekhen (Hierakonpolis)</b>, Abydos, and This vie for supremacy. The first true hieroglyphs appear on ivory tags in Tomb U-j at Abydos (c. 3250 BCE).</p>
-                </div>
-            </div>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Delta Tradition: Maadi-Buto</h2>
-                <p class="mb-4">
-                    While the Naqada culture rose in the south, the <b>Maadi-Buto</b> culture thrived in the northern Delta. Less hierarchical and more trade-oriented (linked to the Levant), its eventual absorption by the southern Naqada expansion is likely the historical root of the "Unification" myths. This cultural merger laid the foundation for the "Two Lands" duality.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Hierakonpolis [Nekhen] & The Palettes</h2>
-                <p class="mb-4">
-                    Hierakonpolis was the cult center of Horus the Falcon. It is the site of the "Main Deposit," a cache of ritual objects including the Narmer Palette and the Scorpion Macehead. These <b>Cosmetic Palettes</b> were not for daily use but were votive objects used to grind pigments for cult statues, depicting the ritual subduing of <a href="maat-isfet.html" class="nav-link">Isfet</a> (chaos) by the ruler.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="timeline.html" class="nav-link">Chronological Framework</a></li>
-                    <li><a href="maat-isfet.html" class="nav-link">Ma'at & Isfet (Origins of Duality)</a></li>
-                    <li><a href="../hieroglyphs.html" class="nav-link">Medu Netjer (Early Scripts)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// ARCHAEOLOGICAL SOURCE: Hierakonpolis Online // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Origins — The Cultural Cradle</a></li>
+            <li><a href="#naqada-i">II. Naqada I (Amratian) — The First Signifiers</a></li>
+            <li><a href="#naqada-ii">III. Naqada II (Gerzean) — Expanding the Field</a></li>
+            <li><a href="#naqada-iii">IV. Naqada III (Dynasty 0) — State Initialization</a></li>
+            <li><a href="#hierakonpolis">V. Hierakonpolis — The City of the Falcon</a></li>
+            <li><a href="#scripts">VI. Protoglyphs — The Birth of Medu Netjer</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Origins — The Cultural Cradle</h2>
+        <p>
+            The <strong>Predynastic Period</strong> (c. 4300–3100 BCE) represents the pre-initialization phase of Kemetic civilization. It was during these twelve centuries that the core symbolic, technical, and social elements of Egypt emerged from the Neolithic background of the Nile Valley.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, this era is viewed as the <strong>Assembly of the Hardware</strong>. The irrigation systems, the burial customs, and the primary icons (the falcon, the bull, the sun) were developed and tested before being integrated into the centralized Pharaonic state.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: NAQADA I -->
+    <section id="naqada-i">
+        <h2 class="section-head">II. Naqada I (Amratian) — The First Signifiers</h2>
+        <div class="phase-card">
+            <h4>4300–3650 BCE</h4>
+            <p>Characterized by black-topped red ware pottery. The first depictions of organized groups and river-boats appear, signaling the beginning of the "Riverine Awareness." Status differentiation in burials suggests the emergence of a specialized initiatory class.</p>
+        </div>
+    </section>
+
+    <!-- SECTION III: NAQADA II -->
+    <section id="naqada-ii">
+        <h2 class="section-head">III. Naqada II (Gerzean) — Expanding the Field</h2>
+        <div class="phase-card">
+            <h4>3650–3300 BCE</h4>
+            <p>A period of rapid expansion and technical innovation. Narrative art begins to appear (e.g., Tomb 100 at Hierakonpolis), depicting the subduing of Isfet. The use of imported materials like <strong>Lapis Lazuli</strong> indicates the establishment of high-bandwidth trade routes.</p>
+        </div>
+    </section>
+
+    <!-- SECTION IV: NAQADA III -->
+    <section id="naqada-iii">
+        <h2 class="section-head">IV. Naqada III (Dynasty 0) — State Initialization</h2>
+        <div class="phase-card">
+            <h4>3300–3100 BCE</h4>
+            <p>The final phase before formal unification. Power centers at <strong>Hierakonpolis</strong>, Abydos, and This compete for supremacy. The <strong>Serekh</strong> (palace façade) appears, containing the first royal Horus names — the literal "booting up" of the Pharaonic operating system.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: HIERAKONPOLIS -->
+    <section id="hierakonpolis">
+        <h2 class="section-head">V. Hierakonpolis — The City of the Falcon</h2>
+        <p>
+            Hierakonpolis (Ancient Egyptian: <i>Nekhen</i>) was the primary cult center of the falcon god <strong>Horus</strong> and the cradle of the 1st Dynasty kings.
+        </p>
+        <p>
+            The excavations at Nekhen's "Main Deposit" yielded the most critical signifiers of early statehood, including the <strong>Narmer Palette</strong> and the <strong>Scorpion Macehead</strong>. These ritual objects utilized a highly coded visual language to record the transition from decentralized regional power to a unified, divinely sanctioned monarchy.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓊖 𓊃 𓏏 𓏴 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="early-dynastic.html">Early Dynastic Period</a></li>
+            <li><a href="old-kingdom.html">The Old Kingdom Age</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="../hieroglyphs.html">Medu Netjer — Early Scripts</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+            <li><a href="sacred-geography.html">Sacred Geography</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    ONTOLOGICAL STATUS: INITIALIZED</p>
+</footer>
 
 </body>
 </html>

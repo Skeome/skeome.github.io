@@ -3,108 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MIDDLE KINGDOM :: EGYPTOLOGY WIKI</title>
+    <title>THE MIDDLE KINGDOM :: THE CLASSICAL AGE :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓋴 𓐍 𓅓 𓂝 𓏏 𓏲';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">THE MIDDLE KINGDOM</h1>
-            <p class="text-gray-500 egypt-text-color">// THE CLASSICAL AGE OF KEMETIC CULTURE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE MIDDLE KINGDOM</h1>
+        <p class="page-subtitle">// THE CLASSICAL AGE :: REUNIFICATION AND LITERARY REFINEMENT //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="timeline.html" class="nav-link">Timeline</a> > Middle Kingdom
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="timeline.html">TIMELINE</a> &gt; MIDDLE KINGDOM
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">Reunification and Refinement (c. 2055–1650 BCE)</h2>
-                <p class="mb-4">
-                    The Middle Kingdom began when <b>Mentuhotep II</b> of the 11th Dynasty defeated the Herakleopolitan kings of the north, reunifying Egypt under Theban rule. He was depicted wearing the Red Crown of Lower Egypt and the White Crown of Upper Egypt, signaling the restoration of the "Two Lands."
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400">Propaganda & Literature</h4>
-                    <p class="text-sm">This era produced sophisticated political literature like the <b>Prophecy of Neferti</b>, which retroactively predicted the chaos of the intermediate period and the coming of a savior king (Amenemhat I) to restore order.</p>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">The Rise of Amun</h3>
-                <p class="mb-4">
-                    The obscure local god <b>Amun</b> ("The Hidden One") was elevated to the state pantheon, eventually merging with the sun god to become <b>Amun-Ra</b>, King of the Gods. This theological move synthesized the invisible, omnipresent power of wind/breath (Amun) with the visible, life-giving power of the sun (Ra).
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Coffin Texts: Spell 1130</h2>
-                <p class="mb-4">
-                    The Middle Kingdom's greatest theological contribution was the Coffin Texts. <b>Spell 1130</b> contains a revolutionary declaration by the creator god:
-                </p>
-                <div class="p-6 border border-amber-400 bg-amber-400/10 mb-8 italic">
-                    <p class="text-sm">"I made the four winds that every man might breathe... I made every man like his fellow; and I did not command that they do evil. It is their hearts that violate what I have said."</p>
-                </div>
-                <p>This text asserts moral responsibility and the fundamental equality of human access to the divine breath.</p>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">The Book of Two Ways</h2>
-                <p class="mb-4">
-                    Often painted on the floors of Middle Kingdom coffins, the <i>Book of Two Ways</i> provides the first known map of the underworld, offering routes by water or land and requiring the deceased to know the names of various gatekeepers.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="funerary-texts.html" class="nav-link">Funerary Corpus (Coffin Texts)</a></li>
-                    <li><a href="netherworld-books.html" class="nav-link">Mapping the Duat</a></li>
-                    <li><a href="scripts-evolution.html" class="nav-link">Classical Middle Egyptian</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// CLASSICAL ALIGNMENT: STABLE // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Restoration — Mentuhotep II</a></li>
+            <li><a href="#literature">II. The Classical Age — Literature as Tool of Ma'at</a></li>
+            <li><a href="#amun">III. The Rise of Amun — The Hidden Power</a></li>
+            <li><a href="#coffin-texts">IV. The Coffin Texts — Democratization of Heka</a></li>
+            <li><a href="#two-ways">V. The Book of Two Ways — Mapping the Duat</a></li>
+            <li><a href="#iti-tawy">VI. Itj-tawy — The New Administrative Node</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Restoration — Mentuhotep II</h2>
+        <p>
+            The <strong>Middle Kingdom</strong> (c. 2055–1650 BCE) represents the triumphant restoration of <a href="maat-isfet.html" class="nl">Ma'at</a> following the fragmentation of the First Intermediate Period. Founded by <strong>Mentuhotep II</strong>, who reunified Egypt from his base in Thebes, this era is characterized by a "sobering" of the Pharaonic ideal.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, this is the <strong>Classical Stabilization Phase</strong>. The Pharaonic state shifted from the remote, "god-king" model of the Old Kingdom to a more "shepherd-king" model, where the monarch's legitimacy was explicitly tied to his care for the population and the maintenance of justice.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: LITERATURE -->
+    <section id="literature">
+        <h2 class="section-head">II. The Classical Age — Literature as Tool of Ma'at</h2>
+        <p>
+            Middle Egyptian became the <strong>classical form of the language</strong> during this period. The literature produced (such as the <i>Story of Sinuhe</i> and the <i>Eloquent Peasant</i>) was used as educational templates for scribes for the next 1,500 years.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE ELOQUENT PEASANT</h4>
+                <p>A literary masterpiece arguing that <strong>justice (Ma'at)</strong> is the right of every person, regardless of rank. It demonstrates the high-bandwidth philosophical debate occurring within the Middle Kingdom state.</p>
+            </div>
+            <div class="info-card">
+                <h4>PROPAGANDA & LOYALTY</h4>
+                <p>Texts like the <i>Instruction of Amenemhat</i> utilized sophisticated narrative techniques to consolidate loyalty to the 12th Dynasty after a period of political instability.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: AMUN -->
+    <section id="amun">
+        <h2 class="section-head">III. The Rise of Amun — The Hidden Power</h2>
+        <p>
+            The Middle Kingdom saw the elevation of the Theban god <strong>Amun</strong> ("The Hidden One"). By identifying Amun with the sun god (<strong>Amun-Ra</strong>), the priesthood synthesized the invisible, omnipresent power of the wind/breath with the visible, manifest power of the sun.
+        </p>
+        <p>
+            This theological synthesis provided a more robust and flexible metaphysical framework, capable of incorporating diverse regional traditions under a single, supreme "Hidden Principle" that animated all of creation.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: COFFIN TEXTS -->
+    <section id="coffin-texts">
+        <h2 class="section-head">IV. The Coffin Texts — Democratization of Heka</h2>
+        <p>
+            The most significant funerary development of this era was the emergence of the <strong>Coffin Texts</strong>. Building on the royal <a href="funerary-texts.html" class="nl">Pyramid Texts</a>, these spells were inscribed on the interior of private wooden coffins.
+        </p>
+        <div class="info-card">
+            <h4>SPELL 1130: RADICAL EQUALITY</h4>
+            <p>In this text, the creator god declares: <i>"I made every man like his fellow... I did not command that they do evil."</i> This asserts individual moral responsibility and the fundamental equality of all souls before the divine presence, a major shift in the Kemetic awareness field.</p>
+        </div>
+    </section>
+
+    <div class="glyph-marker">𓋴 𓐍 𓅓 𓂝 𓏏 𓏲</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="first-intermediate.html">First Intermediate Period</a></li>
+            <li><a href="new-kingdom.html">New Kingdom Empire</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="funerary-texts.html">The Coffin Texts</a></li>
+            <li><a href="scripts-evolution.html">Classical Middle Egyptian</a></li>
+            <li><a href="wisdom-literature.html">Wisdom Literature</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    CLASSICAL ALIGNMENT: STABLE</p>
+</footer>
 
 </body>
 </html>

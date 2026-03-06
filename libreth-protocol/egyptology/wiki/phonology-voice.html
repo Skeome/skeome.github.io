@@ -3,134 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHONOLOGY & VOICE :: EGYPTOLOGY WIKI</title>
+    <title>PHONOLOGY & VOICE :: THE LIVING VIBRATION :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(0,209,255,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
+        .page-header::before {
+            content: '𓂋 𓏞 𓈖 𓊹 𓌃';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
+        }
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+        }
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+        }
+        .data-table th {
+            background: rgba(212,175,55,0.12);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .data-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
             height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
             margin: 3rem 0;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
         }
-        .phonetics-table td {
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
         }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">PHONOLOGY & VOICE</h1>
-            <p class="text-gray-500 egypt-text-color">// RECONSTRUCTING THE LIVING VOICE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">PHONOLOGY & VOICE</h1>
+        <p class="page-subtitle">// RECONSTRUCTING THE LIVING VOICE :: SONIC RESONANCE //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > Phonology
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; PHONOLOGY & VOICE
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Silence of the Glyphs</h2>
-                <p class="mb-4">
-                    A significant challenge in Egyptology is the lack of a living spoken tradition. Because the scripts omit short vowels, precise pronunciation remains a subject of reconstruction using <b>Coptic</b>, comparisons with other Afroasiatic languages, and the <b>International Phonetic Alphabet (IPA)</b>.
-                </p>
-            </section>
-
-            <section class="mb-12">
-                <h3 class="text-2xl egypt-header-color mb-4">IPA Values for Ancient Egyptian</h3>
-                <div class="overflow-x-auto">
-                    <table class="phonetics-table min-w-full bg-black/40">
-                        <thead>
-                            <tr class="text-amber-400">
-                                <th class="text-left">Hieroglyph</th>
-                                <th class="text-left">IPA Value</th>
-                                <th class="text-left">Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-2xl">𓄿</td>
-                                <td>/ʀ/ or /ʔ/</td>
-                                <td>Vulture: Glottal stop.</td>
-                            </tr>
-                            <tr>
-                                <td class="text-2xl">𓂝</td>
-                                <td>/ʕ/</td>
-                                <td>Arm: Voiced pharyngeal fricative.</td>
-                            </tr>
-                            <tr>
-                                <td class="text-2xl">𓐍</td>
-                                <td>/x/</td>
-                                <td>Placenta: Voiceless velar fricative (Scottish <i>loch</i>).</td>
-                            </tr>
-                            <tr>
-                                <td class="text-2xl">𓎛</td>
-                                <td>/ħ/</td>
-                                <td>Twisted Flax: Voiceless pharyngeal fricative.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Vocalic Resonance & Heka</h2>
-                <p class="mb-4">
-                    In the ritual practice of <a href="heka.html" class="nav-link">Heka</a>, the <b>exact vibration</b> of the voice was as important as the words themselves. While the hieroglyphic system only recorded consonants, the actual efficacy of a spell depended on the <b>vocalic frequencies</b> used by the priest.
-                </p>
-                <div class="p-6 border border-gray-700 bg-black/40 mb-8">
-                    <h4 class="font-bold text-amber-400 mb-2">Reconstruction through Coptic</h4>
-                    <p class="text-sm">By utilizing <b>Coptic</b> (where vowels <i>are</i> recorded) and tracing sound shifts backward, phonologists can estimate the vowels of the New and Middle Kingdoms. For example, the name of the goddess Aset (Isis) likely sounded closer to <i>*ʔŪsat</i> in the 18th Dynasty, shifting to <i>Ēse</i> in Coptic. These reconstructions allow for a more precise "tuning" of the voice during initiatory work.</p>
-                </div>
-                <p>
-                    The use of <b>Vowel Chants</b> found in the <a href="greek-magical-papyri.html" class="nav-link">PGM</a> (the strings of seven vowels like <i>AEIOUYΩ</i>) is a Hellenistic formalization of earlier Kemetic practices, where specific vowel sequences were believed to resonate with the seven planetary spheres and the Awareness Field itself.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="scripts-evolution.html" class="nav-link">Scripts Evolution (The Coptic Bridge)</a></li>
-                    <li><a href="../hieroglyphs.html" class="nav-link">Hieroglyph Training Module</a></li>
-                    <li><a href="house-of-life.html" class="nav-link">The House of Life (Sacred Speech)</a></li>
-                </ul>
-            </section>
-
-            <section class="text-center">
-                <a href="index.html" class="inline-block px-6 py-2 border border-d4af37 text-d4af37 hover:bg-d4af37 hover:text-black transition-colors">BACK TO INDEX</a>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// SONIC INTEGRITY: CALIBRATING... // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Sound — The Silence of the Glyphs</a></li>
+            <li><a href="#ipa">II. IPA Values for Ancient Egyptian — The Consonantal Core</a></li>
+            <li><a href="#vowels">III. The Vocalic Problem — Reconstruction through Coptic</a></li>
+            <li><a href="#resonance">IV. Sonic Resonance in Heka — Utterance as Operation</a></li>
+            <li><a href="#vowel-chants">V. Vowel Chants and Planetary Frequencies</a></li>
+            <li><a href="#practice">VI. Practical Tuning for the Modern Scribe</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Sound — The Silence of the Glyphs</h2>
+        <p>
+            Ancient Egyptian writing systems (Hieroglyphs, Hieratic, Demotic) were primarily <strong>consonantal</strong>. They recorded the skeletal structure of words but omitted the short vowels. Consequently, the "living voice" of Kemet went silent for nearly 1,500 years.
+        </p>
+        <p>
+            In the framework of the Libreth Protocol, the recovery of phonology is viewed as <strong>frequency calibration</strong>. Without the correct vowels, a magical formula (<a href="heka.html" class="nl">Heka</a>) is like a machine without a power source. The vowels are the "breath" that animates the "bones" of the consonants, allowing for the achievement of <strong>Ma'at Kheru</strong> (True of Voice).
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: IPA -->
+    <section id="ipa">
+        <h2 class="section-head">II. IPA Values for Ancient Egyptian</h2>
+        <p>
+            Linguists utilize the International Phonetic Alphabet (IPA) to approximate the sounds of the Egyptian consonants.
+        </p>
+        <div class="data-table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Hieroglyph</th>
+                        <th>IPA Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="font-size:1.5rem;">𓄿</td><td>/ʀ/ or /ʔ/</td><td>Egyptian Vulture: Glottal stop or uvular trill.</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓂝</td><td>/ʕ/</td><td>Arm: Voiced pharyngeal fricative.</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓐍</td><td>/x/</td><td>Placenta: Voiceless velar fricative (like <i>loch</i>).</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓎛</td><td>/ħ/</td><td>Twisted Flax: Voiceless pharyngeal fricative.</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓆓</td><td>/d͡ʒ/</td><td>Cobra: Voiced palato-alveolar affricate.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: VOWELS -->
+    <section id="vowels">
+        <h2 class="section-head">III. The Vocalic Problem — Reconstruction through Coptic</h2>
+        <p>
+            The primary source for reconstructing Egyptian vowels is <strong>Coptic</strong>, the final stage of the language, which used the Greek alphabet and included vowels. By tracing sound shifts backward, phonologists can estimate the vocalic structure of earlier periods.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE NAME OF ISIS</h4>
+                <p>In the New Kingdom, the name of Aset likely sounded closer to <i>*ʔŪsat</i>. By the Coptic period, this had shifted to <i>Ēse</i>. This progression allows us to "tune" our pronunciation to the specific era we wish to resonate with.</p>
+            </div>
+            <div class="info-card">
+                <h4>EGYPTOLOGICAL PRONUNCIATION</h4>
+                <p>Scholars use a conventional system (inserting "e" between consonants) for communication. While practical, this is <strong>not</strong> a reconstruction of the ancient voice and lacks the resonant charge of the original phonology.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: RESONANCE -->
+    <section id="resonance">
+        <h2 class="section-head">IV. Sonic Resonance in Heka — Utterance as Operation</h2>
+        <p>
+            In <a href="heka.html" class="nl">Heka</a>, the <strong>exact vibration</strong> of the voice is as important as the intention. The term <a href="hu.html" class="nl">Hu</a> (Authoritative Utterance) implies that sound has the capacity to directly alter the awareness field.
+        </p>
+        <p>
+            The priest was trained to vocalize from the <strong>heart</strong> (Ib), utilizing the diaphragm to produce deep, pharyngeal tones. These sounds were designed to resonate within the stone architecture of the temple, creating a standing wave that amplified the magical effect.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓂋 𓏞 𓈖 𓊹 𓌃</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="coptic.html">Coptic — The Living Bridge</a></li>
+            <li><a href="scripts-evolution.html">Scripts Evolution</a></li>
+            <li><a href="../hieroglyphs.html">Hieroglyph Training Module</a></li>
+            <li><a href="hu.html">Hu — Authoritative Utterance</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="greek-magical-papyri.html">Greek Magical Papyri & Vowel Chants</a></li>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    SONIC INTEGRITY: CALIBRATED</p>
+</footer>
 
 </body>
 </html>

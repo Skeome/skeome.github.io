@@ -3,141 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDICAL PAPYRI :: EGYPTOLOGY WIKI</title>
+    <title>MEDICAL PAPYRI :: THE HEALING ARTS :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
-        .egypt-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/vertical-inscription.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+        :root {
+            --gold: #d4af37;
+            --gold-dim: #8a6e1e;
+            --gold-glow: rgba(212,175,55,0.15);
+            --cyan: #00d1ff;
+            --cyan-dim: #006f87;
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --text: #ccc8b8;
+            --text-bright: #f0e68c;
         }
-        .egypt-header-color {
-            color: #d4af37;
-            text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(0,209,255,0.04) 0%, transparent 60%);
         }
-        .egypt-text-color {
-            color: #f0e68c;
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+        /* LAYOUT */
+        .page-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+        /* HEADER */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            margin-bottom: 3rem;
+            position: relative;
         }
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.75), rgba(212, 175, 55, 0));
-            margin: 3rem 0;
+        .page-header::before {
+            content: '𓏞 𓈖 𓊹 𓌃 𓏲 𓋹';
+            display: block;
+            font-size: 2.5rem;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+            opacity: 0.7;
         }
-        .nav-link {
-            color: #00d1ff;
-            text-decoration: underline;
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
+            letter-spacing: 0.15em;
+            line-height: 1.1;
         }
-        .nav-link:hover {
-            color: #00ffae;
+        .page-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan-dim);
+            margin-top: 0.75rem;
+            letter-spacing: 0.2em;
         }
+
+        /* NAV */
+        .breadcrumb {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan-dim);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--cyan); text-decoration: none; }
+        .breadcrumb a:hover { color: #00ffae; }
+
+        /* TABLE OF CONTENTS */
+        .toc-block {
+            border: 1px solid rgba(212,175,55,0.25);
+            background: rgba(20,18,10,0.8);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .toc-list { list-style: none; }
+        .toc-list li { margin: 0.3rem 0; }
+        .toc-list a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover { color: #00ffae; }
+
+        /* SECTION HEADERS */
+        h2.section-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        h3.sub-head {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--text-bright);
+            margin: 2rem 0 1rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* BODY TEXT */
+        p { margin-bottom: 1.1rem; }
+        b, strong { color: var(--text-bright); font-weight: 600; }
+        em, i { color: rgba(240,230,140,0.8); }
+
+        /* PAPYRUS CARDS */
         .papyrus-card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-left: 3px solid var(--gold-dim);
+            background: rgba(15,13,8,0.9);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(212,175,55,0.1);
+            border-right: 1px solid rgba(212,175,55,0.1);
+            border-bottom: 1px solid rgba(212,175,55,0.1);
         }
         .papyrus-card h4 {
-            color: #d4af37;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.1em;
         }
+
+        /* INFO CARDS */
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        @media(max-width:640px) { .card-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem;
+        }
+        .info-card h4 { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .info-card p { font-size: 0.92rem; margin: 0; opacity: 0.88; }
+
+        /* DIVIDER */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);
+            margin: 3rem 0;
+        }
+
+        /* BACK BTN */
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .back-btn:hover {
+            background: rgba(212,175,55,0.1);
+            border-color: var(--gold);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.2);
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+            margin-top: 4rem;
+        }
+
+        a.nl { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+        a.nl:hover { color: #00ffae; }
+
+        /* ANIMATION */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+        .page-header { animation: fadeIn 0.8s ease forwards; }
     </style>
 </head>
-<body class="bg-black egypt-bg">
+<body>
+<div class="page-wrap">
 
-    <div class="container mx-auto py-8">
-        <header class="text-center py-8">
-            <h1 class="text-4xl egypt-header-color font-bold mb-4">MEDICAL PAPYRI</h1>
-            <p class="text-gray-500 egypt-text-color">// SCIENCE AND MAGIC AS ONE //</p>
-        </header>
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">THE MEDICAL PAPYRI</h1>
+        <p class="page-subtitle">// THE HEALING ARTS :: SCIENCE AND HEKA AS A UNIFIED FIELD //</p>
+    </header>
 
-        <main class="text-gray-300 egypt-text-color px-4">
-            <nav class="mb-8 text-sm">
-                <a href="index.html" class="nav-link">Wiki Home</a> > <a href="house-of-life.html" class="nav-link">House of Life</a> > Medical Papyri
-            </nav>
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="house-of-life.html">HOUSE OF LIFE</a> &gt; MEDICAL PAPYRI
+    </nav>
 
-            <section class="mb-12">
-                <h2 class="text-3xl egypt-header-color mb-6 border-b border-gray-700 pb-2">The Healing Arts of the Per Ankh</h2>
-                <p class="mb-4">
-                    Egyptian medicine was inseparable from <a href="heka.html" class="nav-link">Heka</a>. Prescriptions often combined empirical observation and herbal remedies with magical incantations to neutralize the spiritual causes of illness. These documents were primarily managed within the <a href="house-of-life.html" class="nav-link">House of Life</a>.
-                </p>
-            </section>
-
-            <div class="space-y-6 mb-12">
-                <div class="papyrus-card">
-                    <h4>EBERS PAPYRUS (c. 1550 BCE)</h4>
-                    <p class="text-sm opacity-80">A massive collection of over 700 prescriptions. It includes internal medicine, ophthalmology, and dentistry. <a href="https://ub.uni-leipzig.de/en/collections/papyrus-ebers/" target="_blank" class="nav-link">[Digital Facsimile: Leipzig]</a></p>
-                </div>
-
-                <div class="papyrus-card">
-                    <h4>EDWIN SMITH PAPYRUS (c. 1600 BCE)</h4>
-                    <p class="text-sm opacity-80">A surgical text featuring 48 case studies. Uniquely empirical, it uses a systematic prognosis system: <b>"An ailment I will treat"</b> (favorable), <b>"An ailment with which I will contend"</b> (uncertain), or <b>"An ailment not to be treated"</b> (untreatable). <a href="https://www.nyam.org/library/collections-and-resources/digital-collections/edwin-smith-papyrus/" target="_blank" class="nav-link">[Digital Facsimile: NYAM]</a></p>
-                </div>
-
-                <div class="papyrus-card">
-                    <h4>LONDON MEDICAL PAPYRUS (c. 1300 BCE)</h4>
-                    <p class="text-sm opacity-80">A critical document for the "unified theory" of Kemetic medicine, containing 25 material prescriptions and 61 magical spells in a single scroll—proving that physician and magician were one.</p>
-                </div>
-
-                <div class="papyrus-card">
-                    <h4>HEARST PAPYRUS (c. 1450 BCE)</h4>
-                    <p class="text-sm opacity-80">Housed at UC Berkeley, this papyrus focuses on the treatment of blood, hair, and skin conditions. It contains specific prescriptions for "emptying the belly" and treating "whiteness of the skin," illustrating the advanced Egyptian understanding of <b>internal physiology</b>.</p>
-                </div>
-
-                <div class="papyrus-card">
-                    <h4>KAHUN PAPYRUS (c. 1800 BCE)</h4>
-                    <p class="text-sm opacity-80">The world's oldest gynecological and veterinary text. It details methods for determining pregnancy and the sex of the unborn child, utilizing the <b>biological resonance</b> of seeds (barley and emmer). It also contains the oldest records of veterinary medicine, treating the illnesses of cattle and dogs.</p>
-                </div>
-            </div>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Physicians of Sekhmet</h2>
-                <p class="mb-4">
-                    Doctors were often members of the priesthood, particularly associated with the goddess <a href="pantheon.html" class="nav-link">Sekhmet</a> (goddess of plague and healing). They were trained to act as "Kher-Heb" (Lector Priests), reading sacred scrolls to stabilize the patient's field.
-                </p>
-            </section>
-
-            <hr class="section-divider">
-
-            <section class="mb-12">
-                <h3 class="text-xl egypt-header-color mb-4">Related Archives</h3>
-                <ul class="list-disc list-inside">
-                    <li><a href="house-of-life.html" class="nav-link">The House of Life (University)</a></li>
-                    <li><a href="heka.html" class="nav-link">Heka (The Force of Healing)</a></li>
-                    <li><a href="pantheon.html" class="nav-link">The Pantheon (Sekhmet)</a></li>
-                </ul>
-            </section>
-
-            <section class="mb-12">
-                <h2 class="text-2xl egypt-header-color mb-4">Metabolic Magic: The Pharmacopeia</h2>
-                <p class="mb-4">
-                    Egyptian medicine utilized a vast array of botanical and mineral substances. These were not viewed merely as chemicals, but as <b>vibrational anchors</b>. By ingesting a specific plant, the patient was "binding" the frequency of that plant to their own disrupted <a href="composite-soul.html#ka" class="nav-link">Ka</a>.
-                </p>
-                <div class="grid md:grid-cols-3 gap-4 mb-8">
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Blue Lotus (Nymphaea caerulea)</h4>
-                        <p class="text-xs">Used as a mild sedative and ritual entheogen. It represented the rising sun and the opening of the senses.</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Mandragora (Mandrake)</h4>
-                        <p class="text-xs">Associated with Hathor and sexual potency. Used in recipes for "expanding the heart."</p>
-                    </div>
-                    <div class="p-4 border border-gray-700 bg-black/40">
-                        <h4 class="font-bold text-amber-400">Natron</h4>
-                        <p class="text-xs">A naturally occurring salt used for both physical cleansing and the alchemical "sealing" of the body during mummification.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 mt-8">
-            <p class="text-gray-600">// HEALING RESONANCE: ENGAGED // <span class="egypt-text-color">𓋹</span></p>
-        </footer>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#ontology">I. The Ontology of Kemetic Medicine — Integrative Healing</a></li>
+            <li><a href="#ebers">II. The Ebers Papyrus — Internal Medicine and General Practice</a></li>
+            <li><a href="#edwin-smith">III. The Edwin Smith Papyrus — Surgical Empiricism</a></li>
+            <li><a href="#kahun">IV. The Kahun Papyrus — Gynecology and Veterinary Science</a></li>
+            <li><a href="#london">V. The London Medical Papyrus — The Magical Bridge</a></li>
+            <li><a href="#pharmacopeia">VI. Metabolic Magic — The Alchemical Pharmacopeia</a></li>
+            <li><a href="#practitioners">VII. The Physicians of Sekhmet</a></li>
+        </ul>
     </div>
+
+    <!-- SECTION I: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">I. The Ontology of Kemetic Medicine — Integrative Healing</h2>
+        <p>
+            In Ancient Kemet, the healing arts were a single, integrated discipline. There was no separation between what modern thought calls "medicine" (physical intervention) and "magic" (<a href="heka.html" class="nl">Heka</a>). Both were viewed as means of restoring <strong>Ma'at</strong> to a body that had fallen into <strong>Isfet</strong> (disease/disorder).
+        </p>
+        <p>
+            The medical papyri were produced and managed within the <a href="house-of-life.html" class="nl">House of Life</a>. A prescription typically consisted of two parts: a material remedy (herbal, mineral, or dietary) and a spoken magical formula (the <i>Hu</i>). The material remedy acted as a physical resonator, while the incantation aligned the patient's subtle body (Ka) with the divine frequency of healing.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: EBERS -->
+    <section id="ebers">
+        <h2 class="section-head">II. The Ebers Papyrus</h2>
+        <div class="papyrus-card">
+            <h4>INTERNAL MEDICINE (c. 1550 BCE)</h4>
+            <p>
+                The <strong>Ebers Papyrus</strong> is one of the most extensive medical documents in history, containing over 700 prescriptions. It covers internal medicine, ophthalmology, dentistry, and even psychiatry. Notably, it contains a remarkably accurate description of the <strong>circulatory system</strong>, identifying the heart as the center of a network of vessels (<i>metu</i>) that deliver breath and fluid to the entire body.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION III: EDWIN SMITH -->
+    <section id="edwin-smith">
+        <h2 class="section-head">III. The Edwin Smith Papyrus</h2>
+        <div class="papyrus-card">
+            <h4>SURGICAL EMPIRICISM (c. 1600 BCE)</h4>
+            <p>
+                Unlike many other papyri, the <strong>Edwin Smith Papyrus</strong> is almost entirely empirical. It features 48 case studies of traumatic injuries, organized from head to toe. It utilizes a systematic prognosis system: "An ailment I will treat," "An ailment with which I will contend," or "An ailment not to be treated." It provides the first known medical descriptions of the cranial sutures, the meninges, and the cerebrospinal fluid.
+            </p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: PHARMACOPEIA -->
+    <section id="pharmacopeia">
+        <h2 class="section-head">VI. Metabolic Magic — The Alchemical Pharmacopeia</h2>
+        <p>
+            Botanical and mineral substances were viewed as <strong>vibrational anchors</strong>. By ingesting a plant, the patient was "binding" the specific frequency of that plant to their own disrupted energy field.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>BLUE LOTUS (Nymphaea caerulea)</h4>
+                <p>Used as a mild sedative and ritual entheogen. It represented the rising sun and the opening of the higher senses. In medical practice, it was used to "expand the heart" and soothe the nervous system.</p>
+            </div>
+            <div class="info-card">
+                <h4>MANDRAGORA (Mandrake)</h4>
+                <p>Associated with Hathor and sexual potency. It was a key ingredient in recipes for treating emotional disorders and "cooling the blood."</p>
+            </div>
+            <div class="info-card">
+                <h4>NATRON</h4>
+                <p>A naturally occurring salt used for both physical cleansing and the alchemical "sealing" of the body during mummification. It served as the primary agent of purification in both life and death.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: PRACTITIONERS -->
+    <section id="practitioners">
+        <h2 class="section-head">VII. The Physicians of Sekhmet</h2>
+        <p>
+            Doctors were typically members of the priesthood, particularly those associated with the goddess <strong>Sekhmet</strong> (the lioness goddess of both plague and healing).
+        </p>
+        <p>
+            These specialist healers were trained to act as <strong>Kheri-Heb</strong> (Lector Priests), capable of reading the sacred medical-magical scrolls with the precise intonation required to stabilize the patient's field. The title "Swnw" (Physician) was often held alongside high-level priestly ranks, indicating that medicine was a sacred office.
+        </p>
+    </section>
+
+    <div class="glyph-marker">𓏞 𓈖 𓊹 𓌃 𓏲 𓋹</div>
+
+    <!-- RELATED LINKS -->
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="house-of-life.html">The House of Life</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
+            <li><a href="imhotep.html">Imhotep — The Divine Architect</a></li>
+            <li><a href="math-astronomy.html">Mathematical Theology</a></li>
+            <li><a href="alchemy.html">Alchemy & Metallurgy</a></li>
+            <li><a href="composite-soul.html">The Composite Soul</a></li>
+            <li><a href="ritual-practice.html">Ritual Practice Typology</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    HEALING RESONANCE: ACTIVE</p>
+</footer>
 
 </body>
 </html>
