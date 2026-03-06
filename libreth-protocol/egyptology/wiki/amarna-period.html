@@ -7,7 +7,89 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓇶 𓐍 𓈖 𓇋 𓈖 𓇹'; }</style>
+    <style>
+        .page-header::before { content: '𓇶 𓐍 𓈖 𓇋 𓈖 𓇹'; }
+
+        /* AMARNA-SPECIFIC STYLES */
+        .timeline-block { margin: 2rem 0; }
+        .timeline-item {
+            border-left: 2px solid rgba(212,175,55,0.3);
+            padding: 0.8rem 0 0.8rem 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: rgba(212,175,55,0.6);
+            border-radius: 50%;
+            position: absolute;
+            left: -5px; top: 1.2rem;
+        }
+        .t-date {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+        .sun-card { border-top: 2px solid rgba(212,175,55,0.4); }
+
+        /* HYMN BLOCK */
+        .hymn-block {
+            background: rgba(20,18,10,0.9);
+            border: 1px solid rgba(212,175,55,0.25);
+            border-left: 4px solid rgba(212,175,55,0.7);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: rgba(240,230,140,0.9);
+        }
+        .hymn-block .hymn-title {
+            font-family: 'Cinzel', serif;
+            font-style: normal;
+            font-size: 0.8rem;
+            color: rgba(212,175,55,0.6);
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        /* PHARAOH DISPUTED TABLE */
+        .disputed-note {
+            display: inline-block;
+            background: rgba(180,120,0,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            padding: 0.15rem 0.5rem;
+            font-size: 0.75rem;
+            font-family: 'VT323', monospace;
+            color: rgba(212,175,55,0.7);
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+        }
+
+        /* ANATOMY CARD */
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .anatomy-card {
+            border: 1px solid rgba(0,180,220,0.2);
+            background: rgba(0,20,30,0.7);
+            padding: 1rem;
+        }
+        .anatomy-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+        }
+    </style>
 </head>
 <body>
 <div class="page-wrap">
@@ -18,7 +100,7 @@
         <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">ꜣḫ-n-jtn · Akhet-en-Aten · c. 1353–1336 BCE</div>
         <p class="page-subtitle">// THE HERETICAL INTERLUDE :: THE REIGN OF THE SOLAR DISC :: 18TH DYNASTY //</p>
         <p class="page-epithet">
-            "Thou appearest beautifully on the horizon of heaven, Thou living Aten, the beginning of life! When thou art risen on the eastern horizon, Thou hast filled every land with thy beauty."
+            "Thou appearest beautifully on the horizon of heaven, Thou living Aten, the beginning of life! When thou art risen on the eastern horizon, thou hast filled every land with thy beauty."
             <br><span style="font-size:0.85rem;opacity:0.5;">— Great Hymn to the Aten, attributed to Akhenaten, c. 1350 BCE</span>
         </p>
     </header>
@@ -42,10 +124,20 @@
             <li><a href="#restoration">VIII. The Restoration — Tutankhamun and the Priesthood</a></li>
             <li><a href="#damnatio">IX. Damnatio Memoriae — Erasing the Heresy</a></li>
             <li><a href="#legacy">X. Legacy and Speculation — Monotheism and the Esoteric Reading</a></li>
+            <li><a href="#hymns">XI. The Aten Hymns — Text, Structure, and Theology</a></li>
+            <li><a href="#great-hymn">XII. The Great Hymn — Close Reading and Esoteric Analysis</a></li>
+            <li><a href="#body">XIII. Akhenaten's Body — The Physiology Problem</a></li>
+            <li><a href="#underground">XIV. The Private Underground — Domestic Religion During the Heresy</a></li>
+            <li><a href="#noble-tombs">XV. The Tombs of the Nobles — A New Afterlife Paradigm</a></li>
+            <li><a href="#mystic">XVI. Akhenaten as Mystic — The Inner Vision Hypothesis</a></li>
+            <li><a href="#economy">XVII. The Amarna Economy — Social and Material Consequences</a></li>
+            <li><a href="#esoteric-current">XVIII. The Esoteric Current — Rosicrucian and Hermetic Claims</a></li>
+            <li><a href="#contested">XIX. Modern Egyptology's Open Questions</a></li>
+            <li><a href="#operative">XX. Operative Implications — Working With Amarna Energies</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: REVOLUTION -->
+    <!-- ═══════════════════════════════════════ I. REVOLUTION -->
     <section id="revolution">
         <h2 class="section-head">I. The Atenist Revolution — A Rupture in Time</h2>
         <p>
@@ -74,7 +166,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION II: CHRONOLOGY -->
+    <!-- ═══════════════════════════════════════ II. CHRONOLOGY -->
     <section id="chronology">
         <h2 class="section-head">II. Chronology — The Phases of the Heresy</h2>
         <p>
@@ -107,7 +199,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION III: AKHETATEN -->
+    <!-- ═══════════════════════════════════════ III. AKHETATEN -->
     <section id="akhetaten">
         <h2 class="section-head">III. Akhetaten — The Horizon of the Disc</h2>
 
@@ -124,21 +216,14 @@
             The construction of <strong>Akhetaten</strong> (<em>ꜣḫt-n-jtn</em>, "Horizon of the Aten") was itself a cosmological statement. The site was selected because it lay on a natural horizon-shape — the eastern cliffs form a curved bay that, when viewed from the river at dawn, frames the rising sun in a precise recreation of the hieroglyph <em>ꜣḫt</em> (horizon): the sun disc rising between two mountains. Every morning in this city, the Aten performed its own name.
         </p>
         <p>
-            The site was additionally chosen for its absolute theological neutrality — it had never been settled, belonged to no previous deity, and carried no inherited sacred associations. Akhenaten swore on the boundary stelae, erected to demarcate the city's territory, that he would never cross those boundaries to build elsewhere, and that neither he, nor Nefertiti, nor their daughters would ever be buried anywhere else. (This oath was broken at the very latest upon his death, suggesting the trauma of the period's collapse was severe enough to overturn even a sworn royal commitment.)
-        </p>
-        <p>
-            The city was built with extraordinary speed — a functional capital within approximately three years — using the <strong><em>talatat</em></strong> system: standardised sandstone blocks approximately 52cm × 26cm × 24cm (sized to be carried by one worker, unlike the massive blocks of conventional construction). This modular system allowed rapid assembly but proved structurally less durable than traditional construction. It also made later demolition straightforward: the talatat could be extracted and reused as fill material within new construction, which is precisely what happened after Akhetaten was abandoned.
+            The site was additionally chosen for its absolute theological neutrality — it had never been settled, belonged to no previous deity, and carried no inherited sacred associations. Akhenaten swore on the boundary stelae, erected to demarcate the city's territory, that he would never cross those boundaries to build elsewhere, and that neither he, nor Nefertiti, nor their daughters would ever be buried anywhere else.
         </p>
 
-        <h3 class="sub-head">Urban Layout — Sacred Geometry of the Solar City</h3>
-        <p>
-            Akhetaten's planning was genuinely innovative. The <strong>Royal Road</strong> ran the length of the city — the longest known ancient urban thoroughfare — along which the royal family processed daily by chariot from the palace to the temples, re-enacting the solar journey. This daily procession was not merely ceremonial; in Amarna theology, the king's daily journey along this road <em>was</em> the sun's journey, mediated through the royal body.
-        </p>
-
+        <h3 class="sub-head">The City Layout — A New Sacred Geometry</h3>
         <div class="card-grid">
             <div class="sun-card info-card">
                 <h4>THE GREAT ATEN TEMPLE</h4>
-                <p>The largest religious structure in the city, approximately 800m long, oriented east-west to receive the rising sun directly through its open gates. Unlike traditional temples with their darkening series of hypostyle halls leading to a pitch-dark sanctuary, the Great Aten Temple had no roof — it was entirely open to the sky. Hundreds of offering tables were arranged in rows to receive the direct light of the disc. There were no cult statues, no sacred images, no Heka-charged objects. The Aten itself, present in its own light, needed no material representation.</p>
+                <p>The largest religious structure in the city — approximately 760 metres long — was the <em>Hwt-benben</em> (House of the Benben Stone). Unlike traditional Egyptian temples, which proceeded from open outer courts through increasingly enclosed and dark inner sanctuaries toward the hidden cult statue, the Great Aten Temple was almost entirely open to the sky. Hundreds of offering tables were arranged in rows to receive the direct light of the disc. There were no cult statues, no sacred images, no Heka-charged objects. The Aten itself, present in its own light, needed no material representation.</p>
             </div>
             <div class="sun-card info-card">
                 <h4>THE SMALL ATEN TEMPLE</h4>
@@ -150,39 +235,24 @@
             </div>
             <div class="sun-card info-card">
                 <h4>THE WORKERS' VILLAGE</h4>
-                <p>Archaeological investigation of the planned workers' village south of the main city has produced some of the most revealing finds of the entire period. Despite official Atenist theology, the village houses contained small domestic shrines to traditional deities — Bes, Taweret, Hathor, and even Amun. A cemetery associated with the village shows evidence of a population under significant physical stress: skeletal analysis reveals high rates of spinal injury (from intensive building labour), nutritional deficiency, and early mortality. The Amarna workers lived harder lives than their counterparts at Deir el-Medina.</p>
+                <p>Archaeological investigation of the planned workers' village south of the main city has produced some of the most revealing finds of the entire period. Despite official Atenist theology, the village houses contained small domestic shrines to traditional deities — Bes, Taweret, Hathor, and even Amun. A cemetery associated with the village shows evidence of a population under significant physical stress: skeletal analysis reveals high rates of spinal injury (from intensive building labour), nutritional deficiency, and early mortality. The Amarna workers lived demonstrably harder lives than their counterparts at Deir el-Medina.</p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION IV: THEOLOGY -->
+    <!-- ═══════════════════════════════════════ IV. THEOLOGY -->
     <section id="theology">
         <h2 class="section-head">IV. Amarna Theology — The Suppression of Heka</h2>
         <p>
             Atenism represents the most radical theological experiment in Egyptian history precisely because it did not merely change <em>which</em> god was worshipped — it fundamentally restructured the relationship between divinity, cosmos, and human access to sacred power. The implications for the practice of <a href="heka.html" class="nl">Heka</a> were catastrophic.
         </p>
         <p>
-            In the traditional Kemetic system, the cosmos was populated by a vast, complex network of divine intelligences — the <em>netjeru</em> — who governed every domain of reality and who were accessible through ritual, prayer, magical operation, and the living technology of <a href="amulets-talismans.html" class="nl">amulets</a>, spells, and <a href="funerary-texts.html" class="nl">funerary texts</a>. The <a href="house-of-life.html" class="nl">House of Life</a> was an institution dedicated to maintaining and transmitting this vast operative knowledge. Death was managed by a sophisticated cosmological system involving the <a href="weighing-of-the-heart.html" class="nl">Weighing of the Heart</a>, the journey through the <em>Duat</em>, and the ultimate achievement of the Akh-state under the sponsorship of Osiris, Anubis, and Thoth.
+            Traditional Kemetic theology was built on a structure of <strong>differentiated divine intelligences</strong> — each <em>netjer</em> governing a specific domain of reality, each accessible to practitioners through specific rites, formulae, materials, and times. The entire apparatus of Heka — the operative language, the sacred images, the empowered objects, the mediating priesthood — depended on the existence of multiple addressable divine nodes. The practitioner could invoke Thoth for wisdom, Sekhmet for healing disease, Bes for domestic protection, Sobek for legal help. The system was deliberately complex because reality is complex.
         </p>
         <p>
-            Akhenaten abolished all of this. In Atenist theology, there was no Osiris, no Duat, no Weighing of the Heart. There was no afterlife in any traditional sense — the deceased rested in their tomb until sunrise, when the Aten's rays reached them, giving them temporary daily renewal. The permanent, independent existence of the soul in a cosmic realm — the entire architecture of Egyptian soteriology built over two thousand years — was simply discarded. The only access point to the Aten was through the royal couple; the only prayer format was praise of the disc and of Akhenaten and Nefertiti. Magic, in the traditional operative Heka sense, had no theology within which to operate.
-        </p>
-
-        <div class="blue-block">
-            <div class="bb-title">// THE GREAT HYMN TO THE ATEN — THEOLOGICAL ANALYSIS //</div>
-            <p>The <em>Great Hymn to the Aten</em>, inscribed in the Amarna tomb of the courtier Ay (who would later become pharaoh), is the fullest statement of Atenist theology. It is one of the most beautiful religious poems to survive from the ancient world — and one of the most theologically radical. Scholars including Jan Assmann have identified it as the earliest textual document of what he calls "Mosaic distinction": the sharp separation between true (monotheistic) and false (polytheistic) religion, with the associated imperative to suppress the false.</p>
-            <p>The Hymn describes a universe animated entirely by the Aten's light: at sunrise, all life awakens; at sunset, all falls into death-like darkness. Animals, birds, fish, plants, and humans exist as expressions of the Aten's creative power. The Nile itself is described as "the Aten of the waters below the earth" — even Nubia's Nile is the Aten's gift to foreign lands. The vision is genuinely universal and cosmologically elegant: a single, immanent creative intelligence expressing itself through the entirety of the natural world.</p>
-            <p>What is conspicuously absent: death, judgement, the underworld, the multiple souls and their independent fates, any magical or operative religious technology. The Hymn presents a solar naturalism stripped of the complex metaphysical infrastructure that constituted mainstream Egyptian religion. Theologically, it is closer to a Stoic hymn to Nature or a Psalmist's praise of the Creator than to anything else in the Kemetic corpus.</p>
-        </div>
-
-        <h3 class="sub-head">What Happened to the Priests?</h3>
-        <p>
-            The institutional suppression of the traditional cults was not merely doctrinal — it had concrete human consequences. The vast priesthoods of Amun, Ptah, Mut, Sekhmet, and dozens of other major deities were disbanded. Their temple revenues were redirected to the Aten's administration. Many priests were likely absorbed into the Aten's service; others presumably dispersed into the general population or retreated into private practice.
-        </p>
-        <p>
-            The <a href="house-of-life.html" class="nl">House of Life</a> — the sacred institution responsible for maintaining the corpus of medical, magical, and cosmological texts — almost certainly went underground during this period. The knowledge was too deeply embedded in scribal culture to simply disappear; but its institutional expression was disrupted. This disruption, even across only seventeen years, may have caused significant losses in the transmission of specific technical knowledge, particularly in areas of temple ritual that required continuous practice to maintain.
+            Atenism collapsed this multi-node system into a single point of access. The Aten did not speak, did not respond to invocation, did not possess a name that could be used operatively (its "name" was a theological description, not a power-name in the Kemetic sense). It gave light and warmth universally — but only through the mediation of Akhenaten himself. The pharaoh was not merely the head of the state religion; he was the sole relay station between humanity and the divine. Remove the pharaoh, and access to the divine ceased entirely.
         </p>
 
         <div class="caution-note">
@@ -194,7 +264,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION V: ART -->
+    <!-- ═══════════════════════════════════════ V. ART -->
     <section id="art">
         <h2 class="section-head">V. The Amarna Style — Naturalism and Distortions</h2>
         <p>
@@ -207,19 +277,19 @@
         <div class="card-grid">
             <div class="info-card">
                 <h4>ROYAL INTIMACY</h4>
-                <p>For the first time in Egyptian monumental art, the royal family was depicted in informal, affectionate domestic scenes: Akhenaten and Nefertiti dandling their daughters on their laps, the girls eating from shared dishes, the king kissing one daughter while another tugs at his collar. These scenes were not wall decorations but theological statements — the divine family under the Aten's rays, the light falling equally on all of them. The Aten's rays, always depicted as hands reaching down to offer the <em>ankh</em> symbol of life to the king and queen's nostrils, connect the disc directly to the royal bodies in a unbroken energetic circuit.</p>
+                <p>For the first time in Egyptian monumental art, the royal family was depicted in informal, affectionate domestic scenes: Akhenaten and Nefertiti dandling their daughters on their laps, the girls eating from shared dishes, the king kissing one daughter while another tugs at his collar. These images are revolutionary not merely as art but as theology — they show the divine family as a human family, making the sacred immanent in the domestic.</p>
             </div>
             <div class="info-card">
-                <h4>NATURAL WORLD</h4>
-                <p>The Amarna artistic programme extended to extraordinary naturalistic depictions of the non-human world. Painted palace floors at Akhetaten show marshland scenes — ducks taking flight from papyrus thickets, fish swimming through rendered water — of a liveliness and observational precision that has no parallel in Egyptian art before or after. This reflects the Hymn's theology directly: the natural world under the Aten's light is itself sacred, and its accurate depiction is a form of worship. The marshes are not symbolic but observed.</p>
+                <h4>THE ELONGATED CANON</h4>
+                <p>The royal body in Amarna art is depicted with exaggerated elongation — extended skull, long neck, pendulous belly, wide hips, long thin fingers. This distortion applies to all royal figures and, to a lesser degree, to other figures depicted under the Aten's rays. Whether this represents a literal physical condition of Akhenaten's body, a deliberate theological statement about divine androgyny, or a radical new artistic convention remains one of the period's central debates (see Section XIII).</p>
             </div>
             <div class="info-card">
-                <h4>THE ELONGATED FORMS</h4>
-                <p>The most controversial feature of Amarna art: the royal family depicted with elongated skulls, extended chins, thin necks, rounded abdomens, wide hips, and thighs. Medical hypotheses proposed include Marfan syndrome, Froehlich syndrome (causing feminisation of body shape), and temporal lobe epilepsy (associated with intense religious experiences). None fully accounts for the complex of features. The dominant current scholarly view — argued by Jacobus van Dijk, among others — is that the style was <em>theologically deliberate</em>: the king was depicted as a primordial, androgynous creator figure incorporating both masculine and feminine generative principles, reflecting Aten as the sole source of all life, with no divine consort.</p>
+                <h4>THE NEFERTITI BUST</h4>
+                <p>Discovered in 1912 by Ludwig Borchardt in the workshop of the sculptor Thutmose at Amarna, the famous painted limestone bust of Nefertiti (now in the Neues Museum, Berlin) represents one of the supreme achievements of ancient portraiture. Nefertiti is depicted with precisely the elongated neck and high cheekbones of the Amarna convention, yet she is also rendered with a realism — a sense of specific individual personhood — entirely absent from conventional Egyptian royal portraiture. The sculptor appears to have worked in both registers simultaneously. The bust's continued retention by Germany, despite repeated Egyptian requests for repatriation, remains a live <a href="repatriation-ethics.html" class="nl">repatriation</a> controversy.</p>
             </div>
             <div class="info-card">
-                <h4>THE BUST OF NEFERTITI</h4>
-                <p>The limestone bust now in the Neues Museum, Berlin (discovered 1912 by Ludwig Borchardt at the workshop of the sculptor Thutmose in Amarna) represents the Amarna style at its most accomplished — and its most paradoxical. Nefertiti is depicted with precisely the elongated neck and high cheekbones of the Amarna convention, yet she is also rendered with a realism — a sense of specific individual personhood — entirely absent from conventional Egyptian royal portraiture. The sculptor appears to have worked in both registers simultaneously. The bust's continued retention by Germany, despite repeated Egyptian requests for repatriation, remains a live <a href="repatriation-ethics.html" class="nl">repatriation</a> controversy.</p>
+                <h4>THE LIGHT-RAY MOTIF</h4>
+                <p>The defining iconographic feature of Amarna art is the image of the Aten as a disc with multiple extended rays, each terminating in a human hand. The hands typically hold the <em>ankh</em> sign — the symbol of life — offering it to the nostrils of the royal family. This image embeds several theological statements simultaneously: the Aten is not a person but a force (the disc); it operates through extension of its own substance (the rays are not servants but parts of itself); it offers life directly and continuously; and the only recipients of that direct offering are the royal family — everyone else receives it reflected through the king and queen.</p>
             </div>
         </div>
 
@@ -234,7 +304,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION VI: ROYAL FAMILY -->
+    <!-- ═══════════════════════════════════════ VI. ROYAL FAMILY -->
     <section id="family">
         <h2 class="section-head">VI. The Royal Family — Nefertiti and the Succession</h2>
 
@@ -280,7 +350,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION VII: POLITICS -->
+    <!-- ═══════════════════════════════════════ VII. POLITICS -->
     <section id="politics">
         <h2 class="section-head">VII. International Politics — The Amarna Letters</h2>
         <p>
@@ -293,7 +363,7 @@
         <div class="card-grid">
             <div class="info-card">
                 <h4>THE GREAT KINGS</h4>
-                <p>Letters between Akhenaten and the "Great Kings" — the rulers of Babylon, Mitanni, Assyria, and Hatti (the Hittites) — reveal a diplomatic world of carefully calibrated mutual respect, strategic marriage alliances, and intense negotiation over gold. The Babylonian king Burnaburiash II repeatedly complains that Egypt has sent insufficient gold: "In my brother's land, gold is as plentiful as dirt." This diplomatic language reflects a system under pressure — Egypt's traditional surplus of gold being bartered for political stability with the great powers while its attention was directed inward.</p>
+                <p>Letters between Akhenaten and the "Great Kings" — the rulers of Babylon, Mitanni, Assyria, and Hatti (the Hittites) — reveal a diplomatic world of carefully calibrated mutual respect, strategic marriage alliances, and intense negotiation over gold. The Babylonian king Burnaburiash II repeatedly complains that Egypt has sent insufficient gold: he writes that in Egypt gold is abundant as dust. This diplomatic pressure reflects a system under strain — Egypt's traditional gold surplus being traded for political stability while its attention was directed inward.</p>
             </div>
             <div class="info-card">
                 <h4>THE VASSAL CRISIS</h4>
@@ -305,14 +375,14 @@
             </div>
             <div class="info-card">
                 <h4>THE "DAKHAMUNZU" LETTERS</h4>
-                <p>After Tutankhamun's death, a letter preserved in the Hittite archives from the Egyptian queen "Dakhamunzu" (almost certainly Ankhesenamun) to the Hittite king Suppiluliuma I reveals the political desperation of the moment: "My husband has died and I have no son. Send me one of your sons and I will make him king." Suppiluliuma, suspicious, investigated; by the time he sent a prince, the prince was murdered en route — almost certainly by Horemheb's faction. The incident illustrates how completely the Amarna period had destabilised Egypt's royal succession and diplomatic standing.</p>
+                <p>After Tutankhamun's death, a letter preserved in the Hittite archives from the Egyptian queen "Dakhamunzu" (almost certainly Ankhesenamun) to the Hittite king Suppiluliuma I reveals the political desperation of the moment: the widowed queen begs for a Hittite prince as husband, writing that she refuses to marry a servant. Suppiluliuma, suspicious, investigated; by the time he sent a prince, the prince was murdered en route — almost certainly by Horemheb's faction. The incident illustrates how completely the Amarna period had destabilised Egypt's royal succession and diplomatic standing.</p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION VIII: RESTORATION -->
+    <!-- ═══════════════════════════════════════ VIII. RESTORATION -->
     <section id="restoration">
         <h2 class="section-head">VIII. The Restoration — Tutankhamun and the Priesthood</h2>
         <p>
@@ -322,7 +392,7 @@
             The <strong>Restoration Stele</strong> — erected at Karnak, where it could be read by the restored Amun priesthood — is one of the most politically charged documents in Egyptian history. It describes the state of the land during the Amarna period in deliberately apocalyptic terms: temples in ruin, the gods having abandoned Egypt, prayers going unanswered, military campaigns failing because divine support had been withdrawn. Whether this accurately describes conditions — and archaeological evidence from some provincial sites suggests genuine economic disruption during the Amarna period — or is pure ideological framing of the new administration's legitimacy, it established the narrative that would justify everything that followed.
         </p>
         <p>
-            Tutankhamun changed his name from <strong>Tutankhaten</strong> ("Living Image of the Aten") to <strong>Tutankhamun</strong> ("Living Image of Amun"), and his queen similarly changed from <strong>Ankhesenpaaten</strong> to <strong>Ankhesenamun</strong>. The court returned to Thebes and Memphis. The temples were reopened and restaffed. The extraordinary wealth of the Aten temples — accumulated over seventeen years — was redistributed back to the traditional cults. Tutankhamun's famous tomb, with its three thousand objects crammed into four small rooms, gives some indication of the material culture of the immediately post-Amarna court: a blend of Amarna-style artistic sensibility (much of the tomb equipment shows Amarna influence in its naturalism and intimacy) with restored traditional iconography.
+            Tutankhamun changed his name from <strong>Tutankhaten</strong> ("Living Image of the Aten") to <strong>Tutankhamun</strong> ("Living Image of Amun"), and his queen similarly changed from <strong>Ankhesenpaaten</strong> to <strong>Ankhesenamun</strong>. The court returned to Thebes and Memphis. The temples were reopened and restaffed. The extraordinary wealth of the Aten temples — accumulated over seventeen years — was redistributed back to the traditional cults. Tutankhamun's famous tomb, with its three thousand objects crammed into four small rooms, gives some indication of the material culture of the immediately post-Amarna court: a blend of Amarna-style artistic sensibility with restored traditional iconography.
         </p>
 
         <div class="practical-note">
@@ -333,7 +403,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION IX: DAMNATIO MEMORIAE -->
+    <!-- ═══════════════════════════════════════ IX. DAMNATIO -->
     <section id="damnatio">
         <h2 class="section-head">IX. Damnatio Memoriae — Erasing the Heresy</h2>
         <p>
@@ -360,7 +430,7 @@
 
     <hr class="divider">
 
-    <!-- SECTION X: LEGACY -->
+    <!-- ═══════════════════════════════════════ X. LEGACY -->
     <section id="legacy">
         <h2 class="section-head">X. Legacy and Speculation — Monotheism and the Esoteric Reading</h2>
 
@@ -375,27 +445,410 @@
         <div class="card-grid">
             <div class="info-card">
                 <h4>HYMN TO ATEN / PSALM 104</h4>
-                <p>The most compelling textual evidence for a connection between Atenism and Hebrew religious tradition is the remarkable structural and thematic parallel between the Great Hymn to the Aten and Psalm 104 in the Hebrew Bible. Both hymns celebrate the creator's daily provision of light and life to all living things; both describe the night as a time of danger when the creator's protection withdraws; both include specific attention to animals, plants, and the Nile or river. The parallels are specific enough to suggest either direct literary dependence, a common source, or a shared cultural environment — but not to establish which.</p>
+                <p>The most compelling textual evidence for a connection between Atenism and Hebrew religious tradition is the remarkable structural and thematic parallel between the Great Hymn to the Aten and Psalm 104 in the Hebrew Bible. Both hymns celebrate the creator's daily provision of light and life to all living things; both describe the night as a time of danger when the creator's protection withdraws; both include specific attention to animals, plants, and the Nile or river. The parallel is close enough that direct influence — through whatever transmission route — is widely acknowledged by comparative religion scholars.</p>
             </div>
             <div class="info-card">
-                <h4>THE ATEN'S IMAGELESS THEOLOGY</h4>
-                <p>The Aten was never depicted in human or animal form — only as the solar disc with descending rays ending in human hands. This makes Atenism the first documented case in Egyptian history of a major theological system explicitly rejecting anthropomorphic divine representation. The Hebrew prohibition on graven images (<em>lo ta'aseh lecha pesel</em>) occupies structurally the same theological space: a sharp demarcation between the divine reality and any material representation of it. Whether this parallel reflects historical contact or independent theological development of similar pressures remains an open scholarly question.</p>
+                <h4>AKHENATEN AS "THE FIRST INDIVIDUAL"</h4>
+                <p>The German historian Heinrich Brugsch and later the Egyptologist James Henry Breasted (who called Akhenaten "the first individual in history") proposed that Atenism represented not merely a theological revolution but an anthropological one — the emergence of the interior individual self as a theological subject. The Aten addresses the king personally; the king addresses the Aten in the first person singular. This structural personalisation of the divine relationship has no full parallel in earlier Egyptian religious texts and anticipates the personal-god theology that would become normative in the Abrahamic traditions.</p>
             </div>
         </div>
 
-        <h3 class="sub-head">The Esoteric Reading — System Collapse and Metaphysical Inertia</h3>
+        <h3 class="sub-head">The Metaphysical Failure — A Kemetic Analysis</h3>
         <p>
-            Within the framework of this archive — which treats the Egyptian metaphysical system as a coherent and operative reality, not merely a cultural artefact — the Amarna period carries a specific and instructive significance that goes beyond the historical and theological debates.
-        </p>
-        <p>
-            Akhenaten's project was, in operational terms, an attempt at a <strong>total system reboot</strong>: the replacement of an extraordinarily complex, deeply embedded, multi-layered metaphysical operating system — developed over two thousand years of continuous refinement — with a single, absolute, radically simplified signal. The Aten's light, undifferentiated and total, was to replace the complex network of divine intelligences, each governing specific domains, each accessible through specific operative technologies, each maintaining specific aspects of cosmic order.
-        </p>
-        <p>
-            The failure of this attempt is instructive on multiple levels. The traditional system — whatever its limitations — had been calibrated over millennia to the actual structure of reality as the Kemetic tradition understood it. Its complexity was not bureaucratic accumulation but functional response: there were many <em>netjeru</em> because reality has many domains, many frequencies, many modes of operation. A single signal — however powerful, however genuinely experienced — cannot substitute for a complex system of differentiated intelligences governing differentiated domains.
+            The traditional Kemetic system — whatever its limitations — had been calibrated over millennia to the actual structure of reality as the Kemetic tradition understood it. Its complexity was not bureaucratic accumulation but functional response: there were many <em>netjeru</em> because reality has many domains, many frequencies, many modes of operation. A single signal — however powerful, however genuinely experienced — cannot substitute for a complex system of differentiated intelligences governing differentiated domains.
         </p>
         <p>
             The "system rollback" that followed — the violent restoration, the damnatio memoriae, the extraordinary energy directed at erasure — itself illustrates the <strong>inertia of established metaphysical structures</strong>. A tradition that has been continuously maintained, continuously charged with operative intent, and continuously inhabited by a population of practitioners over two thousand years does not simply shut down because a pharaoh issues a decree. The popular shrines, the domestic worship of Bes and Taweret found in the workers' village, the persistence of traditional funerary practices in private contexts throughout the Amarna period — all of these indicate that the tradition maintained itself at the grassroots level even when institutionally suppressed. The priesthood may have been disbanded; the <em>Heka</em> did not stop flowing.
         </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XI. HYMNS -->
+    <section id="hymns">
+        <h2 class="section-head">XI. The Aten Hymns — Text, Structure, and Theology</h2>
+        <p>
+            The textual legacy of the Amarna period is concentrated in a small but extraordinarily rich corpus of hymns to the Aten — found inscribed in the private tombs of high officials at Akhetaten. Unlike traditional Egyptian religious texts, which were dense with mythological allusions, divine epithets, and operative formulae, the Aten hymns are startlingly plain in their language. They describe what the sun does — rises, warms, illuminates, sets — and celebrate this activity as the totality of divine action. The absence of myth is not accidental; it is programmatic.
+        </p>
+        <p>
+            Several hymns survive in varying degrees of completeness. The most important are the <strong>Great Hymn to the Aten</strong> (found in the tomb of the official Ay, who later became pharaoh) and several shorter hymns found in other tombs. The Great Hymn is almost certainly attributable to Akhenaten himself — its language, its theology, and its inclusion in the tomb of his closest associate all suggest royal authorship. It is the closest thing to a personal theological statement that survives from any Egyptian pharaoh.
+        </p>
+
+        <h3 class="sub-head">The Short Hymn — Structure and Content</h3>
+        <div class="hymn-block">
+            <div class="hymn-title">// SHORT HYMN TO THE ATEN — COMPOSITE TRANSLATION (after Lichtheim, Murnane) //</div>
+            Praise of Re-Harakhty-who-rejoices-in-the-horizon,<br>
+            In his name as Shu who is the Aten,<br>
+            Who lives and endures, the great living Aten<br>
+            Who is in the jubilee, lord of all that the sun encircles,<br>
+            Lord of the sky, lord of the earth, lord of the House-of-Aten.<br><br>
+            Beautiful is your rising on the horizon,<br>
+            O living Aten who initiates life!<br>
+            When you rise on the eastern horizon<br>
+            You fill every land with your beauty.<br>
+            You are beautiful, great, and radiant,<br>
+            High above every land;<br>
+            Your rays embrace the lands<br>
+            To the limit of all that you have made.
+        </div>
+        <p>
+            The Short Hymn is notable for its complete absence of narrative — there is no mythology, no story, no reference to other deities, no underworld journey, no conflict. The Aten simply rises, shines, and by that act sustains all life. The theological statement is direct: divinity is entirely exhausted in the observable activity of the light. Nothing lies behind, beneath, or beyond it.
+        </p>
+
+        <h3 class="sub-head">Structural Features Common to All Aten Hymns</h3>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>UNIVERSALITY WITHOUT HIERARCHY</h4>
+                <p>The Aten's light reaches all peoples — Egyptians and foreigners alike. Earlier Egyptian solar hymns sometimes mentioned foreign peoples, but typically in subordinate roles as tribute-bearers or subjects of the pharaoh's dominion. The Aten hymns describe the creator's care for all humans, including Egypt's neighbours, using the same language for each: the Aten has set a Nile in the sky (rain) for the lands that have no Nile on earth, just as it has given the Nile to Egypt. This universalist impulse distinguishes Atenism from earlier Kemetic solar theology.</p>
+            </div>
+            <div class="info-card">
+                <h4>ANTI-MYTHOLOGICAL STANCE</h4>
+                <p>The hymns systematically avoid mythological language. The sun does not sail a barque; it does not fight Apep; it does not carry the dead pharaoh through the twelve hours of the night. The Aten simply rises and sets. This anti-mythological stance is theologically coherent: if the Aten is the light itself (not a person who controls the light), then narrative mythology about the sun god's activities becomes not merely superfluous but actively misleading — it implies a divine person behind the phenomenon, which Atenism denies.</p>
+            </div>
+            <div class="info-card">
+                <h4>SOLE MEDIATOR DOCTRINE</h4>
+                <p>Every surviving Aten hymn includes a passage affirming that the only knowledge of the Aten comes through Akhenaten, and the only access to the Aten for ordinary people is through the king and queen. This is the most politically charged theological claim in the corpus — it transforms the universal light into a controlled access resource. What the Aten gives freely to all as light, the pharaoh controls as theology and ritual. This structural monopoly on divine access has no parallel in mainstream Egyptian religious thinking.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XII. GREAT HYMN -->
+    <section id="great-hymn">
+        <h2 class="section-head">XII. The Great Hymn — Close Reading and Esoteric Analysis</h2>
+        <p>
+            The Great Hymn to the Aten is the longest and most theologically developed of the Amarna hymnic texts. Inscribed on the west wall of the tomb of Ay at Akhetaten, it runs to approximately 60 verses in the standard scholarly numbering. As noted, its authorship is almost certainly Akhenaten himself — the language is that of a first-person theological declaration, not a court poet's formal address.
+        </p>
+
+        <div class="hymn-block">
+            <div class="hymn-title">// GREAT HYMN TO THE ATEN — SELECTED PASSAGES (after Lichtheim, Murnane, Allen) //</div>
+            Beautiful is your appearing on the horizon of heaven,<br>
+            O living Aten who initiates life —<br>
+            When you dawn on the eastern horizon<br>
+            You fill every land with your beauty.<br>
+            You are beautiful, great, radiant,<br>
+            High over every land.<br>
+            Your rays embrace the lands<br>
+            To the limit of all you have made.<br>
+            You are Re, having reached their limits<br>
+            And subdued them for your beloved son.<br><br>
+            Though you are far away, your rays are on earth;<br>
+            Though you are seen, your movement is not known.<br><br>
+            When you set on the western horizon,<br>
+            The land is in darkness as if in death...<br>
+            Lions come out from their dens,<br>
+            All the serpents bite.<br>
+            Darkness hovers, the land is in silence...<br><br>
+            How many are your deeds,<br>
+            Though hidden from sight,<br>
+            O sole god beside whom there is none!<br>
+            You made the earth as you wished, you alone,<br>
+            All peoples, herds, and flocks;<br>
+            All trees that grow from the soil;<br>
+            They live when you dawn for them,<br>
+            You are mother and father of all that you made.
+        </div>
+
+        <h3 class="sub-head">Esoteric Reading — What the Hymn Actually Teaches</h3>
+        <p>
+            The Great Hymn contains, beneath its surface of solar observation, a coherent operative cosmology. Read esoterically — that is, as a description of the structure of reality rather than merely a poetic celebration of sunrise — several significant teachings emerge.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE PARADOX OF IMMANENCE AND UNKNOWABILITY</h4>
+                <p>"Though you are seen, your movement is not known." This is one of the most sophisticated theological statements in the entire corpus. The Aten is maximally visible — it is literally the most visible thing in the world — yet its essential nature is unknown. This paradox (maximum visibility / minimum knowability) anticipates the Neoplatonic concept of the One: the source of all being, itself beyond being, which cannot be known through the categories it generates. The Hermetic tradition would later systematise this as the distinction between the manifest cosmos and the unknowable Nous behind it.</p>
+            </div>
+            <div class="info-card">
+                <h4>LIGHT AS THE MEDIUM OF CREATION</h4>
+                <p>The hymn consistently presents light not as a product of the Aten's creative activity but as the medium through which creation occurs: "You made the earth as you wished, you alone." The light does not illuminate a pre-existing world — it brings the world into being and sustains it moment-by-moment. When the light withdraws (sunset), the world returns toward non-being: "The land is in darkness as if in death." This is not metaphor but cosmological description: the world is not a self-sustaining object but a continuous event, dependent at every moment on the continuing creative act of the solar source. This anticipates both Neoplatonic emanationism and the Qabalistic concept of <em>tzimtzum</em> and continuous creation.</p>
+            </div>
+            <div class="info-card">
+                <h4>UNIVERSAL PARENTHOOD</h4>
+                <p>"You are mother and father of all that you made." The Aten is explicitly androgynous — simultaneously the masculine principle of active generation and the feminine principle of nurturing sustenance. This theological androgyny is consistent with the Amarna artistic depiction of Akhenaten's own body as androgynous (see Section XIII) and represents a sophisticated understanding of the creative principle as transcending the gender binary that most theological systems impose on the divine. In alchemical terms: the Aten is both Sulfur (active, solar, masculine) and Mercury (receptive, lunar, feminine) simultaneously — the <em>coniunctio</em> achieved at the level of the source rather than as a product of the Work.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE DIVERSITY OF CREATION AS DIVINE INTENTION</h4>
+                <p>A remarkable passage in the Great Hymn celebrates the diversity of human languages as the Aten's deliberate creation: it has set different languages in different peoples, different skins, different lands — and it cares for each according to its particular needs. The Aten of the Levant receives rain; the Aten of Egypt provides the Nile. This universalism-in-particularity is theologically sophisticated: the one divine source manifests differently in different contexts, and each manifestation is equally legitimate. This cuts directly against the exclusivist reading of Atenism as pure monotheism, and suggests a more nuanced theology in which the one light takes many particular forms without thereby becoming multiple.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIII. BODY -->
+    <section id="body">
+        <h2 class="section-head">XIII. Akhenaten's Body — The Physiology Problem</h2>
+        <p>
+            No aspect of the Amarna period has generated more speculation — academic and popular — than the extraordinary physical appearance of Akhenaten as depicted in art. The colossal statues from the early Karnak phase, the relief carvings at Akhetaten, the smaller sculptural works from Thutmose's workshop: all consistently present a figure with an elongated skull (dolichocephaly), an extended narrow face with pronounced jaw, a long sinuous neck, sloping shoulders, pendulous breasts and belly, wide hips, and unusually elongated fingers and toes. This is not the standard Amarna stylistic elongation applied uniformly to all figures — it is a specific configuration applied most intensely to Akhenaten himself, and applied to the royal family and eventually to other figures as a derivative of his depiction.
+        </p>
+        <p>
+            The mummy most likely to be Akhenaten's — the remains from KV55 in the Valley of the Kings — has been studied repeatedly with increasingly sophisticated methods, with inconclusive results. The skeletal remains are incomplete, the age at death is disputed (earlier analyses suggested 25–35; later work suggested 35–45), and no definitive identification has been confirmed. Without a confirmed skeletal record, the question of whether the artistic depiction reflects a real body condition remains open.
+        </p>
+
+        <h3 class="sub-head">The Major Hypotheses</h3>
+        <div class="anatomy-grid">
+            <div class="anatomy-card">
+                <h4>MARFAN SYNDROME</h4>
+                <p>The most commonly proposed medical explanation. Marfan syndrome — a connective tissue disorder — produces the long, thin body habitus, elongated fingers, and arachnodactyly (spider-fingers) visible in the royal iconography. It can also produce cardiovascular complications and, notably, lens dislocation producing visual disturbances that some scholars have proposed as a source for visionary experiences. The objection is that Marfan syndrome does not produce gynecomastia (breast tissue in a male) as prominently depicted in Akhenaten's images.</p>
+            </div>
+            <div class="anatomy-card">
+                <h4>FAMILIAL GYNECOMASTIA / HORMONAL DISORDER</h4>
+                <p>An endocrine disorder — possibly an aromatase excess syndrome, which converts androgens to estrogens — would produce the combination of feminised body features (breasts, wide hips), elongated facial features, and gynoid fat distribution seen in the depictions. The combination of paternal inbreeding over generations in the 18th Dynasty royal line (documented through Tutankhamun's DNA evidence) may have created conditions for rare recessive disorders to express.</p>
+            </div>
+            <div class="anatomy-card">
+                <h4>DELIBERATE THEOLOGICAL STATEMENT</h4>
+                <p>The Egyptologist Donald Redford and others argue that the unusual body is not a medical record but a theological programme: Akhenaten's depiction as androgynous — containing both masculine and feminine features — reflects the Atenist doctrine that the Aten is "mother and father" of all creation. The pharaoh, as the sole earthly embodiment of the Aten, must therefore embody both principles. On this reading, the elongated skull, the feminine body, and the unusual facial proportions are deliberate artistic choices encoding theological content, not depictions of a physical condition.</p>
+            </div>
+            <div class="anatomy-card">
+                <h4>NON-HUMAN / EXTRATERRESTRIAL FRAMING</h4>
+                <p>Popular esoteric literature — and a persistent current of speculative archaeology — proposes that Akhenaten's unusual appearance reflects non-human genetic heritage, typically described as "Anunnaki," "Pleiadian," or "Grey" ancestry. This hypothesis correlates the elongated skull depictions with the "cone-headed" skulls found at Paracas (Peru) and the similar skull forms attributed to ancient alien intervention. Within this archive's methodology: this is a hypothesis of the "cross-reference required" category — the claim appears across multiple independent sources, but the proposed causal mechanism (direct genetic engineering by extraterrestrial beings) has not been independently verified and is not corroborated by any physical evidence recovered from Amarna. It is noted as a subjective-truth claim held by many practitioners; it should not be accepted as historical fact without corroborating evidence.</p>
+            </div>
+            <div class="anatomy-card">
+                <h4>STYLISTIC EVOLUTION / PURE CONVENTION</h4>
+                <p>The most conservative Egyptological position: the Amarna style is a radical artistic convention with no necessary correspondence to any physical reality. Egyptian art always worked by convention; the Amarna convention was simply a different, more extreme convention. The elongated forms encode the Atenist theology of light and extension (rays reaching out, the disc stretching toward the earth) through formal visual language. The fact that the convention extends to Nefertiti, the royal daughters, and eventually other figures in the tombs supports this reading — a systemic medical condition would not transfer to all family members in the same way.</p>
+            </div>
+            <div class="anatomy-card">
+                <h4>SYNTHESIS: THEOLOGY UPON BIOLOGY</h4>
+                <p>The most nuanced position — held by Erik Hornung, among others — is that a genuine physical peculiarity of Akhenaten's body (possibly a mild endocrine condition producing somewhat feminised features) was seized upon and dramatically amplified by the artists into a theological programme. The biology gave the convention its initial impulse; the theology gave it its systematic elaboration. In this reading, Akhenaten's unusual appearance was real, recognised by contemporaries, and interpreted — by himself and by the artists around him — as a sign of his divine nature, his embodiment of the Aten's androgynous creative power.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIV. UNDERGROUND -->
+    <section id="underground">
+        <h2 class="section-head">XIV. The Private Underground — Domestic Religion During the Heresy</h2>
+        <p>
+            The official suppression of traditional religion during the Amarna period was, by any measure, ruthless. Work gangs chiselled names from monuments; temple revenues were redirected; priests were disbanded or reassigned. Yet the archaeological record from Akhetaten itself — the city purpose-built to embody the new theology — shows consistent evidence that ordinary people maintained private devotion to traditional deities throughout the entire period.
+        </p>
+
+        <h3 class="sub-head">Evidence from the Workers' Village</h3>
+        <p>
+            The planned workers' village at the south end of Akhetaten has been systematically excavated by the Amarna Project since the 1970s. The finds are revealing. In house after house, small domestic shrines containing amulets, figurines, and votive objects were found — and many of these objects depict deities that were officially abolished. <strong>Bes</strong>, the household protective deity of women, childbirth, and children, appears repeatedly. <strong>Taweret</strong>, the hippopotamus goddess of pregnancy and childbirth, appears as well. Even <strong>Amun</strong> — the primary target of the reform — appears in one cache, hidden under a floor deposit.
+        </p>
+        <p>
+            This evidence makes clear that the Atenist revolution, however complete it was at the institutional and elite level, did not reach into the domestic religious practices of ordinary people. The reasons are not difficult to understand: Bes and Taweret addressed real anxieties (infant mortality, difficult births, household illness) that the Aten hymns never addressed. The Aten as depicted in official theology was a cosmic, abstract force — it gave light and warmth universally, but it offered no mechanism for asking for help with a difficult childbirth or a sick child. The traditional <em>netjeru</em> served real practical needs that the official theology conspicuously failed to fill.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE CONTINUITY OF HEKA AT THE HOUSEHOLD LEVEL //</div>
+            <p>The persistence of domestic Heka practice during the Amarna period is not merely historically interesting — it is a significant piece of evidence about the nature of Kemetic operative tradition. The tradition did not reside solely in the institutional apparatus of temple and priesthood; it lived in the homes, the knowledge of women, the inherited craft of protection and healing that passed from mother to daughter and from local practitioner to local practitioner, completely independent of the state religious system.</p>
+            <p>This resilience is consistent with the broad pattern of Heka transmission: the tradition has always maintained itself through practitioner-to-practitioner transmission at the personal level, with the institutional apparatus of temples and schools serving as an amplification and systematisation of what was already present at the grassroots. When the institution was removed, the grassroots practice continued. This is both a historical observation and a lesson for contemporary practitioners: tradition ultimately lives in people, not in buildings or organisations.</p>
+        </div>
+
+        <h3 class="sub-head">The Funerary Problem</h3>
+        <p>
+            Atenist theology had no coherent afterlife doctrine. Traditional Kemetic funerary practice was built entirely around the complex mythology of the Duat — the structured underworld through which the deceased navigated with the help of spells, divine allies, and ritual equipment. Osiris judged the dead; Anubis guided them; the forty-two assessors heard the Negative Confession; Re welcomed the justified into his solar barque. All of these divine figures were eliminated by Atenism.
+        </p>
+        <p>
+            What replaced them? In official Atenist funerary practice, the deceased was depicted receiving the Aten's rays directly — the same gift given to the living, now extended to the dead. The king mediated even posthumous access to the divine. But the private cemeteries at Akhetaten's workers' village show that ordinary people ignored this framework entirely. The grave goods, the positioning of bodies, and the amulets found in private burials at Akhetaten are largely traditional in character. People died with the Aten's theology as their official religion and with Osiris in their hearts.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XV. NOBLE TOMBS -->
+    <section id="noble-tombs">
+        <h2 class="section-head">XV. The Tombs of the Nobles — A New Afterlife Paradigm</h2>
+        <p>
+            The <strong>Rock Tombs of the Amarna Officials</strong> — cut into the eastern cliffs above Akhetaten, in two groups (Northern and Southern Tombs) — represent the most complete record of Atenist visual theology. Prepared for the highest officials of Akhenaten's court, these tombs were not personal religious statements but official displays, designed and presumably approved at the highest level of the new administration. Their iconographic programme shows clearly what Atenist afterlife theology actually looked like in practice.
+        </p>
+
+        <h3 class="sub-head">What the Tombs Show</h3>
+        <p>
+            In traditional New Kingdom noble tombs (such as those at Thebes, from the same period), the deceased is shown performing rituals, enjoying family life, and making offerings — with scenes from the <em>Book of the Dead</em>, images of Osiris, Anubis, and other afterlife deities, and the expected funerary texts providing the operative equipment for the journey through the Duat. The Amarna noble tombs replace this entire programme with a single obsessive subject: the royal family at worship.
+        </p>
+        <p>
+            Wall after wall in the Amarna tombs shows Akhenaten and Nefertiti — often with their daughters — worshipping the Aten disc, distributing rewards from the Window of Appearances, conducting rituals, and receiving tribute. The tomb owner appears in a secondary position, witnessing and participating in the royal rites. The message is unambiguous: the path to the afterlife runs entirely through the pharaoh. There is no individual afterlife journey; there is only incorporation into the royal cult.
+        </p>
+
+        <div class="practical-note">
+            <div class="pn-title">// THE THEOLOGICAL POVERTY OF THE ATENIST AFTERLIFE //</div>
+            <p>The Atenist afterlife doctrine — insofar as one can reconstruct it from the noble tomb evidence — amounts to this: the justified dead dwell in proximity to the Aten's light, mediated through the king. There is no trial, no transformation, no active journey of the soul. There is no <em>Duat</em> with its twelve hours, its gates, its guardians, its challenges. There is no resurrection in the Osirian sense — the elaborate machinery of reconstituting the dismembered Osiris, of reactivating the <em>Ba</em> and reuniting it with the <em>Ka</em>, is entirely absent.</p>
+            <p>This impoverishment is perhaps the most revealing critique of Atenism from within the Kemetic metaphysical framework. A theology that eliminates the complexity of the soul's afterlife journey is implicitly denying the complexity of the soul itself — reducing the multi-component composite soul (<em>Ka, Ba, Akh, Ren, Ib, Shuyet, Khat</em>) to a passive recipient of light. The tradition that followed — the great Ramesside expansion of netherworld literature, the proliferation of Books of the Duat in royal tombs — can be read as a direct theological reaction to this impoverishment, an insistence on the full complexity of the soul's cosmic identity.</p>
+        </div>
+
+        <h3 class="sub-head">Key Tombs and Their Contents</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>Tomb</th><th>Owner</th><th>Notable Features</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>TA1</strong></td><td>Huya — Royal Steward</td><td>Contains the durbar scenes showing Year 12 international reception; rare depictions of Kiya and Meketaten</td></tr>
+                <tr><td><strong>TA2</strong></td><td>Meryre II — Overseer of the Queen's Household</td><td>More durbar scenes; shows Nefertiti prominently in ritual role</td></tr>
+                <tr><td><strong>TA3</strong></td><td>Ahmes — Fan-bearer at the Right Hand of the King</td><td>Well-preserved scenes of Window of Appearances ritual</td></tr>
+                <tr><td><strong>TA25</strong></td><td>Ay — God's Father / Later Pharaoh</td><td>Contains the fullest surviving version of the Great Hymn to the Aten; Ay depicted receiving gold collar from the royal family</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XVI. MYSTIC -->
+    <section id="mystic">
+        <h2 class="section-head">XVI. Akhenaten as Mystic — The Inner Vision Hypothesis</h2>
+        <p>
+            Beneath the political and theological analysis lies a question that mainstream Egyptology is structurally ill-equipped to address: was Akhenaten's vision a genuine mystical experience? Did he encounter something real, something that legitimately transformed his understanding of the cosmos, and express it in the only language available to him — that of pharaonic religious authority and absolute political power?
+        </p>
+        <p>
+            The question cannot be answered from the outside, and it is important to be clear about what kind of question it is. We are not asking whether Atenism was theologically correct. We are asking whether it originated in direct, unmediated experience of a unifying transcendent principle — whether Akhenaten, however imperfectly he expressed or institutionalised it, saw something.
+        </p>
+
+        <h3 class="sub-head">The Evidence for Genuine Visionary Experience</h3>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE PERSONAL QUALITY OF THE HYMNS</h4>
+                <p>The Great Hymn is remarkable for its first-person intimacy. Traditional Egyptian divine praise poetry is formal, standardised, built from accumulated epithets and formulae. The Aten hymns read differently — they describe experience, they convey wonder, they have the quality of personal observation. The passage about the embryo in the womb ("when you set, the earth is in darkness... the embryo in the woman's womb is nourished by whatever you make") suggests someone genuinely meditating on the reach of the solar principle into hidden places, not a court poet assembling formulae.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE MYSTICAL STRUCTURE OF THE THEOLOGY</h4>
+                <p>The Atenist doctrine contains structural elements common to mystical experiences across traditions: the encounter with a single, encompassing, luminous principle; the dissolution of distinction between observer and observed (the Aten is "in" everything, including the pharaoh who worships it); the sense that this principle is both maximally visible and ultimately unknowable ("though you are seen, your movement is not known"); and the paradox of simultaneous universality and intimacy (it shines for all creation yet the hymn is addressed in the second person singular). These are the marks of genuine unitive experience across traditions.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE FAILURE TO PRESERVE COMPLEXITY</h4>
+                <p>Genuine mystical experience tends to be followed by difficulty translating the unitary vision back into the complexity of practice. Many mystics across traditions note that the vision of unity is real, but that it requires careful, patient work to integrate — and that premature or imprudent attempts to impose the vision institutionally produce exactly the kind of damage that Atenism produced. The mystic sees the One; the error is concluding that the many are therefore false and must be destroyed. Akhenaten's tragedy, on this reading, is not that his vision was false but that he conflated the mystical truth of unity with a political and theological programme of suppression.</p>
+            </div>
+            <div class="info-card">
+                <h4>COMPARANDA IN OTHER TRADITIONS</h4>
+                <p>The experience Akhenaten appears to describe in the Great Hymn has close parallels in the visionary accounts of the Neoplatonists (particularly Plotinus's descriptions of the One), in Sufi accounts of the divine light (<em>Nur</em>), in certain currents of Jewish mysticism (the <em>Or Ein Sof</em>, the Infinite Light), and in the solar mysticism of Hermeticism. In none of these traditions does the experience of the One lead to the suppression of the many. It is precisely Akhenaten's institutionalisation — his attempt to enforce the vision politically — that distinguishes his path from those of the later mystics who received similar experiences and integrated them more carefully.</p>
+            </div>
+        </div>
+
+        <div class="practical-note">
+            <div class="pn-title">// THE PRACTITIONER'S ASSESSMENT //</div>
+            <p>From the perspective of this archive's operative framework, the most likely assessment is: Akhenaten experienced a genuine encounter with the solar/light principle at its most unified and comprehensive level — what the Hermetic tradition would call the Nous, what the Qabalistic tradition would call Kether or Ain Soph Aur, what the alchemical tradition would call the Quintessence in its solar aspect. This is a real encounter, not a delusion. However, the encounter was insufficiently integrated — whether from personal immaturity, from the extreme pressure of pharaonic authority, or from the absence of a tradition that could contextualise unitive mystical experience within polytheistic operative practice. The result was a vision that was genuine at its source and catastrophic in its application. Both things are true simultaneously.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XVII. ECONOMY -->
+    <section id="economy">
+        <h2 class="section-head">XVII. The Amarna Economy — Social and Material Consequences</h2>
+        <p>
+            The Amarna revolution was not only theological and political — it had profound material consequences for the Egyptian population at every level of society. The redirection of temple revenues, the abandonment of established trade networks, the withdrawal of military protection from Levantine vassals, and the enormous expenditure of the Akhetaten construction project all had measurable effects on the economic life of the Two Lands.
+        </p>
+
+        <h3 class="sub-head">The Seizure of Temple Wealth</h3>
+        <p>
+            The temples of traditional Egypt were not merely religious institutions but the primary economic engine of the state. Temple estates controlled large tracts of agricultural land, maintained herds of cattle, operated workshops producing textiles and metalwork, managed granaries that served as both the taxation system and the social welfare network, and employed enormous numbers of people at every skill level from field labourers to craftsmen to priests and administrators. The Restoration Stele describes, perhaps with some rhetorical exaggeration, the condition of these institutions after the Amarna period: temples in ruin, cult statues abandoned, herds unattended, agricultural estates reverting to scrubland.
+        </p>
+        <p>
+            The redirected wealth did not disappear — it was concentrated in the Aten temples and in the royal household. The colossal expense of building and maintaining Akhetaten from scratch in less than a decade — quarrying, transporting, and carving hundreds of thousands of talatat blocks; constructing palaces, temples, administrative buildings, housing for 20,000+ people; creating an entirely new administrative infrastructure — was an extraordinary drain on state resources, and it was funded directly from the seized temple revenues.
+        </p>
+
+        <h3 class="sub-head">The Human Cost</h3>
+        <p>
+            The physical evidence from the workers' cemetery at Akhetaten documents the human cost of this extraordinary mobilisation. Skeletal analysis of the approximately 450 individuals buried there reveals a population under severe chronic stress: spine injuries consistent with repeated heavy load carrying; fractures distributed across the skeleton suggestive of accident rates well above normal; growth arrest lines in long bones (Harris lines) indicating repeated periods of nutritional deficiency during childhood; dental disease at high rates. The mean age at death in the cemetery is significantly lower than at comparable sites. The sacred city of the Aten was built on the bodies of its labour force.
+        </p>
+
+        <div class="caution-note">
+            <div class="cn-title">// MA'AT AND THE AMARNA SOCIAL CONTRACT //</div>
+            <p>The concept of <a href="maat-isfet.html" class="nl">Ma'at</a> — cosmic and social justice, right order, the proper relationship between all parts of the social and cosmic system — was the fundamental obligation of the pharaoh. The pharaoh's first duty was to maintain Ma'at; all other functions (military, economic, ritual) were expressions of this primary obligation. The pharaoh who disrupted Ma'at — who broke the covenant between the divine order and the human social order — was not merely politically incompetent but metaphysically disastrous.</p>
+            <p>The evidence from the Amarna workers' cemetery presents a direct challenge to hagiographic readings of Akhenaten as a mystical reformer ahead of his time. Whatever his visionary experience, whatever the genuine quality of his encounter with the solar principle, his administration demonstrably failed in the fundamental Kemetic obligation of the king: the maintenance of Ma'at at the social level. The workers who built his city of light lived hard, short lives. The vassal states that petitioned his court for military protection were abandoned to predatory neighbours. The temples that maintained the cosmic order were looted and closed. By the only measure that ultimately matters in the Kemetic framework, the Amarna experiment was a failure of Ma'at on a civilisational scale.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XVIII. ESOTERIC CURRENT -->
+    <section id="esoteric-current">
+        <h2 class="section-head">XVIII. The Esoteric Current — Rosicrucian and Hermetic Claims</h2>
+        <p>
+            From the late 19th century onward, Akhenaten has been a significant figure in Western esoteric imagination — claimed as an initiate, a forerunner, a precursor to the Hermetic tradition, and even (in some accounts) as an operative adept whose work, understood esoterically, was not a failure but a deliberate initiation of a new current. These claims deserve rigorous examination rather than either dismissal or wholesale acceptance.
+        </p>
+
+        <h3 class="sub-head">The AMORC Current</h3>
+        <p>
+            The Ancient Mystical Order Rosae Crucis (AMORC), founded by Harvey Spencer Lewis in 1915, made Akhenaten a central figure in its claimed historical lineage. In AMORC's narrative, the Amarna period was not a failed political and religious experiment but the first public expression of a secret mystery school that had existed in Egypt since the time of Thutmose III — a school that deliberately encoded its teachings in the new religious programme and survived the Amarna period's collapse by returning underground. Akhenaten, on this reading, was an initiate adept who raised the inner mystery teachings to the level of state religion, failed in the inevitable conflict with vested institutional interests, but preserved the lineage through initiatic transmission that ultimately reached modern Rosicrucianism.
+        </p>
+        <p>
+            This is a significant claim. Its evidential basis is thin — it rests primarily on Lewis's own account and cannot be corroborated from archaeological or historical sources. However, within this archive's methodology, the dismissal of a claim for lack of objective evidence is not the same as a determination that the claim is false. The question is whether the subjective and experiential evidence supports the claim. AMORC practitioners consistently report genuine transformative experiences through their curriculum, some of which may reflect authentic resonances with the Amarna-period material. Whether these experiences are evidence of an unbroken lineage or evidence of genuine encounter with a distinctive current of energy that remains accessible to prepared practitioners is, ultimately, not distinguishable from the outside.
+        </p>
+
+        <h3 class="sub-head">The Hermetic Resonance</h3>
+        <p>
+            The structural parallels between the Atenist theological programme and the Hermetic tradition are genuine, whether or not they reflect direct historical transmission. The Aten as described in the Great Hymn is functionally equivalent to the Hermetic <em>Nous</em>: the single luminous intelligence that underlies all creation, visible in its effects but unknowable in its essence, accessible to the prepared human mind through a process of inner alignment. The sole-mediator doctrine of Atenism (the king as the only access point to the Aten) has its Hermetic parallel in the concept of the <em>Poimandres</em> — the divine Nous appearing to Hermes as a direct personal vision and commissioning him as its earthly representative.
+        </p>
+        <p>
+            The question of whether Hermeticism received this current from Atenism directly — through the Alexandria connection, through the Egyptian priestly tradition, through whatever channels may have survived the restoration — or whether both traditions independently accessed the same underlying reality, is genuinely open. The Alexandrian milieu in which Hermeticism crystallised was aware of the Amarna tradition (Manetho, writing in the 3rd century BCE, gives a garbled account of Akhenaten as "Osarseph," a priest who turned against the gods). Whether this awareness reflects a living esoteric inheritance or merely historical memory is another matter.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// OPERATIVE NOTE: THE AMARNA CURRENT IN PRACTICE //</div>
+            <p>Practitioners within several modern Western initiatic orders report that the Amarna period constitutes a distinctive energetic current — recognisable by its particular quality of solar clarity, its sense of direct unmediated contact with a source that transcends all images and names, and its associated difficulty of integration (the same difficulty that Akhenaten himself apparently experienced). This current is sometimes described as the "raw solar current before refraction" — the light before the prism separates it into its constituent colours (the individual <em>netjeru</em>).</p>
+            <p>If this description is accurate, working with Amarna energies specifically requires careful containment protocols — not because the current is dangerous in itself, but because it is radically simplifying in its action, and premature exposure to it without a sufficiently developed operative framework can produce the same error Akhenaten made: a collapse of necessary complexity into a blinding (but operatively incomplete) experience of unity. The appropriate preparatory work is the development of a robust relationship with the full pantheon before approaching the unitary level, so that the encounter with the One can be integrated without destroying the practitioner's operative relationship with the many.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIX. CONTESTED -->
+    <section id="contested">
+        <h2 class="section-head">XIX. Modern Egyptology's Open Questions</h2>
+        <p>
+            The Amarna period remains one of the most actively debated areas in contemporary Egyptology. The following questions are genuinely unresolved as of the current state of scholarship — not "controversial" in the sense of having fringe versus mainstream positions, but actively contested among serious professional researchers.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>WHO IS IN KV55?</h4>
+                <p>The mysterious tomb KV55 in the Valley of the Kings contains a single male burial in an adapted female coffin, along with a cache of objects associated with the Amarna royal family. The mummy's identity is disputed between Akhenaten himself and Smenkhkare. DNA analysis (2010) by the Egyptian Mummy Project suggested the KV55 individual was the father of Tutankhamun — consistent with Akhenaten — but the age at death is disputed, with some physical anthropologists arguing the skeleton shows features of someone dying in their mid-20s, which would be too young for Akhenaten (who reigned 17 years and presumably ruled as an adult). The question is not resolved.</p>
+            </div>
+            <div class="info-card">
+                <h4>WHERE IS NEFERTITI BURIED?</h4>
+                <p>Nicholas Reeves's controversial 2015 hypothesis — based on infrared reflectography of KV62 (Tutankhamun's tomb) — proposed the existence of hidden chambers behind the decorated walls of Tutankhamun's burial chamber, potentially containing Nefertiti's undisturbed burial. Subsequent radar surveys of the tomb produced conflicting results. The Egyptian Supreme Council of Antiquities authorised a definitive radar survey in 2018–19; the results were inconclusive. The question of Nefertiti's final burial place remains open.</p>
+            </div>
+            <div class="info-card">
+                <h4>WAS THERE A CO-REGENCY WITH AMENHOTEP III?</h4>
+                <p>Whether Akhenaten reigned alongside his father Amenhotep III for a period (which would add potentially 11 years to the Amarna chronology) or succeeded him directly is one of the most technically contested issues in New Kingdom chronology. The evidence is ambiguous — some monuments appear to show both kings simultaneously; others are ambiguous. The co-regency question has significant implications for the chronology of the entire period and for understanding how gradually the Atenist programme was initiated.</p>
+            </div>
+            <div class="info-card">
+                <h4>WHO WAS SMENKHKARE?</h4>
+                <p>The brief ruler who appears between Akhenaten and Tutankhamun remains unidentified. Three main positions exist: (a) a young male prince, son of Akhenaten by a secondary wife; (b) Nefertiti herself, ruling under a male titulary for constitutional reasons; (c) Meritaten (the eldest daughter), ruling as female pharaoh under a combined identity. Each position has advocates among serious Egyptologists; none has achieved consensus.</p>
+            </div>
+            <div class="info-card">
+                <h4>WHY DID THE REFORM FAIL SO COMPLETELY?</h4>
+                <p>Akhenaten's reforms, implemented with apparently absolute authority over 17 years, were reversed within a decade of his death. The totality of the reversal — the erasure of names, the demolition of the city, the re-installation of the exact previous order — suggests something more than political pragmatism. Why was the restoration so thorough, so urgent, so violent in its memory-suppression? The answer probably involves a combination of theological reaction (the priesthood's genuine belief that Atenism had damaged the cosmic order), economic motivation (the enormous wealth that could be reclaimed from the Aten temples), and political necessity (the legitimacy of the new dynasty required complete disassociation from the heretic). But the intensity of the erasure still suggests something like collective trauma.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE PLAGUE HYPOTHESIS</h4>
+                <p>Recent scholarship — particularly work by Jacobus van Dijk — has proposed that a significant plague may have struck Egypt during the Amarna period, contributing to the deaths of several royal children (including Meketaten, depicted in mourning scenes at Akhetaten), the destabilisation of the succession, and the general atmosphere of crisis that surrounded the end of the reign. If a genuine epidemic struck Akhetaten, it would have been interpreted within the traditional Kemetic framework as evidence of divine displeasure — confirming for survivors that the abandonment of the traditional gods had real cosmic consequences. This hypothesis remains speculative but is taken seriously by several specialists in New Kingdom disease archaeology.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XX. OPERATIVE -->
+    <section id="operative">
+        <h2 class="section-head">XX. Operative Implications — Working With Amarna Energies</h2>
+        <p>
+            The Amarna period is not merely historical material — it is, within the operative Kemetic framework, an active energetic event whose consequences and residues are still accessible to prepared practitioners. The extraordinary concentration of ritual, royal, and divine power that was focused on Akhetaten for seventeen years; the systematic erasure campaign that followed; and the unresolved questions around the Ren-destruction of the royal family all constitute an energetically complex situation requiring careful navigation.
+        </p>
+
+        <h3 class="sub-head">Considerations for Kemetic Practitioners</h3>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>THE ATEN AS ARCHETYPE</h4>
+                <p>The Aten, as an operative contact, is fundamentally different from the <em>netjeru</em> of the traditional pantheon. Where Thoth responds to specific invocation, where Sekhmet engages with specific petitions, where Isis operates through specific mythological identifications — the Aten does not respond in these ways. It does not have a name in the operative sense (only a theological description). It does not engage with mythology (it has none). It does not discriminate between petitioners. Contact with the Aten principle is more accurately described as alignment than invocation — a process of removing the practitioner's own obstructions to the universal solar light rather than calling the solar light toward the practitioner.</p>
+            </div>
+            <div class="info-card">
+                <h4>AKHENATEN AS OPERATIVE FIGURE</h4>
+                <p>Akhenaten is reported by practitioners across several traditions as an accessible contact — but one with specific qualities and specific dangers. The quality is of direct solar clarity, an intense and sometimes overwhelming sense of everything being illuminated simultaneously. The danger is the same as in his historical life: contact with Akhenaten's field can produce a simplifying, unifying pull that, in an insufficiently grounded practitioner, may work against the necessary complexity of established operative practice. The recommendation is: develop a strong working relationship with the full traditional Kemetic pantheon before approaching Akhenaten as a direct contact.</p>
+            </div>
+            <div class="info-card">
+                <h4>NEFERTITI AS OPERATIVE FIGURE</h4>
+                <p>Nefertiti is reported as a significantly different contact from Akhenaten. Where he carries the intensity of the unmediated solar principle, she carries the quality of the solar principle received, contained, and reflected — the lunar-solar interface that the Amarna iconography depicted as the divine feminine complement to his masculine solar excess. Practitioners who find direct Akhenaten contact overwhelming often find Nefertiti more accessible and more integrable — she functions as a container for the solar intensity, allowing it to be received at human scale.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE UNRESOLVED REN QUESTION</h4>
+                <p>The systematic destruction of the Amarna royal family's <em>Ren</em> (power-names) creates an unusual energetic situation. Souls whose names have been suppressed but not destroyed — temporarily obscured rather than permanently eliminated — can exist in a state of limited manifestation that may affect practitioners who contact the Amarna field unexpectedly. The recommendation is to perform explicit Ren-restoration as part of any serious Amarna-period working: speak the names aloud, write them, treat the act of naming as a direct operative contribution to the souls' continued coherence. "I speak the name of Akhenaten. I speak the name of Nefertiti. I speak the name of Tutankhamun" — each uttered name is a counter to the erasure campaign, three thousand years later. This practice has been independently arrived at by practitioners in several traditions.</p>
+            </div>
+        </div>
 
         <div class="practical-note">
             <div class="pn-title">// SCHOLARLY RESOURCES //</div>
@@ -403,6 +856,8 @@
             <p><strong>Foundational scholarship:</strong> Cyril Aldred, <em>Akhenaten: King of Egypt</em> (1988); Donald Redford, <em>Akhenaten: The Heretic King</em> (1984); Nicholas Reeves, <em>Akhenaten: Egypt's False Prophet</em> (2001).</p>
             <p><strong>Theological analysis:</strong> Jan Assmann, <em>Moses the Egyptian</em> (1997); <em>The Price of Monotheism</em> (2009); Erik Hornung, <em>Akhenaten and the Religion of Light</em> (1999).</p>
             <p><strong>The Amarna Letters:</strong> William Moran (trans.), <em>The Amarna Letters</em> (1992) — the standard scholarly edition of the diplomatic archive.</p>
+            <p><strong>Artistic and physical evidence:</strong> Julia Samson, <em>Nefertiti and Cleopatra</em> (1985); Aidan Dodson, <em>Amarna Sunrise</em> (2014) and <em>Amarna Sunset</em> (2009).</p>
+            <p><strong>Esoteric readings:</strong> Alvin Boyd Kuhn, <em>The Lost Light</em> (1940); AMORC, <em>Rosicrucian Manual</em> (various editions); Jan Assmann, <em>The Mind of Egypt</em> (2002).</p>
         </div>
     </section>
 
