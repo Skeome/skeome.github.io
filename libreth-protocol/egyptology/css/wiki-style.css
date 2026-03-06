@@ -60,13 +60,14 @@ body {
 }
 .page-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.3rem, 7.5vw, 3rem);
+    font-size: clamp(1.1rem, 7vw, 3rem);
     font-weight: 700;
     color: var(--gold);
     text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     line-height: 1.1;
-    word-wrap: break-word;
+    word-break: keep-all;
+    overflow-wrap: break-word;
     padding: 0 10px;
     text-transform: uppercase;
 }
