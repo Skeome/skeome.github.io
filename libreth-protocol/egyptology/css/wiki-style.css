@@ -343,6 +343,36 @@ em, i { color: rgba(240,230,140,0.8); }
     border-color: var(--gold);
 }
 
+.nav-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: rgba(20,18,10,0.4);
+    text-transform: uppercase;
+}
+.nav-btn:hover {
+    background: var(--gold-glow);
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(212,175,55,0.2);
+}
+.nav-btn.terminal {
+    border-color: var(--cyan-dim);
+    color: var(--cyan);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+}
+.nav-btn.terminal:hover {
+    background: rgba(0, 209, 255, 0.1);
+    border-color: var(--cyan);
+    box-shadow: 0 0 15px rgba(0, 209, 255, 0.2);
+}
+
 /* FOOTER */
 footer {
     text-align: center;
