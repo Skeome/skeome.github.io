@@ -8,6 +8,7 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
+    text-align: center;
 }
 
 .container img {
@@ -98,11 +99,14 @@ main {
     align-items: center;
     text-align: center;
     padding: 20px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 #intro, #about, #contact, #media {
-    width: 100%;
-    max-width: 800px;
+    width: fit-content;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
 }

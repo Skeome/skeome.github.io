@@ -16,6 +16,7 @@ body {
   align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
+  text-align: center;
 }
 
 /* shared container */
@@ -27,6 +28,9 @@ body {
   align-items: center;
   padding: 2rem;
   flex-direction: column;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* pre block formatting */

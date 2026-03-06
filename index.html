@@ -13,6 +13,7 @@
             font-family: 'Lato', sans-serif;
             background-color: #111827; /* A dark blue-gray */
             color: #E5E7EB; /* Light gray for text */
+            text-align: center;
         }
         h1, h2, h3 {
             font-family: 'Cormorant Garamond', serif;
@@ -40,10 +41,19 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .section-fade .container {
+            width: fit-content;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .service-card {
              background-color: #1F2937; /* Slightly lighter dark blue-gray */
              border: 1px solid #374151; /* Gray border */
              transition: transform 0.3s ease, box-shadow 0.3s ease;
+             width: fit-content;
+             max-width: 100%;
+             margin: 0 auto;
         }
         .service-card:hover {
             transform: translateY(-5px);

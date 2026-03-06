@@ -32,6 +32,7 @@
                 radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%);
             background-attachment: fixed;
+            text-align: center;
         }
 
         /* SCROLLBAR */
@@ -40,7 +41,12 @@
         ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
 
         /* LAYOUT */
-        .page-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+        .page-wrap { 
+            width: fit-content;
+            max-width: 100%; 
+            margin: 0 auto; 
+            padding: 2rem 1.5rem 6rem; 
+        }
 
         /* HEADER - Terminal to Temple Transition */
         .page-header {
@@ -50,6 +56,10 @@
             margin-bottom: 4rem;
             position: relative;
             background: linear-gradient(to bottom, rgba(0,20,30,0.3) 0%, transparent 100%);
+            width: fit-content;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .page-header::before {
             content: '𓉐𓉻 𓈖 𓎛𓎡𓎠';
@@ -246,7 +256,7 @@
                 <p>
                     By engaging with the historical, philological, and esoteric aspects of ancient Egypt, we aim to re-activate latent knowledge streams and develop the interpretive faculties necessary for navigating complex information matrices. Hieroglyphs, the sacred writing system of Kemet, are a primary example of such a symbolic system, offering profound insights into ancient thought.
                 </p>
-                <div class="flex flex-wrap gap-6 mt-8">
+                <div class="flex flex-wrap justify-center gap-6 mt-8">
                     <a href="hieroglyphs.html" class="nav-btn terminal">Hieroglyph Training Module</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
                 </div>

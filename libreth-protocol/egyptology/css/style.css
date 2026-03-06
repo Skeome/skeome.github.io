@@ -4,9 +4,13 @@ body {
     color: #b0c4de;
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.transparenttextures.com/patterns/black-felt.png');
     overflow-x: hidden;
+    text-align: center;
 }
 .container {
-    max-width: 900px;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 2rem;
     text-shadow: 0 0 3px rgba(176, 196, 222, 0.3);
 }
