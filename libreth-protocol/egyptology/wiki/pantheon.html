@@ -7,7 +7,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓊹 𓊹 𓊹 𓊹 𓊹 𓊹'; }</style>
+    <style>
+        :root {
+            --pantheon-gold: #d4af37;
+            --pantheon-dark: rgba(212, 175, 55, 0.9);
+            --pantheon-light: rgba(212, 175, 55, 0.2);
+            --pantheon-dim: rgba(212, 175, 55, 0.05);
+        }
+        .page-header {
+            border-bottom: 2px solid var(--pantheon-gold);
+            box-shadow: 0 4px 12px var(--pantheon-dim);
+        }
+        .page-header::before { content: '𓊹 𓊹 𓊹 𓊹 𓊹 𓊹'; color: var(--pantheon-gold); }
+        .page-title { color: var(--pantheon-gold); text-shadow: 0 0 10px var(--pantheon-light); }
+        .section-head { 
+            border-bottom: 2px solid var(--pantheon-gold);
+            color: var(--pantheon-dark);
+        }
+        .divider { border-color: var(--pantheon-gold); }
+        .toc-block { border-left: 4px solid var(--pantheon-gold); background: var(--pantheon-dim); }
+        .info-card { border-left: 4px solid var(--pantheon-gold); }
+        .blue-block { background: var(--pantheon-dim); border-left: 4px solid var(--pantheon-gold); }
+        .glyph-marker { color: var(--pantheon-gold); }
+        ::-webkit-scrollbar-thumb { background-color: var(--pantheon-gold); }
+    </style>
 </head>
 <body>
 <div class="page-wrap">
@@ -28,100 +51,359 @@
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
             <li><a href="#ontology">I. The Ontology of the Netjeru — Divine Principles</a></li>
-            <li><a href="#syncretism">II. Syncretism — The Overlap of Frequencies</a></li>
-            <li><a href="#major-deities">III. Directory of Major Netjeru</a></li>
-            <li><a href="#domestic">IV. Domestic Guardians — Bes and Taweret</a></li>
-            <li><a href="#zoomorphism">V. Sacred Fauna — Biological Resonators</a></li>
-            <li><a href="#practice">VI. Aligning with the Archetypes</a></li>
+            <li><a href="#structure">II. The Cosmological Structure — Heavens Above, Earth Below</a></li>
+            <li><a href="#ennead">III. The Ennead — The Nine Principles of Creation</a></li>
+            <li><a href="#ogdoad">IV. The Ogdoad — The Eight Chaos-Deities of Primordial Waters</a></li>
+            <li><a href="#syncretism">V. Syncretism — The Overlap of Frequencies</a></li>
+            <li><a href="#major-deities">VI. Directory of Major Netjeru</a></li>
+            <li><a href="#secondary">VII. Secondary Deities — Specialized Functions</a></li>
+            <li><a href="#feminine-principle">VIII. The Feminine Principle — Goddesses as World-Shapers</a></li>
+            <li><a href="#domestics">IX. Domestic Guardians — Bes, Taweret, and Household Protection</a></li>
+            <li><a href="#gender-principles">X. Gender as Divine Principle — Not Biology But Function</a></li>
+            <li><a href="#ba-ka-principles">XI. Ba, Ka, and Divine Manifestation — Forms of Presence</a></li>
+            <li><a href="#sacred-fauna">XII. Sacred Fauna — Biological Resonators</a></li>
+            <li><a href="#seasonal-cycles">XIII. Seasonal Cycles — The Pantheon Through Time</a></li>
+            <li><a href="#duat">XIV. Naming the Hidden — Gods of the Duat</a></li>
+            <li><a href="#stellar">XV. The Stellar Pantheon — Deities as Celestial Bodies</a></li>
+            <li><a href="#invocation">XVI. Invoking the Netjeru — Practical Resonance</a></li>
+            <li><a href="#transmission">XVII. Pantheon Evolution — From Predynastic to Ptolemaic</a></li>
+            <li><a href="#practice">XVIII. Working with the Pantheon Principle</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: ONTOLOGY -->
-    <section id="ontology">
-        <h2 class="section-head">I. The Ontology of the Netjeru — Divine Principles</h2>
-        <p>
-            The Egyptian gods (Ancient Egyptian: <i>Netjeru</i>) were not viewed as external "beings" in the modern sense, but as <strong>fundamental principles</strong> or <strong>divine frequencies</strong> that animate the cosmos. The term <i>Netjer</i> is related to the idea of renewal and functional integrity.
-        </p>
-        <p>
-            In the framework of the Libreth Protocol, the Pantheon is viewed as a <strong>modular symbolic operating system</strong>. Each deity represents a specific bandwidth of information and energy. By utilizing the correct icon (image), name (Ren), and ritual (Heka), the practitioner can achieve resonance with these archetypes to alter the local awareness field.
-        </p>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: SYNCRETISM -->
-    <section id="syncretism">
-        <h2 class="section-head">II. Syncretism — The Overlap of Frequencies</h2>
+    <!-- SECTION II: STRUCTURE -->
+    <section id="structure">
+        <h2 class="section-head">II. The Cosmological Structure — Heavens Above, Earth Below</h2>
         <p>
-            Egyptian theology utilized <strong>Syncretism</strong> — the temporary or permanent merging of two or more deities (e.g., Amun-Ra, Sobek-Re, Ptah-Sokar-Osiris). This was not theological confusion, but a sophisticated statement about the underlying unity of cosmic principles.
+            The Egyptian cosmos was understood as a tripartite reality: the <strong>Duat</strong> (the underworld of potential and hidden forces), the <strong>Tawy</strong> (the middle world of manifest existence, literally "the Two Lands"), and the <strong>Aaru</strong> (the celestial realm of eternal existence). Each realm contained its own population of netjeru, its own laws, and its own relationship to the principle of Ma'at.
         </p>
         <p>
-            Syncretism allowed for the creation of <strong>complex resonances</strong>. By combining the attributes of "The Hidden One" (Amun) with "The Manifest Sun" (Ra), the priesthood established a more robust and expansive divine archetype capable of governing an empire.
+            The upper heavens (Aaru) were ruled by the solar principle — <a href="alchemy.html" class="nl">Ra and his various manifestations</a>. The middle world (Tawy) was the domain of the terrestrial gods who directly affected human affairs: Osiris (fertility and afterlife), Isis (magic and motherhood), Thoth (wisdom and record-keeping). The lower realms (Duat) contained the forces that must be traversed, negotiated, and sometimes overcome — including fearsome entities like Apep and the guardian deities of the gates.
         </p>
-    </section>
+        <p>
+            Rather than thinking of these as "places," it is more accurate to think of them as <strong>frequency bands</strong>. The Duat is not geographically distant from the everyday world — it is non-ordinary consciousness, accessible through meditation, dreaming, and ritual. The Aaru is not beyond reach — it is the realm of eternal principles that can be contacted through prayer and invocation.
+        </p>
 
-    <hr class="divider">
-
-    <!-- SECTION III: MAJOR DEITIES -->
-    <section id="major-deities">
-        <h2 class="section-head">III. Directory of Major Netjeru</h2>
-        <div class="deity-grid">
-            <div class="deity-card">
-                <h4>ATUM-RE</h4>
-                <p>The primordial Monad and the setting sun. The source from which all emanation begins. He is the self-generated one who exists before time.</p>
+        <div class="card-grid card-grid-3">
+            <div class="info-card">
+                <h4>THE DUAT</h4>
+                <p>The hidden world of potential, dreaming, and unconscious forces. Governed by Osiris and Anubis. It is where dissolution and regeneration occur, where the soul is tested and purified.</p>
             </div>
-            <div class="deity-card">
-                <h4>PTAH</h4>
-                <p>The supreme architect and craftsman. He created the world through <strong>Thought</strong> (Sia) and <strong>Speech</strong> (Hu). See <a href="memphite-theology.html" class="nl">Memphite Theology</a>.</p>
+            <div class="info-card">
+                <h4>THE TAWY</h4>
+                <p>The manifest world of human experience. The "Two Lands" of Upper and Lower Egypt unified. Governed by the combined principle of MA'AT and the active netjeru who maintain balance.</p>
             </div>
-            <div class="deity-card">
-                <h4>OSIRIS [Asar]</h4>
-                <p>Lord of the Afterlife and the regenerative power of the earth. The prototype for all resurrection and the judge of the heart. See <a href="osiris.html" class="nl">Osiris</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>ISIS [Aset]</h4>
-                <p>Mistress of the Throne and Great of Magic (Weret-Hekau). The intelligence that reassembles the fragmented world. See <a href="isis.html" class="nl">Isis</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>THOTH [Djehuty]</h4>
-                <p>The scribe of the gods and master of all written knowledge. He is the keeper of the cosmic records and the patron of the <a href="house-of-life.html" class="nl">House of Life</a>. See <a href="thoth-hermes.html" class="nl">Thoth-Hermes</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>HATHOR</h4>
-                <p>Goddess of love, music, and the celestial sky. She represents the harmonic resonance of the universe and is the primary <strong>Eye of Ra</strong>. See <a href="hathor.html" class="nl">Hathor</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>HORUS</h4>
-                <p>The sky god and the archetype of divine kingship. He is the son of Isis and Osiris, representing the <strong>active victory of order</strong> over chaos.</p>
-            </div>
-            <div class="deity-card">
-                <h4>SET</h4>
-                <p>The god of storms, the desert, and <strong>necessary chaos</strong>. He is the force of dynamic change and the defender of the solar barque against <a href="apep.html" class="nl">Apep</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>ANUBIS</h4>
-                <p>The master of embalming and the psychopomp who leads the soul through the gates of the underworld. The guardian of the threshold. See <a href="anubis.html" class="nl">Anubis</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>SEKHMET</h4>
-                <p>The wrathful aspect of the Eye of Ra. The lioness goddess of war, plague, and solar fire. She represents raw entropic power redirected for protection.</p>
-            </div>
-            <div class="deity-card">
-                <h4>MA'AT</h4>
-                <p>The personification of truth, balance, and cosmic order. She is the standard by which all existence is weighed. See <a href="maat-isfet.html" class="nl">Ma'at & Isfet</a>.</p>
-            </div>
-            <div class="deity-card">
-                <h4>NEITH</h4>
-                <p>The ancient weaver goddess who wove the universe on her cosmic loom. She is the mother of the sun and a primary guardian of the soul.</p>
+            <div class="info-card">
+                <h4>THE AARU</h4>
+                <p>The celestial realm of eternal forms. The home of Ra, the stellar deities, and the perfected ancestors. Accessible through ascent and the development of the Akh (enlightened self).</p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION V: ZOOMORPHISM -->
-    <section id="zoomorphism">
-        <h2 class="section-head">V. Sacred Fauna — Biological Resonators</h2>
+    <!-- SECTION III: ENNEAD -->
+    <section id="ennead">
+        <h2 class="section-head">III. The Ennead — The Nine Principles of Creation</h2>
+        <p>
+            The most systematically organized group of Egyptian deities is the <strong>Ennead of Heliopolis</strong> (Greek name; Egyptian <i>Pesedjet</i>). This group of nine represents the complete cosmic principle broken down into its component frequencies.
+        </p>
+        <p>
+            The Heliopolitan cosmology describes creation as a nine-step process. In the beginning was <strong>Atum</strong> (the primordial monad, the autopoietic self-generating principle). From his own substance, he generated the first pair of opposites: <strong>Shu</strong> (air, separation) and <strong>Tefnut</strong> (moisture, cohesion). These two generated <strong>Geb</strong> (earth) and <strong>Nut</strong> (sky). From Geb and Nut came the <strong>Osirian generation</strong>: Osiris, Isis, Set, and Nephthys.
+        </p>
+        <p>
+            This genealogy is more than mythological narrative — it describes the actual unfolding of differentiation from undifferentiated unity. Each generation represents greater complexity and specificity. Atum is the principle itself. Shu and Tefnut are the fundamental principles of separation and unity that organize all existence. Geb and Nut are the stabilized dimensions of space. The Osirian generation represents the principles that actively govern existence within those dimensions.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE NINE-STEP CREATION //</div>
+            <p><strong>1. Atum (Atem):</strong> The primordial self-generating monad. The source from which all emanates. In modern physics terminology, the unified field before differentiation.</p>
+            <p style="margin-top:0.6rem;"><strong>2. Shu:</strong> The principle of differentiation, separation, air. The first break from unity. Represents consciousness, intellect, the capacity to distinguish one thing from another.</p>
+            <p style="margin-top:0.6rem;"><strong>3. Tefnut:</strong> The principle of unity-recovery, moisture, cohesion. The principle that reunites the separated. Represents order, law, the capacity to synthesize diverse elements.</p>
+            <p style="margin-top:0.6rem;"><strong>4. Geb:</strong> The manifest material world. The receptive field within which all experience occurs. Stability, foundation, the earth principle.</p>
+            <p style="margin-top:0.6rem;"><strong>5. Nut:</strong> The containing sky. Time, cycles, boundary. The container within which all material existence unfolds.</p>
+            <p style="margin-top:0.6rem;"><strong>6-9. Osiris, Isis, Set, Nephthys:</strong> The active principles within manifested existence. Regeneration, magic, chaos, and guardianship respectively.</p>
+        </div>
+
+        <p>
+            The Ennead is the complete theophany (manifestation of divine principle) in nine parts. Later Egyptian theology elaborated this into the <strong>Decanate system</strong> (dividing the zodiac into ten parts of 36 degrees each, each ruled by a different deity), and many other numerical frameworks emerged, each one attempting to map the full complexity of divine differentiation.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IV: OGDOAD -->
+    <section id="ogdoad">
+        <h2 class="section-head">IV. The Ogdoad — The Eight Chaos-Deities of Primordial Waters</h2>
+        <p>
+            While the Ennead describes the path from undifferentiated unity to differentiated complexity, the <strong>Ogdoad of Khemenu</strong> (Greek name for Hermopolis; Egyptian <i>Khemenu</i>) represents something different: <strong>the primordial chaos that preceded any ordered creation</strong>. The Ogdoad consists of eight deities representing the four pairs of primordial chaos-principles.
+        </p>
+        <p>
+            The Ogdoad includes: Nun and Naunet (primordial waters masculine and feminine), Amen and Amenet (hiddenness masculine and feminine), Heh and Hehet (boundlessness masculine and feminine), Kek and Keket (darkness masculine and feminine). Each pair represents a fundamental aspect of the chaos-state preceding creation.
+        </p>
+        <p>
+            Unlike creation theology (which emphasizes order emerging from chaos and defeating it), the Ogdoad theology recognizes that chaos is not the enemy of order — it is the eternal substrate out of which order continually emerges and into which order perpetually dissolves. To understand the Ogdoad is to understand that stability is never permanent, that all created things return to Nun, and that this return is not catastrophe but natural rhythm.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>NUN & NAUNET</h4>
+                <p>The primordial waters in their masculine and feminine aspects. All potential, all unstructured possibility. The source of Heka (magical power) because from undifferentiated possibility, any differentiation becomes possible.</p>
+            </div>
+            <div class="info-card">
+                <h4>AMEN & AMENET</h4>
+                <p>Hiddenness, the unknowable, the veiled principle. Amen becomes the hidden aspect of Ra (Amun-Ra), representing the transcendent beyond-all-knowledge aspect of divinity.</p>
+            </div>
+            <div class="info-card">
+                <h4>HEH & HEHET</h4>
+                <p>Boundlessness, infinity, infinity of space and time. The principle that cannot be contained. Associated with eternity (Heh eternity of cyclical time) as opposed to linear progression.</p>
+            </div>
+            <div class="info-card">
+                <h4>KEK & KEKET</h4>
+                <p>Darkness, the void, non-manifestation. Not evil darkness but the darkness of pre-creation, the womb-darkness from which all life emerges. Associated with Khepri's nighttime journey through the hidden realms.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: SYNCRETISM -->
+    <section id="syncretism">
+        <h2 class="section-head">V. Syncretism — The Overlap of Frequencies</h2>
+        <p>
+            Egyptian theology utilized <strong>Syncretism</strong> — the temporary or permanent merging of two or more deities (e.g., Amun-Ra, Sobek-Re, Ptah-Sokar-Osiris). This was not theological confusion, but a sophisticated statement about the underlying unity of cosmic principles. Two or more netjeru could be merged when their essential functions were understood to operate at the same frequency.
+        </p>
+        <p>
+            Syncretism allowed for the creation of <strong>complex resonances</strong>. By combining the attributes of "The Hidden One" (Amun) with "The Manifest Sun" (Ra), the priesthood established a more robust and expansive divine archetype capable of governing an empire. When priests wished to elevate Ptah's cosmic importance, they merged him with the already-powerful Ra to form Ptah-Ra. When Thoth's wisdom principle was being emphasized, he was merged with Hermes (Greek cognate) to form Hermes Trismegistus.
+        </p>
+        <p>
+            The most consequential syncretism in history was that of Isis with the Greek Demeter and the Roman Fortuna. In the Ptolemaic period, Isis's cult incorporated elements from Greco-Roman religion, resulting in a deity who could speak to diverse populations while maintaining her essential Egyptian function. This flexibility allowed her theology to spread throughout the Mediterranean and eventually influence Christian Mariology.
+        </p>
+
+        <div class="pull-quote">
+            "I am One and yet manifold. I am Aset and I contain Neith. I am the throne and I am the magician. Call upon me by any of my ten thousand names and you invoke the same principle — the restoring intelligence that holds the cosmos in coherence."
+            <cite>— Inscription at the Temple of Isis at Philae</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: MAJOR DEITIES -->
+    <section id="major-deities">
+        <h2 class="section-head">VI. Directory of Major Netjeru</h2>
+        <div class="deity-grid">
+            <div class="deity-card">
+                <h4>ATUM-RE</h4>
+                <p>The primordial Monad and the setting sun. The source from which all emanation begins. He is the self-generated one who exists before time. Contains all subsequent deities within his substance.</p>
+            </div>
+            <div class="deity-card">
+                <h4>RA (RE)</h4>
+                <p>The manifest sun, the active principle of illumination and consciousness. Different aspects rule different hours of the day (Khepri dawn, Ra noon, Atum dusk, Osiris midnight). The most important deity in dynastic Egypt.</p>
+            </div>
+            <div class="deity-card">
+                <h4>PTAH</h4>
+                <p>The supreme architect and craftsman. He created the world through <strong>Thought</strong> (Sia) and <strong>Speech</strong> (Hu). The patron of builders, sculptors, and all craftspeople. See <a href="memphite-theology.html" class="nl">Memphite Theology</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>AMUN</h4>
+                <p>The hidden one, the undifferentiated potential. As Amun-Ra, he becomes the synthesis of hidden and revealed, transcendent and immanent. Eventually the most politically powerful deity of the New Kingdom.</p>
+            </div>
+            <div class="deity-card">
+                <h4>OSIRIS [ASAR]</h4>
+                <p>Lord of the Afterlife and the regenerative power of the earth. The prototype for all resurrection and the judge of the heart. The supreme death and rebirth deity. See <a href="osiris.html" class="nl">Osiris</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>ISIS [ASET]</h4>
+                <p>Mistress of the Throne and Great of Magic (Weret-Hekau). The intelligence that reassembles the fragmented world. Eventually the most universally worshipped goddess of the Greco-Roman world. See <a href="isis.html" class="nl">Isis</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>THOTH [DJEHUTY]</h4>
+                <p>The scribe of the gods and master of all written knowledge. Keeper of cosmic records, inventor of hieroglyphics, patron of wisdom. He is the rational intellect that orders chaos. See <a href="thoth-hermes.html" class="nl">Thoth-Hermes</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>HATHOR</h4>
+                <p>Goddess of love, music, beauty, and the celestial sky. She represents the harmonic resonance of the universe and is the primary <strong>Eye of Ra</strong>. The gentle aspect of the solar principle. See <a href="hathor.html" class="nl">Hathor</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>HORUS</h4>
+                <p>The sky god and the archetype of divine kingship. He is the son of Isis and Osiris, representing the <strong>active victory of order</strong> over chaos. Every pharaoh was the earthly embodiment of Horus.</p>
+            </div>
+            <div class="deity-card">
+                <h4>SET (SUTEKH)</h4>
+                <p>The god of storms, the desert, and <strong>necessary chaos</strong>. He is the force of dynamic change and the defender of the solar barque against <a href="apep.html" class="nl">Apep</a>. Often demonized in later tradition, but originally a guardian principle.</p>
+            </div>
+            <div class="deity-card">
+                <h4>ANUBIS (INPU)</h4>
+                <p>The master of embalming and the psychopomp who leads the soul through the gates of the underworld. The guardian of the threshold. The lord of the cemetery and the patron of mummification. See <a href="anubis.html" class="nl">Anubis</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>SEKHMET</h4>
+                <p>The wrathful aspect of the Eye of Ra. The lioness goddess of war, plague, and solar fire. She represents raw entropic power redirected for protection and healing (physicians invoked her). The destructive shadow of Ra.</p>
+            </div>
+            <div class="deity-card">
+                <h4>BASTET</h4>
+                <p>The feline goddess of protection, motherhood, and joy. Originally fierce like Sekhmet, she became domesticated as the house cat's divine protector. The gentle face of the mother principle.</p>
+            </div>
+            <div class="deity-card">
+                <h4>MA'AT</h4>
+                <p>The personification of truth, balance, and cosmic order. She is the standard by which all existence is weighed. Not invoked for specific requests but honored as the principle that organization itself depends upon. See <a href="maat-isfet.html" class="nl">Ma'at & Isfet</a>.</p>
+            </div>
+            <div class="deity-card">
+                <h4>NEITH</h4>
+                <p>The ancient weaver goddess who wove the universe on her cosmic loom. She is the mother of the sun and a primary guardian of the soul. Also a war goddess. One of the oldest deities in the Egyptian pantheon.</p>
+            </div>
+            <div class="deity-card">
+                <h4>APEP (APOPHIS)</h4>
+                <p>The serpent of chaos that attacks Ra's solar barque each night. The embodiment of dissolution and entropy. Not evil in the absolute sense but the necessary principle of undoing. See <a href="apep.html" class="nl">Apep</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: SECONDARY DEITIES -->
+    <section id="secondary">
+        <h2 class="section-head">VII. Secondary Deities — Specialized Functions</h2>
+        <p>
+            Beyond the major Ennead and other primary deities, Egyptian theology recognized an extensive list of secondary deities, each governing specific functions. These were not "less important" but performed specialized operations within the larger cosmic machinery.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>KHEPRI (Morning Sun)</h4>
+                <p>The scarab-form of the sun in its aspect of becoming and transformation. Represents the principle of self-generation and perpetual renewal. The morning-consciousness rising from sleep.</p>
+            </div>
+            <div class="info-card">
+                <h4>KHNUM</h4>
+                <p>The ram-headed potter god who shaped human forms on the potter's wheel. Represents the principle of crafting and precise form-giving. Invoked by artisans and those undergoing soul-work.</p>
+            </div>
+            <div class="info-card">
+                <h4>SOBEK</h4>
+                <p>The crocodile god of the Nile, representing primal power, the dangerous fertility of the river, and transformation. Both feared and respected as a protector and a devourer.</p>
+            </div>
+            <div class="info-card">
+                <h4>NEPHTHYS</h4>
+                <p>The sister of Isis, representing the hidden edges and boundaries of existence. Often shown as the shadow-aspect of Isis, she guards the mysteries and the threshold between life and death.</p>
+            </div>
+            <div class="info-card">
+                <h4>SEKER (SOKAR)</h4>
+                <p>The deity of the hidden depths of the Duat, the underground forces of decay and transformation. Often merged as Sokar-Osiris, representing the underworld's regenerative function.</p>
+            </div>
+            <div class="info-card">
+                <h4>HU & SIA</h4>
+                <p>Personifications of divine speech (Hu) and divine thought (Sia). They accompany Ra in his daily journey. Represent the principles that manifest intention into reality.</p>
+            </div>
+            <div class="info-card">
+                <h4>SESHAT</h4>
+                <p>The goddess of writing, measurement, and knowledge recording. The female counterpart to Thoth's wisdom. Invoked by scholars, scribes, and those engaging in serious study.</p>
+            </div>
+            <div class="info-card">
+                <h4>NUN & NAUNET</h4>
+                <p>The primordial waters in masculine and feminine aspects. Represent undifferentiated potential. Associated with fertility, healing, and return to the source.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VIII: FEMININE PRINCIPLE -->
+    <section id="feminine-principle">
+        <h2 class="section-head">VIII. The Feminine Principle — Goddesses as World-Shapers</h2>
+        <p>
+            Unlike many cultural pantheons where female deities are secondary, Egyptian theology elevated the feminine principle to central importance. The greatest powers in the cosmos were often goddesses: Isis as the supreme magician, Hathor as the celestial harmony, Sekhmet as the raw fire of solar power, Neith as the primordial weaver.
+        </p>
+        <p>
+            The feminine principle in Egyptian theology often represents <strong>active intelligence</strong> rather than passive receptivity. Isis is not passive "mother" but the operative magician who restores the shattered world. Neith is not a gentle weaver but a fierce warrior-goddess. Even Hathor, though associated with gentleness, represents the overwhelming divine delight and ecstasy that transcends human comprehension.
+        </p>
+        <p>
+            The Eye of Ra, the most powerful principle in the solar theology, was consistently feminine. The wrathful Sekhmet and the gentle Hathor were both called the "Eye of Ra" — representing different modes of solar power but both female. This suggests a deep theological assertion: the active principle that executes divine will in the world is feminine.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE DIVINE FEMININE IN KEMETIC THOUGHT //</div>
+            <p>The feminine principle in Egyptian thought is not associated with weakness, chaos, or irrationality — common stereotypes in patriarchal religions. Rather, the feminine represents: active intelligence, the power to create form, the ability to maintain order through wisdom rather than force, and the principle that holds the cosmos in coherence. This understanding preserved in Egypt what was lost in later Western religious traditions.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IX: DOMESTIC GUARDIANS -->
+    <section id="domestics">
+        <h2 class="section-head">IX. Domestic Guardians — Bes, Taweret, and Household Protection</h2>
+        <p>
+            Not all important deities were cosmic in scale. <strong>Bes</strong> and <strong>Taweret</strong> (Taueret) were household deities, protectors of women in childbirth, guardians of children, and warding against nightmares and malevolent spirits. Their importance in daily life was enormous, even if temple theology focused on grander cosmic principles.
+        </p>
+        <p>
+            <strong>Bes</strong> was depicted as a grotesque dwarf with prominent features — anything but conventionally "beautiful." Yet his image adorned homes, nurseries, and bedchambers throughout pharaonic Egypt. His unattractive appearance was understood to ward off evil spirits, who presumably were repelled by anything ugly. Bes danced and played music, representing joy and defense combined.
+        </p>
+        <p>
+            <strong>Taweret</strong> was a hippopotamus-headed goddess (hippopotamuses were simultaneously feared and revered as protectors of mothers and infants). She stood vigil during pregnancy and childbirth, and mothers invoked her for protection of themselves and their children. No mother in ancient Egypt would have understood the pantheon without central attention to Taweret.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>BES</h4>
+                <p>The grotesque dwarf-god. Protector of women in childbirth, guardian of children, defender against evil spirits and nightmares. Represented joy, music, dance, and defense. Ubiquitous in household amulets.</p>
+            </div>
+            <div class="info-card">
+                <h4>TAWERET (TAUERET)</h4>
+                <p>The hippopotamus-headed mother-goddess. Protector of pregnant women and nursing mothers. Fierce defender of infants. One of the most ancient protective deities, with cult reaching back to predynastic times.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION X: GENDER AS PRINCIPLE -->
+    <section id="gender-principles">
+        <h2 class="section-head">X. Gender as Divine Principle — Not Biology But Function</h2>
+        <p>
+            A crucial misunderstanding in many treatments of Egyptian theology stems from the assumption that divine gender corresponds to biological sex. This is not the case. Gender in Egyptian theology is a description of <strong>functional principle</strong>, not biological nature.
+        </p>
+        <p>
+            Male deities (netjeru) typically represent outward-moving, creative, manifest principles: Ra as the active sun, Ptah as the architect actively creating, Thoth as the scribe recording and organizing. Female deities typically represent inward-gathering, restorative, coherence-maintaining principles: Isis gathering the scattered pieces, Hathor harmonizing disparate elements, Neith weaving the universe's fabric.
+        </p>
+        <p>
+            Yet in the primordial state, before differentiation, Atum is hermaphroditic — he is both male and female, or rather, beyond gender. When differentiation occurs, the cosmic principle splits into complementary masculine and feminine aspects. But these can be understood as functional descriptions rather than biological categories.
+        </p>
+        <p>
+            A practitioner of any biological sex can invoke either masculine or feminine aspects of the pantheon, as the work requires. A woman invoking Ra does not deny her femininity; she activates the solar creative principle as it manifests in her consciousness. A man invoking Isis does not violate his masculinity; he activates the restorative principle as it manifests in his work.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XI: BA & KA -->
+    <section id="ba-ka-principles">
+        <h2 class="section-head">XI. Ba, Ka, and Divine Manifestation — Forms of Presence</h2>
+        <p>
+            Egyptian theology recognized that existence is not singular but manifold. A being does not have <strong>one</strong> mode of existence but several simultaneous modes. The primary concepts were <strong>Ba</strong> and <strong>Ka</strong>.
+        </p>
+        <p>
+            The <strong>Ka</strong> is the vital force, the life-energy that animates a being. At the moment of death, the Ka is released. Religious rituals were designed to sustain the Ka of the dead. The Ka was understood as relatively impersonal — it was the principle of life-force itself, not individuality.
+        </p>
+        <p>
+            The <strong>Ba</strong> is closer to what we might call the soul or personality — the individual aspect that persists after death. The Ba could travel, transform, and interact. A dead person's Ba might visit the living in dreams. The god's Ba was understood as his manifestation in the world — the manifestation by which he could be contacted and engaged.
+        </p>
+        <p>
+            Each god had multiple Ba-manifestations. Isis had her Ba-form as the falcon, her Ba-form as human mother, her Ba-form as the throne itself. Each represented a different frequency at which her principle could be contacted. When a practitioner invoked Isis at her temple, they were engaging with her Ba — the aspect of her presence that could manifest in the world of human experience.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE MULTIPLE FORMS OF DIVINE PRESENCE //</div>
+            <p>A deity exists simultaneously in multiple forms: in the primordial unity (the undifferentiated potential), in theoretical understanding (the theological principle), in metaphysical reality (the true form accessible only to initiated understanding), and in manifested presence (the Ba-form accessible through invocation). Understanding these multiple forms prevents the mistake of reducing gods to either pure mythology or pure metaphor.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XII: SACRED FAUNA -->
+    <section id="sacred-fauna">
+        <h2 class="section-head">XII. Sacred Fauna — Biological Resonators</h2>
         <p>
             Egyptian zoomorphism was the recognition that certain animals possess a <strong>biological frequency</strong> that resonates with specific divine principles. These animals were viewed as the living <i>Ba</i> (manifestation) of the gods on earth.
         </p>
@@ -134,10 +416,154 @@
                 <h4>THE SCARAB (KHEPRI)</h4>
                 <p>Resonates with the principle of <strong>Becoming</strong> (Kheper). Its behavior of self-generation mirrors the sun's rebirth each dawn.</p>
             </div>
+            <div class="info-card">
+                <h4>THE CROCODILE (SOBEK)</h4>
+                <p>Resonates with primal power, fertility, and transformation. Feared and respected, embodying both the nourishing and destructive aspects of the Nile.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE LION/LIONESS (SEKHMET/HATHOR)</h4>
+                <p>Resonates with combined solar power and royal authority. The fierce defender and the gentle mother exist in one form, representing complementary aspects of power.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE CAT (BASTET)</h4>
+                <p>Resonates with domestic protection, feminine grace, and fierce maternal defense. From wild to domesticated, representing transformation and integration.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE IBIS (THOTH)</h4>
+                <p>Resonates with wisdom, communication, and divine knowledge. Its curved beak represents the crescent moon and the reflective consciousness of Thoth.</p>
+            </div>
         </div>
     </section>
 
-    <div class="glyph-marker">𓊹 𓊹 𓊹 𓊹 𓊹 𓊹</div>
+    <hr class="divider">
+
+    <!-- SECTION XIII: SEASONAL CYCLES -->
+    <section id="seasonal-cycles">
+        <h2 class="section-head">XIII. Seasonal Cycles — The Pantheon Through Time</h2>
+        <p>
+            The Egyptian religious calendar was intimately tied to the annual Nile flood cycle and the four seasons. Different deities came into prominence at different times of year, and religious festivals honored the relationships between the heavenly and earthly cycles.
+        </p>
+        <p>
+            <strong>Akhet</strong> (the inundation season) was the time of Hapi (the Nile flood deity) and Osiris (the god of fertile regeneration). The water brought life and renewal. <strong>Peret</strong> (the growing season) was the time of agricultural labor and the ascendance of earthly powers. <strong>Shemu</strong> (the harvest season) saw the return of Ra's power and the preparation for the new cycle.
+        </p>
+        <p>
+            Major religious festivals occurred at key astronomical and agricultural moments: the heliacal rising of Sirius (which coincided roughly with the beginning of inundation) was sacred to Isis/Sopdet, marking the New Year. The winter solstice marked the rebirth of the sun. The summer solstice marked Ra's maximum power.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE SACRED CALENDAR //</div>
+            <p><strong>Akhet (Inundation):</strong> Ruled by Hapi and Osiris. Time of flooding, fertility, renewal, and the descent into the underworld.</p>
+            <p style="margin-top:0.6rem;"><strong>Peret (Growing Season):</strong> Ruled by agricultural deities and local powers. Time of growth, labor, and terrestrial manifestation.</p>
+            <p style="margin-top:0.6rem;"><strong>Shemu (Harvest):</strong> Ruled by Ra and the solar principle at full power. Time of gathering, ripening, and preparation.</p>
+            <p style="margin-top:0.6rem;"><strong>Festival of Sed:</strong> The jubilee festival renewing the pharaoh's power, tied to the heliacal rising of Sirius and the New Year.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XIV: DUAT DEITIES -->
+    <section id="duat">
+        <h2 class="section-head">XIV. Naming the Hidden — Gods of the Duat</h2>
+        <p>
+            The underworld (Duat) was not a place of punishment or damnation in the Egyptian understanding, but a realm of testing, transformation, and encounter with ultimate reality. It had its own population of deities, each serving specific functions in the soul's journey through the hidden realms.
+        </p>
+        <p>
+            <strong>Anubis</strong> was the primary psychopomp, the guide through the gates. <strong>Ammit</strong ("the Devourer") was not a demon but a principle of accountability — the being who consumed the hearts of those whose deeds could not satisfy Ma'at. <strong>Thoth</strong> appeared in the Duat as the scribe of the weighing of the heart. <strong>Seker</strong> ruled the deepest hidden places.
+        </p>
+        <p>
+            Encountering the gods of the Duat was understood as essential to spiritual development. The <a href="book-of-the-dead-passages.html" class="nl">Book of the Dead</a> provided passwords and invocations to speak the names of these gods correctly, because knowing the name gave power over the threshold they guarded.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XV: STELLAR PANTHEON -->
+    <section id="stellar">
+        <h2 class="section-head">XV. The Stellar Pantheon — Deities as Celestial Bodies</h2>
+        <p>
+            The stars themselves were understood as divine manifestations. <strong>Sopdet</strong> (Sirius) was Isis's stellar form. <strong>Sahu</strong> (Orion) was Osiris's constellation. The planets each had deity associations: Venus was called "the Star of Isis" when in evening appearance and "the Star of Horus" when in morning appearance.
+        </p>
+        <p>
+            The northern stars (which never set, called the "Imperishable Stars" or <strong>Akhemu-Seku</strong>) were understood as the celestial home of the justified dead, the location of unchanging eternity. The southern stars represented the Duat, the underworld constellation. The central band (the Milky Way) was understood as a great river in the sky, mirroring the earthly Nile.
+        </p>
+        <p>
+            <a href="egyptian-astronomy.html" class="nl">Egyptian astronomy</a> was not merely observational but mystical — the movements of the stars were understood as the movements of divine beings, and tracking them was a form of communion with the celestial principles. The decans (divisions of the zodiac) each had their own deities and magical associations.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XVI: INVOCATION -->
+    <section id="invocation">
+        <h2 class="section-head">XVI. Invoking the Netjeru — Practical Resonance</h2>
+        <p>
+            The primary method of engaging with the pantheon in Egyptian practice was <strong>invocation</strong> — the direct calling upon a deity through precise ritual and words of power. This was not begging or supplication but resonance-alignment: the practitioner adjusted their consciousness to the frequency of the deity and invited their presence.
+        </p>
+        <p>
+            Three elements were essential: the <strong>icon</strong> (the image or symbol of the deity), the <strong>ren</strong> (the true name or names of power), and the <strong>ka-offering</strong> (the provision of energy through ritual action). Priests in temples performed daily invocations, maintaining the presence of the gods in the sanctuary.
+        </p>
+        <p>
+            Effective invocation required knowledge of the deity's functional domain (to invoke the correct deity for your need), knowledge of their primary names (to activate the right frequency), understanding of their mythological associations (to provide appropriate symbols), and the ability to achieve a mental state of receptivity and respect.
+        </p>
+
+        <div class="practice-box">
+            <div class="practice-title">// BASIC INVOCATION FRAMEWORK //</div>
+            <p><strong>Preparation:</strong> Create or enter a clean, dedicated space. Orient yourself to the cardinal direction associated with the deity (Ra-east, Osiris-west, etc.). Burn incense if possible.</p>
+            <p style="margin-top:0.6rem;"><strong>Greeting the Icon:</strong> If you have an image of the deity, greet it with respect. Describe what you see: "Horus, you with the falcon-head and the solar disk..."</p>
+            <p style="margin-top:0.6rem;"><strong>Invocation of Names:</strong> Call upon the deity by their known names and titles: "I invoke you, Horus, Lord of the Sky, Falcon of Light, Son of Isis..."</p>
+            <p style="margin-top:0.6rem;"><strong>Statement of Purpose:</strong> Clearly state why you're seeking this contact and what principle you wish to align with.</p>
+            <p style="margin-top:0.6rem;"><strong>Receptive Silence:</strong> Fall silent and listen. The presence may come as feeling, insight, vision, or simply a shift in the room's quality.</p>
+            <p style="margin-top:0.6rem;"><strong>Thanks and Closure:</strong> When the sense of presence begins to fade, thank the deity and close the ritual with a formal statement.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XVII: TRANSMISSION -->
+    <section id="transmission">
+        <h2 class="section-head">XVII. Pantheon Evolution — From Predynastic to Ptolemaic</h2>
+        <p>
+            The Egyptian pantheon was not static but evolved dramatically across three thousand years. Deities that were central in one era became peripheral in another. Regional deities gained national importance. Completely new deities emerged, while others faded from worship.
+        </p>
+        <p>
+            In the <strong>Predynastic period</strong> (before 3100 BCE), worship was local and tribal. Animals and natural forces were worshipped directly. The falcon-god (Horus), the cobra-goddess, the Nile inundation deity represented regional powers.
+        </p>
+        <p>
+            In the <strong>Old Kingdom</strong> (c. 2686-2181 BCE), the solar theology reached its apex. Ra became the supreme deity, and the pyramid texts were composed to ensure the pharaoh's journey to the solar realm. Osiris remained important but was secondary.
+        </p>
+        <p>
+            In the <strong>Middle Kingdom</strong> (c. 2055-1650 BCE), Osiris rose to supremacy, particularly after the democratization-of-the-afterlife theology. Every individual, not just pharaohs, gained the right to the Osirian regeneration principle.
+        </p>
+        <p>
+            In the <strong>New Kingdom</strong> (c. 1550-1075 BCE), Amun emerged as the supreme deity, eventually merging with Ra to form Amun-Ra. The pantheon reached its most elaborate form, with subsidiary deities governing every conceivable function.
+        </p>
+        <p>
+            In the <strong>Ptolemaic period</strong> (332-30 BCE), Greek deities were syncretized with Egyptian ones. Isis became universalized and spread throughout the Mediterranean world, eventually influencing Christianity.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XVIII: PRACTICE -->
+    <section id="practice">
+        <h2 class="section-head">XVIII. Working with the Pantheon Principle</h2>
+        <p>
+            The pantheon is not merely a collection of myth and theology — it is a functional system for organizing and channeling cosmic power. Modern practitioners engage with it in several ways:
+        </p>
+        <p>
+            <strong>Study</strong> of the mythology, theology, and history develops intellectual understanding. <strong>Ritual invocation</strong> creates direct contact with the archetypal forces. <strong>Adoption of divine kingship</strong> — understanding oneself as a manifestation of one or more of the netjeru — gradually transforms consciousness.
+        </p>
+        <p>
+            The goal is not to worship external gods but to activate and unify the divine principles within one's own consciousness. The pantheon is a map of the full spectrum of conscious and unconscious forces. To know the pantheon is to know oneself at the deepest level.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE PANTHEON AS OPERATING SYSTEM //</div>
+            <p>The Egyptian pantheon is best understood not as a collection of myths about external beings, but as a symbolic operating system for managing consciousness and channeling cosmic energy. Each deity represents a specific function or mode of consciousness. By understanding the pantheon, you develop the ability to activate any required frequency in yourself or your work. This is not metaphorical advancement but actual development of operative capacity.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
 
     <!-- RELATED LINKS -->
     <div class="related-links">
