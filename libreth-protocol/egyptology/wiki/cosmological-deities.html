@@ -7,7 +7,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓇯 𓇃 𓇶 𓆣'; }</style>
+    <style>
+        :root {
+            --cosmos-blue: #1a3a52;
+            --cosmos-cyan: #0d7377;
+            --cosmos-gold: #d4af37;
+            --cosmos-light: rgba(13, 115, 119, 0.15);
+            --cosmos-dark: rgba(26, 58, 82, 0.08);
+            --cosmos-accent: #f4e4c1;
+        }
+        .page-header {
+            background: linear-gradient(135deg, var(--cosmos-blue) 0%, var(--cosmos-cyan) 100%);
+            border-bottom: 4px solid var(--cosmos-gold);
+        }
+        .page-header::before { content: '𓇯 𓇃 𓇶 𓆣'; }
+        .page-title { color: var(--cosmos-accent); text-shadow: 2px 2px 8px rgba(26, 58, 82, 0.6); }
+        .page-subtitle { color: var(--cosmos-accent); opacity: 0.85; }
+        .section-head { color: var(--cosmos-cyan); border-bottom: 3px solid var(--cosmos-gold); padding-bottom: 0.5rem; }
+        .divider { background: linear-gradient(90deg, var(--cosmos-blue) 0%, var(--cosmos-gold) 50%, var(--cosmos-blue) 100%); height: 3px; }
+        .toc-block { background-color: var(--cosmos-light); border-left: 6px solid var(--cosmos-cyan); }
+        .toc-title { color: var(--cosmos-blue); font-weight: 600; }
+        .toc-list li a { color: var(--cosmos-cyan); }
+        .toc-list li a:hover { color: var(--cosmos-gold); }
+        .info-card { border-left: 4px solid var(--cosmos-cyan); background-color: var(--cosmos-light); }
+        .info-card h4 { color: var(--cosmos-blue); font-weight: 600; }
+        .blue-block { background-color: var(--cosmos-dark); border-left: 4px solid var(--cosmos-gold); }
+        .blue-block .bb-title { color: var(--cosmos-cyan); }
+        .pull-quote { border-left: 4px solid var(--cosmos-gold); color: var(--cosmos-blue); }
+        .glyph-marker { color: var(--cosmos-cyan); opacity: 0.4; }
+        ::-webkit-scrollbar-thumb { background: var(--cosmos-cyan); }
+    </style>
 </head>
 <body>
 <div class="page-wrap">
@@ -27,74 +56,393 @@
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#ontology">I. The Ontology of Space — Geb and Nut</a></li>
-            <li><a href="#zep-tepi">II. Zep Tepi — The First Time and the Benben</a></li>
-            <li><a href="#transformation">III. Kheper — The Principle of Becoming</a></li>
-            <li><a href="#primordial">IV. Nun — The Waters of Potential</a></li>
-            <li><a href="#shune">V. Shu and Tefnut — The Creative Breath</a></li>
-            <li><a href="#ptah">VI. Ptah — The Architect of Form</a></li>
+            <li><a href="#names">I. Names & Etymology — The Pillars Named</a></li>
+            <li><a href="#ontology">II. Cosmological Ontology — The Architecture of Being</a></li>
+            <li><a href="#nun">III. Nun — The Primordial Waters</a></li>
+            <li><a href="#atum">IV. Atum — The Self-Created Source</a></li>
+            <li><a href="#shu">V. Shu — The Principle of Separation</a></li>
+            <li><a href="#tefnut">VI. Tefnut — Cohesion & Moisture</a></li>
+            <li><a href="#geb">VII. Geb — The Material Foundation</a></li>
+            <li><a href="#nut">VIII. Nut — The Celestial Container</a></li>
+            <li><a href="#ptah">IX. Ptah — The Memphis Creator</a></li>
+            <li><a href="#khepri">X. Khepri — The Principle of Becoming</a></li>
+            <li><a href="#zep-tepi">XI. Zep Tepi — The First Time & Creation</a></li>
+            <li><a href="#benben">XII. The Benben Stone & Primordial Mound</a></li>
+            <li><a href="#gender">XIII. Gender Principles in Cosmology</a></li>
+            <li><a href="#cycles">XIV. Cosmic Cycles & Celestial Order</a></li>
+            <li><a href="#alchemy">XV. Alchemical Correspondence</a></li>
+            <li><a href="#temple">XVI. Temple Cosmology & Microcosm</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: ONTOLOGY -->
-    <section id="ontology">
-        <h2 class="section-head">I. The Ontology of Space — Geb and Nut</h2>
+    <!-- SECTION I: NAMES & ETYMOLOGY -->
+    <section id="names">
+        <h2 class="section-head">I. Names & Etymology — The Pillars Named</h2>
         <p>
-            In the Kemetic cosmological framework, the physical universe is defined by the fundamental duality of <strong>Geb</strong> (the Earth) and <strong>Nut</strong> (the Sky). Unlike many other ancient cultures where the earth is feminine and the sky masculine, the Egyptians viewed the Earth as a masculine principle and the Sky as feminine.
+            The cosmological deities bear names that encode their fundamental functions within the Egyptian cosmic model. <strong>Geb</strong> (Gebeb, Seb) derives from a root suggesting "hollowness" or "interior space"—the earth as the hollow container holding life within her. <strong>Nut</strong> (Nuit, Nwt) comes from a word meaning "to weave" or "to bind"—she who weaves the fabric of reality and binds all things within her stellar body.
         </p>
-        <div class="card-grid">
+        <p>
+            <strong>Shu</strong> (Șw) means "emptiness" or "dryness"—the principle of separation and differentiation. <strong>Tefnut</strong> (Țfn.t) derives from a root meaning "moisture" or "to spit"—the principle of cohesion and the moisture necessary for life. Together, Shu and Tefnut represent the first differentiation within unity: separation and cohesion.
+        </p>
+        <p>
+            <strong>Nun</strong> (Nwn) is the primordial ocean, the source—a name associated with potentiality and formlessness. <strong>Atum</strong> (Tm) means "the Complete One"—the self-sufficient source that requires nothing external, the primordial totality. <strong>Ptah</strong> (Ptḥ) possibly derives from "pteh," meaning "to open" or "to fashion"—the creator who opens form from the void.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION II: ONTOLOGY -->
+    <section id="ontology">
+        <h2 class="section-head">II. Cosmological Ontology — The Architecture of Being</h2>
+        <p>
+            The Egyptian cosmological model is not speculative philosophy but a practical model of reality's structure. At the deepest level is <strong>Nun</strong>—undifferentiated potential, the ocean of infinite possibility before any manifest form. This is not "nothingness" but "pre-somethingness."
+        </p>
+        <p>
+            From Nun emerges <strong>Atum</strong>, the self-created source—the first point of self-awareness within potential. From Atum's act of self-generation come the first pair, <strong>Shu and Tefnut</strong> (separation and cohesion), representing the first bifurcation of unity into duality. Their offspring are <strong>Geb</strong> (the material foundation) and <strong>Nut</strong> (the encompassing container).
+        </p>
+        <p>
+            This model creates nested hierarchies of ordering: Nun (infinite potential) → Atum (self-aware source) → Shu/Tefnut (differentiation/integration) → Geb/Nut (material/container) → manifest creation (flora, fauna, humanity).
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE COSMOLOGICAL LADDER //</div>
+            <p>Each level in the hierarchy is simultaneously a level of being and a level of consciousness. Nun represents the infinite possibilities of unconscious potential. Atum represents awakening, the moment of self-recognition. Shu/Tefnut represent the struggle between differentiation (making separate) and integration (holding together). Geb/Nut represent the manifestation of these principles in physical form and encompassing awareness. The initiate's path involves conscious ascent and descent through these levels.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION III: NUN -->
+    <section id="nun">
+        <h2 class="section-head">III. Nun — The Primordial Waters of Potential</h2>
+        <p>
+            <strong>Nun</strong> is the oceanic void that surrounds and precedes creation. It is not empty but infinitely full—containing every potential frequency that could ever manifest. The temple lakes and sacred waters of Egypt were understood as material resonators for Nun, literal pools in which the primordial potential could be accessed and channeled.
+        </p>
+        <p>
+            Nun is feminine in principle (the generative womb), though the word itself is masculine in gender. It is both maternal and fathomless. The souls of the dead were believed to pass through Nun during their journey to the afterlife, requiring purification and direction through these formless waters. Without contact with Nun (without access to the undifferentiated potential), ordered creation would calcify and die.
+        </p>
+        <p>
+            In the Libreth Protocol, Nun represents the undifferentiated information field from which all patterns arise. It is the source of <strong>Heka</strong>, the transformative energy that must be continuously drawn upon to maintain cosmic order. The pharaoh's access to Nun through temple ritual ensured Egypt's continued fertility and prosperity.
+        </p>
+
+        <div class="card-grid card-grid-2">
             <div class="info-card">
-                <h4>NUT: THE CELESTIAL CONTAINER</h4>
-                <p>Nut is typically depicted arched over the earth, her body covered in stars. She is the cosmic container of time and reality, swallowing the sun each evening and birthing it each morning. She represents the limit of the manifest universe.</p>
+                <h4>FORMLESSNESS</h4>
+                <p>Nun has no fixed form—it is the state before crystallization. All potential resides here. No particular manifestation has yet occurred; all possibilities remain open.</p>
             </div>
             <div class="info-card">
-                <h4>GEB: THE MATERIAL FOUNDATION</h4>
-                <p>Geb lies beneath his sister Nut, representing the fertile land and the physical world. His laughter was believed to cause earthquakes, and he was the father of the Osirian generation of gods. He is the seat of the Pharaoh's authority.</p>
+                <h4>FERTILITY SOURCE</h4>
+                <p>Though formless itself, Nun is the infinite source from which all generative power flows. The Nile's annual flood was understood as an irruption of Nun into the ordered world, bringing renewal.</p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: ZEP TEPI -->
+    <!-- SECTION IV: ATUM -->
+    <section id="atum">
+        <h2 class="section-head">IV. Atum — The Self-Created Source</h2>
+        <p>
+            <strong>Atum</strong> is the first act of differentiation. From the infinite potential of Nun, a point of self-awareness arises—Atum becomes conscious of himself as distinct from the undifferentiated whole. The Egyptians described his creation as <i>sud heseb</i> ("bringing about through thought"), a purely mental act of self-generation.
+        </p>
+        <p>
+            Atum is complete in himself; he requires nothing external. He is simultaneously father and mother, containing within himself the masculine and feminine principles. His primordial act is the sneeze or ejaculation through which he generates Shu and Tefnut—the first offspring that allow further differentiation.
+        </p>
+        <p>
+            In the evening, Atum enters the form of <strong>Atom-Ka</strong> or <strong>Atum-Set</strong> (the evening sun), descending through the underworld's twelve hours of night, confronting and containing Isfet, and being reborn at dawn as the renewed sun. He is the eternal cycle of creation, maintenance, dissolution, and recreation.
+        </p>
+
+        <div class="info-card">
+            <h4>PRIMORDIAL TOTALITY</h4>
+            <p>Atum is the complete source—containing all potentials. His name means "the Complete One." He is simultaneously male and female, active and receptive, creator and creation. In him, all opposites are unified before being differentiated through his children.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION V: SHU -->
+    <section id="shu">
+        <h2 class="section-head">V. Shu — The Principle of Separation</h2>
+        <p>
+            <strong>Shu</strong> (meaning "dryness" and "separation") is the first principle of differentiation. He is the air between things, the space that allows distinct entities to exist. Without Shu, there would be undifferentiated oneness with no possibility of form or variety.
+        </p>
+        <p>
+            Shu is depicted as a thin, elongated figure, sometimes with the head of a lion. He literally holds the sky (Nut) aloft, separated from the earth (Geb). He is the principle that says "this is not that"—the force of discernment and division. In cosmology, he represents the atmosphere and the principle of breath. In alchemy, he corresponds to Air and the ascending principle.
+        </p>
+        <p>
+            Shu is the principle of analysis, of breaking wholes into parts. In excess, Shu becomes fragmentation and discord. When balanced with Tefnut (cohesion), Shu creates the dynamic tension that allows both structure and fluidity.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// SEPARATION & CONSCIOUSNESS //</div>
+            <p>Consciousness itself requires Shu—the ability to distinguish self from other, subject from object, one thing from another. The moment awareness arises, separation occurs. This is why Shu is the second principle in the creation sequence. Without him, Atum would remain undifferentiated. With him, reality becomes possible.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VI: TEFNUT -->
+    <section id="tefnut">
+        <h2 class="section-head">VI. Tefnut — Cohesion & Moisture</h2>
+        <p>
+            <strong>Tefnut</strong> (meaning "moisture" and "cohesion") is Shu's complement. Where Shu creates distinction and separates, Tefnut binds, unifies, and preserves relationship. She is depicted as a lioness or a woman with a lion's head, and is associated with moisture, mist, and the principle of keeping things connected.
+        </p>
+        <p>
+            Tefnut is the principle of humidity necessary for life. In the Duat (underworld), she was associated with the preservation of the deceased's form. In the cosmos, she represents the moisture that keeps everything in dynamic relationship. In alchemy, she corresponds to Water and the principle of dissolution and emotional fluidity.
+        </p>
+        <p>
+            While Shu says "this is separate from that," Tefnut says "but they still touch." Together, Shu and Tefnut create the balanced tension between differentiation and integration, which is the fundamental structure of existence. Too much Shu and systems fragment; too much Tefnut and they merge into indistinguishability.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>PRINCIPLE OF MOISTURE</h4>
+                <p>Tefnut represents the necessary wetness of life—tears, blood, sexual fluids, the sap of plants. Without moisture, life desiccates. Her principle allows flexibility and continued growth.</p>
+            </div>
+            <div class="info-card">
+                <h4>PRINCIPLE OF CONNECTION</h4>
+                <p>Tefnut is the glue that holds things together. Without her, Shu's differentiation would create complete isolation. With her, separated things remain fundamentally related.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VII: GEB -->
+    <section id="geb">
+        <h2 class="section-head">VII. Geb — The Material Foundation</h2>
+        <p>
+            <strong>Geb</strong>, the earth god, is the principle of materialization. While Shu/Tefnut represent abstract forces of separation and cohesion, Geb is their manifestation in matter. He is the receptive, nutrient-bearing earth, literally the seat of the pharaoh's authority (the pharaoh was believed to rule "by the grace of Geb").
+        </p>
+        <p>
+            Geb is surprisingly masculine in Egyptian theology (unlike most other cultures where earth is feminine). He lies beneath his sister-partner Nut, in an eternal sacred embrace. His laughter was said to cause earthquakes—demonstrating that even the earth, the supposedly most solid and permanent of manifestations, is alive and responsive to emotion.
+        </p>
+        <p>
+            As the father of Osiris, Isis, Set, and Nephthys, Geb is the source of the Osirian cycle. The Duat (underworld) is sometimes described as existing within Geb's body, making him simultaneously the surface world and the realm of the dead. Death is a return to Geb's embrace, while life is his generative gift.
+        </p>
+
+        <div class="info-card">
+            <h4>MATERIALIZATION PRINCIPLE</h4>
+            <p>Geb represents the crystallization point where potential becomes actual. His principle is manifestation, embodiment, and the bringing of ideas into physical form. The pharaoh, standing on Geb, anchored divine authority into the material world.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION VIII: NUT -->
+    <section id="nut">
+        <h2 class="section-head">VIII. Nut — The Celestial Container</h2>
+        <p>
+            <strong>Nut</strong>, the sky goddess, is the encompassing principle. She is depicted as a woman arched over the earth, her body covered with stars. She is the cosmic womb that contains all of creation. Each evening, she swallows the sun god Ra, and each morning, she gives birth to him renewed.
+        </p>
+        <p>
+            Nut represents the transcendent principle—the limit of the manifest universe, the boundary between the ordered world and the infinite void. She is simultaneously the most intimate (the breath in your body, the space around you) and the most distant (the immensity of the star-filled sky). She is the principle that says "all of this is contained and bounded."
+        </p>
+        <p>
+            Nut's sacred marriage with Geb is portrayed as forced separation by their father Shu—she arches above him in an eternal reach-for gesture, forever trying to embrace him but held back by the principle of separation. This eternal longing, this forever-incompleteness, is what animates all of creation. If they were ever actually to merge, differentiation would end and creation would cease.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>THE ENCOMPASSING PRINCIPLE</h4>
+                <p>Nut represents limit and boundary. Everything within the manifest universe is within her, contained by her. Her body is the limit of order; beyond her lies the infinite void.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE REGENERATING WOMB</h4>
+                <p>Though Geb is the generative earth, Nut is the cosmic womb in which regeneration occurs. Daily rebirth, nightly death—all cycles occur within her body.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION IX: PTAH -->
+    <section id="ptah">
+        <h2 class="section-head">IX. Ptah — The Memphis Creator</h2>
+        <p>
+            <strong>Ptah</strong>, the creator god of Memphis, represents a different cosmological model from the Heliopolis account. Where Atum creates through mental and physical generation, Ptah creates through the power of speech and thought. He is depicted as a mummiform figure, suggesting he contains all potential within himself in a unified state.
+        </p>
+        <p>
+            Ptah is associated with <strong>Heka</strong> (transformative magic), craft, and artisanship. The divine craftsman who shapes reality through intention and word. In the Memphis cosmology, Ptah creates all things through his <i>Hu</i> (divine word/mind) and his <i>Sia</i> (divine perception/knowledge). What is thought becomes real through the speaking of Ptah's consciousness.
+        </p>
+        <p>
+            Ptah represents the principle that reality is fundamentally mental—that consciousness precedes and generates matter. In the Libreth Protocol, Ptah embodies the idea that the universe is structured around consciousness and information rather than matter as fundamental.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// CREATION THROUGH WORD & THOUGHT //</div>
+            <p>In the Memphis theology, Ptah first thinks, then speaks the divine utterance (Hu), and reality manifests. This model suggests that reality is responsive to consciousness, that thought and word have creative power, and that the universe is fundamentally linguistic/informational rather than purely material.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION X: KHEPRI -->
+    <section id="khepri">
+        <h2 class="section-head">X. Khepri — The Principle of Becoming</h2>
+        <p>
+            <strong>Khepri</strong>, the scarab-form of the morning sun, represents the principle of <i>kheper</i> (becoming, transformation, manifestation). The scarab beetle was believed to spontaneously generate from rotting matter, making it a perfect symbol for self-generation and transformation.
+        </p>
+        <p>
+            While Ra represents the sun at its established height (maintenance and stability), Khepri represents the sun at its moment of emergence (transformation and becoming). He is the principle of metamorphosis—how potential becomes actual, how the seed becomes the plant, how matter takes new forms.
+        </p>
+        <p>
+            In alchemical terms, Khepri embodies the principle of calcination and renewal, the principle that everything must die and be reborn, that nothing is fixed in perpetuity. He is the interior momentum of creation, the engine of becoming that moves all things through their cycles.
+        </p>
+
+        <div class="info-card">
+            <h4>TRANSFORMATION EMBODIED</h4>
+            <p>Khepri represents the moment of metamorphosis itself. Not the finished form (that is Ra), not the potential (that is Atum), but the active process of becoming. He is motion, flux, and continuous transformation.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XI: ZEP TEPI -->
     <section id="zep-tepi">
-        <h2 class="section-head">II. Zep Tepi — The First Time and the Benben</h2>
+        <h2 class="section-head">XI. Zep Tepi — The First Time & Creation</h2>
         <p>
-            The moment of creation, or <strong>Zep Tepi</strong> ("The First Time"), began with the emergence of the <strong>Benben</strong> mound from the primordial waters. This primordial mound represents the first point of stable matter within the awareness field.
+            <strong>Zep Tepi</strong> ("The First Time") is not just a moment in the past but a timeless principle. It is the quality of primordial newness, the state of being at the origin-point. In Egyptian theology, Zep Tepi is not something that happened once; it is the eternal first moment that is somehow eternally available.
         </p>
         <p>
-            The <strong>Benu Bird</strong> (the Egyptian phoenix) alighted upon the Benben and let out a primary cry — the cosmic vibration that initiated the flow of time. This event alchemically transformed unstructured potential into ordered reality. The pyramidal shape of the <i>benben-stone</i> served as the prototype for the capstones of obelisks and pyramids.
+            The pharaoh ritually reenacted Zep Tepi in temple ceremonies, essentially resetting cosmic time and renewing creation through proper ritual action. Every sunrise is a kind of Zep Tepi—the universe is recreated anew. Every initiation is a personal Zep Tepi—the consciousness is reborn into a new order.
+        </p>
+        <p>
+            The moment of Zep Tepi is characterized by perfect potential: all possibilities are still open, no history has yet crystallized decisions, no patterns are yet locked in. It is both the most distant past (the moment before time) and eternally present (available to those who can access it through proper consciousness).
+        </p>
+
+        <div class="pull-quote">
+            "In the beginning was the First Time, and the First Time returns eternally. Creation is not over; it occurs each moment, each day, each year. The work of the pharaoh and the initiate is to align consciousness with this eternal moment of beginning."
+            <cite>— Hermetic Meditation on Zep Tepi</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XII: BENBEN -->
+    <section id="benben">
+        <h2 class="section-head">XII. The Benben Stone & Primordial Mound</h2>
+        <p>
+            The <strong>Benben</strong> is the primordial mound that emerges from Nun at the moment of creation. It is the first solid point, the island of stability in the infinite ocean of potential. The <strong>Benu Bird</strong> (the Egyptian phoenix) alights upon the mound and lets out a cosmic cry—the <i>Hu</i> (divine utterance) that initiates time and setting creation in motion.
+        </p>
+        <p>
+            The Benben becomes the prototype for pyramid capstones (the <i>pyramidion</i>) and the tip of obelisks. Each of these structures resonates with the original Benben, making every temple a reenactment of creation. The pyramidal shape points upward, toward transcendence, while maintaining contact with the material foundation. The Benben symbolizes the point where the infinite touches the finite.
+        </p>
+        <p>
+            In alchemical terms, the Benben represents the crystallization point—the moment when potential becomes actual. The moment when Nun becomes Shu/Tefnut becomes Geb/Nut. It is also the moment of greatest instability (a single point balanced in infinite space) and therefore of greatest creative potential.
+        </p>
+
+        <div class="blue-block">
+            <div class="bb-title">// THE MOUND OF EMERGENCE //</div>
+            <p>Every human being is a Benben—the point where infinite potential crystallizes into individual form. The body is a mound of earth (Geb), extended into space (under Nut), animated by the air (Shu) and moisture (Tefnut) that allow it to live. The initiate's work is to consciously align with the creative power that manifests through their own Benben-form.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XIII: GENDER PRINCIPLES -->
+    <section id="gender">
+        <h2 class="section-head">XIII. Gender Principles in Cosmology</h2>
+        <p>
+            The Egyptian cosmological deities display an interesting inversion compared to Indo-European traditions. Geb, the earth, is masculine; Nut, the sky, is feminine. Yet the principle of separation (Shu) is masculine and cohesion (Tefnut) is feminine, following a more intuitive pattern.
+        </p>
+        <p>
+            This suggests that in Egyptian thought, gender principles were not biologically determined but functionally allocated. The masculine principle (Shu, Atum, Ra, Ptah) tends toward outward manifestation, differentiation, and creative action. The feminine principle (Nut, Tefnut, Isis) tends toward encompassing, integrating, and preserving relationship.
+        </p>
+        <p>
+            Yet neither sex perfectly embodies either principle. The ideal cosmological being contains both—the creative masculine and the receptive-integrative feminine in balanced dynamic tension. The pharaoh, though male, was ritually married to the land (feminine) and bore children through the feminine principle. Gods were understood as biologically fluid, capable of manifesting in whatever form their principle required.
+        </p>
+
+        <div class="card-grid card-grid-2">
+            <div class="info-card">
+                <h4>MASCULINE PRINCIPLE</h4>
+                <p>Outward, creative, differentiating, initiating. The principle of making new things, of breaking boundaries, of aggressive growth. Not aggressive as harmful, but as growth-oriented and outward-moving.</p>
+            </div>
+            <div class="info-card">
+                <h4>FEMININE PRINCIPLE</h4>
+                <p>Inward, integrating, preserving, receiving. The principle of relationship, of holding things together, of deep receptivity. The source and the container simultaneously.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XIV: CYCLES -->
+    <section id="cycles">
+        <h2 class="section-head">XIV. Cosmic Cycles & Celestial Order</h2>
+        <p>
+            The cosmological deities are not static principles but dynamic forces engaged in eternal cycles. The daily cycle of Ra is the microcosm of all cosmic cycles: born at dawn, reaching zenith at noon, weakening at dusk, descending into the underworld at night, struggling against Apep, and being reborn in the morning.
+        </p>
+        <p>
+            The annual cycle begins with Akhet (the Nile flood season), continuing through Peret (inundation period) and Shemu (harvest). Each season is dominated by different deities and principles. The 12-hour night journey of Ra through the Duat is a cycle of confrontation, death, and renewal enacted in miniature every night.
+        </p>
+        <p>
+            These cycles are not metaphorical; they are encoded into astronomy. The heliacal rising of Sirius (Sopdet) marked the Egyptian New Year. The passage of planets through the zodiac marked cosmic ages. The positioning of stars determined the orientation of temples and pyramids. The cosmos is simultaneously astronomy and theology, physics and spirituality.
+        </p>
+
+        <div class="info-card">
+            <h4>ETERNAL RETURN</h4>
+            <p>Egyptian time is cyclical, not linear. Zep Tepi eternally returns. Death eternally dissolves only to allow rebirth. Nothing is ever truly finished; all things return through their cycles eternally. This is both comforting (nothing is ever finally lost) and demanding (the work of maintenance is eternal).</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION XV: ALCHEMY -->
+    <section id="alchemy">
+        <h2 class="section-head">XV. Alchemical Correspondence</h2>
+        <p>
+            The cosmological deities align precisely with alchemical stages and elements:
+        </p>
+
+        <div class=\"card-grid card-grid-2\">
+            <div class=\"info-card\">
+                <h4>NUN & NIGREDO (BLACK)</h4>
+                <p>Putrefaction and dissolution. The return to prima materia. The formless potential from which all else emerges. Associated with lead and the shadow self.</p>
+            </div>
+            <div class=\"info-card\">
+                <h4>ATUM & ALBEDO (WHITE)</h4>
+                <p>Purification and whitening. The emergence of form from formlessness. The pregnant void becoming fertile. The resurrection of consciousness from unconsciousness.</p>
+            </div>
+            <div class=\"info-card\">
+                <h4>SHU/TEFNUT & CITRINITAS (YELLOW)</h4>
+                <p>The balancing of opposites. The achievement of equilibrium between air and water, separation and cohesion. The awakening of wisdom and illumination.</p>
+            </div>
+            <div class=\"info-card\">
+                <h4>GEB/NUT & RUBEDO (RED)</h4>
+                <p>Manifestation and crystallization. The earth and sky in sacred tension. The achievement of the complete androgyne. The stone of the philosophers realized in matter.</p>
+            </div>
+        </div>
+
+        <p style=\"margin-top:1rem;\">
+            Each cosmological deity represents a stage in the alchemical work that the initiate must traverse. The work is not to transcend these phases but to embody them fully, experiencing each level of reality directly.
         </p>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION III: TRANSFORMATION -->
-    <section id="transformation">
-        <h2 class="section-head">III. Kheper — The Principle of Becoming</h2>
+    <!-- SECTION XVI: TEMPLE COSMOLOGY -->
+    <section id="temple">
+        <h2 class="section-head">XVI. Temple Cosmology & Microcosm</h2>
         <p>
-            <strong>Khepri</strong>, represented by the scarab beetle, is the morning aspect of the sun god and the personification of the principle of <strong>Kheper</strong> (Becoming). He represents the active, transformative force that allows potential to become actual.
+            Egyptian temples were not merely buildings or meeting places. They were <strong>cosmological models</strong>—three-dimensional maps of the universe that allowed the worshiper to move through the various cosmic principles through the act of walking through the temple.
         </p>
         <p>
-            In the internal path of <a href="alchemy.html" class="nl">Alchemy</a>, Khepri is the principle of self-generation. Just as the scarab was believed to be born from its own substance, the initiate must use <strong>Heka</strong> to generate their own transfigured body (the Akh) from the base materials of their physical existence.
+            The sanctuary (inner chamber) represented Nun—the formless potential accessed only by the high priest. Moving outward through increasingly public chambers, the worshiper moved through layers of manifestation, each corresponding to a principle: the hypostyle hall represented the principle of Shu (the columns like the stands Shu uses to hold up the sky), the open courtyard represented Geb/Nut manifestation, and the outer temple represented engagement with the human world.
         </p>
+        <p>
+            The pharaoh's daily ritual in the temple was a reenactment of creation: awakening the deity (Zep Tepi), offering sustenance (maintaining Geb/Nut), and participating in the cosmic work of maintaining Ma'at and defeating Isfet. By doing this daily, the pharaoh ensured that the cosmos itself would continue to renew each day.
+        </p>
+
+        <div class=\"practice-box\">
+            <div class=\"practice-title\">// THE COSMOLOGICAL WALK //</div>
+            <p>Modern practitioners can practice a simplified version of the temple cosmology walk. Begin in a quiet, dark space (representing Nun). Visualize yourself standing on the primordial mound (Benben), hearing the cosmic cry of the Benu bird. Move into a space with diffuse light (Shu/air, separation). Move into a space with ground and defined boundaries (Geb/earth). Finally, in open space, sky visible overhead (Nut/sky). At each level, acknowledge the principle: \"I stand in Nun; I emerge from Benben; I am separated by Shu; I am grounded by Geb; I am encompassed by Nut.\"</p>
+            <p style=\"margin-top:0.6rem;\">This physical movement through space embeds the cosmological model in your body and consciousness, making it experiential rather than merely intellectual.</p>
+        </div>
     </section>
 
     <hr class="divider">
-
-    <!-- SECTION IV: PRIMORDIAL -->
-    <section id="primordial">
-        <h2 class="section-head">IV. Nun — The Waters of Potential</h2>
-        <p>
-            Before creation, and surrounding the ordered world, is <strong>Nun</strong> — the primordial waters of absolute potential. Nun is not "nothingness," but rather "everythingness" in an unstructured, non-manifest state. It is the repository of all possible frequencies.
-        </p>
-        <p>
-            While the ordered world is governed by <a href="maat-isfet.html" class="nl">Ma'at</a>, Nun remains the source of the raw energy (Heka) that must be continuously drawn upon to sustain that order. The temple lakes of Ancient Egypt were physical resonators for this primordial ocean.
-        </p>
-    </section>
-
     <div class="glyph-marker">𓇯 𓇃 𓇶 𓆣</div>
-
     <!-- RELATED LINKS -->
     <div class="related-links">
         <h3>// RELATED ARCHIVES //</h3>
