@@ -467,7 +467,7 @@ body[data-page="isis"] {
 }
 body[data-page="isis"] ::-webkit-scrollbar-thumb { background: #c41e3a; }
 body[data-page="isis"] .page-header { border-bottom: 1px solid rgba(196,30,58,0.3); }
-body[data-page="isis"] .page-header::before { content: '𓊨 𓏏 𓁐 𓅓 𓂝'; color: #c41e3a; }
+body[data-page="isis"] .page-header::before { content: '𓊨 𓏏 𓆇 𓁐'; color: #c41e3a; }
 body[data-page="isis"] h2.section-head { border-bottom: 1px solid rgba(196,30,58,0.3); }
 body[data-page="isis"] .divider { background: linear-gradient(to right, transparent, rgba(196,30,58,0.4), transparent); }
 body[data-page="isis"] .toc-block { border: 1px solid rgba(196,30,58,0.3); background: rgba(20,10,15,0.8); }
@@ -529,7 +529,7 @@ body[data-page="maat-isfet"] {
     --balance-gold: #d4a574;
 }
 body[data-page="maat-isfet"] .page-header { border-bottom: 2px solid #2d5a3d; box-shadow: 0 4px 12px rgba(82, 183, 136, 0.2); }
-body[data-page="maat-isfet"] .page-header::before { content: '𓇓 𓏏 𓅱 𓀭 · 𓇼 𓅱 𓏏 𓅮'; color: #52b788; }
+body[data-page="maat-isfet"] .page-header::before { content: '𓐙 𓂝 𓏏 𓁐 · 𓇋 𓊃 𓆑 𓏏 𓏱 𓍢'; color: #52b788; }
 body[data-page="maat-isfet"] .page-title { color: #52b788; text-shadow: 0 0 10px rgba(82, 183, 136, 0.2); }
 body[data-page="maat-isfet"] .page-subtitle { color: #2d5a3d; }
 body[data-page="maat-isfet"] h2.section-head { color: #52b788; border-bottom: 2px solid #2d5a3d; }
