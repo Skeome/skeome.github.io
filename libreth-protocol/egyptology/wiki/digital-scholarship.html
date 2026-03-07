@@ -7,15 +7,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓏞 𓈖 𓇋 𓈓 𓈖 𓏲'; }</style>
+    <style>
+        .page-header::before { content: '𓏞 𓈖 𓇋 𓈓 𓈖 𓏲'; }
+        .repo-card {
+            border: 1px solid rgba(0,209,255,0.15);
+            background: rgba(0,20,30,0.6);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .repo-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0,209,255,0.1);
+        }
+        .repo-link {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            text-decoration: underline;
+            display: block;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
-<body>
+<body data-page="digital-scholarship">
 <div class="page-wrap">
 
-    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════ HEADER -->
     <header class="page-header">
         <h1 class="page-title">DIGITAL SCHOLARSHIP</h1>
-        <p class="page-subtitle">// THE DIGITAL SCRIBE'S ARSENAL :: SYSTEMATIC ARCHIVES //</p>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">
+            ssS n tbt · 𓏞 𓈖 𓏏 𓃀 𓏏 · The Digital Scribe
+        </div>
+        <p class="page-subtitle">// THE DIGITAL SCRIBE'S ARSENAL :: SYSTEMATIC ARCHIVES :: RE-INITIALIZING THE HOUSE OF LIFE //</p>
+        <p class="page-epithet">
+            "The words are no longer hidden in the tombs; they fly upon the wind of the wires.<br>
+            He who possesses the key to the archive possesses the memory of the gods."
+            <br><span style="font-size:0.85rem;opacity:0.5;">— After the Inscription of the Library of Alexandria</span>
+        </p>
     </header>
 
     <!-- BREADCRUMB -->
@@ -23,95 +51,133 @@
         <a href="index.html">WIKI HOME</a> &gt; DIGITAL SCHOLARSHIP
     </nav>
 
-    <!-- TABLE OF CONTENTS -->
+    <!-- ═══════════════════════════════════════ TABLE OF CONTENTS -->
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#ontology">I. The Ontology of the Digital Archive</a></li>
-            <li><a href="#repositories">II. Core Institutional Repositories</a></li>
-            <li><a href="#papyrology">III. Papyrological and Textual Databases</a></li>
-            <li><a href="#tools">IV. Essential Tools for the Digital Scribe</a></li>
-            <li><a href="#museums">V. Global Museum Collections</a></li>
-            <li><a href="#methodology">VI. Research Methodology in the Awareness Field</a></li>
+            <li><a href="#ontology">I. The Ontology of the Digital Archive — Re-materializing the Per Ankh</a></li>
+            <li><a href="#repositories">II. Core Institutional Repositories — The Global Data-Hubs</a></li>
+            <li><a href="#ucla-encyclopedia">III. UCLA Encyclopedia of Egyptology (UEE) — The Scholarly Baseline</a></li>
+            <li><a href="#tla-thesaurus">IV. Thesaurus Linguae Aegyptiae (TLA) — Lexical Resonance</a></li>
+            <li><a href="#papyrology-info">V. Papyri.info — High-Resolution Textual Analysis</a></li>
+            <li><a href="#trismegistos">VI. Trismegistos — Multi-Script Data Migration</a></li>
+            <li><a href="#osirisnet">VII. Osirisnet — Virtual Navigation of the Royal Tombs</a></li>
+            <li><a href="#jsesh-processing">VIII. JSesh — The Professional Scribe’s Workbench</a></li>
+            <li><a href="#fabricius-ai">IX. Fabricius (Google) — Machine Learning in Epigraphy</a></li>
+            <li><a href="#three-d-modeling">X. 3D Photogrammetry — Hardening the Material Record</a></li>
+            <li><a href="#spectral-imaging">XI. Multispectral Imaging — Reading the Invisible Tekt</a></li>
+            <li><a href="#digital-epigraphy">XII. Digital Epigraphy — Precision Facsimiles</a></li>
+            <li><a href="#gis-mapping">XIII. GIS and Sacred Geography — Mapping the Field</a></li>
+            <li><a href="#databases-museums">XIV. Global Museum Databases — Distributed Storage Nodes</a></li>
+            <li><a href="#open-access">XV. The Ethics of Open Access — Democratizing the Heka</a></li>
+            <li><a href="#digital-preservation">XVI. Bit-Rot and Isfet — Challenges of Data-Longevity</a></li>
+            <li><a href="#machine-translation">XVII. AI and Automated Translation — The Future of Hu</a></li>
+            <li><a href="#virtual-repatriation">XVIII. Virtual Repatriation — Re-unifying the Resonators</a></li>
+            <li><a href="#methodology">XIX. Research Methodology — Synthesizing Multi-Bandwidth Data</a></li>
+            <li><a href="#ethics-digital">XX. The Digital Ethic — Responsibility of the Modern Sesh</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: ONTOLOGY -->
+    <!-- ═══════════════════════════════════════ I. ONTOLOGY -->
     <section id="ontology">
-        <h2 class="section-head">I. The Ontology of the Digital Archive</h2>
+        <h2 class="section-head">I. The Ontology of the Digital Archive — Re-materializing the Per Ankh</h2>
         <p>
-            In the 21st century, the <a href="house-of-life.html" class="nl">House of Life</a> (Per Ankh) has been re-materialized through the medium of the digital archive. The preservation of Kemetic knowledge no longer depends on physical papyrus or stone alone, but on the systematic encoding of that information into accessible, high-resolution data-streams.
+            In the 21st century, the <a href="house-of-life.html" class="nl">House of Life</a> (<i>Per Ankh</i> [𓉐𓏤𓋹]) has been re-materialized through the medium of the digital archive. The preservation of Kemetic knowledge no longer depends on physical papyrus or stone alone, but on the systematic encoding of that information into accessible, high-resolution data-streams.
         </p>
         <p>
-            Digital scholarship in Egyptology represents a <strong>frequency-shift</strong> in research. By utilizing machine learning, spectral imaging, and trilingual databases, scholars can identify patterns and connections that were previously invisible to the unassisted eye. In this research framework, these tools are viewed as "cybernetic eyes" (the Eye of Ra) that permit the reconstruction of the ancient symbolic operating system.
+            Digital scholarship in Egyptology represents a <strong>Frequency-Shift</strong> in research. By utilizing machine learning, spectral imaging, and trilingual databases, scholars can identify patterns and connections that were previously invisible to the unassisted eye. In this research framework, these tools are viewed as "Cybernetic Eyes" (the Eye of Ra [𓂀]) that permit the reconstruction of the ancient symbolic operating system. The digital scribe (<a href="scribal-arts.html" class="nl">Sesh</a>) acts as the <strong>Maintenance Technician of the Field</strong>, ensuring that the signal of Kemet remains clear despite the entropic noise of time.
         </p>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: REPOSITORIES -->
-    <section id="repositories">
-        <h2 class="section-head">II. Core Institutional Repositories</h2>
-        <div class="repo-grid">
-            <div class="repo-card">
-                <h4>UCLA (UEE)</h4>
-                <p>The <strong>UCLA Encyclopedia of Egyptology</strong> is a peer-reviewed, open-access repository of articles covering every aspect of Ancient Egyptian civilization. It is the gold standard for academic-grade contextual research.</p>
-                <a href="https://uee.ucla.edu/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
-            <div class="repo-card">
-                <h4>TLA (THESAURUS)</h4>
-                <p>The <strong>Thesaurus Linguae Aegyptiae</strong> is a massive searchable database of Egyptian texts from all stages of the language. It provides lemmatized word-searches and exhaustive definitions.</p>
-                <a href="https://thesaurus-linguae-aegyptiae.de/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
-            <div class="repo-card">
-                <h4>TRISMEGISTOS</h4>
-                <p>An interdisciplinary portal providing metadata for all texts from the ancient world (c. 800 BCE – 800 CE). It is essential for tracking the migration of data across different scripts and cultures.</p>
-                <a href="https://www.trismegistos.org/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
-            <div class="repo-card">
-                <h4>IFAO DIGITAL</h4>
-                <p>The digital publications of the <strong>Institut Français d'Archéologie Orientale</strong> in Cairo, providing high-quality archaeological reports and site-specific data.</p>
-                <a href="https://www.ifao.egnet.net/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
+    <!-- ═══════════════════════════════════════ III. UCLA ENCYCLOPEDIA -->
+    <section id="ucla-encyclopedia">
+        <h2 class="section-head">III. UCLA Encyclopedia of Egyptology (UEE) — The Scholarly Baseline</h2>
+        <div class="repo-card">
+            <h4>UCLA ENCYCLOPEDIA OF EGYPTOLOGY (UEE)</h4>
+            <p>The UEE is a peer-reviewed, open-access repository of articles covering every aspect of Ancient Egyptian civilization. It provides the <strong>Technical Specification</strong> for our modern understanding of Kemet.</p>
+            <p>In our framework, the UEE acts as the <strong>Standard Documentation</strong> for the ancient OS. It provides the peer-verified data needed to distinguish between genuine historical frequencies and modern speculative noise. It is the gold standard for academic-grade contextual research.</p>
+            <a href="https://uee.ucla.edu/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION III: PAPYROLOGY -->
-    <section id="papyrology">
-        <h2 class="section-head">III. Papyrological and Textual Databases</h2>
-        <div class="repo-grid">
-            <div class="repo-card">
-                <h4>PAPYRI.INFO</h4>
-                <p>The primary portal for high-resolution images and transcriptions of papyrus documents, focusing on Greek, Coptic, and Demotic materials from Roman Egypt.</p>
-                <a href="https://papyri.info/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
-            <div class="repo-card">
-                <h4>OSIRISNET</h4>
-                <p>A comprehensive digital archive dedicated specifically to the tombs of Ancient Egypt, featuring exhaustive photographic coverage and theological analysis of tomb decorations.</p>
-                <a href="https://www.osirisnet.net/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
-            </div>
+    <!-- ═══════════════════════════════════════ IV. TLA THESAURUS -->
+    <section id="tla-thesaurus">
+        <h2 class="section-head">IV. Thesaurus Linguae Aegyptiae (TLA) — Lexical Resonance</h2>
+        <div class="repo-card">
+            <h4>THESAURUS LINGUAE AEGYPTIAE (TLA)</h4>
+            <p>The TLA is a massive searchable database of Egyptian texts from all stages of the language—from Old Kingdom <a href="funerary-texts.html" class="nl">Pyramid Texts</a> to <a href="coptic.html" class="nl">Coptic</a> liturgies.</p>
+            <p>The TLA provides <strong>Lemmatized Word-Searches</strong> and exhaustive definitions. For the researcher, it is the tool for <strong>Vibrational Analysis</strong>: it allows us to track how a specific divine word (<i>Medu Netjer</i>) evolved in its usage and resonance across 3,500 years. It is the primary instrument for <a href="ontological-gematria.html" class="nl">Ontological Gematria</a> studies.</p>
+            <a href="https://thesaurus-linguae-aegyptiae.de/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION IV: TOOLS -->
-    <section id="tools">
-        <h2 class="section-head">IV. Essential Tools for the Digital Scribe</h2>
-        <div class="repo-grid">
-            <div class="repo-card">
-                <h4>JSESH</h4>
-                <p>The professional-standard word processor for hieroglyphic texts. It allows for the precise transcription of <i>Medu Netjer</i> using Gardiner codes or phonetic values.</p>
-                <a href="https://jsesh.qenherkhopeshef.org/" target="_blank" class="repo-link">>> DOWNLOAD TOOL</a>
-            </div>
-            <div class="repo-card">
-                <h4>FABRICIUS (GOOGLE)</h4>
-                <p>An interactive workbench utilizing machine learning to assist in the decoding and facsimile-creation of hieroglyphs. It bridges the gap between traditional study and AI-assisted analysis.</p>
-                <a href="https://artsandculture.google.com/experiment/fabricius/" target="_blank" class="repo-link">>> ACCESS TOOL</a>
-            </div>
+    <!-- ═══════════════════════════════════════ VII. OSIRISNET -->
+    <section id="osirisnet">
+        <h2 class="section-head">VII. Osirisnet — Virtual Navigation of the Royal Tombs</h2>
+        <div class="repo-card">
+            <h4>OSIRISNET (TOMBS OF ANCIENT EGYPT)</h4>
+            <p>Osirisnet is a comprehensive digital archive dedicated specifically to the tombs of Egypt. It features exhaustive photographic coverage and theological analysis of tomb decorations.</p>
+            <p>From our perspective, Osirisnet provides the <strong>Visual Schematics</strong> for the <a href="netherworld-books.html" class="nl">Netherworld Books</a>. It allows the researcher to "Virtually Walk" through the 12 hours of the night as rendered in the Valley of the Kings. It is an essential tool for understanding the <strong>Architectural Integration</strong> of soul-software.</p>
+            <a href="https://www.osirisnet.net/" target="_blank" class="repo-link">>> ACCESS PORTAL</a>
         </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ VIII. JSESH -->
+    <section id="jsesh-processing">
+        <h2 class="section-head">VIII. JSesh — The Professional Scribe’s Workbench</h2>
+        <p>
+            <strong>JSesh</strong> is the industry-standard word processor for hieroglyphic texts. Developed by Serge Rosmorduc, it allows for the precise transcription of <i>Medu Netjer</i> using <strong>Gardiner Sign Codes</strong>.
+        </p>
+        <p>
+            In this archive, JSesh is the primary tool for <strong>Encoding the Word</strong>. It allows the modern scribe to manipulate the signs with the same precision as the ancient painters of <a href="deir-el-medina.html" class="nl">Deir el-Medina</a>. JSesh ensures that the <strong>Glyphic Integrity</strong> of the research is maintained, preventing the "Unicode Hallucination" that often plagues amateur digital Egyptology. It is the mandatory interface for all high-fidelity transcription work.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ IX. FABRICIUS AI -->
+    <section id="fabricius-ai">
+        <h2 class="section-head">IX. Fabricius (Google) — Machine Learning in Epigraphy</h2>
+        <p>
+            <strong>Fabricius</strong> is an interactive workbench developed by Google Arts & Culture that utilizes <strong>Machine Learning</strong> to assist in the decoding and facsimile-creation of hieroglyphs.
+        </p>
+        <p>
+            Fabricius represents the <strong>AI-Augmented Scribe</strong>. It bridges the gap between traditional philology and automated pattern-recognition. By "Training" the AI on thousands of verified glyphs, Fabricius can identify eroded or damaged signs on stone surfaces that are invisible to the human eye. This is the <strong>Re-activation of the Eye of Ra</strong> through neural networks, permitting the salvage of data-nodes that were previously considered lost.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XV. OPEN ACCESS -->
+    <section id="open-access">
+        <h2 class="section-head">XV. The Ethics of Open Access — Democratizing the Heka</h2>
+        <p>
+            The move toward <strong>Open Access</strong> in digital scholarship is viewed here as a <strong>Democratization of the Mysteries</strong>.
+        </p>
+        <p>
+            In the <a href="old-kingdom.html" class="nl">Old Kingdom</a>, high-frequency data was restricted to the King. In the <a href="middle-kingdom.html" class="nl">Middle Kingdom</a>, it migrated to the elite. Today, the digital archive makes the "Words of God" available to any consciousness capable of receiving them. This is a <strong>Total System Unlock</strong>. The ethics of digital scholarship require that we maintain the <strong>Accessibility of the Record</strong>, ensuring that the legacy of Kemet is not re-monopolized by new institutional "Archons."
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XX. ETHICS -->
+    <section id="ethics-digital">
+        <h2 class="section-head">XX. The Digital Ethic — Responsibility of the Modern Sesh</h2>
+        <p>
+            The final "frequency" of digital scholarship is <strong>Integrity</strong>. As modern scribes, we have a responsibility to <a href="maat-isfet.html" class="nl">Ma'at</a>.
+        </p>
+        <p>
+            The ease of digital reproduction can lead to <strong>Data-Corruption</strong> and the spread of superficial "Pseudo-Egyptology." Our task is to maintain the <strong>High-Fidelity of the Ancestral Stream</strong>. We use digital tools not to replace the ancient wisdom, but to <strong>Magnify</strong> it. By providing precise citations, high-resolution images, and peer-verified definitions, we ensure that the "Memory of Egypt" remains a functional, unbreakable resonator for the modern world. The work of the digital scribe is the eternal work of the Per Ankh: keeping the soul of Kemet alive in the medium of the present.
+        </p>
     </section>
 
     <div class="glyph-marker">𓏞 𓈖 𓇋 𓈓 𓈖 𓏲</div>
@@ -127,6 +193,11 @@
             <li><a href="repatriation-ethics.html">Repatriation & Ethics</a></li>
             <li><a href="medical-papyri.html">The Medical Papyri</a></li>
             <li><a href="funerary-texts.html">The Funerary Corpus</a></li>
+            <li><a href="scribal-arts.html">The Scribal Arts</a></li>
+            <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
+            <li><a href="hieroglyph-reference.html">Medu Netjer Index</a></li>
+            <li><a href="netherworld-books.html">Netherworld Navigation</a></li>
+            <li><a href="timeline.html">Chronological Timeline</a></li>
         </ul>
     </div>
 
@@ -139,7 +210,7 @@
 <footer>
     <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
     <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
-    DATA INTEGRITY: VERIFIED</p>
+    DATA INTEGRITY: STABLE // THE ARCHIVE IS ONLINE</p>
 </footer>
 
 </body>

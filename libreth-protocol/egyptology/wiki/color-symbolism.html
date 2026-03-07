@@ -7,16 +7,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓏞 𓈖 𓇋 𓈓 𓈖'; }</style>
+    <style>
+        .page-header::before { content: '𓏞 𓈖 𓇋 𓈓 𓈖'; }
+        .color-block {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin: 2.5rem 0;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(10,10,10,0.4);
+        }
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border: 1px solid rgba(212,175,55,0.3);
+            flex-shrink: 0;
+        }
+        .freq-tag {
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+    </style>
 </head>
-<body>
+<body data-page="color-symbolism">
 <div class="page-wrap">
 
-    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════ HEADER -->
     <header class="page-header">
         <h1 class="page-title">COLOR SYMBOLISM</h1>
-        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">iwn</div>
-        <p class="page-subtitle">// THE THEOLOGICAL LANGUAGE :: SACRED FREQUENCIES AND RESONANCE //</p>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">
+            iwn · 𓇋 𓈓 𓈖 · Color as Essence
+        </div>
+        <p class="page-subtitle">// THE THEOLOGICAL LANGUAGE :: SACRED FREQUENCIES AND RESONANCE :: THE VIBRATIONAL PALETTE //</p>
+        <p class="page-epithet">
+            "The nature of a man is in his color; his disposition is seen in the hue of his skin.<br>
+            The gods are known by the brilliance of their radiance."
+            <br><span style="font-size:0.85rem;opacity:0.5;">— After the Instruction of Amenemope</span>
+        </p>
     </header>
 
     <!-- BREADCRUMB -->
@@ -24,100 +56,224 @@
         <a href="index.html">WIKI HOME</a> &gt; <a href="ritual-practice.html">RITUAL PRACTICE</a> &gt; COLOR SYMBOLISM
     </nav>
 
-    <!-- TABLE OF CONTENTS -->
+    <!-- ═══════════════════════════════════════ TABLE OF CONTENTS -->
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#ontology">I. The Ontology of Color — iwn as Essence</a></li>
-            <li><a href="#black">II. Black (Kem) — Rebirth and Fertility</a></li>
-            <li><a href="#red">III. Red (Desher) — Danger and Power</a></li>
-            <li><a href="#white">IV. White (Hedj) — Purity and Holiness</a></li>
-            <li><a href="#green">V. Green (Wadj) — Growth and Eternal Life</a></li>
-            <li><a href="#blue">VI. Blue (Irtyu) — Divinity and the Sky</a></li>
-            <li><a href="#gold">VII. Yellow/Gold (Khenet) — The Flesh of the Gods</a></li>
-            <li><a href="#heka">VIII. Application in Heka and Alchemy</a></li>
+            <li><a href="#ontology">I. The Ontology of Color — iwn as Being</a></li>
+            <li><a href="#vibration">II. The Metaphysics of Vibration — Color as Frequency</a></li>
+            <li><a href="#black">III. Black (Kem) — The Fertile Darkness of the Nun</a></li>
+            <li><a href="#red">IV. Red (Desher) — Dynamic Force and Martial Fire</a></li>
+            <li><a href="#white">V. White (Hedj) — Clarification and Lunar Purity</a></li>
+            <li><a href="#green">VI. Green (Wadj) — Eternal Growth and Resurrection</a></li>
+            <li><a href="#blue">VII. Blue (Irtyu) — Celestial Depth and Divine Flesh</a></li>
+            <li><a href="#yellow-gold">VIII. Yellow & Gold (Khenet/Nbw) — Incorruptible Solar Light</a></li>
+            <li><a href="#alchemical-sequence">IX. The Alchemical Color Sequence — Nigredo to Rubedo</a></li>
+            <li><a href="#mineral-resonance">X. Mineral Resonance — Materials as Color-Carriers</a></li>
+            <li><a href="#ritual-clothing">XI. The Scribe's Inks — Archiving the Colors</a></li>
+            <li><a href="#temple-pigments">XII. Temple Pigments — Fixing the Divine Frequencies</a></li>
+            <li><a href="#eye-colors">XIII. The Eye of Horus — Spectral Integrity</a></li>
+            <li><a href="#soul-hues">XIV. The Colors of the Soul — Ba and Ka Hues</a></li>
+            <li><a href="#amulet-logic">XV. Amuletic Color Combinations — Harmonic Shielding</a></li>
+            <li><a href="#gender-colors">XVI. Gender Hues — The Convention of Skin Tones</a></li>
+            <li><a href="#seasonal-shifts">XVII. Temporal Colors — The Inundation Cycle</a></li>
+            <li><a href="#hermetic-alchemy">XVIII. Hermetic Alchemy — Continuity of the Palette</a></li>
+            <li><a href="#modern-optics">XIX. Modern Parallel — Chromotherapy and Photonic Logic</a></li>
+            <li><a href="#ethics-color">XX. Ethics of Appearance — The Integrity of the Hue</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: ONTOLOGY -->
+    <!-- ═══════════════════════════════════════ I. ONTOLOGY -->
     <section id="ontology">
-        <h2 class="section-head">I. The Ontology of Color — iwn as Essence</h2>
+        <h2 class="section-head">I. The Ontology of Color — iwn as Being</h2>
         <p>
-            In Ancient Egypt, color was not merely an aesthetic attribute but a theological language. The term <strong>iwn</strong> referred not only to "color" but also to the "nature," "being," or "disposition" of a person or object. To change the color of something was to fundamentally alter its ontological state.
+            In the Kemetic worldview, color was not an accidental or superficial property of an object. The word <strong>iwn</strong> (<i>iwn</i> [𓇋𓅱𓈖𓈒𓈒𓈒]) referred simultaneously to "color," "nature," "disposition," and "being." To describe the color of a person or deity was to describe their fundamental <strong>ontological state</strong>.
         </p>
         <p>
-            Each color possessed a specific <strong>vibration</strong> and was associated with particular deities, cosmological concepts, and magical properties. The selection of materials for amulets and ritual tools was governed by these correspondences, ensuring that the physical object resonated with the desired divine frequency.
+            Color functioned as a <strong>Theological Language</strong>. It was the "Face of the Spirit" made visible to the physical senses. If a deity was depicted with green skin, they were not "green-colored"; they <i>were</i> the frequency of regeneration and growth. The selection of pigments in temple art and the choice of stones for <a href="amulets-talismans.html" class="nl">Amulets</a> was a rigorous process of <strong>Vibrational Alignment</strong>, intended to "Hard-Code" specific metaphysical qualities into the material vessel.
         </p>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: BLACK -->
-    <section id="#black">
-        <h2 class="section-head">II. Black (Kem) — Rebirth and Fertility</h2>
-        <div class="card-grid">
-            <div class="info-card">
-                <div class="color-preview" style="background-color: #000;"></div>
-                <h4>KEM (BLACK)</h4>
-                <p>Contrary to many modern cultures, black was a positive color in Kemet. It symbolized the rich silt deposited by the Nile flood — the source of all life and fertility. It was the color of <strong>Osiris</strong> (the "Black One") and <strong>Anubis</strong>.</p>
-            </div>
-            <div class="info-card">
-                <h4>METAPHYSICAL FREQUENCY</h4>
-                <p>Black represents the stage of <strong>Nigredo</strong> in the alchemical process: the fertile darkness of the womb/tomb from which new life emerge. It is the frequency of the "hidden sun" during its nocturnal journey through the Duat.</p>
+    <!-- ═══════════════════════════════════════ II. VIBRATION -->
+    <section id="vibration">
+        <h2 class="section-head">II. The Metaphysics of Vibration — Color as Frequency</h2>
+        <p>
+            Ancient Egyptians understood color as a <strong>vibrational band</strong> within the spectrum of <a href="heka.html" class="nl">Heka</a>. Each color possessed a specific resonance that could be utilized to attract divine favor or repel chaotic interference (<a href="maat-isfet.html" class="nl">Isfet</a>).
+        </p>
+        <p>
+            Within this research framework, the Kemetic palette is viewed as a <strong>Spectral Tuning System</strong>. Just as a radio must be tuned to a specific frequency to receive a signal, the practitioner utilized specific colors to "tune" their environment and their own <a href="composite-soul.html" class="nl">Ka-body</a> to the divine data-streams. The integrity of the hue was synonymous with the integrity of the magic. A "muddy" or incorrect color resulted in a "decoherent" ritual signal.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ III. BLACK -->
+    <section id="black">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #050505; border-color: #333;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: REGENERATIVE DEPTH</span>
+                <h2 class="section-head" style="margin-top: 0;">III. Black (Kem) — The Fertile Darkness of the Nun</h2>
+                <p>
+                    <strong>Black</strong> (<i>km</i> [𓆎]) is perhaps the most significant positive color in Kemetic theology. It is the color of the rich, life-giving silt deposited by the Nile inundation—the foundation of the "Black Land" (Kemet).
+                </p>
+                <p>
+                    Black symbolizes <strong>Potency, Rebirth, and the Underworld</strong>. It is the frequency of <strong>Osiris</strong> (called "The Black One") in his role as lord of regeneration, and of <strong>Anubis</strong>, the guardian of the hidden paths. In alchemical terms, Black represents the <strong>Nigredo</strong>: the state of putrefaction and fertile dissolution from which new life is initialized. It is the "Silent Background" of the <a href="cosmological-deities.html" class="nl">Nun</a> from which the first light emerged.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION III: RED -->
-    <section id="#red">
-        <h2 class="section-head">III. Red (Desher) — Danger and Power</h2>
-        <div class="card-grid">
-            <div class="info-card">
-                <div class="color-preview" style="background-color: #8b0000;"></div>
-                <h4>DESHER (RED)</h4>
-                <p>Associated with <strong>Set</strong>, the desert sun, and dynamic, chaotic energy. It was the color of blood and fire, representing both destruction and the protective force required to defeat Apep.</p>
-            </div>
-            <div class="info-card">
-                <h4>METAPHYSICAL FREQUENCY</h4>
-                <p>Red is the frequency of <strong>vitality</strong> and <strong>will</strong>. While it could represent "evil" or danger, it was essential for apotropaic magic. Red jasper and carnelian were used to channel this aggressive, protective Heka.</p>
+    <!-- ═══════════════════════════════════════ IV. RED -->
+    <section id="red">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #9e1b1b; border-color: #ff4d4d;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: DYNAMIC WILL / KINETIC HEAT</span>
+                <h2 class="section-head" style="margin-top: 0;">IV. Red (Desher) — Dynamic Force and Martial Fire</h2>
+                <p>
+                    <strong>Red</strong> (<i>dSr</i> [𓂋𓋴𓂋]) is the color of the "Red Land" (the desert), blood, and fire. It is the frequency of the god <strong>Set</strong> and the destructive heat of the sun.
+                </p>
+                <p>
+                    Red is a <strong>High-Voltage Frequency</strong>. It represents both danger and the necessary <strong>Apotropaic Power</strong> needed to protect the solar barque. While too much Red leads to Isfet (anger and violence), a controlled application of Red is essential for military victory and the repelling of Apep. In the <a href="scribal-arts.html" class="nl">Scribal Arts</a>, Red ink was used to "isolate" dangerous words, binding their power within the containment field of the text.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION IV: WHITE -->
-    <section id="#white">
-        <h2 class="section-head">IV. White (Hedj) — Purity and Holiness</h2>
-        <div class="card-grid">
-            <div class="info-card">
-                <div class="color-preview" style="background-color: #ffffff;"></div>
-                <h4>HEDJ (WHITE)</h4>
-                <p>The color of <strong>purity</strong>, holiness, and the clarified state of the soul. White linen was the standard garment for priests and the deceased. It was associated with the moon and the goddess Nekhbet.</p>
+    <!-- ═══════════════════════════════════════ V. WHITE -->
+    <section id="white">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #fcfcfc; border-color: #d4af37;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: CLARIFICATION / LUNAR PURITY</span>
+                <h2 class="section-head" style="margin-top: 0;">V. White (Hedj) — Clarification and Lunar Purity</h2>
+                <p>
+                    <strong>White</strong> (<i>ḥḏ</i> [𓌉]) is the color of <strong>Purity, Holiness, and Transparency</strong>. It is the frequency of the moon, the goddess Nekhbet, and the "White Walls" of Memphis.
+                </p>
+                <p>
+                    White represents the <strong>Albedo</strong> stage of <a href="alchemy.html" class="nl">Alchemy</a>—the washing and clarification of the soul. White linen was the mandatory garment for priests and the justified deceased, symbolizing that their "Heart-Field" was free from the noise of Isfet. White is the state of <strong>Optimal Signal Reception</strong>, where the individual consciousness is a clear mirror for the divine light.
+                </p>
             </div>
-            <div class="info-card">
-                <h4>METAPHYSICAL FREQUENCY</h4>
-                <p>White represents the <strong>Albedo</strong> stage of alchemy — the purification of the self. It is the frequency of the "shining one" (the Akh) who has successfully navigated the judgment of Ma'at.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VI. GREEN -->
+    <section id="green">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #1b5e20; border-color: #4caf50;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: BIOLOGICAL RESONANCE / VEGETATIVE LIFE</span>
+                <h2 class="section-head" style="margin-top: 0;">VI. Green (Wadj) — Eternal Growth and Resurrection</h2>
+                <p>
+                    <strong>Green</strong> (<i>wꜣḏ</i> [𓇅]) is the color of <strong>Freshness, Health, and Renewal</strong>. It is associated with the papyrus plant and the literal "Greenness" of the Nile valley after the flood.
+                </p>
+                <p>
+                    Green represents the <strong>Resurrected Osiris</strong>. It is the frequency of the <i>Ka</i>—the vital life force that requires constant replenishment. Amulets made of green feldspar or malachite were used to ensure the physical health of the living and the vegetative renewal of the dead. To be "Wadj" was to be in a state of <strong>Harmonic Flourishing</strong> with the natural order.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VII. BLUE -->
+    <section id="blue">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #0d47a1; border-color: #00d1ff;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: CELESTIAL DEPTH / DIVINE MATTER</span>
+                <h2 class="section-head" style="margin-top: 0;">VII. Blue (Irtyu) — Celestial Depth and Divine Flesh</h2>
+                <p>
+                    <strong>Blue</strong> (<i>irtyw</i> [𓂋𓏏𓏭𓅱𓈒𓏥]) is the color of the <strong>Sky and the Nile</strong>. It represents the "High-Frequency" matter of the gods.
+                </p>
+                <p>
+                    <strong>Lapis Lazuli</strong> (Blue) was believed to be the material of the hair and bones of the deities. Dark blue represents the night sky and the cosmic depth of the Nut, while light blue (turquoise) represents the joy and protection of <a href="hathor.html" class="nl">Hathor</a>. Blue is the color of <strong>Divine Information</strong>—it is the medium through which the solar disk travels. Egyptian Blue (the first synthetic pigment) was a "Theurgical Material" designed to mimic the resonance of the sky on the earth.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VIII. YELLOW GOLD -->
+    <section id="yellow-gold">
+        <div class="color-block">
+            <div class="color-swatch" style="background-color: #ffd700; border-color: #d4af37;"></div>
+            <div>
+                <span class="freq-tag">FREQUENCY: INCORRUPTIBILITY / SOLAR ASCENT</span>
+                <h2 class="section-head" style="margin-top: 0;">VIII. Yellow & Gold (Khenet/Nbw) — Incorruptible Solar Light</h2>
+                <p>
+                    <strong>Gold</strong> (<i>nbw</i> [𓋞]) was viewed as the <strong>Literal Flesh of the Gods</strong>, particularly Re. It is the color of <strong>Immortality and Sovereignty</strong>.
+                </p>
+                <p>
+                    Because gold does not tarnish, it was the material expression of <strong>Djet</strong> (Eternal Stability). Yellow (<i>ḫnt</i> [𓏏𓈖𓏏𓏭𓈒𓏥]) functioned as the pigment-proxy for gold. It represents the <strong>Citrinitas</strong> stage of alchemy—the solar dawn where the soul begins to radiate its own light. The "Golden Flesh" of the deceased indicates their successful transfiguration into an <strong>Akh</strong>.
+                </p>
             </div>
         </div>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION VIII: HEKA -->
-    <section id="heka">
-        <h2 class="section-head">VIII. Application in Heka and Alchemy</h2>
+    <!-- ═══════════════════════════════════════ IX. ALCHEMICAL SEQUENCE -->
+    <section id="alchemical-sequence">
+        <h2 class="section-head">IX. The Alchemical Color Sequence — Nigredo to Rubedo</h2>
         <p>
-            In practical <a href="heka.html" class="nl">Heka</a>, color functioned as a <strong>frequency-modulator</strong>. When creating a <a href="amulets-talismans.html" class="nl">talisman</a>, the material's color was the primary factor in determining its resonance.
+            The Great Work of <a href="alchemy.html" class="nl">Alchemy</a> (<i>Opus Magnum</i>) is a sequential process of "Frequency Refinement" that follows the spectral logic of Kemet.
         </p>
-        <div class="card-grid">
+        <div class="card-grid card-grid-2">
             <div class="info-card">
-                <h4>ALCHEMICAL COLOR STAGES</h4>
-                <p>The alchemical Great Work (<i>Opus Magnum</i>) follows the spectral sequence of Kemetic theology: Nigredo (Black), Albedo (White), Citrinitas (Yellow), and Rubedo (Red). This sequence represents the progressive refinement of the soul's vibration.</p>
+                <h4>1. NIGREDO (BLACK)</h4>
+                <p>The state of the <i>Prima Materia</i>. The darkness of the tomb. The work of dissolution and the confrontation with the Shadow.</p>
             </div>
             <div class="info-card">
-                <h4>MATERIAL CORRESPONDENCES</h4>
-                <p>Lapis Lazuli (Blue) was used to invoke the celestial waters; Red Jasper (Red) for the blood of Isis; Malachite (Green) for Osirian renewal; and Gold (Yellow) for the incorruptible flesh of the gods.</p>
+                <h4>2. ALBEDO (WHITE)</h4>
+                <p>The state of purification. The lunar clarity. The washing of the material and the stabilization of the spiritual signal.</p>
+            </div>
+            <div class="info-card">
+                <h4>3. CITRINITAS (YELLOW)</h4>
+                <p>The dawning of the solar consciousness. The "Yellowing" of the work as the divine intelligence begins to permeate the vessel.</p>
+            </div>
+            <div class="info-card">
+                <h4>4. RUBEDO (RED)</h4>
+                <p>The final peak. The "Reddening" or fixation. The permanent union of opposites into the incorruptible Red Stone (the Akh).</p>
             </div>
         </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XI. SCRIBE'S INKS -->
+    <section id="ritual-clothing">
+        <h2 class="section-head">XI. The Scribe's Inks — Archiving the Colors</h2>
+        <p>
+            In the <a href="scribal-arts.html" class="nl">Scribal Arts</a>, the use of color was a form of <strong>Theurgical Data-Encryption</strong>.
+        </p>
+        <p>
+            The scribe utilized <strong>Carbon Black</strong> for the "Stable Code" of the main text and <strong>Red Ochre</strong> for the "Dynamic Code" of headings, dangerous names, and corrections. This binary ink system allowed the scribe to manage the <strong>Energetic Polarity</strong> of the document. To write a name in red was to "charge" it with protective fire; to write it in black was to "fix" it into the record of eternity. The scribe's palette was a miniaturized model of the dualism of the Two Lands.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIII. EYE OF HORUS -->
+    <section id="eye-colors">
+        <h2 class="section-head">XIII. The Eye of Horus — Spectral Integrity</h2>
+        <p>
+            The <strong>Eye of Horus</strong> (<i>wḏꜣt</i> [𓂀]) is the supreme symbol of <strong>Spectral Integrity</strong>. It is the "Whole Eye"—the state where all colors and frequencies are perfectly integrated into a single, functional vision.
+        </p>
+        <p>
+            In the myth, the eye was shattered into fractional parts by Set and restored by <a href="thoth-hermes.html" class="nl">Thoth</a>. Each part of the eye represents a specific sensory bandwidth and a mathematical fraction. The restoration of the Eye is the restoration of <strong>Full-Spectrum Perception</strong> (<a href="sia.html" class="nl">Sia</a>). For the practitioner, "Restoring the Eye" is the work of aligning all the "Colors" of their composite soul into a coherent, radiant whole.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ XX. ETHICS -->
+    <section id="ethics-color">
+        <h2 class="section-head">XX. Ethics of Appearance — The Integrity of the Hue</h2>
+        <p>
+            The final "frequency" of color symbolism is <strong>Ethics</strong>. In Kemetic morality, "showing your true color" was a requirement of Ma'at.
+        </p>
+        <p>
+            Self-deception and hypocrisy were viewed as "Color-Corruption"—attempts to masquerade as one frequency while vibrating at another. The "Justified" soul (<a href="weighing-of-the-heart.html" class="nl">Ma'at Kheru</a>) is one whose internal and external "colors" are in perfect synchronization. We are called to maintain the <strong>Spectral Honesty</strong> of our being, ensuring that our actions radiate the same clarity as our intentions. To live in Ma'at is to ensure that your "Color" is a true witness to your soul.
+        </p>
     </section>
 
     <div class="glyph-marker">𓏞 𓈖 𓇋 𓈓 𓈖</div>
@@ -128,11 +284,16 @@
         <ul>
             <li><a href="amulets-talismans.html">Amulets & Talismans</a></li>
             <li><a href="alchemy.html">Alchemy & Kemet</a></li>
-            <li><a href="heka.html">Heka — The Operative Force</a></li>
+            <li><a href="heka.html">Heka — The Primordial Force</a></li>
             <li><a href="osiris.html">Osiris — The Green & Black One</a></li>
-            <li><a href="anubis.html">Anubis — The Black Jackal</a></li>
+            <li><a href="anubis.html">Anubis — The Master of Embalming</a></li>
             <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
             <li><a href="composite-soul.html">The Composite Soul</a></li>
+            <li><a href="scribal-arts.html">The Scribal Arts</a></li>
+            <li><a href="thoth-hermes.html">Thoth-Hermes</a></li>
+            <li><a href="hathor.html">Hathor — Lady of Turquoise</a></li>
+            <li><a href="sia.html">Sia & Hu</a></li>
+            <li><a href="opening-of-the-mouth.html">Opening of the Mouth</a></li>
         </ul>
     </div>
 
@@ -145,7 +306,7 @@
 <footer>
     <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
     <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
-    SPECTRAL INTEGRITY: LOCKED</p>
+    SPECTRAL RESONANCE: STABLE // THE FREQUENCY IS TUNED</p>
 </footer>
 
 </body>
