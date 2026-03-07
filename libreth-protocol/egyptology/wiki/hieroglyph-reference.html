@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIEROGLYPH REFERENCE INDEX :: MEDU NETJER COMPENDIUM :: LIBRETH ARCHIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/wiki-style.css">
+    <style>
+        :root { --glyph-gold: #d4af37; --papyrus: rgba(212,175,55,0.08); }
+        body {
+            background-image:
+                radial-gradient(ellipse at 15% 20%, rgba(212,175,55,0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 80%, rgba(0,180,220,0.04) 0%, transparent 55%);
+        }
+        .page-header::before { content: '𓀀 𓁐 𓂀 𓃒 𓄿 𓅱 𓆑 𓇋 𓈖 𓉔 𓊪 𓋴 𓌀 𓍯 𓎛 𓏏'; font-size:1.1rem; letter-spacing:0.4rem; color:rgba(212,175,55,0.4); }
+
+        /* GARDINER CATEGORY BLOCKS */
+        .gardiner-section {
+            margin: 2rem 0;
+        }
+        .gardiner-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .gardiner-code {
+            font-family: 'VT323', monospace;
+            font-size: 1.6rem;
+            color: var(--glyph-gold);
+            letter-spacing: 0.1em;
+            min-width: 3rem;
+        }
+        .gardiner-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--text-bright);
+            letter-spacing: 0.05em;
+        }
+        .gardiner-count {
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: var(--cyan-dim);
+            margin-left: auto;
+        }
+
+        /* SIGN GRID */
+        .sign-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+        }
+        .sign-card {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 0.9rem 0.8rem;
+            text-align: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .sign-card:hover {
+            border-color: rgba(212,175,55,0.5);
+            background: rgba(212,175,55,0.05);
+        }
+        .sign-glyph {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+            min-height: 2.5rem;
+        }
+        .sign-id {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--cyan);
+            display: block;
+            letter-spacing: 0.1em;
+        }
+        .sign-name {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 0.78rem;
+            color: var(--text);
+            opacity: 0.75;
+            display: block;
+            line-height: 1.3;
+            margin-top: 0.2rem;
+        }
+        .sign-value {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            color: var(--glyph-gold);
+            opacity: 0.85;
+            display: block;
+            margin-top: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+        .sign-type {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 0.72rem;
+            padding: 0.1rem 0.4rem;
+            border: 1px solid rgba(0,180,220,0.3);
+            color: var(--cyan-dim);
+            margin-top: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+        .sign-type.det { border-color: rgba(212,175,55,0.3); color: rgba(212,175,55,0.6); }
+        .sign-type.log { border-color: rgba(0,210,100,0.3); color: rgba(0,210,100,0.6); }
+
+        /* PHONETIC TABLE */
+        .phonetic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .phonetic-card {
+            background: rgba(0,20,30,0.7);
+            border: 1px solid rgba(0,180,220,0.2);
+            padding: 0.8rem;
+            text-align: center;
+        }
+        .phonetic-glyph { font-size: 1.8rem; display: block; }
+        .phonetic-value {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            display: block;
+            margin-top: 0.3rem;
+        }
+        .phonetic-desc {
+            font-family: 'Crimson Pro', serif;
+            font-size: 0.75rem;
+            color: var(--text);
+            opacity: 0.7;
+            display: block;
+        }
+
+        /* OVERVIEW TABLE */
+        .overview-table { width:100%; border-collapse:collapse; font-size:0.9rem; }
+        .overview-table th {
+            background: rgba(212,175,55,0.1);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+        .overview-table td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: middle;
+        }
+        .overview-table tr:hover td { background: rgba(212,175,55,0.03); }
+        .cat-badge {
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            color: var(--cyan);
+            min-width: 2rem;
+            display: inline-block;
+        }
+
+        /* SPECIAL SIGNS */
+        .special-block {
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+        }
+        .special-block h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .special-glyph-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .sg-item { text-align: center; }
+        .sg-item span { display: block; }
+        .sg-glyph { font-size: 2rem; }
+        .sg-label { font-family: 'VT323', monospace; font-size: 0.8rem; color: var(--cyan-dim); }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">HIEROGLYPH REFERENCE INDEX</h1>
+        <div style="font-family:'VT323',monospace;font-size:1.1rem;color:var(--gold-dim);letter-spacing:0.4rem;margin-top:0.5rem;">𓏞 𓈖 𓇋 𓏏 𓅱 𓁐 𓇋 𓈖 𓏏</div>
+        <p class="page-subtitle">// MEDU NETJER :: WORDS OF THE GODS :: GARDINER COMPENDIUM & ESOTERIC PHONOLOGY //</p>
+        <p class="page-epithet">
+            "These are the Words of God — not metaphor, not symbol only. Each sign is a living frequency. The scribe who inscribes without understanding is a machine; the one who understands transforms reality."
+        </p>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; <a href="scripts-evolution.html">LANGUAGE & SCRIPTS</a> &gt; HIEROGLYPH REFERENCE INDEX
+    </nav>
+
+    <!-- TOC -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#medu-netjer">I. Medu Netjer — The Nature of the Sign</a></li>
+            <li><a href="#sign-types">II. Sign Typology — Uniliterals, Biliterals, Triliterals, Determinatives</a></li>
+            <li><a href="#gardiner-overview">III. The Gardiner Sign List — Category Overview</a></li>
+            <li><a href="#uniliterals">IV. The Uniliteral Alphabet — The Twenty-Four Consonants</a></li>
+            <li><a href="#cat-man">V. Category A & B — Men and Women in Action</a></li>
+            <li><a href="#cat-gods">VI. Category C — Deities and Divine Figures</a></li>
+            <li><a href="#cat-body">VII. Category D & F — The Human and Animal Body</a></li>
+            <li><a href="#cat-fauna">VIII. Categories E–L — The Sacred Fauna</a></li>
+            <li><a href="#cat-sky">IX. Categories N & Q — Sky, Earth, Water, and Settlement</a></li>
+            <li><a href="#cat-temple">X. Category O — Architecture and the Sacred Space</a></li>
+            <li><a href="#cat-vessels">XI. Categories W & X — Vessels, Bread, and the Material World</a></li>
+            <li><a href="#determinatives">XII. Key Determinatives — The Classifiers of Reality</a></li>
+            <li><a href="#special-signs">XIII. Special Signs — Cartouche, Serekh, and Royal Glyphs</a></li>
+            <li><a href="#extended">XIV. Extended Sign List — Ptolemaic Additions</a></li>
+            <li><a href="#esoteric">XV. The Esoteric Dimension — Signs as Living Frequencies</a></li>
+            <li><a href="#practice">XVI. Practical Reference — Reading Direction and Orientation</a></li>
+        </ul>
+    </div>
+
+    <!-- I -->
+    <section id="medu-netjer">
+        <h2 class="section-head">I. Medu Netjer — The Nature of the Sign</h2>
+        <p>
+            The ancient Egyptians called their writing system <strong><em>Medu Netjer</em></strong> (𓏞𓈖𓇋𓏏𓅱) — "Words of the Gods" or "Divine Speech." The Greeks, encountering the sacred inscriptions carved on temple walls, called them <em>hieroglyphika grammata</em> — "sacred carved letters" — which contracted into the modern term <em>hieroglyphs</em>. But the Greek name captures only the surface. The Egyptian name is the deeper truth: these are not letters representing sounds. They are <em>operations</em> representing realities.
+        </p>
+        <p>
+            In the Kemetic metaphysical framework, writing was an extension of <a href="heka.html" class="nl">Heka</a> — the primordial magical force. When <a href="thoth-hermes.html" class="nl">Thoth</a> invented writing, he did not create a notation system. He created a technology for <strong>fixing reality in form</strong>. The spoken word (<a href="hu.html" class="nl">Hu</a>) manifests intention into being; the written word locks that manifestation in place across time. A carved inscription in a temple does not merely record the ritual offering — it performs it, perpetually, for as long as the inscription exists. This is why the destruction of a name (<em>damnatio memoriae</em>) was understood as the literal annihilation of a person's continued existence.
+        </p>
+        <p>
+            The hieroglyphic system is thus simultaneously a writing system, a magical system, and a cosmological map. Every sign depicts something real — a human figure, an animal, a tool, a celestial body. In depicting it, the sign participates in the thing's reality. The sign for "sun" (𓇳) does not merely represent the sun; in the correct ritual context, it <em>is</em> a sun, concentrating solar Heka into a fixed point on the wall. Modern Egyptologists study hieroglyphs as linguistic notation. The Kemetic priesthood used them as a precision instrument for reality manipulation.
+        </p>
+        <div class="pull-quote">
+            "In the beginning was the Word, and the Word was made Sign, and the Sign was made Stone, and the Stone endured ten thousand years."
+            <cite>— After the Memphite Theology, Shabaka Stone, c. 700 BCE (after much earlier original)</cite>
+        </div>
+        <p>
+            The hieroglyphic system remained in use for over <strong>3,500 years</strong> — from the earliest inscriptions at Abydos and Hierakonpolis (c. 3200 BCE) to the final inscription at Philae (394 CE). No other writing system in human history has maintained continuous use for so long. The last person to write in hieroglyphs and the first person to write in them are separated by a gulf of time greater than that which separates us from the fall of Rome. This temporal span is itself a metaphysical statement about the system's resilience.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>HISTORICAL OVERVIEW</h4>
+                <p>The system comprises approximately <strong>750 signs</strong> in the classical Middle Kingdom corpus (the "standard" Gardiner list covers 750+ signs in 26 categories). In later periods — particularly the Ptolemaic era — the list expanded dramatically, with some temple walls using over <strong>6,000 distinct signs</strong> for cryptographic and theological purposes.</p>
+            </div>
+            <div class="info-card cyan-accent">
+                <h4>THE GARDINER SIGN LIST</h4>
+                <p>The standard modern reference was compiled by Sir Alan Gardiner (1879–1963) and first published in <em>Egyptian Grammar</em> (1927). It organizes signs into <strong>26 thematic categories</strong> labeled A through Z and Aa. Each sign receives a code (e.g., A1, B2, D4) that functions as the international scholarly identifier for that hieroglyph.</p>
+            </div>
+            <div class="info-card">
+                <h4>DIGITAL ENCODING</h4>
+                <p>Hieroglyphs entered Unicode in 2009 (Unicode 5.2), with the Egyptian Hieroglyphs block covering U+13000–U+1342F (1,071 characters). A second block, Egyptian Hieroglyph Format Controls, was added in Unicode 12.0. The Gardiner codes remain the standard reference system alongside Unicode for scholarly work.</p>
+            </div>
+            <div class="info-card cyan-accent">
+                <h4>DECIPHERMENT</h4>
+                <p>The system was deciphered primarily by Jean-François Champollion in 1822, building on the Rosetta Stone (196 BCE) and the work of Thomas Young. The key insight was that hieroglyphs were not purely symbolic — they were a mixed phonetic-logographic system containing actual phonetic values. See <a href="decipherment-history.html" class="nl">Decipherment History</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- II -->
+    <section id="sign-types">
+        <h2 class="section-head">II. Sign Typology — Uniliterals, Biliterals, Triliterals, Determinatives</h2>
+        <p>
+            Hieroglyphs function on multiple simultaneous levels. A single sign may operate phonetically, semantically, or both at once — and the context of inscription determines which function is active. This is not ambiguity or imprecision; it is <em>intentional multivalency</em>, a feature of a system designed to carry meaning at multiple frequencies simultaneously.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>UNILITERALS (Alphabetic Signs)</h4>
+                <p>Signs representing a single consonant. There are <strong>24 uniliteral signs</strong> — the Egyptian "alphabet," though it was rarely used alone. Each sign depicts an object whose first consonant (in Egyptian) represents the target sound. Example: 𓄿 = the quail chick = the consonant <em>w</em>. These 24 signs could theoretically write anything phonetically but were never isolated as a pure alphabet in ancient practice.</p>
+            </div>
+            <div class="info-card">
+                <h4>BILITERALS (Two-Consonant Signs)</h4>
+                <p>Signs representing two consonants simultaneously. These significantly compressed written language. Example: 𓅓 (the owl) represents <em>m</em> + something, more precisely <em>m</em> alone in many contexts but classically a biliteral. 𓂝 represents <em>ꜥ</em> (ayin). There are approximately <strong>80 common biliterals</strong>, each a semantic shortcut encoding two phonetic values in a single sign.</p>
+            </div>
+            <div class="info-card">
+                <h4>TRILITERALS (Three-Consonant Signs)</h4>
+                <p>Signs representing three consonants. These are usually direct depictions of the word they encode — making them simultaneously phonetic and logographic. Example: 𓄦 (the trachea and heart sign) = <em>nfr</em>, meaning "beautiful/good." 𓏠 = <em>mn</em>, meaning "to be stable." These signs are at the intersection of phonetic and symbolic communication and often carry the most condensed esoteric content.</p>
+            </div>
+            <div class="info-card">
+                <h4>DETERMINATIVES (Semantic Classifiers)</h4>
+                <p>Silent signs appended to the end of a word to classify its semantic category. Not pronounced, but essential for disambiguation. The seated man 𓀀 indicates a personal name or male person. The seated woman 𓁐 indicates feminine. The roll of papyrus 𓏛 indicates an abstract concept. The city plan 𓊖 indicates a place name. These are the most important signs for understanding the deep conceptual structure of the language.</p>
+            </div>
+        </div>
+
+        <h3 class="sub-head">The Phonetic Complement System</h3>
+        <p>
+            Egyptian scribes employed a confirmation system called <strong>phonetic complements</strong>: after writing a biliteral or triliteral sign, they would add uniliteral signs spelling out some or all of the same consonants, essentially confirming the reading. This was not redundancy — it was precision engineering. The scribe was providing multiple convergent signals to ensure the reader decoded the sign correctly. It also reveals a deep understanding of the reader's interpretive process: the system is designed to be <em>overconstrained</em> toward correct readings.
+        </p>
+        <p>
+            In esoteric terms, phonetic complementation resonates with the alchemical principle of <em>fixation</em> — the act of making a subtle reality more stable by anchoring it in multiple material forms simultaneously. The scribe does not trust a single signifier; reality is fixed through convergent attestation.
+        </p>
+
+        <div class="pull-quote">
+            "Egyptian writing is not a code to break. It is an architecture to inhabit. The signs are rooms, and understanding is living there."
+            <cite>— After John A. Wilson, <em>The Culture of Ancient Egypt</em>, 1951</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- III -->
+    <section id="gardiner-overview">
+        <h2 class="section-head">III. The Gardiner Sign List — Category Overview</h2>
+        <p>
+            Gardiner organized the sign list thematically, reflecting the Egyptian tendency to classify by <em>nature</em> rather than by phonetic value. The categories follow the Egyptian cosmological hierarchy: humans first, then deities, then animals, then the physical world. This is not accidental — it mirrors the theology of Ma'at, in which all things are organized in proper relation to the divine order.
+        </p>
+
+        <div class="data-table-wrap">
+            <table class="overview-table">
+                <thead>
+                    <tr>
+                        <th>CAT.</th>
+                        <th>DESCRIPTION</th>
+                        <th>COUNT</th>
+                        <th>KEY EXAMPLES</th>
+                        <th>PRIMARY FUNCTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="cat-badge">A</span></td><td>Man and his occupations</td><td>~55</td><td>𓀀 𓀁 𓀃 𓀆 𓀉</td><td>Determinative for human male activities, postures, professions</td></tr>
+                    <tr><td><span class="cat-badge">B</span></td><td>Woman and her occupations</td><td>~7</td><td>𓁐 𓁑 𓁒</td><td>Determinative for female persons and activities</td></tr>
+                    <tr><td><span class="cat-badge">C</span></td><td>Anthropomorphic deities</td><td>~12</td><td>𓁛 𓁜 𓁝</td><td>Determinative for divine names and categories</td></tr>
+                    <tr><td><span class="cat-badge">D</span></td><td>Parts of the human body</td><td>~62</td><td>𓂀 𓂋 𓂝 𓂧 𓂻</td><td>Phonetic (body part = first consonant) and determinative</td></tr>
+                    <tr><td><span class="cat-badge">E</span></td><td>Mammals</td><td>~34</td><td>𓃒 𓃓 𓃠 𓃥</td><td>Phonetic and determinative for animal-related words</td></tr>
+                    <tr><td><span class="cat-badge">F</span></td><td>Parts of mammals</td><td>~52</td><td>𓄂 𓄃 𓄇 𓄛</td><td>Phonetic (body part name) and classifier</td></tr>
+                    <tr><td><span class="cat-badge">G</span></td><td>Birds</td><td>~56</td><td>𓅀 𓅃 𓅓 𓅱</td><td>High phonetic utility — many key uniliterals are birds</td></tr>
+                    <tr><td><span class="cat-badge">H</span></td><td>Parts of birds</td><td>~9</td><td>𓆄 𓆅</td><td>Phonetic and determinative</td></tr>
+                    <tr><td><span class="cat-badge">I</span></td><td>Reptiles and amphibians</td><td>~15</td><td>𓆈 𓆙 𓆚</td><td>Determinative for serpents, lizards; key phonetic values</td></tr>
+                    <tr><td><span class="cat-badge">K</span></td><td>Fish</td><td>~13</td><td>𓆛 𓆜</td><td>Determinative and phonetic</td></tr>
+                    <tr><td><span class="cat-badge">L</span></td><td>Invertebrates and lesser animals</td><td>~7</td><td>𓆣 𓆤 𓆦</td><td>Determinative for insects, scarab key theological symbol</td></tr>
+                    <tr><td><span class="cat-badge">M</span></td><td>Trees and plants</td><td>~42</td><td>𓇋 𓇌 𓇑 𓇥</td><td>High phonetic utility; key biliteral and uniliteral values</td></tr>
+                    <tr><td><span class="cat-badge">N</span></td><td>Sky, earth, water</td><td>~42</td><td>𓇳 𓇼 𓈖 𓈗</td><td>Determinatives for cosmic phenomena; key theological signs</td></tr>
+                    <tr><td><span class="cat-badge">O</span></td><td>Buildings and their parts</td><td>~51</td><td>𓉐 𓉔 𓊖 𓊪</td><td>Determinative for places, architectural terms</td></tr>
+                    <tr><td><span class="cat-badge">P</span></td><td>Ships and their parts</td><td>~15</td><td>𓊭 𓊯</td><td>Determinative for nautical terms and the solar barque</td></tr>
+                    <tr><td><span class="cat-badge">Q</span></td><td>Domestic furniture</td><td>~7</td><td>𓋐 𓋑</td><td>Phonetic and determinative for furniture, thrones</td></tr>
+                    <tr><td><span class="cat-badge">R</span></td><td>Temple furniture and sacred emblems</td><td>~25</td><td>𓋹 𓌀 𓌁</td><td>Theological signs; many carry direct sacred significance</td></tr>
+                    <tr><td><span class="cat-badge">S</span></td><td>Crowns, clothing, staves</td><td>~45</td><td>𓌀 𓌃 𓌸 𓌻</td><td>Royal and priestly regalia; determinatives and phonetics</td></tr>
+                    <tr><td><span class="cat-badge">T</span></td><td>Warfare, hunting, slaughter</td><td>~36</td><td>𓍑 𓍒 𓍯</td><td>Military and hunting terminology; key triliterals</td></tr>
+                    <tr><td><span class="cat-badge">U</span></td><td>Agriculture, crafts, professions</td><td>~41</td><td>𓎛 𓎜 𓎝</td><td>Determinatives for agricultural and craft activity</td></tr>
+                    <tr><td><span class="cat-badge">V</span></td><td>Rope, fibre, baskets, bags</td><td>~40</td><td>𓎡 𓎣 𓏏</td><td>Key phonetic signs; cartouche is V10</td></tr>
+                    <tr><td><span class="cat-badge">W</span></td><td>Vessels of stone and earthenware</td><td>~25</td><td>𓏀 𓏁 𓏅</td><td>Phonetic and determinative for vessel terminology</td></tr>
+                    <tr><td><span class="cat-badge">X</span></td><td>Loaves and cakes</td><td>~8</td><td>𓏏 𓏐</td><td>Key uniliterals (𓏏 = t); bread determinatives</td></tr>
+                    <tr><td><span class="cat-badge">Y</span></td><td>Writing, games, music</td><td>~8</td><td>𓏛 𓏜</td><td>Determinative for written texts and abstract knowledge</td></tr>
+                    <tr><td><span class="cat-badge">Z</span></td><td>Strokes, geometric shapes</td><td>~11</td><td>𓏤 𓏥 𓏲 𓏴</td><td>Plural strokes, abstract classifiers; numeral notation</td></tr>
+                    <tr><td><span class="cat-badge">Aa</span></td><td>Unclassified signs</td><td>~32</td><td>𓐍 𓐎 𓐝</td><td>Diverse functions; many carry cryptographic usage</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- IV -->
+    <section id="uniliterals">
+        <h2 class="section-head">IV. The Uniliteral Alphabet — The Twenty-Four Consonants</h2>
+        <p>
+            The twenty-four uniliteral signs form the phonetic spine of the hieroglyphic system. Egyptian, like Arabic and Hebrew, was written in consonants only — vowels were not represented in the script (though they existed in spoken speech). This is not a deficiency. It is a deliberate theological choice: vowels are breath, spirit, the living animating force. They belong to the speaker, to the ritual context, to the performed utterance. To inscribe them would be to fix what must remain fluid.
+        </p>
+        <p>
+            Modern Egyptologists conventionally use a semicolon or <em>e</em> to break up consonant clusters for readability, but these are scholarly conventions, not ancient ones. The true pronunciation of Middle Egyptian remains partially reconstructed through comparison with Coptic (which does write vowels), Akkadian cuneiform transcriptions of Egyptian names, and Greek transliterations.
+        </p>
+
+        <div class="phonetic-grid">
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓄿</span>
+                <span class="phonetic-value">ꜣ (aleph)</span>
+                <span class="phonetic-desc">Egyptian vulture; glottal stop</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓇋</span>
+                <span class="phonetic-value">i (yod)</span>
+                <span class="phonetic-desc">Reed; palatal glide</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓇌</span>
+                <span class="phonetic-value">y (double reed)</span>
+                <span class="phonetic-desc">Double reed leaf</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓂝</span>
+                <span class="phonetic-value">ꜥ (ayin)</span>
+                <span class="phonetic-desc">Forearm; pharyngeal fricative</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓅱</span>
+                <span class="phonetic-value">w (quail)</span>
+                <span class="phonetic-desc">Quail chick; labial-velar</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓃀</span>
+                <span class="phonetic-value">b (foot)</span>
+                <span class="phonetic-desc">Human leg and foot; bilabial</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓊪</span>
+                <span class="phonetic-value">p (mat)</span>
+                <span class="phonetic-desc">Reed mat; bilabial stop</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓆑</span>
+                <span class="phonetic-value">f (horned viper)</span>
+                <span class="phonetic-desc">Horned viper; labio-dental</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓅓</span>
+                <span class="phonetic-value">m (owl)</span>
+                <span class="phonetic-desc">Owl; bilabial nasal</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓈖</span>
+                <span class="phonetic-value">n (water)</span>
+                <span class="phonetic-desc">Water ripple; alveolar nasal</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓂋</span>
+                <span class="phonetic-value">r (mouth)</span>
+                <span class="phonetic-desc">Human mouth; alveolar flap</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓉔</span>
+                <span class="phonetic-value">h (shelter)</span>
+                <span class="phonetic-desc">Twisted flax; aspirated h</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓎛</span>
+                <span class="phonetic-value">ḥ (wick)</span>
+                <span class="phonetic-desc">Twisted flax; emphatic h</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓐍</span>
+                <span class="phonetic-value">ḫ (placenta?)</span>
+                <span class="phonetic-desc">Sieve; velar fricative (kh)</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓄡</span>
+                <span class="phonetic-value">ẖ (belly)</span>
+                <span class="phonetic-desc">Animal belly; palatal-velar</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓊃</span>
+                <span class="phonetic-value">z / s (door bolt)</span>
+                <span class="phonetic-desc">Door bolt; alveolar fricative</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓋴</span>
+                <span class="phonetic-value">s (folded cloth)</span>
+                <span class="phonetic-desc">Folded linen; alveolar sibilant</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓈙</span>
+                <span class="phonetic-value">š (pool)</span>
+                <span class="phonetic-desc">Sand dune or pool; palatal sh</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓈎</span>
+                <span class="phonetic-value">q (slope)</span>
+                <span class="phonetic-desc">Hillside; uvular stop</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓎡</span>
+                <span class="phonetic-value">k (basket)</span>
+                <span class="phonetic-desc">Basket with handle; velar stop</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓎤</span>
+                <span class="phonetic-value">g (jar stand)</span>
+                <span class="phonetic-desc">Jar stand; voiced velar</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓏏</span>
+                <span class="phonetic-value">t (bread loaf)</span>
+                <span class="phonetic-desc">Bread loaf; alveolar stop</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓍿</span>
+                <span class="phonetic-value">ṯ (tether)</span>
+                <span class="phonetic-desc">Hobble; palato-alveolar</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓂧</span>
+                <span class="phonetic-value">d (hand)</span>
+                <span class="phonetic-desc">Human hand; alveolar stop d</span>
+            </div>
+            <div class="phonetic-card">
+                <span class="phonetic-glyph">𓆙</span>
+                <span class="phonetic-value">ḏ (snake)</span>
+                <span class="phonetic-desc">Cobra; palato-alveolar dj</span>
+            </div>
+        </div>
+
+        <div class="practical-note">
+            <div class="pn-title">// PRACTICAL NOTE — THE ESOTERIC ALPHABET //</div>
+            <p>The twenty-four uniliterals are the skeleton of the language and the foundation for any practical work with Medu Netjer. Mastering these signs — their shapes, their values, and the objects they depict — is the first gate of the hieroglyphic system. It typically takes a dedicated student two to four weeks to memorize all twenty-four with their phonetic values. From there, the biliterals and triliterals follow as vocabulary items rather than a new system. Begin here. Return here. The alphabet is the anchor.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- V -->
+    <section id="cat-man">
+        <h2 class="section-head">V. Categories A & B — Men and Women in Action</h2>
+        <p>
+            The first two Gardiner categories depict human figures in various postures and occupations. Their primary function is <strong>determinative</strong> — appended to words, they classify the word's semantic domain. Category A (men) contains approximately 55 signs; Category B (women) contains 7. The asymmetry reflects not a diminishment of women but the structure of the written record: most surviving texts were administrative or priestly, authored by male scribes.
+        </p>
+
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓀀</span>
+                <span class="sign-id">A1</span>
+                <span class="sign-name">Seated man</span>
+                <span class="sign-value">Generic male person; personal names</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓀁</span>
+                <span class="sign-id">A2</span>
+                <span class="sign-name">Man hand to mouth</span>
+                <span class="sign-value">Eating, drinking, speaking, thinking</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓀃</span>
+                <span class="sign-id">A4</span>
+                <span class="sign-name">Man with hand to mouth (weeping)</span>
+                <span class="sign-value">Grief, mourning, lamentation</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓀆</span>
+                <span class="sign-id">A7</span>
+                <span class="sign-name">Fatigued man</span>
+                <span class="sign-value">Tiredness, weakness, old age</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓀭</span>
+                <span class="sign-id">A40</span>
+                <span class="sign-name">Seated god</span>
+                <span class="sign-value">Divinity, divine names</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓁐</span>
+                <span class="sign-id">B1</span>
+                <span class="sign-name">Seated woman</span>
+                <span class="sign-value">Generic female person; names</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓁓</span>
+                <span class="sign-id">B3</span>
+                <span class="sign-name">Woman giving birth</span>
+                <span class="sign-value">Birth, creation, generation</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓁕</span>
+                <span class="sign-id">B5</span>
+                <span class="sign-name">Woman suckling child</span>
+                <span class="sign-value">Nurse, mother, nurturing</span>
+                <span class="sign-type det">DET</span>
+            </div>
+        </div>
+
+        <p>The male and female seated figures (A1 and B1) are among the most frequently appearing signs in all Egyptian inscriptions. They classify virtually every human name and occupation. In esoteric reading, they remind the interpreter that all words pertaining to human beings — regardless of apparent subject matter — ultimately refer back to the human soul navigating existence. Every determinative is an ontological statement about what category of reality the word belongs to.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- VI -->
+    <section id="cat-gods">
+        <h2 class="section-head">VI. Category C — Deities and Divine Figures</h2>
+        <p>
+            Category C covers the <strong>anthropomorphic deity signs</strong> — human or partially human divine figures used as determinatives for divine names and concepts. The Egyptians recognized that the divine could not be fully depicted; a god shown seated in human form is a placeholder for a reality that exceeds visual representation. The sign acknowledges divinity without claiming to contain it.
+        </p>
+        <p>
+            Crucially, the same determinative (A40, the seated man with flagellum) was used for both mortal kings and gods in certain registers — deliberately collapsing the distinction between the divine and the royal. This was not hyperbole or flattery. It was a theological assertion: the properly installed pharaoh was an instantiation of divine principle, specifically the Horus-principle, in matter.
+        </p>
+        <div class="card-grid">
+            <div class="info-card cyan-accent">
+                <h4>C1 — THE SOLAR DISK WITH URAEUS</h4>
+                <p>𓁛 Determinative for solar deities — Re, Atum, Khepri, Aten. The solar disk above a human figure marks the sign as pertaining to solar divine power. It appears most frequently in New Kingdom sun theology texts and the Amarna period inscriptions of Akhenaten.</p>
+            </div>
+            <div class="info-card cyan-accent">
+                <h4>C2 — GOD WITH FEATHER</h4>
+                <p>𓁜 Determinative for Amun and related wind/invisible deities. The double plume identifies the hidden god — <em>imn</em>, the concealed one. The very name Amun means "the hidden" — and his determinative reflects this: a divine figure marked by what is not seen, not by what is visible.</p>
+            </div>
+            <div class="info-card cyan-accent">
+                <h4>C7 — GOD WITH SET ANIMAL HEAD</h4>
+                <p>𓁠 Determinative for Set and related chaotic/desert deities. The Set animal — a creature of ambiguous zoology, possibly a composite or mythological animal — marks the sign as pertaining to Set's domain: storms, the desert, the foreign, powerful and liminal force. See <a href="osiris-myth.html" class="nl">The Osirian Cycle</a>.</p>
+            </div>
+            <div class="info-card cyan-accent">
+                <h4>C12 — IBIS-HEADED DEITY</h4>
+                <p>𓁝 Determinative for Thoth in his anthropomorphic form. The ibis head — associated with the bird's habit of probing in river mud (like a scribe's pen in ink) — marks the sign as pertaining to writing, knowledge, and divine intelligence. See <a href="thoth-hermes.html" class="nl">Thoth-Hermes</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- VII -->
+    <section id="cat-body">
+        <h2 class="section-head">VII. Category D & F — The Human and Animal Body</h2>
+        <p>
+            The body part categories (D = human, F = mammal) represent the system's most sophisticated integration of phonetics and theology. Each body part's Egyptian name begins with a consonant that becomes the sign's phonetic value — the sign is simultaneously a picture of the thing and a sound derived from what the thing is called. This convergence of form and function is characteristic of the Kemetic worldview: the name of a thing and the thing itself are not separate. The word participates in the reality of what it names.
+        </p>
+        <p>
+            The body part signs also carry direct soul-component associations. The eye (𓂀) resonates with the <em>Irt</em> — the divine eye of Re and Horus, the Eye of perception, the Udjat. The heart (𓄤) is the <em>Ib</em> — the seat of moral intelligence. The arm (𓂝) is agency, will, the extension of the self into action. The mouth (𓂋) is <em>Ru</em> — the opening through which Hu (authoritative utterance) exits into the world. Reading these signs as mere phonetics misses half their content.
+        </p>
+
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓂀</span>
+                <span class="sign-id">D4</span>
+                <span class="sign-name">Eye (Irt)</span>
+                <span class="sign-value">ir = to do/make; seeing, perception</span>
+                <span class="sign-type">BILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓂋</span>
+                <span class="sign-id">D21</span>
+                <span class="sign-name">Mouth (Ro/Ru)</span>
+                <span class="sign-value">r = mouth, opening, utterance</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓂝</span>
+                <span class="sign-id">D36</span>
+                <span class="sign-name">Forearm (ꜥ)</span>
+                <span class="sign-value">ꜥ = arm, action; phonetic ayin</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓂧</span>
+                <span class="sign-id">D46</span>
+                <span class="sign-name">Hand (d)</span>
+                <span class="sign-value">d = hand; phonetic d</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓂻</span>
+                <span class="sign-id">D54</span>
+                <span class="sign-name">Walking legs</span>
+                <span class="sign-value">Movement, going, coming</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓃀</span>
+                <span class="sign-id">D58</span>
+                <span class="sign-name">Foot and leg (b)</span>
+                <span class="sign-value">b = foot; phonetic b</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓄤</span>
+                <span class="sign-id">F34</span>
+                <span class="sign-name">Heart (Ib)</span>
+                <span class="sign-value">ib = heart, desire, consciousness</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓄀</span>
+                <span class="sign-id">F1</span>
+                <span class="sign-name">Ox head (ḥḏ)</span>
+                <span class="sign-value">Determinative for cattle, power</span>
+                <span class="sign-type det">DET</span>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- VIII -->
+    <section id="cat-fauna">
+        <h2 class="section-head">VIII. Categories E–L — The Sacred Fauna</h2>
+        <p>
+            The animal categories (E through L) are among the most theologically rich in the sign list. Egyptian zoomorphism — the attribution of divine qualities to specific animals — was not primitive anthropomorphism. It was the recognition that certain animals embody particular <em>cosmic frequencies</em> in their biological form. Each animal was the living manifestation (<em>Ba</em>) of specific divine principles. When a scribe depicted the falcon (𓅃), they were not just writing a letter — they were invoking the Horus-principle, the principle of sharp-sighted solar authority and royal legitimacy.
+        </p>
+
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓃒</span>
+                <span class="sign-id">E1</span>
+                <span class="sign-name">Bull (kꜣ)</span>
+                <span class="sign-value">kꜣ = bull; virility, the Ka-soul</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓃠</span>
+                <span class="sign-id">E17</span>
+                <span class="sign-name">Jackal (sꜣb)</span>
+                <span class="sign-value">Anubis; guide of the dead</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓃭</span>
+                <span class="sign-id">E23</span>
+                <span class="sign-name">Lion</span>
+                <span class="sign-value">Rw = lion; solar strength, guardian</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓄿</span>
+                <span class="sign-id">G1</span>
+                <span class="sign-name">Egyptian vulture (ꜣ)</span>
+                <span class="sign-value">ꜣ = Nekhbet; maternal protection</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓅃</span>
+                <span class="sign-id">G5</span>
+                <span class="sign-name">Falcon (Ḥr)</span>
+                <span class="sign-value">Horus; kingship, solar sight</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓅓</span>
+                <span class="sign-id">G17</span>
+                <span class="sign-name">Owl (m)</span>
+                <span class="sign-value">m = owl; the uniliteral m</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓅱</span>
+                <span class="sign-id">G43</span>
+                <span class="sign-name">Quail chick (w)</span>
+                <span class="sign-value">w = uniliteral w; transformation</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓆙</span>
+                <span class="sign-id">I10</span>
+                <span class="sign-name">Cobra (ḏ)</span>
+                <span class="sign-value">ḏ = Wadjet; protection, solar fire</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓆤</span>
+                <span class="sign-id">L1</span>
+                <span class="sign-name">Scarab (ḫpr)</span>
+                <span class="sign-value">ḫpr = to become; Khepri, dawn sun</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓆣</span>
+                <span class="sign-id">L2</span>
+                <span class="sign-name">Bee (bit)</span>
+                <span class="sign-value">bit = Lower Egypt; royal title</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+        </div>
+
+        <div class="pull-quote">
+            "The ibis does not represent Thoth. The ibis <em>is</em> Thoth in a form that lives and breathes and wades in the river. When the scribe writes the ibis, he does not illustrate — he summons."
+            <cite>— After Garth Fowden, <em>The Egyptian Hermes</em>, 1986</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- IX -->
+    <section id="cat-sky">
+        <h2 class="section-head">IX. Categories N & Q — Sky, Earth, Water, and Settlement</h2>
+        <p>
+            Category N (sky, earth, water, land) contains some of the most cosmologically significant signs in the entire list. These are the signs of the primary creation categories — the first things that came into being from the Nun (the primordial waters) in the beginning. To write these signs is to participate in the act of creation.
+        </p>
+
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓇳</span>
+                <span class="sign-id">N5</span>
+                <span class="sign-name">Solar disk (Rꜥ)</span>
+                <span class="sign-value">rꜥ = Re, the sun, time, day</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓇼</span>
+                <span class="sign-id">N14</span>
+                <span class="sign-name">Star (Sbꜣ)</span>
+                <span class="sign-value">dw3t = Duat; the divine, the hour</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓇹</span>
+                <span class="sign-id">N11</span>
+                <span class="sign-name">Crescent moon</span>
+                <span class="sign-value">ꜥb = moon; lunar time</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓈖</span>
+                <span class="sign-id">N35</span>
+                <span class="sign-name">Water ripple (n)</span>
+                <span class="sign-value">n = water; the uniliteral n</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓈗</span>
+                <span class="sign-id">N36</span>
+                <span class="sign-name">Canal / water body</span>
+                <span class="sign-value">mw = water; rivers, inundation</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓈀</span>
+                <span class="sign-id">N18</span>
+                <span class="sign-name">Sandy land / island (jw)</span>
+                <span class="sign-value">Geographic terrain; the primordial mound</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓊖</span>
+                <span class="sign-id">O49</span>
+                <span class="sign-name">City plan (njwt)</span>
+                <span class="sign-value">njwt = town, city; settlement</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓈎</span>
+                <span class="sign-id">N29</span>
+                <span class="sign-name">Hillslope (q)</span>
+                <span class="sign-value">q = the uniliteral q; desert edge</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- X -->
+    <section id="cat-temple">
+        <h2 class="section-head">X. Category O — Architecture and the Sacred Space</h2>
+        <p>
+            Category O (buildings and architectural elements) carries profound theological significance because in Egyptian thought, the temple was not a building where worship occurred. It was a <em>functioning cosmological instrument</em> — a microcosm of creation, oriented to the cardinal points, built on the mythological "First Mound" that emerged from the primordial waters, and designed to channel divine energy (<em>Heka</em>) from the cosmic to the terrestrial level. See <a href="temple-architecture.html" class="nl">Temple Architecture</a> for full treatment.
+        </p>
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓉐</span>
+                <span class="sign-id">O1</span>
+                <span class="sign-name">House (pr)</span>
+                <span class="sign-value">pr = house; to go out</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓉔</span>
+                <span class="sign-id">O4</span>
+                <span class="sign-name">Reed shelter (h)</span>
+                <span class="sign-value">h = shelter; uniliteral h</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓉥</span>
+                <span class="sign-id">O11</span>
+                <span class="sign-name">Palace (ꜥḥ)</span>
+                <span class="sign-value">ꜥḥ = palace; royal domain</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓊃</span>
+                <span class="sign-id">O34</span>
+                <span class="sign-name">Bolt / door bolt (z/s)</span>
+                <span class="sign-value">z = bolt; uniliteral z/s</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XI -->
+    <section id="cat-vessels">
+        <h2 class="section-head">XI. Categories W & X — Vessels, Bread, and the Material World</h2>
+        <p>
+            The vessel and bread categories (W and X) represent the most common objects of Egyptian daily ritual life. Offerings of bread, beer, and water were the foundation of the temple economy and the funerary offering formula. These signs appear in virtually every offering text ever inscribed — and thus in virtually every tomb and temple in Egypt.
+        </p>
+        <p>
+            The offering formula itself (<em>Ḥtp-dj-njswt</em> — "an offering which the king gives") typically incorporates signs from multiple categories simultaneously: the bread loaf (𓏏, X1) and the bread loaf on a mat (𓇓, R4) appear together. The formula is not merely administrative; it is the activation code for the entire offering system, triggering the flow of divine substance from the symbolic realm into the actual.
+        </p>
+
+        <div class="sign-grid">
+            <div class="sign-card">
+                <span class="sign-glyph">𓏏</span>
+                <span class="sign-id">X1</span>
+                <span class="sign-name">Bread loaf (t)</span>
+                <span class="sign-value">t = bread; uniliteral t</span>
+                <span class="sign-type">UNILIT</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓏐</span>
+                <span class="sign-id">X2</span>
+                <span class="sign-name">Tall Bread Loaf</span>
+                <span class="sign-value">Ideo. in dḥwty “Thoth.”</span>
+                <span class="sign-type det">DET</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓏀</span>
+                <span class="sign-id">W1</span>
+                <span class="sign-name">Oil jar (bjꜣ)</span>
+                <span class="sign-value">bjꜣ = oil, ointment; precious liquid</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+            <div class="sign-card">
+                <span class="sign-glyph">𓏅</span>
+                <span class="sign-id">W6</span>
+                <span class="sign-name">Libation vessel</span>
+                <span class="sign-value">ḥs = praise, favor; libation ritual</span>
+                <span class="sign-type log">LOG</span>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XII -->
+    <section id="determinatives">
+        <h2 class="section-head">XII. Key Determinatives — The Classifiers of Reality</h2>
+        <p>
+            Determinatives are perhaps the most overlooked and most philosophically rich element of the hieroglyphic system. They are the system's <em>ontological sorters</em> — silent signs that tell the reader what category of reality the word belongs to. They do not add pronunciation; they add meaning-context. A word that ends with 𓂡 (throwing stick) involves foreigners or enemy forces. A word ending with 𓏛 (papyrus roll) involves abstract concepts, books, or knowledge. A word ending with 𓀭 (seated god) belongs to the divine realm.
+        </p>
+        <p>
+            This determinative system encodes the entire Kemetic worldview: the categories into which the Egyptians sorted all reality. By studying which determinatives attach to which words, a researcher can reconstruct an implicit Egyptian ontology — a map of how they believed reality was organized at the deepest level.
+        </p>
+
+        <div class="data-table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>GLYPH</th>
+                        <th>GARDINER</th>
+                        <th>CATEGORY IT MARKS</th>
+                        <th>ESOTERIC SIGNIFICANCE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="font-size:1.5rem;">𓀭</td><td>A40</td><td>Divine beings, deities</td><td>Marks the boundary between human and divine reality</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓁐</td><td>B1</td><td>Female person, woman</td><td>Feminine principle, receptive, generative</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓂡</td><td>T14</td><td>Foreigners, enemy</td><td>The external, the unincorporated, chaotic forces</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓂻</td><td>D54</td><td>Motion, movement</td><td>Dynamic force, change of state, journey</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓆑</td><td>I9</td><td>Serpents</td><td>Liminal power, protection and danger simultaneously</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓇓</td><td>R4</td><td>Offerings, sacred bread</td><td>The sacrificial axis between human and divine levels</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓈖</td><td>N35A</td><td>Water, liquids</td><td>The Nun, primordial potential, the unconscious</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓊖</td><td>O49</td><td>Towns, cities, place names</td><td>Points of cosmic anchoring in the terrestrial plane</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓋴</td><td>S29</td><td>Cloth, fabric</td><td>Linen wrapping, the material envelope of the soul</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓏛</td><td>Y1</td><td>Abstract concepts, books</td><td>Knowledge, the written reality, the akashic register</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓏤</td><td>Z1</td><td>Singular determinative stroke</td><td>Individuation; the marking of unique identity</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓏥</td><td>Z2</td><td>Plural determinative</td><td>Multiplicity; the collective principle</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓂝</td><td>D36</td><td>Actions of the arm</td><td>Willed action, the extension of magical agency</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓀼</td><td>A30</td><td>Prayer, adoration, praise</td><td>The posture of reception; alignment with the divine</td></tr>
+                    <tr><td style="font-size:1.5rem;">𓅓</td><td>G17</td><td>Before prepositions of place</td><td>Orientation; the grammatical anchor of spatial reality</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XIII -->
+    <section id="special-signs">
+        <h2 class="section-head">XIII. Special Signs — Cartouche, Serekh, and Royal Glyphs</h2>
+        <p>
+            Beyond the standard Gardiner categories, several signs of supreme theological importance operate as structural elements of royal and divine naming rather than phonetic or determinative elements within words. These are the architectural elements of royal identity.
+        </p>
+
+        <div class="special-block">
+            <h4>𓍶 / 𓍷 THE CARTOUCHE (Šnw / Shenu) — V9/V10</h4>
+            <p>The cartouche (from the French for "gun cartridge" — an entirely inappropriate modern name) is the oval ring formed by a doubled loop of rope, closed at the base with a horizontal bar. In Egyptian it is called <em>šnw</em> — from the verb "to encircle" — and it represents an infinite loop, a ring that contains and protects the divine name within. Royal names (from the 4th Dynasty onward) were invariably written inside the cartouche. The cartouche declares: <em>this name is encircled by the sun's circuit; it endures for as long as the sun revolves; it is protected by the infinite circumference of Re's path</em>. To write a name in a cartouche is to bind it to solar time — to make it as durable as the sun's daily journey.</p>
+            <div class="special-glyph-row">
+                <div class="sg-item"><span class="sg-glyph">𓍶</span><span class="sg-label">Shen Ring</span></div>
+                <div class="sg-item"><span class="sg-glyph">→</span><span class="sg-label"></span></div>
+                <div class="sg-item" style="font-size:1.5rem; color:var(--cyan); font-family:'VT323',monospace; letter-spacing:0.2em;">[ NAME ]</div>
+                <div class="sg-item"><span class="sg-glyph">→</span><span class="sg-label"></span></div>
+                <div class="sg-item"><span class="sg-glyph">𓍷</span><span class="sg-label">Cartouche enclosure</span></div>
+            </div>
+        </div>
+
+        <div class="special-block">
+            <h4>THE SEREKH — The Palace Façade</h4>
+            <p>Predating the cartouche, the <em>serekh</em> is a rectangular enclosure depicting the façade of the royal palace (the "palace façade" pattern), topped by a falcon (Horus). The pharaoh's Horus-name — their oldest and most theologically fundamental royal title — was written inside the serekh. The serekh makes the identity statement that the king is not merely a person in a palace; the king <em>is</em> the Horus-principle, housed in the material structure of the palace as the divine soul is housed in the body. The falcon on top is not decorative — it is the statement of what inhabits the structure below.</p>
+        </div>
+
+        <div class="special-block">
+            <h4>𓋹 THE ANKH (ꜥnḫ) — S34</h4>
+            <p>The most recognizable Egyptian sign and one of the most discussed. Gardiner S34. Phonetically: <em>ꜥnḫ</em> = "life." Its graphic origin remains debated — proposed derivations include a sandal strap, a knot, a mirror, a tjet knot, or a looped cross of foreign origin. What is not debated is its semantic weight: the ankh is <em>ꜥnḫ</em>, life itself, life force, the animating principle that distinguishes the living from the dead. It was held by deities as a gift of life; it was placed at the nostrils of the dead in resurrection spells to restore the breath of life. In practical esoteric work, it functions as the primary symbol of the vital force — analogous to <em>Prana</em>, <em>Qi</em>, <em>Pneuma</em>, and <em>Orgone</em> in other traditions.</p>
+        </div>
+
+        <div class="special-block">
+            <h4>𓊽 THE DJED PILLAR (Ḏd) — R11</h4>
+            <p><em>Ḏd</em> = "stability." The djed is one of the most ancient Egyptian symbols, predating the dynastic period. It appears as a stylized object of debated origin (possibly a bundle of grain stalks, a tree with branches lopped off, or a spinal column). Its primary meaning is <em>stability, endurance, continuity</em>. As the backbone of Osiris, it represents the restoration of order after dissolution — the spine of Osiris reassembled by Isis, standing upright as proof that death has been defeated and structure restored. The "Raising of the Djed" was a central rite in the Sed festival and Osirian ceremonies. It encodes the alchemical truth that the Great Work is not complete until stability is achieved — until the volatile is fixed and the structure can stand without support.</p>
+        </div>
+
+        <div class="special-block">
+            <h4>𓌀 THE WAS SCEPTER (Wꜣs) — S40</h4>
+            <p><em>Wꜣs</em> = "dominion, power." The was scepter — a long staff with a distinctive forked base and an animal head (possibly the Set animal) at the top — is carried by deities and pharaohs as the sign of divine power and authority. Unlike the crook and flail (symbols of royal pastoral and agricultural authority), the was scepter represents direct divine force. It is what the gods hold; the power that is theirs by nature rather than by function. In esoteric practice, it corresponds to the channeled will of the operator — the capacity to direct Heka through a consecrated instrument.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XIV -->
+    <section id="extended">
+        <h2 class="section-head">XIV. Extended Sign List — Ptolemaic Additions</h2>
+        <p>
+            The classical Gardiner list of ~750 signs represents the Middle Kingdom standard — the corpus used by professional scribes of the 12th Dynasty (c. 1991–1802 BCE), which became the canonical literary register. But the hieroglyphic system did not freeze there. In the <a href="ptolemaic-period.html" class="nl">Ptolemaic period</a> (332–30 BCE), the priestly tradition underwent a remarkable expansion of the sign repertoire, ultimately producing walls at temples like Esna, Edfu, and Dendera that employed over <strong>6,000 distinct signs</strong>.
+        </p>
+        <p>
+            This expansion was not graphical inflation or scribal showing-off (though it was sometimes that too). It served a primarily <strong>cryptographic and theological function</strong>: by multiplying signs, the priestly class created a layer of encoded knowledge accessible only to the initiated. Words could be written in multiple ways; signs could be substituted based on phonetic or visual resemblance; new signs encoding theological concepts could be invented for particular texts. The outer walls of temples displayed accessible material; the inner sanctuaries encoded material that required initiation to decode. See <a href="enigmatic-writing.html" class="nl">Enigmatic Writing</a> for full treatment of this dimension.
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>SIGN MULTIPLICATION</h4>
+                <p>Ptolemaic scribes invented signs for specific theological concepts — abstract principles that did not correspond to any single object. They also repurposed existing signs by reassigning their phonetic values based on visual resemblance or pun relationships. A sign depicting a heron might be assigned to a word beginning with the sound "bꜣ" because the heron's beak shape resembled the letter Ba in another script.</p>
+            </div>
+            <div class="info-card">
+                <h4>THE ESNA SIGN LIST</h4>
+                <p>The Ptolemaic temple of Esna (Khnum's temple, Upper Egypt) contains the most extensive preserved collection of Ptolemaic cryptographic signs. Its hymns to Khnum were written in signs where virtually every hieroglyph depicts a ram or a crocodile — the two sacred animals of the temple — making the entire text simultaneously a devotional hymn and a zoological catalogue of the divine. This is not wordplay; it is a fully operational theological statement inscribed in visual form.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XV -->
+    <section id="esoteric">
+        <h2 class="section-head">XV. The Esoteric Dimension — Signs as Living Frequencies</h2>
+        <p>
+            Modern Egyptology treats hieroglyphs as a writing system: notation for language, decoded via phonology and grammar. This is correct as far as it goes. But the Kemetic tradition understood the signs as something more. They were — and in active practice, remain — <em>living configurations of Heka</em>. The sign is not a representation of a reality; it is a reality operating at a different level.
+        </p>
+        <p>
+            This understanding has parallels in every major esoteric tradition: the Hebrew letters of the Qabalah are understood as the building blocks of creation, each encoding a divine force. The Sanskrit mantric system holds that the phoneme <em>OM</em> is not a symbol for the Absolute but the Absolute sounding itself. The Germanic runes were not alphabetic signs but cosmic principles in visual form. In each case, the writing system is simultaneously a cosmological map and a set of operational tools. The Kemetic system is no different — and in some respects deeper than the others, because it survived for 3,500 years of continuous priestly development, accumulating layers of operational experience that most other traditions did not have time to develop.
+        </p>
+
+        <div class="practical-note">
+            <div class="pn-title">// OPERATIONAL NOTE — WORKING WITH THE SIGNS //</div>
+            <p>Those engaged in practical work with Medu Netjer should treat each sign as a distinct frequency-pattern that can be activated, contemplated, or invoked depending on the working. The uniliteral alphabet provides 24 primary frequencies corresponding to the 24 consonants. These align, with varying correspondence, to Hebrew letters, planetary forces, and elemental attributions in Western esoteric systems. The determinatives are not neutral classifiers — they are the signs' declarations of which domain of reality the operation addresses. When constructing a Heka-working using hieroglyphic inscription, the choice of determinative is the specification of which plane the operation targets. Choose accordingly and consciously.</p>
+        </div>
+
+        <p>
+            The esoteric significance of individual signs has been preserved in multiple streams: directly in the Egyptian magical papyri (see <a href="greek-magical-papyri.html" class="nl">Greek Magical Papyri</a>), in the Hermetic tradition's doctrine of signs and signatures (see <a href="hermeticism.html" class="nl">Hermeticism</a>), and in Coptic-era magical texts that continued to use hieroglyphic signs in amulets and ritual objects long after the script had ceased to be used for ordinary writing. The scribal knowledge did not disappear when the temples closed — it went underground, where it has remained operational through the long dark of the medieval period into the modern revival.
+        </p>
+
+        <div class="pull-quote">
+            "The last inscription at Philae was carved in 394 CE. But the signs were not finished. They withdrew."
+            <cite>— After Jan Assmann, <em>The Search for God in Ancient Egypt</em>, 2001</cite>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- XVI -->
+    <section id="practice">
+        <h2 class="section-head">XVI. Practical Reference — Reading Direction and Orientation</h2>
+        <p>
+            Hieroglyphs can be written in three directions: <strong>right to left</strong> (most common in classic inscriptions), <strong>left to right</strong>, and <strong>vertically in columns</strong> (reading top to bottom, columns arranged right to left). The determining rule is: <strong>the living creatures in the signs face the beginning of the text</strong>. If the falcons, men, and animals face right, read from right to left. If they face left, read from left to right.
+        </p>
+        <p>
+            This orientation rule is not arbitrary. In classical texts, living beings face toward the source of speech — toward the deity, the king, or the ritual officiant. The orientation is a form of reverential alignment. The entire inscription is organized around the principle that the written word moves <em>toward</em> the sacred, not away from it.
+        </p>
+
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>HIERATIC — THE CURSIVE FORM</h4>
+                <p>For administrative and literary texts, scribes used Hieratic — a simplified, cursive version of the hieroglyphs developed from very early in the dynastic period. Hieratic always reads right to left. It is to hieroglyphs what a simplified handwritten script is to printed block letters: the same system, expressed in a more fluid and rapid form. Most of the major literary and magical papyri are written in Hieratic, not Hieroglyphs.</p>
+            </div>
+            <div class="info-card">
+                <h4>ENCODING SOFTWARE</h4>
+                <p>Modern scholars and practitioners use <strong>JSesh</strong> (free, open source) for composing hieroglyphic texts with Gardiner codes. The system accepts standard Gardiner notation (e.g., <em>G17-N35-R8</em>) and renders the corresponding signs. Unicode now supports hieroglyphs directly (U+13000–U+1342F) though rendering quality varies by font. Recommended fonts: Noto Sans Egyptian Hieroglyphs, Segoe UI Historic.</p>
+            </div>
+        </div>
+
+        <div class="caution-note">
+            <div class="cn-title">// CAUTION — ON PRONUNCIATION //</div>
+            <p>Reconstructed Middle Egyptian pronunciation (as used in Egyptological convention) is a scholarly approximation, not a precise recovery of the ancient spoken language. The vowels are entirely reconstructed and conventionalized. For esoteric and ritual work, Coptic pronunciation provides a more direct line to the actual phonology — Coptic preserves vowels and is a direct descendant of the spoken language. However, no one alive today speaks the language as it was spoken in the New Kingdom temples. Approach reconstructions with the understanding that they are useful working approximations, not precise historical recoveries. The written form is more stable than the spoken; the inscribed sign more durable than the pronounced phoneme.</p>
+        </div>
+    </section>
+
+    <div class="glyph-marker">𓏞 𓈖 𓇋 𓏏 𓅱 𓁐 𓇋 𓈖 𓏏</div>
+
+    <div class="related-links">
+        <h3>// RELATED ARCHIVES //</h3>
+        <ul>
+            <li><a href="scripts-evolution.html">Scripts Evolution — Hieratic, Demotic, Coptic</a></li>
+            <li><a href="enigmatic-writing.html">Enigmatic Writing — Cryptographic Scripts</a></li>
+            <li><a href="ontological-gematria.html">Ontological Gematria — Numerical Resonance</a></li>
+            <li><a href="phonology-voice.html">Phonology & Voice — Reconstructing the Sound</a></li>
+            <li><a href="decipherment-history.html">Decipherment History — Champollion & the Rosetta Stone</a></li>
+            <li><a href="coptic.html">Coptic — The Living Bridge</a></li>
+            <li><a href="demotic.html">Demotic — Script of the People</a></li>
+            <li><a href="heka.html">Heka — The Magic Behind the Signs</a></li>
+            <li><a href="thoth-hermes.html">Thoth-Hermes — The Inventor of Writing</a></li>
+            <li><a href="house-of-life.html">The House of Life — Where Scribes Were Trained</a></li>
+            <li><a href="greek-magical-papyri.html">Greek Magical Papyri — Signs in Late Ritual Use</a></li>
+            <li><a href="ren-power-names.html">The Ren — Why the Name Matters</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO ARCHIVE INDEX</a>
+    </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓏞 𓈖 𓇋 𓏏 𓅱</span><br>
+    SCRIPT INTEGRITY: ACTIVE — 3,500 YEARS OF CONTINUOUS TRANSMISSION</p>
+</footer>
+
+</body>
+</html>
