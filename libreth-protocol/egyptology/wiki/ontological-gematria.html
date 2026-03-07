@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONTOLOGICAL GEMATRIA — THE NUMBERS OF BEING :: LIBRETH ARCHIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/wiki-style.css">
+    <style>
+        .page-header::before { content: '▲ ◇ ▲ ◇ ▲'; }
+
+        /* GEMATRIA-SPECIFIC CARDS */
+        .gematria-card { border-left: 3px solid rgba(180,150,0,0.5); }
+
+        /* NUMBER BLOCKS */
+        .number-block {
+            border: 1px solid rgba(180,150,0,0.3);
+            background: rgba(30,28,0,0.4);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .number-title {
+            font-family: 'Cinzel', serif;
+            color: #c4b02d;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* VALUE MAPPING */
+        .value-mapping {
+            background: rgba(10,10,10,0.6);
+            border: 1px solid rgba(180,150,0,0.2);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .value-pair {
+            display: grid;
+            grid-template-columns: 2fr 1fr 3fr;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(180,150,0,0.1);
+            align-items: start;
+        }
+        .value-pair:last-child { border-bottom: none; }
+        .value-glyph {
+            font-family: 'VT323', monospace;
+            color: var(--gold);
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+        .value-num {
+            color: #c4b02d;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-align: right;
+        }
+        .value-meaning {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* CALCULATION DEMONSTRATION */
+        .calculation-box {
+            background: rgba(30,28,0,0.5);
+            border: 1px solid rgba(180,150,0,0.3);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+            font-family: 'VT323', monospace;
+        }
+        .calc-title {
+            font-family: 'Cinzel', serif;
+            color: #d4b852;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        .calc-step {
+            margin: 0.8rem 0;
+            padding: 0.6rem;
+            background: rgba(0,0,0,0.3);
+            border-left: 3px solid rgba(180,150,0,0.4);
+            line-height: 1.6;
+        }
+        .calc-result {
+            background: rgba(180,150,0,0.15);
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(180,150,0,0.3);
+            color: #e8d852;
+            font-weight: bold;
+        }
+
+        /* SACRED NUMBER ANALYSIS */
+        .number-analysis {
+            border: 1px solid rgba(180,150,0,0.25);
+            background: rgba(20,18,10,0.6);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .number-label {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+        .number-properties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        .property-item {
+            background: rgba(10,10,10,0.4);
+            padding: 0.8rem;
+            border-left: 3px solid rgba(180,150,0,0.4);
+        }
+        .prop-label {
+            font-family: 'Cinzel', serif;
+            color: #d4b852;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+        .prop-text {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        /* GEMATRIAC TABLE */
+        .gematriac-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+        .gematriac-table th {
+            background: rgba(180,150,0,0.15);
+            color: #c4b02d;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(180,150,0,0.3);
+        }
+        .gematriac-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+        .gematriac-table tr:hover td { background: rgba(180,150,0,0.05); }
+        .gematriac-table .num-col { 
+            font-family: 'VT323', monospace; 
+            color: #e8d852;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* CORRESPONDENCE BOX */
+        .correspondence-box {
+            border: 1px solid rgba(100,150,220,0.3);
+            background: rgba(10,20,40,0.4);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .corr-title {
+            font-family: 'Cinzel', serif;
+            color: #6fa3e8;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+        .corr-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .corr-item {
+            padding: 0.6rem;
+            background: rgba(0,0,0,0.2);
+            border-left: 3px solid rgba(100,150,220,0.4);
+        }
+        .corr-label {
+            font-family: 'VT323', monospace;
+            color: rgba(100,200,255,0.8);
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+        .corr-value {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* TALISMAN RECIPE -->
+        .talisman-instruction {
+            border: 1px solid rgba(180,150,0,0.3);
+            background: rgba(25,22,5,0.6);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .talisman-title {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .talisman-steps {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+        .talisman-steps li {
+            margin: 0.6rem 0;
+            padding-left: 0.5rem;
+        }
+
+        /* VIBRATIONAL NOTE */
+        .vibrational-note {
+            border: 1px solid rgba(100,180,100,0.3);
+            background: rgba(10,30,10,0.5);
+            padding: 1.2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .vib-title {
+            font-family: 'Cinzel', serif;
+            color: #7db37d;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- ═══════════════════════════════════════ HEADER -->
+    <header class="page-header">
+        <h1 class="page-title">ONTOLOGICAL GEMATRIA</h1>
+        <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">
+            THE NUMBERS OF BEING
+        </div>
+        <p class="page-subtitle">
+            // WHERE VIBRATION BECOMES FORM //
+        </p>
+        <p class="page-epithet">
+            Every glyph has its number. Every number has its vibration. Every vibration shapes reality. To know the numerical dimensions of a word is to know the deep structure of what it names. The cosmos itself is woven from numbers — patterns of repeated vibration, fractals that echo from the infinite to the infinitesimal. To master ontological gematria is to understand how the universe is written in mathematics, and thus how to read and reshape it.
+        </p>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+        <a href="index.html">WIKI HOME</a> &gt; ONTOLOGICAL GEMATRIA
+    </nav>
+
+    <!-- ═══════════════════════════════════════ TABLE OF CONTENTS -->
+    <div class="toc-block">
+        <div class="toc-title">// ARCHIVE CONTENTS //</div>
+        <ul class="toc-list">
+            <li><a href="#definition">I. Definition and Fundamental Principles</a></li>
+            <li><a href="#numeral-system">II. The Egyptian Numeral System and Glyph Values</a></li>
+            <li><a href="#sacred-numbers">III. Sacred Numbers and the Metaphysics of Quantity</a></li>
+            <li><a href="#enumeration">IV. The Method of Enumeration and Reduction</a></li>
+            <li><a href="#divine-names">V. Gematriac Analysis of Divine Names</a></li>
+            <li><a href="#pharaonic-names">VI. Pharaonic Titulary and Numerical Resonance</a></li>
+            <li><a href="#temple-dimensions">VII. Sacred Geometry: Temple Proportions and Gematriac Values</a></li>
+            <li><a href="#protective-talismans">VIII. Talismans and Amulets — Numbers as Protective Force</a></li>
+            <li><a href="#transmission">IX. Transmission of Gematriac Knowledge</a></li>
+            <li><a href="#correspondence">X. Correspondence Systems and Cosmic Alignment</a></li>
+            <li><a href="#magical-squares">XI. Magic Squares and Ritual Geometry</a></li>
+            <li><a href="#vibrational">XII. Vibrational Resonance and Sound Values</a></li>
+            <li><a href="#cosmic-numerology">XIII. The Cosmic Numerology of Creation</a></li>
+            <li><a href="#modern">XIV. Modern Analysis and Recovery of Gematriac Principles</a></li>
+        </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ I. DEFINITION -->
+    <section id="definition">
+        <h2 class="section-head">I. Definition and Fundamental Principles</h2>
+        <p>
+            <b>Ontological gematria</b> is the Egyptian science of assigning numerical values to hieroglyphic signs and interpreting the metaphysical and cosmic significance of those values. The term "gematria" comes primarily from Hebrew mystical tradition, but the practice of assigning spiritual meaning to numerical values appears to have much deeper roots in Egyptian temple knowledge.
+        </p>
+        <p>
+            Unlike simple numerology (the practice of interpreting numbers as omens or personality indicators), ontological gematria is a system aimed at understanding the deep structure of reality itself. In Egyptian philosophy, numbers were not abstract concepts but were understood as the fundamental patterns underlying material manifestation. The cosmos itself was conceived as organized by repeating numerical relationships — patterns of vibration encoded in the structure of matter, consciousness, and divinity.
+        </p>
+
+        <h3 class="sub-head">The Principle: Everything Has a Number</h3>
+        <p>
+            At the heart of Egyptian gematriac thinking lies a deceptively simple principle: <b>every thing, every word, every concept has a numerical value, and that value expresses something essential about the nature of that thing</b>.
+        </p>
+        <p>
+            When a priest carved a divine name into a temple wall, they were not merely inscribing a label. They were inscribing a pattern of invisible forces, a vibration that shaped the space around the inscription. The numerical total of that name's values determined the specific quality and magnitude of the divine power invoked. By calculating, manipulating, and aligning these numerical values, the priest could enhance or modulate the potency of the inscription.
+        </p>
+
+        <div class="pull-quote">
+            "The number reveals what the name conceals. Add the letters and the sum speaks what the letters whisper."
+            <cite>— Principle attributed to priestly instructors, echoed across multiple temple papyri</cite>
+        </div>
+
+        <h3 class="sub-head">Gematria vs. Numerology</h3>
+        <p>
+            Modern Western occultism distinguishes between gematria (the assignment of mystical significance to numerical values) and numerology (the interpretation of numbers as symbols). Egyptian ontological gematria is more fundamental than either. It does not treat numbers as symbols to be interpreted — it treats them as the actual structural basis of reality. Numbers are not meanings *about* things; they are the patterns *in* things.
+        </p>
+        <p>
+            This is why mastering gematria was understood as approaching mastery of reality itself. To know the numerical essence of a thing was to know its deepest nature. To manipulate the numbers was, in a sense, to reshape the thing itself.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ II. NUMERAL SYSTEM -->
+    <section id="numeral-system">
+        <h2 class="section-head">II. The Egyptian Numeral System and Glyph Values</h2>
+        <p>
+            The assignment of numerical values to hieroglyphic signs was an intricate system, likely preserved and taught in the Houses of Life. While no comprehensive gematriac table survives from ancient Egypt itself, modern scholars have reconstructed the system through careful analysis of encoded temple texts, the organization of sacred geometry in temples, and the structure of ritual numbers.
+        </p>
+
+        <h3 class="sub-head">The Base Enumeration System</h3>
+        <p>
+            Ancient Egyptian used a decimal (base-10) numerical system. The basic units were:
+        </p>
+
+        <div class="value-mapping">
+            <div class="value-pair">
+                <div class="value-glyph">𓏩 (Single stroke)</div>
+                <div class="value-num">1</div>
+                <div class="value-meaning">Unity, identity, the monad, undivided singularity</div>
+            </div>
+            <div class="value-pair">
+                <div class="value-glyph">𓏩𓏩 (Two strokes)</div>
+                <div class="value-num">2</div>
+                <div class="value-meaning">Duality, opposition, complementarity, the divided pair</div>
+            </div>
+            <div class="value-pair">
+                <div class="value-glyph">𓉴 (Coil)</div>
+                <div class="value-num">10</div>
+                <div class="value-meaning">Completion of the first cycle, return to unity at a higher level</div>
+            </div>
+            <div class="value-pair">
+                <div class="value-glyph">𓍯 (Lotus-flower rope)</div>
+                <div class="value-num">100</div>
+                <div class="value-meaning">Multiplication of the return, sacred completion, high order</div>
+            </div>
+            <div class="value-pair">
+                <div class="value-glyph">𓆻 (Tadpole)</div>
+                <div class="value-num">1000</div>
+                <div class="value-meaning">Multitude, infinity, the approach to divine abundance</div>
+            </div>
+        </div>
+
+        <h3 class="sub-head">The Alphabetic Gematriac System</h3>
+        <p>
+            For the assignment of values to individual hieroglyphic signs (beyond simple numerical notation), the Egyptians appear to have used a system in which each sign was assigned a value according to its position in a standardized ordering. The exact ordering differed from tradition to tradition, and different priestly schools may have maintained slightly variant systems.
+        </p>
+        <p>
+            A commonly reconstructed system assigns values 1-24 to the basic phonetic signs (as they appear in Khenti's analysis), with higher values given to determinatives and more complex signs. Some signs had only one value; others (particularly those used in enigmatic writing) could have multiple assigned values depending on context.
+        </p>
+
+        <table class="gematriac-table">
+            <thead>
+                <tr>
+                    <th>Sign Category</th>
+                    <th>Value Range</th>
+                    <th>Examples</th>
+                    <th>Significance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Primary Phonetics</b></td>
+                    <td class="num-col">1-24</td>
+                    <td>a, b, g, h, kh, etc.</td>
+                    <td>Essential to all language; primary creative force</td>
+                </tr>
+                <tr>
+                    <td><b>Divine Determinatives</b></td>
+                    <td class="num-col">25-50</td>
+                    <td>God signs, sacred categories</td>
+                    <td>Elevated spiritual agency; divine attributes</td>
+                </tr>
+                <tr>
+                    <td><b>Celestial Symbols</b></td>
+                    <td class="num-col">51-100</td>
+                    <td>Sun (Ra), Moon, Stars, Sky</td>
+                    <td>Cosmic principles; infinite duration</td>
+                </tr>
+                <tr>
+                    <td><b>Royal Glyphs</b></td>
+                    <td class="num-col">101-150</td>
+                    <td>Cartouche, Crown, Throne</td>
+                    <td>Terrestrial manifestations of divine order</td>
+                </tr>
+                <tr>
+                    <td><b>Chthonic Symbols</b></td>
+                    <td class="num-col">151-200</td>
+                    <td>Coffin, Tomb, Underworld markers</td>
+                    <td>Death, transformation, the hidden realms</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="sub-head">The Principle of Positional Significance</h3>
+        <p>
+            In gematriac calculation, the position of a sign within a word or name could affect its value. A sign appearing at the beginning of a word might accumulate higher significance than when appearing at the end. The position in sacred sequences — whether the word appeared first, middle, or last — adjusted the interpretive weight of the value.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ III. SACRED NUMBERS -->
+    <section id="sacred-numbers">
+        <h2 class="section-head">III. Sacred Numbers and the Metaphysics of Quantity</h2>
+        <p>
+            Beyond the simple assignment of numerical values, Egyptian thought attributed profound metaphysical significance to certain numbers themselves. These "sacred numbers" were understood to represent fundamental principles of cosmic organization.
+        </p>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER ONE (Waḥ)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Absolute unity, undivided monad, the source from which all multiplicity emerges</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Atum before creation, the deity containing all potential within itself</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">The primordial point, the undifferentiated singularity from which being emerges</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Foundation stone; axis mundi; the eternal witness present in all things</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER TWO (Snjwy)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Duality, polarity, the necessary opposition enabling manifestation and consciousness</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Shu and Tefnut (air and moisture); Isis and Osiris; male and female principles</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">The split that allows consciousness; the distance between subject and object</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Balancing forces; the Two Lands of Egypt; cosmic equilibrium</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER THREE (Khmt)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Synthesis of duality; the reconciling force; the stable tripod of manifestation</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Past-Present-Future; Creator-Creation-Sustainer; Father-Mother-Child triads</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">Stability; the first stable form; the completion of a cycle into new beginning</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Triple ennead; temples with tripartite structure; three-fold initiation paths</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER FOUR (Pdw)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Manifestation in the material plane; the four quarters; material stabilization</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Four cardinal directions; Four Sons of Horus; four elements (sometimes)</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">The square, the table, the solid foundation; the material world comprehended</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Foundation; four-fold protection; temples oriented to four cardinal directions</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER FIVE (Diw)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Divine grace entering matter; the human form (head + four limbs); the unexpected</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Osiris and the Four Sons; the human (5 points of contact with earth); the pentagram</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">Humanity; free will entering destiny; the unexpected grace that disrupts order</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Human initiation; five-fold protective talismans; five senses as paths to knowledge</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER NINE (Psdt)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">The ennead; divine multiplicity in unity; completion of creative cycles; the sacred plural</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">The Heliopolitan Ennead (nine great gods); completion before return to unity</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">The full expression of creative principles; all possibilities; the threshold of transcendence</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Nine-fold incantations; nine levels of initiation; nine gates of the underworld</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">NUMBER TEN (Mḏw)</div>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">Metaphysical Principle</div>
+                    <div class="prop-text">Return to unity at higher level; completion of a full cycle; cosmic perfection achieved</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Cosmic Correspondence</div>
+                    <div class="prop-text">Maat's sacred measure; the ten-fold divine utterance; completeness</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Manifestation</div>
+                    <div class="prop-text">Wholeness; the completed circle; return to source laden with wisdom</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">Sacred Use</div>
+                    <div class="prop-text">Ten-day festivals; ten commandments in priestly disciplines; decad structures</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ IV. ENUMERATION -->
+    <section id="enumeration">
+        <h2 class="section-head">IV. The Method of Enumeration and Reduction</h2>
+        <p>
+            The core method of gematriac analysis involves several key steps: <b>enumeration</b> (assigning numerical values to signs), <b>summation</b> (adding those values), and <b>reduction</b> (simplifying the resulting sum to a single digit or sacred number).
+        </p>
+
+        <h3 class="sub-head">Basic Enumeration Process</h3>
+        <p>
+            To calculate the gematriac value of a word, divine name, or inscription, the trained practitioner would:
+        </p>
+        <ol style="text-align: left; padding-left: 2rem; margin: 1rem 0;">
+            <li>Identify each hieroglyphic sign in the sequence</li>
+            <li>Assign its numerical value according to the gematriac table</li>
+            <li>Sum all the individual values</li>
+            <li>Reduce the sum through digital root reduction to a single final digit (or stop at a sacred number)</li>
+        </ol>
+
+        <h3 class="sub-head">Reduction Methods</h3>
+        <p>
+            Reduction is the process of simplifying a multi-digit number to a single digit by repeatedly summing its digits. There are several approaches:
+        </p>
+
+        <div class="calculation-box">
+            <div class="calc-title">METHOD 1: FULL DIGITAL ROOT REDUCTION</div>
+            <div class="calc-step">Sum all digit values until a single digit remains.</div>
+            <div class="calc-step">Example: 147 → 1+4+7 = 12 → 1+2 = 3</div>
+            <div class="calc-step">The single digit (3) reveals the essential archetypal force embedded in the original number.</div>
+            <div class="calc-result">FINAL VALUE: 3 (Synthesis, sacred triangulation)</div>
+        </div>
+
+        <div class="calculation-box">
+            <div class="calc-title">METHOD 2: THEURGIC REDUCTION (Stopping at Sacred Numbers)</div>
+            <div class="calc-step">Reduce the sum, but stop if the intermediate result is a sacred number (3, 7, 9, 12, etc.)</div>
+            <div class="calc-step">Example: 156 → 1+5+6 = 12 (stop, as 12 is sacred)</div>
+            <div class="calc-step">12 is itself explored as a meaningful value (3+9, unity and multiplicity reconciled)</div>
+            <div class="calc-result">FINAL VALUE: 12 (Sacred completion, transcendence)</div>
+        </div>
+
+        <div class="calculation-box">
+            <div class="calc-title">METHOD 3: POSITIONAL WEIGHTING</div>
+            <div class="calc-step">Multiply each sign's value by its position in the word (1st = x1, 2nd = x2, etc.)</div>
+            <div class="calc-step">Sum the weighted values, then reduce</div>
+            <div class="calc-step">This method reflects the increasing importance of later positions in ritual utterances</div>
+            <div class="calc-result">Final value reflects both the content and sequencing of the name</div>
+        </div>
+
+        <h3 class="sub-head">Interpretation of Reduced Values</h3>
+        <p>
+            Once a gematriac value is calculated and reduced, the practitioner would interpret its meaning:
+        </p>
+        <ul style="text-align: left; padding-left: 2rem; margin: 1rem 0;">
+            <li><b>Value 1:</b> Divine unity; the name invokes absolute source</li>
+            <li><b>Value 2:</b> Duality, balance; invokes paired complementary forces</li>
+            <li><b>Value 3:</b> Synthesis and stability; creative manifestation</li>
+            <li><b>Value 4:</b> Material grounding; earthly manifestation of divine principles</li>
+            <li><b>Value 7:</b> Perfection, sacred completion; the seven rays of divinity</li>
+            <li><b>Value 9:</b> Fullness and transcendence; the complete ennead</li>
+            <li><b>Values above 10:</b> Master numbers carrying amplified significance</li>
+        </ul>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ V. DIVINE NAMES -->
+    <section id="divine-names">
+        <h2 class="section-head">V. Gematriac Analysis of Divine Names</h2>
+        <p>
+            The divine names of Egypt were not simply labels. Each name was understood to be a Word of Power, a formula that invoked and constrained divine presence. The gematriac values of these names were crucial to their potency.
+        </p>
+
+        <h3 class="sub-head">The Name of Ra</h3>
+        <p>
+            The solar god Ra had multiple names, each with distinct gematriac values and corresponding powers. The basic name "Ra" (rˁ) carries fundamental solar values — light, vision, creative warmth, the eye that sees all things. More extended titles like "Ra-Horakhty" (Ra, the Horus of the Horizon) accumulate additional values, encoding within the name itself the entire cosmological journey of the sun through the sky.
+        </p>
+
+        <h3 class="sub-head">The Secret Name of Amun</h3>
+        <p>
+            One of the most closely guarded secrets of priestly knowledge was the true, secret name of Amun-Ra. This name was believed to have been known only to the highest priests and to be too potent to be spoken aloud except in the most controlled circumstances. The gematriac value of this name was calculated to resonate with the fundamental frequency of creation itself — the vibration from which all things emerged.
+        </p>
+
+        <div class="correspondence-box">
+            <div class="corr-title">Divine Name Gematriac Patterns</div>
+            <div class="corr-items">
+                <div class="corr-item">
+                    <div class="corr-label">Names of Ra:</div>
+                    <div class="corr-value">Values typically multiples of 9 or 10 (solar perfection)</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Names of Osiris:</div>
+                    <div class="corr-value">Values reducing to 4 or 8 (underworld, material transformation)</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Names of Thoth:</div>
+                    <div class="corr-value">Values often prime numbers or multiples of 3 (wisdom, speech)</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Names of Isis:</div>
+                    <div class="corr-value">Values often incorporating 5 (humanity, magic, the unexpected)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="number-analysis">
+            <div class="number-label">GEMATRIAC EXAMPLE: THE NAME PTAH</div>
+            <p>The creator god Ptah's name, written as <b>Ptḥ</b>, can be analyzed gematrically. Assuming the values:</p>
+            <div class="number-properties">
+                <div class="property-item">
+                    <div class="prop-label">P = 16</div>
+                    <div class="prop-text">(Creation, opening, the mouth)</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">T = 20</div>
+                    <div class="prop-text">(Divine speech, breath, utterance)</div>
+                </div>
+                <div class="property-item">
+                    <div class="prop-label">H = 8</div>
+                    <div class="prop-text">(Divine praise, the jubilee, completion)</div>
+                </div>
+            </div>
+            <p style="margin-top: 1rem;">Sum: 16 + 20 + 8 = 44 → 4 + 4 = 8 (Material manifestation through divine speech)</p>
+            <p>The reduced value 8 reveals Ptah's essential function: the manifestation of divine thought into material form.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ VI. PHARAONIC NAMES -->
+    <section id="pharaonic-names">
+        <h2 class="section-head">VI. Pharaonic Titulary and Numerical Resonance</h2>
+        <p>
+            The pharaoh's five sacred names were not merely titles. They were understood to encode the entire scope of the pharaoh's divine mission and cosmic function. The gematriac values of these names were carefully calculated to ensure that the pharaoh embodied the precise numerical vibrations necessary to maintain Ma'at and govern according to cosmic law.
+        </p>
+
+        <h3 class="sub-head">The Five Names and Their Gematriac Layers</h3>
+        <p>
+            Each of the five sacred names of the pharaoh — the Horus name, the Two Ladies name, the Golden Falcon name, the Prenomen (throne name), and the Nomen (birth name) — had its own gematriac value. Collectively, these five values were understood to create a composite number describing the complete spiritual and cosmic function of the king.
+        </p>
+
+        <h3 class="sub-head">Royal Example: Hatshepsut's Names</h3>
+        <p>
+            When Hatshepsut assumed the throne and created new royal names for herself, the priesthood calculated their gematriac values with care. Her throne name (Prenomen) <b>Maatkare</b> ("Truth is the Soul of Ra") was chosen not only for its theological meaning but for its gematriac properties. The value reduced to a number expressing both balance (sacred 2 or 4) and solar power (multiples of 9), creating a symbolic statement that she was a legitimate embodiment of solar justice despite her female form.
+        </p>
+
+        <table class="gematriac-table">
+            <thead>
+                <tr>
+                    <th>Name Type</th>
+                    <th>Typical Value Range</th>
+                    <th>Cosmic Function Encoded</th>
+                    <th>Example Pharaoh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Horus Name</b></td>
+                    <td class="num-col">90-144</td>
+                    <td>Living deity; procession into the sky; divine falcon principle</td>
+                    <td>Tuthmose III</td>
+                </tr>
+                <tr>
+                    <td><b>Two Ladies Name</b></td>
+                    <td class="num-col">80-130</td>
+                    <td>Protection of both lands; integration of complementary forces</td>
+                    <td>Ramesses II</td>
+                </tr>
+                <tr>
+                    <td><b>Prenomen (Throne Name)</b></td>
+                    <td class="num-col">100-200</td>
+                    <td>Solar identification; rule from the throne; cosmic authority</td>
+                    <td>All pharaohs</td>
+                </tr>
+                <tr>
+                    <td><b>Nomen (Birth Name)</b></td>
+                    <td class="num-col">60-120</td>
+                    <td>Individual humanity; personal essence; mortal embodiment</td>
+                    <td>Varies</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="sub-head">The Composite Pharaonic Number</h3>
+        <p>
+            Scholars theorize that the five royal names were designed so that when their values were summed and reduced, they produced a sacred number that defined the entire numerical essence of that pharaoh's reign. A pharaoh whose composite number reduced to 7 would be expected to reign for a particularly fortunate period; one whose number reduced to 4 might emphasize practical, material achievement and building.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ VII. TEMPLE DIMENSIONS -->
+    <section id="temple-dimensions">
+        <h2 class="section-head">VII. Sacred Geometry: Temple Proportions and Gematriac Values</h2>
+        <p>
+            Temples were not randomly constructed. Their dimensions — the width of a sanctuary, the height of a pylon, the spacing of columns — were calculated according to gematriac principles. The temple itself was a vast mathematical formula expressing cosmic principles in stone.
+        </p>
+
+        <h3 class="sub-head">The Sanctum Sanctorum: Proportions of the Holy of Holies</h3>
+        <p>
+            The inner chamber of a temple, where the divine statue resided, was often constructed with dimensions that reduced gamatrically to sacred numbers. A chamber 30 cubits long and 20 cubits wide (totaling 50, reducing to 5 — humanity touching the divine) created a space whose very geometry invoked the divine-human encounter.
+        </p>
+
+        <h3 class="sub-head">Pylon Angles and Sacred Geometry</h3>
+        <p>
+            The pylons flanking temple entrances were often inclined at specific angles — angles whose degrees added to sacred numbers. A pylon inclined at 62 degrees would carry a value that, when summed across both pylons (62 + 62 = 124 → 1+2+4 = 7), invoked the sacred seven — the multiple rays of divinity emanating from the sanctuary.
+        </p>
+
+        <h3 class="sub-head">Columned Halls: Sacred Counting in Space</h3>
+        <p>
+            In the great Hypostyle Hall of Karnak, the columns are not randomly distributed. They are arranged in groupings of 9 and 12 — sacred numbers whose significance is multiplied by the repetition. Walking through these halls, a priest would count the columns and understand through the numbers themselves a liturgy of cosmic principles encoded in the very architecture of the space.
+        </p>
+
+        <div class="vibrational-note">
+            <div class="vib-title">Architecture as Frozen Music</div>
+            <p>
+                The ancient saying "architecture is frozen music" captures the Egyptian vision of the temple. Just as a musical chord is organized by mathematical ratios producing harmonic vibration, so too is the temple organized by gematriac ratios. Walking through a properly proportioned temple, one experiences sacred geometry; bathed in light filtered through windows positioned according to solar angles encoded with sacred values, one receives the temple's message not only intellectually but somatically, through the body's resonance with the building's cosmic proportions.
+            </p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ VIII. PROTECTIVE TALISMANS -->
+    <section id="protective-talismans">
+        <h2 class="section-head">VIII. Talismans and Amulets — Numbers as Protective Force</h2>
+        <p>
+            One of the most practical applications of ontological gematria was the creation of protective talismans and amulets. By inscribing divine names or magical sequences whose gematriac values accumulated protective power, the priests created objects of extraordinary potency.
+        </p>
+
+        <h3 class="sub-head">The Method of Talismanic Creation</h3>
+
+        <div class="talisman-instruction">
+            <div class="talisman-title">Creating a Protective Amulet Through Gematria</div>
+            <ol class="talisman-steps">
+                <li>Identify the protection desired (protection from evil eye, guard against illness, ensure safe journey, etc.)</li>
+                <li>Choose or construct a divine name or magical phrase aligned with that protection</li>
+                <li>Calculate the gematriac value of the name</li>
+                <li>Ensure the value reduces to a sacred number aligned with the desired protection (e.g., 7 for divine protection, 4 for material safety)</li>
+                <li>Carve or paint the name on the amulet (stone, metal, papyrus, or faience)</li>
+                <li>Consecrate the amulet through ritual, activating the gematriac forces encoded in the numbers</li>
+                <li>Wear or place the amulet in the location requiring protection</li>
+                <li>The encoded numbers continue to vibrate their protective force, creating an invisible shield</li>
+            </ol>
+        </div>
+
+        <h3 class="sub-head">Famous Protective Talismans</h3>
+        <p>
+            Among the most famous protective amulets were:
+        </p>
+        <ul style="text-align: left; padding-left: 2rem; margin: 1rem 0;">
+            <li><b>The Djed Pillar (Stability):</b> Carved with gematriac sequences encoding the number 9, ensuring eternal endurance</li>
+            <li><b>The Ankh (Life):</b> Often inscribed with divine names totaling values of 5 or 10, ensuring the life force remained engaged</li>
+            <li><b>The Eye of Horus (Protection):</b> Inscribed with names of protective deities, calculating to values of 7 or 12</li>
+            <li><b>Scarabs (Transformation):</b> Bearing names of the solar barque, encoding values that supported the soul's journey</li>
+        </ul>
+
+        <h3 class="sub-head">Talismanic Multiplication: The Power of Repetition</h3>
+        <p>
+            A talisman was more powerful not just by the gematriac value of its inscription, but by the number of times the inscription appeared. A formula repeated 9 times on an amulet accumulated 9 times the protective power. The very repetition itself served as a magical formula, instilling the principle into reality through rhythmic recurrence.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ IX. TRANSMISSION -->
+    <section id="transmission">
+        <h2 class="section-head">IX. Transmission of Gematriac Knowledge</h2>
+        <p>
+            Like enigmatic writing and other advanced priestly arts, gematriac knowledge was carefully guarded and transmitted only to selected initiates trained in the Houses of Life. The decline of these institutions meant the loss of much systematic gematriac understanding.
+        </p>
+
+        <h3 class="sub-head">The Priestly Teaching Sequence</h3>
+        <p>
+            A student learning gematria would progress through stages:
+        </p>
+        <div class="card-grid card-grid-3">
+            <div class="info-card">
+                <h4>Stage 1: Number Lore</h4>
+                <p>Memorization of the sacred properties of numbers 1-12 and the cosmic principles they represent.</p>
+            </div>
+            <div class="info-card">
+                <h4>Stage 2: Sign Assignment</h4>
+                <p>Mastery of the gematriac values assigned to hieroglyphic signs and the rationale for assignments.</p>
+            </div>
+            <div class="info-card">
+                <h4>Stage 3: Calculation Practice</h4>
+                <p>Extensive practice calculating values of divine names, royal titles, and ritual phrases.</p>
+            </div>
+            <div class="info-card">
+                <h4>Stage 4: Interpretation</h4>
+                <p>Learning to interpret gematriac values in context and to understand theological implications.</p>
+            </div>
+            <div class="info-card">
+                <h4>Stage 5: Creation</h4>
+                <p>Composing new divine names or magical formulas to specific gematriac values for ritual purposes.</p>
+            </div>
+            <div class="info-card">
+                <h4>Stage 6: Mastery</h4>
+                <p>The ability to recognize gematriac principles in existing temple architecture and inscriptions.</p>
+            </div>
+        </div>
+
+        <h3 class="sub-head">Secret Transmission and Lost Knowledge</h3>
+        <p>
+            Much gematriac knowledge was preserved only in oral form, transmitted from master to student within closed priestly circles. When Egypt's priesthood was suppressed and temple schools closed, this living transmission was interrupted. What survived is what was carved in stone on temples whose Egyptian language was eventually forgotten.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ X. CORRESPONDENCE -->
+    <section id="correspondence">
+        <h2 class="section-head">X. Correspondence Systems and Cosmic Alignment</h2>
+        <p>
+            Gematria was part of a larger system of correspondences in which numbers, divine names, cosmic principles, colors, celestial bodies, and human attributes were understood to be interconnected through shared numerical values.
+        </p>
+
+        <h3 class="sub-head">The Seven-Fold Correspondence System</h3>
+        <p>
+            One of the most elaborate correspondence systems involved the number seven, associating it with:
+        </p>
+
+        <div class="correspondence-box">
+            <div class="corr-title">Seven-Fold Cosmic Alignment</div>
+            <div class="corr-items">
+                <div class="corr-item">
+                    <div class="corr-label">Number: 7</div>
+                    <div class="corr-value">Sacred perfection; the divine septenary</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Celestial: Seven stars (Pleiades)</div>
+                    <div class="corr-value">Divine multiplicity united in constellation</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Color: Green</div>
+                    <div class="corr-value">Renewal, fertility, new growth</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Direction: Center</div>
+                    <div class="corr-value">The axis mundi, place of divine presence</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Metal: Gold</div>
+                    <div class="corr-value">Divine incorruptibility and eternal rays</div>
+                </div>
+                <div class="corr-item">
+                    <div class="corr-label">Divine principle: Protection</div>
+                    <div class="corr-value">The seven protective deities</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="sub-head">Aligning Human Actions with Cosmic Numbers</h3>
+        <p>
+            Priests used gematriac calculations to determine auspicious times and methods for major undertakings. A temple would not be begun if its founding stone's installation occurred on a day number that was cosmically inauspicious according to gematriac calculation. A pharaoh might launch a military campaign only if the total numerical value of the operation (combining date, troop numbers, and divine sanctions) calculated to a favorable value.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XI. MAGIC SQUARES -->
+    <section id="magical-squares">
+        <h2 class="section-head">XI. Magic Squares and Ritual Geometry</h2>
+        <p>
+            The priests constructed mathematical grids called "magic squares" — arrangements of numbers where all rows, columns, and diagonals summed to the same sacred total. These squares were inscribed on amulets, drawn on papyri, or reproduced in temple floor plans.
+        </p>
+
+        <h3 class="sub-head">The 3x3 Magic Square (Sirius Configuration)</h3>
+        <p>
+            The famous 3x3 magic square, with values summing to 15 across all dimensions, was associated with Sirius (Sopdet), the brightest star in the Egyptian sky and herald of the Nile's annual flood. This square appears in temple inscriptions and may have been inscribed on talismans meant to ensure the proper flooding of the Nile.
+        </p>
+
+        <div class="calculation-box">
+            <div class="calc-title">THE SACRED 3x3 SQUARE</div>
+            <div class="calc-step">2 | 7 | 6</div>
+            <div class="calc-step">9 | 5 | 1</div>
+            <div class="calc-step">4 | 3 | 8</div>
+            <div class="calc-result">All rows, columns, and diagonals sum to 15 (reducing to 6 → 1+5 = 6, the material world elevated)</div>
+        </div>
+
+        <h3 class="sub-head">The 4x4 Magic Square (Foundation Pattern)</h3>
+        <p>
+            A 4x4 magic square, summing all dimensions to 34 (reducing to 7), was used to encode the principles of stable manifestation. This square was sometimes inscribed on the foundations of temples to ensure their endurance and stability.
+        </p>
+
+        <h3 class="sub-head">Ritual Use of Magic Squares</h3>
+        <p>
+            Priests would trace the paths through magic squares during rituals, the sequence of numbers creating a vibrational path that the soul could follow. A priest walking the pattern of the magic square — moving through the numbers in prescribed sequence — would literally walk the geometry of cosmic order, embodying its principles through bodily movement.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XII. VIBRATIONAL -->
+    <section id="vibrational">
+        <h2 class="section-head">XII. Vibrational Resonance and Sound Values</h2>
+        <p>
+            Numbers were understood not as abstract concepts but as vibrations. Each number carried a specific resonant frequency. A divine name whose gematriac value was 99 would literally produce a specific vibration when intoned aloud, a vibration aligned with cosmic frequencies.
+        </p>
+
+        <h3 class="sub-head">Sound and Frequency</h3>
+        <p>
+            While the Egyptians did not possess modern physics, they understood empirically that sound could alter material reality. Certain chants intoned at certain pitches could produce trance states. Certain rhythms could align consciousness with cosmic cycles. The gematriac value of chanted words was understood to determine the quality and potency of their vibrational effect.
+        </p>
+
+        <h3 class="sub-head">The Frequency of Divine Names</h3>
+        <p>
+            A divine name whose gematriac value was 9 (or a multiple of 9) would be intoned at a frequency that harmonized with the ninth harmonic of the fundamental creative frequency. When multiple priests chanted divine names synchronized to these gematriac frequencies, their combined voice would create a standing wave of divine power in the temple space.
+        </p>
+
+        <div class="vibrational-note">
+            <div class="vib-title">Living Vibration, Living Language</div>
+            <p>
+                In the Egyptian view, hieroglyphic writing was never silent. Every inscription was meant to be read aloud, intoned, vibrated into existence. The carved glyphs on a temple wall were not meant merely to be seen — they were meant to be sounded. The gematriac values of the inscriptions ensured that when properly sounded, the human voice aligned with cosmic frequencies, and the speaker became a conduit for divine power working through the medium of sacred sound.
+            </p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIII. COSMIC NUMEROLOGY -->
+    <section id="cosmic-numerology">
+        <h2 class="section-head">XIII. The Cosmic Numerology of Creation</h2>
+        <p>
+            At the highest level, ontological gematria was a system for understanding the numerical structure of creation itself. The universe was understood as having been organized according to mathematical principles that could be perceived, calculated, and manipulated by those with the requisite knowledge.
+        </p>
+
+        <h3 class="sub-head">The Cosmic Enumeration</h3>
+        <p>
+            According to some priestly texts (known primarily through fragmentary quotations in later Greek and Coptic sources), creation itself proceeded through a cosmic enumeration:
+        </p>
+        <ul style="text-align: left; padding-left: 2rem; margin: 1rem 0;">
+            <li>The unmanifest One (Atum in his potential form)</li>
+            <li>The differentiation into Two (Shu and Tefnut, male and female poles)</li>
+            <li>The emergence of Three (Geb, Nut, and the space between — earth, sky, and the principle of separation)</li>
+            <li>The quadruple manifestation (Four directions, Four seasons, matter becoming stable)</li>
+            <li>The fivefold complexity (Five wits, five senses, human consciousness entering matter)</li>
+            <li>And so forth, each number representing an increasing elaboration and densification of divine potential into material reality</li>
+        </ul>
+
+        <h3 class="sub-head">Return to Unity: The Hieroglyph of All Things</h3>
+        <p>
+            The supreme achievement in understanding ontological gematria was to perceive how all numbers, all multiplicities, ultimately returned to and expressed aspects of the original unity. Just as any number divided by itself equals one, so too the cosmos, understood through gematriac principles, could be perceived as infinite expressions of absolute unity.
+        </p>
+
+        <p>
+            The master of gematria understood that the descent of the One into the Many was not a fragmentation but a creative elaboration. The infinite diversity of creation was not a falling-away from unity but a fuller expression of it. And through the numbers, the initiate could retrace the path, seeing in each particular thing the universal pattern that had created it.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIV. MODERN -->
+    <section id="modern">
+        <h2 class="section-head">XIV. Modern Analysis and Recovery of Gematriac Principles</h2>
+        <p>
+            Contemporary Egyptology is in the early stages of rediscovering gematriac principles encoded in Egyptian texts and monuments. As scholars apply computational analysis to temple inscriptions and sacred geometry to architectural measurements, the sophistication of the gematriac system becomes increasingly apparent.
+        </p>
+
+        <h3 class="sub-head">Archaeological Evidence of Gematriac Design</h3>
+        <p>
+            Modern measurement of Egyptian temples has revealed that their dimensions follow numerical ratios that are neither random nor arbitrary. The dimensions calculate to values that reduce gamatrically to sacred numbers. The distances between key architectural features echo gematriac proportions. These discoveries suggest that what once was living priestly knowledge can be partially reconstructed through careful architectural analysis.
+        </p>
+
+        <h3 class="sub-head">Computational Gematria</h3>
+        <p>
+            Digital analysis of hieroglyphic inscriptions has allowed scholars to identify patterns in how glyphs are arranged and how their values appear to accumulate. Machine learning algorithms trained on temple texts can now predict where gematriac principles are likely to be encoded, narrowing the search space for interpretation.
+        </p>
+
+        <h3 class="sub-head">Limitations and Future Directions</h3>
+        <p>
+            While significant progress has been made, the complete gematriac system remains partially lost. Without access to the oral traditions that accompanied the written knowledge, modern scholars can identify patterns but struggle to verify interpretations. The deepest theological meanings encoded in gematriac values — the ones most carefully protected by priestly guardians — remain opaque.
+        </p>
+
+        <div class="destruction-warning">
+            <div class="dw-title">The Sacred Numbers Persist</div>
+            <p>
+                Despite thousands of years of lost transmission, the encoded gematriac values remain active in the temples and texts where they were inscribed. Whether understood or not, the sacred proportions continue to vibrate their ancient power. The standing temples still resonate with the numerical harmonies designed into their architecture. The intoned names still carry the vibrational frequencies calculated by ancient priests.
+            </p>
+            <p>
+                Modern rediscovery of gematriac principles is thus not merely an academic exercise. It is a rekindling of knowledge that was believed to shape and sustain the cosmos itself.
+            </p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ RELATED LINKS -->
+    <div class="related-links">
+        <h3>Related Concepts in the Egyptology Archive</h3>
+        <ul>
+            <li><a href="enigmatic-writing.html">Enigmatic Writing — The Art of Layered Meanings</a></li>
+            <li><a href="heka.html">Heka — Operative Force and Sympathetic Magic</a></li>
+            <li><a href="temple-architecture.html">Temple Architecture and Sacred Geometry</a></li>
+            <li><a href="amulets-talismans.html">Amulets and Talismans — Portable Sacred Objects</a></li>
+            <li><a href="house-of-life.html">House of Life — Centers of Priestly Learning</a></li>
+            <li><a href="maat-isfet.html">Ma'at and Isfet — Cosmic Order and Proportion</a></li>
+            <li><a href="memphite-theology.html">Memphite Theology — Creation Through Thought and Speech</a></li>
+            <li><a href="math-astronomy.html">Mathematics and Astronomy in Ancient Egypt</a></li>
+        </ul>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html" class="back-btn">← RETURN TO WIKI INDEX</a>
+    </div>
+
+    <div class="glyph-marker">▲ ◇ ▲ ◇ ▲</div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+    <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
+    <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
+    GEMATRIA RESONATES // THE NUMBERS ENDURE</p>
+</footer>
+
+</body>
+</html>
