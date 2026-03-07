@@ -3,19 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHRONOLOGICAL TIMELINE :: EPOCHS OF KEMET :: LIBRETH ARCHIVE</title>
+    <title>CHRONOLOGICAL TIMELINE :: THE RIVER OF TIME :: LIBRETH ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>.page-header::before { content: '𓏲 𓏴 𓈖 𓎛 𓎛'; }</style>
+    <style>
+        .page-header::before { content: '𓏲 𓏴 𓈖 𓎛 𓎛'; }
+        .timeline-marker {
+            font-family: 'VT323', monospace;
+            color: var(--gold);
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--gold-dim);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .era-block {
+            border-left: 2px solid var(--cyan-dim);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+        .era-block::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--cyan);
+            border-radius: 50%;
+        }
+    </style>
 </head>
-<body>
+<body data-page="timeline">
 <div class="page-wrap">
 
-    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════ HEADER -->
     <header class="page-header">
         <h1 class="page-title">CHRONOLOGICAL TIMELINE</h1>
-        <p class="page-subtitle">// THE RIVER OF TIME :: EPOCHS OF THE NILE VALLEY // LIBRETH ARCHIVE</p>
+        <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-dim);letter-spacing:0.3em;margin-top:0.5rem;">
+            Iteru n Heheh · 𓈗 𓈖 𓎛 𓎛 · The River of Eternity
+        </div>
+        <p class="page-subtitle">// THE TEMPORAL BACKBONE :: DYNAMIC CYCLES OF KEMET :: INITIALIZATION TO DISSOLUTION //</p>
+        <p class="page-epithet">
+            "Time is a river that flows from the Nun, and the King is the one who steers the barque through its currents.<br>
+            Every reign is a new creation, and every cycle a return to the First Time."
+            <br><span style="font-size:0.85rem;opacity:0.5;">— After the Sais Neith Inscriptions</span>
+        </p>
     </header>
 
     <!-- BREADCRUMB -->
@@ -23,100 +57,251 @@
         <a href="index.html">WIKI HOME</a> &gt; TIMELINE
     </nav>
 
-    <!-- TABLE OF CONTENTS -->
+    <!-- ═══════════════════════════════════════ TABLE OF CONTENTS -->
     <div class="toc-block">
         <div class="toc-title">// ARCHIVE CONTENTS //</div>
         <ul class="toc-list">
-            <li><a href="#ontology">I. The Ontology of Time — History as Sacred Vessel</a></li>
-            <li><a href="#table">II. The Dynastic Sequence — Epochal Mapping</a></li>
-            <li><a href="#major-shifts">III. Major Metaphysical Shifts by Era</a></li>
+            <li><a href="#ontology">I. The Ontology of Time — Zep Tepi and Linear Flow</a></li>
+            <li><a href="#predynastic">II. The Primordial Phase — Predynastic Origins (c. 4300–3100 BCE)</a></li>
+            <li><a href="#early-dynastic">III. Unification — The Early Dynastic Period (c. 3100–2686 BCE)</a></li>
+            <li><a href="#old-kingdom">IV. The Solar Peak — The Old Kingdom (c. 2686–2181 BCE)</a></li>
+            <li><a href="#first-intermediate">V. Systemic Decoherence — 1st Intermediate Period (c. 2181–2055 BCE)</a></li>
+            <li><a href="#middle-kingdom">VI. The Classical Restoration — Middle Kingdom (c. 2055–1650 BCE)</a></li>
+            <li><a href="#second-intermediate">VII. The Hyksos Encounter — 2nd Intermediate Period (c. 1650–1550 BCE)</a></li>
+            <li><a href="#new-kingdom">VIII. Imperial Zenith — The New Kingdom (c. 1550–1075 BCE)</a></li>
+            <li><a href="#amarna-rift">IX. The Amarna Anomaly — Akhenaten’s Interlude</a></li>
+            <li><a href="#third-intermediate">X. The Theban Theocracy — 3rd Intermediate Period (c. 1075–664 BCE)</a></li>
+            <li><a href="#late-period">XI. The Saite Renaissance — Late Period (c. 664–332 BCE)</a></li>
+            <li><a href="#ptolemaic">XII. The Greco-Egyptian Synthesis — Ptolemaic Period (c. 332–30 BCE)</a></li>
+            <li><a href="#roman">XIII. The Final Chapter — Roman and Coptic Transition (30 BCE – 641 CE)</a></li>
+            <li><a href="#astronomical">XIV. Astronomical Sothic Cycles — The Calibration of History</a></li>
+            <li><a href="#king-lists">XV. The Royal Lists — Palermo, Abydos, and Turin</a></li>
+            <li><a href="#manetho">XVI. Manetho’s Framework — The Origins of Dynastic Division</a></li>
+            <li><a href="#metaphysical-cycles">XVII. Metaphysical Cyclicity — The Concept of Neheh and Djet</a></li>
+            <li><a href="#archival-data">XVIII. Archival Integrity — How the Stream was Preserved</a></li>
+            <li><a href="#modern-reconstruction">XIX. Modern Radiocarbon vs. Traditional Chronology</a></li>
+            <li><a href="#ethics-time">XX. The Ethics of Time — Responsibility to the Ancestral Stream</a></li>
         </ul>
     </div>
 
-    <!-- SECTION I: ONTOLOGY -->
+    <!-- ═══════════════════════════════════════ I. ONTOLOGY -->
     <section id="ontology">
-        <h2 class="section-head">I. The Ontology of Time — History as Sacred Vessel</h2>
+        <h2 class="section-head">I. The Ontology of Time — Zep Tepi and Linear Flow</h2>
         <p>
-            Ancient Egyptian civilization did not separate history from theology. Every reign was viewed as a repetition of cosmic archetypes; every Pharaoh was Horus in life and Osiris in death. To understand Kemetic esoteric traditions, one must first inhabit its timeline — not merely as a sequence of dates, but as a series of <strong>initiatory cycles</strong>.
+            Ancient Egyptian civilization operated on a dual understanding of time. While they recognized the linear progression of human events (<i>rnpwt</i> [𓆳𓏏𓏥] - years), this was always nested within <strong>Zep Tepi</strong> (<i>sp tpy</i> [𓊗𓏤𓊪𓏭𓇋] - The First Time). History was viewed as a sacred vessel through which primordial archetypes were continuously re-manifested.
         </p>
         <p>
-            In this research framework, the timeline is viewed as a <strong>continuous data-stream</strong> that undergoes periodic phases of initialization, expansion, decoherence, and restoration. Each "Intermediate Period" is a system stress-test, while each "Kingdom" is a stable state crystallization of <a href="maat-isfet.html" class="nl">Ma'at</a>.
+            In this research framework, the timeline is not a flat sequence of dates but a <strong>vibrational data-stream</strong>. It undergoes periodic phases of initialization (Kingdoms), decoherence (Intermediate Periods), and restoration. To study the chronology of Kemet is to perform a "System Audit" of how <a href="maat-isfet.html" class="nl">Ma'at</a> was maintained, lost, and reclaimed across five millennia.
         </p>
     </section>
 
     <hr class="divider">
 
-    <!-- SECTION II: TABLE -->
-    <section id="table">
-        <h2 class="section-head">II. The Dynastic Sequence — Epochal Mapping</h2>
-        <div class="data-table-wrapper">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Period</th>
-                        <th>Dates (Approx)</th>
-                        <th>Metaphysical Key Developments</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="predynastic.html">Predynastic</a></td>
-                        <td>4300–3100 BCE</td>
-                        <td>Assembly of the hardware; emergence of the first symbolic signifiers (Serekhs).</td>
-                    </tr>
-                    <tr>
-                        <td><a href="early-dynastic.html">Early Dynastic</a></td>
-                        <td>3100–2686 BCE</td>
-                        <td>Unification of the Two Lands; founding of Memphis; establishment of Divine Kingship.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="old-kingdom.html">Old Kingdom</a></td>
-                        <td>2686–2181 BCE</td>
-                        <td>The <strong>Pyramid Age</strong>; Creation of the <a href="funerary-texts.html">Pyramid Texts</a>; solar absolute power.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="first-intermediate.html">1st Intermediate</a></td>
-                        <td>2181–2055 BCE</td>
-                        <td>Systemic collapse; democratization of the afterlife via the <a href="funerary-texts.html">Coffin Texts</a>.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="middle-kingdom.html">Middle Kingdom</a></td>
-                        <td>2055–1650 BCE</td>
-                        <td>The <strong>Classical Age</strong>; rise of Amun at Thebes; ethical expansion of Ma'at.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="second-intermediate-period.html">2nd Intermediate</a></td>
-                        <td>1650–1550 BCE</td>
-                        <td>The <a href="hyksos-exchange.html">Hyksos Exchange</a>; introduction of the chariot; archival preservation.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="new-kingdom.html">New Kingdom</a></td>
-                        <td>1550–1075 BCE</td>
-                        <td>Imperial Peak; Valley of the Kings; <a href="amarna-period.html">Amarna Heresy</a>; Book of the Dead.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="third-intermediate-period.html">3rd Intermediate</a></td>
-                        <td>1075–664 BCE</td>
-                        <td>Theban Theocracy; the <a href="kushite-revival.html">Kushite Revival</a>; archival wrapping of royal mummies.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="late-period.html">Late Period</a></td>
-                        <td>664–332 BCE</td>
-                        <td>Saite Renaissance; systematic archaism; the final stand of the indigenous Pharaohs.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="ptolemaic-period.html">Ptolemaic Period</a></td>
-                        <td>332–30 BCE</td>
-                        <td>Greco-Egyptian synthesis; Alexandria Library; birth of <a href="hermeticism.html">Hermeticism</a>.</td>
-                    </tr>
-                    <tr>
-                        <td><a href="roman-period.html">Roman Period</a></td>
-                        <td>30 BCE – 395 CE</td>
-                        <td>Rise of <a href="coptic.html">Coptic</a>; Flowering of <a href="gnosticism.html">Gnosticism</a>; the end of Hieroglyphs at Philae.</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- ═══════════════════════════════════════ II. PREDYNASTIC -->
+    <section id="predynastic" class="era-block">
+        <div class="timeline-marker">c. 4300 – 3100 BCE</div>
+        <h2 class="section-head">II. The Primordial Phase — Predynastic Origins</h2>
+        <p>
+            The <a href="predynastic.html" class="nl">Predynastic Period</a> represents the "Assembly of the Hardware." During this phase, the indigenous Neolithic cultures of the Nile Valley (Badarian, Naqada I-III) developed the fundamental symbolic language of Egypt.
+        </p>
+        <p>
+            Critical developments include the emergence of the <strong>Serekh</strong> (<i>srḫ</i> [𓊁])—the palace-façade identifier for royal power—and the first "Protoglyphs" found in Tomb U-j at Abydos. This era is the pre-initialization of the Kemetic OS, where the concepts of the Falcon (<a href="pantheon.html" class="nl">Horus</a>), the Sun, and the <a href="cosmological-deities.html" class="nl">Nun</a> were first encoded into material form.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ III. EARLY DYNASTIC -->
+    <section id="early-dynastic" class="era-block">
+        <div class="timeline-marker">c. 3100 – 2686 BCE</div>
+        <h2 class="section-head">III. Unification — The Early Dynastic Period</h2>
+        <p>
+            The <a href="early-dynastic.html" class="nl">Early Dynastic Period</a> (Dynasties 1–2) marks the formal "Boot-Up" of the unified state. Traditionally attributed to <strong>Narmer</strong> (Menes), unification was the successful synthesis of the "Two Lands"—Upper and Lower Egypt.
+        </p>
+        <p>
+            This period established the city of <strong>Memphis</strong> (<i>mn-nfr</i> [𓏠𓈖𓉺𓏏𓊖]) as the primary administrative node and introduced the core rituals of Divine Kingship. The King became the <i>Neb Tawy</i> (Lord of the Two Lands), the high-frequency capacitor that balanced the internal energies of the nation.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ IV. OLD KINGDOM -->
+    <section id="old-kingdom" class="era-block">
+        <div class="timeline-marker">c. 2686 – 2181 BCE</div>
+        <h2 class="section-head">IV. The Solar Peak — The Old Kingdom</h2>
+        <p>
+            The <a href="old-kingdom.html" class="nl">Old Kingdom</a> (Dynasties 3–6) is the "Primary Initialization Phase." It reached its zenith with the construction of the Giza Plateau. Under the guidance of sages like <a href="imhotep.html" class="nl">Imhotep</a>, the state utilized <strong>Monumental Hardening</strong> to fix its spiritual frequencies into stone.
+        </p>
+        <p>
+            Key developments: The transition from mastabas to true pyramids; the Solar Revolution of the 5th Dynasty; and the creation of the <a href="funerary-texts.html" class="nl">Pyramid Texts</a> (<i>mdw-nTr</i> [𓌃𓊹]). This was an era of absolute centralization, where the Pharaoh's Ka was the sole engine of national prosperity.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ V. 1ST INTERMEDIATE -->
+    <section id="first-intermediate" class="era-block">
+        <div class="timeline-marker">c. 2181 – 2055 BCE</div>
+        <h2 class="section-head">V. Systemic Decoherence — 1st Intermediate Period</h2>
+        <p>
+            The collapse of the Old Kingdom led to the <a href="first-intermediate.html" class="nl">First Intermediate Period</a>. A combination of climate failure (failed Nile floods) and bureaucratic bloat caused the central "Signal" to fragment into regional "Noise."
+        </p>
+        <p>
+            Metaphysically, this was a <strong>Democratization Cycle</strong>. The transfiguration technologies once reserved for the King (Pyramid Texts) began to appear in the coffins of local officials, evolving into the <a href="funerary-texts.html" class="nl">Coffin Texts</a>. This period proved that the Kemetic data-stream could survive even when its primary "Hardware" (the central state) failed.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VI. MIDDLE KINGDOM -->
+    <section id="middle-kingdom" class="era-block">
+        <div class="timeline-marker">c. 2055 – 1650 BCE</div>
+        <h2 class="section-head">VI. The Classical Restoration — Middle Kingdom</h2>
+        <p>
+            The <a href="middle-kingdom.html" class="nl">Middle Kingdom</a> (Dynasties 11–13) is the "Classical Stabilization Phase." Founded by Mentuhotep II, it shifted the royal ideal from the "God-King" to the "Shepherd-King."
+        </p>
+        <p>
+            This era produced the standard forms of Middle Egyptian literature and language. The rise of <strong>Amun</strong> (<i>imn</i> [𓇋𓏠𓈖]) at Thebes provided a new, flexible theological synthesis. It was a period of high-bandwidth intellectual production, focusing on the ethical responsibility of the individual to maintain Ma'at.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VII. 2ND INTERMEDIATE -->
+    <section id="second-intermediate" class="era-block">
+        <div class="timeline-marker">c. 1650 – 1550 BCE</div>
+        <h2 class="section-head">VII. The Hyksos Encounter — 2nd Intermediate Period</h2>
+        <p>
+            The <a href="second-intermediate-period.html" class="nl">Second Intermediate Period</a> saw the conquest of Lower Egypt by the <strong>Hyksos</strong> (<i>ḥḳȝw-ḫȝswt</i> [𓋾𓆤𓋭𓈉𓏥] - Rulers of Foreign Lands). 
+        </p>
+        <p>
+            This was a <strong>Stress-Test</strong> for the Egyptian system. The encounter forced the indigenous data-stream to integrate new "Hardware" (the chariot, vertical loom, composite bow) and new "Software" (the integration of Levantine deities). This trauma paved the way for the imperial evolution of the New Kingdom.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ VIII. NEW KINGDOM -->
+    <section id="new-kingdom" class="era-block">
+        <div class="timeline-marker">c. 1550 – 1075 BCE</div>
+        <h2 class="section-head">VIII. Imperial Zenith — The New Kingdom</h2>
+        <p>
+            The <a href="new-kingdom.html" class="nl">New Kingdom</a> (Dynasties 18–20) is the "High-Bandwidth Expansion Phase." Following the expulsion of the Hyksos, Egypt transformed into a global empire.
+        </p>
+        <p>
+            Key figures: Thutmose III (military expansion), Hatshepsut (trade and geometry), and Amenhotep III (monumental saturation). The religious center shifted entirely to <strong>Amun-Ra</strong> at Karnak. This era saw the compilation of the <a href="funerary-texts.html" class="nl">Book of the Dead</a> (<i>prt m hrw</i> [𓉿𓂋𓏏𓇋𓅱𓇳𓏤] - Going Forth by Day) and the secret navigation technology of the <a href="netherworld-books.html" class="nl">Valley of the Kings</a>.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ IX. AMARNA RIFT -->
+    <section id="amarna-rift" class="era-block">
+        <div class="timeline-marker">c. 1352 – 1336 BCE</div>
+        <h2 class="section-head">IX. The Amarna Anomaly — Akhenaten’s Interlude</h2>
+        <p>
+            Nested within the New Kingdom, the <a href="amarna-period.html" class="nl">Amarna Period</a> was a radical <strong>Systemic Rift</strong>. Akhenaten attempted to delete the traditional Ennead and replace it with the exclusive worship of the <strong>Aten</strong> (<i>itn</i> [𓇋𓏏𓈖𓇳]).
+        </p>
+        <p>
+            While culturally brilliant, this rift caused a collapse of Egypt’s external imperial stability and was eventually subjected to a total "System Restore" (<i>Damnatio Memoriae</i>) by Horemheb and the early Ramesside kings.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ X. 3RD INTERMEDIATE -->
+    <section id="third-intermediate" class="era-block">
+        <div class="timeline-marker">c. 1075 – 664 BCE</div>
+        <h2 class="section-head">X. The Theban Theocracy — 3rd Intermediate Period</h2>
+        <p>
+            The <a href="third-intermediate-period.html" class="nl">Third Intermediate Period</a> was a "Data-Preservation Cycle." As the central "Imperial Hardware" fractured, the High Priests of Amun at Thebes established a local theocracy.
+        </p>
+        <p>
+            Faced with looting and economic decline, the priesthood focused on the <strong>Archival Protection</strong> of royal mummies and sacred texts. This era saw the rise of Libyan and Nubian (25th Dynasty) rulers who sought to restore Ma'at by mimicking the high-frequency styles of the Old Kingdom.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ XI. LATE PERIOD -->
+    <section id="late-period" class="era-block">
+        <div class="timeline-marker">c. 664 – 332 BCE</div>
+        <h2 class="section-head">XI. The Saite Renaissance — Late Period</h2>
+        <p>
+            The <a href="late-period.html" class="nl">Late Period</a> (Dynasties 26–31) is the "Total System Backup." Facing the encroaching empires of Assyria, Babylon, and Persia, the Saite kings (26th Dynasty) initiated a radical program of <strong>Archaism</strong>. 
+        </p>
+        <p>
+            They systematically copied the art, language, and rituals of the Old Kingdom to ensure that the core Kemetic frequency would survive the impending foreign rule. This period marks the final stand of the indigenous Pharaohs before the Hellenistic transition.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ XII. PTOLEMAIC -->
+    <section id="ptolemaic" class="era-block">
+        <div class="timeline-marker">332 – 30 BCE</div>
+        <h2 class="section-head">XII. The Greco-Egyptian Synthesis — Ptolemaic Period</h2>
+        <p>
+            The <a href="ptolemaic-period.html" class="nl">Ptolemaic Period</a> is the "Translation Phase." Following the conquest of Alexander the Great, the high-frequency knowledge of the <a href="house-of-life.html" class="nl">House of Life</a> was systematically translated into the philosophical vocabulary of Greece.
+        </p>
+        <p>
+            This era saw the construction of the Great Temples of Edfu, Dendera, and Philae, which are effectively "Stone Encylopedias" of Kemetic theurgy. This synthesis gave birth to <a href="hermeticism.html" class="nl">Hermeticism</a>, preserving the spirit of <a href="thoth-hermes.html" class="nl">Thoth</a> for the Western intellectual stream.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ XIII. ROMAN -->
+    <section id="roman" class="era-block">
+        <div class="timeline-marker">30 BCE – 641 CE</div>
+        <h2 class="section-head">XIII. The Final Chapter — Roman and Coptic Transition</h2>
+        <p>
+            The <a href="roman-period.html" class="nl">Roman Period</a> represents the <strong>Dissolution Phase</strong>. While material resources were extracted for Rome, the initiatory knowledge retreated into increasingly restricted and subterranean channels.
+        </p>
+        <p>
+            The final hieroglyphic inscription was carved at Philae in 394 CE. The language evolved into <a href="coptic.html" class="nl">Coptic</a> (using the Greek alphabet), and the metaphysical focus shifted into <a href="gnosticism.html" class="nl">Gnosticism</a> and monasticism. By the Arab Conquest in 641 CE, the ancient OS had successfully "migrated" its essential data into the Christian and Islamic esoteric traditions.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XIV. ASTRONOMICAL -->
+    <section id="astronomical">
+        <h2 class="section-head">XIV. Astronomical Sothic Cycles — The Calibration of History</h2>
+        <p>
+            Kemetic chronology is calibrated against the <strong>Sothic Cycle</strong>—the periodic heliacal rising of the star <strong>Sopdet</strong> (Sirius [𓇮]). 
+        </p>
+        <p>
+            Because the Egyptian civil calendar lacked a leap year, it fell out of sync with the solar year by one day every four years. A full "Sothic Year" required 1,460 years to return to synchronization. By recording "Sothic Risings" in specific regnal years, the ancient scribes provided modern researchers with "Absolute Data-Nodes" that permit the precise dating of the Middle and New Kingdoms. This celestial clock is the ultimate anchor for the timeline of the Nile Valley.
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XV. KING LISTS -->
+    <section id="king-lists">
+        <h2 class="section-head">XV. The Royal Lists — Palermo, Abydos, and Turin</h2>
+        <p>
+            The Egyptians were the world's most meticulous archivists. They maintained several "King Lists" to ensure the continuity of the royal Ka-stream:
+        </p>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>PALERMO STONE (OK)</h4>
+                <p>The earliest surviving annals, recording reigns from the Predynastic through the 5th Dynasty, including the height of the Nile flood for each year.</p>
+            </div>
+            <div class="info-card">
+                <h4>ABYDOS KING LIST (NK)</h4>
+                <p>A ceremonial list in the Temple of Seti I, showing the King offering to 76 legitimate predecessors, systematically omitting "Isfet-infected" kings like Akhenaten.</p>
+            </div>
+            <div class="info-card">
+                <h4>TURIN CANON (NK)</h4>
+                <p>The most accurate administrative list, written on papyrus, including exact lengths of reigns in years, months, and days, including the "God-Kings" of the Zep Tepi.</p>
+            </div>
         </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════ XVII. METAPHYSICAL CYCLES -->
+    <section id="metaphysical-cycles">
+        <h2 class="section-head">XVII. Metaphysical Cyclicity — Neheh and Djet</h2>
+        <p>
+            The timeline of Kemet is governed by two types of eternity: <strong>Neheh</strong> (<i>nḥḥ</i> [𓎛𓎛𓄿𓇳]) and <strong>Djet</strong> (<i>ḏt</i> [𓆓𓏏𓇿]).
+        </p>
+        <ul style="list-style: square; padding-left: 2rem; margin-bottom: 1.5rem;">
+            <li><strong>Neheh:</strong> The eternity of <strong>Cycles</strong>. The time of the sun god Re, characterized by movement, sunrise, sunset, and the seasons. The "Horizontal" axis of the timeline.</li>
+            <li><strong>Djet:</strong> The eternity of <strong>Crystallization</strong>. The time of the god Osiris, characterized by stability, the fixed record, and the stone monuments. The "Vertical" axis of the timeline.</li>
+        </ul>
+        <p>History, for the Egyptians, was the intersection of these two forces. A successful reign brought the moving cycles of Neheh into alignment with the stable truth of Djet.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════ XX. ETHICS TIME -->
+    <section id="ethics-time">
+        <h2 class="section-head">XX. The Ethics of Time — Responsibility to the Ancestral Stream</h2>
+        <p>
+            In Kemetic ethics, to remember the past is to "give life" to it. The scribe’s duty was to prevent the "Decoherence" of memory. 
+        </p>
+        <p>
+            When we study the timeline of Kemet, we are not looking at dead history; we are maintaining the <strong>Ancestral Data-Stream</strong>. Every name spoken and every date recovered restores a node of Ma'at to the modern awareness field. The timeline is a living cord that links us to the First Time, and our responsibility is to ensure that its resonance remains clear.
+        </p>
     </section>
 
     <div class="glyph-marker">𓏲 𓏴 𓈖 𓎛 𓎛</div>
@@ -126,11 +311,15 @@
         <h3>// RELATED ARCHIVES //</h3>
         <ul>
             <li><a href="maat-isfet.html">Ma'at & Isfet</a></li>
-            <li><a href="funerary-texts.html">Evolution of Funerary Texts</a></li>
-            <li><a href="scripts-evolution.html">Evolution of Scripts</a></li>
-            <li><a href="hermeticism.html">Hermeticism & Syncretism</a></li>
-            <li><a href="house-of-life.html">The House of Life</a></li>
-            <li><a href="pantheon.html">The Egyptian Pantheon</a></li>
+            <li><a href="predynastic.html">Predynastic Origins</a></li>
+            <li><a href="old-kingdom.html">The Old Kingdom</a></li>
+            <li><a href="middle-kingdom.html">The Middle Kingdom</a></li>
+            <li><a href="new-kingdom.html">The New Kingdom</a></li>
+            <li><a href="late-period.html">The Late Period</a></li>
+            <li><a href="ptolemaic-period.html">Ptolemaic Egypt</a></li>
+            <li><a href="roman-period.html">Roman Egypt</a></li>
+            <li><a href="funerary-texts.html">Evolution of Texts</a></li>
+            <li><a href="hermeticism.html">Hermetic Tradition</a></li>
         </ul>
     </div>
 
@@ -143,7 +332,7 @@
 <footer>
     <p>// LIBRETH ARCHIVE :: EGYPTOLOGY DIVISION //<br>
     <span style="font-size:1.5rem;letter-spacing:0.3rem;opacity:0.3;">𓋹 𓏤 𓈖 𓎛</span><br>
-    TEMPORAL MAPPING: COMPLETE</p>
+    TEMPORAL RESONANCE: STABLE // THE STREAM IS OPEN</p>
 </footer>
 
 </body>

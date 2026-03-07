@@ -45,16 +45,17 @@
                 
                 <!-- Action Bar -->
                 <div class="action-bar">
-                    <label class="format-checkbox-label">
-                        <input type="checkbox" id="format-controls" onchange="convertText()">
-                        <span>Enable Unicode formatting (:, *)</span>
-                    </label>
-
                     <button id="copy-btn" type="button" onclick="copyToClipboard()">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                         <span id="copy-text">Copy Hieroglyphs</span>
                     </button>
                 </div>
+            </div>
+            <div class="controls-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="format-controls" checked onchange="convertText()">
+                            Enable Stacking Logic (Unicode 12.0+)
+                        </label>
             </div>
         </div>
 
@@ -222,13 +223,9 @@
             const input = inputField.value;
             const useFormat = document.getElementById('format-controls').checked;
 
-            // Regex matches:
-            // 1. Gardiner codes (e.g., M17, Aa1, Z4A)
-            // 2. Single alphabetic letters (for MdC parsing)
-            // 3. Formatting controls (:, *, -)
-            // 4. Newlines to preserve block spacing
-            const tokenRegex = /([A-Za-z]{1,2}\d+[A-Za-z]?|[a-zA-Z]|[:*\-]|\n)/g;
-            
+            // 1. Added '(' and ')' to the regex capture group
+            const tokenRegex = /([A-Za-z]{1,2}\d+[A-Za-z]?|[a-zA-Z]|[:*\-()]|\n)/g;
+    
             let match;
             let result = '';
 
@@ -238,31 +235,38 @@
                 if (token === '\n') {
                     result += '\n';
                 } else if (token === ':') {
-                    result += useFormat ? '𓐰' : ''; // Vertical stacking joiner
+                    result += useFormat ? '𓐰' : ''; // U+13430 Vertical Stacking
                 } else if (token === '*') {
-                    result += useFormat ? '𓐱' : ''; // Horizontal grouping joiner
+                    result += useFormat ? '𓐱' : ''; // U+13431 Horizontal Grouping
+                } else if (token === '(') {
+                    result += useFormat ? '𓐷' : ''; // U+13437 Begin Segment
+                } else if (token === ')') {
+                    result += useFormat ? '𓐸' : ''; // U+13438 End Segment
                 } else if (token === '-') {
-                    result += ''; // Ignore, layout is horizontally adjacent by default
+                    result += ''; // Ignore visual spacers
                 } else if (mdcMap[token]) {
-                    // It's a single letter corresponding to an MdC code
+                    // Uniliteral MdC mapping
                     result += gardinerMap[mdcMap[token]] || `[${mdcMap[token]}]`;
                 } else if (token.length > 1 || /^[A-Z]$/.test(token)) {
-                    // It's a Gardiner Code (Normalize it first)
+                    // 2. Safely parse Gardiner codes with trailing lowercase letters (e.g., N35a)
                     let norm = token;
-                    if (norm.toLowerCase().startsWith('aa')) {
-                        norm = 'Aa' + norm.substring(2).toUpperCase(); // e.g. aa1 -> Aa1
+                    const matchCode = token.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+            
+                    if (matchCode) {
+                        let letterPart = matchCode[1].toLowerCase() === 'aa' ? 'Aa' : matchCode[1].toUpperCase();
+                        let numPart = matchCode[2];
+                        let trailingPart = matchCode[3].toLowerCase(); // Force the trailing letter back to lower
+                        norm = letterPart + numPart + trailingPart;
                     } else {
-                        norm = norm.toUpperCase(); // e.g. m17 -> M17
+                        norm = token.toUpperCase(); 
                     }
 
                     if (gardinerMap[norm]) {
                         result += gardinerMap[norm];
                     } else {
-                        // Keep unrecognized signs visually distinct
-                        result += `[${norm}]`;
+                        result += `[${norm}]`; // Keep unrecognized visually distinct
                     }
                 } else {
-                    // Single lower-case letter not in MdC (e.g., 'e', 'c')
                     result += `[${token}]`;
                 }
             }

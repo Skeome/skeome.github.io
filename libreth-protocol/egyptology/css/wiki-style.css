@@ -1,3 +1,6 @@
+/* EGYPTIAN HIEROGLYPH FONT (Supports Unicode 12.0+ Formatting Controls) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
+
 :root {
     --gold: #d4af37;
     --gold-dim: #8a6e1e;
@@ -52,10 +55,12 @@ body {
 }
 .page-header::before {
     display: block;
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif; /* ADDED FONT */
+    font-weight: 400; /* Force normal weight so ligatures don't break */
+    font-size: clamp(2rem, 6vw, 3rem); /* Bumped up slightly for Noto Sans */
     color: var(--gold-dim);
     margin-bottom: 1.5rem;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.5rem; /* Still adds nice spacing between completed quadrats */
     opacity: 0.7;
 }
 .page-title {
@@ -242,12 +247,21 @@ em, i { color: rgba(240,230,140,0.8); }
 
 /* GLYPH MARKER */
 .glyph-marker {
+    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif; /* ADDED FONT */
+    font-weight: 400;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--gold-dim);
     opacity: 0.4;
     letter-spacing: 0.5rem;
     margin: 2rem 0;
+}
+
+/* HIEROGLYPH UTILITY CLASS (For your inline text and Transliterator tool) */
+.hieroglyph {
+    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 /* SIDEBAR NOTE */
