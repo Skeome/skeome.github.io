@@ -7,38 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/wiki-style.css">
-    <style>
-        :root { 
-            --apep-crimson: #8b0000;
-            --apep-fire: #ff4500;
-            --apep-dark: rgba(139,0,0,0.9);
-            --apep-light: rgba(139,0,0,0.15);
-            --apep-dim: rgba(139,0,0,0.03);
-        }
-        body {
-            background-image:
-                radial-gradient(ellipse at 20% 10%, var(--apep-light) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
-        }
-        ::-webkit-scrollbar-thumb { background: var(--apep-fire); }
-        .page-header { border-bottom: 2px solid var(--apep-crimson); box-shadow: 0 4px 12px var(--apep-dim); }
-        .page-header::before { content: '𓇋 𓏏 𓈖 𓐍 𓆙'; color: var(--apep-fire); }
-        .page-title { color: var(--apep-fire); text-shadow: 0 0 30px rgba(139,0,0,0.5), 0 0 60px rgba(139,0,0,0.2); }
-        .page-subtitle { color: var(--apep-crimson); }
-        .page-epithet { color: var(--apep-light); }
-        .toc-block { border-left: 4px solid var(--apep-crimson); background: var(--apep-dim); }
-        .toc-title { color: var(--apep-fire); }
-        h2.section-head { color: var(--apep-fire); border-bottom: 2px solid var(--apep-crimson); }
-        .pull-quote { border-left: 4px solid var(--apep-crimson); background: var(--apep-dim); }
-        .info-card { border-left: 4px solid var(--apep-crimson); background: var(--apep-dim); }
-        .info-card h4 { color: var(--apep-fire); }
-        .blue-block { background: var(--apep-dim); border-left: 4px solid var(--apep-crimson); }
-        .divider { border-color: var(--apep-crimson); }
-        .glyph-marker { color: var(--apep-fire); }
-        footer { color: var(--apep-crimson); border-top: 1px solid var(--apep-dim); }
-    </style>
 </head>
-<body>
+<body data-page="apep">
 <div class="page-wrap">
 
     <!-- HEADER -->

@@ -440,3 +440,187 @@ a.nl:hover { color: #00ffae; }
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     width: 100%;
 }
+
+/* PAGE-SPECIFIC THEMING */
+
+/* OSIRIS PAGE */
+body[data-page="osiris"] {
+    --osiris-green: #2e8b57;
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(46,139,87,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+body[data-page="osiris"] ::-webkit-scrollbar-thumb { background: #2e8b57; }
+body[data-page="osiris"] .page-header { border-bottom: 1px solid rgba(46,139,87,0.3); }
+body[data-page="osiris"] .page-header::before { content: '𓊨 𓁹 𓀭 𓋴 𓐍 𓅓'; color: #2e8b57; }
+body[data-page="osiris"] h2.section-head { border-bottom: 1px solid rgba(46,139,87,0.3); }
+body[data-page="osiris"] .divider { background: linear-gradient(to right, transparent, rgba(46,139,87,0.4), transparent); }
+body[data-page="osiris"] .toc-block { border: 1px solid rgba(46,139,87,0.3); background: rgba(10,20,15,0.8); }
+body[data-page="osiris"] footer { color: rgba(46,139,87,0.3); border-top: 1px solid rgba(46,139,87,0.1); }
+
+/* ISIS PAGE */
+body[data-page="isis"] {
+    --isis-rose: #c41e3a;
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(196,30,58,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+body[data-page="isis"] ::-webkit-scrollbar-thumb { background: #c41e3a; }
+body[data-page="isis"] .page-header { border-bottom: 1px solid rgba(196,30,58,0.3); }
+body[data-page="isis"] .page-header::before { content: '𓊨 𓏏 𓁐 𓅓 𓂝'; color: #c41e3a; }
+body[data-page="isis"] h2.section-head { border-bottom: 1px solid rgba(196,30,58,0.3); }
+body[data-page="isis"] .divider { background: linear-gradient(to right, transparent, rgba(196,30,58,0.4), transparent); }
+body[data-page="isis"] .toc-block { border: 1px solid rgba(196,30,58,0.3); background: rgba(20,10,15,0.8); }
+body[data-page="isis"] footer { color: rgba(196,30,58,0.3); border-top: 1px solid rgba(196,30,58,0.1); }
+
+/* PANTHEON PAGE */
+body[data-page="pantheon"] {
+    --pantheon-gold: #d4af37;
+    --pantheon-dark: rgba(212, 175, 55, 0.9);
+    --pantheon-light: rgba(212, 175, 55, 0.2);
+    --pantheon-dim: rgba(212, 175, 55, 0.05);
+}
+body[data-page="pantheon"] .page-header { border-bottom: 2px solid #d4af37; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.05); }
+body[data-page="pantheon"] .page-header::before { content: '𓊹 𓊹 𓊹 𓊹 𓊹 𓊹'; color: #d4af37; }
+body[data-page="pantheon"] .page-title { color: #d4af37; text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+body[data-page="pantheon"] h2.section-head { border-bottom: 2px solid #d4af37; color: rgba(212, 175, 55, 0.9); }
+body[data-page="pantheon"] .divider { border-color: #d4af37; }
+body[data-page="pantheon"] .toc-block { border-left: 4px solid #d4af37; background: rgba(212, 175, 55, 0.05); }
+body[data-page="pantheon"] .info-card { border-left: 4px solid #d4af37; }
+body[data-page="pantheon"] .blue-block { background: rgba(212, 175, 55, 0.05); border-left: 4px solid #d4af37; }
+body[data-page="pantheon"] .glyph-marker { color: #d4af37; }
+body[data-page="pantheon"] ::-webkit-scrollbar-thumb { background-color: #d4af37; }
+
+/* APEP PAGE */
+body[data-page="apep"] {
+    --apep-crimson: #8b0000;
+    --apep-fire: #ff4500;
+    --apep-dark: rgba(139,0,0,0.9);
+    --apep-light: rgba(139,0,0,0.15);
+    --apep-dim: rgba(139,0,0,0.03);
+    background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(139,0,0,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+body[data-page="apep"] ::-webkit-scrollbar-thumb { background: #ff4500; }
+body[data-page="apep"] .page-header { border-bottom: 2px solid #8b0000; box-shadow: 0 4px 12px rgba(139,0,0,0.03); }
+body[data-page="apep"] .page-header::before { content: '𓉺 𓊪 𓊪 𓆙'; color: #ff4500; }
+body[data-page="apep"] .page-title { color: #ff4500; text-shadow: 0 0 30px rgba(139,0,0,0.5), 0 0 60px rgba(139,0,0,0.2); }
+body[data-page="apep"] .page-subtitle { color: #8b0000; }
+body[data-page="apep"] .page-epithet { color: rgba(139,0,0,0.15); }
+body[data-page="apep"] .toc-block { border-left: 4px solid #8b0000; background: rgba(139,0,0,0.03); }
+body[data-page="apep"] .toc-title { color: #ff4500; }
+body[data-page="apep"] h2.section-head { color: #ff4500; border-bottom: 2px solid #8b0000; }
+body[data-page="apep"] .pull-quote { border-left: 4px solid #8b0000; background: rgba(139,0,0,0.03); }
+body[data-page="apep"] .info-card { border-left: 4px solid #8b0000; background: rgba(139,0,0,0.03); }
+body[data-page="apep"] .info-card h4 { color: #ff4500; }
+body[data-page="apep"] .blue-block { background: rgba(139,0,0,0.03); border-left: 4px solid #8b0000; }
+body[data-page="apep"] .divider { border-color: #8b0000; }
+body[data-page="apep"] .glyph-marker { color: #ff4500; }
+body[data-page="apep"] footer { color: #8b0000; border-top: 1px solid rgba(139,0,0,0.03); }
+
+/* MA'AT & ISFET PAGE */
+body[data-page="maat-isfet"] {
+    --maat-green: #2d5a3d;
+    --maat-emerald: #52b788;
+    --isfet-storm: #4a4a5a;
+    --maat-light: rgba(82, 183, 136, 0.2);
+    --isfet-dark: rgba(74, 74, 90, 0.1);
+    --balance-gold: #d4a574;
+}
+body[data-page="maat-isfet"] .page-header { border-bottom: 2px solid #2d5a3d; box-shadow: 0 4px 12px rgba(82, 183, 136, 0.2); }
+body[data-page="maat-isfet"] .page-header::before { content: '𓇓 𓏏 𓅱 𓀭 · 𓇼 𓅱 𓏏 𓅮'; color: #52b788; }
+body[data-page="maat-isfet"] .page-title { color: #52b788; text-shadow: 0 0 10px rgba(82, 183, 136, 0.2); }
+body[data-page="maat-isfet"] .page-subtitle { color: #2d5a3d; }
+body[data-page="maat-isfet"] h2.section-head { color: #52b788; border-bottom: 2px solid #2d5a3d; }
+body[data-page="maat-isfet"] .divider { border-color: #2d5a3d; }
+body[data-page="maat-isfet"] .toc-block { border-left: 4px solid #2d5a3d; background: rgba(82, 183, 136, 0.2); }
+body[data-page="maat-isfet"] .toc-title { color: #52b788; }
+body[data-page="maat-isfet"] .info-card { border-left: 4px solid #2d5a3d; }
+body[data-page="maat-isfet"] .info-card h4 { color: #52b788; }
+body[data-page="maat-isfet"] .blue-block { background: rgba(82, 183, 136, 0.2); border-left: 4px solid #2d5a3d; }
+body[data-page="maat-isfet"] .pull-quote { border-left: 4px solid #2d5a3d; }
+body[data-page="maat-isfet"] .glyph-marker { color: #52b788; }
+body[data-page="maat-isfet"] ::-webkit-scrollbar-thumb { background-color: #2d5a3d; }
+
+/* COSMOLOGICAL DEITIES PAGE */
+body[data-page="cosmological-deities"] {
+    --cosmos-blue: #1a3a52;
+    --cosmos-cyan: #0d7377;
+    --cosmos-gold: #d4af37;
+    --cosmos-light: rgba(13, 115, 119, 0.15);
+    --cosmos-dark: rgba(26, 58, 82, 0.08);
+    --cosmos-accent: #f4e4c1;
+}
+body[data-page="cosmological-deities"] .page-header { background: linear-gradient(135deg, #1a3a52 0%, #0d7377 100%); border-bottom: 4px solid #d4af37; }
+body[data-page="cosmological-deities"] .page-header::before { content: '𓇯 𓇃 𓇶 𓆣'; }
+body[data-page="cosmological-deities"] .page-title { color: #f4e4c1; text-shadow: 2px 2px 8px rgba(26, 58, 82, 0.6); }
+body[data-page="cosmological-deities"] .page-subtitle { color: #f4e4c1; opacity: 0.85; }
+body[data-page="cosmological-deities"] h2.section-head { color: #0d7377; border-bottom: 3px solid #d4af37; padding-bottom: 0.5rem; }
+body[data-page="cosmological-deities"] .divider { background: linear-gradient(90deg, #1a3a52 0%, #d4af37 50%, #1a3a52 100%); height: 3px; }
+body[data-page="cosmological-deities"] .toc-block { background-color: rgba(13, 115, 119, 0.15); border-left: 6px solid #0d7377; }
+body[data-page="cosmological-deities"] .toc-title { color: #1a3a52; font-weight: 600; }
+body[data-page="cosmological-deities"] .toc-list li a { color: #0d7377; }
+body[data-page="cosmological-deities"] .toc-list li a:hover { color: #d4af37; }
+body[data-page="cosmological-deities"] .info-card { border-left: 4px solid #0d7377; background-color: rgba(13, 115, 119, 0.15); }
+body[data-page="cosmological-deities"] .info-card h4 { color: #1a3a52; font-weight: 600; }
+body[data-page="cosmological-deities"] .blue-block { background-color: rgba(26, 58, 82, 0.08); border-left: 4px solid #d4af37; }
+body[data-page="cosmological-deities"] .blue-block .bb-title { color: #0d7377; }
+body[data-page="cosmological-deities"] .pull-quote { border-left: 4px solid #d4af37; color: #1a3a52; }
+body[data-page="cosmological-deities"] .glyph-marker { color: #0d7377; opacity: 0.4; }
+body[data-page="cosmological-deities"] ::-webkit-scrollbar-thumb { background: #0d7377; }
+
+/* HOUSE OF LIFE PAGE */
+body[data-page="house-of-life"] {
+    --holife-gold: #d4af37;
+    --holife-amber: #cc771f;
+    --holife-papyrus: #e8dcc4;
+    --holife-light: rgba(212, 175, 55, 0.12);
+    --holife-dark: rgba(51, 40, 20, 0.08);
+    --holife-accent: #4a3728;
+}
+body[data-page="house-of-life"] .page-header { background: linear-gradient(135deg, #3a2a15 0%, #5a4a30 100%); border-bottom: 4px solid #d4af37; }
+body[data-page="house-of-life"] .page-header::before { content: '𓉐 𓂋 𓅱 𓏤 𓇯'; }
+body[data-page="house-of-life"] .page-title { color: #d4af37; text-shadow: 2px 2px 8px rgba(58, 42, 21, 0.6); }
+body[data-page="house-of-life"] .page-subtitle { color: #e8dcc4; opacity: 0.9; }
+body[data-page="house-of-life"] .page-epithet { color: #cc771f; font-style: italic; opacity: 0.85; }
+body[data-page="house-of-life"] h2.section-head { color: #cc771f; border-bottom: 3px solid #d4af37; padding-bottom: 0.5rem; }
+body[data-page="house-of-life"] .divider { background: linear-gradient(90deg, #4a3728 0%, #d4af37 50%, #4a3728 100%); height: 3px; }
+body[data-page="house-of-life"] .toc-block { background-color: rgba(212, 175, 55, 0.12); border-left: 6px solid #cc771f; }
+body[data-page="house-of-life"] .toc-title { color: #4a3728; font-weight: 600; }
+body[data-page="house-of-life"] .toc-list li a { color: #cc771f; }
+body[data-page="house-of-life"] .toc-list li a:hover { color: #d4af37; }
+body[data-page="house-of-life"] .info-card { border-left: 4px solid #cc771f; background-color: rgba(212, 175, 55, 0.12); }
+body[data-page="house-of-life"] .info-card h4 { color: #4a3728; font-weight: 600; }
+body[data-page="house-of-life"] .blue-block { background-color: rgba(51, 40, 20, 0.08); border-left: 4px solid #d4af37; }
+body[data-page="house-of-life"] .blue-block .bb-title { color: #cc771f; }
+body[data-page="house-of-life"] .pull-quote { border-left: 4px solid #d4af37; color: #4a3728; }
+body[data-page="house-of-life"] .glyph-marker { color: #cc771f; opacity: 0.4; }
+body[data-page="house-of-life"] ::-webkit-scrollbar-thumb { background: #cc771f; }
+
+/* FUNERARY TEXTS PAGE */
+body[data-page="funerary-texts"] {
+    --funerary-purple: #4a2a6a;
+    --funerary-gold: #d4af37;
+    --funerary-dark: #2a1840;
+    --funerary-light: rgba(74, 42, 106, 0.12);
+    --funerary-dust: #8b7a6b;
+    --funerary-accent: #c9a961;
+}
+body[data-page="funerary-texts"] .page-header { background: linear-gradient(135deg, #1a0f30 0%, #4a2a6a 100%); border-bottom: 4px solid #d4af37; }
+body[data-page="funerary-texts"] .page-header::before { content: '𓉐 𓂋 𓏏 𓅓 𓉔 𓂋 𓅱'; }
+body[data-page="funerary-texts"] .page-title { color: #d4af37; text-shadow: 2px 2px 8px rgba(26, 15, 48, 0.8); }
+body[data-page="funerary-texts"] .page-subtitle { color: #c9a961; opacity: 0.9; }
+body[data-page="funerary-texts"] h2.section-head { color: #c9a961; border-bottom: 3px solid #d4af37; padding-bottom: 0.5rem; }
+body[data-page="funerary-texts"] .divider { background: linear-gradient(90deg, #2a1840 0%, #d4af37 50%, #2a1840 100%); height: 3px; }
+body[data-page="funerary-texts"] .toc-block { background-color: rgba(74, 42, 106, 0.12); border-left: 6px solid #4a2a6a; }
+body[data-page="funerary-texts"] .toc-title { color: #4a2a6a; font-weight: 600; }
+body[data-page="funerary-texts"] .toc-list li a { color: #4a2a6a; }
+body[data-page="funerary-texts"] .toc-list li a:hover { color: #d4af37; }
+body[data-page="funerary-texts"] .info-card { border-left: 4px solid #4a2a6a; background-color: rgba(74, 42, 106, 0.12); }
+body[data-page="funerary-texts"] .info-card h4 { color: #4a2a6a; font-weight: 600; }
+body[data-page="funerary-texts"] .blue-block { background-color: rgba(42, 24, 64, 0.08); border-left: 4px solid #d4af37; }
+body[data-page="funerary-texts"] .blue-block .bb-title { color: #c9a961; }
+body[data-page="funerary-texts"] .pull-quote { border-left: 4px solid #d4af37; color: #4a2a6a; }
+body[data-page="funerary-texts"] .glyph-marker { color: #d4af37; opacity: 0.4; }
+body[data-page="funerary-texts"] ::-webkit-scrollbar-thumb { background: #4a2a6a; }

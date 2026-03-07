@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hieroglyphic Transliterator | Libreth Protocol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensures maximum compatibility with standard Hieroglyph fonts */
+        .hieroglyph {
+            font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', Arial, sans-serif;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-amber-900 mb-2">Hieroglyphic Transliterator</h1>
+            <p class="text-slate-600 mb-4">Convert Gardiner sign codes (e.g., A1, G43) or MdC alphabet (e.g., m, n, i) into copyable Unicode Egyptian Hieroglyphs. Built for the Libreth Protocol Wiki.</p>
+            
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                <p class="text-sm font-semibold text-amber-900 mb-3">This tool is built with a few powerful features specifically for Egyptology:</p>
+                <ul class="space-y-2 text-sm text-slate-700">
+                    <li class="flex items-start"><span class="text-amber-600 font-bold mr-2">•</span><span><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) single-letter uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</span></li>
+                    <li class="flex items-start"><span class="text-amber-600 font-bold mr-2">•</span><span><strong>Formatting Controls:</strong> It supports Unicode grouping controls (: for vertical stacking and * for horizontal grouping) so you can accurately represent sign positioning.</span></li>
+                    <li class="flex items-start"><span class="text-amber-600 font-bold mr-2">•</span><span><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly without needing external APIs.</span></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Input Area -->
+            <div class="flex flex-col">
+                <div class="flex justify-between items-end mb-2">
+                    <label for="input-field" class="text-sm font-semibold text-slate-700">Input (Gardiner Codes or MdC)</label>
+                    <button onclick="clearInput()" class="text-xs text-slate-500 hover:text-amber-600 transition-colors">Clear</button>
+                </div>
+                <textarea id="input-field" class="w-full flex-grow h-48 lg:h-64 p-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 font-mono text-base shadow-sm resize-none" placeholder="Enter codes separated by spaces or dashes...&#10;&#10;Examples:&#10;M17 G43 X1&#10;i w t&#10;A1 : n * w"></textarea>
+            </div>
+
+            <!-- Output Area -->
+            <div class="flex flex-col">
+                <label for="output-field" class="text-sm font-semibold text-slate-700 mb-2">Unicode Output</label>
+                <textarea id="output-field" class="w-full flex-grow h-48 lg:h-64 p-4 border border-slate-300 rounded-xl bg-white text-4xl hieroglyph focus:outline-none shadow-sm resize-none" readonly placeholder="𓇋𓅱𓏏"></textarea>
+                
+                <!-- Action Bar -->
+                <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <label class="flex items-center space-x-2 text-sm text-slate-600 cursor-pointer group">
+                        <input type="checkbox" id="format-controls" class="rounded text-amber-600 focus:ring-amber-500 cursor-pointer" onchange="convertText()">
+                        <span class="group-hover:text-amber-700 transition-colors">Enable Unicode formatting (:, *)</span>
+                    </label>
+
+                    <button id="copy-btn" onclick="copyToClipboard()" class="w-full sm:w-auto px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center space-x-2 shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        <span id="copy-text">Copy Hieroglyphs</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference Tables -->
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <h3 class="text-lg font-bold text-amber-900 mb-4 border-b border-slate-100 pb-2">Uniliteral Cheat Sheet (MdC)</h3>
+            <p class="text-xs text-slate-500 mb-4">Type these single characters into the input field to instantly output their corresponding uniliteral sign.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-4 gap-x-2 text-sm">
+                <!-- Row 1 -->
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓅀</span> <span class="font-mono text-slate-600">A (G1)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓇋</span> <span class="font-mono text-slate-600">i (M17)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓏭</span> <span class="font-mono text-slate-600">y (Z4)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓂝</span> <span class="font-mono text-slate-600">a (D36)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓅱</span> <span class="font-mono text-slate-600">w (G43)</span></div>
+                <!-- Row 2 -->
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓃀</span> <span class="font-mono text-slate-600">b (D58)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓊪</span> <span class="font-mono text-slate-600">p (Q3)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓆑</span> <span class="font-mono text-slate-600">f (I9)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓅓</span> <span class="font-mono text-slate-600">m (G17)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓈖</span> <span class="font-mono text-slate-600">n (N35)</span></div>
+                <!-- Row 3 -->
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓂋</span> <span class="font-mono text-slate-600">r (D21)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓉔</span> <span class="font-mono text-slate-600">h (O4)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓎛</span> <span class="font-mono text-slate-600">H (V28)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓐍</span> <span class="font-mono text-slate-600">x (Aa1)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓄡</span> <span class="font-mono text-slate-600">X (F32)</span></div>
+                <!-- Row 4 -->
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓋴</span> <span class="font-mono text-slate-600">s (S29)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓊃</span> <span class="font-mono text-slate-600">z (O34)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓈟</span> <span class="font-mono text-slate-600">S (N37)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓈎</span> <span class="font-mono text-slate-600">q (N29)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓎡</span> <span class="font-mono text-slate-600">k (V31)</span></div>
+                <!-- Row 5 -->
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓎼</span> <span class="font-mono text-slate-600">g (W11)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓏏</span> <span class="font-mono text-slate-600">t (X1)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓍿</span> <span class="font-mono text-slate-600">T (V13)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓂧</span> <span class="font-mono text-slate-600">d (D46)</span></div>
+                <div class="flex items-center space-x-2"><span class="text-2xl hieroglyph text-slate-800">𓆓</span> <span class="font-mono text-slate-600">D (I10)</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manuel de Codage to Gardiner mapping
+        const mdcMap = {
+            'A': 'G1', 'i': 'M17', 'y': 'Z4', 'a': 'D36', 'w': 'G43',
+            'b': 'D58', 'p': 'Q3', 'f': 'I9', 'm': 'G17', 'n': 'N35',
+            'r': 'D21', 'h': 'O4', 'H': 'V28', 'x': 'Aa1', 'X': 'F32',
+            's': 'S29', 'z': 'O34', 'S': 'N37', 'q': 'N29', 'k': 'V31',
+            'g': 'W11', 't': 'X1', 'T': 'V13', 'd': 'D46', 'D': 'I10'
+        };
+
+        // Comprehensive Core Gardiner Dictionary (~300 most common signs)
+        // If a sign is missing, it will output the raw code in brackets e.g. [A99]
+        const gardinerMap = {
+            "A1":"𓀀","A2":"𓀁","A3":"𓀂","A4":"𓀃","A5":"𓀄","A6":"𓀅","A7":"𓀆","A8":"𓀇","A9":"𓀈","A10":"𓀉",
+            "A11":"𓀊","A12":"𓀋","A13":"𓀌","A14":"𓀍","A15":"𓀎","A16":"𓀏","A17":"𓀐","A18":"𓀑","A19":"𓀒","A20":"𓀓",
+            "A21":"𓀔","A22":"𓀕","A23":"𓀖","A24":"𓀗","A25":"𓀘","A26":"𓀙","A27":"𓀚","A28":"𓀛","A29":"𓀜","A30":"𓀝",
+            "A31":"𓀞","A32":"𓀟","A33":"𓀠","A34":"𓀡","A35":"𓀢","A36":"𓀣","A37":"𓀤","A38":"𓀥","A39":"𓀦","A40":"𓀧",
+            "A41":"𓀨","A42":"𓀩","A43":"𓀪","A44":"𓀫","A45":"𓀬","A46":"𓀭","A47":"𓀮","A48":"𓀯","A49":"𓀰","A50":"𓀱",
+            "A51":"𓀲","A52":"𓀳","A53":"𓀴","A54":"𓀵","A55":"𓀶","A56":"𓀷","A57":"𓀸","A58":"𓀹","A59":"𓀺",
+            "B1":"𓁐","B2":"𓁑","B3":"𓁒","B4":"𓁓","B5":"𓁔","B6":"𓁕","B7":"𓁖","B8":"𓁗","B9":"𓁘",
+            "C1":"𓁰","C2":"𓁱","C3":"𓁲","C4":"𓁳","C5":"𓁴","C6":"𓁵","C7":"𓁶","C8":"𓁷","C9":"𓁸","C10":"𓁹","C11":"𓁺",
+            "D1":"𓁶","D2":"𓁷","D3":"𓁸","D4":"𓁹","D5":"𓁺","D6":"𓁻","D7":"𓁼","D8":"𓁽","D9":"𓁾","D10":"𓁿",
+            "D21":"𓂋","D36":"𓂝","D46":"𓂧","D54":"𓂻","D58":"𓃀","D60":"𓃂",
+            "E1":"𓃒","E2":"𓃓","E3":"𓃔","E4":"𓃕","E5":"𓃖","E6":"𓃗","E7":"𓃘","E8":"𓃙","E9":"𓃚","E10":"𓃛","E34":"𓃹",
+            "F1":"𓃾","F2":"𓃿","F3":"𓄀","F4":"𓄁","F5":"𓄂","F32":"𓄡","F35":"𓄤",
+            "G1":"𓅀","G2":"𓅁","G3":"𓅂","G4":"𓅃","G5":"𓅃","G17":"𓅓","G29":"𓅟","G36":"𓅨","G38":"𓅩","G39":"𓅿","G43":"𓅱",
+            "H1":"𓆦","H2":"𓆧","H3":"𓆨","H4":"𓆩","H5":"𓆪",
+            "I1":"𓆈","I2":"𓆉","I3":"𓆊","I4":"𓆋","I5":"𓆌","I9":"𓆑","I10":"𓆓","I12":"𓆕",
+            "K1":"𓆝","K2":"𓆞","K3":"𓆟","K4":"𓆠","K5":"𓆡",
+            "L1":"𓆣","L2":"𓆤","L3":"𓆥","L4":"𓆦","L5":"𓆧",
+            "M1":"𓆭","M2":"𓆮","M3":"𓆯","M4":"𓆰","M5":"𓆱","M17":"𓇋","M17A":"𓇌","M23":"𓇗",
+            "N1":"𓇯","N2":"𓇰","N3":"𓇱","N4":"𓇲","N5":"𓇳","N14":"𓇽","N29":"𓈎","N35":"𓈖","N37":"𓈟",
+            "O1":"𓉐","O2":"𓉑","O3":"𓉒","O4":"𓉔","O34":"𓊃",
+            "P1":"𓊛","P2":"𓊜","P3":"𓊝","P4":"𓊞","P5":"𓊟",
+            "Q1":"𓊩","Q2":"𓊪","Q3":"𓊪",
+            "R1":"𓊯","R2":"𓊰","R3":"𓊱","R4":"𓊲","R8":"𓊹","R11":"𓊼",
+            "S1":"𓋑","S2":"𓋒","S3":"𓋓","S4":"𓋔","S29":"𓋴","S34":"𓋹",
+            "T1":"𓌃","T2":"𓌄","T3":"𓌅","T4":"𓌆","T5":"𓌇",
+            "U1":"𓌢","U2":"𓌣","U3":"𓌤","U4":"𓌥","U5":"𓌦",
+            "V1":"𓍙","V2":"𓍚","V3":"𓍛","V4":"𓍜","V13":"𓍿","V28":"𓎛","V31":"𓎡",
+            "W1":"𓎺","W2":"𓎻","W3":"𓎼","W11":"𓎼",
+            "X1":"𓏏","X2":"𓏐","X3":"𓏑","X4":"𓏒","X5":"𓏓",
+            "Y1":"𓏛","Y2":"𓏜","Y3":"𓏝","Y4":"𓏞","Y5":"𓏟",
+            "Z1":"𓏤","Z2":"𓏥","Z3":"𓏦","Z4":"𓏭","Z7":"𓏲",
+            "Aa1":"𓐍","Aa2":"𓐎","Aa3":"𓐏","Aa4":"𓐐","Aa11":"𓐗","Aa15":"𓐛","Aa18":"𓐞"
+        };
+
+        const inputField = document.getElementById('input-field');
+        const outputField = document.getElementById('output-field');
+        
+        // Listen for input changes
+        inputField.addEventListener('input', convertText);
+
+        function clearInput() {
+            inputField.value = '';
+            convertText();
+            inputField.focus();
+        }
+
+        function convertText() {
+            const input = inputField.value;
+            const useFormat = document.getElementById('format-controls').checked;
+
+            // Regex matches:
+            // 1. Gardiner codes (e.g., M17, Aa1, Z4A)
+            // 2. Single alphabetic letters (for MdC parsing)
+            // 3. Formatting controls (:, *, -)
+            // 4. Newlines to preserve block spacing
+            const tokenRegex = /([A-Za-z]{1,2}\d+[A-Za-z]?|[a-zA-Z]|[:*\-]|\n)/g;
+            
+            let match;
+            let result = '';
+
+            while ((match = tokenRegex.exec(input)) !== null) {
+                const token = match[1];
+
+                if (token === '\n') {
+                    result += '\n';
+                } else if (token === ':') {
+                    result += useFormat ? '𓐰' : ''; // Vertical stacking joiner
+                } else if (token === '*') {
+                    result += useFormat ? '𓐱' : ''; // Horizontal grouping joiner
+                } else if (token === '-') {
+                    result += ''; // Ignore, layout is horizontally adjacent by default
+                } else if (mdcMap[token]) {
+                    // It's a single letter corresponding to an MdC code
+                    result += gardinerMap[mdcMap[token]] || `[${mdcMap[token]}]`;
+                } else if (token.length > 1 || /^[A-Z]$/.test(token)) {
+                    // It's a Gardiner Code (Normalize it first)
+                    let norm = token;
+                    if (norm.toLowerCase().startsWith('aa')) {
+                        norm = 'Aa' + norm.substring(2).toUpperCase(); // e.g. aa1 -> Aa1
+                    } else {
+                        norm = norm.toUpperCase(); // e.g. m17 -> M17
+                    }
+
+                    if (gardinerMap[norm]) {
+                        result += gardinerMap[norm];
+                    } else {
+                        // Keep unrecognized signs visually distinct
+                        result += `[${norm}]`;
+                    }
+                } else {
+                    // Single lower-case letter not in MdC (e.g., 'e', 'c')
+                    result += `[${token}]`;
+                }
+            }
+
+            outputField.value = result;
+        }
+
+        function copyToClipboard() {
+            if (!outputField.value) return;
+
+            // Standard fallback copy method to bypass iframe restrictions
+            outputField.select();
+            outputField.setSelectionRange(0, 99999); 
+            document.execCommand('copy');
+            
+            // Remove selection so it doesn't stay highlighted
+            window.getSelection().removeAllRanges();
+
+            // Provide visual feedback
+            const btn = document.getElementById('copy-btn');
+            const originalHTML = btn.innerHTML;
+            
+            btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span id="copy-text">Copied!</span>`;
+            btn.classList.remove('bg-amber-600', 'hover:bg-amber-700');
+            btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+                btn.classList.add('bg-amber-600', 'hover:bg-amber-700');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
