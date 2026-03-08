@@ -21,12 +21,22 @@
             <div class="features-box">
                 <h3>This tool is built with a few powerful features specifically for Egyptology:</h3>
                 <ul>
-                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) single-letter uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
+                    <li><strong>Transliteration Mapping:</strong> It recognizes academic transliteration symbols (e.g., ꜣ, ḫ, š, ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> will automatically pull the correct sign sequences.</li>
+                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
                     <li><strong>Formatting Controls:</strong> It supports Unicode grouping controls (: for vertical stacking and * for horizontal grouping) so you can accurately represent sign positioning.</li>
-                    <li><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly without needing external APIs.</li>
+                    <li><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly.</li>
                 </ul>
             </div>
         </header>
+
+        <!-- Phonetic Preview Panel -->
+        <div class="phonetic-preview-panel">
+            <div class="phonetic-preview-header">
+                <span class="phonetic-label">Phonetic Transliteration</span>
+                <span class="phonetic-hint">Egyptological romanization of your input</span>
+            </div>
+            <div id="phonetic-output" class="phonetic-output"><span class="output-placeholder">Phonetic preview will appear here…</span></div>
+        </div>
 
         <div class="transliterator-grid">
             <!-- Input Area -->
@@ -40,7 +50,9 @@
 
             <!-- Output Area -->
             <div class="output-panel">
-                <label>Unicode Hieroglyphs</label>
+                <div class="output-header">
+                    <label>Unicode Hieroglyphs</label>
+                </div>
                 <div id="output-field" class="hieroglyph" role="textbox" aria-readonly="true" aria-label="Hieroglyph output"><span class="output-placeholder">𓇋𓅱𓏏</span></div>
                 
                 <!-- Action Bar -->
@@ -55,15 +67,6 @@
                     </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Phonetic Preview Panel -->
-        <div class="phonetic-preview-panel">
-            <div class="phonetic-preview-header">
-                <span class="phonetic-label">Phonetic Transliteration</span>
-                <span class="phonetic-hint">Egyptological romanization of your input</span>
-            </div>
-            <div id="phonetic-output" class="phonetic-output"><span class="output-placeholder">Phonetic preview will appear here…</span></div>
         </div>
 
         <!-- Reference Table -->
@@ -112,33 +115,252 @@
     </section>
 
     <script>
-        // ─── Phonetic (Egyptological) → MdC single-letter mapping ───────────────
-        // Accepts proper Egyptological diacritics and maps them to MdC codes.
-        // Ordered longest-first so multi-char combining sequences match first.
+        // ─── Egyptological phonetic → MdC normalisation ─────────────────────────
+        // Maps every form a user might type or paste to its MdC ASCII equivalent.
+        // Covers precomposed NFC forms, NFD combining-diacritic forms, half-ring
+        // substitutes, capital variants, and informal dotted/alternate forms.
+        // Sorted longest-first so multi-codepoint sequences match before base chars.
+        //
+        //   ꜣ aleph  (G1)  → A    ꜥ ayin  (D36) → a
+        //   ḥ h-dot  (V28) → H    ḫ h-breve (Aa1) → x    ẖ H-line (F32) → X
+        //   š s-caron(N37) → S    ṯ t-line  (V13) → T    ḏ d-line  (I10) → D
+        //
         const phoneticToMdc = [
-            ['ꜣ', 'A'],  // aleph  (U+A723)
-            ['ꜥ', 'a'],  // ayin   (U+A725)
-            ['ḥ', 'H'],  // h-dot-below (U+1E25)
-            ['ḫ', 'x'],  // h-breve-below (U+1E2B)
-            ['ẖ', 'X'],  // H-breve-below (U+1E96)
-            ['š', 'S'],  // s-caron (U+0161)
-            ['Š', 'S'],
-            ['ṯ', 'T'],  // t-line-below (U+1E6F)
-            ['Ṯ', 'T'],
-            ['ḏ', 'D'],  // d-line-below (U+1E0F)
-            ['Ḏ', 'D'],
-            ['h\u0323', 'H'], // h + combining dot below
+            // ── NFD: base + combining diacritic (match BEFORE precomposed) ───────
+            ['h\u0323', 'H'],  // h + combining dot below → ḥ
             ['H\u0323', 'H'],
-            ['h\u032E', 'x'], // h + combining breve below
+            ['h\u032E', 'x'],  // h + combining breve below → ḫ
+            ['H\u032E', 'x'],
+            ['h\u0332', 'X'],  // h + combining line below → ẖ
+            ['H\u0332', 'X'],
+            ['t\u0331', 'T'],  // t + combining line below → ṯ
+            ['T\u0331', 'T'],
+            ['d\u0331', 'D'],  // d + combining line below → ḏ
+            ['D\u0331', 'D'],
+            ['s\u030C', 'S'],  // s + combining caron → š
+            ['S\u030C', 'S'],
+            // ── Half-ring / modifier substitutes used in ASCII Egyptology ────────
+            ['\u02BE', 'A'],   // ʾ RIGHT HALF RING — aleph substitute
+            ['\u02BF', 'a'],   // ʿ LEFT HALF RING  — ayin substitute
+            ['\u02C2', 'A'],   // ˂ MODIFIER LEFT ARROWHEAD — rare aleph substitute
+            // ── NFC precomposed forms ─────────────────────────────────────────────
+            ['\uA722', 'A'],   // Ꜣ LATIN CAPITAL EGYPTOLOGICAL ALEF
+            ['\uA723', 'A'],   // ꜣ LATIN SMALL EGYPTOLOGICAL ALEF
+            ['\uA724', 'a'],   // Ꜥ LATIN CAPITAL EGYPTOLOGICAL AIN
+            ['\uA725', 'a'],   // ꜥ LATIN SMALL EGYPTOLOGICAL AIN
+            ['\u1E24', 'H'],   // Ḥ h-dot-below capital
+            ['\u1E25', 'H'],   // ḥ h-dot-below
+            ['\u1E2A', 'x'],   // Ḫ h-breve-below capital
+            ['\u1E2B', 'x'],   // ḫ h-breve-below
+            ['\u1E96', 'X'],   // ẖ H-line-below (only lowercase in Unicode)
+            ['\u0160', 'S'],   // Š s-caron capital
+            ['\u0161', 'S'],   // š s-caron
+            ['\u1E6E', 'T'],   // Ṯ t-line-below capital
+            ['\u1E6F', 'T'],   // ṯ t-line-below
+            ['\u1E0E', 'D'],   // Ḏ d-line-below capital
+            ['\u1E0F', 'D'],   // ḏ d-line-below
+            // ── Informal / older transliteration alternates ───────────────────────
+            ['\u1E6C', 'T'],   // Ṭ t-dot-below (used as ṯ in some older systems)
+            ['\u1E6D', 'T'],   // ṭ
+            ['\u1E92', 'D'],   // Ẓ z-dot-below (used as ḏ in some older texts)
+            ['\u1E93', 'D'],   // ẓ
         ];
 
-        // Manuel de Codage → Gardiner code
+        // ─── Manuel de Codage → Gardiner code ────────────────────────────────────
+        // Sources: Buurman et al. (1988) Manuel de Codage; CCER 1997 online edition
+        //          (catchpenny.org/codage — Appendices B & C); Rosmorduc JSesh docs.
+        //
+        // THREE TIERS:
+        //   1. 25 standard uniliteral MdC single-letter codes (A-D, case-sensitive)
+        //   2. Official MdC phonetic multi-letter aliases for the most common bi/triliterals
+        //      (e.g. nfr, Htp, anx, wAs). These are the "canonical" phonetic codes from
+        //      Appendix C of the Manuel de Codage — only one sign per phonetic value.
+        //   3. Widely-used common variant aliases accepted by JSesh, WikiHiero, etc.
+        //
+        // NOTE: Only one sign maps to each code. Where the CCER chose the "most frequent"
+        // sign for an ambiguous phonetic value, we follow that choice exactly.
         const mdcMap = {
-            'A': 'G1', 'i': 'M17', 'y': 'Z4', 'a': 'D36', 'w': 'G43',
-            'b': 'D58', 'p': 'Q3', 'f': 'I9', 'm': 'G17', 'n': 'N35',
-            'r': 'D21', 'h': 'O4', 'H': 'V28', 'x': 'Aa1', 'X': 'F32',
-            's': 'S29', 'z': 'O34', 'S': 'N37', 'q': 'N29', 'k': 'V31',
-            'g': 'W11', 't': 'X1', 'T': 'V13', 'd': 'D46', 'D': 'I10'
+            // ── 25 standard uniliterals (case-sensitive, per MdC §2) ──────────────
+            'A': 'G1',   // ꜣ  Egyptian vulture
+            'i': 'M17',  // i  reed
+            'y': 'Z4',   // y  two strokes
+            'a': 'D36',  // ꜥ  forearm
+            'w': 'G43',  // w  quail chick
+            'b': 'D58',  // b  foot
+            'p': 'Q3',   // p  stool
+            'f': 'I9',   // f  horned viper
+            'm': 'G17',  // m  owl
+            'n': 'N35',  // n  water ripple
+            'r': 'D21',  // r  mouth
+            'h': 'O4',   // h  reed shelter
+            'H': 'V28',  // ḥ  twisted wick
+            'x': 'Aa1',  // ḫ  placenta
+            'X': 'F32',  // ẖ  belly
+            's': 'S29',  // s  folded cloth
+            'z': 'O34',  // z  door bolt
+            'S': 'N37',  // š  pool
+            'q': 'N29',  // q  hill slope
+            'k': 'V31',  // k  basket with handle
+            'g': 'W11',  // g  stand for jug
+            't': 'X1',   // t  bread loaf
+            'T': 'V13',  // ṯ  tethering rope
+            'd': 'D46',  // d  hand
+            'D': 'I10',  // ḏ  cobra
+
+            // ── MdC official phonetic codes for biliterals ────────────────────────
+            // From CCER Appendix B/C (catchpenny.org/codage) and MdC-88 sign tables.
+            // Ordered alphabetically by phonetic code for maintainability.
+            'aA':  'O29',  // ꜥꜣ  large wooden column
+            'ab':  'D59',  // ꜥb  foot variant (ab)
+            'aq':  'G35',  // ꜥq  cormorant
+            'aHA': 'D34',  // ꜥḥꜣ spear
+            'apr': 'Aa20', // ꜥpr equip
+            'awt': 'S39',  // ꜥwt crook (flock)
+            'Aw':  'F40',  // ꜣw  extending spine
+            'Ax':  'G25',  // ꜣḫ  crested ibis
+            'Abd': 'N11',  // ꜣbd month (crescent moon)
+            'Axt': 'N27',  // ꜣḫt horizon (Akhet)
+            'bA':  'G29',  // bꜣ  jabiru stork (ba-soul)
+            'bAk': 'G5',   // bꜣk falcon (hawk; used as Horus variant in some encodings)  ← JSesh
+            'bit': 'L2',   // bit bee (king of Lower Egypt)
+            'bH':  'F18',  // bḥ  animal belly (variant)
+            'bnr': 'M30',  // bnr sweet (root)
+            'bz':  'K5',   // bz  bolti fish
+            'Db':  'G22',  // ḏb  hoopoe
+            'dSr': 'G27',  // dšr flamingo (red)
+            'Dba': 'D50',  // ḏbꜥ finger
+            'Dd':  'R11',  // ḏd  djed pillar (stable, endure)
+            'DD':  'I11',  // ḏḏ  two cobras
+            'DHwty': 'G26',// Ḏḥwty Thoth (ibis on standard)
+            'Dr':  'M36',  // Dr  bundle of flax (also "since")
+            'Dsr': 'D41',  // ḏsr forearm palm-down (sacred, holy)
+            'dwA': 'N14',  // dwꜣ star (adoration, morning)
+            'dwAt':'N15',  // dwꜣt star in circle (Duat, necropolis)
+            'Dw':  'N26',  // ḏw  two hills (mountain)
+            'fnD': 'D19',  // fnḏ nose
+            'gb':  'G50',  // gb  two plovers (Geb)
+            'gH':  'D56',  // gḥ  leg (variant)
+            'gm':  'G28',  // gm  black ibis (find)
+            'HA':  'M16',  // ḥꜣ  clump of papyrus (behind, around)
+            'HAt': 'F4',   // ḥꜣt forepart of lion (fore, first)
+            'Hfn': 'I8',   // ḥfn tadpole (100,000)
+            'HH':  'C11',  // ḥḥ  seated Heh (million)
+            'Hm':  'U36',  // ḥm  washing club (majesty, slave)
+            'Hn':  'M2',   // ḥn  plant (hoe — U8 also; most common is M2 per CCER)
+            'Hp':  'Aa5',  // ḥp  Apis / part of ship (law, rule)
+            'Hr':  'D2',   // ḥr  face
+            'Htp': 'R4',   // ḥtp bread on mat (offering, peace, rest)
+            'ia':  'D55',  // iꜥ  legs backward (also iw)
+            'iaH': 'N11',  // iꜥḥ crescent moon (moon)
+            'ib':  'F34',  // ib  heart
+            'ibi': 'A32',  // ibi man dancing (dance)
+            'idr': 'V37',  // idr bandage (herd)
+            'im':  'Z11',  // im  crossed planks (imy — who is in)
+            'in':  'K1',   // in  tilapia fish (bring)
+            'inb': 'O36',  // inb wall (fortress)
+            'inpw':'C12',  // inpw Anubis (lying jackal)
+            'ir':  'D4',   // ir  eye (do, make)
+            'irt': 'D12',  // irt pupil (eye, milk)
+            'isw': 'F44',  // isw reeds (equivalent, reward)
+            'it':  'M33',  // it  grains of wheat (barley, father)
+            'iw':  'N18',  // iw  sandbank (island; also "the" in Late Egyptian)
+            'iwa': 'F44',  // iwꜥ reeds — heir
+            'iz':  'M40',  // iz  bundle of reeds (tomb)
+            'kA':  'D28',  // kꜣ  arms raised (ka-soul)
+            'km':  'I6',   // km  crocodile skin (black — Kemet)
+            'kfA': 'F22',  // kfꜣ hind leg
+            'l':   'E23',  // l   lion recumbent (rare MdC code; = rw)
+            'mA':  'U1',   // mꜣ  sickle (see, true)
+            'mAa': 'Aa11', // mꜣꜥ true, just (Maat consonants)
+            'mAat':'C10',  // mꜣꜥt Maat seated goddess
+            'mAi': 'E22',  // mꜣi lion (walking)
+            'mi':  'W19',  // mi  milk jug (like, as)
+            'mm':  'G18',  // mm  two owls
+            'mnD': 'D27',  // mnḏ breast
+            'mniw':'A33',  // mniw herdsman (man with stick)
+            'ms':  'F31',  // ms  three fox skins (born of, bring forth)
+            'msi': 'B3',   // msi woman giving birth
+            'mt':  'D52',  // mt  phallus (dead, seed)
+            'mwt': 'G14',  // mwt vulture (mother)
+            'nD':  'Aa27', // nḏ  unknown sign (ask, protect)
+            'nDs': 'G37',  // nḏs small bird (small, poor)
+            'nfr': 'F35',  // nfr windpipe + heart (good, beautiful, perfect)
+            'nH':  'G21',  // nḥ  guinea fowl
+            'nTr': 'R8',   // nṯr flag on pole (god)
+            'ns':  'F20',  // ns  animal nose (tongue)
+            'nSmt':'K6',   // nšmt oxyrhynchus fish
+            'pt':  'N1',   // pt  sky (heaven)
+            'pA':  'G40',  // pꜣ  pintail duck flying (the, this)
+            'pH':  'F22',  // pḥ  hind leg (reach, back part) — variant of kfA
+            'pHty':'F22',  // pḥty strength (two legs sign set)
+            'pXr': 'F46',  // pḫr intestines (go around, reverse)
+            'pzD': 'N9',   // psḏ moon disk (shine, back of spine)
+            'qAb': 'F46',  // qꜣb intestines (double, fold)
+            'qd':  'Aa28', // qd  builder's tool (build, character, shape)
+            'qiz': 'A38',  // qiz man with two emblems (Cusae)
+            'qn':  'Aa8',  // qn  irrigation canal? (brave, complete)
+            'ra':  'N5',   // rꜥ  sun disk (Re, day)     ← canonical per CCER
+            'rd':  'D54',  // rd  walking legs (go, leg)
+            'rdi': 'X8',   // rdi conical loaf (give — rdi is MdC alias for di/X8)
+            'rmi': 'D9',   // rmi weeping eye (weep)
+            'rnp': 'M4',   // rnp palm branch with notches (year, rejuvenate)
+            'rw':  'E23',  // rw  recumbent lion (lion)
+            'rxyt':'G23',  // rḫyt hoopoe variant (common people)
+            's':   'S29',  // s   folded cloth (already in uniliterals; alias kept for disambiguation)
+            'sA':  'G38',  // sꜣ  goose (son of; also protective amulet)
+            'sAH': 'D61',  // sꜣḥ sandaled foot (Orion, dignified)
+            'sAb': 'E17',  // sꜣb lying jackal on shrine (Anubis epithet, dignitary)
+            'sbk': 'I4',   // sbk crocodile with curved tail (Sobek)
+            'sd':  'F33',  // sd  tail
+            'sDm': 'F21',  // sḏm ear of animal (hear, Sekhmet)
+            'Sd':  'F30',  // šd  vessel with liquid (nourish)
+            'sm':  'M21',  // sm  plant (sem-priest robes)
+            'smA': 'F36',  // smꜣ lung (unite)
+            'snD': 'G54',  // snḏ plucked bird (fear)
+            'spAt':'N24',  // sp3t nome (region, district)
+            'spr': 'F42',  // spr rib (reach, petition)
+            'Sps': 'A50',  // špsi noble on chair (revered)
+            'Spsi':'A51',  // špsi noble with flagellum
+            'sr':  'E31',  // sr  ram (noble, official)
+            'srqt':'L7',   // srqt scorpion (Serqet)
+            'stX': 'E20',  // stš Seth animal (Set)
+            'sti': 'F29',  // sti belly with teats (pour out, shoot)
+            'Styt':'S26',  // šṯyt apron/šendyt-kilt
+            'sw':  'M23',  // sw  sedge (he, him; king of Upper Egypt)
+            'Sw':  'H6',   // šw  feather (Shu, light, empty)
+            'sxt': 'M20',  // sḫt field of reeds (field)
+            'Sma': 'M26',  // šmꜥ sedge without root (Upper Egypt)
+            'Smsw':'T18',  // šmsw crook with package (follower, eldest)
+            'snb': 'G34',  // snb ostrich (healthy, health)
+            'tp':  'D1',   // tp  head (upon, first, head)
+            'tyw': 'G4',   // tyw buzzard
+            'txn': 'O25',  // tḫn obelisk (Heliopolis, Luxor)
+            'wAD': 'M13',  // wꜣḏ papyrus scepter (green, fresh, papyrus)
+            'wab': 'D60',  // wꜥb pure foot (pure, priest)
+            'wAs': 'S40',  // wꜣs was-scepter (power, dominion) ← canonical MdC alias
+            'wD':  'V24',  // wḏ  cord on stick (command, decree)
+            'wDAt':'D10',  // wḏꜣt the eye of Horus (sound eye)
+            'wHm': 'F25',  // wḥm hind-leg/hide (repeat, again)
+            'wn':  'E34',  // wn  hare (be, exist, open)
+            'wr':  'G36',  // wr  swallow (great, elder)
+            'wsr': 'F8',   // wsr neck of animal (mighty, powerful)
+            'wSA': 'G42',  // wšꜣ chick (hungry)
+            'xA':  'M12',  // ḫꜣ  lotus with stalk (1000, thousand)
+            'xAst':'N25',  // ḫꜣst foreign hill (desert, foreign land)
+            'xn':  'G41',  // ḫn  pintail alighting
+            'xpr': 'L1',   // ḫpr scarab beetle (become, Khepri)
+            'xpS': 'F23',  // ḫpš foreleg (strong arm, scimitar)
+            'xft': 'A13',  // ḫfty enemy (bound man)
+            'zA':  'G39',  // zꜣ  pintail duck (son; also son-sign per CCER)
+            'zAb': 'E14',  // zꜣb dog (dignitary, judge)
+            'zH':  'O22',  // zḥ  booth with pole (audience hall, tent)
+            'zm':  'M21',  // zm  (variant alias for sm — plant)
+            'zmA': 'F36',  // zmꜣ lung/unite (alias for smA)
+            'zmyt':'N25',  // zmyt desert (variant; foreign land)
+            'znb': 'E29',  // znb oryx
+            'znD': 'G54',  // znḏ plucked bird (fear — variant of snD)
+            'zSn': 'M9',   // zšn lotus flower
+            'zzmt':'E6',   // zzmt horse (var. ꜣbd)
         };
 
         // MdC letter → canonical Egyptological phonetic display character
@@ -151,116 +373,119 @@
         };
 
         // Gardiner code → canonical Egyptological transliteration
-        // Sources: Gardiner (1957) Egyptian Grammar; Allen (2000) Middle Egyptian;
-        //          Faulkner (1962) Concise Dictionary; egyptianhieroglyphs.net sign list.
+        // PRIMARY SOURCES (in order of authority):
+        //   1. Buurman et al. (1988/1997) Manuel de Codage, CCER — Appendices B & C
+        //      http://www.catchpenny.org/codage/ — the official phonetic value table
+        //   2. Gardiner, A.H. (1957) Egyptian Grammar, 3rd ed. — sign descriptions
+        //   3. Allen, J.P. (2000/2010) Middle Egyptian — phonemic values
+        //   4. Faulkner, R.O. (1962) Concise Dictionary of Middle Egyptian — word forms
+        //   5. egyptianhieroglyphs.net sign list (2021) — descriptions and phono values
         //
-        // PHILOSOPHY: Signs with a genuine PHONOGRAM value show that value (e.g. nfr, r, ḥtp).
-        // Signs used as IDEOGRAMS for a specific word also show that word's transliteration
-        // (e.g. N14 = dwꜣt, N27 = ꜣḫt, G5 = Ḥr). This is what an Egyptologist reads.
-        // Signs that are PURE SILENT DETERMINATIVES with no conventional reading get ⟨code⟩.
-        // Gardiner code → canonical Egyptological transliteration
-        // Sources: Gardiner (1957) Egyptian Grammar; Allen (2000) Middle Egyptian;
-        //          Faulkner (1962) Concise Dictionary; egyptianhieroglyphs.net sign list.
-        //
-        // PHILOSOPHY: Signs with a genuine PHONOGRAM value show that value.
-        // Signs used as IDEOGRAMS for a specific word show that word's transliteration.
-        // Pure silent DETERMINATIVES with no conventional reading get ⟨code⟩ via fallback.
+        // ENCODING PHILOSOPHY:
+        //   • Phonogram signs → their consonantal value (e.g. nfr, r, ḥtp)
+        //   • Ideograms with a canonical word reading → that reading (e.g. N27 = ꜣḫt)
+        //   • Pure silent determinatives with no phonetic reading → resolved to ⟨code⟩
+        //     by the fallback in resolveGardiner(), not stored here.
+        //   • Where CCER Appendix B gives multiple values, the PRIMARY/most-common is used.
+        //   • Transliteration uses proper Egyptological diacritics (ꜣ ꜥ ḥ ḫ ẖ š ṯ ḏ).
         const gardinerToPhonetic = {
             // ── 25 uniliterals ────────────────────────────────────────────────────
-            'G1' :'ꜣ',    // Egyptian vulture
-            'M17':'i',    // reed
-            'M17a':'i',
-            'Z4' :'y',    // two strokes
-            'Z4a':'y',
-            'D36':'ꜥ',    // forearm — ayin
-            'G43':'w',    // quail chick
-            'D58':'b',    // foot
-            'Q3' :'p',    // stool
-            'I9' :'f',    // horned viper
-            'G17':'m',    // owl
-            'N35':'n',    // water ripple
-            'D21':'r',    // mouth
-            'O4' :'h',    // reed shelter
-            'V28':'ḥ',    // twisted wick
-            'Aa1':'ḫ',    // placenta
-            'F32':'ẖ',    // belly
-            'S29':'s',    // folded cloth
-            'O34':'z',    // door bolt
-            'N37':'š',    // pool
-            'N29':'q',    // hill slope
-            'V31':'k',    // basket with handle
-            'W11':'g',    // stand for jug
-            'X1' :'t',    // bread loaf
-            'V13':'ṯ',    // tethering rope
-            'D46':'d',    // hand
-            'I10':'ḏ',    // cobra
+            'G1' :'ꜣ',    // Egyptian vulture  (MdC A)
+            'M17':'i',    // reed              (MdC i)
+            'M17a':'i',   // reed variant
+            'Z4' :'y',    // two strokes       (MdC y)
+            'Z4a':'y',    // two strokes variant
+            'D36':'ꜥ',    // forearm           (MdC a)
+            'G43':'w',    // quail chick       (MdC w)
+            'D58':'b',    // foot              (MdC b)
+            'Q3' :'p',    // stool             (MdC p)
+            'I9' :'f',    // horned viper      (MdC f)
+            'G17':'m',    // owl               (MdC m)
+            'N35':'n',    // water ripple      (MdC n)
+            'D21':'r',    // mouth             (MdC r)
+            'O4' :'h',    // reed shelter      (MdC h)
+            'V28':'ḥ',    // twisted wick      (MdC H)
+            'Aa1':'ḫ',    // placenta          (MdC x)
+            'F32':'ẖ',    // belly with teats  (MdC X)
+            'S29':'s',    // folded cloth      (MdC s)
+            'O34':'z',    // door bolt         (MdC z)
+            'N37':'š',    // pool              (MdC S)
+            'N29':'q',    // hill slope        (MdC q)
+            'V31':'k',    // basket with handle(MdC k)
+            'W11':'g',    // stand for jug     (MdC g)
+            'X1' :'t',    // bread loaf        (MdC t)
+            'V13':'ṯ',    // tethering rope    (MdC T)
+            'D46':'d',    // hand              (MdC d)
+            'I10':'ḏ',    // cobra             (MdC D)
 
             // ── A: Men and their occupations ─────────────────────────────────────
-            'A1' :'s',    // seated man — det. man/person; 1sg pronoun i/wi
-            'A2' :'r',    // hand to mouth — det. eat/drink/speak
-            'A3' :'ḥms',  // man on heel — det. sit, ḥms
-            'A4' :'dwꜣ',  // man arms raised — det. adoration, dwꜣ
-            'A5' :'imn',  // man hiding — det. hide, imn
-            'A5a':'imn',  // variant — imn
-            'A6' :'wꜥb',  // man purifying — det. purity, wꜥb
-            'A6a':'wꜥb',  // variant — wꜥb
-            'A6b':'wꜥb',  // variant — wꜥb
-            'A7' :'nḏm',  // fatigued man — det. weary
-            'A8' :'hnw',  // man performing hnw — det. jubilation
-            'A9' :'fꜣi',  // man with basket — det. carry, fꜣi
-            'A10':'sḳdw', // man with oar — det. sail
-            'A11':'ḫnms', // man with scepter and crook — det. friend, ḫnms
-            'A12':'mšꜥ',  // man with bow — det. army, mšꜥ
-            'A13':'ḫfty', // man bound — det. enemy, ḫfty
-            'A14':'mwt',  // man with bleeding head — det. die, mwt
-            'A14a':'mwt', // variant — mwt
-            'A15':'ḫr',   // man falling — det. fall, ḫr
-            'A16':'ksi',  // man bowing — det. bow, ksi
-            'A17':'šri',  // child — det. young, šri
-            'A17a':'šri', // child sitting — šri
-            'A18':'ẖrd',  // child with red crown — ẖrd
-            'A19':'i3w',  // old man with stick — det. old, i3w
-            'A20':'i3w',  // man leaning on forked stick — i3w
-            'A21':'sr',   // man with stick and cloth — det. noble, sr
-            'A22':'twt',  // statue of man — det. statue, twt
-            'A23':'ity',  // king with mace — det. sovereign, ity
-            'A24':'ḥwi',  // man striking — det. strike, ḥwi
-            'A25':'ḥwi',  // man striking one hand — ḥwi
-            'A26':'nis',  // man beckoning — det. call, nis
-            'A27':'in',   // man running — in (agent particle "by")
-            'A28':'kꜣ',   // man with arms raised — kꜣ (also det. "high, rejoice")
-            'A29':'tni',  // man upside down — det. upside down
-            'A30':'i3w',  // man arms outstretched — det. praise, i3w
-            'A31':'ḥni',  // man arms turned back — det. turn away
-            'A32':'ibi',  // man dancing — det. dance, ibi
-            'A33':'i3m',  // man with stick and bundle — det. herdsman
-            'A34':'ḫwsi', // man pounding — det. pound, ḫwsi
-            'A35':'qd',   // man building wall — det. build, qd
-            'A36':'ꜥfty', // man straining into vessel — det. brewer, ꜥfty
-            'A37':'ꜥfty', // commoner form — ꜥfty
-            'A38':'qis',  // man with two emblems — det. Cusae, qis
-            'A39':'qis',  // man with two giraffes — qis
-            'A40':'nṯr',  // seated god — det. god, nṯr
-            'A40a':'nṯr', // seated god variant — nṯr
-            'A41':'nsw',  // seated king — det. king, nsw
-            'A42':'nsw',  // seated king with flail — nsw
-            'A42a':'nsw', // variant — nsw
-            'A43':'nsw',  // king with white crown — nsw
-            'A43a':'nsw', // variant — nsw
-            'A44':'nsw',  // king with flail and white crown — nsw
-            'A45':'bity', // king with red crown — bity (king of Lower Egypt)
-            'A45a':'bity',// variant — bity
-            'A46':'bity', // king with flail and red crown — bity
-            'A47':'s3w',  // seated shepherd — det. guard, s3w
-            'A48':'iry',  // man with knife — det. iry
-            'A49':'ꜥꜣmw', // foreigner with stick — det. foreigner
-            'A50':'špsi', // noble on chair — det. revered, špsi
-            'A51':'špsi', // noble with flagellum — špsi
-            'A52':'šps',  // kneeling noble — det. revered deceased
-            'A53':'ḥsy',  // upright mummy — det. mummy/form
-            'A54':'mwt',  // recumbent mummy — det. dead, mwt
-            'A55':'sḏr',  // mummy on bed — det. lie down, sḏr
-            'A59':'dr',   // man threatening with stick — det. drive off, dr
+            // CCER: A12=mšꜥ, A15=ḫr, A17=Ẑrd, A21=sr, A33=mniw, A38=qiz, A47=iry
+            // A50=špsi, A51=špsi
+            'A1' :'s',     // seated man — det. man/person; 1sg pronoun i/wi
+            'A2' :'r',     // hand to mouth — det. eat/drink/speak
+            'A3' :'ḥms',   // man on heel — det. sit, ḥms
+            'A4' :'dwꜣ',   // man arms raised — det. adoration, dwꜣ
+            'A5' :'imn',   // man hiding — det. hide, imn
+            'A5a':'imn',
+            'A6' :'wꜥb',   // man purifying — det. purity, wꜥb
+            'A6a':'wꜥb',
+            'A6b':'wꜥb',
+            'A7' :'nḏm',   // fatigued man — det. weary, nḏm
+            'A8' :'ḥnw',   // man performing ḥnw — det. jubilation
+            'A9' :'fꜣi',   // man with basket — det. carry, fꜣi
+            'A10':'sḳdw',  // man with oar — det. sail
+            'A11':'ḫnms',  // man with scepter — det. friend, ḫnms
+            'A12':'mšꜥ',   // man with bow — det. army, mšꜥ (CCER: mSa)
+            'A13':'ḫfty',  // man bound — det. enemy, ḫfty
+            'A14':'mwt',   // man with bleeding head — det. die, mwt
+            'A14a':'mwt',
+            'A15':'ḫr',    // man falling — det. fall, ḫr (CCER: xr)
+            'A16':'ksi',   // man bowing — det. bow, ksi
+            'A17':'šri',   // child — det. young, šri (CCER: Xrd = ẖrd)
+            'A17a':'šri',
+            'A18':'ẖrd',   // child with red crown — ẖrd
+            'A19':'i3w',   // old man with stick — det. old, i3w
+            'A20':'i3w',
+            'A21':'sr',    // man with stick and cloth — det. noble, sr (CCER: sr)
+            'A22':'twt',   // statue — det. statue, twt
+            'A23':'ity',   // king with mace — det. sovereign, ity
+            'A24':'ḥwi',   // man striking — det. strike, ḥwi
+            'A25':'ḥwi',
+            'A26':'nis',   // man beckoning — det. call, nis
+            'A27':'in',    // man running — in (particle "by")
+            'A28':'kꜣ',    // man arms raised — kꜣ (also det. high, rejoice)
+            'A29':'tni',   // man upside down — det. upside down
+            'A30':'i3w',   // man arms outstretched — det. praise, i3w
+            'A31':'ḥni',   // man arms turned back
+            'A32':'ibi',   // man dancing — det. dance, ibi (CCER: ibi)
+            'A33':'mniw',  // man with stick and bundle — det. herdsman (CCER: mniw)
+            'A34':'ḫwsi',  // man pounding — det. pound
+            'A35':'qd',    // man building wall — det. build, qd
+            'A36':'ꜥfty',  // man at brewery — det. brewer, ꜥfty
+            'A37':'ꜥfty',
+            'A38':'qis',   // man with two emblems — Cusae, qiz (CCER: qiz)
+            'A39':'qis',
+            'A40':'nṯr',   // seated god — det. god, nṯr
+            'A40a':'nṯr',
+            'A41':'nsw',   // seated king — det. king, nsw
+            'A42':'nsw',
+            'A42a':'nsw',
+            'A43':'nsw',
+            'A43a':'nsw',
+            'A44':'nsw',
+            'A45':'bity',  // king with red crown — bity (king of Lower Egypt)
+            'A45a':'bity',
+            'A46':'bity',
+            'A47':'iry',   // man with knife — iry (CCER: iry)
+            'A48':'iry',
+            'A49':'ꜥꜣmw',  // foreigner with stick — det. foreigner
+            'A50':'špsi',  // noble on chair — det. revered, špsi (CCER: Sps)
+            'A51':'špsi',  // noble with flagellum (CCER: Spsi)
+            'A52':'šps',   // kneeling noble — det. revered deceased
+            'A53':'ḥsy',   // upright mummy — det. mummy/form
+            'A54':'mwt',   // recumbent mummy — det. dead, mwt
+            'A55':'sḏr',   // mummy on bed — det. lie down, sḏr
+            'A59':'dr',    // man threatening — det. drive off, dr
 
             // ── B: Women ─────────────────────────────────────────────────────────
             'B1' :'st',   // seated woman — det. woman, st
@@ -449,65 +674,69 @@
             'F52':'mt',   // phallus — mt
 
             // ── G: Birds ─────────────────────────────────────────────────────────
-            'G1' :'ꜣ',    // Egyptian vulture — ꜣ (aleph)
-            'G2' :'ꜣꜣ',   // two vultures — ꜣꜣ
+            // CCER: G1=A, G2=AA, G4=tyw, G14=mwt, G16=nbty, G17=m, G18=mm,
+            //   G21=nH, G22=Db, G23=rxyt, G25=Ax, G27=dSr, G28=gm, G29=bA,
+            //   G32=baHi, G35=aq, G36=wr, G37=nDs, G38=gb, G39=zA, G40=pA,
+            //   G41=xn, G42=wSA, G43=w, G44=ww, G46=mAw, G47=TA, G54=snD
+            'G1' :'ꜣ',    // Egyptian vulture — ꜣ (aleph); also phonetic G2
+            'G2' :'ꜣꜣ',   // two vultures — ꜣꜣ (CCER: AA)
             'G3' :'ꜣ',    // vulture with flail — ꜣ
-            'G4' :'tyw',  // buzzard — tyw
+            'G4' :'tyw',  // buzzard — tyw (CCER: tyw)
             'G5' :'Ḥr',   // falcon — Ḥr (Horus)
-            'G6' :'Ḥr',   // falcon with white crown — Ḥr
-            'G7' :'Ḥr',   // falcon on standard — Ḥr
-            'G7a':'Ḥr',   // falcon on standard variant — Ḥr
-            'G7b':'Ḥr',   // falcon on standard variant 2 — Ḥr
+            'G6' :'Ḥr',
+            'G7' :'Ḥr',
+            'G7a':'Ḥr',
+            'G7b':'Ḥr',
             'G8' :'BḤdty',// behedety falcon — BḤdty
             'G9' :'sꜣ',   // falcon in boat — sꜣ
-            'G10':'mꜣꜥt', // falcon on standard with feather — mꜣꜥt
-            'G11':'Ḥr',   // falcon with sun disk — Ḥr
-            'G12':'Mnṯw', // falcon god of Montu — Mnṯw
+            'G10':'mꜣꜥt', // falcon on standard with feather — mꜣꜥt (Maat)
+            'G11':'Ḥr',
+            'G12':'Mnṯw', // falcon of Montu — Mnṯw
             'G13':'nṯr',  // falcon with two plumes — nṯr
-            'G14':'mwt',  // vulture — mwt (mother)
-            'G15':'nḫbt', // vulture with white crown — nḫbt
-            'G16':'nbty',  // two ladies — nbty
-            'G17':'m',    // owl — m
-            'G17a':'m',   // owl variant — m
-            'G18':'mm',   // two owls — mm
-            'G19':'m',    // combination owl — m
-            'G20':'m',    // owl with unleavened bread — m
-            'G21':'nh',   // guinea fowl — nh
-            'G22':'bb',   // hoopoe — bb
-            'G23':'db3',  // hoopoe variant — db3
+            'G14':'mwt',  // vulture — mwt (mother) (CCER: mwt)
+            'G15':'nḫbt', // vulture with white crown — nḫbt (Nekhbet)
+            'G16':'nbty', // two ladies (vulture + cobra) — nbty (CCER: nbty)
+            'G17':'m',    // owl — m (MdC m)
+            'G17a':'m',
+            'G18':'mm',   // two owls — mm (CCER: mm)
+            'G19':'m',
+            'G20':'m',
+            'G21':'nḥ',   // guinea fowl — nḥ (CCER: nH)
+            'G22':'ḏb',   // hoopoe — ḏb (CCER: Db)
+            'G23':'rḫyt', // hoopoe variant — rḫyt (CCER: rxyt, common people)
             'G24':'pq',   // hoopoe variant — pq
-            'G25':'ꜣḫ',   // crested ibis — ꜣḫ (transfigured spirit)
-            'G26':'Ḏḥwty',// ibis on standard — Ḏḥwty (Thoth)
-            'G26a':'Ḏḥwty',// ibis variant — Ḏḥwty
-            'G27':'dšr',  // flamingo — dšr (red)
-            'G28':'gm',   // black ibis — gm
-            'G29':'bꜣ',   // jabiru stork — bꜣ (ba-soul)
+            'G25':'ꜣḫ',   // crested ibis — ꜣḫ (transfigured spirit) (CCER: Ax)
+            'G26':'Ḏḥwty',// ibis on standard — Ḏḥwty (Thoth) (CCER: DHwty)
+            'G26a':'Ḏḥwty',
+            'G27':'dšr',  // flamingo — dšr (red) (CCER: dSr)
+            'G28':'gm',   // black ibis — gm (find) (CCER: gm)
+            'G29':'bꜣ',   // jabiru stork — bꜣ (ba-soul) (CCER: bA)
             'G30':'bꜣ',   // three jabiru storks — bꜣ
             'G31':'dfḏ',  // heron variant — dfḏ
-            'G32':'bꜣ',   // heron on perch — bꜣ
+            'G32':'bꜣḥi', // heron on perch — bꜣḥi (CCER: baHi = flood, inundate)
             'G33':'bnw',  // heron — bnw (phoenix/Bennu)
-            'G34':'snb',  // ostrich — snb
-            'G35':'wšꜣ',  // cormorant — wšꜣ
-            'G36':'mr',   // swallow — mr (love, also mry)
-            'G37':'nḏs',  // small bird — nḏs (small, poor, bad)
-            'G38':'sꜣ',   // white-fronted goose — sꜣ (son)
-            'G39':'šp',   // pintail duck — šp (also zA "son")
-            'G40':'pꜣ',   // pintail duck flying — pꜣ (the, this)
-            'G41':'pꜣ',   // pintail duck alighting — pꜣ
-            'G42':'wšn',  // chick — wšn
+            'G34':'snb',  // ostrich — snb (healthy) (CCER: snb)
+            'G35':'ꜥq',   // cormorant — ꜥq (CCER: aq = enter)
+            'G36':'wr',   // swallow — wr (great, elder) (CCER: wr)
+            'G37':'nḏs',  // small bird — nḏs (small, poor, bad) (CCER: nDs)
+            'G38':'sꜣ',   // white-fronted goose — sꜣ (protection, amulet) (CCER: gb → NOTE: CCER maps G38=gb; Gardiner has sA "son" for G38/G39. We use sꜣ/g39=zA per Allen)
+            'G39':'zꜣ',   // pintail duck — zꜣ (son; the primary MdC "son" sign) (CCER: zA)
+            'G40':'pꜣ',   // pintail duck flying — pꜣ (the, this) (CCER: pA)
+            'G41':'ḫn',   // pintail duck alighting — ḫn (CCER: xn)
+            'G42':'wšꜣ',  // chick — wšꜣ (CCER: wSA = hungry)
             'G43':'w',    // quail chick — w
-            'G43a':'w',   // quail chick variant — w
-            'G44':'ww',   // two quail chicks — ww
+            'G43a':'w',
+            'G44':'ww',   // two quail chicks — ww (CCER: ww)
             'G45':'mꜣ',   // quail chick + arm — mꜣ
-            'G46':'wꜣ',   // quail chick + arm variant — wꜣ
-            'G47':'ti',   // duckling — ti
+            'G46':'wꜣ',   // quail chick + arm variant — wꜣ (CCER: mAw)
+            'G47':'ṯꜣ',   // duckling — ṯꜣ (CCER: TA)
             'G48':'ss',   // three ducklings — ss
             'G49':'ꜣpdw', // nest — ꜣpdw (birds)
-            'G50':'gb',   // two plovers — gb (Geb)
+            'G50':'gb',   // two plovers — gb (Geb) (CCER: gb)
             'G51':'pꜣ',   // hawk swooping — pꜣ
             'G52':'bꜣ',   // hawk-headed sphinx — bꜣ
             'G53':'bꜣ',   // ba-bird (human-headed) — bꜣ
-            'G54':'snḏm', // plucked bird — snḏm
+            'G54':'snḏ',  // plucked bird — snḏ (fear) (CCER: snD)
 
             // ── H: Parts of birds ────────────────────────────────────────────────
             'H1':'pꜣ',    // head of pintail — pꜣ
@@ -593,56 +822,60 @@
             'M37':'ꜥr',   // bundle of flax — ꜥr
             'M38':'ꜥšꜣ',  // wide bundle — ꜥšꜣ (many)
             'M39':'ꜣskt', // basket of grain — ꜣskt
-            'M40':'mdw',  // bundle of reeds — mdw (words)
+            'M40':'iz',    // bundle of reeds — iz (tomb, chamber) (CCER: iz)
             'M41':'xt',   // piece of wood — xt
             'M42':'wn',   // flower — wn (open)
             'M43':'ꜥnḫ',  // vine on trellis — ꜥnḫ
             'M44':'nnt',  // thorn — nnt
 
             // ── N: Sky, earth, water ─────────────────────────────────────────────
-            'N1' :'pt',   // sky — pt (heaven)
-            'N2' :'pt',   // sky with scepter — pt
-            'N3' :'pt',   // sky variant — pt
-            'N4' :'iꜣdt', // sky with rain — iꜣdt (dew)
-            'N5' :'rꜥ',   // sun — rꜥ (Re, day)
-            'N6' :'rꜥ',   // sun with uraeus — rꜥ
-            'N7' :'hrw',  // sun with eye — hrw (day)
-            'N8' :'šwt',  // sunshine — šwt (sunshine)
-            'N9' :'psḏ',  // moon disk — psḏ (shine)
-            'N10':'psḏ',  // moon crescent — psḏ
-            'N11':'iꜥḥ',  // crescent moon — iꜥḥ (moon)
-            'N12':'iꜥḥ',  // crescent moon variant — iꜥḥ
-            'N13':'mꜣbt', // star in circle — mꜣbt
-            'N14':'dwꜣt', // star — dwꜣt (Duat, underworld)
-            'N15':'nwt',  // star in circle — nwt (sky goddess)
-            'N16':'tꜣ',   // land with grains — tꜣ (earth, land)
-            'N17':'tꜣ',   // land without grains — tꜣ
-            'N18':'iw',   // sandbank — iw (island)
-            'N19':'sp',   // two sandbanks — sp (shore)
-            'N20':'spt',  // tongue of land — spt (nome)
-            'N21':'idb',  // low bank — idb (bank, shore)
-            'N22':'nw',   // desert plateau — nw
-            'N23':'ꜣḥt',  // irrigation canal — ꜣḥt (field)
-            'N24':'sp3t', // field with canal — sp3t (nome, region)
-            'N25':'ḏw',   // hill — ḏw (mountain)
-            'N26':'ḏw',   // two hills — ḏw
-            'N27':'ꜣḫt',  // horizon — ꜣḫt (Akhet)
-            'N28':'ꜣḫt',  // sun rising over hill — ꜣḫt
-            'N29':'q',    // hill slope — q
-            'N30':'n',    // mound of earth — n
-            'N31':'wꜣt',  // road with plants — wꜣt (road, way)
-            'N32':'šn',   // lump of clay — šn
-            'N33':'ꜥšꜣ',  // grain of sand — ꜣšꜣ (many, numerous)
-            'N34':'bꜣ',   // ingot of metal — bꜣ (metal, ore)
-            'N35':'n',    // water ripple — n
-            'N35a':'nw',  // three water ripples — nw
-            'N36':'mr',   // canal — mr
-            'N37':'š',    // pool — š (lake)
-            'N38':'š',    // pool variant — š
-            'N39':'š',    // pool with legs — š
-            'N40':'km',   // pool with vegetation — km
-            'N41':'bꜣ',   // well with ripple — bꜣ
-            'N42':'ḥmt',  // well — ḥmt (woman, wife; also used for warm/wet)
+            // CCER: N1=pt, N4=iAdt/idt, N5=hrw/ra/zw, N8=Hnmmt, N9=pzD,
+            //   N11=Abd/iaH, N14=dwA/sbA, N15=dwAt, N16=tA, N18=iw, N20=wDb,
+            //   N24=spAt, N25=xAst, N26=Dw, N27=Axt, N28=xa, N29=q, N30=iAt
+            //   N35=n, N35A=mw, N37=S, N40=Sm, N41=id
+            'N1' :'pt',    // sky — pt (heaven)
+            'N2' :'pt',
+            'N3' :'pt',
+            'N4' :'iꜣdt',  // sky with rain — iꜣdt (dew, mist) (CCER: iAdt/idt)
+            'N5' :'rꜥ',    // sun disk — rꜥ/hrw (CCER: ra=N5; also hrw=day, zw=sun)
+            'N6' :'rꜥ',    // sun with uraeus — rꜥ
+            'N7' :'hrw',   // sun with eye — hrw (day) (CCER: hrw)
+            'N8' :'šwt',   // sunshine — šwt (also Ḥnmmt = sunfolk) (CCER: Hnmmt)
+            'N9' :'psḏ',   // moon disk — psḏ (shine, back of spine) (CCER: pzD)
+            'N10':'psḏ',
+            'N11':'iꜥḥ',   // crescent moon — iꜥḥ (moon; also ꜣbd = month) (CCER: Abd/iaH)
+            'N12':'iꜥḥ',
+            'N13':'mꜣbt',  // star in circle — mꜣbt
+            'N14':'dwꜣ',   // star — dwꜣ (adoration, morning star) (CCER: dwA, sbA)
+            'N15':'dwꜣt',  // star in circle (Duat) — dwꜣt (necropolis, underworld) (CCER: dwAt)
+            'N16':'tꜣ',    // land with grains — tꜣ (earth, land) (CCER: tA)
+            'N17':'tꜣ',
+            'N18':'iw',    // sandbank — iw (island) (CCER: iw — most frequent choice)
+            'N19':'sp',    // two sandbanks — sp (shore)
+            'N20':'wḏb',   // tongue of land — wḏb (bank, nome) (CCER: wDb)
+            'N21':'idb',   // low bank — idb (bank, shore)
+            'N22':'nw',    // desert plateau — nw
+            'N23':'ꜣḥt',   // irrigation canal — ꜣḥt (field, arable land)
+            'N24':'sp3t',  // nome sign — sp3t (nome, region) (CCER: spAt)
+            'N25':'ḫꜣst',  // foreign hill — ḫꜣst (desert, foreign land) (CCER: xAst)
+            'N26':'ḏw',    // two hills — ḏw (mountain) (CCER: Dw)
+            'N27':'ꜣḫt',   // horizon — ꜣḫt (Akhet, horizon) (CCER: Axt)
+            'N28':'ḫꜥ',    // sun rising over hill — ḫꜥ (arise, appear in glory) (CCER: xa)
+            'N29':'q',     // hill slope — q (MdC q)
+            'N30':'iꜣt',   // mound of earth — iꜣt (heap, mound) (CCER: iAt)
+            'N31':'wꜣt',   // road with plants — wꜣt (road, way)
+            'N32':'šn',    // lump of clay — šn
+            'N33':'ꜥšꜣ',   // grain of sand — det. many, numerous
+            'N34':'bꜣ',    // ingot of metal — bꜣ (metal, ore)
+            'N35':'n',     // water ripple — n (MdC n)
+            'N35a':'mw',   // three water ripples — mw (water) (CCER: mw)
+            'N36':'mr',    // canal — mr
+            'N37':'š',     // pool — š (lake) (MdC S)
+            'N38':'š',
+            'N39':'š',
+            'N40':'šm',    // pool with vegetation — šm (CCER: Sm = go, move)
+            'N41':'id',    // well with ripple — id (CCER: id = uraeus, poison)
+            'N42':'ḥmt',   // well — ḥmt (woman; also warm/wet)
 
             // ── O: Buildings and monuments ───────────────────────────────────────
             'O1' :'pr',   // house — pr (house, go out)
@@ -970,53 +1203,57 @@
             'Y8' :'sššt', // sistrum — sššt (sistrum)
 
             // ── Z: Strokes and geometric shapes ──────────────────────────────────
-            'Z1' :'|',    // vertical stroke (ideogram marker / classifier)
-            'Z2' :'w',    // triple stroke — det. plurality
-            'Z3' :'w',    // three vertical strokes — det. plurality
-            'Z3a':'w',    // vertical triple stroke — det. plurality
-            'Z5' :'s',    // diagonal stroke (hieratic) — s (replacement sign)
-            'Z6' :'mwt',  // hieratic var. of A13/A14 — mwt (die)
-            'Z7' :'w',    // quail chick hieratic variant — w
-            'Z8' :'šn',   // oval — det. round
-            'Z9' :'sw3',  // crossed sticks — sw3 (pass)
-            'Z10':'sw3',  // crossed sticks variant — sw3
-            'Z11':'im',   // crossed planks — im (imy, who is in)
+            // CCER: no phonetic code for Z1 (it is an ideogram classifier stroke).
+            // Z4=y (two diagonal strokes), Z7=w (hieratic quail variant), Z9=sw3, Z11=im
+            'Z1' :'|',     // single stroke — ideogram marker / classifier / numeral 1
+            'Z2' :'w',     // triple stroke — det. plurality
+            'Z3' :'w',
+            'Z3a':'w',
+            'Z4' :'y',     // two diagonal strokes — y (MdC y)
+            'Z4a':'y',
+            'Z5' :'s',     // diagonal stroke (hieratic) — replacement for dangerous signs
+            'Z6' :'mwt',   // hieratic det. of A13/A14 — mwt (die)
+            'Z7' :'w',     // hieratic quail chick — w (CCER: w; variant of G43)
+            'Z8' :'šn',    // oval — det. round
+            'Z9' :'sw3',   // crossed sticks — sw3 (pass) (CCER: sw3)
+            'Z10':'sw3',
+            'Z11':'im',    // crossed planks — im (who is in) (CCER: im)
 
             // ── Aa: Unclassified ─────────────────────────────────────────────────
-            'Aa1':'ḫ',    // placenta — ḫ
-            'Aa2':'ḫꜥ',   // pustule or gland — ḫꜥ (det. bodily growths)
-            'Aa3':'ḫꜥ',   // pustule with discharge — ḫꜥ
-            'Aa4':'b3',   // pot — b3 (variant of W10a)
-            'Aa5':'ḥp',   // part of ship — ḥp (Apis; rule, law)
-            'Aa6':'tm3',  // unknown — tm3 (mat)
-            'Aa7':'sqr',  // unknown — sqr (smite)
-            'Aa8':'qn',   // irrigation canal — qn (complete, brave)
-            'Aa9':'ḫwd',  // unknown — ḫwd (rich)
-            'Aa10':'drf', // unknown — drf (writing)
-            'Aa11':'m3ꜥ', // unknown — m3ꜥ (true, just)
-            'Aa12':'m3ꜥ', // unknown variant — m3ꜥ
-            'Aa13':'im',  // unknown — im (in, who is in)
-            'Aa14':'im',  // unknown variant — im
-            'Aa15':'im',  // unknown variant — im
-            'Aa16':'gs',  // short form — gs (side, half)
-            'Aa17':'s3',  // back of something — s3 (back)
-            'Aa18':'s3',  // variant — s3
-            'Aa19':'ḥryt',// unknown — ḥryt (dread)
-            'Aa20':'ꜥpr', // unknown — ꜥpr (equip)
-            'Aa21':'wḏꜥ', // unknown — wḏꜥ (judge)
-            'Aa22':'wḏꜥ', // combination — wḏꜥ
-            'Aa23':'mḏd', // warp between stakes — mḏd (puncture, adhere)
-            'Aa24':'mḏd', // variant — mḏd
-            'Aa25':'sm3', // unknown — sm3 (stolist priest)
-            'Aa26':'sbi', // unknown — sbi (rebel)
-            'Aa27':'nḏ',  // unknown — nḏ (ask, inquire, protect)
-            'Aa28':'qd',  // builder's tool — qd (build, character)
-            'Aa29':'qd',  // variant — qd
-            'Aa30':'Ẑqr', // frieze element — Ẑqr (adorn)
-            'Aa31':'Ẑqr', // variant — Ẑqr
-        };
-
-        // Complete Gardiner Dictionary (768 signs from official Gardiner's Sign List)
+            // CCER Appendix B: Aa5=Hp, Aa8=qn, Aa11=mAa, Aa13=im/m, Aa14=im/m,
+            //   Aa15=im/m, Aa16=gs, Aa17=sA, Aa20=apr, Aa21=wDa, Aa27=nD, Aa28=qd
+            'Aa1':'ḫ',     // placenta — ḫ (MdC x)
+            'Aa2':'ḫꜥ',    // pustule — det. bodily growths
+            'Aa3':'ḫꜥ',    // pustule with discharge
+            'Aa4':'b3',    // pot — b3 (variant of W10a)
+            'Aa5':'ḥp',    // part of ship — ḥp (Apis bull; law, rule) (CCER: Hp)
+            'Aa6':'tm3',   // unknown — tm3 (mat)
+            'Aa7':'sqr',   // unknown — sqr (smite) (CCER: Aa7=sqr)
+            'Aa8':'qn',    // irrigation canal shape — qn (brave, complete) (CCER: qn)
+            'Aa9':'ḫwd',   // unknown — ḫwd (rich)
+            'Aa10':'drf',  // unknown — drf (writing)
+            'Aa11':'mꜣꜥ',  // unknown — mꜣꜥ (true, just) (CCER: mAa; J11 in old Aa numbering)
+            'Aa12':'mꜣꜥ',
+            'Aa13':'im',   // unknown — im (in, who is in) (CCER: im/m)
+            'Aa14':'im',
+            'Aa15':'im',
+            'Aa16':'gs',   // short form — gs (side, half) (CCER: gs; J13)
+            'Aa17':'s3',   // back of something — s3 (back, behind) (CCER: sA; J17)
+            'Aa18':'s3',
+            'Aa19':'ḥryt', // unknown — ḥryt (dread)
+            'Aa20':'ꜥpr',  // unknown — ꜥpr (equip, crew) (CCER: apr; J20)
+            'Aa21':'wḏꜥ',  // unknown — wḏꜥ (judge, decide) (CCER: wDa; J21)
+            'Aa22':'wḏꜥ',
+            'Aa23':'mḏd',  // warp between stakes — mḏd (puncture, adhere) (CCER: Aa23)
+            'Aa24':'mḏd',
+            'Aa25':'sm3',  // unknown — sm3 (stolist priest) (CCER: Aa25)
+            'Aa26':'sbi',  // unknown — sbi (rebel, star)
+            'Aa27':'nḏ',   // unknown — nḏ (ask, protect, avenge) (CCER: nD; J27)
+            'Aa28':'qd',   // builder's tool — qd (build, character, shape) (CCER: qd; J28)
+            'Aa29':'qd',
+            'Aa30':'ẑqr',  // frieze element — det. adorn (CCER: J30=Xkr)
+            'Aa31':'ẑqr',
+        }; // end gardinerToPhonetic
         // Includes all categories A through Z and Aa1-Aa31
         const gardinerMap = {
             "A1":"𓀀","A2":"𓀁","A3":"𓀂","A4":"𓀃","A5":"𓀄","A5a":"𓀅","A6":"𓀆","A6a":"𓀇","A6b":"𓀈","A7":"𓀉",
@@ -1122,13 +1359,13 @@
         }
 
         // ─── Pre-process: normalise Egyptological diacritics → MdC letters ──────
-        // Walks through raw input string and substitutes phonetic chars with their
-        // MdC equivalents so the tokeniser below doesn't need to know about them.
+        // Step 1: NFC normalise — collapses NFD combining sequences into precomposed
+        //   forms (e.g. h + combining dot below → ḥ) for consistent matching.
+        // Step 2: Apply phoneticToMdc table (longest-match order) to substitute
+        //   every Egyptological special character with its MdC ASCII equivalent.
         function normalisePhoneticsToMdc(raw) {
-            let out = raw;
-            // Apply longest matches first (phoneticToMdc is already ordered that way)
+            let out = raw.normalize('NFC');
             for (const [from, to] of phoneticToMdc) {
-                // Use a global string replace for each mapping
                 out = out.split(from).join(to);
             }
             return out;
@@ -1145,12 +1382,80 @@
                 norm = raw.toUpperCase();
             }
             const glyph    = gardinerMap[norm] || `[${norm}]`;
-            // For determinatives/ideograms with no phonetic value, show the Gardiner
-            // code in angle brackets so the user knows it's a classifier, not silence.
             const phonetic = gardinerToPhonetic[norm] !== undefined
                 ? gardinerToPhonetic[norm]
                 : `⟨${norm}⟩`;
             return { glyph, phonetic };
+        }
+
+        // Build a sorted list of multi-letter MdC phonetic codes (longest first)
+        // so the tokeniser can greedily match them before falling back to single letters.
+        const mdcPhoneticCodes = Object.keys(mdcMap)
+            .filter(k => k.length > 1)
+            .sort((a, b) => b.length - a.length);
+
+        // ─── Step 1: Tokenise ─────────────────────────────────────────────────
+        // Pattern priority:
+        //   1. Aa-prefixed Gardiner codes (Aa1–Aa31)
+        //   2. Standard Gardiner codes: 1-2 uppercase letters + digits + optional suffix
+        //   3. Multi-letter MdC phonetic codes (nfr, Htp, anx, etc.) — matched at runtime
+        //   4. Operators and structural characters
+        //   5. Single MdC letter (uniliteral fallback)
+        function tokenise(input) {
+            const tokens = [];
+            let i = 0;
+            while (i < input.length) {
+                const rest = input.slice(i);
+
+                // Whitespace — skip
+                if (/^[ \t]/.test(rest)) { i++; continue; }
+
+                // Newline
+                if (rest[0] === '\n') { tokens.push({ type: 'newline' }); i++; continue; }
+
+                // Operators
+                if (':*()-'.includes(rest[0])) {
+                    tokens.push({ type: 'op', value: rest[0] }); i++; continue;
+                }
+
+                // Aa-prefixed Gardiner code: Aa + digits + optional letter suffix
+                const aaMatch = rest.match(/^[Aa][Aa](\d+)([a-z]?)/i);
+                if (aaMatch && /^[Aa]{2}/.test(rest)) {
+                    const full = rest.match(/^Aa\d+[a-z]?/i);
+                    if (full) { tokens.push({ type: 'sign', value: full[0] }); i += full[0].length; continue; }
+                }
+
+                // Standard Gardiner code: 1-2 letters + digits + optional suffix
+                const gcMatch = rest.match(/^[A-Za-z]{1,2}\d+[A-Za-z]?/);
+                if (gcMatch) {
+                    tokens.push({ type: 'sign', value: gcMatch[0] }); i += gcMatch[0].length; continue;
+                }
+
+                // Multi-letter MdC phonetic codes (greedy, longest first)
+                let matched = false;
+                for (const code of mdcPhoneticCodes) {
+                    if (rest.startsWith(code)) {
+                        // Confirm it's not immediately followed by a digit (which would make it a Gardiner code prefix)
+                        const after = rest[code.length];
+                        if (!after || !/\d/.test(after)) {
+                            tokens.push({ type: 'sign', value: code });
+                            i += code.length;
+                            matched = true;
+                            break;
+                        }
+                    }
+                }
+                if (matched) continue;
+
+                // Single ASCII letter (uniliteral MdC fallback)
+                if (/[A-Za-z]/.test(rest[0])) {
+                    tokens.push({ type: 'sign', value: rest[0] }); i++; continue;
+                }
+
+                // Anything else — skip silently (punctuation, digits not in code, etc.)
+                i++;
+            }
+            return tokens;
         }
 
         // ═══════════════════════════════════════════════════════════════════════
@@ -1179,34 +1484,6 @@
         //     Glyphs scale uniformly within their quadrat so the tallest
         //     column in a vstack equals the full quadrat height.
         // ═══════════════════════════════════════════════════════════════════════
-
-        // ─── Step 1: Tokenise ─────────────────────────────────────────────────
-        // Returns array of token objects: { type, value }
-        // Fixed regex: Gardiner codes (letter(s)+digits) matched before bare letters,
-        // and bare letters use a word-boundary-like check to avoid greedily eating
-        // adjacent MdC letters (e.g. "nr" without an operator between them).
-        function tokenise(input) {
-            // Pattern priority (left to right in alternation):
-            //   1. Aa/aa-prefixed codes (must come before generic 2-letter catch)
-            //   2. Standard Gardiner codes: 1-2 letters + digits + optional letter suffix
-            //   3. Operators and structural chars
-            //   4. Single MdC letter NOT adjacent to another letter (lookahead/behind)
-            //   5. Single MdC letter in any context (fallback — may be part of word)
-            const re = /([A-Za-z]{1,2}\d+[A-Za-z]?|[:*()\-\n]|[A-Za-z])/g;
-            const tokens = [];
-            let m;
-            while ((m = re.exec(input)) !== null) {
-                const v = m[1];
-                if (v === '\n')       tokens.push({ type: 'newline' });
-                else if (v === ':')   tokens.push({ type: 'op', value: ':' });
-                else if (v === '*')   tokens.push({ type: 'op', value: '*' });
-                else if (v === '(')   tokens.push({ type: 'op', value: '(' });
-                else if (v === ')')   tokens.push({ type: 'op', value: ')' });
-                else if (v === '-')   tokens.push({ type: 'op', value: '-' });
-                else                  tokens.push({ type: 'sign', value: v });
-            }
-            return tokens;
-        }
 
         // ─── Step 2: Resolve a sign token → { glyph, phonetic } ─────────────
         function resolveSign(value) {
