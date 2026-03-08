@@ -21,8 +21,8 @@
             <div class="features-box">
                 <h3>This tool is built with a few powerful features specifically for Egyptology:</h3>
                 <ul>
-                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) single-letter uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
-                    <li><strong>Formatting Controls:</strong> It supports Unicode grouping controls (: for vertical stacking and * for horizontal grouping) so you can accurately represent sign positioning.</li>
+                    <li><strong>Transliteration Mapping:</strong> It recognizes academic transliteration symbols (e.g., ꜣ, ḫ, š, ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> will automatically pull the correct sign sequences.</li>
+                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
                     <li><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly without needing external APIs.</li>
                 </ul>
             </div>
@@ -50,12 +50,6 @@
                         <span id="copy-text">Copy Hieroglyphs</span>
                     </button>
                 </div>
-            </div>
-            <div class="controls-group">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="format-controls" checked onchange="convertText()">
-                            Enable Stacking Logic (Unicode 12.0+)
-                        </label>
             </div>
         </div>
 
@@ -106,13 +100,110 @@
     </section>
 
     <script>
-        // Manuel de Codage to Gardiner mapping
+        // ─── Egyptological phonetic → MdC normalisation ─────────────────────────
+        // Maps every form a user might type or paste to its MdC ASCII equivalent.
+        const phoneticToMdc = [
+            // ── NFD: base + combining diacritic (match BEFORE precomposed) ───────
+            ['h\u0323', 'H'],  // h + combining dot below → ḥ
+            ['H\u0323', 'H'],
+            ['h\u032E', 'x'],  // h + combining breve below → ḫ
+            ['H\u032E', 'x'],
+            ['h\u0332', 'X'],  // h + combining line below → ẖ
+            ['H\u0332', 'X'],
+            ['t\u0331', 'T'],  // t + combining line below → ṯ
+            ['T\u0331', 'T'],
+            ['d\u0331', 'D'],  // d + combining line below → ḏ
+            ['D\u0331', 'D'],
+            ['s\u030C', 'S'],  // s + combining caron → š
+            ['S\u030C', 'S'],
+            // ── Half-ring / modifier substitutes used in ASCII Egyptology ────────
+            ['\u02BE', 'A'],   // ʾ RIGHT HALF RING — aleph substitute
+            ['\u02BF', 'a'],   // ʿ LEFT HALF RING  — ayin substitute
+            ['\u02C2', 'A'],   // ˂ MODIFIER LEFT ARROWHEAD — rare aleph substitute
+            // ── NFC precomposed forms ─────────────────────────────────────────────
+            ['\uA722', 'A'],   // Ꜣ LATIN CAPITAL EGYPTOLOGICAL ALEF
+            ['\uA723', 'A'],   // ꜣ LATIN SMALL EGYPTOLOGICAL ALEF
+            ['\uA724', 'a'],   // Ꜥ LATIN CAPITAL EGYPTOLOGICAL AIN
+            ['\uA725', 'a'],   // ꜥ LATIN SMALL EGYPTOLOGICAL AIN
+            ['\u1E24', 'H'],   // Ḥ h-dot-below capital
+            ['\u1E25', 'H'],   // ḥ h-dot-below
+            ['\u1E2A', 'x'],   // Ḫ h-breve-below capital
+            ['\u1E2B', 'x'],   // ḫ h-breve-below
+            ['\u1E96', 'X'],   // ẖ H-line-below (only lowercase in Unicode)
+            ['\u0160', 'S'],   // Š s-caron capital
+            ['\u0161', 'S'],   // š s-caron
+            ['\u1E6E', 'T'],   // Ṯ t-line-below capital
+            ['\u1E6F', 'T'],   // ṯ t-line-below
+            ['\u1E0E', 'D'],   // Ḏ d-line-below capital
+            ['\u1E0F', 'D'],   // ḏ d-line-below
+            // ── Informal / older transliteration alternates ───────────────────────
+            ['\u1E6C', 'T'],   // Ṭ t-dot-below (used as ṯ in some older systems)
+            ['\u1E6D', 'T'],   // ṭ
+            ['\u1E92', 'D'],   // Ẓ z-dot-below (used as ḏ in some older texts)
+            ['\u1E93', 'D'],   // ẓ
+        ];
+
+        // ─── Manuel de Codage → Gardiner code ────────────────────────────────────
+        // Comprehensive mapping including 25 uniliterals and 150+ multi-letter codes
         const mdcMap = {
-            'A': 'G1', 'i': 'M17', 'y': 'Z4', 'a': 'D36', 'w': 'G43',
-            'b': 'D58', 'p': 'Q3', 'f': 'I9', 'm': 'G17', 'n': 'N35',
-            'r': 'D21', 'h': 'O4', 'H': 'V28', 'x': 'Aa1', 'X': 'F32',
-            's': 'S29', 'z': 'O34', 'S': 'N37', 'q': 'N29', 'k': 'V31',
-            'g': 'W11', 't': 'X1', 'T': 'V13', 'd': 'D46', 'D': 'I10'
+            // ── 25 standard uniliterals (case-sensitive, per MdC §2) ──────────────
+            'A': 'G1',   // ꜣ  Egyptian vulture
+            'i': 'M17',  // i  reed
+            'y': 'Z4',   // y  two strokes
+            'a': 'D36',  // ꜥ  forearm
+            'w': 'G43',  // w  quail chick
+            'b': 'D58',  // b  foot
+            'p': 'Q3',   // p  stool
+            'f': 'I9',   // f  horned viper
+            'm': 'G17',  // m  owl
+            'n': 'N35',  // n  water ripple
+            'r': 'D21',  // r  mouth
+            'h': 'O4',   // h  reed shelter
+            'H': 'V28',  // ḥ  twisted wick
+            'x': 'Aa1',  // ḫ  placenta
+            'X': 'F32',  // ẖ  belly
+            's': 'S29',  // s  folded cloth
+            'z': 'O34',  // z  door bolt
+            'S': 'N37',  // š  pool
+            'q': 'N29',  // q  hill slope
+            'k': 'V31',  // k  basket with handle
+            'g': 'W11',  // g  stand for jug
+            't': 'X1',   // t  bread loaf
+            'T': 'V13',  // ṯ  tethering rope
+            'd': 'D46',  // d  hand
+            'D': 'I10',  // ḏ  cobra
+
+            // ── Multi-letter MdC biliterals and longer codes ──────────────────────
+            'aA':  'O29',  'ab':  'D59',  'aq':  'G35',  'aHA': 'D34',  'apr': 'Aa20',
+            'awt': 'S39',  'Aw':  'F40',  'Ax':  'G25',  'Abd': 'N11',  'Axt': 'N27',
+            'bA':  'G29',  'bAk': 'G5',   'bit': 'L2',   'bH':  'F18',  'bnr': 'M30',
+            'bz':  'K5',   'Db':  'G22',  'dSr': 'G27',  'Dba': 'D50',  'Dd':  'R11',
+            'DD':  'I11',  'DHwty': 'G26','Dr':  'M36',  'Dsr': 'D41',  'dwA': 'N14',
+            'dwAt':'N15',  'Dw':  'N26',  'fnD': 'D19',  'gb':  'G50',  'gH':  'D56',
+            'gm':  'G28',  'HA':  'M16',  'HAt': 'F4',   'Hfn': 'I8',   'HH':  'C11',
+            'Hm':  'U36',  'Hn':  'M2',   'Hp':  'Aa5',  'Hr':  'D2',   'Htp': 'R4',
+            'ia':  'D55',  'iaH': 'N11',  'ib':  'F34',  'ibi': 'A32',  'idr': 'V37',
+            'im':  'Z11',  'in':  'K1',   'inb': 'O36',  'inpw':'C12',  'ir':  'D4',
+            'irt': 'D12',  'isw': 'F44',  'it':  'M33',  'iw':  'N18',  'iwa': 'F44',
+            'iz':  'M40',  'kA':  'D28',  'km':  'I6',   'kfA': 'F22',  'l':   'E23',
+            'mA':  'U1',   'mAa': 'Aa11', 'mAat':'C10',  'mAi': 'E22',  'mi':  'W19',
+            'mm':  'G18',  'mnD': 'D27',  'mniw':'A33',  'ms':  'F31',  'msi': 'B3',
+            'mt':  'D52',  'mwt': 'G14',  'nD':  'Aa27', 'nDs': 'G37',  'nfr': 'F35',
+            'nH':  'G21',  'nTr': 'R8',   'ns':  'F20',  'nSmt':'K6',   'pt':  'N1',
+            'pA':  'G40',  'pH':  'F22',  'pHty':'F22',  'pXr': 'F46',  'pzD': 'N9',
+            'qAb': 'F46',  'qd':  'Aa28', 'qiz': 'A38',  'qn':  'Aa8',  'ra':  'N5',
+            'rd':  'D54',  'rdi': 'X8',   'rmi': 'D9',   'rnp': 'M4',   'rw':  'E23',
+            'rxyt':'G23',  'sA':  'G38',  'sAH': 'D61',  'sAb': 'E17',  'sbk': 'I4',
+            'sd':  'F33',  'sDm': 'F21',  'Sd':  'F30',  'sm':  'M21',  'smA': 'F36',
+            'snD': 'G54',  'spAt':'N24',  'spr': 'F42',  'Sps': 'A50',  'Spsi':'A51',
+            'sr':  'E31',  'srqt':'L7',   'stX': 'E20',  'sti': 'F29',  'Styt':'S26',
+            'sw':  'M23',  'Sw':  'H6',   'sxt': 'M20',  'Sma': 'M26',  'Smsw':'T18',
+            'snb': 'G34',  'tp':  'D1',   'tyw': 'G4',   'txn': 'O25',  'wAD': 'M13',
+            'wab': 'D60',  'wAs': 'S40',  'wD':  'V24',  'wDAt':'D10',  'wHm': 'F25',
+            'wn':  'E34',  'wr':  'G36',  'wsr': 'F8',   'wSA': 'G42',  'xA':  'M12',
+            'xAst':'N25',  'xn':  'G41',  'xpr': 'L1',   'xpS': 'F23',  'xft': 'A13',
+            'zA':  'G39',  'zAb': 'E14',  'zH':  'O22',  'zm':  'M21',  'zmA': 'F36',
+            'zmyt':'N25',  'znb': 'E29',  'znD': 'G54',  'zSn': 'M9',   'zzmt':'E6'
         };
 
         // Complete Gardiner Dictionary (768 signs from official Gardiner's Sign List)
@@ -220,55 +311,120 @@
             inputField.focus();
         }
 
+        // ─── Pre-process: normalise Egyptological diacritics → MdC letters ──────
+        function normalisePhoneticsToMdc(raw) {
+            let out = raw.normalize('NFC');
+            for (const [from, to] of phoneticToMdc) {
+                out = out.split(from).join(to);
+            }
+            return out;
+        }
+
+        // Build a sorted list of multi-letter MdC phonetic codes (longest first)
+        // so the tokeniser can greedily match them before falling back to single letters.
+        const mdcPhoneticCodes = Object.keys(mdcMap)
+            .filter(k => k.length > 1)
+            .sort((a, b) => b.length - a.length);
+
+        // ─── Tokenise input into Gardiner codes, operators, and newlines ────────
+        function tokenise(input) {
+            const tokens = [];
+            let i = 0;
+            while (i < input.length) {
+                const rest = input.slice(i);
+
+                // Whitespace — skip
+                if (/^[ \t]/.test(rest)) { i++; continue; }
+
+                // Newline
+                if (rest[0] === '\n') { tokens.push({ type: 'newline' }); i++; continue; }
+
+                // Operators and dashes
+                if (':*()-'.includes(rest[0])) {
+                    tokens.push({ type: 'op', value: rest[0] }); i++; continue;
+                }
+
+                // Aa-prefixed Gardiner code: Aa + digits + optional letter suffix
+                const aaMatch = rest.match(/^[Aa][Aa](\d+)([a-z]?)/i);
+                if (aaMatch && /^[Aa]{2}/.test(rest)) {
+                    const full = rest.match(/^Aa\d+[a-z]?/i);
+                    if (full) { tokens.push({ type: 'sign', value: full[0] }); i += full[0].length; continue; }
+                }
+
+                // Standard Gardiner code: 1-2 letters + digits + optional suffix
+                const gcMatch = rest.match(/^[A-Za-z]{1,2}\d+[A-Za-z]?/);
+                if (gcMatch) {
+                    tokens.push({ type: 'sign', value: gcMatch[0] }); i += gcMatch[0].length; continue;
+                }
+
+                // Multi-letter MdC phonetic codes (greedy, longest first)
+                let matched = false;
+                for (const code of mdcPhoneticCodes) {
+                    if (rest.startsWith(code)) {
+                        // Confirm it's not immediately followed by a digit (which would make it a Gardiner code prefix)
+                        const after = rest[code.length];
+                        if (!after || !/\d/.test(after)) {
+                            tokens.push({ type: 'sign', value: code });
+                            i += code.length;
+                            matched = true;
+                            break;
+                        }
+                    }
+                }
+                if (matched) continue;
+
+                // Single ASCII letter (uniliteral MdC fallback)
+                if (/[A-Za-z]/.test(rest[0])) {
+                    tokens.push({ type: 'sign', value: rest[0] }); i++; continue;
+                }
+
+                // Anything else — skip silently
+                i++;
+            }
+            return tokens;
+        }
+
+        // ─── Resolve a sign token (MdC code or Gardiner code) → glyph ──────────
+        function resolveSign(value) {
+            // Try MdC map (includes uniliterals and multi-letter codes)
+            if (mdcMap[value]) {
+                const gc = mdcMap[value];
+                return gardinerMap[gc] || `[${gc}]`;
+            }
+
+            // Try as Gardiner code
+            const mc = value.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+            let norm;
+            if (mc) {
+                const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' : mc[1].toUpperCase();
+                norm = letter + mc[2] + mc[3].toLowerCase();
+            } else {
+                norm = value.toUpperCase();
+            }
+
+            return gardinerMap[norm] || `[${norm}]`;
+        }
+
         function convertText() {
-            const input = inputField.value;
-            const useFormat = document.getElementById('format-controls').checked;
+            const raw = inputField.value;
 
-            // 1. Added '(' and ')' to the regex capture group
-            const tokenRegex = /([A-Za-z]{1,2}\d+[A-Za-z]?|[a-zA-Z]|[:*\-()]|\n)/g;
-    
-            let match;
+            // Step 1: normalise Egyptological phonetic chars to MdC
+            const input = normalisePhoneticsToMdc(raw);
+
+            // Step 2: tokenise
+            const tokens = tokenise(input);
+
+            // Step 3: convert each token to its glyph
             let result = '';
-
-            while ((match = tokenRegex.exec(input)) !== null) {
-                const token = match[1];
-
-                if (token === '\n') {
+            for (const token of tokens) {
+                if (token.type === 'newline') {
                     result += '\n';
-                } else if (token === ':') {
-                    result += useFormat ? '𓐰' : ''; // U+13430 Vertical Stacking
-                } else if (token === '*') {
-                    result += useFormat ? '𓐱' : ''; // U+13431 Horizontal Grouping
-                } else if (token === '(') {
-                    result += useFormat ? '𓐷' : ''; // U+13437 Begin Segment
-                } else if (token === ')') {
-                    result += useFormat ? '𓐸' : ''; // U+13438 End Segment
-                } else if (token === '-') {
-                    result += ''; // Ignore visual spacers
-                } else if (mdcMap[token]) {
-                    // Uniliteral MdC mapping
-                    result += gardinerMap[mdcMap[token]] || `[${mdcMap[token]}]`;
-                } else if (token.length > 1 || /^[A-Z]$/.test(token)) {
-                    // 2. Safely parse Gardiner codes with trailing lowercase letters (e.g., N35a)
-                    let norm = token;
-                    const matchCode = token.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
-            
-                    if (matchCode) {
-                        let letterPart = matchCode[1].toLowerCase() === 'aa' ? 'Aa' : matchCode[1].toUpperCase();
-                        let numPart = matchCode[2];
-                        let trailingPart = matchCode[3].toLowerCase(); // Force the trailing letter back to lower
-                        norm = letterPart + numPart + trailingPart;
-                    } else {
-                        norm = token.toUpperCase(); 
-                    }
-
-                    if (gardinerMap[norm]) {
-                        result += gardinerMap[norm];
-                    } else {
-                        result += `[${norm}]`; // Keep unrecognized visually distinct
-                    }
-                } else {
-                    result += `[${token}]`;
+                } else if (token.type === 'op') {
+                    // Skip formatting operators in V1 (they don't affect output in textarea)
+                    continue;
+                } else if (token.type === 'sign') {
+                    const glyph = resolveSign(token.value);
+                    result += glyph;
                 }
             }
 

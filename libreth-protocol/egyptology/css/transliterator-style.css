@@ -14,7 +14,7 @@
 .transliterator-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
 }
 
 /* Header */
@@ -24,19 +24,19 @@
 
 .transliterator-header h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-size: clamp(1.5rem, 5vw, 2rem);
     color: var(--gold);
     text-shadow: 0 0 30px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.1);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .transliterator-header > p {
     color: var(--text);
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
 /* Features Box */
@@ -44,17 +44,17 @@
     background: rgba(212,175,55,0.04);
     border: 1px solid rgba(212,175,55,0.2);
     border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .features-box h3 {
     font-family: 'Cinzel', serif;
     color: var(--gold);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     opacity: 0.9;
 }
 
@@ -66,9 +66,9 @@
 
 .features-box li {
     color: var(--text);
-    font-size: 0.95rem;
-    margin-bottom: 0.8rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
     display: flex;
     align-items: flex-start;
 }
@@ -111,11 +111,11 @@
 .input-panel label,
 .output-panel label {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--gold);
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
     opacity: 0.9;
 }
 
@@ -123,12 +123,16 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-header label {
+    margin-bottom: 0;
 }
 
 .input-header button {
     font-family: 'VT323', monospace;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--cyan-dim);
     background: none;
     border: none;
@@ -146,14 +150,14 @@ textarea {
     border: 1px solid rgba(212,175,55,0.2);
     color: var(--text);
     font-family: 'VT323', monospace;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 0.3rem;
     resize: none;
     width: 100%;
-    height: 300px; /* Locked height for symmetry */
+    height: 250px;
     box-sizing: border-box;
     transition: border-color 0.3s;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 textarea:focus {
@@ -172,13 +176,13 @@ textarea::placeholder {
     font-size: clamp(2.5rem, 8vw, 4rem);
     text-align: center;
     background-color: rgba(15,13,8,0.95);
-    padding: 1.5rem;
+    padding: 1.2rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: pre-wrap;
     text-shadow: 0 0 20px var(--gold-glow);
     width: 100%;
-    height: 300px; /* Match input exactly */
+    height: 250px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -356,4 +360,59 @@ textarea::placeholder {
     color: var(--cyan);
     font-size: 0.8rem;
     letter-spacing: 0.05em;
+}
+
+/* ── Phonetic Preview Panel ──────────────────────────────────────────── */
+.phonetic-preview-panel {
+    background: rgba(0, 209, 255, 0.03);
+    border: 1px solid rgba(0, 209, 255, 0.15);
+    border-radius: 0.3rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.phonetic-preview-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+    padding-bottom: 0.4rem;
+}
+
+.phonetic-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.phonetic-hint {
+    font-family: 'VT323', monospace;
+    font-size: 0.75rem;
+    color: var(--cyan-dim);
+    opacity: 0.6;
+}
+
+.phonetic-output {
+    font-family: 'Crimson Pro', 'Gentium Plus', Georgia, serif;
+    font-size: 1.4rem;
+    color: var(--text-bright);
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    min-height: 2rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.output-placeholder {
+    color: var(--cyan-dim);
+    opacity: 0.4;
+    font-size: 1.4rem;
+    pointer-events: none;
 }
