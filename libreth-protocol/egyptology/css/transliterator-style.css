@@ -168,17 +168,12 @@ textarea::placeholder {
 }
 
 #output-field {
-    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
     text-align: center;
     background-color: rgba(15,13,8,0.95);
     padding: 1.5rem;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    text-shadow: 0 0 20px var(--gold-glow);
     width: 100%;
-    height: 300px; /* Match input exactly */
+    height: 300px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -186,6 +181,122 @@ textarea::placeholder {
     border: 1px solid rgba(212,175,55,0.2);
     border-radius: 0.3rem;
     overflow-y: auto;
+    cursor: default;
+    user-select: text;
+}
+
+/* ── Quadrat Layout Engine Styles ─────────────────────────────────── */
+
+.q-sequence {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    row-gap: 12px;
+}
+
+.q-quadrat {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.q-vstack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.q-hgroup {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.q-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-shadow: 0 0 20px var(--gold-glow);
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+    font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+}
+
+.q-unknown {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-dim);
+    font-family: 'VT323', monospace;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.output-placeholder {
+    color: var(--cyan-dim);
+    opacity: 0.4;
+    font-size: 3.5rem;
+    pointer-events: none;
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
+}
+
+/* ── Phonetic Preview Panel ──────────────────────────────────────────── */
+.phonetic-preview-panel {
+    background: rgba(0, 209, 255, 0.03);
+    border: 1px solid rgba(0, 209, 255, 0.15);
+    border-radius: 0.3rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.phonetic-preview-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.phonetic-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.phonetic-hint {
+    font-family: 'VT323', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan-dim);
+    opacity: 0.6;
+}
+
+.phonetic-output {
+    font-family: 'Crimson Pro', 'Gentium Plus', Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--text-bright);
+    letter-spacing: 0.12em;
+    line-height: 1.6;
+    min-height: 2.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    /* Egyptological diacritics render better with these settings */
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1;
 }
 
 /* Action Bar */
