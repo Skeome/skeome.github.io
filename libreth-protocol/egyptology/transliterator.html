@@ -35,35 +35,28 @@
                     <label for="input-field">Input (Gardiner Codes or MdC)</label>
                     <button type="button" onclick="clearInput()">Clear</button>
                 </div>
-                <textarea id="input-field" placeholder="Enter codes separated by spaces or dashes...&#10;&#10;Examples:&#10;M17 G43 X1&#10;i w t&#10;A1 : n * w&#10;&#10;Or phonetic: nfr, imy, ra"></textarea>
+                <textarea id="input-field" placeholder="Enter codes separated by spaces or dashes...&#10;&#10;Examples:&#10;M17 G43 X1&#10;i w t&#10;A1 : n * w"></textarea>
             </div>
 
             <!-- Output Area -->
             <div class="output-panel">
-                <label>Unicode Hieroglyphs</label>
-                <div id="output-field" class="hieroglyph" role="textbox" aria-readonly="true" aria-label="Hieroglyph output"><span class="output-placeholder">𓇋𓅱𓏏</span></div>
+                <label for="output-field">Unicode Output</label>
+                <textarea id="output-field" class="hieroglyph" readonly placeholder="𓇋𓅱𓏏"></textarea>
                 
                 <!-- Action Bar -->
                 <div class="action-bar">
-                    <label class="format-checkbox-label">
-                        <input type="checkbox" id="format-controls" checked onchange="convertText()">
-                        Enable Stacking (Unicode 12.0+)
-                    </label>
                     <button id="copy-btn" type="button" onclick="copyToClipboard()">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                         <span id="copy-text">Copy Hieroglyphs</span>
                     </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Phonetic Preview Panel -->
-        <div class="phonetic-preview-panel">
-            <div class="phonetic-preview-header">
-                <span class="phonetic-label">Phonetic Transliteration</span>
-                <span class="phonetic-hint">Egyptological romanization of your input</span>
+            <div class="controls-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="format-controls" checked onchange="convertText()">
+                            Enable Stacking Logic (Unicode 12.0+)
+                        </label>
             </div>
-            <div id="phonetic-output" class="phonetic-output"><span class="output-placeholder">Phonetic preview will appear here…</span></div>
         </div>
 
         <!-- Reference Table -->
@@ -108,300 +101,18 @@
         <div class="flex flex-wrap justify-center gap-6 mt-8">
                     <a href="hieroglyphs.html" class="nav-btn">Hieroglyph Training Module</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
+                    <a href="transliterator-V2.html" class="nav-btn">Access Version 2 (Beta)</a>
                 </div>
     </section>
 
     <script>
-        // ─── Phonetic (Egyptological) → MdC single-letter mapping ───────────────
-        // Accepts proper Egyptological diacritics and maps them to MdC codes.
-        // Ordered longest-first so multi-char combining sequences match first.
-        const phoneticToMdc = [
-            ['ꜣ', 'A'],  // aleph  (U+A723)
-            ['ꜥ', 'a'],  // ayin   (U+A725)
-            ['ḥ', 'H'],  // h-dot-below (U+1E25)
-            ['ḫ', 'x'],  // h-breve-below (U+1E2B)
-            ['ẖ', 'X'],  // H-breve-below (U+1E96)
-            ['š', 'S'],  // s-caron (U+0161)
-            ['Š', 'S'],
-            ['ṯ', 'T'],  // t-line-below (U+1E6F)
-            ['Ṯ', 'T'],
-            ['ḏ', 'D'],  // d-line-below (U+1E0F)
-            ['Ḏ', 'D'],
-            ['h\u0323', 'H'], // h + combining dot below
-            ['H\u0323', 'H'],
-            ['h\u032E', 'x'], // h + combining breve below
-        ];
-
-        // Manuel de Codage → Gardiner code
+        // Manuel de Codage to Gardiner mapping
         const mdcMap = {
             'A': 'G1', 'i': 'M17', 'y': 'Z4', 'a': 'D36', 'w': 'G43',
             'b': 'D58', 'p': 'Q3', 'f': 'I9', 'm': 'G17', 'n': 'N35',
             'r': 'D21', 'h': 'O4', 'H': 'V28', 'x': 'Aa1', 'X': 'F32',
             's': 'S29', 'z': 'O34', 'S': 'N37', 'q': 'N29', 'k': 'V31',
             'g': 'W11', 't': 'X1', 'T': 'V13', 'd': 'D46', 'D': 'I10'
-        };
-
-        // MdC letter → canonical Egyptological phonetic display character
-        const mdcToPhonetic = {
-            'A': 'ꜣ', 'i': 'i', 'y': 'y',  'a': 'ꜥ', 'w': 'w',
-            'b': 'b', 'p': 'p', 'f': 'f',  'm': 'm', 'n': 'n',
-            'r': 'r', 'h': 'h', 'H': 'ḥ',  'x': 'ḫ', 'X': 'ẖ',
-            's': 's', 'z': 'z', 'S': 'š',  'q': 'q', 'k': 'k',
-            'g': 'g', 't': 't', 'T': 'ṯ',  'd': 'd', 'D': 'ḏ'
-        };
-
-        // Gardiner code → canonical Egyptological transliteration
-        // Sources: Gardiner (1957) Egyptian Grammar; Allen (2000) Middle Egyptian;
-        //          Faulkner (1962) Concise Dictionary; egyptianhieroglyphs.net sign list.
-        //
-        // PHILOSOPHY: Signs with a genuine PHONOGRAM value show that value (e.g. nfr, r, ḥtp).
-        // Signs used as IDEOGRAMS for a specific word also show that word's transliteration
-        // (e.g. N14 = dwꜣt, N27 = ꜣḫt, G5 = Ḥr). This is what an Egyptologist reads.
-        // Signs that are PURE SILENT DETERMINATIVES with no conventional reading get ⟨code⟩.
-        const gardinerToPhonetic = {
-            // ── 25 uniliterals ────────────────────────────────────────────────────
-            'G1' :'ꜣ',    // Egyptian vulture
-            'M17':'i',    // reed
-            'M17a':'i',
-            'Z4' :'y',    // two strokes
-            'Z4a':'y',
-            'D36':'ꜥ',    // forearm — ayin
-            'G43':'w',    // quail chick
-            'D58':'b',    // foot
-            'Q3' :'p',    // stool
-            'I9' :'f',    // horned viper
-            'G17':'m',    // owl
-            'N35':'n',    // water ripple
-            'D21':'r',    // mouth
-            'O4' :'h',    // reed shelter
-            'V28':'ḥ',    // twisted wick
-            'Aa1':'ḫ',    // placenta
-            'F32':'ẖ',    // belly
-            'S29':'s',    // folded cloth
-            'O34':'z',    // door bolt
-            'N37':'š',    // pool
-            'N29':'q',    // hill slope
-            'V31':'k',    // basket with handle
-            'W11':'g',    // stand for jug
-            'X1' :'t',    // bread loaf
-            'V13':'ṯ',    // tethering rope
-            'D46':'d',    // hand
-            'I10':'ḏ',    // cobra
-
-            // ── A: Men & their occupations (mostly det., no phonetic reading) ───
-            'A28':'kꜣ',   // arms raised — kꜣ (ka-posture; used phonetically)
-
-            // ── D: Body parts ────────────────────────────────────────────────────
-            'D2' :'ḥr',   // face — ḥr
-            'D3' :'šnꜥ',  // hair — šnꜥ
-            'D4' :'ir',   // eye — ir
-            'D10':'wḏꜣt', // wḏꜣt-eye — wḏꜣt
-            'D19':'fnḏ',  // nose — fnḏ
-            'D28':'kꜣ',   // arms in kꜣ-posture — kꜣ
-            'D37':'di',   // forearm with bread — di
-            'D40':'ꜥwi',  // forearm with stick — ꜥwi (also nḥm in some contexts)
-            'D54':'rd',   // walking legs — rd (also in verb "to go")
-            'D56':'psd',  // leg — psd
-
-            // ── E: Mammals ───────────────────────────────────────────────────────
-            'E1' :'kꜣ',   // bull — kꜣ
-            'E17':'inpw', // lying jackal — inpw (Anubis)
-            'E23':'rw',   // lion — rw
-            'E34':'wn',   // hare — wn
-
-            // ── F: Parts of mammals ──────────────────────────────────────────────
-            'F4' :'ḥꜣt',  // forepart of lion — ḥꜣt
-            'F13':'db',   // horns — db
-            'F16':'šsp',  // palm rib — šsp
-            'F20':'srt',  // nose — srt
-            'F21':'msDr', // ear — msDr
-            'F22':'wḥm',  // hind leg — wḥm
-            'F23':'ḫpš',  // foreleg — ḫpš
-            'F24':'ḥꜣ',   // tail — ḥꜣ
-            'F26':'bꜣ',   // panther-head — bꜣ
-            'F29':'ẖ',    // belly with teats — ẖ (variant)
-            'F34':'ib',   // heart — ib
-            'F35':'nfr',  // windpipe + heart — nfr
-            'F36':'smꜣ',  // lung — smꜣ
-            'F39':'ꜥb',   // vertebrae — ꜥb
-            'F44':'mꜣi',  // forepart of lion — mꜣi
-            'F46':'inḥ',  // intestines — inḥ
-            'F51':'ẖt',   // body/belly — ẖt
-
-            // ── G: Birds ─────────────────────────────────────────────────────────
-            'G5' :'Ḥr',   // falcon — Ḥr (Horus)
-            'G7' :'Ḥr',   // falcon on standard — Ḥr
-            'G14':'mwt',  // vulture — mwt (mut/mother)
-            'G17a':'m',   // owl variant
-            'G25':'ꜣḫ',   // crested ibis — ꜣḫ
-            'G26':'Ḏḥwty',// ibis on standard — Ḏḥwty (Thoth)
-            'G27':'dšr',  // flamingo — dšr
-            'G29':'bꜣ',   // jabiru stork — bꜣ (ba-soul)
-            'G36':'mr',   // swallow — mr
-            'G37':'nḏs',  // small bird — nḏs (det. of small/bad)
-            'G38':'sꜣ',   // goose — sꜣ
-            'G39':'šp',   // pintail duck — šp
-            'G42':'wšn',  // chick — wšn
-            'G43a':'w',
-            'G44':'ww',   // two quail chicks — ww
-
-            // ── H: Parts of birds ────────────────────────────────────────────────
-            'H1':'pꜣ',    // head of pintail — pꜣ
-            'H6':'šwt',   // feather — šwt (also mꜣꜥt)
-
-            // ── I: Reptiles ──────────────────────────────────────────────────────
-            'I3' :'km',   // crocodile — km
-            'I4' :'km',
-            'I5' :'sꜣ',   // lizard — sꜣ
-            'I13':'Ḏd',   // coiled serpent — Ḏd
-
-            // ── L: Invertebrates & lesser creatures ──────────────────────────────
-            'L1':'ḫpr',   // scarab — ḫpr (Khepri)
-            'L2':'bit',   // bee — bit
-            'L5':'sr',    // centipede — sr
-
-            // ── M: Trees & plants ────────────────────────────────────────────────
-            'M3' :'xt',   // wood — xt
-            'M4' :'rnpt', // palm branch — rnpt (year)
-            'M8' :'šꜣ',   // pool with lotus — šꜣ
-            'M12':'ḥ',    // lotus with stalk — ḥ
-            'M13':'wꜣḏ',  // papyrus scepter — wꜣḏ
-            'M16':'ḥ',    // clump of papyrus — ḥ
-            'M17a':'i',
-            'M18':'ii',   // double reed — ii
-            'M22':'nḫb',  // lotus bud — nḫb
-            'M23':'sw',   // sedge — sw (element of nsw)
-            'M26':'šmꜥ',  // flowering sedge — šmꜥ (Upper Egypt)
-            'M29':'nḏm',  // pod — nḏm
-            'M40':'iꜣrt', // bundle of reed — iꜣrt
-
-            // ── N: Sky, earth & water ─────────────────────────────────────────────
-            'N1' :'pt',   // sky — pt (heaven)
-            'N5' :'rꜥ',   // sun disk — rꜥ (Ra)
-            'N6' :'rꜥ',   // sun disk with uraeus — rꜥ
-            'N8' :'šwt',  // sun rays — šwt (Shu/shadow)
-            'N11':'iꜣḥ',  // crescent moon — iꜣḥ
-            'N14':'dwꜣt', // star — dwꜣt (the Duat, underworld)
-            'N16':'tꜣ',   // flat land — tꜣ
-            'N17':'tꜣ',
-            'N18':'iw',   // sandy tract/island — iw
-            'N21':'iḏb',  // bank of river — iḏb
-            'N23':'i3t',  // mound of earth — i3t
-            'N24':'spꜣt', // nome sign — spꜣt
-            'N25':'ḫꜣst', // foreign hills — ḫꜣst
-            'N26':'Dw',   // mountain — Dw
-            'N27':'ꜣḫt',  // horizon — ꜣḫt (Akhet)
-            'N28':'ḫꜥ',   // sun rising over hill — ḫꜥ
-            'N35a':'n',
-            'N36':'mw',   // canal — mw
-            'N37':'š',    // pool (already in uniliterals)
-            'N41':'ḥm',   // well with water — ḥm
-            'N42':'ḥm',   // well (variant)
-
-            // ── O: Buildings & parts of buildings ───────────────────────────────
-            'O1' :'pr',   // house plan — pr
-            'O6' :'Ḥwt',  // enclosure — Ḥwt (Hwt-sign, "mansion")
-            'O24':'mr',   // pyramid — mr
-            'O28':'iwn',  // column — iwn
-            'O29':'ꜥꜣ',   // great door — ꜥꜣ
-            'O34':'z',    // door bolt (already above)
-            'O49':'niwt', // city plan — niwt
-
-            // ── P: Ships ─────────────────────────────────────────────────────────
-            'P1' :'dpt',  // boat — dpt
-            'P3' :'wꜣ',   // sacred bark — wꜣ
-            'P5' :'nfw',  // sail — nfw
-
-            // ── Q: Furniture ─────────────────────────────────────────────────────
-            'Q1':'st',    // seat/throne — st
-            'Q3':'p',     // stool (already above)
-
-            // ── R: Temple furniture & sacred emblems ─────────────────────────────
-            'R4' :'ḥtp',  // offering table — ḥtp
-            'R8' :'nṯr',  // flag — nṯr (god)
-            'R11':'ḏd',   // djed pillar — ḏd
-            'R14':'imnt', // west/right — imnt
-            'R15':'iꜣbt', // east/left — iꜣbt
-            'R22':'ḫm',   // Min-emblem — ḫm
-
-            // ── S: Crowns, dress & staves ────────────────────────────────────────
-            'S1' :'ḥḏt',  // white crown — ḥḏt
-            'S3' :'dšrt', // red crown — dšrt (also phono n)
-            'S5' :'sḫmty',// double crown — sḫmty
-            'S10':'mḏḥ',  // headband — mḏḥ
-            'S12':'nbw',  // gold collar — nbw
-            'S24':'ṯs',   // knotted belt — ṯs
-            'S34':'ꜥnḫ',  // sandal strap — ꜥnḫ (ankh)
-            'S38':'ḥqꜣ',  // crook — ḥqꜣ
-            'S40':'wꜣs',  // was-scepter — wꜣs
-            'S41':'ḏꜥm',  // scepter of fine gold — ḏꜥm
-            'S42':'sḫm',  // sekhem scepter — sḫm
-            'S43':'md',   // staff — md
-
-            // ── T: Warfare, hunting, butchery ────────────────────────────────────
-            'T1' :'mn',   // angular mace — mn
-            'T3' :'ḥḏ',   // pear-shaped mace — ḥḏ
-            'T8' :'tp',   // dagger — tp
-            'T9' :'pḏ',   // bow — pḏ
-            'T11':'swn',  // arrow — swn
-            'T13':'rs',   // wood tied — rs
-            'T18':'šms',  // crook + package — šms
-            'T19':'qs',   // harpoon head — qs
-            'T21':'wꜥ',   // harpoon — wꜥ
-            'T22':'sn',   // arrowhead — sn
-            'T24':'ꜥḥ',   // net — ꜥḥ
-            'T28':'ẖr',   // butcher's block — ẖr
-
-            // ── U: Agriculture, crafts & professions ────────────────────────────
-            'U1' :'mꜣ',   // sickle — mꜣ
-            'U6' :'mr',   // hoe — mr
-            'U13':'šnꜥ',  // plough — šnꜥ
-            'U15':'tm',   // sled — tm
-            'U19':'nw',   // adze — nw
-            'U21':'stp',  // adze on block — stp
-            'U23':'mr',   // chisel — mr
-            'U28':'ḏꜣ',   // fire drill — ḏꜣ
-            'U30':'t3',   // kiln — t3
-            'U33':'ti',   // pestle — ti
-            'U36':'ḥm',   // club — ḥm
-
-            // ── V: Rope, fiber, baskets ──────────────────────────────────────────
-            'V1' :'šn',   // rope coil — šn
-            'V4' :'wꜣ',   // lasso — wꜣ
-            'V6' :'šs',   // cord — šs
-            'V7' :'šn',   // cord with loop — šn
-            'V20':'mḥ',   // rope-count — mḥ
-            'V24':'wḏ',   // rope on stick — wḏ
-            'V25':'wḏ',
-            'V26':'ꜣb',   // wick of cord — ꜣb
-            'V30':'nb',   // basket — nb
-            'V33':'ms',   // bag — ms
-
-            // ── W: Stone & earthenware vessels ───────────────────────────────────
-            'W9' :'nw',   // stone jug — nw
-            'W14':'Hs',   // Hes-vase — Hs
-            'W17':'ḥnw',  // Henu-jar — ḥnw
-            'W24':'nw',   // pot — nw
-            'W25':'ini',  // pot + walking legs — ini
-
-            // ── X: Loaves & cakes ────────────────────────────────────────────────
-            'X8' :'di',   // conical loaf — di
-
-            // ── Y: Writings, games & music ───────────────────────────────────────
-            'Y1':'mḏꜣt',  // papyrus roll — mḏꜣt
-            'Y5':'mn',    // senet game board — mn
-
-            // ── Z: Strokes & geometric shapes ────────────────────────────────────
-            'Z1' :'|',    // vertical stroke (ideogram marker / classifier)
-            'Z7' :'w',    // quail chick variant
-
-            // ── Aa: Unclassified ─────────────────────────────────────────────────
-            'Aa1':'ḫ',    // placenta (already above)
-            'Aa5':'nḏ',
-            'Aa11':'mw',
-            'Aa13':'zbꜣ',
-            'Aa27':'nfr',
-            'Aa28':'r',
         };
 
         // Complete Gardiner Dictionary (768 signs from official Gardiner's Sign List)
@@ -497,10 +208,10 @@
             "Aa31":"𓐭"
         };
 
-        const inputField   = document.getElementById('input-field');
-        const outputField  = document.getElementById('output-field');
-        const phoneticOut  = document.getElementById('phonetic-output');
-
+        const inputField = document.getElementById('input-field');
+        const outputField = document.getElementById('output-field');
+        
+        // Listen for input changes
         inputField.addEventListener('input', convertText);
 
         function clearInput() {
@@ -509,417 +220,80 @@
             inputField.focus();
         }
 
-        // ─── Pre-process: normalise Egyptological diacritics → MdC letters ──────
-        // Walks through raw input string and substitutes phonetic chars with their
-        // MdC equivalents so the tokeniser below doesn't need to know about them.
-        function normalisePhoneticsToMdc(raw) {
-            let out = raw;
-            // Apply longest matches first (phoneticToMdc is already ordered that way)
-            for (const [from, to] of phoneticToMdc) {
-                // Use a global string replace for each mapping
-                out = out.split(from).join(to);
-            }
-            return out;
-        }
-
-        // ─── Resolve a normalised Gardiner-code string → { glyph, phonetic } ───
-        function resolveGardiner(raw) {
-            const mc = raw.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
-            let norm;
-            if (mc) {
-                const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' : mc[1].toUpperCase();
-                norm = letter + mc[2] + mc[3].toLowerCase();
-            } else {
-                norm = raw.toUpperCase();
-            }
-            const glyph    = gardinerMap[norm] || `[${norm}]`;
-            // For determinatives/ideograms with no phonetic value, show the Gardiner
-            // code in angle brackets so the user knows it's a classifier, not silence.
-            const phonetic = gardinerToPhonetic[norm] !== undefined
-                ? gardinerToPhonetic[norm]
-                : `⟨${norm}⟩`;
-            return { glyph, phonetic };
-        }
-
-        // ═══════════════════════════════════════════════════════════════════════
-        // QUADRAT LAYOUT ENGINE
-        // ═══════════════════════════════════════════════════════════════════════
-        //
-        // Unicode 12.0 hieroglyph layout controls (U+13430–U+13438) have no
-        // visual rendering support in any current browser or font. Instead, we
-        // parse the MdC operator tree ourselves and build an SVG/HTML layout
-        // that accurately represents vertical stacking (:) and horizontal
-        // grouping (*) as the Egyptological community intends.
-        //
-        // ARCHITECTURE:
-        //   parse(tokens) → AST of { type, children } nodes
-        //     type: 'sequence'  — top-level list of quadrats (space-separated)
-        //           'quadrat'   — a single layout unit rendered as one block
-        //           'vstack'    — colon (:) operator — stack children vertically
-        //           'hgroup'    — asterisk (*) operator — group children side-by-side
-        //           'glyph'     — leaf node: a single hieroglyph character
-        //           'unknown'   — unrecognised code, renders as [CODE]
-        //           'newline'   — line break
-        //
-        //   renderAST(node) → HTML string
-        //     Each vstack becomes a CSS flex-column container sized to fit.
-        //     Each hgroup becomes a CSS flex-row container.
-        //     Glyphs scale uniformly within their quadrat so the tallest
-        //     column in a vstack equals the full quadrat height.
-        // ═══════════════════════════════════════════════════════════════════════
-
-        // ─── Step 1: Tokenise ─────────────────────────────────────────────────
-        // Returns array of token objects: { type, value }
-        // Fixed regex: Gardiner codes (letter(s)+digits) matched before bare letters,
-        // and bare letters use a word-boundary-like check to avoid greedily eating
-        // adjacent MdC letters (e.g. "nr" without an operator between them).
-        function tokenise(input) {
-            // Pattern priority (left to right in alternation):
-            //   1. Aa/aa-prefixed codes (must come before generic 2-letter catch)
-            //   2. Standard Gardiner codes: 1-2 letters + digits + optional letter suffix
-            //   3. Operators and structural chars
-            //   4. Single MdC letter NOT adjacent to another letter (lookahead/behind)
-            //   5. Single MdC letter in any context (fallback — may be part of word)
-            const re = /([A-Za-z]{1,2}\d+[A-Za-z]?|[:*()\-\n]|[A-Za-z])/g;
-            const tokens = [];
-            let m;
-            while ((m = re.exec(input)) !== null) {
-                const v = m[1];
-                if (v === '\n')       tokens.push({ type: 'newline' });
-                else if (v === ':')   tokens.push({ type: 'op', value: ':' });
-                else if (v === '*')   tokens.push({ type: 'op', value: '*' });
-                else if (v === '(')   tokens.push({ type: 'op', value: '(' });
-                else if (v === ')')   tokens.push({ type: 'op', value: ')' });
-                else if (v === '-')   tokens.push({ type: 'op', value: '-' });
-                else                  tokens.push({ type: 'sign', value: v });
-            }
-            return tokens;
-        }
-
-        // ─── Step 2: Resolve a sign token → { glyph, phonetic } ─────────────
-        function resolveSign(value) {
-            // Try MdC single-letter map first (case-sensitive)
-            if (mdcMap[value]) {
-                const gc = mdcMap[value];
-                return {
-                    glyph: gardinerMap[gc] || null,
-                    phonetic: mdcToPhonetic[value] || value,
-                    code: gc
-                };
-            }
-            // Try as Gardiner code
-            const { glyph, phonetic } = resolveGardiner(value);
-            const isUnknown = glyph.startsWith('[');
-            return { glyph: isUnknown ? null : glyph, phonetic, code: value, unknown: isUnknown ? value : null };
-        }
-
-        // ─── Step 3: Parse token stream → AST ────────────────────────────────
-        // Grammar (simplified, left-recursive eliminated):
-        //   sequence  = quadrat (' ' quadrat)*
-        //   quadrat   = vstack
-        //   vstack    = hgroup (':' hgroup)*
-        //   hgroup    = atom ('*' atom)*
-        //   atom      = '(' vstack ')' | sign
-        //
-        // We implement this as a recursive descent parser over the flat token array.
-
-        function parse(tokens) {
-            let pos = 0;
-
-            function peek() { return tokens[pos]; }
-            function consume() { return tokens[pos++]; }
-            function atEnd() { return pos >= tokens.length; }
-
-            // atom = parenthesised group or single sign
-            function parseAtom() {
-                const t = peek();
-                if (!t) return null;
-                if (t.type === 'op' && t.value === '(') {
-                    consume(); // eat '('
-                    const inner = parseVstack();
-                    if (peek() && peek().type === 'op' && peek().value === ')') consume();
-                    // Wrap in enclosure marker for optional visual treatment
-                    return { type: 'enclosure', child: inner };
-                }
-                if (t.type === 'sign') {
-                    consume();
-                    const r = resolveSign(t.value);
-                    if (r.unknown) return { type: 'unknown', code: r.unknown, phonetic: r.phonetic };
-                    return { type: 'glyph', glyph: r.glyph, phonetic: r.phonetic, code: r.code };
-                }
-                return null;
-            }
-
-            // hgroup = atom ('*' atom)*
-            function parseHgroup() {
-                const first = parseAtom();
-                if (!first) return null;
-                const children = [first];
-                while (!atEnd() && peek().type === 'op' && peek().value === '*') {
-                    consume(); // eat '*'
-                    const next = parseAtom();
-                    if (next) children.push(next);
-                }
-                if (children.length === 1) return children[0];
-                return { type: 'hgroup', children };
-            }
-
-            // vstack = hgroup (':' hgroup)*
-            function parseVstack() {
-                const first = parseHgroup();
-                if (!first) return null;
-                const children = [first];
-                while (!atEnd() && peek().type === 'op' && peek().value === ':') {
-                    consume(); // eat ':'
-                    const next = parseHgroup();
-                    if (next) children.push(next);
-                }
-                if (children.length === 1) return children[0];
-                return { type: 'vstack', children };
-            }
-
-            // sequence: parse quadrats separated by implicit spaces or explicit '-'
-            // (operators between quadrats don't exist in MdC — each quadrat is
-            // terminated when we hit a newline or run out of tokens without an op)
-            const quadrats = [];
-            const phonLines = [[]]; // phonetic parts, split by newlines
-
-            while (!atEnd()) {
-                const t = peek();
-                if (t.type === 'newline') {
-                    consume();
-                    quadrats.push({ type: 'newline' });
-                    phonLines.push([]);
-                    continue;
-                }
-                if (t.type === 'op' && t.value === '-') {
-                    consume();
-                    phonLines[phonLines.length - 1].push(' ');
-                    continue;
-                }
-                // Skip stray closing parens at top level
-                if (t.type === 'op' && (t.value === ')')) { consume(); continue; }
-
-                const node = parseVstack();
-                if (node) {
-                    quadrats.push(node);
-                    phonLines[phonLines.length - 1].push(getPhonetic(node));
-                }
-            }
-
-            return { type: 'sequence', quadrats, phonLines };
-        }
-
-        // ─── Phonetic string extraction from AST node ─────────────────────────
-        function getPhonetic(node) {
-            if (!node) return '';
-            switch (node.type) {
-                case 'glyph':    return node.phonetic || '';
-                case 'unknown':  return `⟨${node.code}⟩`;
-                case 'enclosure': return `(${getPhonetic(node.child)})`;
-                case 'hgroup':   return node.children.map(getPhonetic).join('·');
-                case 'vstack':   return node.children.map(getPhonetic).join('·');
-                case 'newline':  return '\n';
-                default: return '';
-            }
-        }
-
-        // ─── Step 4: Render AST → HTML ────────────────────────────────────────
-        // Each quadrat is rendered as a self-contained inline-flex block.
-        // The base glyph size (em units) is set on the sequence container;
-        // vstack/hgroup children scale to fill their allocated space.
-
-        const GLYPH_SIZE_PX = 64; // base quadrat height in pixels
-
-        function renderNode(node, availH, availW) {
-            // availH / availW are the pixel dimensions allocated to this node.
-            // For top-level quadrats they start at GLYPH_SIZE_PX × GLYPH_SIZE_PX.
-            if (!node) return '';
-            switch (node.type) {
-                case 'glyph':
-                    return renderGlyph(node.glyph, availH, availW);
-                case 'unknown':
-                    return `<span class="q-unknown" style="font-size:${Math.round(availH * 0.35)}px;line-height:${availH}px;">[${node.code}]</span>`;
-                case 'enclosure':
-                    return renderNode(node.child, availH, availW);
-                case 'hgroup':
-                    return renderHgroup(node, availH, availW);
-                case 'vstack':
-                    return renderVstack(node, availH, availW);
-                default:
-                    return '';
-            }
-        }
-
-        function renderGlyph(glyph, h, w) {
-            if (!glyph) return `<span class="q-empty" style="width:${w}px;height:${h}px;"></span>`;
-            // Font size: fit glyph into the box. Egyptian hieroglyphs are roughly
-            // square in the Noto font, so font-size ≈ min(h, w) gives a good fit.
-            const fs = Math.round(Math.min(h, w) * 0.88);
-            return `<span class="q-glyph hieroglyph" style="font-size:${fs}px;width:${w}px;height:${h}px;line-height:${h}px;">${glyph}</span>`;
-        }
-
-        function renderHgroup(node, availH, availW) {
-            const n = node.children.length;
-            const childW = Math.round(availW / n);
-            const inner = node.children.map(c => renderNode(c, availH, childW)).join('');
-            return `<span class="q-hgroup" style="height:${availH}px;width:${availW}px;">${inner}</span>`;
-        }
-
-        function renderVstack(node, availH, availW) {
-            const n = node.children.length;
-            const childH = Math.round(availH / n);
-            const inner = node.children.map(c => renderNode(c, childH, availW)).join('');
-            return `<span class="q-vstack" style="height:${availH}px;width:${availW}px;">${inner}</span>`;
-        }
-
-        // ─── Step 5: Measure quadrat aspect ratio for width allocation ────────
-        // We want each quadrat to be roughly square regardless of content depth.
-        // A hgroup of N children should be N× as wide; a vstack stays 1× wide.
-        function measureAspect(node) {
-            if (!node) return 1;
-            switch (node.type) {
-                case 'glyph':
-                case 'unknown':
-                case 'enclosure': return 1;
-                case 'hgroup': return node.children.reduce((s, c) => s + measureAspect(c), 0);
-                case 'vstack': return Math.max(...node.children.map(measureAspect));
-                default: return 1;
-            }
-        }
-
-        // ─── Step 6: Full render pipeline ─────────────────────────────────────
-        function renderSequence(ast, useFormat) {
-            if (!ast || ast.quadrats.length === 0) return '';
-
-            const H = GLYPH_SIZE_PX;
-            const parts = [];
-
-            for (const node of ast.quadrats) {
-                if (node.type === 'newline') {
-                    parts.push('<br>');
-                    continue;
-                }
-                if (!useFormat) {
-                    // Stacking disabled: render each glyph/group flat
-                    parts.push(renderFlat(node, H));
-                    continue;
-                }
-                const aspect = measureAspect(node);
-                const W = Math.round(H * aspect);
-                parts.push(
-                    `<span class="q-quadrat" style="width:${W}px;height:${H}px;">${renderNode(node, H, W)}</span>`
-                );
-            }
-            return parts.join('');
-        }
-
-        // Flat render (stacking disabled) — just emit glyphs in sequence
-        function renderFlat(node, h) {
-            if (!node) return '';
-            switch (node.type) {
-                case 'glyph':   return renderGlyph(node.glyph, h, h);
-                case 'unknown': return `<span class="q-unknown" style="font-size:${Math.round(h*0.35)}px;line-height:${h}px;">[${node.code}]</span>`;
-                case 'enclosure': return renderFlat(node.child, h);
-                case 'hgroup':  return node.children.map(c => renderFlat(c, h)).join('');
-                case 'vstack':  return node.children.map(c => renderFlat(c, h)).join('');
-                default: return '';
-            }
-        }
-
-        // ─── Unicode copy-string builder (for clipboard) ──────────────────────
-        // Even though browsers can't render U+13430 stacking, we still copy the
-        // proper Unicode sequence so pastes into future-capable software work.
-        function buildUnicodeString(ast, useFormat) {
-            let out = '';
-            for (const node of ast.quadrats) {
-                if (node.type === 'newline') { out += '\n'; continue; }
-                out += nodeToUnicode(node, useFormat);
-            }
-            return out;
-        }
-
-        function nodeToUnicode(node, useFormat) {
-            if (!node) return '';
-            switch (node.type) {
-                case 'glyph':    return node.glyph || '';
-                case 'unknown':  return `[${node.code}]`;
-                case 'enclosure':
-                    return useFormat
-                        ? '\u{13437}' + nodeToUnicode(node.child, useFormat) + '\u{13438}'
-                        : nodeToUnicode(node.child, useFormat);
-                case 'hgroup':
-                    return node.children.map((c, i) =>
-                        (i > 0 && useFormat ? '\u{13431}' : '') + nodeToUnicode(c, useFormat)
-                    ).join('');
-                case 'vstack':
-                    return node.children.map((c, i) =>
-                        (i > 0 && useFormat ? '\u{13430}' : '') + nodeToUnicode(c, useFormat)
-                    ).join('');
-                default: return '';
-            }
-        }
-
-        // ─── Main converter ───────────────────────────────────────────────────────
         function convertText() {
-            const raw       = inputField.value;
+            const input = inputField.value;
             const useFormat = document.getElementById('format-controls').checked;
 
-            // Step 1: swap any Egyptological phonetic chars → MdC equivalents
-            const input = normalisePhoneticsToMdc(raw);
+            // 1. Added '(' and ')' to the regex capture group
+            const tokenRegex = /([A-Za-z]{1,2}\d+[A-Za-z]?|[a-zA-Z]|[:*\-()]|\n)/g;
+    
+            let match;
+            let result = '';
 
-            // Step 2: tokenise
-            const tokens = tokenise(input);
+            while ((match = tokenRegex.exec(input)) !== null) {
+                const token = match[1];
 
-            // Step 3: parse into AST
-            const ast = parse(tokens);
+                if (token === '\n') {
+                    result += '\n';
+                } else if (token === ':') {
+                    result += useFormat ? '𓐰' : ''; // U+13430 Vertical Stacking
+                } else if (token === '*') {
+                    result += useFormat ? '𓐱' : ''; // U+13431 Horizontal Grouping
+                } else if (token === '(') {
+                    result += useFormat ? '𓐷' : ''; // U+13437 Begin Segment
+                } else if (token === ')') {
+                    result += useFormat ? '𓐸' : ''; // U+13438 End Segment
+                } else if (token === '-') {
+                    result += ''; // Ignore visual spacers
+                } else if (mdcMap[token]) {
+                    // Uniliteral MdC mapping
+                    result += gardinerMap[mdcMap[token]] || `[${mdcMap[token]}]`;
+                } else if (token.length > 1 || /^[A-Z]$/.test(token)) {
+                    // 2. Safely parse Gardiner codes with trailing lowercase letters (e.g., N35a)
+                    let norm = token;
+                    const matchCode = token.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+            
+                    if (matchCode) {
+                        let letterPart = matchCode[1].toLowerCase() === 'aa' ? 'Aa' : matchCode[1].toUpperCase();
+                        let numPart = matchCode[2];
+                        let trailingPart = matchCode[3].toLowerCase(); // Force the trailing letter back to lower
+                        norm = letterPart + numPart + trailingPart;
+                    } else {
+                        norm = token.toUpperCase(); 
+                    }
 
-            // Step 4: render HTML layout
-            const html = renderSequence(ast, useFormat);
-
-            // Step 5: build Unicode copy string
-            const unicodeStr = buildUnicodeString(ast, useFormat);
-
-            // ── Render hieroglyphs into the output <div> ──────────────────────
-            if (!html) {
-                outputField.innerHTML = '<span class="output-placeholder">𓇋𓅱𓏏</span>';
-            } else {
-                outputField.innerHTML = `<span class="q-sequence">${html}</span>`;
+                    if (gardinerMap[norm]) {
+                        result += gardinerMap[norm];
+                    } else {
+                        result += `[${norm}]`; // Keep unrecognized visually distinct
+                    }
+                } else {
+                    result += `[${token}]`;
+                }
             }
 
-            // Store Unicode string for copy
-            outputField.dataset.raw = unicodeStr;
-
-            // ── Render phonetic preview ───────────────────────────────────────
-            const phonStr = ast.phonLines.map(line => line.join('')).join('\n').trim();
-            if (!phonStr) {
-                phoneticOut.innerHTML = '<span class="output-placeholder">Phonetic preview will appear here…</span>';
-            } else {
-                phoneticOut.textContent = phonStr;
-            }
+            outputField.value = result;
         }
 
-        // ─── Copy hieroglyphs from the div ────────────────────────────────────────
         function copyToClipboard() {
-            const text = outputField.dataset.raw;
-            if (!text || outputField.querySelector('.output-placeholder')) return;
+            if (!outputField.value) return;
 
-            navigator.clipboard.writeText(text).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-            });
+            // Standard fallback copy method
+            outputField.select();
+            outputField.setSelectionRange(0, 99999); 
+            document.execCommand('copy');
+            
+            // Remove selection
+            window.getSelection().removeAllRanges();
 
+            // Provide visual feedback
             const btn = document.getElementById('copy-btn');
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Copied!</span>`;
+            
+            btn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span id="copy-text">Copied!</span>`;
             btn.style.backgroundColor = 'var(--cyan-dim)';
             btn.style.borderColor = 'var(--cyan)';
+
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.backgroundColor = '';
