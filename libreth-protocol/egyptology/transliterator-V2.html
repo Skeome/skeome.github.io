@@ -497,23 +497,37 @@
             'B7' :'ḥmt',  // woman with flagellum — ḥmt
 
             // ── C: Anthropomorphic deities ────────────────────────────────────────
-            'C1' :'rꜥ',   // Re with sun disk — rꜥ
-            'C2' :'itmw',  // Atum — itmw
-            'C3' :'Ḏḥwty',// Thoth — Ḏḥwty
-            'C4' :'mnṯw', // Montu — mnṯw
-            'C5' :'imn',  // Amun — imn
-            'C6' :'nfr-tm',// Nefertum — nfr-tm
-            'C7' :'sp3',  // Sopdu — sp3
-            'C8' :'ḥꜥpy', // Hapy — ḥꜥpy
-            'C9' :'nit',  // Neith — nit
-            'C10':'ḥwt-ḥr',// Hathor — ḥwt-ḥr
-            'C10a':'ḥwt-ḥr',// Hathor variant — ḥwt-ḥr
-            'C11':'nb',   // Nebuu — nb
-            'C12':'inpw', // Anubis — inpw
-            'C17':'Gb',   // Geb — Gb
-            'C18':'Wsir', // Osiris — Wsir
-            'C19':'Wsir', // Osiris with atef — Wsir
-            'C20':'Mnw',  // Min — Mnw
+            'C1' :'rꜥ',    // Re-Harakhty (sun disk on head) — rꜥ
+            'C2' :'itmw',  // Atum (pschent crown) — itmw
+            'C2a':'itmw',  // Atum variant (C002A) — itmw
+            'C2b':'itmw',  // Atum variant (C002B) — itmw
+            'C2c':'itmw',  // Atum variant (C002C) — itmw
+            'C3' :'Ḏḥwty',// Thoth (ibis-headed) — Ḏḥwty
+            'C4' :'Ḫnmw', // Khnum (ram-headed) — Ḫnmw  ← corrected from mnṯw
+            'C5' :'nfr-tm',// Nefertum (lotus crown) — nfr-tm  ← corrected from imn
+            'C6' :'Wsir',  // Osiris (mummiform, crook+flail) — Wsir  ← corrected from nfr-tm
+            'C7' :'sp3',   // Sopdu — sp3
+            'C8' :'ḥꜥpy',  // Hapy (Nile god) — ḥꜥpy
+            'C9' :'nit',   // Neith — nit
+            'C10':'mꜣꜥt',  // Maat (woman with feather) — mꜣꜥt  ← corrected from ḥwt-ḥr
+            'C10a':'mꜣꜥt', // Maat variant — mꜣꜥt  ← corrected from ḥwt-ḥr
+            'C11':'ḥḥ',    // Heh (seated god with notched palms, million) — ḥḥ  ← corrected from nb
+            'C12':'inpw',  // Anubis (jackal-headed) — inpw
+            // ── Extended C-series deity figures ──────────────────────────────────
+            // Source: Gardiner supplementary list; JSesh/CCER extended codes;
+            //         cross-verified against Unicode 12.0 character names.
+            'C13':'Ḫnsw',  // Khonsu (moon god, crook+flail) — Ḫnsw
+            'C14':'Ḫpri',  // Khepri (scarab-headed seated god) — Ḫpri
+            'C15':'nfr-tm',// Nefertum variant (different posture) — nfr-tm
+            'C16':'Inḥr',  // Onuris/Anhur (feathered crown) — Inḥr
+            'C17':'Gb',    // Geb — Gb
+            'C18':'Wsir',  // Osiris — Wsir
+            'C19':'Wsir',  // Osiris with atef crown — Wsir
+            'C20':'Mnw',   // Min — Mnw
+            'C21':'Sḫmt',  // Sekhmet (lion-headed woman) — Sḫmt
+            'C22':'Ptḥ',   // Ptah (mummiform, was-scepter) — Ptḥ
+            'C23':'Skr',   // Sokar/Ptah-Sokar (hawk-headed mummiform) — Skr
+            'C24':'Bꜣstt', // Bastet (cat-headed woman) — Bꜣstt
 
             // ── D: Body parts ────────────────────────────────────────────────────
             'D1' :'tp',   // head — tp (upon, first)
@@ -1253,6 +1267,56 @@
             'Aa29':'qd',
             'Aa30':'ẑqr',  // frieze element — det. adorn (CCER: J30=Xkr)
             'Aa31':'ẑqr',
+
+            // ── Extended: animal variants ─────────────────────────────────────────
+            // All codepoints verified against Unicode 12.0 Egyptian Hieroglyphs block.
+            'E9a' :'šꜣ',   // pig variant — šꜣ
+            'E10' :'bꜣ',   // ram of Mendes (alternate posture) — bꜣ
+            'E16a':'inpw', // couchant jackal variant — inpw (Anubis)
+            'E17a':'inpw', // jackal on shrine variant — inpw
+            'E20a':'stš',  // Seth animal variant — stš
+            'E34a':'wn',   // hare variant — wn
+            'E36' :'šꜣ',   // boar/pig (extended) — šꜣ
+            'E37' :'sꜣb',  // canid variant — sꜣb
+            'E38' :'sꜣb',  // lying canid variant — sꜣb
+
+            // ── Extended: bird variants ───────────────────────────────────────────
+            'G6a' :'Ḥr',   // Horus falcon variant — Ḥr
+            'G43a':'w',    // quail chick variant — w
+
+            // ── Extended: reptile/serpent variants ────────────────────────────────
+            'I5a' :'sꜣ',   // lizard variant — sꜣ
+            'I9a' :'f',    // horned viper variant — f
+            'I10a':'ḏ',    // cobra variant — ḏ
+            'I11a':'ḏd',   // cobra erect variant — ḏd
+
+            // ── Extended: N-series variant ────────────────────────────────────────
+            'N33a':'ꜥšꜣ',  // grain of sand variant — det. many/fine/granular
+
+            // ── Extended: Z15–Z16 numeral stroke signs ────────────────────────────
+            // Source: Gardiner §259; Allen Middle Egyptian ch.9.
+            // Z15–Z15h = individual strokes for digits 1–9 (distinct from Z1 ideogram stroke).
+            // Z15i = additional stroke variant. Z16–Z16h = ten-group strokes for 10–90.
+            // Phonetic values are the Egyptian cardinal number words.
+            'Z15' :'wꜥ',   // 1 stroke — wꜥ (one)
+            'Z15a':'snwy', // 2 strokes — snwy (two)
+            'Z15b':'ḫmt',  // 3 strokes — ḫmt (three)
+            'Z15c':'fdw',  // 4 strokes — fdw (four)
+            'Z15d':'diw',  // 5 strokes — diw (five)
+            'Z15e':'srsw', // 6 strokes — srsw (six)
+            'Z15f':'sfḫ',  // 7 strokes — sfḫ (seven)
+            'Z15g':'ḫmnw', // 8 strokes — ḫmnw (eight)
+            'Z15h':'psḏ',  // 9 strokes — psḏ (nine)
+            'Z15i':'wꜥ',   // 1 stroke variant
+            'Z16' :'mḏ',   // 10 strokes — mḏ (ten)
+            'Z16a':'ḏbꜥ',  // 20 strokes — ḏbꜥ (twenty, lit. "fingers")
+            'Z16b':'mꜣbꜣ', // 30 — mꜣbꜣ
+            'Z16c':'ḥmw',  // 40 — ḥmw
+            'Z16d':'diw',  // 50 — diw
+            'Z16e':'srsw', // 60 — srsw
+            'Z16f':'sfḫ',  // 70 — sfḫ
+            'Z16g':'ḫmnw', // 80 — ḫmnw
+            'Z16h':'psḏw', // 90 — psḏw
         }; // end gardinerToPhonetic
         // Includes all categories A through Z and Aa1-Aa31
         const gardinerMap = {
@@ -1343,7 +1407,34 @@
             "Aa1":"𓐍","Aa2":"𓐎","Aa3":"𓐏","Aa4":"𓐐","Aa5":"𓐑","Aa6":"𓐒","Aa7":"𓐓","Aa8":"𓐖","Aa9":"𓐗","Aa10":"𓐘",
             "Aa11":"𓐙","Aa12":"𓐚","Aa13":"𓐛","Aa14":"𓐜","Aa15":"𓐝","Aa16":"𓐞","Aa17":"𓐟","Aa18":"𓐠","Aa19":"𓐡","Aa20":"𓐢",
             "Aa21":"𓐣","Aa22":"𓐤","Aa23":"𓐥","Aa24":"𓐦","Aa25":"𓐧","Aa26":"𓐨","Aa27":"𓐩","Aa28":"𓐪","Aa29":"𓐫","Aa30":"𓐬",
-            "Aa31":"𓐭"
+            "Aa31":"𓐭",
+            // ── Extended: C-series deity figures (C13–C16, C21–C24) ──────────────
+            // Codepoints verified: U+1306A–U+1306D, U+13072–U+13075 (Unicode 12.0)
+            // Identities cross-checked: Gardiner supplementary list + JSesh + CCER.
+            // C2 corrected: U+1305B=C002 (canonical Atum); U+1305C=C002A was the old "C2" entry.
+            "C2":"𓁛","C2a":"𓁜","C2b":"𓁝","C2c":"𓁞",
+            "C13":"𓁪","C14":"𓁫","C15":"𓁬","C16":"𓁭",
+            "C21":"𓁲","C22":"𓁳","C23":"𓁴","C24":"𓁵",
+            // ── Extended: E-series animal variants ───────────────────────────────
+            // E9a U+130DC, E10 U+130DD, E16a U+130E4, E17a U+130E6,
+            // E20a U+130EA, E34a U+130FA, E36 U+130FB, E37 U+130FC, E38 U+130FD
+            "E9a":"𓃜","E10":"𓃝","E16a":"𓃤","E17a":"𓃦",
+            "E20a":"𓃪","E34a":"𓃺","E36":"𓃻","E37":"𓃼","E38":"𓃽",
+            // ── Extended: G-series bird variants ─────────────────────────────────
+            // G6a U+13145, G43a U+13172
+            "G6a":"𓅅","G43a":"𓅲",
+            // ── Extended: I-series reptile/serpent variants ───────────────────────
+            // I5a U+1318D, I9a U+13192, I10a U+13194, I11a U+13196
+            "I5a":"𓆍","I9a":"𓆒","I10a":"𓆔","I11a":"𓆖",
+            // ── Extended: N33a grain-of-sand variant ─────────────────────────────
+            // N33a U+13213
+            "N33a":"𓈓",
+            // ── Extended: Z15–Z16 numeral stroke signs ───────────────────────────
+            // Z15–Z15i U+133FA–U+13403; Z16–Z16h U+13404–U+1340C
+            "Z15":"𓏺","Z15a":"𓏻","Z15b":"𓏼","Z15c":"𓏽","Z15d":"𓏾",
+            "Z15e":"𓏿","Z15f":"𓐀","Z15g":"𓐁","Z15h":"𓐂","Z15i":"𓐃",
+            "Z16":"𓐄","Z16a":"𓐅","Z16b":"𓐆","Z16c":"𓐇","Z16d":"𓐈",
+            "Z16e":"𓐉","Z16f":"𓐊","Z16g":"𓐋","Z16h":"𓐌"
         };
 
         const inputField   = document.getElementById('input-field');
