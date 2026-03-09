@@ -12,6 +12,43 @@
         body { background-image: radial-gradient(circle at 50% 0%, rgba(0, 209, 255, 0.05) 0%, transparent 50%),
                 radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 90%, rgba(0,80,100,0.05) 0%, transparent 60%); }
+
+        /* ── Exercise blocks ─────────────────────────────────────── */
+        .exercise-block {
+            border: 1px solid rgba(0,209,255,0.22);
+            background: rgba(0,18,30,0.75);
+            padding: 1.3rem 1.7rem;
+            margin: 1.8rem 0;
+        }
+        .exercise-title {
+            font-family: 'VT323', monospace;
+            color: var(--cyan);
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.9rem;
+            display: block;
+        }
+        .exercise-block ol { padding-left: 1.5rem; margin: 0.4rem 0 0; }
+        .exercise-block li { margin-bottom: 0.45rem; font-size: 0.94rem; }
+
+        /* ── Answer key ──────────────────────────────────────────── */
+        details.answer-key {
+            border: 1px solid rgba(212,175,55,0.15);
+            background: rgba(18,16,8,0.85);
+            padding: 0.7rem 1.1rem;
+            margin-top: 1rem;
+        }
+        details.answer-key summary {
+            font-family: 'VT323', monospace;
+            color: var(--gold-dim);
+            cursor: pointer;
+            letter-spacing: 0.08em;
+            user-select: none;
+            font-size: 0.98rem;
+        }
+        details.answer-key summary:hover { color: var(--gold); }
+        details.answer-key ol { padding-left: 1.5rem; margin-top: 0.7rem; }
+        details.answer-key li { margin-bottom: 0.3rem; font-size: 0.91rem; }
     </style>
 </head>
 <body>
@@ -22,59 +59,103 @@
         <header class="page-header">
             <h1 class="page-title">Hieroglyph Training</h1>
             <p class="page-subtitle">// Deciphering Ancient Knowledge Streams //</p>
+            <p class="page-epithet"><i>mdw-nṯr</i> [Gardiner: G17-D21-G43-R8] — "Words of God." To write is not to record. To write is to fix reality in form — to perform the act eternally in stone.</p>
             <div style="font-family:'VT323',monospace; color:var(--cyan-dim); margin-top:1.5rem; font-size:0.9rem; opacity:0.6;">
-                MODULE_INIT :: SYMBOLIC_DECODING_V0.1 :: ACTIVATING ANCESTRAL DATA-STREAMS
+                MODULE_INIT :: SYMBOLIC_DECODING_V0.2 :: ACTIVATING ANCESTRAL DATA-STREAMS
             </div>
         </header>
 
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb">
+            <a href="index.html">RESEARCH HUB</a> &gt; HIEROGLYPH TRAINING MODULE
+        </nav>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc-block">
+            <div class="toc-title">// MODULE CONTENTS //</div>
+            <ul class="toc-list">
+                <li><a href="#introduction">I. Introduction — The Nature of Medu Netjer</a></li>
+                <li><a href="#scribes-kit">II. The Scribe's Apprentice — Tools of the Trade</a></li>
+                <li><a href="#orientation">III. Layout and Orientation — The Faces Rule</a></li>
+                <li><a href="#gardiner">IV. Gardiner's Sign List — The Classification System</a></li>
+                <li><a href="#sign-types">V. Sign Typology — Uniliterals, Biliterals, Triliterals, Determinatives</a></li>
+                <li><a href="#mechanics">VI. The Middle Egyptian Language — Mechanics of the System</a></li>
+                <li><a href="#biliterals">VII. Essential Biliterals and Triliterals</a></li>
+                <li><a href="#determinatives">VIII. Key Determinatives — The Silent Classifiers</a></li>
+                <li><a href="#grammar">IX. Grammar and Syntax — VSO, Honorific Transposition, the Verbal System</a></li>
+                <li><a href="#decipherment">X. Decipherment — Rosetta Stone to Champollion</a></li>
+                <li><a href="#phonology">XI. Phonology — Reconstructing the Living Voice</a></li>
+                <li><a href="#enigmatic">XII. Advanced Module — Enigmatic Writing and Cryptography</a></li>
+                <li><a href="#esoteric">XIII. The Esoteric Dimension — Signs as Living Frequencies</a></li>
+                <li><a href="#gematria">XIV. Speculative Layer — Ontological Gematria</a></li>
+                <li><a href="#exercises">XV. Training Exercises — Drills and Practice Sets</a></li>
+                <li><a href="#digital-tools">XVI. The Digital Scribe — Modern Tools</a></li>
+                <li><a href="#recommendations">XVII. Strategic Recommendations</a></li>
+            </ul>
+        </div>
+
         <!-- Main Content -->
         <main>
-            <section>
-                <h2 class="section-head">Introduction to Ancient Kemet Hieroglyphs</h2>
+
+            <!-- ═══════════════════════════════════ I. INTRODUCTION -->
+            <section id="introduction">
+                <h2 class="section-head">I. Introduction to Ancient Kemet Hieroglyphs</h2>
                 <p>
                     In the research of symbolic language, the understanding of ancient systems is paramount. This module focuses on the <b>hieroglyphic system of ancient Kemet (Egypt)</b>, as an essential foundational training. Egyptian hieroglyphs represent a profound early form of informational encoding, deeply intertwined with both practical communication and esoteric spiritual understanding.
                 </p>
                 <p>
-                    The study of Ancient Egypt is inextricably linked to the decipherment of its language. <b>Middle Egyptian</b>, the phase of the language used during the Middle Kingdom, is considered the classical form of the script. Understanding these hieroglyphs is not merely about linguistic translation; it is an exercise in resonance, a method of attuning to the frequency of ancient thought and the underlying archetypes they represent.
+                    The study of Ancient Egypt is inextricably linked to the decipherment of its language. <b>Middle Egyptian</b>, the phase of the language used during the Middle Kingdom (c. 2055–1650 BCE), is considered the classical form of the script and remained the standard for religious, monumental, and literary works for nearly two millennia after spoken Egyptian had evolved further. Understanding these hieroglyphs is not merely about linguistic translation; it is an exercise in resonance, a method of attuning to the frequency of ancient thought and the underlying archetypes they represent.
+                </p>
+                <p>
+                    The Egyptians themselves called their script <i>mdw-nṯr</i> [Gardiner: G17-D21-G43-R8] — "Words of God" or "Divine Speech." This designation is theological before it is linguistic. These signs are operational extensions of <i>ḥkꜣ</i> [Gardiner: V28-D28-G1], the primordial creative force. To inscribe a word was not to describe an action — it was to perform that action, perpetually and without cessation, for as long as the stone endured. A temple offering list did not commemorate past offerings. It <i>made</i> the offerings, continuously, for all time. The scribe who inscribed without understanding was not simply making an error; by the Egyptian theory of writing, they were performing the action incorrectly — with real consequences in the field of divine order, <i>Mꜣꜥt</i> [Gardiner: C10].
+                </p>
+                <p>
+                    The Greeks who encountered the sacred inscriptions on temple walls called them <i>hieroglyphika grammata</i> — "sacred carved letters" — which contracted over centuries into our word <i>hieroglyphs</i>. But the Egyptian name is the deeper truth. In Kemetic theology, the spoken word (<i>Ḥw</i> [Gardiner: V28-G43-A40], "Authoritative Utterance") manifested intention; the written sign fixed that manifestation across time. The scribe did not record the world. The scribe maintained it.
                 </p>
             </section>
 
             <hr class="divider">
 
-            <section>
-                <h2 class="section-head">The Scribe’s Apprentice: Practical Methods</h2>
+            <!-- ═══════════════════════════════════ II. SCRIBE'S KIT -->
+            <section id="scribes-kit">
+                <h2 class="section-head">II. The Scribe's Apprentice: Practical Methods</h2>
                 <p>
-                    To learn the "Words of God" (<i>Medu Netjer</i>) is to step into the role of a professional class that maintained the administrative and spiritual life of Egypt. This section outlines both traditional preparation and modern interactive substitutes.
+                    To learn the "Words of God" (<i>Medu Netjer</i>) is to step into the role of a professional class that maintained the administrative and spiritual life of Egypt. The title of scribe — <i>sš</i> [Gardiner: S29-N37, with A1 determinative] — was among the most prestigious in Egyptian society. Tomb paintings show scribes at the right hand of administrators, generals, and priests; the palette and rush-pen were marks of office as unmistakable as a military insignia. This section outlines both traditional preparation and modern interactive substitutes.
                 </p>
 
-                <h3 class="sub-head">I. The Scribe’s Kit: Tools of the Trade</h3>
+                <h3 class="sub-head">I. The Scribe's Kit: Tools of the Trade</h3>
                 <p>
-                    Ancient Egyptian writing was inseparable from the physical preparation of tools. A professional scribe’s palette (<i>mesetet</i>) held the essential instruments of the trade.
+                    Ancient Egyptian writing was inseparable from the physical preparation of tools. A professional scribe's palette (<i>mesetet</i>) held the essential instruments of the trade. The palette itself — typically a long, narrow piece of wood or ivory with two shallow depressions for black and red pigment cakes and a central channel for reed brushes — was an object of high symbolic status. Scribes were buried with their palettes. Some survive with the original pigment cakes intact, chemically viable after 3,500 years.
                 </p>
 
                 <h4 class="mini-head">1. Making the Brush and Stylus</h4>
                 <ul class="training-list">
                     <li><b>Traditional Method:</b> Scribes used a thin reed about 8–10 inches long. The tip was created by chewing one end of the reed for several minutes, fraying the fibers into a fine, flexible brush.</li>
                     <li><b>Modern Substitute:</b> Beginners can use small-tip brush pens like the <b>Tombow Fudenosuke</b> or the <b>Pentel Touch Sign Pen</b>.</li>
+                    <li><b>Advanced:</b> Dip pens with flexible G-nibs (Zebra, Nikko) allow superior stroke modulation — thin hairlines on the upstroke, broad sweeps on the down — essential for signs like the owl (𓅓, G17) and the vulture (𓄿, G1) where tonal variation carries the character of the sign.</li>
                 </ul>
 
                 <h4 class="mini-head">2. Creating the Ink</h4>
                 <ul class="training-list">
                     <li><b>Traditional Method:</b> Black ink was made by mixing soot (carbon) with a vegetable binder like Gum Arabic. Red ink used red oxide (ochre) and was reserved for titles.</li>
+                    <li><b>Red Ink — The Dual Valence:</b> Red (<i>dšrt</i>) carried a double meaning — the colour of the desert (also <i>dšrt</i>, "the red land"), of Set's violent energy, and of danger and power. Scribes used red for headings, corrections, quantities in mathematical texts, and critically, for the names of hostile entities like Apep in ritual destruction texts — writing the enemy's name in red simultaneously marked it for annihilation.</li>
                     <li><b>DIY Modern Alternative:</b> Create your own black ink by collecting soot from a candle flame, mixing it with water and Gum Arabic.</li>
                 </ul>
 
-                <h3 class="sub-head">II. Layout and Orientation: The "Faces Rule"</h3>
+                <h3 class="sub-head" id="orientation">II. Layout and Orientation: The "Faces Rule"</h3>
                 <p>
-                    Hieroglyphs prioritize aesthetic balance (<i>horror vacui</i>), arranging signs in compact blocks called "quadrats" rather than simple side-by-side strings.
+                    Hieroglyphs prioritize aesthetic balance (<i>horror vacui</i>), arranging signs in compact blocks called "quadrats" rather than simple side-by-side strings. A quadrat is a notional square unit within which multiple signs are stacked and grouped for visual equilibrium. The <a href="transliterator.html">Archive Transliterator</a> supports MdC stacking operators (<code>:</code> for vertical, <code>*</code> for horizontal) to compose quadrats digitally.
                 </p>
                 <ul class="training-list">
                     <li><b>Reading Direction:</b> Look at the figures (birds, animals, people) and always read <b>into</b> their faces. If a bird faces <b>left</b>, read <b>left to right</b>.</li>
                     <li><b>Stroke Order:</b> Practice the 24 "alphabetical" uniliteral signs first. Every sign follows a top-to-bottom and left-to-right priority.</li>
+                    <li><b>Retrograde Writing:</b> In symmetrically composed doorway inscriptions and some cartouches, signs are mirrored purely for visual balance. The reader must identify the symmetry and reverse reading direction accordingly — this is a competency that requires pattern recognition before phonetic decoding.</li>
+                    <li><b>Column vs. Row:</b> Columns (read top-to-bottom) were the prestige format for formal temple inscriptions. Rows were standard for papyrus. Both appear on any major monument; the trained reader switches fluidly between them.</li>
                 </ul>
             </section>
 
-            <section>
+            <!-- ═══════════════════════════════════ III–V (original section, preserved exactly) -->
+            <section id="gardiner">
                 <h3 class="sub-head">III. Categorization: Gardiner's Sign List</h3>
                 <p>
                     In 1927, Sir Alan Gardiner established the standard classification system, organizing over 700 signs into 26 categories (A–Z). This allows scribes to quickly identify the <b>semantic domain</b> of a sign.
@@ -85,69 +166,291 @@
                     <li><b>Category G:</b> Birds (e.g., 𓅓 - owl).</li>
                     <li><b>Category O:</b> Buildings and parts of buildings (e.g., 𓉐 - house plan).</li>
                 </ul>
+                <p>
+                    The full GSL extends to 27 categories when including the supplementary <b>Aa</b> class ("unclassified" signs), which contains some of the most ancient and cryptographically significant glyphs — including Aa1 𓐍 (the placenta sign, phonetic <i>ḫ</i>) and Aa11 (<i>qn</i>, "brave/strong"). The Ptolemaic era dramatically expanded the working repertoire to over 6,000 distinct signs for theological encoding purposes; the standard 750-sign Gardiner corpus represents the functional core used across all periods.
+                </p>
 
                 <h3 class="sub-head">IV. Advanced Module: Enigmatic Writing (Cryptography)</h3>
                 <p>
                     During the New Kingdom, a system of <b>Enigmatic Writing</b> was developed. This was a "visual Heka" where standard signs took on new phonetic values. This forced the initiate to look <b>beyond the surface</b>, engaging the <b>Sia</b> (Perception) to decode the divine frequency.
+                </p>
+                <p>
+                    This system is treated in full detail in <a href="#enigmatic">Section XII</a> below. The present entry introduces the concept; the full treatment — including the mechanism of value substitution, pictographic overloading, acrophonic reading, and rotational signs — follows after the foundational philological grounding.
                 </p>
 
                 <h3 class="sub-head">V. Speculative Layer: Ontological Gematria</h3>
                 <p>
                     Within the Awareness Field (AF), each hieroglyph is not just a sound but a <b>geometric vibration</b>. Ontological Gematria involves calculating the resonance of a word by summing the frequency-values of its component signs. The combination of these specific shapes creates a unique <b>waveform</b> that anchors the concept into the physical plane.
                 </p>
+                <p>
+                    This speculative framework is developed in full in <a href="#gematria">Section XIV</a>, including its epistemological distinction from the philological record and its practical application as an interpretive methodology within this archive.
+                </p>
             </section>
 
             <hr class="divider">
 
-            <section>
-                <h2 class="section-head">The Middle Egyptian Language and the Art of Hieroglyphs</h2>
+            <!-- ═══════════════════════════════════ V. SIGN TYPOLOGY -->
+            <section id="sign-types">
+                <h2 class="section-head">V. Sign Typology — Uniliterals, Biliterals, Triliterals, Determinatives</h2>
                 <p>
-                    The breakthough in decipherment occurred after the 1799 discovery of the <b>Rosetta Stone</b>. Jean-François Champollion’s mastery of Coptic allowed him to realize that hieroglyphs were a complex combination of phonetic signs and ideograms.
+                    The hieroglyphic system operates simultaneously on four distinct levels. A single written word can contain phonetic signs, semantic classifiers, and ideographic markers in the same visual unit. This is not ambiguity — it is intentional multivalency, a system engineered to encode meaning at multiple frequencies simultaneously.
+                </p>
+
+                <h3 class="sub-head">Uniliterals — The Phonetic Spine</h3>
+                <p>
+                    Signs encoding a single consonant. There are <b>25 standard uniliteral signs</b> — the Egyptian "alphabet," though it was never used in isolation as a pure phonetic system. Ancient scribes always mixed uniliterals with biliterals and triliterals for efficiency and aesthetic rhythm. In esoteric terms, these 25 signs are the consonantal skeleton of creation — the minimal set of vibrational units from which all Egyptian words, and therefore all encoded reality, can be constructed.
+                </p>
+                <p>
+                    A crucial distinction: the signs <i>ꜣ</i> (G1, Egyptian vulture) and <i>ꜥ</i> (D36, forearm) are <b>not vowels</b>. They are consonants — a glottal or uvular stop, and a voiced pharyngeal fricative respectively. The hieroglyphic system is an <b>abjad</b>: consonants are written; short vowels are omitted. This is a theological choice as much as a scribal convention — vowels are breath, spirit, the animating force that belongs to the living speaker in the act of utterance. To fix them in stone would be to freeze what must remain alive.
+                </p>
+
+                <h3 class="sub-head">Biliterals — Two Consonants, One Sign</h3>
+                <p>
+                    Signs encoding two consonants in a single glyph. Approximately <b>80 common biliterals</b> form the working vocabulary of the trained scribe. These function as semantic compression: the sign 𓄦 F35 (<i>nfr</i>) encodes "beautiful / good / complete" — the trachea and heart drawn together into one perfect formal unit. After a biliteral, scribes frequently added <b>phonetic complements</b> — uniliteral signs confirming one or both consonants already expressed by the biliteral. This is not redundancy but precision engineering: over-constraining the signal to ensure correct decoding regardless of context or the reader's familiarity with the biliteral.
+                </p>
+
+                <h3 class="sub-head">Triliterals — Three Consonants, Maximum Compression</h3>
+                <p>
+                    Signs encoding three consonants, often depicting the object they name, making them simultaneously phonetic and logographic. The scarab 𓆣 L1 (<i>ḫpr</i>) — "to become, to transform, scarab beetle" — compresses three phonemes, a divine name, and the theological concept of solar transformation into a single glyph. Triliterals carry the most condensed esoteric content — convergence points where sound, form, and concept merge into a single operational unit.
+                </p>
+
+                <h3 class="sub-head">Determinatives — The Taxonomy of Reality</h3>
+                <p>
+                    Silent signs placed at the end of a word to indicate its semantic category. They are not pronounced and carry no phonetic value — their function is purely classificatory. The determinative system is the Egyptian theory of knowledge made visible: every word belongs to a field of being, and the written sign places it correctly within that field. The same phonetic string means entirely different things depending on which determinative is applied — not because the phonetics are ambiguous, but because the determinative assigns the word to its correct ontological register.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ VI. MECHANICS / UNILITERAL TABLE -->
+            <section id="mechanics">
+                <h2 class="section-head">VI. The Middle Egyptian Language and the Art of Hieroglyphs</h2>
+                <p>
+                    The breakthrough in decipherment occurred after the 1799 discovery of the <b>Rosetta Stone</b>. Jean-François Champollion's mastery of Coptic allowed him to realize that hieroglyphs were a complex combination of phonetic signs and ideograms.
                 </p>
 
                 <h3 class="sub-head">Mechanics of the Hieroglyphic Writing System</h3>
+                <p>
+                    The table below presents the core uniliteral signs with their Gardiner codes, standard Egyptological transliterations, depicted objects, and phonetic reconstructions. Note that several signs represent phonemes with no English equivalents — particularly the pharyngeal consonants <i>ḥ</i> [V28] and <i>ꜥ</i> [D36], and the uvular <i>q</i> [N29]. These are not stylistic variants of familiar sounds; they are entirely distinct consonants that could differentiate otherwise identical words.
+                </p>
                 <div class="data-table-wrapper">
                     <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Sign</th>
+                                <th>Gardiner</th>
                                 <th>Transliteration</th>
                                 <th>Description</th>
                                 <th>Approximate Pronunciation</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td class="hieroglyph-example">𓄿</td><td>ꜣ</td><td>Egyptian Vulture</td><td>"ah" (as in yacht)</td></tr>
-                            <tr><td class="hieroglyph-example">𓇋</td><td>i</td><td>Reed Leaf</td><td>"ee" (as in feet)</td></tr>
-                            <tr><td class="hieroglyph-example">𓂝</td><td>ꜥ</td><td>Arm</td><td>"ah" (as in yacht)</td></tr>
-                            <tr><td class="hieroglyph-example">𓅱</td><td>w</td><td>Quail Chick</td><td>"oo" (as in blue)</td></tr>
-                            <tr><td class="hieroglyph-example">𓃀</td><td>b</td><td>Foot</td><td>"b"</td></tr>
-                            <tr><td class="hieroglyph-example">𓊪</td><td>p</td><td>Stool</td><td>"p"</td></tr>
-                            <tr><td class="hieroglyph-example">𓆑</td><td>f</td><td>Horned Viper</td><td>"f"</td></tr>
-                            <tr><td class="hieroglyph-example">𓅓</td><td>m</td><td>Owl</td><td>"m"</td></tr>
-                            <tr><td class="hieroglyph-example">𓈖</td><td>n</td><td>Water Ripple</td><td>"n"</td></tr>
-                            <tr><td class="hieroglyph-example">𓂋</td><td>r</td><td>Mouth</td><td>"r"</td></tr>
-                            <tr><td class="hieroglyph-example">𓉐</td><td>h</td><td>House Plan</td><td>"h"</td></tr>
-                            <tr><td class="hieroglyph-example">𓏏</td><td>t</td><td>Bread Loaf</td><td>"t"</td></tr>
-                            <tr><td class="hieroglyph-example">𓂧</td><td>d</td><td>Hand</td><td>"d"</td></tr>
-                            <tr><td class="hieroglyph-example">𓆓</td><td>ḏ</td><td>Cobra</td><td>"dj"</td></tr>
+                            <tr><td class="hieroglyph-example">𓄿</td><td>G1</td><td>ꜣ</td><td>Egyptian Vulture</td><td>glottal/uvular — not a simple vowel</td></tr>
+                            <tr><td class="hieroglyph-example">𓇋</td><td>M17</td><td>i</td><td>Reed Leaf</td><td>"ee" (as in feet)</td></tr>
+                            <tr><td class="hieroglyph-example">𓂝</td><td>D36</td><td>ꜥ</td><td>Arm</td><td>voiced pharyngeal — Arabic <i>ʿayn</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓅱</td><td>G43</td><td>w</td><td>Quail Chick</td><td>"oo" (as in blue)</td></tr>
+                            <tr><td class="hieroglyph-example">𓃀</td><td>D58</td><td>b</td><td>Foot</td><td>"b"</td></tr>
+                            <tr><td class="hieroglyph-example">𓊪</td><td>Q3</td><td>p</td><td>Stool</td><td>"p"</td></tr>
+                            <tr><td class="hieroglyph-example">𓆑</td><td>I9</td><td>f</td><td>Horned Viper</td><td>"f"</td></tr>
+                            <tr><td class="hieroglyph-example">𓅓</td><td>G17</td><td>m</td><td>Owl</td><td>"m"</td></tr>
+                            <tr><td class="hieroglyph-example">𓈖</td><td>N35</td><td>n</td><td>Water Ripple</td><td>"n"</td></tr>
+                            <tr><td class="hieroglyph-example">𓂋</td><td>D21</td><td>r</td><td>Mouth</td><td>"r" (alveolar flap → late glottal)</td></tr>
+                            <tr><td class="hieroglyph-example">𓉐</td><td>O1</td><td>h</td><td>House Plan</td><td>"h"</td></tr>
+                            <tr><td class="hieroglyph-example">𓎛</td><td>V28</td><td>ḥ</td><td>Twisted Flax Wick</td><td>voiceless pharyngeal — Arabic <i>ḥa</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓐍</td><td>Aa1</td><td>ḫ</td><td>Placenta / Sieve</td><td>velar fricative — Scottish <i>loch</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓄡</td><td>F32</td><td>ẖ</td><td>Animal Belly with Teats</td><td>palatal fricative — German <i>ich</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓋴</td><td>S29</td><td>s</td><td>Folded Cloth</td><td>"s"</td></tr>
+                            <tr><td class="hieroglyph-example">𓈙</td><td>N37</td><td>š</td><td>Pool / Lake</td><td>"sh"</td></tr>
+                            <tr><td class="hieroglyph-example">𓈎</td><td>N29</td><td>q</td><td>Hill Slope</td><td>uvular stop — Arabic <i>qaf</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓎡</td><td>V31</td><td>k</td><td>Basket with Handle</td><td>"k"</td></tr>
+                            <tr><td class="hieroglyph-example">𓎼</td><td>W11</td><td>g</td><td>Stand for Jar</td><td>"g"</td></tr>
+                            <tr><td class="hieroglyph-example">𓏏</td><td>X1</td><td>t</td><td>Bread Loaf</td><td>"t"</td></tr>
+                            <tr><td class="hieroglyph-example">𓍿</td><td>V13</td><td>ṯ</td><td>Tethering Rope</td><td>"ch" (palato-alveolar)</td></tr>
+                            <tr><td class="hieroglyph-example">𓂧</td><td>D46</td><td>d</td><td>Hand</td><td>"d"</td></tr>
+                            <tr><td class="hieroglyph-example">𓆓</td><td>I10</td><td>ḏ</td><td>Cobra</td><td>"dj"</td></tr>
                         </tbody>
                     </table>
                 </div>
 
                 <h3 class="sub-head">Basic Grammar and Syntax</h3>
                 <p>
-                    Middle Egyptian grammar follows a <b>Verb-Subject-Object (VSO)</b> order. A unique feature is <b>Honorific Transposition</b>, where signs for "god" (<i>nTr</i>) or "king" (<i>nswt</i>) are written first out of respect, regardless of their phonetic position.
+                    Middle Egyptian grammar follows a <b>Verb-Subject-Object (VSO)</b> order. A unique feature is <b>Honorific Transposition</b>, where signs for "god" (<i>nṯr</i> [Gardiner: R8]) or "king" (<i>nswt</i> [Gardiner: M23-X1]) are written first out of respect, regardless of their phonetic position in the spoken phrase. The reader learns to recognize this reversal and restore the spoken order mentally — not as a scribal error but as a theological statement about ontological priority.
                 </p>
             </section>
 
             <hr class="divider">
 
-            <section>
-                <h2 class="section-head">Phonology and the Reconstruction of the Living Voice</h2>
+            <!-- ═══════════════════════════════════ VII. BILITERALS -->
+            <section id="biliterals">
+                <h2 class="section-head">VII. Essential Biliterals and Triliterals</h2>
                 <p>
-                    Precise pronunciation remains a subject of scholarly reconstruction based on Coptic and comparisons with other Afroasiatic languages.
+                    Mastering the highest-frequency biliterals is the single most important accelerator of reading speed beyond the uniliteral stage. The table below covers the core signs encountered across royal titularies, offering formulae, and divine epithets.
                 </p>
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sign</th>
+                                <th>Gardiner</th>
+                                <th>Reading</th>
+                                <th>Depicted Object</th>
+                                <th>Primary Meaning / Context</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="hieroglyph-example">𓄦</td><td>F35</td><td><i>nfr</i></td><td>Trachea + heart</td><td>"beautiful, good, complete" — the central aesthetic and moral ideal of Kemetic culture</td></tr>
+                            <tr><td class="hieroglyph-example">𓊹</td><td>R8</td><td><i>nṯr</i></td><td>Flag on pole</td><td>"god, divine" — standard religious determinative; also used as logogram in divine names</td></tr>
+                            <tr><td class="hieroglyph-example">𓋹</td><td>S34</td><td><i>ꜥnḫ</i></td><td>Sandal strap / loop</td><td>"life, to live" — the ankh; appears in millions of divine epithets and royal titularies</td></tr>
+                            <tr><td class="hieroglyph-example">𓌀</td><td>S40</td><td><i>wꜣs</i></td><td>Was-sceptre</td><td>"dominion, power" — carried by gods as the primary emblem of divine authority</td></tr>
+                            <tr><td class="hieroglyph-example">𓂓</td><td>D28</td><td><i>kꜣ</i></td><td>Upraised arms</td><td>"vital soul / Ka" — the spiritual double; also "bull" in certain registers</td></tr>
+                            <tr><td class="hieroglyph-example">𓆣</td><td>L1</td><td><i>ḫpr</i></td><td>Scarab beetle</td><td>"to become, to transform, to come into being" — solar transformation, daily rebirth</td></tr>
+                            <tr><td class="hieroglyph-example">𓇯</td><td>N1</td><td><i>pt</i></td><td>Sky sign</td><td>"sky, heaven" — the celestial vault; cosmological determinative for all above-horizon phenomena</td></tr>
+                            <tr><td class="hieroglyph-example">𓉐</td><td>O1</td><td><i>pr</i></td><td>House plan (floor plan)</td><td>"house, estate; to go out / exit" — biliteral <i>pr</i> and logogram for any enclosed domain</td></tr>
+                            <tr><td class="hieroglyph-example">𓅝</td><td>G29</td><td><i>bꜣ</i></td><td>Jabiru stork</td><td>"Ba soul" — the mobile aspect of the soul capable of leaving the tomb and manifesting</td></tr>
+                            <tr><td class="hieroglyph-example">𓏠</td><td>Y5</td><td><i>mn</i></td><td>Gaming board</td><td>"to be stable, to endure, to remain" — found in royal epithets of permanence</td></tr>
+                            <tr><td class="hieroglyph-example">𓎟</td><td>V30</td><td><i>nb</i></td><td>Basket with handle</td><td>"lord, master; every, all" — extremely high frequency in titles and epithets of gods and kings</td></tr>
+                            <tr><td class="hieroglyph-example">𓇾</td><td>N16</td><td><i>tꜣ</i></td><td>Flat land with grains</td><td>"land, earth, the earthly world" — contrasts cosmologically with <i>pt</i> (sky)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="practical-note">
+                    <div class="pn-title">// ON PHONETIC COMPLEMENTS //</div>
+                    <p>After a biliteral or triliteral, scribes routinely added <b>phonetic complements</b> — uniliteral signs confirming one or both consonants already expressed by the multi-consonant sign. <i>nfr</i> (F35) is frequently written F35 + I9 + D21 (<i>nfr</i> + <i>f</i> + <i>r</i>). This is precision engineering — over-constraining the signal to ensure correct decoding regardless of context. In alchemical terms, this mirrors the principle of fixation: anchoring a subtle truth in multiple material attestations simultaneously.</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ VIII. DETERMINATIVES -->
+            <section id="determinatives">
+                <h2 class="section-head">VIII. Key Determinatives — The Silent Classifiers</h2>
+                <p>
+                    Determinatives are unpronounced signs appended to the end of a word to indicate its semantic category. They are not pronounced and carry no phonetic value — their function is purely classificatory. The same phonetic string can carry entirely different meanings depending on which determinative is applied, because the determinative assigns the word to its correct ontological field.
+                </p>
+                <p>
+                    Consider the string <i>mn</i>: followed by 𓏛 Y1 (papyrus scroll) = "to remain, endure (abstract concept)"; followed by 𓅆 G7 (falcon on perch) = the divine name Min; followed by 𓂾 D54 (walking legs) = "to travel." The phonetic content is identical across all three. The determinative is not clarifying an ambiguous word — it is locating it within the correct dimension of reality.
+                </p>
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sign</th>
+                                <th>Gardiner</th>
+                                <th>Category Signalled</th>
+                                <th>Typical Words</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="hieroglyph-example">𓀀</td><td>A1</td><td>Male human person</td><td>Male names, male roles, male pronouns; personal acts of a male agent</td></tr>
+                            <tr><td class="hieroglyph-example">𓁐</td><td>B1</td><td>Female human person</td><td>Female names, goddess epithets in human form, female roles</td></tr>
+                            <tr><td class="hieroglyph-example">𓀭</td><td>A40</td><td>Seated deity / divine being</td><td>God names (<i>Wsir</i>, <i>Jnpw</i>), divine principles, divine epithets</td></tr>
+                            <tr><td class="hieroglyph-example">𓏛</td><td>Y1</td><td>Papyrus roll / writing / the abstract</td><td>Abstract concepts, books, acts of knowing, speech, thought</td></tr>
+                            <tr><td class="hieroglyph-example">𓊖</td><td>O49</td><td>Town plan / settlement</td><td>City names, geographic locations, administrative units</td></tr>
+                            <tr><td class="hieroglyph-example">𓂾</td><td>D54</td><td>Walking legs / motion</td><td>All verbs of motion: to walk, to run, to travel, to flee, to approach</td></tr>
+                            <tr><td class="hieroglyph-example">𓇯</td><td>N1</td><td>Sky / celestial</td><td>Meteorological phenomena, celestial objects, divine height</td></tr>
+                            <tr><td class="hieroglyph-example">𓆙</td><td>I14</td><td>Unspecified snake / danger</td><td>Reptiles, serpentine forms, venom, winding motion, threat</td></tr>
+                            <tr><td class="hieroglyph-example">𓅆</td><td>G7</td><td>Falcon on perch / divine kingship</td><td>Horus-forms, solar deity names, royal divine titles</td></tr>
+                            <tr><td class="hieroglyph-example">𓈗</td><td>N36</td><td>Canal / body of water</td><td>Rivers, irrigation, the inundation (<i>Ḥꜥpj</i>), nautical vocabulary</td></tr>
+                            <tr><td class="hieroglyph-example">𓁹</td><td>D4</td><td>Eye / perception</td><td>Acts of seeing, watching, visual attention, witnessing, the divine gaze</td></tr>
+                            <tr><td class="hieroglyph-example">𓏤</td><td>Z1</td><td>Single stroke (logogram marker)</td><td>Follows any sign used as an ideogram for itself; also numeral 1</td></tr>
+                            <tr><td class="hieroglyph-example">𓈉</td><td>N25</td><td>Three hill peaks / foreign land</td><td>Desert terrain, foreign territories, mountain regions beyond the Black Land</td></tr>
+                            <tr><td class="hieroglyph-example">𓂝</td><td>D36</td><td>Forearm extended / giving</td><td>Acts of giving, extending, offering; also phonetic <i>ꜥ</i></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ IX. GRAMMAR -->
+            <section id="grammar">
+                <h2 class="section-head">IX. Grammar and Syntax — VSO, Honorific Transposition, the Verbal System</h2>
+
+                <h3 class="sub-head">Word Order — The Action-First Universe</h3>
+                <p>
+                    Middle Egyptian grammar follows a primary <b>Verb-Subject-Object (VSO)</b> word order in verbal sentences. This is cognitively significant: the Egyptian world is understood through its verbs before its nouns, through processes before entities. A sentence that sounds in English "The scribe reads the text" is structured in Egyptian "Reads — the scribe — the text." The world is, first and foremost, a field of actions.
+                </p>
+
+                <h3 class="sub-head">The Pronoun System</h3>
+                <p>Middle Egyptian employs three classes of pronouns, each with distinct grammatical functions that cannot be freely substituted for one another:</p>
+                <ul class="training-list">
+                    <li><b>Suffix Pronouns</b> — Attached directly to verbs (as subject) and nouns (as possessive). <i>sḏm.f</i> [Gardiner: S29-D46-G17 + <i>.f</i>] = "he hears / he will hear"; <i>it.f</i> = "his father." These are the workhorse pronouns of the system and appear on virtually every line of any substantial text.</li>
+                    <li><b>Dependent Pronouns</b> — Used as direct objects of verbs and as subjects in certain adverbial sentence types. Morphologically distinct from suffix pronouns — they cannot be interchanged without grammatical error.</li>
+                    <li><b>Independent Pronouns</b> — Used as subjects of nominal sentences (predication without a verb). <i>ink sš</i> = "I am a scribe." The nominal sentence is one of the most common and most misread structures at the beginner level.</li>
+                </ul>
+
+                <h3 class="sub-head">Honorific Transposition</h3>
+                <p>
+                    Divine or royal titles — <i>nṯr</i> [Gardiner: R8], <i>nswt</i> [Gardiner: M23-X1], <i>Jmn</i> (Amun) [Gardiner: M17-G17-N35], full divine names — are written first in any phrase regardless of their syntactic position in the spoken utterance. A phrase meaning "giving bread to the god" may be written "god — giving bread to." This is not an error; it is a theological statement about ontological priority. The divine name is spoken last but written first — it is the ground from which the action proceeds. The trained reader holds both orders simultaneously: the written order (theological) and the spoken order (syntactic).
+                </p>
+
+                <h3 class="sub-head">The Verbal System — Aspect, Not Tense</h3>
+                <p>
+                    The Egyptian verbal system is primarily <b>aspect-based</b> rather than purely tense-based. The same verbal root is inflected for: completed action (<i>sḏm.n.f</i> = "he heard [completed]"), ongoing or prospective action (<i>sḏm.f</i> = "he hears / he will hear"), and a wide range of nominalized and adjectivalized forms. Tense in the modern sense is conveyed through context and adverbial circumstantial clauses rather than through inflectional morphology alone. James P. Allen's <i>Middle Egyptian: An Introduction to the Language and Culture of Hieroglyphs</i> (3rd ed., Cambridge University Press) is the definitive modern reference grammar.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ X. DECIPHERMENT -->
+            <section id="decipherment">
+                <h2 class="section-head">X. Decipherment — Rosetta Stone to Champollion</h2>
+                <p>
+                    The ability to read hieroglyphs was effectively lost by the 4th century CE — the last confirmed hieroglyphic inscription is from Philae, dated 24 August 394 CE. For the following fourteen centuries, Western scholarship treated the script as purely allegorical or mystical, a prejudice reinforced by Horapollon's <i>Hieroglyphica</i> (5th century CE), which described the signs as philosophical symbols rather than phonetic notation. The idea that a pictorial script could simultaneously encode sounds seemed counterintuitive to scholars trained on alphabetic writing — which is precisely why decipherment took so long despite the physical key existing on a single stone.
+                </p>
+                <p>
+                    The breakthrough came following the <b>1799 discovery of the Rosetta Stone</b> by French soldiers during Napoleon's Egyptian campaign. The stele presents a priestly decree from 196 BCE in three scripts: Hieroglyphic (formal prestige register), Demotic (cursive administrative script), and Ancient Greek (the Hellenistic administrative language of Ptolemaic Egypt). Since the Greek was fully readable, it provided the semantic content.
+                </p>
+                <p>
+                    <b>Thomas Young</b> (1819) correctly identified the oval rings — <i>šnw</i> [Gardiner: V9], today called cartouches — as enclosing royal names, and identified the phonetic values of several signs in the name of Ptolemy. <b>Jean-François Champollion</b> completed the decipherment in <b>September 1822</b>, announcing it in his <i>Lettre à M. Dacier</i>. His critical insight — enabled by his mastery of Coptic, the final stage of the Egyptian language written in Greek letters — was that hieroglyphs were a hybrid system of phonetic signs and ideograms, not a purely symbolic code. The same script that used a picture of an owl to mean the sound <i>m</i> also used it sometimes to mean "owl" as a logogram. Champollion identified this dual capacity and the system unlocked.
+                </p>
+                <div class="practical-note">
+                    <div class="pn-title">// THE COPTIC KEY //</div>
+                    <p>Coptic is Egyptian written in the Greek alphabet plus six additional letters from Demotic. It was the liturgical language of the Coptic Christian Church and remained spoken in some communities until the 17th century. Because Coptic <i>writes vowels</i> — which hieroglyphic does not — it provides the vowel reconstruction that allows us to approximate how ancient Egyptian words were actually pronounced. Champollion recognized that the Coptic word for "sun" (<i>rê</i>) matched the solar cartouche sign — and the entire system opened. Coptic remains the primary evidence base for Egyptian phonological reconstruction today.</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XI. PHONOLOGY -->
+            <section id="phonology">
+                <h2 class="section-head">XI. Phonology and the Reconstruction of the Living Voice</h2>
+                <p>
+                    Precise pronunciation remains a subject of scholarly reconstruction based on Coptic and comparisons with other Afroasiatic languages. The hieroglyphic script records consonants but omits short vowels — an <b>abjadic</b> system shared with ancient Hebrew, Phoenician, and early Arabic. This means the consonantal skeleton of words is known with high confidence; the vowel reconstruction is inferred from Coptic attestations, Akkadian cuneiform transcriptions of Egyptian names, and Greek transliterations in Ptolemaic-era papyri.
+                </p>
+
+                <h3 class="sub-head">IPA Reconstruction of Key Phonemes</h3>
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sign</th>
+                                <th>Gardiner</th>
+                                <th>Transliteration</th>
+                                <th>IPA</th>
+                                <th>Closest Equivalent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="hieroglyph-example">𓄿</td><td>G1</td><td>ꜣ</td><td>/ʔ/ or /ʀ/</td><td>Glottal stop (late Egyptian) or uvular trill (Old Kingdom reconstruction)</td></tr>
+                            <tr><td class="hieroglyph-example">𓇋</td><td>M17</td><td>i</td><td>/j/</td><td>"y" as in <i>yes</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓂝</td><td>D36</td><td>ꜥ</td><td>/ʕ/</td><td>Voiced pharyngeal fricative — Arabic <i>ʿayn</i>; no English equivalent</td></tr>
+                            <tr><td class="hieroglyph-example">𓅱</td><td>G43</td><td>w</td><td>/w/</td><td>"w" as in <i>water</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓂋</td><td>D21</td><td>r</td><td>/ɾ/ → /ʔ/</td><td>Alveolar flap (earlier); merges with glottal stop in later periods</td></tr>
+                            <tr><td class="hieroglyph-example">𓉐</td><td>O1</td><td>h</td><td>/h/</td><td>"h" as in <i>hat</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓎛</td><td>V28</td><td>ḥ</td><td>/ħ/</td><td>Voiceless pharyngeal fricative — Arabic <i>ḥa</i>; no English equivalent</td></tr>
+                            <tr><td class="hieroglyph-example">𓐍</td><td>Aa1</td><td>ḫ</td><td>/x/</td><td>Velar fricative — Scottish <i>loch</i>, German <i>Bach</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓄡</td><td>F32</td><td>ẖ</td><td>/ç/</td><td>Palatal fricative — German <i>ich</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓋴</td><td>S29</td><td>s</td><td>/s/</td><td>"s" as in <i>sun</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓈙</td><td>N37</td><td>š</td><td>/ʃ/</td><td>"sh" as in <i>ship</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓈎</td><td>N29</td><td>q</td><td>/q/</td><td>Uvular stop — Arabic <i>qāf</i>; no English equivalent</td></tr>
+                            <tr><td class="hieroglyph-example">𓏏</td><td>X1</td><td>t</td><td>/t/</td><td>"t" as in <i>top</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓍿</td><td>V13</td><td>ṯ</td><td>/tʃ/</td><td>"ch" as in <i>church</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓂧</td><td>D46</td><td>d</td><td>/d/</td><td>"d" as in <i>door</i></td></tr>
+                            <tr><td class="hieroglyph-example">𓆓</td><td>I10</td><td>ḏ</td><td>/dʒ/</td><td>"j" as in <i>judge</i></td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3 class="sub-head">Interactive IPA for Ancient Egyptian</h3>
                 <ul class="training-list terminal">
@@ -155,30 +458,289 @@
                     <li><b>IPA Chart with Audio (Cambridge):</b> Allows you to listen to audio examples for each phonetic symbol.</li>
                     <li><b>IPA-Reader:</b> Paste phonetic notations (e.g., /tʃ/ for the tethering rope 𓍿) to hear them read aloud.</li>
                 </ul>
+                <div class="practical-note">
+                    <div class="pn-title">// THE PHARYNGEAL THRESHOLD //</div>
+                    <p>The four signs <i>ꜥ</i> (D36), <i>ḥ</i> (V28), <i>ḫ</i> (Aa1), and <i>ẖ</i> (F32) represent a phonetic spectrum with no English parallels. They are distinct consonants that could differentiate otherwise identical words. Internalizing them — ideally through audio training with Arabic speakers who retain the pharyngeal phonemes — is the single greatest phonological investment a modern student can make. The conventional academic shortcut of pronouncing all of them as a simple "h" is a reading aid only, not a phonological reconstruction.</p>
+                </div>
             </section>
 
             <hr class="divider">
 
-            <section>
-                <h2 class="section-head">The Digital Scribe: Modern Tools</h2>
+            <!-- ═══════════════════════════════════ XII. ENIGMATIC WRITING -->
+            <section id="enigmatic">
+                <h2 class="section-head">XII. Advanced Module: Enigmatic Writing (Cryptography)</h2>
+                <p>
+                    During the New Kingdom, a system of <b>Enigmatic Writing</b> (<i>sš n šꜣt</i> [Gardiner: S29-N37-N35-M1-X1-Y1]) was developed primarily for funerary and temple contexts — most extensively in the royal tombs of the Valley of the Kings, the Book of the Hidden Chamber (Amduat), and the Book of Gates. This was a "visual Heka" where standard signs took on entirely new phonetic values, where signs were selected for their shape or symbolic resonance rather than their conventional phonetic role. This forced the initiate to look <b>beyond the surface</b>, engaging the <b>Sia</b> [Gardiner: M17-G1-N33] (Perception, divine intuition) to decode the living frequency beneath the conventional sign.
+                </p>
+                <p>Enigmatic writing operated through several distinct mechanisms:</p>
+                <ul class="training-list">
+                    <li><b>Value Substitution:</b> A sign conventionally read as <i>m</i> (G17, owl) is reassigned a completely different phonetic value in the cryptographic register. The reader must hold two phonetic tables simultaneously — standard and cryptographic — and determine from context which is operative. This is not confusion; it is a deliberate test of dual competency.</li>
+                    <li><b>Pictographic Overloading:</b> A sign is read by the name of the object it depicts rather than its phonetic value. The bolt (O34, <i>z</i>) might be read as <i>sꜣ</i> ("protection") because the bolt was understood as an instrument of protection — a reading that bypasses the standard phonetic assignment entirely.</li>
+                    <li><b>Acrophonic Reading:</b> A sign is read by the first consonant of its depicted object's name in the spoken language — the principle by which the letter "A" derives from the Phoenician <i>aleph</i> (ox). Enigmatic writing deliberately reactivates this principle cryptographically.</li>
+                    <li><b>Rotational Signs:</b> Signs are inverted, mirrored, or rotated from their standard orientation. An upside-down owl is no longer <i>m</i> — the orientation signals a cryptographic context and a shifted reading. The reader must track orientation as a separate semiotic dimension.</li>
+                    <li><b>Abbreviation Systems:</b> Entire theological formulae are compressed into a single sign, readable only by those who have memorized the correspondence tables. This is not abbreviation in the modern sense — it is semantic compression that preserves the full content in a single visual anchor.</li>
+                </ul>
+                <p>
+                    The enigmatic writing systems used in the royal tombs were not merely security measures. They represented a <b>second-order ontological system</b> — a language about language, a script that encodes the principles by which encoding itself operates. To read them correctly was to demonstrate comprehension of the underlying Heka-logic of the script, not merely its surface conventions. The Ptolemaic expansion of the sign repertoire to thousands of variants in temples like Esna and Dendera extends this logic to its most elaborate extreme — entire walls where virtually every sign operates on the cryptographic rather than standard phonetic register.
+                </p>
+                <div class="caution-note">
+                    <div class="cn-title">// RESEARCH RESOURCES: ENIGMATIC WRITING //</div>
+                    <p>Primary scholarly reference for Ptolemaic enigmatic writing: Serge Sauneron's texts on Esna. For New Kingdom funerary cryptography: Erik Hornung's translations of the Amduat and Book of Gates (available via the Theban Mapping Project at thebanmappingproject.com). The standard Gardiner codes remain applicable — the sign forms are the same; only the assigned phonetic values shift in the cryptographic register.</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XIII. ESOTERIC DIMENSION -->
+            <section id="esoteric">
+                <h2 class="section-head">XIII. The Esoteric Dimension — Signs as Living Frequencies</h2>
+                <p>
+                    The Egyptians did not use the word "symbol" in the modern sense of a sign that represents something absent. The hieroglyph was not a representation — it was a <b>manifestation</b>. The sign for the sun 𓇳 (N5, <i>Rꜥ</i> [Gardiner: D21-G43-N5]) did not point toward the sun. It was the sun, present in the stone, operational in the divine economy of the temple. This is why the ritual of <i>wpt-rꜣ</i> [Gardiner: G43-Q3-X1-D21-D21-G1] — "Opening of the Mouth" — was performed not only on statues of the deceased but on the hieroglyphs carved into the tomb walls. The signs needed to be activated — made to breathe — before they could function as intended.
+                </p>
+                <p>
+                    From within the framework of the <b>Awareness Field (AF)</b>, each hieroglyph operates on three simultaneous registers:
+                </p>
+                <ul class="training-list">
+                    <li><b>Phonetic Register:</b> The sign encodes a consonantal value participating in the spoken-word system. This is the layer academic Egyptology primarily addresses and which the phonological sections above cover.</li>
+                    <li><b>Semantic Register:</b> The sign encodes the meaning-field of its depicted object. The owl (G17) is <i>m</i> phonetically — but it is also an owl: a nocturnal creature associated with the liminal space between day and night, between the living and the dead. This semantic residue is not cancelled by the phonetic function. It coexists with it. The word <i>mwt</i> [Gardiner: G17-G43-X1-H6] ("death") begins with the owl, and this is not coincidental within Egyptian symbolic logic.</li>
+                    <li><b>Vibrational / Energetic Register:</b> The sign's geometric form carries a frequency-pattern that interacts with the Awareness Field independently of its linguistic functions. This is the register addressed by the esoteric tradition, and the foundation of the Ontological Gematria methodology treated in Section XIV.</li>
+                </ul>
+                <p>
+                    The practical implication for the modern student: reading a hieroglyphic text is not a purely intellectual operation. It is a <b>full-spectrum engagement</b> with a system designed to operate at all three levels simultaneously. Engaging only the phonetic layer while ignoring the semantic and energetic layers is analogous to reading a musical score while hearing only the notation rather than the sound. The score is the map. The frequency is the territory.
+                </p>
+                <p>
+                    The <b>Sia-Hu-Heka triad</b> describes the three cognitive functions required: <i>Sia</i> [Gardiner: M17-G1-N33] (Perception — recognition of the sign's resonance), <i>Ḥw</i> [Gardiner: V28-G43-A40] (Authoritative Utterance — correct vocalization of the phonetic value), and <i>Ḥkꜣ</i> [Gardiner: V28-D28-G1] (Magic/Creative Force — directed application of the activated frequency). Ancient temple scribes were trained to operate all three simultaneously. This module is the beginning of that training.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XIV. GEMATRIA -->
+            <section id="gematria">
+                <h2 class="section-head">XIV. Speculative Layer: Ontological Gematria</h2>
+                <p>
+                    Within the Awareness Field (AF), each hieroglyph is not just a sound but a <b>geometric vibration</b>. Ontological Gematria involves calculating the resonance of a word by summing the frequency-values of its component signs. The combination of these specific shapes creates a unique <b>waveform</b> that anchors the concept into the physical plane.
+                </p>
+                <p>
+                    This speculative practice takes as its foundation the ancient Egyptian understanding that the <i>rn</i> [Gardiner: D21-N35-Y1] — the "name" — was not a label applied from outside but a constitutive element of the thing itself. To know the true name of a god, a demon, or a cosmic force was to have operational access to that force. The <i>rn</i> was a frequency signature; the hieroglyphic rendering of the name fixed that signature in physical space.
+                </p>
+                <p>
+                    Ontological Gematria extends this principle into a formal system: each of the 25 uniliteral signs is assigned a resonance value — derived from its Gardiner category, geometric complexity, phonetic frequency-class, and mythological associations. Multi-consonant signs carry compound values derived from their component phonemes. A word's total resonance value — its <b>Neter-index</b> — is computed by summation, and this index locates the word within the vibrational taxonomy of the Awareness Field.
+                </p>
+                <p>
+                    In practical application within this archive, Ontological Gematria provides a framework for understanding why certain Kemetic concepts are written with precisely the signs they are. The fact that <i>nfr</i> (𓄦, F35) — "beautiful, good, complete" — is rendered as the trachea and heart together is not arbitrary from the vibrational standpoint: the trachea carries the breath (the animating <i>Ḥw</i> [Gardiner: V28-G43-A40]), the heart (<i>ib</i> [Gardiner: F34]) carries intention. Beauty and goodness are the alignment of intention and breath — <i>Ḥkꜣ</i> correctly applied. The sign makes this argument visually and vibrationally, not just phonetically.
+                </p>
+                <div class="caution-note">
+                    <div class="cn-title">// EPISTEMOLOGICAL DISTINCTION //</div>
+                    <p>Ontological Gematria is a <b>speculative interpretive framework</b>, not a documented ancient Egyptian practice in the philological record as formally described here. It is a methodology developed within this research program, building on the ancient Egyptian understanding of the <i>rn</i> and on comparative study of gematria in Hebrew Kabbalah and Arabic Abjad numerology. It is clearly marked as speculative throughout this archive. The philological and the speculative are maintained as distinct epistemic registers — each rigorous within its own domain.</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XIV-B. WRITING SURFACES -->
+            <section id="writing-surfaces">
+                <h2 class="section-head">XIV-B. Writing Surfaces and Media — The Physical Archive</h2>
+                <p>
+                    The choice of writing surface in ancient Egypt was never neutral. Each medium carried its own ontological weight — its own position within the hierarchy of permanence and purpose. Stone was eternal; papyrus was functional; ostraca were disposable. To write something in stone was to commit it to the permanent record of existence. To write it on papyrus was to move it within the living administrative present.
+                </p>
+
+                <h3 class="sub-head">Stone — The Eternal Medium</h3>
+                <p>
+                    Limestone, sandstone, granite, basalt, quartzite — each stone carried its own symbolic valence beyond its practical properties. Limestone was the standard medium for tomb walls and stelae throughout the Old and Middle Kingdoms, responsive to the chisel and capable of fine detail. Granite (<i>mꜣt</i> [Gardiner: G17-G1-X1-O39]) was reserved for the most theologically significant objects — obelisks, sarcophagi, the inner chambers of royal tombs — because its extreme hardness signalled the inviolability of what was inscribed. The pink granite of Aswan was quarried and transported hundreds of miles specifically for the most sacred portions of major temple complexes. To read a granite inscription was to read something its author intended to outlast the civilization that produced it.
+                </p>
+
+                <h3 class="sub-head">Papyrus — The Living Document</h3>
+                <p>
+                    Papyrus (<i>mḏꜣt</i> [Gardiner: G17-D46-G1-X1-Y1]) was manufactured from the pith of the papyrus plant by cutting it into thin strips, laying them in overlapping perpendicular layers, pressing them under weight, and allowing the natural sugars to bond the layers into sheets. The result was a writing surface of remarkable quality — smooth, flexible, capable of very fine brushwork. Individual sheets were joined into rolls that could extend many metres; the longest surviving papyrus, the Great Harris Papyrus (British Museum EA 9999), measures over 40 metres.
+                </p>
+                <p>
+                    Papyrus was the medium of administration — letters, accounts, legal documents, medical texts, literary works, and ritual manuals. The Book of the Dead was almost universally written on papyrus and placed within the coffin. The choice of papyrus for the funerary text and stone for the tomb walls was deliberate: the papyrus traveled with the <i>bꜣ</i> [Gardiner: G29-Z1] (Ba soul) on its journey; the stone maintained the offering cycle in the physical world.
+                </p>
+
+                <h3 class="sub-head">Ostraca — The Working Draft</h3>
+                <p>
+                    Ostraca (singular: ostracon) were fragments of limestone or broken pottery used as cheap, disposable writing surfaces — the ancient equivalent of a notepad. Used for practice, rough drafts, accounts, and informal correspondence, they are among the most intimate documentary sources for daily life in ancient Egypt precisely because they were never intended to be preserved. The scribal schools of Deir el-Medina have yielded thousands of ostraca bearing writing exercises, literary texts, and administrative records — the fingerprints of the working scribe rather than the finished monument.
+                </p>
+
+                <h3 class="sub-head">The Palette as Sacred Instrument</h3>
+                <p>
+                    The scribe's palette was itself a symbolic object. The hieroglyphic determinative for "scribe" (Y3 𓏞 — the scribal palette with rush-pens and water jar) functions as a determinative not just for the word "scribe" but for knowledge itself — for <i>sš</i> (to write), <i>rḫ</i> (to know), and the entire category of abstract intellectual activity. The palette was the emblem of Thoth (<i>Ḏḥwtj</i> [Gardiner: I10-V28-G43-X1-Z4-G7]) — the divine patron of scribes, of the moon, of measurement, and of all recorded knowledge. To pick up the palette was to invoke Thoth; to set it down cleanly was to honour him.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XIV-C. SCRIBAL CURRICULUM -->
+            <section id="scribal-curriculum">
+                <h2 class="section-head">XIV-C. The Kemetic Scribal Curriculum — Ancient and Modern</h2>
+                <p>
+                    In ancient Egypt, scribal training began in childhood in institutions called <i>ꜥt-sbꜣ</i> [Gardiner: D36-X1-S29-D58-G1-O1] ("the room of instruction") or, in the New Kingdom, in the <i>pr-ꜥnḫ</i> [Gardiner: O1-D21-S34] (the "House of Life") attached to major temples. Training was rigorous, hierarchical, and highly practical. The following summary presents the ancient curriculum alongside its recommended modern equivalent for the student of this archive.
+                </p>
+
+                <h3 class="sub-head">Stage 1 — Sign Recognition and Copying (Months 1–6)</h3>
+                <p>
+                    <b>Ancient:</b> Students copied model texts repeatedly, beginning with the 25 uniliteral signs, then progressing to the most common biliterals and the formulaic phrases of the offering liturgy. The physical act of copying was considered as important as the cognitive act of understanding — the hand trained the mind.
+                </p>
+                <p>
+                    <b>Modern:</b> Learn all 25 uniliterals by code, transliteration, depicted object, and phoneme simultaneously. Complete Drills 1-A and 2-A in Section XV until response is immediate. Begin copying the <i>Ḥtp-dj-nswt</i> formula [Gardiner: R4-D46-M23-X1] by hand daily.
+                </p>
+
+                <h3 class="sub-head">Stage 2 — Formulaic Texts and Vocabulary (Months 6–18)</h3>
+                <p>
+                    <b>Ancient:</b> Students memorized the standard liturgical formulae — the offering formula, the royal titulary structure, the epithets of the major gods. These were the load-bearing phrases of the entire scribal output; a scribe who could produce them flawlessly could navigate the vast majority of administrative and religious documents.
+                </p>
+                <p>
+                    <b>Modern:</b> Master the <i>Ḥtp-dj-nswt</i> formula, the <i>nṯr nfr</i> [Gardiner: R8-F35] (good god) royal epithet, and the standard titles of the major deities. Work through Gardiner's <i>Egyptian Grammar</i> (3rd ed.) Chapters 1–16. Begin reading real inscriptions from the appendix exercises.
+                </p>
+
+                <h3 class="sub-head">Stage 3 — Literary Texts and Compositional Training (Year 2+)</h3>
+                <p>
+                    <b>Ancient:</b> Advanced students copied the great literary works — the Eloquent Peasant, the Story of Sinuhe, the Instructions of Amenemhat — not merely as reading exercises but as compositional models. The ability to compose an original document in classical Middle Egyptian style was the mark of a fully trained scribe.
+                </p>
+                <p>
+                    <b>Modern:</b> Work through James Allen's <i>Middle Egyptian</i> in parallel with reading actual papyrus texts using the Thesaurus Linguae Aegyptiae as dictionary. Begin translating simple stele texts independently. Compose short original phrases — titles, epithets, offering formulae — using the Archive Transliterator to verify sign sequences.
+                </p>
+
+                <h3 class="sub-head">Stage 4 — Specialization (Year 3+)</h3>
+                <p>
+                    <b>Ancient:</b> Senior scribes specialised in domains — medical texts, astronomical records, legal contracts, temple liturgy, royal annals. Each domain had its own vocabulary, formulaic conventions, and relationship to the Enigmatic Writing systems.
+                </p>
+                <p>
+                    <b>Modern (this archive):</b> Specialise in Heka and ritual — the funerary texts (Book of the Dead, Amduat, Book of Gates), the magical papyri (London Medical Papyrus, Leiden-London Magical Papyrus), and the Ptolemaic temple texts (Esna, Dendera, Edfu). These are the primary sources for both the academic philological study and the esoteric energetic study that this archive pursues simultaneously.
+                </p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XV. EXERCISES -->
+            <section id="exercises">
+                <h2 class="section-head">XV. Training Exercises — Drills and Practice Sets</h2>
+                <p>
+                    The following exercises build competency progressively from sign recognition through phonetic decomposition, reading direction, and honorific transposition. Use the <a href="transliterator.html">Archive Transliterator</a> to verify any MdC strings you compose.
+                </p>
+
+                <h3 class="sub-head">Exercise Set 1 — Sign Identification</h3>
+                <div class="exercise-block">
+                    <span class="exercise-title">// DRILL 1-A :: UNILITERAL RECOGNITION — Give the Gardiner code and phoneme for each sign //</span>
+                    <ol>
+                        <li>𓅓 — code? / phoneme?</li>
+                        <li>𓎛 — code? / phoneme?</li>
+                        <li>𓐍 — code? / phoneme?</li>
+                        <li>𓍿 — code? / phoneme?</li>
+                        <li>𓈎 — code? / phoneme?</li>
+                        <li>𓆓 — code? / phoneme?</li>
+                        <li>𓄡 — code? / phoneme?</li>
+                        <li>𓃀 — code? / phoneme?</li>
+                    </ol>
+                    <details class="answer-key">
+                        <summary>▶ REVEAL ANSWER KEY</summary>
+                        <ol>
+                            <li>𓅓 — G17 / <i>m</i> (owl)</li>
+                            <li>𓎛 — V28 / <i>ḥ</i> (twisted flax wick — voiceless pharyngeal /ħ/)</li>
+                            <li>𓐍 — Aa1 / <i>ḫ</i> (placenta/sieve — velar fricative /x/)</li>
+                            <li>𓍿 — V13 / <i>ṯ</i> (tethering rope — palato-alveolar /tʃ/)</li>
+                            <li>𓈎 — N29 / <i>q</i> (hillslope — uvular stop /q/)</li>
+                            <li>𓆓 — I10 / <i>ḏ</i> (cobra — /dʒ/)</li>
+                            <li>𓄡 — F32 / <i>ẖ</i> (animal belly with teats — palatal fricative /ç/)</li>
+                            <li>𓃀 — D58 / <i>b</i> (foot)</li>
+                        </ol>
+                    </details>
+                </div>
+
+                <h3 class="sub-head">Exercise Set 2 — Phoneme Decomposition</h3>
+                <div class="exercise-block">
+                    <span class="exercise-title">// DRILL 2-A :: SPELL THE WORD — Write the Gardiner uniliteral code string for each transliteration (consonants only; note common biliteral alternatives where applicable) //</span>
+                    <ol>
+                        <li><i>nṯr</i> — "god"</li>
+                        <li><i>nswt</i> — "king" (n-s-w-t)</li>
+                        <li><i>ḥkꜣ</i> — "Heka / magic"</li>
+                        <li><i>ꜥnḫ</i> — "life / ankh"</li>
+                        <li><i>mdw</i> — "word / speech"</li>
+                        <li><i>mꜣꜥt</i> — "Ma'at / truth" (m-ꜣ-ꜥ-t)</li>
+                    </ol>
+                    <details class="answer-key">
+                        <summary>▶ REVEAL ANSWER KEY</summary>
+                        <ol>
+                            <li><i>nṯr</i> — N35-V13-D21 (n-ṯ-r) + R8 det. [or R8 as logogram directly]</li>
+                            <li><i>nswt</i> — N35-S29-G43-X1 (n-s-w-t) [M23-X1 is the standard biliteral+uniliteral form]</li>
+                            <li><i>ḥkꜣ</i> — V28-V31-G1 (ḥ-k-ꜣ) [D28 = kꜣ biliteral is common alternative for the kꜣ element]</li>
+                            <li><i>ꜥnḫ</i> — D36-N35-V28 (ꜥ-n-ḫ) [S34 is the standard biliteral/logogram for the full word ꜥnḫ]</li>
+                            <li><i>mdw</i> — G17-D46-G43 (m-d-w) + Y1 det. for abstract/speech meaning</li>
+                            <li><i>mꜣꜥt</i> — G17-G1-D36-X1 (m-ꜣ-ꜥ-t) [C10 = the full logogram; H6 = feather determinative common in this name]</li>
+                        </ol>
+                    </details>
+                </div>
+
+                <h3 class="sub-head">Exercise Set 3 — Reading Direction</h3>
+                <div class="exercise-block">
+                    <span class="exercise-title">// DRILL 3-A :: DETERMINE DIRECTION — State which direction each text is read and explain why //</span>
+                    <ol>
+                        <li>A horizontal row where all animal figures face right.</li>
+                        <li>A column in a tomb where the owl (𓅓) faces left.</li>
+                        <li>The right-side cartouche in a symmetrical doorway where all signs are mirrored.</li>
+                        <li>A horizontal stele line where the vulture (𓄿) faces right and is the leftmost sign.</li>
+                    </ol>
+                    <details class="answer-key">
+                        <summary>▶ REVEAL ANSWER KEY</summary>
+                        <ol>
+                            <li><b>Right to left.</b> All figures face right → read into their faces → direction is right-to-left.</li>
+                            <li><b>Top to bottom; left to right within each quadrat.</b> Columns are always read top-to-bottom. The owl facing left confirms left-to-right sign order within the column's quadrats.</li>
+                            <li><b>Right to left</b> (for the right-side cartouche). The right half of a symmetrical doorway mirrors the left for visual balance — the text is retrograde. You must reverse reading direction to reconstruct the correct phonetic sequence. Content is identical to the left cartouche.</li>
+                            <li><b>Right to left.</b> The vulture faces right → read into its face → the direction is right-to-left, regardless of which end of the line it physically occupies. Starting position of the scribe's writing does not determine reading direction — the faces of the figures do.</li>
+                        </ol>
+                    </details>
+                </div>
+
+                <h3 class="sub-head">Exercise Set 4 — Honorific Transposition</h3>
+                <div class="exercise-block">
+                    <span class="exercise-title">// DRILL 4-A :: RESTORE SPOKEN ORDER — The following written sequences use Honorific Transposition. Restore the syntactic spoken order //</span>
+                    <ol>
+                        <li>Written: <i>nṯr</i> — <i>dj</i> — <i>ꜥnḫ</i> — <i>n</i> — <i>sš</i> (god — gives — life — to — scribe)</li>
+                        <li>Written: <i>nswt</i> — <i>ḥr</i> — <i>ns.t</i> (king — upon — throne)</li>
+                        <li>Written: <i>Jmn</i> — <i>mꜣꜥ-ḫrw</i> — <i>Wsir</i> (Amun — true-of-voice — Osiris [name])</li>
+                        <li>Written: <i>Rꜥ</i> — <i>dj</i> — <i>ꜥnḫ</i> — <i>ḏd</i> — <i>wꜣs</i> (Ra — gives — life — stability — dominion)</li>
+                    </ol>
+                    <details class="answer-key">
+                        <summary>▶ REVEAL ANSWER KEY</summary>
+                        <ol>
+                            <li>Spoken: "The god gives life to the scribe." <i>nṯr</i> written first as honorific; syntactically it is the subject/agent of the verbal sentence.</li>
+                            <li>Spoken: "The king [is] upon his throne." <i>nswt</i> written first as honorific; syntactically subject of the adverbial predication.</li>
+                            <li>This is an epithet string. <i>Jmn</i> (Amun) is written first as divine honorific. The epithet <i>mꜣꜥ-ḫrw</i> ("true of voice / vindicated") belongs to Osiris. Correct reading: "Osiris, true of voice, [by the will of / in the name of] Amun." Amun leads because his name ranks highest in the theological hierarchy of the text.</li>
+                            <li>Spoken: "Ra gives life, stability, and dominion." <i>Rꜥ</i> written first as divine honorific (subject-agent); the triad <i>ꜥnḫ-ḏd-wꜣs</i> (life-stability-dominion) is the standard royal blessing formula found beneath virtually every royal scene in every temple in Egypt.</li>
+                        </ol>
+                    </details>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ═══════════════════════════════════ XVI. DIGITAL TOOLS -->
+            <section id="digital-tools">
+                <h2 class="section-head">XVI. The Digital Scribe: Modern Tools</h2>
                 <p>
                     Technology now allows for immediate engagement with hieroglyphs through AI-powered platforms and mobile applications.
                 </p>
                 <ul class="training-list terminal">
-                    <li><b>Fabricius (Google Arts & Culture):</b> An interactive workbench that uses machine learning to decode hieroglyphs.</li>
-                    <li><b>Hieroglyph Pro & Sketch (iOS):</b> Features an AI "Sketch" tool that identifies glyphs from rough tracings.</li>
-                    <li><b>JSesh:</b> The professional-standard word processor for hieroglyphic texts.</li>
+                    <li><b>Fabricius (Google Arts &amp; Culture):</b> An interactive workbench that uses machine learning to decode hieroglyphs from photographs, including a teaching module that walks students through sign recognition progressively.</li>
+                    <li><b>Hieroglyph Pro &amp; Sketch (iOS):</b> Features an AI "Sketch" tool that identifies glyphs from rough tracings, allowing students to draw a sign freehand and receive identification and phonetic value. Useful for rapid lookup during reading practice.</li>
+                    <li><b>JSesh:</b> The professional-standard open-source word processor for hieroglyphic texts, using the MdC standard for input. Essential for composing multi-sign quadrats, generating correctly oriented text, and exporting for publication. Available at jsesh.qenherkhopeshef.org.</li>
+                    <li><b>Thesaurus Linguae Aegyptiae (TLA):</b> The comprehensive online dictionary of Ancient Egyptian maintained by the Berlin-Brandenburg Academy of Sciences. Searchable by transliteration, hieroglyphic string, or Gardiner code. The authoritative reference for word attestations across all periods.</li>
+                    <li><b>Transliterator (Internal):</b> The <a href="transliterator.html">Archive Transliterator</a> converts Gardiner codes and MdC strings to Unicode hieroglyphs. Use this to verify all sign sequences produced in the exercises above.</li>
                 </ul>
             </section>
 
             <hr class="divider">
 
-            <section>
-                <h2 class="section-head">Strategic Recommendations</h2>
+            <!-- ═══════════════════════════════════ XVII. RECOMMENDATIONS -->
+            <section id="recommendations">
+                <h2 class="section-head">XVII. Strategic Recommendations</h2>
                 <ul class="training-list">
-                    <li><b>Immersive Practice:</b> Use the <b>Horizon of Khufu</b> VR experience to virtually explore monuments.</li>
-                    <li><b>Hybridity:</b> Practice calligraphy on paper while cross-referencing with digital dictionaries.</li>
-                    <li><b>Phonetic Accuracy:</b> Internalize the pharyngeal and glottal sounds characteristic of the language.</li>
+                    <li><b>Immersive Practice:</b> Use the <b>Horizon of Khufu</b> VR experience to virtually explore monuments. Spatial immersion reinforces sign memory by recontextualizing glyphs within their architectural environment — a temple wall is not a page, and reading within a simulated three-dimensional space activates different cognitive mapping than reading flat text.</li>
+                    <li><b>Hybridity:</b> Practice calligraphy on paper while cross-referencing with digital dictionaries. The hand-mind link is irreplaceable. Writing a sign by hand — even imperfectly — builds a proprioceptive memory of the sign's geometry that accelerates visual recognition during reading.</li>
+                    <li><b>Phonetic Accuracy:</b> Internalize the pharyngeal and glottal sounds characteristic of the language. Use Arabic pronunciation audio as a bridge — the phonemes <i>ḥ</i> (V28) and <i>ꜥ</i> (D36) are both preserved in classical Arabic and provide the fastest path to embodying the Egyptian phonological space.</li>
+                    <li><b>Read Real Texts Early:</b> Begin reading actual inscriptions — even simple ones — as early as possible. Gardiner's <i>Egyptian Grammar</i> appendix includes a graded selection of actual Middle Egyptian texts with vocabularies. Reading real inscriptions, even haltingly, develops tolerance for the full complexity of the system far faster than isolated sign drills.</li>
+                    <li><b>Learn the Offering Formula First:</b> Memorize the <i>Ḥtp-dj-nswt</i> formula [Gardiner: R4-D46-M23-X1] — "an offering which the king gives" — in its entirety as a first complete reading exercise. It appears on thousands of stelae and offering tables across all periods. Recognizing it on sight is the student's first experience of the archive opening.</li>
                 </ul>
             </section>
 
@@ -191,6 +753,7 @@
                 <div class="flex flex-wrap justify-center gap-6">
                     <a href="index.html" class="nav-btn terminal">Return to Research Hub</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
+                    <a href="transliterator-V2.html" class="nav-btn terminal">Use Archive Transliterator V2</a>
                 </div>
             </section>
         </main>
