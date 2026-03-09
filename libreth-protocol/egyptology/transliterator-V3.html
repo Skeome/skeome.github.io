@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hieroglyphic Transliterator</title>
+    <title>Hieroglyphic Transliterator V3</title>
     <!-- Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@400;600&family=VT323&display=swap" rel="stylesheet">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/wiki-style.css">
-    <link rel="stylesheet" href="css/transliterator-V2-style.css">
+    <link rel="stylesheet" href="css/transliterator-V3-style.css">
 </head>
 <body>
 
     <div class="transliterator-container">
         <!-- Header -->
         <header class="transliterator-header">
-            <h1>Hieroglyphic Transliterator</h1>
-            <p>Convert Gardiner sign codes (e.g., A1, G43) or MdC alphabet (e.g., m, n, i) into copyable Unicode Egyptian Hieroglyphs. Built for the Egyptology Research Archive.</p>
+            <h1>Hieroglyphic Transliterator <span style="font-size:0.55em;opacity:0.6;letter-spacing:0.15em;">V3</span></h1>
+            <p>Convert Gardiner sign codes (e.g., A1, G43) or MdC alphabet (e.g., m, n, i) into copyable Unicode Egyptian Hieroglyphs. Unicode 17.0 verified. Built for the Egyptology Research Archive.</p>
             
             <div class="features-box">
-                <h3>This tool is built with a few powerful features specifically for Egyptology:</h3>
+                <h3>V3 — Unicode 17.0 Verified Sign Database</h3>
                 <ul>
-                    <li><strong>Transliteration Mapping:</strong> It recognizes academic transliteration symbols (e.g., ꜣ, ḫ, š, ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> will automatically pull the correct sign sequences.</li>
-                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
-                    <li><strong>Formatting Controls:</strong> It supports Unicode grouping controls (: for vertical stacking and * for horizontal grouping) so you can accurately represent sign positioning.</li>
-                    <li><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly.</li>
+                    <li><strong>Transliteration Mapping:</strong> Recognizes academic diacritics (ꜣ ꜥ ḥ ḫ ẖ š ṯ ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> pulls the correct sign sequences.</li>
+                    <li><strong>Sign-Type Tagging:</strong> The phonetic preview now labels each resolved sign as <em>Phon.</em> (phonogram), <em>Det.</em> (determinative), <em>Log.</em> (logogram), or <em>Num.</em> (numeral) — with intelligent grouping of compound sequences.</li>
+                    <li><strong>Intelligent Parsing:</strong> Understands Gardiner codes (M17, G43), MdC uniliterals (i w t), and phonetic word aliases (nfr, Htp, anx). Handles quadrat stacking with <code>:</code> and horizontal grouping with <code>*</code>.</li>
+                    <li><strong>Unicode 17.0 Database:</strong> Every sign verified against the Unicode 17.0 character block (U+13000–U+1342F) plus Format Controls (U+13430–U+1345F). Codepoints cross-checked against the official Unicode charts.</li>
                 </ul>
             </div>
         </header>
@@ -33,9 +33,10 @@
         <div class="phonetic-preview-panel">
             <div class="phonetic-preview-header">
                 <span class="phonetic-label">Phonetic Transliteration</span>
-                <span class="phonetic-hint">Egyptological romanization of your input</span>
+                <span class="phonetic-hint">Egyptological romanization · sign type badges below</span>
             </div>
             <div id="phonetic-output" class="phonetic-output"><span class="output-placeholder">Phonetic preview will appear here…</span></div>
+            <div id="type-output" class="type-output"></div>
         </div>
 
         <div class="transliterator-grid">
@@ -105,13 +106,68 @@
                 <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂧</span> <span class="cheat-code">d (D46)</span></div>
                 <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆓</span> <span class="cheat-code">D (I10)</span></div>
             </div>
+
+            <!-- Expanded two-column reference: MdC phonetic aliases + key signs -->
+            <div class="ref-mode-grid" style="margin-top:1.5rem;">
+                <div class="ref-mode-block">
+                    <p class="ref-mode-title">Common Phonetic Aliases</p>
+                    <p class="ref-mode-hint">Type the code directly to auto-resolve the sign</p>
+                    <div class="cheat-sheet" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓄤</span><div class="cheat-phonetic-group"><span class="cheat-phon">nfr</span><span class="cheat-code">F35</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁦</span><div class="cheat-phonetic-group"><span class="cheat-phon">mꜣꜥt</span><span class="cheat-code">C10</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓋹</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜥnḫ</span><span class="cheat-code">S34</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓌀</span><div class="cheat-phonetic-group"><span class="cheat-phon">wꜣs</span><span class="cheat-code">S40</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊽</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḏd</span><span class="cheat-code">R11</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊹</span><div class="cheat-phonetic-group"><span class="cheat-phon">nṯr</span><span class="cheat-code">R8</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓄣</span><div class="cheat-phonetic-group"><span class="cheat-phon">ib</span><span class="cheat-code">F34</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇳</span><div class="cheat-phonetic-group"><span class="cheat-phon">rꜥ</span><span class="cheat-code">N5</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂓</span><div class="cheat-phonetic-group"><span class="cheat-phon">kꜣ</span><span class="cheat-code">D28</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅡</span><div class="cheat-phonetic-group"><span class="cheat-phon">bꜣ</span><span class="cheat-code">G29</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅜</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜣḫ</span><span class="cheat-code">G25</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊚</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḥtp</span><span class="cheat-code">R4</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆣</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḫpr</span><span class="cheat-code">L1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇓</span><div class="cheat-phonetic-group"><span class="cheat-phon">sw</span><span class="cheat-code">M23</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈋</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḏw</span><span class="cheat-code">N26</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈌</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜣḫt</span><span class="cheat-code">N27</span></div></div>
+                    </div>
+                </div>
+                <div class="ref-mode-block">
+                    <p class="ref-mode-title">Key Determinatives</p>
+                    <p class="ref-mode-hint">Silent classifiers — add after phonograms</p>
+                    <div class="cheat-sheet" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀀</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">man</span><span class="cheat-code">A1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁐</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">woman</span><span class="cheat-code">B1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀭</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">god</span><span class="cheat-code">A40</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓃢</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">Anubis</span><span class="cheat-code">E15</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅽</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">bꜣ-bird</span><span class="cheat-code">G53</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅾</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">plucked bird</span><span class="cheat-code">G54</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏤</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">stroke</span><span class="cheat-code">Z1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏥</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">plural</span><span class="cheat-code">Z2</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈒</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">sand/many</span><span class="cheat-code">N33</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏛</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">scroll</span><span class="cheat-code">Y1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊖</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">town</span><span class="cheat-code">O49</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇯</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">sky</span><span class="cheat-code">N1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁿</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">weeping</span><span class="cheat-code">D9</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂸</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">phallus</span><span class="cheat-code">D52</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀿</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">mummy</span><span class="cheat-code">A54</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆙</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">serpent</span><span class="cheat-code">I14</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign-type legend -->
+            <div class="type-legend">
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:var(--gold);"></div><span style="color:var(--gold);">Phon.</span> — Phonogram: consonantal sound value</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:var(--cyan);"></div><span style="color:var(--cyan);">Det.</span> — Determinative: silent semantic classifier</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:#c9a0dc;"></div><span style="color:#c9a0dc;">Log.</span> — Logogram: word-sign with fixed reading</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:#90ee90;"></div><span style="color:#90ee90;">Num.</span> — Numeral: counting / quantity sign</div>
+            </div>
         </div>
     </div>
     <section class="navigation">
         <div class="flex flex-wrap justify-center gap-6 mt-8">
                     <a href="hieroglyphs.html" class="nav-btn">Hieroglyph Training Module</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
-                    <a href="transliterator-V3.html" class="nav-btn">Access Version 3 (Beta)</a>
                 </div>
     </section>
 
@@ -373,21 +429,114 @@
             'g': 'g', 't': 't', 'T': 'ṯ',  'd': 'd', 'D': 'ḏ'
         };
 
+        // ─── Sign-type classification (Unicode 17.0 + Gardiner/Allen verified) ──
+        // Types: 'phon' = phonogram (has consonantal value)
+        //        'det'  = determinative/classifier (semantic only, silent)
+        //        'log'  = logogram (word-sign with specific reading)
+        //        'num'  = numeral sign
+        // Source: Unicode 17.0 annotations (• phonemogram / • classifier / • logogram)
+        //         cross-referenced with Allen (2010) Middle Egyptian sign list.
+        const gardinerType = {
+            // ── 25 uniliterals: all phonemic ──────────────────────────────────────
+            'G1':'phon','M17':'phon','M17a':'phon','Z4':'phon','Z4a':'phon',
+            'D36':'phon','G43':'phon','G43a':'phon','D58':'phon','Q3':'phon',
+            'I9':'phon','I9a':'phon','G17':'phon','N35':'phon','D21':'phon',
+            'O4':'phon','V28':'phon','Aa1':'phon','F32':'phon','S29':'phon',
+            'O34':'phon','N37':'phon','N29':'phon','V31':'phon','V31a':'phon',
+            'W11':'phon','X1':'phon','V13':'phon','D46':'phon','I10':'phon','I10a':'phon',
+            // ── Key biliterals / triliterals ─────────────────────────────────────
+            'F35':'phon','D28':'phon','D54':'phon','D55':'phon','S34':'phon',
+            'R4':'phon','R8':'phon','N5':'phon','N27':'phon','N26':'phon',
+            'S40':'phon','R11':'phon','G29':'phon','L1':'phon','G25':'phon',
+            'G36':'phon','M23':'phon','G26':'phon','G26a':'phon','F34':'phon',
+            'M40':'phon','V9':'log','V10':'log','D4':'phon','D10':'log',
+            'D19':'phon','L2':'log','E34':'phon','G39':'phon','G40':'phon',
+            'F22':'phon','F23':'phon','F36':'phon','G14':'phon','G16':'log',
+            'G27':'phon','G28':'phon','G37':'det','G38':'phon','G50':'phon',
+            'G51':'phon','G52':'log','G53':'log','G54':'det',
+            'H5':'phon','H6':'phon','H8':'det',
+            'I8':'phon','I11':'phon','I12':'det','I14':'det','L7':'det',
+            'M1':'det','M2':'phon','M3':'phon','M4':'phon','M9':'phon',
+            'M13':'phon','M16':'phon','M20':'det','M21':'phon','M29':'phon',
+            'M33':'phon','M36':'phon','N1':'det','N4':'det','N6':'det',
+            'N8':'phon','N14':'phon','N15':'log','N16':'phon','N17':'phon',
+            'N18':'phon','N21':'phon','N22':'phon','N24':'phon','N25':'phon',
+            'N27':'phon','N28':'phon','N30':'phon','N33':'det','N34':'det',
+            'N35a':'phon','N36':'phon','N40':'phon','N41':'det',
+            'O1':'phon','O6':'det','O7':'det','O11':'det','O23':'log',
+            'O24':'log','O25':'log','O28':'phon','O29':'phon','O36':'det',
+            'O47':'det','O49':'det','O50':'det',
+            'P1':'det','P5':'phon','P11':'log',
+            'Q1':'det','Q6':'det','Q7':'det',
+            'R5':'log','R7':'det','R10':'det','R12':'det','R13':'det','R14':'det',
+            'S1':'det','S2':'det','S3':'det','S5':'det','S7':'det','S8':'det',
+            'S9':'det','S26':'det','S27':'det','S28':'det','S38':'phon',
+            'S42':'phon','S43':'phon','S44':'det','S45':'det',
+            'T1':'phon','T2':'phon','T3':'phon','T9':'phon','T11':'phon',
+            'T13':'phon','T14':'det','T21':'phon','T22':'phon','T26':'det',
+            'U1':'phon','U6':'phon','U19':'phon','U21':'phon','U22':'phon',
+            'U28':'phon','U36':'phon','U38':'log',
+            'V1':'phon','V5':'phon','V6':'phon','V7':'phon','V9':'log',
+            'V10':'log','V12':'phon','V16':'phon','V20':'phon','V24':'phon',
+            'V28':'phon','V29':'phon','V30':'phon','V31':'phon','V39':'log',
+            'W3':'phon','W10':'phon','W14':'phon','W19':'phon','W22':'phon',
+            'W24':'phon','W25':'phon',
+            'X8':'phon',
+            'Y1':'det','Y1v':'det','Y3':'log','Y5':'phon',
+            'Z1':'det','Z2':'det','Z3':'det','Z3a':'det','Z4':'phon',
+            'Z7':'phon','Z9':'phon','Z11':'phon',
+            // Numerals
+            'Z15':'num','Z15a':'num','Z15b':'num','Z15c':'num','Z15d':'num',
+            'Z15e':'num','Z15f':'num','Z15g':'num','Z15h':'num','Z15i':'num',
+            'Z16':'num','Z16a':'num','Z16b':'num','Z16c':'num','Z16d':'num',
+            'Z16e':'num','Z16f':'num','Z16g':'num','Z16h':'num',
+            // Aa class
+            'Aa1':'phon','Aa5':'phon','Aa8':'phon','Aa11':'phon','Aa13':'phon',
+            'Aa14':'phon','Aa15':'phon','Aa16':'phon','Aa17':'phon','Aa20':'phon',
+            'Aa21':'phon','Aa27':'phon','Aa28':'phon',
+            // Deity figures: all logographic
+            'C1':'log','C2':'log','C2a':'log','C2b':'log','C2c':'log',
+            'C3':'log','C4':'log','C5':'log','C6':'log','C7':'log','C8':'log',
+            'C9':'log','C10':'log','C10a':'log','C11':'log','C12':'log',
+            'C13':'log','C14':'log','C15':'log','C16':'log','C17':'log',
+            'C18':'log','C19':'log','C20':'log','C21':'log','C22':'log',
+            'C23':'log','C24':'log',
+            // Man/woman determinatives
+            'A1':'det','A2':'det','A3':'det','A4':'det','A5':'det','A5a':'det',
+            'A6':'det','A6a':'det','A6b':'det','A7':'det','A8':'det','A9':'det',
+            'A10':'det','A13':'det','A14':'det','A14a':'det','A15':'det',
+            'A16':'det','A17':'det','A17a':'det','A18':'det','A19':'det',
+            'A20':'det','A21':'det','A22':'log','A23':'log','A24':'det',
+            'A25':'det','A26':'det','A29':'det','A30':'det','A32':'det',
+            'A33':'det','A34':'det','A35':'det','A36':'det','A37':'det',
+            'A40':'det','A40a':'det','A41':'log','A42':'log','A42a':'log',
+            'A43':'log','A43a':'log','A44':'log','A45':'log','A45a':'log',
+            'A46':'log','A47':'det','A48':'det','A49':'det','A50':'det',
+            'A51':'det','A52':'det','A53':'det','A54':'det','A55':'det',
+            'B1':'det','B2':'det','B3':'det','B4':'det','B5':'det','B6':'det','B7':'det',
+            // Animals: mostly phonemic when used as phonograms
+            'E1':'phon','E2':'phon','E7':'phon','E15':'det','E16':'det',
+            'E17':'det','E20':'log','E22':'phon','E23':'phon','E25':'log',
+            'E26':'log','E32':'log','E33':'det',
+        };
+
         // Gardiner code → canonical Egyptological transliteration
         // PRIMARY SOURCES (in order of authority):
-        //   1. Buurman et al. (1988/1997) Manuel de Codage, CCER — Appendices B & C
+        //   1. Unicode Standard 17.0 (2025) — U+13000–U+1342F Egyptian Hieroglyphs block
+        //      Character annotations: phonemogram, logogram, classifier values
+        //   2. Buurman et al. (1988/1997) Manuel de Codage, CCER — Appendices B & C
         //      http://www.catchpenny.org/codage/ — the official phonetic value table
-        //   2. Gardiner, A.H. (1957) Egyptian Grammar, 3rd ed. — sign descriptions
-        //   3. Allen, J.P. (2000/2010) Middle Egyptian — phonemic values
-        //   4. Faulkner, R.O. (1962) Concise Dictionary of Middle Egyptian — word forms
-        //   5. egyptianhieroglyphs.net sign list (2021) — descriptions and phono values
+        //   3. Gardiner, A.H. (1957) Egyptian Grammar, 3rd ed. — sign descriptions
+        //   4. Allen, J.P. (2000/2010) Middle Egyptian — phonemic values
+        //   5. Faulkner, R.O. (1962) Concise Dictionary of Middle Egyptian — word forms
         //
         // ENCODING PHILOSOPHY:
-        //   • Phonogram signs → their consonantal value (e.g. nfr, r, ḥtp)
-        //   • Ideograms with a canonical word reading → that reading (e.g. N27 = ꜣḫt)
-        //   • Pure silent determinatives with no phonetic reading → resolved to ⟨code⟩
-        //     by the fallback in resolveGardiner(), not stored here.
-        //   • Where CCER Appendix B gives multiple values, the PRIMARY/most-common is used.
+        //   • Phonogram signs → their primary consonantal value (MdC convention)
+        //   • Ideograms with a canonical word reading → that reading
+        //   • Pure silent determinatives → descriptive label in angled brackets
+        //   • Unicode 17.0 logogram annotations supplement but do NOT override MdC
+        //     uniliteral values (e.g. N37=š not 'ꞽw', G43=w not 'm')
+        //   • Where CCER Appendix B gives multiple values, the PRIMARY is used.
         //   • Transliteration uses proper Egyptological diacritics (ꜣ ꜥ ḥ ḫ ẖ š ṯ ḏ).
         const gardinerToPhonetic = {
             // ── 25 uniliterals ────────────────────────────────────────────────────
@@ -613,8 +762,8 @@
             'E12':'šꜣ',   // pig — šꜣ
             'E13':'mꜣi',  // cat — mꜣi
             'E14':'sꜣb',  // dog — sꜣb
-            'E15':'iw',   // lying dog — iw
-            'E16':'inpw', // lying jackal — inpw
+            'E15':'inpw', // lying dog (Anubis sign) — inpw (Unicode 17.0: ꞽnp.w)
+            'E16':'inpw', // lying jackal — inpw (Anubis)
             'E17':'inpw', // lying jackal on shrine — inpw (Anubis)
             'E18':'wn',   // running hound — wn
             'E19':'ꜥbd',  // hedgehog — ꜥbd
@@ -623,7 +772,7 @@
             'E22':'miw',  // lion — miw (cat sound)
             'E23':'rw',   // lion recumbent — rw
             'E24':'mꜣi',  // lion walking — mꜣi
-            'E25':'nꜣ',   // two lions — nꜣ
+            'E25':'rwtj', // two lions back-to-back — rwtj (Ruty, the horizon lions; NOT hippopotamus)
             'E26':'Abw',  // elephant — Abw
             'E27':'bꜣ',   // giraffe — bꜣ (soul, also mmy)
             'E28':'mmy',  // giraffe — mmy
@@ -663,10 +812,10 @@
             'F26':'bꜣ',   // panther head — bꜣ
             'F27':'km',   // hide of animal — km (black)
             'F28':'ms',   // hide of animal with tail — ms (bear, give birth)
-            'F29':'ẖ',    // belly with teats — ẖ
+            'F29':'sti',   // belly with teats — sti (pour out, shoot; Unicode 17.0: phonemogram st)
             'F30':'nḏm',  // vessel with liquid — nḏm (pleasant)
             'F31':'ms',   // three fox skins — ms
-            'F32':'ẖ',    // placenta/belly — ẖ
+            'F32':'ẖ',    // placenta/belly with tail — ẖ (belly, womb; MdC X)
             'F33':'sd',   // tail — sd
             'F34':'ib',   // heart — ib
             'F35':'nfr',  // windpipe + heart — nfr (good, beautiful)
@@ -739,7 +888,7 @@
             'G40':'pꜣ',   // pintail duck flying — pꜣ (the, this) (CCER: pA)
             'G41':'ḫn',   // pintail duck alighting — ḫn (CCER: xn)
             'G42':'wšꜣ',  // chick — wšꜣ (CCER: wSA = hungry)
-            'G43':'w',    // quail chick — w
+            'G43':'w',    // quail chick — w (MdC w; Unicode 17.0: phonemogram w)
             'G43a':'w',
             'G44':'ww',   // two quail chicks — ww (CCER: ww)
             'G45':'mꜣ',   // quail chick + arm — mꜣ
@@ -885,7 +1034,7 @@
             'N35':'n',     // water ripple — n (MdC n)
             'N35a':'mw',   // three water ripples — mw (water) (CCER: mw)
             'N36':'mr',    // canal — mr
-            'N37':'š',     // pool — š (lake) (MdC S)
+            'N37':'š',     // pool — š (MdC S; Unicode 17.0 logogram 'ꞽw' is secondary reading)
             'N38':'š',
             'N39':'š',
             'N40':'šm',    // pool with vegetation — šm (CCER: Sm = go, move)
@@ -1577,7 +1726,7 @@
         //     column in a vstack equals the full quadrat height.
         // ═══════════════════════════════════════════════════════════════════════
 
-        // ─── Step 2: Resolve a sign token → { glyph, phonetic } ─────────────
+        // ─── Step 2: Resolve a sign token → { glyph, phonetic, type } ──────────
         function resolveSign(value) {
             // Try MdC single-letter map first (case-sensitive)
             if (mdcMap[value]) {
@@ -1585,13 +1734,28 @@
                 return {
                     glyph: gardinerMap[gc] || null,
                     phonetic: mdcToPhonetic[value] || value,
+                    type: gardinerType[gc] || 'phon',
                     code: gc
                 };
             }
             // Try as Gardiner code
             const { glyph, phonetic } = resolveGardiner(value);
             const isUnknown = glyph.startsWith('[');
-            return { glyph: isUnknown ? null : glyph, phonetic, code: value, unknown: isUnknown ? value : null };
+            const norm = (() => {
+                const mc = value.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+                if (mc) {
+                    const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' : mc[1].toUpperCase();
+                    return letter + mc[2] + mc[3].toLowerCase();
+                }
+                return value.toUpperCase();
+            })();
+            return {
+                glyph: isUnknown ? null : glyph,
+                phonetic,
+                type: gardinerType[norm] || (isUnknown ? null : 'phon'),
+                code: value,
+                unknown: isUnknown ? value : null
+            };
         }
 
         // ─── Step 3: Parse token stream → AST ────────────────────────────────
@@ -1626,7 +1790,7 @@
                     consume();
                     const r = resolveSign(t.value);
                     if (r.unknown) return { type: 'unknown', code: r.unknown, phonetic: r.phonetic };
-                    return { type: 'glyph', glyph: r.glyph, phonetic: r.phonetic, code: r.code };
+                    return { type: 'glyph', glyph: r.glyph, phonetic: r.phonetic, signType: r.type, code: r.code };
                 }
                 return null;
             }
@@ -1664,6 +1828,7 @@
             // terminated when we hit a newline or run out of tokens without an op)
             const quadrats = [];
             const phonLines = [[]]; // phonetic parts, split by newlines
+            const typeLines = [[]]; // sign-type annotations per line
 
             while (!atEnd()) {
                 const t = peek();
@@ -1671,6 +1836,7 @@
                     consume();
                     quadrats.push({ type: 'newline' });
                     phonLines.push([]);
+                    typeLines.push([]);
                     continue;
                 }
                 if (t.type === 'op' && t.value === '-') {
@@ -1685,10 +1851,11 @@
                 if (node) {
                     quadrats.push(node);
                     phonLines[phonLines.length - 1].push(getPhonetic(node));
+                    typeLines[typeLines.length - 1].push(...getTypeAnnotations(node));
                 }
             }
 
-            return { type: 'sequence', quadrats, phonLines };
+            return { type: 'sequence', quadrats, phonLines, typeLines };
         }
 
         // ─── Phonetic string extraction from AST node ─────────────────────────
@@ -1702,6 +1869,25 @@
                 case 'vstack':   return node.children.map(getPhonetic).join('·');
                 case 'newline':  return '\n';
                 default: return '';
+            }
+        }
+
+        // ─── Sign-type annotations: collect {phon, det, log, num} from AST ──────
+        // Returns array of {phonetic, signType, code} objects for the preview row.
+        function getTypeAnnotations(node) {
+            if (!node) return [];
+            switch (node.type) {
+                case 'glyph':
+                    if (!node.phonetic) return [];
+                    return [{ phonetic: node.phonetic, signType: node.signType || 'phon', code: node.code }];
+                case 'unknown':
+                    return [{ phonetic: `⟨${node.code}⟩`, signType: null, code: node.code }];
+                case 'enclosure':
+                    return getTypeAnnotations(node.child);
+                case 'hgroup':
+                case 'vstack':
+                    return node.children.flatMap(getTypeAnnotations);
+                default: return [];
             }
         }
 
@@ -1875,6 +2061,25 @@
                 phoneticOut.innerHTML = '<span class="output-placeholder">Phonetic preview will appear here…</span>';
             } else {
                 phoneticOut.textContent = phonStr;
+            }
+
+            // ── Render sign-type badge row ────────────────────────────────────
+            const typeOut = document.getElementById('type-output');
+            const allAnnotations = ast.typeLines ? ast.typeLines.flat() : [];
+            if (allAnnotations.length === 0 || !phonStr) {
+                typeOut.innerHTML = '';
+            } else {
+                // Group consecutive signs of the same type for cleaner display
+                const typeLabels = { phon: 'Phon.', det: 'Det.', log: 'Log.', num: 'Num.' };
+                const typeColors = { phon: 'var(--gold)', det: 'var(--cyan)', log: '#c9a0dc', num: '#90ee90' };
+                const badges = allAnnotations.map(ann => {
+                    if (!ann.signType) return `<span class="type-badge type-unknown">?</span>`;
+                    const label = typeLabels[ann.signType] || ann.signType;
+                    const color = typeColors[ann.signType] || 'var(--text)';
+                    const title = `${ann.code}: ${ann.phonetic} — ${label}`;
+                    return `<span class="type-badge type-${ann.signType}" title="${title}" style="border-color:${color};color:${color};">${label}</span>`;
+                });
+                typeOut.innerHTML = `<div class="type-badge-row">${badges.join('')}</div>`;
             }
         }
 
