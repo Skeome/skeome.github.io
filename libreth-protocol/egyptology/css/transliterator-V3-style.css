@@ -1,6 +1,11 @@
 /* Transliterator Styles - Aligned with Wiki Theme */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 /* Hieroglyph Font */
 .hieroglyph {
     font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', Arial, sans-serif;
@@ -15,6 +20,16 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .transliterator-container {
+        padding: 1rem 0.5rem;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
 }
 
 /* Header */
@@ -87,6 +102,8 @@
     color: var(--text-bright);
     font-weight: 600;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 @media (max-width: 640px) {
@@ -103,10 +120,19 @@
     .features-box li {
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
+        word-break: break-word;
+        min-width: 0;
     }
 
     .features-box ul {
         padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-box li {
+        font-size: 0.75rem;
+        word-spacing: -0.05em;
     }
 }
 
