@@ -601,3 +601,86 @@ textarea::placeholder {
     border-radius: 2px;
     flex-shrink: 0;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* EMBEDDED REFERENCE WINDOW */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.reference-window-section {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: rgba(15,13,8,0.8);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.reference-window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(10,9,6,0.9);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.reference-window-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.reference-toggle-btn {
+    background: none;
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--gold);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-radius: 0.2rem;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.reference-toggle-btn:hover {
+    border-color: rgba(212,175,55,0.6);
+    background: rgba(212,175,55,0.1);
+    color: #f0e68c;
+}
+
+.reference-window-viewport {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    background: #0a0a0a;
+}
+
+.reference-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #0a0a0a;
+    display: block;
+}
+
+.reference-window-section.collapsed .reference-window-viewport {
+    display: none;
+    height: 0;
+}
+
+.reference-window-section.collapsed {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .reference-window-viewport {
+        height: 500px;
+    }
+}

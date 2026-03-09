@@ -1,0 +1,5007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardiner Sign Reference — All Valid Codes</title>
+    <link rel="stylesheet" href="css/wiki-style.css">
+    <style>
+        /* ═══════════════════════════════════════
+           GARDINER REFERENCE PAGE — INLINE STYLES
+           Extends wiki-style.css
+        ═══════════════════════════════════════ */
+
+        body { background: #0a0906; color: #c8b89a; }
+
+        /* HEADER */
+        .ref-header {
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            padding: 2.5rem 0 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .ref-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            color: #d4af37;
+            letter-spacing: 0.25em;
+            margin: 0 0 0.4rem;
+        }
+        .ref-subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 1.05rem;
+            color: #7ec8c8;
+            letter-spacing: 0.3em;
+            margin: 0 0 0.8rem;
+        }
+        .ref-meta {
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: #6b5f4a;
+            letter-spacing: 0.1em;
+        }
+
+        /* LEGEND BAR */
+        .legend-bar {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+            background: rgba(15,13,8,0.8);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 2rem;
+            font-family: 'VT323', monospace;
+        }
+        .legend-label {
+            color: #6b5f4a;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            margin-right: 0.5rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #c8b89a;
+        }
+
+        /* TYPE BADGES */
+        .type-badge {
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+            padding: 1px 6px;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .badge-phon { background: rgba(126,200,200,0.12); color: #7ec8c8; border: 1px solid rgba(126,200,200,0.3); }
+        .badge-det  { background: rgba(180,140,80,0.12);  color: #b48c50; border: 1px solid rgba(180,140,80,0.3); }
+        .badge-log  { background: rgba(180,100,120,0.12); color: #d4708a; border: 1px solid rgba(180,100,120,0.3); }
+        .badge-num  { background: rgba(130,180,100,0.12); color: #82b464; border: 1px solid rgba(130,180,100,0.3); }
+
+        /* FILTER BAR */
+        .filter-bar {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+        .filter-label {
+            font-family: 'VT323', monospace;
+            color: #6b5f4a;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+        }
+        .filter-btn {
+            font-family: 'VT323', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            padding: 3px 12px;
+            border: 1px solid rgba(212,175,55,0.2);
+            background: transparent;
+            color: #8a7a5a;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: #d4af37;
+            color: #d4af37;
+            background: rgba(212,175,55,0.05);
+        }
+        .search-input {
+            font-family: 'VT323', monospace;
+            font-size: 0.95rem;
+            background: rgba(15,13,8,0.9);
+            border: 1px solid rgba(212,175,55,0.2);
+            color: #c8b89a;
+            padding: 3px 10px;
+            width: 200px;
+            letter-spacing: 0.1em;
+            outline: none;
+        }
+        .search-input:focus { border-color: rgba(126,200,200,0.5); }
+        .search-input::placeholder { color: #4a3f2a; }
+
+        /* TOC GRID */
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.4rem;
+            margin-bottom: 2.5rem;
+            background: rgba(10,9,6,0.6);
+            border: 1px solid rgba(212,175,55,0.1);
+            padding: 1rem;
+        }
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.5rem;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+        }
+        .toc-link:hover {
+            border-color: rgba(212,175,55,0.2);
+            background: rgba(212,175,55,0.03);
+        }
+        .toc-cat {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #d4af37;
+            min-width: 2.2rem;
+        }
+        .toc-desc {
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+            color: #7a6c52;
+            flex: 1;
+            letter-spacing: 0.05em;
+        }
+        .toc-count {
+            font-family: 'VT323', monospace;
+            font-size: 0.75rem;
+            color: #4a3f2a;
+        }
+
+        /* CATEGORY SECTIONS */
+        .cat-section {
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212,175,55,0.08);
+        }
+        .cat-section.hidden { display: none; }
+        .cat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(15,13,8,0.95);
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+            padding: 0.6rem 1rem;
+        }
+        .cat-letter {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #d4af37;
+            min-width: 2.5rem;
+        }
+        .cat-title {
+            font-family: 'VT323', monospace;
+            font-size: 0.95rem;
+            color: #8a7a5a;
+            letter-spacing: 0.1em;
+            flex: 1;
+            text-transform: uppercase;
+        }
+        .cat-count {
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+            color: #4a3f2a;
+        }
+
+        /* SIGN TABLE */
+        .sign-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'VT323', monospace;
+        }
+        .sign-table thead tr {
+            background: rgba(10,9,6,0.8);
+        }
+        .sign-table th {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.72rem;
+            color: #4a3f2a;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.08);
+            font-family: 'VT323', monospace;
+            font-weight: normal;
+        }
+        .sign-table tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: background 0.1s;
+        }
+        .sign-table tbody tr:hover {
+            background: rgba(212,175,55,0.03);
+        }
+        .sign-table tbody tr.row-hidden { display: none; }
+        .sign-table td {
+            padding: 0.25rem 0.8rem;
+            font-size: 0.88rem;
+            vertical-align: middle;
+        }
+        .col-code {
+            color: #d4af37;
+            font-size: 0.92rem;
+            min-width: 5rem;
+            letter-spacing: 0.05em;
+        }
+        .col-phon {
+            color: #c8b89a;
+            font-size: 0.88rem;
+            min-width: 10rem;
+        }
+        .col-type {
+            min-width: 4rem;
+        }
+
+        /* INPUT SYNTAX SECTION */
+        .syntax-block {
+            background: rgba(10,9,6,0.85);
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .syntax-block h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin: 0 0 0.8rem;
+        }
+        .syntax-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.8rem;
+        }
+        .syntax-item {
+            border-left: 2px solid rgba(126,200,200,0.3);
+            padding-left: 0.8rem;
+        }
+        .syntax-example {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: #7ec8c8;
+            letter-spacing: 0.05em;
+        }
+        .syntax-desc {
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+            color: #6b5f4a;
+            margin-top: 0.2rem;
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: #5a4f3a;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+        .stat-item span { color: #8a7a5a; }
+
+        /* BACK LINK */
+        .back-link {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: #5a4f3a;
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            transition: color 0.15s;
+        }
+        .back-link:hover { color: #d4af37; }
+
+        /* RESULT COUNT */
+        #result-count {
+            font-family: 'VT323', monospace;
+            font-size: 0.85rem;
+            color: #5a4f3a;
+            margin-left: auto;
+        }
+
+        /* FOOTER */
+        .ref-footer {
+            border-top: 1px solid rgba(212,175,55,0.1);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+            color: #3a3228;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+
+        /* PAGE WRAP */
+        .page-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        .divider { border: none; border-top: 1px solid rgba(212,175,55,0.08); margin: 1.5rem 0; }
+    </style>
+</head>
+<body data-page="gardiner-reference">
+<div class="page-wrap">
+
+    <!-- HEADER -->
+    <header class="ref-header">
+        <h1 class="ref-title">GARDINER SIGN LIST — COMPLETE CODE REFERENCE</h1>
+        <div class="ref-subtitle">// MEDU NETJER :: TRANSLITERATOR VALID INPUT REGISTRY //</div>
+        <p class="ref-meta">
+            816 verified codes &nbsp;·&nbsp; 26 categories &nbsp;·&nbsp;
+            Cross-referenced: Gardiner (1957) · Faulkner (1962) · Allen (2014) · Unicode 17.0
+        </p>
+    </header>
+
+    <a href="transliterator.html" class="back-link">← RETURN TO TRANSLITERATOR</a>
+
+    <!-- SYNTAX QUICK REFERENCE -->
+    <div class="syntax-block">
+        <h3>// VALID INPUT SYNTAX //</h3>
+        <div class="syntax-grid">
+            <div class="syntax-item">
+                <div class="syntax-example">G17-N35-D46</div>
+                <div class="syntax-desc">Hyphen-separated Gardiner codes → sequence</div>
+            </div>
+            <div class="syntax-item">
+                <div class="syntax-example">G17:N35</div>
+                <div class="syntax-desc">Colon → vertical stack (G17 over N35)</div>
+            </div>
+            <div class="syntax-item">
+                <div class="syntax-example">G17*N35</div>
+                <div class="syntax-desc">Asterisk → horizontal group (side by side)</div>
+            </div>
+            <div class="syntax-item">
+                <div class="syntax-example">m n r t</div>
+                <div class="syntax-desc">MdC uniliterals — lowercase single letters</div>
+            </div>
+            <div class="syntax-item">
+                <div class="syntax-example">ḥ š ḏ ṯ ẖ ꜣ ꜥ</div>
+                <div class="syntax-desc">Transliteration characters → resolved to sign</div>
+            </div>
+            <div class="syntax-item">
+                <div class="syntax-example">G17-N35 G17-N35</div>
+                <div class="syntax-desc">Space separates independent word groups</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEGEND + FILTER -->
+    <div class="legend-bar">
+        <span class="legend-label">TYPE KEY:</span>
+        <div class="legend-item"><span class="type-badge badge-phon">phon</span> Phonogram — represents sound(s)</div>
+        <div class="legend-item"><span class="type-badge badge-det">det</span> Determinative — semantic classifier</div>
+        <div class="legend-item"><span class="type-badge badge-log">log</span> Logogram — represents word directly</div>
+        <div class="legend-item"><span class="type-badge badge-num">num</span> Numeral — quantity sign</div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-item">TOTAL <span>816</span></div>
+        <div class="stat-item">PHONOGRAMS <span id="stat-phon">—</span></div>
+        <div class="stat-item">DETERMINATIVES <span id="stat-det">—</span></div>
+        <div class="stat-item">LOGOGRAMS <span id="stat-log">—</span></div>
+        <div class="stat-item">NUMERALS <span id="stat-num">—</span></div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+        <span class="filter-label">FILTER:</span>
+        <button class="filter-btn active" data-filter="all">ALL</button>
+        <button class="filter-btn" data-filter="phon">PHONOGRAMS</button>
+        <button class="filter-btn" data-filter="det">DETERMINATIVES</button>
+        <button class="filter-btn" data-filter="log">LOGOGRAMS</button>
+        <button class="filter-btn" data-filter="num">NUMERALS</button>
+        <input type="text" class="search-input" id="code-search" placeholder="SEARCH CODE OR VALUE…">
+        <span id="result-count"></span>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc-grid">
+        <a href="#cat-A" class="toc-link"><span class="toc-cat">A</span><span class="toc-desc">Man and his occupations</span><span class="toc-count">65</span></a>
+<a href="#cat-Aa" class="toc-link"><span class="toc-cat">Aa</span><span class="toc-desc">Unclassified signs</span><span class="toc-count">31</span></a>
+<a href="#cat-B" class="toc-link"><span class="toc-cat">B</span><span class="toc-desc">Woman and her occupations</span><span class="toc-count">7</span></a>
+<a href="#cat-C" class="toc-link"><span class="toc-cat">C</span><span class="toc-desc">Anthropomorphic deities</span><span class="toc-count">28</span></a>
+<a href="#cat-D" class="toc-link"><span class="toc-cat">D</span><span class="toc-desc">Parts of the human body</span><span class="toc-count">66</span></a>
+<a href="#cat-E" class="toc-link"><span class="toc-cat">E</span><span class="toc-desc">Mammals</span><span class="toc-count">42</span></a>
+<a href="#cat-F" class="toc-link"><span class="toc-cat">F</span><span class="toc-desc">Parts of mammals</span><span class="toc-count">52</span></a>
+<a href="#cat-G" class="toc-link"><span class="toc-cat">G</span><span class="toc-desc">Birds</span><span class="toc-count">60</span></a>
+<a href="#cat-H" class="toc-link"><span class="toc-cat">H</span><span class="toc-desc">Parts of birds</span><span class="toc-count">8</span></a>
+<a href="#cat-I" class="toc-link"><span class="toc-cat">I</span><span class="toc-desc">Reptiles, amphibians, fish</span><span class="toc-count">19</span></a>
+<a href="#cat-K" class="toc-link"><span class="toc-cat">K</span><span class="toc-desc">Fish</span><span class="toc-count">7</span></a>
+<a href="#cat-L" class="toc-link"><span class="toc-cat">L</span><span class="toc-desc">Insects & invertebrates</span><span class="toc-count">7</span></a>
+<a href="#cat-M" class="toc-link"><span class="toc-cat">M</span><span class="toc-desc">Plants</span><span class="toc-count">45</span></a>
+<a href="#cat-N" class="toc-link"><span class="toc-cat">N</span><span class="toc-desc">Sky, earth, water</span><span class="toc-count">44</span></a>
+<a href="#cat-O" class="toc-link"><span class="toc-cat">O</span><span class="toc-desc">Buildings & their parts</span><span class="toc-count">51</span></a>
+<a href="#cat-P" class="toc-link"><span class="toc-cat">P</span><span class="toc-desc">Ships & boats</span><span class="toc-count">12</span></a>
+<a href="#cat-Q" class="toc-link"><span class="toc-cat">Q</span><span class="toc-desc">Domestic furniture</span><span class="toc-count">7</span></a>
+<a href="#cat-R" class="toc-link"><span class="toc-cat">R</span><span class="toc-desc">Temple furniture & emblems</span><span class="toc-count">25</span></a>
+<a href="#cat-S" class="toc-link"><span class="toc-cat">S</span><span class="toc-desc">Crowns, dress, staves</span><span class="toc-count">46</span></a>
+<a href="#cat-T" class="toc-link"><span class="toc-cat">T</span><span class="toc-desc">Warfare, hunting, butchery</span><span class="toc-count">38</span></a>
+<a href="#cat-U" class="toc-link"><span class="toc-cat">U</span><span class="toc-desc">Agriculture, crafts, professions</span><span class="toc-count">41</span></a>
+<a href="#cat-V" class="toc-link"><span class="toc-cat">V</span><span class="toc-desc">Rope, fibre, baskets, bags</span><span class="toc-count">40</span></a>
+<a href="#cat-W" class="toc-link"><span class="toc-cat">W</span><span class="toc-desc">Vessels of stone & earthenware</span><span class="toc-count">26</span></a>
+<a href="#cat-X" class="toc-link"><span class="toc-cat">X</span><span class="toc-desc">Loaves & cakes</span><span class="toc-count">8</span></a>
+<a href="#cat-Y" class="toc-link"><span class="toc-cat">Y</span><span class="toc-desc">Writing, games, music</span><span class="toc-count">9</span></a>
+<a href="#cat-Z" class="toc-link"><span class="toc-cat">Z</span><span class="toc-desc">Strokes, hieratic, geometric</span><span class="toc-count">32</span></a>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- CATEGORY SECTIONS -->
+    <div id="sign-catalog">
+        <section class="cat-section" id="cat-A">
+        <div class="cat-header">
+            <span class="cat-letter">A</span>
+            <span class="cat-title">Man and his occupations</span>
+            <span class="cat-count">65 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">A1</td>
+            <td class="col-phon">s</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A2</td>
+            <td class="col-phon">r</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A3</td>
+            <td class="col-phon">ḥms</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A4</td>
+            <td class="col-phon">dwꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A5</td>
+            <td class="col-phon">imn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A5a</td>
+            <td class="col-phon">imn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A6</td>
+            <td class="col-phon">wꜥb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A6a</td>
+            <td class="col-phon">wꜥb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A7</td>
+            <td class="col-phon">nḏm</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A8</td>
+            <td class="col-phon">ḥnw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A9</td>
+            <td class="col-phon">fꜣi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A10</td>
+            <td class="col-phon">sḳdw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A11</td>
+            <td class="col-phon">ḫnms</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A12</td>
+            <td class="col-phon">mšꜥ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A13</td>
+            <td class="col-phon">ḫfty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A14</td>
+            <td class="col-phon">mwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A14a</td>
+            <td class="col-phon">mwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A15</td>
+            <td class="col-phon">ḫr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A16</td>
+            <td class="col-phon">ksi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A17</td>
+            <td class="col-phon">šri</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A17a</td>
+            <td class="col-phon">šri</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A18</td>
+            <td class="col-phon">ẖrd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A19</td>
+            <td class="col-phon">i3w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A20</td>
+            <td class="col-phon">i3w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A21</td>
+            <td class="col-phon">sr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A22</td>
+            <td class="col-phon">twt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A23</td>
+            <td class="col-phon">ity</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A24</td>
+            <td class="col-phon">ḥwi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A25</td>
+            <td class="col-phon">ḥwi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A26</td>
+            <td class="col-phon">nis</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A27</td>
+            <td class="col-phon">in</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A28</td>
+            <td class="col-phon">kꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A29</td>
+            <td class="col-phon">tni</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A30</td>
+            <td class="col-phon">i3w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A31</td>
+            <td class="col-phon">ḥni</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A32</td>
+            <td class="col-phon">ibi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A33</td>
+            <td class="col-phon">mniw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A34</td>
+            <td class="col-phon">ḫwsi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A35</td>
+            <td class="col-phon">qd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A36</td>
+            <td class="col-phon">ꜥfty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A37</td>
+            <td class="col-phon">ꜥfty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A38</td>
+            <td class="col-phon">qis</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A39</td>
+            <td class="col-phon">qis</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A40</td>
+            <td class="col-phon">nṯr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A40a</td>
+            <td class="col-phon">nṯr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A41</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A42</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A42a</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A43</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A43a</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A44</td>
+            <td class="col-phon">nsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A45</td>
+            <td class="col-phon">bity</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A45a</td>
+            <td class="col-phon">bity</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A46</td>
+            <td class="col-phon">bity</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A47</td>
+            <td class="col-phon">iry</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A48</td>
+            <td class="col-phon">iry</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A49</td>
+            <td class="col-phon">ꜥꜣmw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A50</td>
+            <td class="col-phon">špsi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A51</td>
+            <td class="col-phon">špsi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A52</td>
+            <td class="col-phon">šps</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A53</td>
+            <td class="col-phon">ḥsy</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A54</td>
+            <td class="col-phon">mwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A55</td>
+            <td class="col-phon">sḏr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A59</td>
+            <td class="col-phon">dr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">A6b</td>
+            <td class="col-phon">wꜥb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-Aa">
+        <div class="cat-header">
+            <span class="cat-letter">Aa</span>
+            <span class="cat-title">Unclassified signs</span>
+            <span class="cat-count">31 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">Aa1</td>
+            <td class="col-phon">ḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa2</td>
+            <td class="col-phon">ḫꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa3</td>
+            <td class="col-phon">ḫꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa4</td>
+            <td class="col-phon">b3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa5</td>
+            <td class="col-phon">ḥp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa6</td>
+            <td class="col-phon">tm3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa7</td>
+            <td class="col-phon">sqr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa8</td>
+            <td class="col-phon">qn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa9</td>
+            <td class="col-phon">ḫwd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa10</td>
+            <td class="col-phon">drf</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa11</td>
+            <td class="col-phon">mꜣꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa12</td>
+            <td class="col-phon">mꜣꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa13</td>
+            <td class="col-phon">im</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa14</td>
+            <td class="col-phon">im</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa15</td>
+            <td class="col-phon">im</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa16</td>
+            <td class="col-phon">gs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa17</td>
+            <td class="col-phon">s3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa18</td>
+            <td class="col-phon">s3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa19</td>
+            <td class="col-phon">ḥryt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa20</td>
+            <td class="col-phon">ꜥpr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa21</td>
+            <td class="col-phon">wḏꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa22</td>
+            <td class="col-phon">wḏꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa23</td>
+            <td class="col-phon">mḏd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa24</td>
+            <td class="col-phon">mḏd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa25</td>
+            <td class="col-phon">sm3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa26</td>
+            <td class="col-phon">sbi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa27</td>
+            <td class="col-phon">nḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa28</td>
+            <td class="col-phon">qd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa29</td>
+            <td class="col-phon">qd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa30</td>
+            <td class="col-phon">ẑqr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Aa31</td>
+            <td class="col-phon">ẑqr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-B">
+        <div class="cat-header">
+            <span class="cat-letter">B</span>
+            <span class="cat-title">Woman and her occupations</span>
+            <span class="cat-count">7 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">B1</td>
+            <td class="col-phon">st</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B2</td>
+            <td class="col-phon">iꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B3</td>
+            <td class="col-phon">msi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B4</td>
+            <td class="col-phon">mst</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B5</td>
+            <td class="col-phon">rdit</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B6</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">B7</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-C">
+        <div class="cat-header">
+            <span class="cat-letter">C</span>
+            <span class="cat-title">Anthropomorphic deities</span>
+            <span class="cat-count">28 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">C1</td>
+            <td class="col-phon">rꜥ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C2</td>
+            <td class="col-phon">itmw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C2a</td>
+            <td class="col-phon">itmw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C3</td>
+            <td class="col-phon">Ḏḥwty</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C4</td>
+            <td class="col-phon">Ḫnmw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C5</td>
+            <td class="col-phon">nfr-tm</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C6</td>
+            <td class="col-phon">Wsir</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C7</td>
+            <td class="col-phon">sp3</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C8</td>
+            <td class="col-phon">ḥꜥpy</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C9</td>
+            <td class="col-phon">nit</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C10</td>
+            <td class="col-phon">mꜣꜥt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C10a</td>
+            <td class="col-phon">mꜣꜥt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C11</td>
+            <td class="col-phon">ḥḥ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C12</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C13</td>
+            <td class="col-phon">Ḫnsw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C14</td>
+            <td class="col-phon">Ḫpri</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C15</td>
+            <td class="col-phon">nfr-tm</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C16</td>
+            <td class="col-phon">Inḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C17</td>
+            <td class="col-phon">Gb</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C18</td>
+            <td class="col-phon">Wsir</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C19</td>
+            <td class="col-phon">Wsir</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C20</td>
+            <td class="col-phon">Mnw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C21</td>
+            <td class="col-phon">Sḫmt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C22</td>
+            <td class="col-phon">Ptḥ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C23</td>
+            <td class="col-phon">Skr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C24</td>
+            <td class="col-phon">Bꜣstt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C2b</td>
+            <td class="col-phon">itmw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">C2c</td>
+            <td class="col-phon">itmw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-D">
+        <div class="cat-header">
+            <span class="cat-letter">D</span>
+            <span class="cat-title">Parts of the human body</span>
+            <span class="cat-count">66 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">D1</td>
+            <td class="col-phon">tp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D2</td>
+            <td class="col-phon">ḥr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D3</td>
+            <td class="col-phon">šnꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D4</td>
+            <td class="col-phon">ir</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D5</td>
+            <td class="col-phon">wḏꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D6</td>
+            <td class="col-phon">ir</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D7</td>
+            <td class="col-phon">šnꜥ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D8</td>
+            <td class="col-phon">irt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D9</td>
+            <td class="col-phon">rmi</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D10</td>
+            <td class="col-phon">wḏꜣt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D11</td>
+            <td class="col-phon">ꜥnḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D12</td>
+            <td class="col-phon">irt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D13</td>
+            <td class="col-phon">hr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D14</td>
+            <td class="col-phon">sp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D15</td>
+            <td class="col-phon">sp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D16</td>
+            <td class="col-phon">ꜥnt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D17</td>
+            <td class="col-phon">sšt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D18</td>
+            <td class="col-phon">qnbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D19</td>
+            <td class="col-phon">fnḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D20</td>
+            <td class="col-phon">fnḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D21</td>
+            <td class="col-phon">r</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D22</td>
+            <td class="col-phon">rꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D23</td>
+            <td class="col-phon">rꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D24</td>
+            <td class="col-phon">spt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D25</td>
+            <td class="col-phon">spt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D26</td>
+            <td class="col-phon">mẖ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D27</td>
+            <td class="col-phon">sns</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D27a</td>
+            <td class="col-phon">sns</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D28</td>
+            <td class="col-phon">kꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D29</td>
+            <td class="col-phon">ḥꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D30</td>
+            <td class="col-phon">ḥꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D31</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D32</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D33</td>
+            <td class="col-phon">ḥm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D34</td>
+            <td class="col-phon">ꜣms</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D34a</td>
+            <td class="col-phon">ꜣms</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D35</td>
+            <td class="col-phon">n</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D36</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D37</td>
+            <td class="col-phon">di</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D38</td>
+            <td class="col-phon">imi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D39</td>
+            <td class="col-phon">ini</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D40</td>
+            <td class="col-phon">nḥm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D41</td>
+            <td class="col-phon">ḏsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D42</td>
+            <td class="col-phon">mḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D43</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D44</td>
+            <td class="col-phon">ꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D45</td>
+            <td class="col-phon">ḏsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D46</td>
+            <td class="col-phon">d</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D46a</td>
+            <td class="col-phon">d</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D47</td>
+            <td class="col-phon">ḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D48</td>
+            <td class="col-phon">sp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D49</td>
+            <td class="col-phon">dr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D50</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D51</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D52</td>
+            <td class="col-phon">mt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D53</td>
+            <td class="col-phon">mt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D54</td>
+            <td class="col-phon">rd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D55</td>
+            <td class="col-phon">iw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D56</td>
+            <td class="col-phon">psd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D57</td>
+            <td class="col-phon">psd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D58</td>
+            <td class="col-phon">b</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D59</td>
+            <td class="col-phon">b</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D60</td>
+            <td class="col-phon">wbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D61</td>
+            <td class="col-phon">ṯbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D62</td>
+            <td class="col-phon">rd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">D63</td>
+            <td class="col-phon">rd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-E">
+        <div class="cat-header">
+            <span class="cat-letter">E</span>
+            <span class="cat-title">Mammals</span>
+            <span class="cat-count">42 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">E1</td>
+            <td class="col-phon">kꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E2</td>
+            <td class="col-phon">kꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E3</td>
+            <td class="col-phon">Ab</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E4</td>
+            <td class="col-phon">ḏndnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E5</td>
+            <td class="col-phon">wr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E6</td>
+            <td class="col-phon">ꜣbd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E7</td>
+            <td class="col-phon">ꜥꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E8</td>
+            <td class="col-phon">ḫr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E9</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E9a</td>
+            <td class="col-phon">šꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E10</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E11</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E12</td>
+            <td class="col-phon">šꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E13</td>
+            <td class="col-phon">mꜣi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E14</td>
+            <td class="col-phon">sꜣb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E15</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E16</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E16a</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E17</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E17a</td>
+            <td class="col-phon">inpw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E18</td>
+            <td class="col-phon">wn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E19</td>
+            <td class="col-phon">ꜥbd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E20</td>
+            <td class="col-phon">stš</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E20a</td>
+            <td class="col-phon">stš</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E21</td>
+            <td class="col-phon">stš</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E22</td>
+            <td class="col-phon">miw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E23</td>
+            <td class="col-phon">rw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E24</td>
+            <td class="col-phon">mꜣi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E25</td>
+            <td class="col-phon">rwtj</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E26</td>
+            <td class="col-phon">Abw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E27</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E28</td>
+            <td class="col-phon">mmy</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E29</td>
+            <td class="col-phon">ꜥnb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E30</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E31</td>
+            <td class="col-phon">sr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E32</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E33</td>
+            <td class="col-phon">ky</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E34</td>
+            <td class="col-phon">wn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E34a</td>
+            <td class="col-phon">wn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E36</td>
+            <td class="col-phon">šꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E37</td>
+            <td class="col-phon">sꜣb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">E38</td>
+            <td class="col-phon">sꜣb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-F">
+        <div class="cat-header">
+            <span class="cat-letter">F</span>
+            <span class="cat-title">Parts of mammals</span>
+            <span class="cat-count">52 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">F1</td>
+            <td class="col-phon">ḥꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F2</td>
+            <td class="col-phon">ḥꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F3</td>
+            <td class="col-phon">ḥꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F4</td>
+            <td class="col-phon">ḥꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F5</td>
+            <td class="col-phon">km</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F6</td>
+            <td class="col-phon">tp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F7</td>
+            <td class="col-phon">tp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F8</td>
+            <td class="col-phon">wsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F9</td>
+            <td class="col-phon">f</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F10</td>
+            <td class="col-phon">wsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F11</td>
+            <td class="col-phon">ꜣbw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F12</td>
+            <td class="col-phon">wsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F13</td>
+            <td class="col-phon">db</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F14</td>
+            <td class="col-phon">wp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F15</td>
+            <td class="col-phon">wp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F16</td>
+            <td class="col-phon">šsp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F17</td>
+            <td class="col-phon">ꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F18</td>
+            <td class="col-phon">ꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F19</td>
+            <td class="col-phon">isr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F20</td>
+            <td class="col-phon">fnḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F21</td>
+            <td class="col-phon">msDr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F22</td>
+            <td class="col-phon">wḥm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F23</td>
+            <td class="col-phon">ḫpš</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F24</td>
+            <td class="col-phon">ḥꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F25</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F26</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F27</td>
+            <td class="col-phon">km</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F28</td>
+            <td class="col-phon">ms</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F29</td>
+            <td class="col-phon">sti</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F30</td>
+            <td class="col-phon">nḏm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F31</td>
+            <td class="col-phon">ms</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F32</td>
+            <td class="col-phon">ẖ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F33</td>
+            <td class="col-phon">sd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F34</td>
+            <td class="col-phon">ib</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F35</td>
+            <td class="col-phon">nfr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F36</td>
+            <td class="col-phon">smꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F37</td>
+            <td class="col-phon">ꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F38</td>
+            <td class="col-phon">iꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F39</td>
+            <td class="col-phon">ꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F40</td>
+            <td class="col-phon">wꜣs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F41</td>
+            <td class="col-phon">ꜣbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F42</td>
+            <td class="col-phon">imꜣḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F43</td>
+            <td class="col-phon">ꜣpd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F44</td>
+            <td class="col-phon">mꜣi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F45</td>
+            <td class="col-phon">ḥꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F46</td>
+            <td class="col-phon">inḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F47</td>
+            <td class="col-phon">ꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F48</td>
+            <td class="col-phon">ꜥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F49</td>
+            <td class="col-phon">ẖt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F50</td>
+            <td class="col-phon">ẖt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F51</td>
+            <td class="col-phon">ẖt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">F52</td>
+            <td class="col-phon">mt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-G">
+        <div class="cat-header">
+            <span class="cat-letter">G</span>
+            <span class="cat-title">Birds</span>
+            <span class="cat-count">60 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">G1</td>
+            <td class="col-phon">ꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G2</td>
+            <td class="col-phon">ꜣꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G3</td>
+            <td class="col-phon">ꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G4</td>
+            <td class="col-phon">tyw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G5</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G6</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G6a</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G7</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G7a</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G8</td>
+            <td class="col-phon">BḤdty</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G9</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G10</td>
+            <td class="col-phon">mꜣꜥt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G11</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G12</td>
+            <td class="col-phon">Mnṯw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G13</td>
+            <td class="col-phon">nṯr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G14</td>
+            <td class="col-phon">mwt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G15</td>
+            <td class="col-phon">nḫbt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G16</td>
+            <td class="col-phon">nbty</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G17</td>
+            <td class="col-phon">m</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G17a</td>
+            <td class="col-phon">m</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G18</td>
+            <td class="col-phon">mm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G19</td>
+            <td class="col-phon">m</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G20</td>
+            <td class="col-phon">m</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G21</td>
+            <td class="col-phon">nḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G22</td>
+            <td class="col-phon">ḏb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G23</td>
+            <td class="col-phon">rḫyt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G24</td>
+            <td class="col-phon">pq</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G25</td>
+            <td class="col-phon">ꜣḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G26</td>
+            <td class="col-phon">Ḏḥwty</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G26a</td>
+            <td class="col-phon">Ḏḥwty</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G27</td>
+            <td class="col-phon">dšr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G28</td>
+            <td class="col-phon">gm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G29</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G30</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G31</td>
+            <td class="col-phon">dfḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G32</td>
+            <td class="col-phon">bꜣḥi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G33</td>
+            <td class="col-phon">bnw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G34</td>
+            <td class="col-phon">snb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G35</td>
+            <td class="col-phon">ꜥq</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G36</td>
+            <td class="col-phon">wr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G37</td>
+            <td class="col-phon">nḏs</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G38</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G39</td>
+            <td class="col-phon">zꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G40</td>
+            <td class="col-phon">pꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G41</td>
+            <td class="col-phon">ḫn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G42</td>
+            <td class="col-phon">wšꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G43</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G43a</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G44</td>
+            <td class="col-phon">ww</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G45</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G46</td>
+            <td class="col-phon">wꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G47</td>
+            <td class="col-phon">ṯꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G48</td>
+            <td class="col-phon">ss</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G49</td>
+            <td class="col-phon">ꜣpdw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G50</td>
+            <td class="col-phon">gb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G51</td>
+            <td class="col-phon">pꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G52</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G53</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G54</td>
+            <td class="col-phon">snḏ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">G7b</td>
+            <td class="col-phon">Ḥr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-H">
+        <div class="cat-header">
+            <span class="cat-letter">H</span>
+            <span class="cat-title">Parts of birds</span>
+            <span class="cat-count">8 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">H1</td>
+            <td class="col-phon">pꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H2</td>
+            <td class="col-phon">wsr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H3</td>
+            <td class="col-phon">ꜣpd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H4</td>
+            <td class="col-phon">snm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H5</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H6</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H7</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">H8</td>
+            <td class="col-phon">swḥt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-I">
+        <div class="cat-header">
+            <span class="cat-letter">I</span>
+            <span class="cat-title">Reptiles, amphibians, fish</span>
+            <span class="cat-count">19 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">I1</td>
+            <td class="col-phon">ḥfꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I2</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I3</td>
+            <td class="col-phon">km</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I4</td>
+            <td class="col-phon">km</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I5</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I5a</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I6</td>
+            <td class="col-phon">km</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I7</td>
+            <td class="col-phon">ꜣḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I8</td>
+            <td class="col-phon">ḥfn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I9</td>
+            <td class="col-phon">f</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I9a</td>
+            <td class="col-phon">f</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I10</td>
+            <td class="col-phon">ḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I10a</td>
+            <td class="col-phon">ḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I11</td>
+            <td class="col-phon">ḏd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I11a</td>
+            <td class="col-phon">ḏd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I12</td>
+            <td class="col-phon">wꜣḏ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I13</td>
+            <td class="col-phon">Ḏd</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I14</td>
+            <td class="col-phon">mt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">I15</td>
+            <td class="col-phon">sf</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-K">
+        <div class="cat-header">
+            <span class="cat-letter">K</span>
+            <span class="cat-title">Fish</span>
+            <span class="cat-count">7 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">K1</td>
+            <td class="col-phon">in</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K2</td>
+            <td class="col-phon">ꜣbd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K3</td>
+            <td class="col-phon">ꜣbd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K4</td>
+            <td class="col-phon">ḥꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K5</td>
+            <td class="col-phon">bw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K6</td>
+            <td class="col-phon">nšm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">K7</td>
+            <td class="col-phon">ꜣdf</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-L">
+        <div class="cat-header">
+            <span class="cat-letter">L</span>
+            <span class="cat-title">Insects & invertebrates</span>
+            <span class="cat-count">7 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">L1</td>
+            <td class="col-phon">ḫpr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L2</td>
+            <td class="col-phon">bit</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L3</td>
+            <td class="col-phon">sr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L4</td>
+            <td class="col-phon">sr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L5</td>
+            <td class="col-phon">sr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L6</td>
+            <td class="col-phon">sꜥr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">L7</td>
+            <td class="col-phon">ꜥnḏ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-M">
+        <div class="cat-header">
+            <span class="cat-letter">M</span>
+            <span class="cat-title">Plants</span>
+            <span class="cat-count">45 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">M1</td>
+            <td class="col-phon">iꜣm</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M2</td>
+            <td class="col-phon">ḥn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M3</td>
+            <td class="col-phon">xt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M4</td>
+            <td class="col-phon">rnpt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M5</td>
+            <td class="col-phon">rnpt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M6</td>
+            <td class="col-phon">rnpt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M7</td>
+            <td class="col-phon">tr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M8</td>
+            <td class="col-phon">šꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M9</td>
+            <td class="col-phon">wꜣḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M10</td>
+            <td class="col-phon">ḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M11</td>
+            <td class="col-phon">ꜥnḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M12</td>
+            <td class="col-phon">ḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M13</td>
+            <td class="col-phon">wꜣḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M14</td>
+            <td class="col-phon">wꜣḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M15</td>
+            <td class="col-phon">ḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M16</td>
+            <td class="col-phon">ḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M17</td>
+            <td class="col-phon">i</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M17a</td>
+            <td class="col-phon">i</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M18</td>
+            <td class="col-phon">ii</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M19</td>
+            <td class="col-phon">nḏm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M20</td>
+            <td class="col-phon">sḫt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M21</td>
+            <td class="col-phon">sm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M22</td>
+            <td class="col-phon">nḥbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M23</td>
+            <td class="col-phon">sw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M24</td>
+            <td class="col-phon">šmꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M25</td>
+            <td class="col-phon">šmꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M26</td>
+            <td class="col-phon">šmꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M27</td>
+            <td class="col-phon">nrw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M28</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M29</td>
+            <td class="col-phon">nḏm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M30</td>
+            <td class="col-phon">bꜣq</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M31</td>
+            <td class="col-phon">ḏꜣm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M32</td>
+            <td class="col-phon">ḫnmt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M33</td>
+            <td class="col-phon">it</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M34</td>
+            <td class="col-phon">ḏꜣmt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M35</td>
+            <td class="col-phon">ꜣr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M36</td>
+            <td class="col-phon">dt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M37</td>
+            <td class="col-phon">ꜥr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M38</td>
+            <td class="col-phon">ꜥšꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M39</td>
+            <td class="col-phon">ꜣskt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M40</td>
+            <td class="col-phon">iz</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M41</td>
+            <td class="col-phon">xt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M42</td>
+            <td class="col-phon">wn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M43</td>
+            <td class="col-phon">ꜥnḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">M44</td>
+            <td class="col-phon">nnt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-N">
+        <div class="cat-header">
+            <span class="cat-letter">N</span>
+            <span class="cat-title">Sky, earth, water</span>
+            <span class="cat-count">44 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">N1</td>
+            <td class="col-phon">pt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N2</td>
+            <td class="col-phon">pt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N3</td>
+            <td class="col-phon">pt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N4</td>
+            <td class="col-phon">iꜣdt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N5</td>
+            <td class="col-phon">rꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N6</td>
+            <td class="col-phon">rꜥ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N7</td>
+            <td class="col-phon">hrw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N8</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N9</td>
+            <td class="col-phon">psḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N10</td>
+            <td class="col-phon">psḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N11</td>
+            <td class="col-phon">iꜥḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N12</td>
+            <td class="col-phon">iꜥḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N13</td>
+            <td class="col-phon">mꜣbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N14</td>
+            <td class="col-phon">dwꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N15</td>
+            <td class="col-phon">dwꜣt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N16</td>
+            <td class="col-phon">tꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N17</td>
+            <td class="col-phon">tꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N18</td>
+            <td class="col-phon">iw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N19</td>
+            <td class="col-phon">sp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N20</td>
+            <td class="col-phon">wḏb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N21</td>
+            <td class="col-phon">idb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N22</td>
+            <td class="col-phon">nw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N23</td>
+            <td class="col-phon">ꜣḥt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N24</td>
+            <td class="col-phon">sp3t</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N25</td>
+            <td class="col-phon">ḫꜣst</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N26</td>
+            <td class="col-phon">ḏw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N27</td>
+            <td class="col-phon">ꜣḫt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N28</td>
+            <td class="col-phon">ḫꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N29</td>
+            <td class="col-phon">q</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N30</td>
+            <td class="col-phon">iꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N31</td>
+            <td class="col-phon">wꜣt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N32</td>
+            <td class="col-phon">šn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N33</td>
+            <td class="col-phon">ꜥšꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N33a</td>
+            <td class="col-phon">ꜥšꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N34</td>
+            <td class="col-phon">bꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N35</td>
+            <td class="col-phon">n</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N35a</td>
+            <td class="col-phon">mw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N36</td>
+            <td class="col-phon">mr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N37</td>
+            <td class="col-phon">š</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N38</td>
+            <td class="col-phon">š</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N39</td>
+            <td class="col-phon">š</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N40</td>
+            <td class="col-phon">šm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N41</td>
+            <td class="col-phon">id</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">N42</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-O">
+        <div class="cat-header">
+            <span class="cat-letter">O</span>
+            <span class="cat-title">Buildings & their parts</span>
+            <span class="cat-count">51 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">O1</td>
+            <td class="col-phon">pr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O2</td>
+            <td class="col-phon">pr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O3</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O4</td>
+            <td class="col-phon">h</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O5</td>
+            <td class="col-phon">wꜣbt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O6</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O7</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O8</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O9</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O10</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O11</td>
+            <td class="col-phon">ẖ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O12</td>
+            <td class="col-phon">ẖ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O13</td>
+            <td class="col-phon">inb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O14</td>
+            <td class="col-phon">inb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O15</td>
+            <td class="col-phon">ipt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O16</td>
+            <td class="col-phon">nfr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O17</td>
+            <td class="col-phon">ꜣst</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O18</td>
+            <td class="col-phon">spꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O19</td>
+            <td class="col-phon">pr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O20</td>
+            <td class="col-phon">ḥwt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O21</td>
+            <td class="col-phon">s</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O22</td>
+            <td class="col-phon">ḫnt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O23</td>
+            <td class="col-phon">iwnw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O24</td>
+            <td class="col-phon">mr</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O25</td>
+            <td class="col-phon">ḏd</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O26</td>
+            <td class="col-phon">iwn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O27</td>
+            <td class="col-phon">s</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O28</td>
+            <td class="col-phon">iwn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O29</td>
+            <td class="col-phon">ꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O30</td>
+            <td class="col-phon">sꜣḥ</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O31</td>
+            <td class="col-phon">sb3</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O32</td>
+            <td class="col-phon">sꜥḥ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O33</td>
+            <td class="col-phon">st</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O34</td>
+            <td class="col-phon">z</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O35</td>
+            <td class="col-phon">sꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O36</td>
+            <td class="col-phon">inb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O37</td>
+            <td class="col-phon">in</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O38</td>
+            <td class="col-phon">qnbt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O39</td>
+            <td class="col-phon">inr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O40</td>
+            <td class="col-phon">stb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O41</td>
+            <td class="col-phon">ḥpꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O42</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O43</td>
+            <td class="col-phon">wꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O44</td>
+            <td class="col-phon">itrw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O45</td>
+            <td class="col-phon">ipt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O46</td>
+            <td class="col-phon">qr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O47</td>
+            <td class="col-phon">niwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O48</td>
+            <td class="col-phon">niwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O49</td>
+            <td class="col-phon">niwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O50</td>
+            <td class="col-phon">sp</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">O51</td>
+            <td class="col-phon">ꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-P">
+        <div class="cat-header">
+            <span class="cat-letter">P</span>
+            <span class="cat-title">Ships & boats</span>
+            <span class="cat-count">12 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">P1</td>
+            <td class="col-phon">dpt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P1a</td>
+            <td class="col-phon">wiꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P2</td>
+            <td class="col-phon">ḫ3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P3</td>
+            <td class="col-phon">ḫnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P4</td>
+            <td class="col-phon">mn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P5</td>
+            <td class="col-phon">nfw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P6</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P7</td>
+            <td class="col-phon">ḥrw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P8</td>
+            <td class="col-phon">ḥ3w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P9</td>
+            <td class="col-phon">ssmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P10</td>
+            <td class="col-phon">dp</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">P11</td>
+            <td class="col-phon">mni</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-Q">
+        <div class="cat-header">
+            <span class="cat-letter">Q</span>
+            <span class="cat-title">Domestic furniture</span>
+            <span class="cat-count">7 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">Q1</td>
+            <td class="col-phon">st</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q2</td>
+            <td class="col-phon">ws</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q3</td>
+            <td class="col-phon">p</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q4</td>
+            <td class="col-phon">wrs</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q5</td>
+            <td class="col-phon">hn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q6</td>
+            <td class="col-phon">qrs</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Q7</td>
+            <td class="col-phon">sḏt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-R">
+        <div class="cat-header">
+            <span class="cat-letter">R</span>
+            <span class="cat-title">Temple furniture & emblems</span>
+            <span class="cat-count">25 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">R1</td>
+            <td class="col-phon">ḫꜣwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R2</td>
+            <td class="col-phon">ḫꜣwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R3</td>
+            <td class="col-phon">wḥḏw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R4</td>
+            <td class="col-phon">ḥtp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R5</td>
+            <td class="col-phon">k3p</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R6</td>
+            <td class="col-phon">k3p</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R7</td>
+            <td class="col-phon">sntr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R8</td>
+            <td class="col-phon">nṯr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R9</td>
+            <td class="col-phon">bd</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R10</td>
+            <td class="col-phon">ẖrt-nṯr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R11</td>
+            <td class="col-phon">ḏd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R12</td>
+            <td class="col-phon">i3t</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R13</td>
+            <td class="col-phon">imnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R14</td>
+            <td class="col-phon">imnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R15</td>
+            <td class="col-phon">i3bt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R16</td>
+            <td class="col-phon">wḫ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R17</td>
+            <td class="col-phon">t3-wr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R18</td>
+            <td class="col-phon">t3-wr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R19</td>
+            <td class="col-phon">wꜣst</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R20</td>
+            <td class="col-phon">sšt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R21</td>
+            <td class="col-phon">sšt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R22</td>
+            <td class="col-phon">ḫm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R23</td>
+            <td class="col-phon">ḫm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R24</td>
+            <td class="col-phon">nit</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">R25</td>
+            <td class="col-phon">nit</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-S">
+        <div class="cat-header">
+            <span class="cat-letter">S</span>
+            <span class="cat-title">Crowns, dress, staves</span>
+            <span class="cat-count">46 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">S1</td>
+            <td class="col-phon">ḥḏt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S2</td>
+            <td class="col-phon">ḥḏt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S3</td>
+            <td class="col-phon">n</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S4</td>
+            <td class="col-phon">dšrt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S5</td>
+            <td class="col-phon">sḫmty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S6</td>
+            <td class="col-phon">sḫmty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S7</td>
+            <td class="col-phon">ḫprš</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S8</td>
+            <td class="col-phon">3tf</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S9</td>
+            <td class="col-phon">šwty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S10</td>
+            <td class="col-phon">mḏḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S11</td>
+            <td class="col-phon">wsḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S12</td>
+            <td class="col-phon">nbw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S13</td>
+            <td class="col-phon">nb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S14</td>
+            <td class="col-phon">ḥḏ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S14a</td>
+            <td class="col-phon">ḏꜥm</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S15</td>
+            <td class="col-phon">ṯḥn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S16</td>
+            <td class="col-phon">ṯḥnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S17</td>
+            <td class="col-phon">ṯḥnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S18</td>
+            <td class="col-phon">mnit</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S19</td>
+            <td class="col-phon">sḏꜣwty</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S20</td>
+            <td class="col-phon">ḫtm</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S21</td>
+            <td class="col-phon">iꜥꜥw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S22</td>
+            <td class="col-phon">sṯ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S23</td>
+            <td class="col-phon">dmḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S24</td>
+            <td class="col-phon">ṯs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S25</td>
+            <td class="col-phon">iꜥ3w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S26</td>
+            <td class="col-phon">šndyt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S27</td>
+            <td class="col-phon">mnḫt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S28</td>
+            <td class="col-phon">ḥbs</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S29</td>
+            <td class="col-phon">s</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S30</td>
+            <td class="col-phon">sf</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S31</td>
+            <td class="col-phon">smꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S32</td>
+            <td class="col-phon">siꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S33</td>
+            <td class="col-phon">ṯbt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S34</td>
+            <td class="col-phon">ꜥnḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S35</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S36</td>
+            <td class="col-phon">šwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S37</td>
+            <td class="col-phon">ḫw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S38</td>
+            <td class="col-phon">ḥqꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S39</td>
+            <td class="col-phon">ꜥwt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S40</td>
+            <td class="col-phon">wꜣs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S41</td>
+            <td class="col-phon">ḏꜥm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S42</td>
+            <td class="col-phon">sḫm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S43</td>
+            <td class="col-phon">mdw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S44</td>
+            <td class="col-phon">3ms</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">S45</td>
+            <td class="col-phon">nḫꜣḫꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-T">
+        <div class="cat-header">
+            <span class="cat-letter">T</span>
+            <span class="cat-title">Warfare, hunting, butchery</span>
+            <span class="cat-count">38 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">T1</td>
+            <td class="col-phon">mn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T2</td>
+            <td class="col-phon">sqr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T3</td>
+            <td class="col-phon">ḥḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T4</td>
+            <td class="col-phon">ḥḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T5</td>
+            <td class="col-phon">ḥḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T6</td>
+            <td class="col-phon">ḥḏḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T7</td>
+            <td class="col-phon">mdḥ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T7a</td>
+            <td class="col-phon">3qḥw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T8</td>
+            <td class="col-phon">tp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T8a</td>
+            <td class="col-phon">b3gsw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T9</td>
+            <td class="col-phon">pd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T9a</td>
+            <td class="col-phon">pd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T10</td>
+            <td class="col-phon">pd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T11</td>
+            <td class="col-phon">swn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T12</td>
+            <td class="col-phon">rwd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T13</td>
+            <td class="col-phon">rs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T14</td>
+            <td class="col-phon">ꜥ3m</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T15</td>
+            <td class="col-phon">ꜥ3m</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T16</td>
+            <td class="col-phon">ḫpš</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T17</td>
+            <td class="col-phon">wrrt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T18</td>
+            <td class="col-phon">šms</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T19</td>
+            <td class="col-phon">qs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T20</td>
+            <td class="col-phon">qs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T21</td>
+            <td class="col-phon">wꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T22</td>
+            <td class="col-phon">sn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T23</td>
+            <td class="col-phon">sn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T24</td>
+            <td class="col-phon">iḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T25</td>
+            <td class="col-phon">db3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T26</td>
+            <td class="col-phon">sḫt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T27</td>
+            <td class="col-phon">sḫt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T28</td>
+            <td class="col-phon">ẖr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T29</td>
+            <td class="col-phon">nmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T30</td>
+            <td class="col-phon">dmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T31</td>
+            <td class="col-phon">sšm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T32</td>
+            <td class="col-phon">sšm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T33</td>
+            <td class="col-phon">sšm</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T34</td>
+            <td class="col-phon">nm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">T35</td>
+            <td class="col-phon">nm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-U">
+        <div class="cat-header">
+            <span class="cat-letter">U</span>
+            <span class="cat-title">Agriculture, crafts, professions</span>
+            <span class="cat-count">41 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">U1</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U2</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U3</td>
+            <td class="col-phon">mꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U4</td>
+            <td class="col-phon">mꜣꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U5</td>
+            <td class="col-phon">mꜣꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U6</td>
+            <td class="col-phon">mr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U7</td>
+            <td class="col-phon">mr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U8</td>
+            <td class="col-phon">ḥn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U9</td>
+            <td class="col-phon">bdt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U10</td>
+            <td class="col-phon">it</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U11</td>
+            <td class="col-phon">ḥqꜣt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U12</td>
+            <td class="col-phon">ḥqꜣt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U13</td>
+            <td class="col-phon">šnꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U14</td>
+            <td class="col-phon">šnꜥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U15</td>
+            <td class="col-phon">tm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U16</td>
+            <td class="col-phon">biꜣ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U17</td>
+            <td class="col-phon">grg</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U18</td>
+            <td class="col-phon">grg</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U19</td>
+            <td class="col-phon">nw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U20</td>
+            <td class="col-phon">nw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U21</td>
+            <td class="col-phon">stp</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U22</td>
+            <td class="col-phon">mnḫ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U23</td>
+            <td class="col-phon">mr</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U24</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U25</td>
+            <td class="col-phon">ḥmt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U26</td>
+            <td class="col-phon">wb3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U27</td>
+            <td class="col-phon">wb3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U28</td>
+            <td class="col-phon">ḏ3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U29</td>
+            <td class="col-phon">ḏ3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U30</td>
+            <td class="col-phon">t3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U31</td>
+            <td class="col-phon">rtḥty</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U32</td>
+            <td class="col-phon">smn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U33</td>
+            <td class="col-phon">ti</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U34</td>
+            <td class="col-phon">ḫsf</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U35</td>
+            <td class="col-phon">ḫsf</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U36</td>
+            <td class="col-phon">ḥm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U37</td>
+            <td class="col-phon">ẖꜥq</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U38</td>
+            <td class="col-phon">mḫ3t</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U39</td>
+            <td class="col-phon">wṯs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U40</td>
+            <td class="col-phon">wṯs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">U41</td>
+            <td class="col-phon">tḫ</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-V">
+        <div class="cat-header">
+            <span class="cat-letter">V</span>
+            <span class="cat-title">Rope, fibre, baskets, bags</span>
+            <span class="cat-count">40 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">V1</td>
+            <td class="col-phon">šn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V2</td>
+            <td class="col-phon">st3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V3</td>
+            <td class="col-phon">st3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V4</td>
+            <td class="col-phon">wꜣ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V5</td>
+            <td class="col-phon">snṯ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V6</td>
+            <td class="col-phon">šs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V7</td>
+            <td class="col-phon">šn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V8</td>
+            <td class="col-phon">šn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V9</td>
+            <td class="col-phon">šnw</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V10</td>
+            <td class="col-phon">rn</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V11</td>
+            <td class="col-phon">dni</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V12</td>
+            <td class="col-phon">sšd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V13</td>
+            <td class="col-phon">ṯ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V14</td>
+            <td class="col-phon">ṯ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V15</td>
+            <td class="col-phon">iṯ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V16</td>
+            <td class="col-phon">s3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V17</td>
+            <td class="col-phon">s3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V18</td>
+            <td class="col-phon">s3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V19</td>
+            <td class="col-phon">mḏt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V20</td>
+            <td class="col-phon">mḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V21</td>
+            <td class="col-phon">mḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V22</td>
+            <td class="col-phon">mḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V23</td>
+            <td class="col-phon">mḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V24</td>
+            <td class="col-phon">wḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V25</td>
+            <td class="col-phon">wḏ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V26</td>
+            <td class="col-phon">ꜥd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V27</td>
+            <td class="col-phon">ꜥd</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V28</td>
+            <td class="col-phon">ḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V29</td>
+            <td class="col-phon">wꜣḥ</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V30</td>
+            <td class="col-phon">nb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V31</td>
+            <td class="col-phon">k</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V31a</td>
+            <td class="col-phon">k</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V32</td>
+            <td class="col-phon">msn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V33</td>
+            <td class="col-phon">šsr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V34</td>
+            <td class="col-phon">šsr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V35</td>
+            <td class="col-phon">šsr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V36</td>
+            <td class="col-phon">ḥn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V37</td>
+            <td class="col-phon">idr</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V38</td>
+            <td class="col-phon">wt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">V39</td>
+            <td class="col-phon">tit</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-W">
+        <div class="cat-header">
+            <span class="cat-letter">W</span>
+            <span class="cat-title">Vessels of stone & earthenware</span>
+            <span class="cat-count">26 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">W1</td>
+            <td class="col-phon">mrḥt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W2</td>
+            <td class="col-phon">b3s</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W3</td>
+            <td class="col-phon">ḥb</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W4</td>
+            <td class="col-phon">ḥb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W5</td>
+            <td class="col-phon">ẖry-ḥbt</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W6</td>
+            <td class="col-phon">wḥt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W7</td>
+            <td class="col-phon">3bt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W8</td>
+            <td class="col-phon">3bt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W9</td>
+            <td class="col-phon">Ẑnm</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W10</td>
+            <td class="col-phon">ḥnw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W10a</td>
+            <td class="col-phon">b3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W11</td>
+            <td class="col-phon">g</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W12</td>
+            <td class="col-phon">g</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W13</td>
+            <td class="col-phon">dšrt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W14</td>
+            <td class="col-phon">ḥs</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W15</td>
+            <td class="col-phon">qbb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W16</td>
+            <td class="col-phon">qbb</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W17</td>
+            <td class="col-phon">ḫnt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W18</td>
+            <td class="col-phon">ḫnt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W19</td>
+            <td class="col-phon">mi</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W20</td>
+            <td class="col-phon">irtt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W21</td>
+            <td class="col-phon">irp</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W22</td>
+            <td class="col-phon">ḥnqt</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W23</td>
+            <td class="col-phon">ḥnqt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W24</td>
+            <td class="col-phon">nw</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">W25</td>
+            <td class="col-phon">in</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-X">
+        <div class="cat-header">
+            <span class="cat-letter">X</span>
+            <span class="cat-title">Loaves & cakes</span>
+            <span class="cat-count">8 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">X1</td>
+            <td class="col-phon">t</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X2</td>
+            <td class="col-phon">t</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X3</td>
+            <td class="col-phon">t</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X4</td>
+            <td class="col-phon">fq3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X5</td>
+            <td class="col-phon">ꜥqw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X6</td>
+            <td class="col-phon">p3t</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X7</td>
+            <td class="col-phon">snw</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">X8</td>
+            <td class="col-phon">di</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-Y">
+        <div class="cat-header">
+            <span class="cat-letter">Y</span>
+            <span class="cat-title">Writing, games, music</span>
+            <span class="cat-count">9 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">Y1</td>
+            <td class="col-phon">mḏꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y2</td>
+            <td class="col-phon">mḏꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y3</td>
+            <td class="col-phon">sš</td>
+            <td class="col-type"><span class="type-badge badge-log">log</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y4</td>
+            <td class="col-phon">sš</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y5</td>
+            <td class="col-phon">mn</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y6</td>
+            <td class="col-phon">ib3</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y7</td>
+            <td class="col-phon">bnt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y8</td>
+            <td class="col-phon">sššt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Y1v</td>
+            <td class="col-phon">mḏꜣt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+<section class="cat-section" id="cat-Z">
+        <div class="cat-header">
+            <span class="cat-letter">Z</span>
+            <span class="cat-title">Strokes, hieratic, geometric</span>
+            <span class="cat-count">32 signs</span>
+        </div>
+        <table class="sign-table">
+            <thead>
+                <tr><th>Code</th><th>Phonetic Value</th><th>Type</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+            <td class="col-code">Z1</td>
+            <td class="col-phon">|</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z2</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z3</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z3a</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z4</td>
+            <td class="col-phon">y</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z4a</td>
+            <td class="col-phon">y</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z5</td>
+            <td class="col-phon">s</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z6</td>
+            <td class="col-phon">mwt</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z7</td>
+            <td class="col-phon">w</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z8</td>
+            <td class="col-phon">šn</td>
+            <td class="col-type"><span class="type-badge badge-det">det</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z9</td>
+            <td class="col-phon">sw3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z10</td>
+            <td class="col-phon">sw3</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z11</td>
+            <td class="col-phon">im</td>
+            <td class="col-type"><span class="type-badge badge-phon">phon</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15</td>
+            <td class="col-phon">wꜥ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15a</td>
+            <td class="col-phon">snwy</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16</td>
+            <td class="col-phon">mḏ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16a</td>
+            <td class="col-phon">ḏbꜥ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15b</td>
+            <td class="col-phon">ḫmt</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15c</td>
+            <td class="col-phon">fdw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15d</td>
+            <td class="col-phon">diw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15e</td>
+            <td class="col-phon">srsw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15f</td>
+            <td class="col-phon">sfḫ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15g</td>
+            <td class="col-phon">ḫmnw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15h</td>
+            <td class="col-phon">psḏ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z15i</td>
+            <td class="col-phon">wꜥ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16b</td>
+            <td class="col-phon">mꜣbꜣ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16c</td>
+            <td class="col-phon">ḥmw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16d</td>
+            <td class="col-phon">diw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16e</td>
+            <td class="col-phon">srsw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16f</td>
+            <td class="col-phon">sfḫ</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16g</td>
+            <td class="col-phon">ḫmnw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+<tr>
+            <td class="col-code">Z16h</td>
+            <td class="col-phon">psḏw</td>
+            <td class="col-type"><span class="type-badge badge-num">num</span></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="ref-footer">
+        LIBRETH ARCHIVE — GARDINER SIGN LIST REFERENCE &nbsp;·&nbsp;
+        816 CODES &nbsp;·&nbsp;
+        UNICODE 17.0 &amp; MdC COMPATIBLE &nbsp;·&nbsp;
+        RESONANCE INTEGRITY: NOMINAL
+    </footer>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// LIVE FILTER + SEARCH
+// ═══════════════════════════════════════
+
+// Compute stats
+const rows = document.querySelectorAll('.sign-table tbody tr');
+const typeCounts = {};
+rows.forEach(r => {
+    const badge = r.querySelector('.type-badge');
+    if (badge) {
+        const t = badge.textContent.trim();
+        typeCounts[t] = (typeCounts[t] || 0) + 1;
+    }
+});
+['phon','det','log','num'].forEach(t => {
+    const el = document.getElementById('stat-' + t);
+    if (el) el.textContent = typeCounts[t] || 0;
+});
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function updateResultCount() {
+    const visible = document.querySelectorAll('.sign-table tbody tr:not(.row-hidden)').length;
+    const el = document.getElementById('result-count');
+    el.textContent = visible < 816 ? visible + ' SHOWN' : '';
+}
+
+function applyFilters() {
+    const q = currentSearch.toUpperCase().trim();
+
+    // Show/hide rows
+    rows.forEach(row => {
+        const code = row.querySelector('.col-code')?.textContent.trim().toUpperCase() || '';
+        const phon = row.querySelector('.col-phon')?.textContent.trim().toUpperCase() || '';
+        const type = row.querySelector('.type-badge')?.textContent.trim() || '';
+
+        const typeMatch = currentFilter === 'all' || type === currentFilter;
+        const searchMatch = !q || code.includes(q) || phon.includes(q);
+
+        row.classList.toggle('row-hidden', !(typeMatch && searchMatch));
+    });
+
+    // Show/hide sections based on visible rows
+    document.querySelectorAll('.cat-section').forEach(sec => {
+        const visible = sec.querySelectorAll('tbody tr:not(.row-hidden)').length;
+        sec.classList.toggle('hidden', visible === 0);
+    });
+
+    updateResultCount();
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        applyFilters();
+    });
+});
+
+// Search input
+document.getElementById('code-search').addEventListener('input', (e) => {
+    currentSearch = e.target.value;
+    applyFilters();
+});
+
+// Initial count
+updateResultCount();
+</script>
+
+</body>
+</html>

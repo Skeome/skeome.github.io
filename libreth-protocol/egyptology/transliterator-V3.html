@@ -164,10 +164,23 @@
             </div>
         </div>
     </div>
+
+    <!-- Embedded Reference Window -->
+    <section class="reference-window-section">
+        <div class="reference-window-header">
+            <h3>Gardiner Sign Reference</h3>
+            <button class="reference-toggle-btn" onclick="toggleReferenceWindow()" aria-label="Toggle reference window">▼ Collapse</button>
+        </div>
+        <div id="reference-window-viewport" class="reference-window-viewport">
+            <iframe src="transliterator-V3-info.html" class="reference-iframe" title="Gardiner Sign Reference Table"></iframe>
+        </div>
+    </section>
+
     <section class="navigation">
         <div class="flex flex-wrap justify-center gap-6 mt-8">
                     <a href="hieroglyphs.html" class="nav-btn">Hieroglyph Training Module</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
+                    <a href="transliterator-V3-info.html" class="nav-btn">View Full Sign Page</a>
                 </div>
     </section>
 
@@ -2239,6 +2252,14 @@
                 btn.style.backgroundColor = '';
                 btn.style.borderColor = '';
             }, 2000);
+        }
+
+        // ─── Toggle Embedded Reference Window ──────────────────────────────────
+        function toggleReferenceWindow() {
+            const section = document.querySelector('.reference-window-section');
+            const btn = document.querySelector('.reference-toggle-btn');
+            section.classList.toggle('collapsed');
+            btn.textContent = section.classList.contains('collapsed') ? '▶ Expand' : '▼ Collapse';
         }
     </script>
 </body>
