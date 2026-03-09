@@ -71,19 +71,43 @@
     line-height: 1.5;
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .features-box li::before {
     content: "•";
     color: var(--gold);
     font-weight: bold;
-    margin-right: 0.8rem;
+    margin-right: 0;
     flex-shrink: 0;
 }
 
 .features-box strong {
     color: var(--text-bright);
     font-weight: 600;
+    word-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+    .features-box {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .features-box h3 {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .features-box li {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .features-box ul {
+        padding: 0;
+    }
 }
 
 /* Main Grid */
