@@ -8,25 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@400;600&family=VT323&display=swap" rel="stylesheet">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/wiki-style.css">
-    <link rel="stylesheet" href="css/transliterator-style.css">
+    <link rel="stylesheet" href="css/transliterator-V3-style.css">
 </head>
 <body>
 
     <div class="transliterator-container">
         <!-- Header -->
         <header class="transliterator-header">
-            <h1>Hieroglyphic Transliterator</h1>
-            <p>Convert Gardiner sign codes (e.g., A1, G43) or MdC alphabet (e.g., m, n, i) into copyable Unicode Egyptian Hieroglyphs. Built for the Egyptology Research Archive.</p>
+            <h1>Hieroglyphic Transliterator <span style="font-size:0.55em;opacity:0.6;letter-spacing:0.15em;">V1</span></h1>
+            <p>Convert Gardiner sign codes (e.g., A1, G43) or MdC alphabet (e.g., m, n, i) into copyable Unicode Egyptian Hieroglyphs. Unicode 17.0 verified. Built for the Egyptology Research Archive.</p>
             
             <div class="features-box">
-                <h3>This tool is built with a few powerful features specifically for Egyptology:</h3>
+                <h3>Unicode 17.0 Verified Sign Database</h3>
                 <ul>
-                    <li><strong>Transliteration Mapping:</strong> It recognizes academic transliteration symbols (e.g., ꜣ, ḫ, š, ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> will automatically pull the correct sign sequences.</li>
-                    <li><strong>Intelligent Parsing:</strong> It understands standard Gardiner codes (e.g., M17, G43) regardless of capitalization, as well as Manuel de Codage (MdC) uniliterals (e.g., typing i w t translates instantly to 𓇋𓅱𓏏).</li>
-                    <li><strong>Embedded Dictionary:</strong> It includes a dense dictionary of hundreds of the most common Gardiner signs (including all uniliterals, numbers, and common determinatives) directly in the file so it works instantly without needing external APIs.</li>
+                    <li><strong>Transliteration Mapping:</strong> Recognizes academic diacritics (ꜣ ꜥ ḥ ḫ ẖ š ṯ ḏ). Typing words like <em>nfr</em> or <em>bꜣ</em> pulls the correct sign sequences.</li>
+                    <li><strong>Sign-Type Tagging:</strong> The phonetic preview now labels each resolved sign as <em>Phon.</em> (phonogram), <em>Det.</em> (determinative), <em>Log.</em> (logogram), or <em>Num.</em> (numeral) — with intelligent grouping of compound sequences.</li>
+                    <li><strong>Intelligent Parsing:</strong> Understands Gardiner codes (M17, G43), MdC uniliterals (i w t), and phonetic word aliases (nfr, Htp, anx). Handles quadrat stacking with <code>:</code> and horizontal grouping with <code>*</code>.</li>
+                    <li><strong>Unicode 17.0 Database:</strong> Every sign verified against the Unicode 17.0 character block (U+13000–U+1342F) plus Format Controls (U+13430–U+1345F). Codepoints cross-checked against the official Unicode charts.</li>
                 </ul>
             </div>
         </header>
+
+        <!-- Phonetic Preview Panel -->
+        <div class="phonetic-preview-panel">
+            <div class="phonetic-preview-header">
+                <span class="phonetic-label">Phonetic Transliteration</span>
+                <span class="phonetic-hint">Egyptological romanization · sign type badges below</span>
+            </div>
+            <div id="phonetic-output" class="phonetic-output"><span class="output-placeholder">Phonetic preview will appear here…</span></div>
+            <div id="type-output" class="type-output"></div>
+        </div>
 
         <div class="transliterator-grid">
             <!-- Input Area -->
@@ -35,16 +46,22 @@
                     <label for="input-field">Input (Gardiner Codes or MdC)</label>
                     <button type="button" onclick="clearInput()">Clear</button>
                 </div>
-                <textarea id="input-field" placeholder="Enter codes separated by spaces or dashes...&#10;&#10;Examples:&#10;M17 G43 X1&#10;i w t&#10;A1 : n * w"></textarea>
+                <textarea id="input-field" placeholder="Enter codes separated by spaces or dashes...&#10;&#10;Examples:&#10;M17 G43 X1&#10;i w t&#10;A1 :n * w&#10;&#10;Or phonetic:nfr, imy, ra"></textarea>
             </div>
 
             <!-- Output Area -->
             <div class="output-panel">
-                <label for="output-field">Unicode Output</label>
-                <textarea id="output-field" class="hieroglyph" readonly placeholder="𓇋𓅱𓏏"></textarea>
+                <div class="output-header">
+                    <label for="format-controls">Unicode Hieroglyphs</label>
+                </div>
+                <div id="output-field" class="hieroglyph" role="textbox" aria-readonly="true" aria-label="Hieroglyph output"><span class="output-placeholder">𓇋𓅱𓏏</span></div>
                 
                 <!-- Action Bar -->
                 <div class="action-bar">
+                    <label class="format-checkbox-label">
+                        <input type="checkbox" id="format-controls" checked onchange="convertText()">
+                        Enable Stacking (Unicode 12.0+)
+                    </label>
                     <button id="copy-btn" type="button" onclick="copyToClipboard()">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                         <span id="copy-text">Copy Hieroglyphs</span>
@@ -89,21 +106,98 @@
                 <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂧</span> <span class="cheat-code">d (D46)</span></div>
                 <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆓</span> <span class="cheat-code">D (I10)</span></div>
             </div>
+
+            <!-- Expanded two-column reference:MdC phonetic aliases + key signs -->
+            <div class="ref-mode-grid" style="margin-top:1.5rem;">
+                <div class="ref-mode-block">
+                    <p class="ref-mode-title">Common Phonetic Aliases</p>
+                    <p class="ref-mode-hint">Type the code directly to auto-resolve the sign</p>
+                    <div class="cheat-sheet" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓄤</span><div class="cheat-phonetic-group"><span class="cheat-phon">nfr</span><span class="cheat-code">F35</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁦</span><div class="cheat-phonetic-group"><span class="cheat-phon">mꜣꜥt</span><span class="cheat-code">C10</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓋹</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜥnḫ</span><span class="cheat-code">S34</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓌀</span><div class="cheat-phonetic-group"><span class="cheat-phon">wꜣs</span><span class="cheat-code">S40</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊽</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḏd</span><span class="cheat-code">R11</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊹</span><div class="cheat-phonetic-group"><span class="cheat-phon">nṯr</span><span class="cheat-code">R8</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓄣</span><div class="cheat-phonetic-group"><span class="cheat-phon">ib</span><span class="cheat-code">F34</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇳</span><div class="cheat-phonetic-group"><span class="cheat-phon">rꜥ</span><span class="cheat-code">N5</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂓</span><div class="cheat-phonetic-group"><span class="cheat-phon">kꜣ</span><span class="cheat-code">D28</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅡</span><div class="cheat-phonetic-group"><span class="cheat-phon">bꜣ</span><span class="cheat-code">G29</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅜</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜣḫ</span><span class="cheat-code">G25</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊚</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḥtp</span><span class="cheat-code">R4</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆣</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḫpr</span><span class="cheat-code">L1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇓</span><div class="cheat-phonetic-group"><span class="cheat-phon">sw</span><span class="cheat-code">M23</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈋</span><div class="cheat-phonetic-group"><span class="cheat-phon">ḏw</span><span class="cheat-code">N26</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈌</span><div class="cheat-phonetic-group"><span class="cheat-phon">ꜣḫt</span><span class="cheat-code">N27</span></div></div>
+                    </div>
+                </div>
+                <div class="ref-mode-block">
+                    <p class="ref-mode-title">Key Determinatives</p>
+                    <p class="ref-mode-hint">Silent classifiers — add after phonograms</p>
+                    <div class="cheat-sheet" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀀</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">man</span><span class="cheat-code">A1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁐</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">woman</span><span class="cheat-code">B1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀭</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">god</span><span class="cheat-code">A40</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓃢</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">Anubis</span><span class="cheat-code">E15</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅽</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">bꜣ-bird</span><span class="cheat-code">G53</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓅾</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">plucked bird</span><span class="cheat-code">G54</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏤</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">stroke</span><span class="cheat-code">Z1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏥</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">plural</span><span class="cheat-code">Z2</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓈒</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">sand/many</span><span class="cheat-code">N33</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓏛</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">scroll</span><span class="cheat-code">Y1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓊖</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">town</span><span class="cheat-code">O49</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓇯</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">sky</span><span class="cheat-code">N1</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓁿</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">weeping</span><span class="cheat-code">D9</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓂸</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">phallus</span><span class="cheat-code">D52</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓀿</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">mummy</span><span class="cheat-code">A54</span></div></div>
+                        <div class="cheat-item"><span class="cheat-glyph hieroglyph">𓆙</span><div class="cheat-phonetic-group"><span class="cheat-phon" style="font-size:0.9rem;">serpent</span><span class="cheat-code">I14</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign-type legend -->
+            <div class="type-legend">
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:var(--gold);"></div><span style="color:var(--gold);">Phon.</span> — Phonogram:consonantal sound value</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:var(--cyan);"></div><span style="color:var(--cyan);">Det.</span> — Determinative:silent semantic classifier</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:#c9a0dc;"></div><span style="color:#c9a0dc;">Log.</span> — Logogram:word-sign with fixed reading</div>
+                <div class="type-legend-item"><div class="type-legend-dot" style="background:#90ee90;"></div><span style="color:#90ee90;">Num.</span> — Numeral:counting / quantity sign</div>
+            </div>
         </div>
     </div>
+
+    <!-- Embedded Reference Window -->
+    <section class="reference-window-section">
+        <div class="reference-window-header">
+            <h3>Gardiner Sign Reference</h3>
+            <button class="reference-toggle-btn" onclick="toggleReferenceWindow()" aria-label="Toggle reference window">▼ Collapse</button>
+        </div>
+        <div id="reference-window-viewport" class="reference-window-viewport">
+            <iframe src="transliterator-info.html" class="reference-iframe" title="Gardiner Sign Reference Table"></iframe>
+        </div>
+    </section>
+
     <section class="navigation">
         <div class="flex flex-wrap justify-center gap-6 mt-8">
                     <a href="hieroglyphs.html" class="nav-btn">Hieroglyph Training Module</a>
                     <a href="wiki/index.html" class="nav-btn">Access Egyptology Wiki</a>
-                    <a href="transliterator-V2.html" class="nav-btn">Access Version 2</a>
+                    <a href="transliterator-info.html" class="nav-btn">View Full Sign Page</a>
+                    <a href="transliterator-V2.html" class="nav-btn">Access Extended Version</a>
                 </div>
     </section>
 
     <script>
         // ─── Egyptological phonetic → MdC normalisation ─────────────────────────
         // Maps every form a user might type or paste to its MdC ASCII equivalent.
+        // Covers precomposed NFC forms, NFD combining-diacritic forms, half-ring
+        // substitutes, capital variants, and informal dotted/alternate forms.
+        // Sorted longest-first so multi-codepoint sequences match before base chars.
+        //
+        //   ꜣ aleph  (G1)  → A    ꜥ ayin  (D36) → a
+        //   ḥ h-dot  (V28) → H    ḫ h-breve (Aa1) → x    ẖ H-line (F32) → X
+        //   š s-caron(N37) → S    ṯ t-line  (V13) → T    ḏ d-line  (I10) → D
+        //
         const phoneticToMdc = [
-            // ── NFD: base + combining diacritic (match BEFORE precomposed) ───────
+            // ── NFD:base + combining diacritic (match BEFORE precomposed) ───────
             ['h\u0323', 'H'],  // h + combining dot below → ḥ
             ['H\u0323', 'H'],
             ['h\u032E', 'x'],  // h + combining breve below → ḫ
@@ -144,165 +238,1972 @@
         ];
 
         // ─── Manuel de Codage → Gardiner code ────────────────────────────────────
-        // Comprehensive mapping including 25 uniliterals and 150+ multi-letter codes
+        // Sources:Buurman et al. (1988) Manuel de Codage; CCER 1997 online edition
+        //          (catchpenny.org/codage — Appendices B & C); Rosmorduc JSesh docs.
+        //
+        // THREE TIERS:
+        //   1. 25 standard uniliteral MdC single-letter codes (A-D, case-sensitive)
+        //   2. Official MdC phonetic multi-letter aliases for the most common bi/triliterals
+        //      (e.g. nfr, Htp, anx, wAs). These are the "canonical" phonetic codes from
+        //      Appendix C of the Manuel de Codage — only one sign per phonetic value.
+        //   3. Widely-used common variant aliases accepted by JSesh, WikiHiero, etc.
+        //
+        // NOTE:Only one sign maps to each code. Where the CCER chose the "most frequent"
+        // sign for an ambiguous phonetic value, we follow that choice exactly.
         const mdcMap = {
             // ── 25 standard uniliterals (case-sensitive, per MdC §2) ──────────────
-            'A': 'G1',   // ꜣ  Egyptian vulture
-            'i': 'M17',  // i  reed
-            'y': 'Z4',   // y  two strokes
-            'a': 'D36',  // ꜥ  forearm
-            'w': 'G43',  // w  quail chick
-            'b': 'D58',  // b  foot
-            'p': 'Q3',   // p  stool
-            'f': 'I9',   // f  horned viper
-            'm': 'G17',  // m  owl
-            'n': 'N35',  // n  water ripple
-            'r': 'D21',  // r  mouth
-            'h': 'O4',   // h  reed shelter
-            'H': 'V28',  // ḥ  twisted wick
-            'x': 'Aa1',  // ḫ  placenta
-            'X': 'F32',  // ẖ  belly
-            's': 'S29',  // s  folded cloth
-            'z': 'O34',  // z  door bolt
-            'S': 'N37',  // š  pool
-            'q': 'N29',  // q  hill slope
-            'k': 'V31',  // k  basket with handle
-            'g': 'W11',  // g  stand for jug
-            't': 'X1',   // t  bread loaf
-            'T': 'V13',  // ṯ  tethering rope
-            'd': 'D46',  // d  hand
-            'D': 'I10',  // ḏ  cobra
+            'A':'G1',   // ꜣ  Egyptian vulture
+            'i':'M17',  // i  reed
+            'y':'Z4',   // y  two strokes
+            'a':'D36',  // ꜥ  forearm
+            'w':'G43',  // w  quail chick
+            'b':'D58',  // b  foot
+            'p':'Q3',   // p  stool
+            'f':'I9',   // f  horned viper
+            'm':'G17',  // m  owl — PRIMARY phonogram for m; Aa15 (ribs, 𓐝) is a secondary variant (never default)
+            'n':'N35',  // n  water ripple
+            'r':'D21',  // r  mouth
+            'h':'O4',   // h  reed shelter
+            'H':'V28',  // ḥ  twisted wick
+            'x':'Aa1',  // ḫ  placenta (MdC x = ḫ; Aa1 phonemogram confirmed Unicode 17.0 U+1340D)
+            'X':'F32',  // ẖ  belly (MdC X = ẖ with bar below; F32 logogram ẖ.t, Unicode 17.0 U+13121 — strictly distinct from ḫ/Aa1)
+            's':'S29',  // s  folded cloth
+            'z':'O34',  // z  door bolt
+            'S':'N37',  // š  pool
+            'q':'N29',  // q  hill slope
+            'k':'V31',  // k  basket with handle
+            'g':'W11',  // g  stand for jug
+            't':'X1',   // t  bread loaf
+            'T':'V13',  // ṯ  tethering rope
+            'd':'D46',  // d  hand
+            'D':'I10',  // ḏ  cobra
 
-            // ── Multi-letter MdC biliterals and longer codes ──────────────────────
-            'aA':  'O29',  'ab':  'D59',  'aq':  'G35',  'aHA': 'D34',  'apr': 'Aa20',
-            'awt': 'S39',  'Aw':  'F40',  'Ax':  'G25',  'Abd': 'N11',  'Axt': 'N27',
-            'bA':  'G29',  'bAk': 'G5',   'bit': 'L2',   'bH':  'F18',  'bnr': 'M30',
-            'bz':  'K5',   'Db':  'G22',  'dSr': 'G27',  'Dba': 'D50',  'Dd':  'R11',
-            'DD':  'I11',  'DHwty': 'G26','Dr':  'M36',  'Dsr': 'D41',  'dwA': 'N14',
-            'dwAt':'N15',  'Dw':  'N26',  'fnD': 'D19',  'gb':  'G50',  'gH':  'D56',
-            'gm':  'G28',  'HA':  'M16',  'HAt': 'F4',   'Hfn': 'I8',   'HH':  'C11',
-            'Hm':  'U36',  'Hn':  'M2',   'Hp':  'Aa5',  'Hr':  'D2',   'Htp': 'R4',
-            'ia':  'D55',  'iaH': 'N11',  'ib':  'F34',  'ibi': 'A32',  'idr': 'V37',
-            'im':  'Z11',  'in':  'K1',   'inb': 'O36',  'inpw':'C12',  'ir':  'D4',
-            'irt': 'D12',  'isw': 'F44',  'it':  'M33',  'iw':  'N18',  'iwa': 'F44',
-            'iz':  'M40',  'kA':  'D28',  'km':  'I6',   'kfA': 'F22',  'l':   'E23',
-            'mA':  'U1',   'mAa': 'Aa11', 'mAat':'C10',  'mAi': 'E22',  'mi':  'W19',
-            'mm':  'G18',  'mnD': 'D27',  'mniw':'A33',  'ms':  'F31',  'msi': 'B3',
-            'mt':  'D52',  'mwt': 'G14',  'nD':  'Aa27', 'nDs': 'G37',  'nfr': 'F35',
-            'nH':  'G21',  'nTr': 'R8',   'ns':  'F20',  'nSmt':'K6',   'pt':  'N1',
-            'pA':  'G40',  'pH':  'F22',  'pHty':'F22',  'pXr': 'F46',  'pzD': 'N9',
-            'qAb': 'F46',  'qd':  'Aa28', 'qiz': 'A38',  'qn':  'Aa8',  'ra':  'N5',
-            'rd':  'D54',  'rdi': 'X8',   'rmi': 'D9',   'rnp': 'M4',   'rw':  'E23',
-            'rxyt':'G23',  'sA':  'G38',  'sAH': 'D61',  'sAb': 'E17',  'sbk': 'I4',
-            'sd':  'F33',  'sDm': 'F21',  'Sd':  'F30',  'sm':  'M21',  'smA': 'F36',
-            'snD': 'G54',  'spAt':'N24',  'spr': 'F42',  'Sps': 'A50',  'Spsi':'A51',
-            'sr':  'E31',  'srqt':'L7',   'stX': 'E20',  'sti': 'F29',  'Styt':'S26',
-            'sw':  'M23',  'Sw':  'H6',   'sxt': 'M20',  'Sma': 'M26',  'Smsw':'T18',
-            'snb': 'G34',  'tp':  'D1',   'tyw': 'G4',   'txn': 'O25',  'wAD': 'M13',
-            'wab': 'D60',  'wAs': 'S40',  'wD':  'V24',  'wDAt':'D10',  'wHm': 'F25',
-            'wn':  'E34',  'wr':  'G36',  'wsr': 'F8',   'wSA': 'G42',  'xA':  'M12',
-            'xAst':'N25',  'xn':  'G41',  'xpr': 'L1',   'xpS': 'F23',  'xft': 'A13',
-            'zA':  'G39',  'zAb': 'E14',  'zH':  'O22',  'zm':  'M21',  'zmA': 'F36',
-            'zmyt':'N25',  'znb': 'E29',  'znD': 'G54',  'zSn': 'M9',   'zzmt':'E6'
+            // ── MdC official phonetic codes for biliterals ────────────────────────
+            // From CCER Appendix B/C (catchpenny.org/codage) and MdC-88 sign tables.
+            // Ordered alphabetically by phonetic code for maintainability.
+            'aA':'O29',  // ꜥꜣ  large wooden column
+            'ab':'D59',  // ꜥb  foot variant (ab)
+            'aq':'G35',  // ꜥq  cormorant
+            'aHA':'D34',  // ꜥḥꜣ spear
+            'apr':'Aa20', // ꜥpr equip
+            'awt':'S39',  // ꜥwt crook (flock)
+            'Aw':'F40',  // ꜣw  extending spine
+            'Ax':'G25',  // ꜣḫ  crested ibis
+            'Abd':'N11',  // ꜣbd month (crescent moon)
+            'Axt':'N27',  // ꜣḫt horizon (Akhet)
+            'bA':'G29',  // bꜣ  jabiru stork (ba-soul)
+            'bAk':'G5',   // bꜣk falcon (hawk; used as Horus variant in some encodings)  ← JSesh
+            'bit':'L2',   // bit bee (king of Lower Egypt)
+            'bH':'F18',  // bḥ  animal belly (variant)
+            'bnr':'M30',  // bnr sweet (root)
+            'bz':'K5',   // bz  bolti fish
+            'Db':'G22',  // ḏb  hoopoe
+            'dSr':'G27',  // dšr flamingo (red)
+            'Dba':'D50',  // ḏbꜥ finger
+            'Dd':'R11',  // ḏd  djed pillar (stable, endure)
+            'DD':'I11',  // ḏḏ  two cobras
+            'DHwty':'G26',// Ḏḥwty Thoth (ibis on standard)
+            'Dr':'M36',  // Dr  bundle of flax (also "since")
+            'Dsr':'D41',  // ḏsr forearm palm-down (sacred, holy)
+            'dwA':'N14',  // dwꜣ star (adoration, morning)
+            'dwAt':'N15',  // dwꜣt star in circle (Duat, necropolis)
+            'Dw':'N26',  // ḏw  two hills (mountain)
+            'fnD':'D19',  // fnḏ nose
+            'gb':'G50',  // gb  two plovers (Geb)
+            'gH':'D56',  // gḥ  leg (variant)
+            'gm':'G28',  // gm  black ibis (find)
+            'HA':'M16',  // ḥꜣ  clump of papyrus (behind, around)
+            'HAt':'F4',   // ḥꜣt forepart of lion (fore, first)
+            'Hfn':'I8',   // ḥfn tadpole (100,000)
+            'HH':'C11',  // ḥḥ  seated Heh (million)
+            'Hm':'U36',  // ḥm  washing club (majesty, slave)
+            'Hn':'M2',   // ḥn  plant (hoe — U8 also; most common is M2 per CCER)
+            'Hp':'Aa5',  // ḥp  Apis / part of ship (law, rule)
+            'Hr':'D2',   // ḥr  face
+            'Htp':'R4',   // ḥtp bread on mat (offering, peace, rest)
+            'ia':'D55',  // iꜥ  legs backward (also iw)
+            'iaH':'N11',  // iꜥḥ crescent moon (moon)
+            'ib':'F34',  // ib  heart
+            'ibi':'A32',  // ibi man dancing (dance)
+            'idr':'V37',  // idr bandage (herd)
+            'im':'Z11',  // im  crossed planks (imy — who is in)
+            'in':'K1',   // in  tilapia fish (bring)
+            'inb':'O36',  // inb wall (fortress)
+            'inpw':'C12',  // inpw Anubis (lying jackal)
+            'ir':'D4',   // ir  eye (do, make)
+            'irt':'D12',  // irt pupil (eye, milk)
+            'isw':'F44',  // isw reeds (equivalent, reward)
+            'it':'M33',  // it  grains of wheat (barley, father)
+            'iw':'N18',  // iw  sandbank (island; also "the" in Late Egyptian)
+            'iwa':'F44',  // iwꜥ reeds — heir
+            'iz':'M40',  // iz  bundle of reeds (tomb)
+            'kA':'D28',  // kꜣ  arms raised (ka-soul)
+            'km':'I6',   // km  crocodile skin (black — Kemet)
+            'kfA':'F22',  // kfꜣ hind leg
+            'l':'E23',  // l   lion recumbent (rare MdC code; = rw)
+            'mA':'U1',   // mꜣ  sickle (see, true)
+            'mAa':'Aa11', // mꜣꜥ true, just (Maat consonants)
+            'mAat':'C10',  // mꜣꜥt Maat seated goddess
+            'mAi':'E22',  // mꜣi lion (walking)
+            'mi':'W19',  // mi  milk jug (like, as)
+            'mm':'G18',  // mm  two owls
+            'mnD':'D27',  // mnḏ breast
+            'mniw':'A33',  // mniw herdsman (man with stick)
+            'ms':'F31',  // ms  three fox skins (born of, bring forth)
+            'msi':'B3',   // msi woman giving birth
+            'mt':'D52',  // mt  phallus (dead, seed)
+            'mwt':'G14',  // mwt vulture (mother)
+            'nD':'Aa27', // nḏ  unknown sign (ask, protect)
+            'nDs':'G37',  // nḏs small bird (small, poor)
+            'nfr':'F35',  // nfr windpipe + heart (good, beautiful, perfect)
+            'nH':'G21',  // nḥ  guinea fowl
+            'nTr':'R8',   // nṯr flag on pole (god)
+            'ns':'F20',  // ns  animal nose (tongue)
+            'nSmt':'K6',   // nšmt oxyrhynchus fish
+            'pt':'N1',   // pt  sky (heaven)
+            'pA':'G40',  // pꜣ  pintail duck flying (the, this)
+            'pH':'F22',  // pḥ  hind leg (reach, back part) — variant of kfA
+            'pHty':'F22',  // pḥty strength (two legs sign set)
+            'pXr':'F46',  // pḫr intestines (go around, reverse)
+            'pzD':'N9',   // psḏ moon disk (shine, back of spine)
+            'qAb':'F46',  // qꜣb intestines (double, fold)
+            'qd':'Aa28', // qd  builder's tool (build, character, shape)
+            'qiz':'A38',  // qiz man with two emblems (Cusae)
+            'qn':'Aa8',  // qn  irrigation canal? (brave, complete)
+            'ra':'N5',   // rꜥ  sun disk (Re, day)     ← canonical per CCER
+            'rd':'D54',  // rd  walking legs (go, leg)
+            'rdi':'X8',   // rdi conical loaf (give — rdi is MdC alias for di/X8)
+            'rmi':'D9',   // rmi weeping eye (weep)
+            'rnp':'M4',   // rnp palm branch with notches (year, rejuvenate)
+            'rw':'E23',  // rw  recumbent lion (lion)
+            'rxyt':'G23',  // rḫyt hoopoe variant (common people)
+            's':'S29',  // s   folded cloth (already in uniliterals; alias kept for disambiguation)
+            'sA':'G38',  // sꜣ  goose (son of; also protective amulet)
+            'sAH':'D61',  // sꜣḥ sandaled foot (Orion, dignified)
+            'sAb':'E17',  // sꜣb lying jackal on shrine (Anubis epithet, dignitary)
+            'sbk':'I4',   // sbk crocodile with curved tail (Sobek)
+            'sd':'F33',  // sd  tail
+            'sDm':'F21',  // sḏm ear of animal (hear, Sekhmet)
+            'Sd':'F30',  // šd  vessel with liquid (nourish)
+            'sm':'M21',  // sm  plant (sem-priest robes)
+            'smA':'F36',  // smꜣ lung (unite)
+            'snD':'G54',  // snḏ plucked bird (fear)
+            'spAt':'N24',  // sp3t nome (region, district)
+            'spr':'F42',  // spr rib (reach, petition)
+            'Sps':'A50',  // špsi noble on chair (revered)
+            'Spsi':'A51',  // špsi noble with flagellum
+            'sr':'E31',  // sr  ram (noble, official)
+            'srqt':'L7',   // srqt scorpion (Serqet)
+            'stX':'E20',  // stš Seth animal (Set)
+            'sti':'F29',  // sti belly with teats (pour out, shoot)
+            'Styt':'S26',  // šṯyt apron/šendyt-kilt
+            'sw':'M23',  // sw  sedge (he, him; king of Upper Egypt)
+            'Sw':'H6',   // šw  feather (Shu, light, empty)
+            'sxt':'M20',  // sḫt field of reeds (field)
+            'Sma':'M26',  // šmꜥ sedge without root (Upper Egypt)
+            'Smsw':'T18',  // šmsw crook with package (follower, eldest)
+            'snb':'G34',  // snb ostrich (healthy, health)
+            'tp':'D1',   // tp  head (upon, first, head)
+            'tyw':'G4',   // tyw buzzard
+            'txn':'O25',  // tḫn obelisk (Heliopolis, Luxor)
+            'wAD':'M13',  // wꜣḏ papyrus scepter (green, fresh, papyrus)
+            'wab':'D60',  // wꜥb pure foot (pure, priest)
+            'wAs':'S40',  // wꜣs was-scepter (power, dominion) ← canonical MdC alias
+            'wD':'V24',  // wḏ  cord on stick (command, decree)
+            'wDAt':'D10',  // wḏꜣt the eye of Horus (sound eye)
+            'wHm':'F25',  // wḥm hind-leg/hide (repeat, again)
+            'wn':'E34',  // wn  hare (be, exist, open)
+            'wr':'G36',  // wr  swallow (great, elder)
+            'wsr':'F8',   // wsr neck of animal (mighty, powerful)
+            'wSA':'G42',  // wšꜣ chick (hungry)
+            'xA':'M12',  // ḫꜣ  lotus with stalk (1000, thousand)
+            'xAst':'N25',  // ḫꜣst foreign hill (desert, foreign land)
+            'xn':'G41',  // ḫn  pintail alighting
+            'xpr':'L1',   // ḫpr scarab beetle (become, Khepri)
+            'xpS':'F23',  // ḫpš foreleg (strong arm, scimitar)
+            'xft':'A13',  // ḫfty enemy (bound man)
+            'zA':'G39',  // zꜣ  pintail duck (son; also son-sign per CCER)
+            'zAb':'E14',  // zꜣb dog (dignitary, judge)
+            'zH':'O22',  // zḥ  booth with pole (audience hall, tent)
+            'zm':'M21',  // zm  (variant alias for sm — plant)
+            'zmA':'F36',  // zmꜣ lung/unite (alias for smA)
+            'zmyt':'N25',  // zmyt desert (variant; foreign land)
+            'znb':'E29',  // znb oryx
+            'znD':'G54',  // znḏ plucked bird (fear — variant of snD)
+            'zSn':'M9',   // zšn lotus flower
+            'zzmt':'E6',   // zzmt horse (var. ꜣbd)
         };
 
-        // Complete Gardiner Dictionary (768 signs from official Gardiner's Sign List)
+        // MdC letter → canonical Egyptological phonetic display character
+        const mdcToPhonetic = {
+            'A':'ꜣ', 'i':'i', 'y':'y',  'a':'ꜥ', 'w':'w',
+            'b':'b', 'p':'p', 'f':'f',  'm':'m', 'n':'n',
+            'r':'r', 'h':'h', 'H':'ḥ',  'x':'ḫ', 'X':'ẖ',
+            's':'s', 'z':'z', 'S':'š',  'q':'q', 'k':'k',
+            'g':'g', 't':'t', 'T':'ṯ',  'd':'d', 'D':'ḏ'
+        };
+
+        // ─── Sign-type classification (Unicode 17.0 + Gardiner/Allen verified) ──
+        // Types:'phon' = phonogram (has consonantal value)
+        //        'det'  = determinative/classifier (semantic only, silent)
+        //        'log'  = logogram (word-sign with specific reading)
+        //        'num'  = numeral sign
+        // Source:Unicode 17.0 annotations (• phonemogram / • classifier / • logogram)
+        //         cross-referenced with Allen (2010) Middle Egyptian sign list.
+        const gardinerType = {
+            // ── 25 uniliterals:all phonemic ──────────────────────────────────────
+            'G1':'phon','M17':'phon','M17a':'phon','Z4':'phon','Z4a':'phon',
+            'D36':'phon','G43':'phon','G43a':'phon','D58':'phon','Q3':'phon',
+            'I9':'phon','I9a':'phon','G17':'phon','N35':'phon','D21':'phon',
+            'O4':'phon','V28':'phon','Aa1':'phon','F32':'phon','S29':'phon',
+            'O34':'phon','N37':'phon','N29':'phon','V31':'phon','V31a':'phon',
+            'W11':'phon','X1':'phon','V13':'phon','D46':'phon','I10':'phon','I10a':'phon',
+            // ── Key biliterals / triliterals ─────────────────────────────────────
+            'F35':'phon','D28':'phon','D54':'phon','D55':'phon','S34':'phon',
+            'R4':'phon','R8':'phon','N5':'phon','N27':'phon','N26':'phon',
+            'S40':'phon','R11':'phon','G29':'phon','L1':'phon','G25':'phon',
+            'G36':'phon','M23':'phon','G26':'phon','G26a':'phon','F34':'phon',
+            'M40':'phon','V9':'log','V10':'log','D4':'phon','D10':'log',
+            'D19':'phon','L2':'log','E34':'phon','G39':'phon','G40':'phon',
+            'F22':'phon','F23':'phon','F36':'phon','G14':'phon','G16':'log',
+            'G27':'phon','G28':'phon','G37':'det','G38':'phon','G50':'phon',
+            'G51':'phon','G52':'log','G53':'log','G54':'det',
+            'H5':'phon','H6':'phon','H8':'det',
+            'I8':'phon','I11':'phon','I12':'det','I14':'det','L7':'det',
+            'M1':'det','M2':'phon','M3':'phon','M4':'phon','M9':'phon',
+            'M13':'phon','M16':'phon','M20':'det','M21':'phon','M29':'phon',
+            'M33':'phon','M36':'phon','N1':'det','N4':'det','N6':'det',
+            'N8':'phon','N14':'phon','N15':'log','N16':'phon','N17':'phon',
+            'N18':'phon','N21':'phon','N22':'phon','N24':'phon','N25':'phon',
+            'N27':'phon','N28':'phon','N30':'phon','N33':'det','N34':'det',
+            'N35a':'phon','N36':'phon','N40':'phon','N41':'det',
+            'O1':'phon','O6':'det','O7':'det','O11':'det','O23':'log',
+            'O24':'log','O25':'log','O28':'phon','O29':'phon','O36':'det',
+            'O47':'det','O49':'det','O50':'det',
+            'P1':'det','P5':'phon','P11':'log',
+            'Q1':'det','Q6':'det','Q7':'det',
+            'R5':'log','R7':'det','R10':'det','R12':'det','R13':'det','R14':'det',
+            'S1':'det','S2':'det','S3':'det','S5':'det','S7':'det','S8':'det',
+            'S9':'det','S26':'det','S27':'det','S28':'det','S38':'phon',
+            'S42':'phon','S43':'phon','S44':'det','S45':'det',
+            'T1':'phon','T2':'phon','T3':'phon','T9':'phon','T11':'phon',
+            'T13':'phon','T14':'det','T21':'phon','T22':'phon','T26':'det',
+            'U1':'phon','U6':'phon','U19':'phon','U21':'phon','U22':'phon',
+            'U28':'phon','U36':'phon','U38':'log',
+            'V1':'phon','V5':'phon','V6':'phon','V7':'phon','V9':'log',
+            'V10':'log','V12':'phon','V16':'phon','V20':'phon','V24':'phon',
+            'V28':'phon','V29':'phon','V30':'phon','V31':'phon','V39':'log',
+            'W3':'phon','W10':'phon','W14':'phon','W19':'phon','W22':'phon',
+            'W24':'phon','W25':'phon',
+            'X8':'phon',
+            'Y1':'det','Y1v':'det','Y1a':'log','Y3':'log','Y5':'phon',
+            'Z1':'det','Z2':'det','Z3':'det','Z3a':'det','Z4':'phon',
+            'Z7':'phon','Z9':'phon','Z11':'phon',
+            // Numerals
+            'Z15':'num','Z15a':'num','Z15b':'num','Z15c':'num','Z15d':'num',
+            'Z15e':'num','Z15f':'num','Z15g':'num','Z15h':'num','Z15i':'num',
+            'Z16':'num','Z16a':'num','Z16b':'num','Z16c':'num','Z16d':'num',
+            'Z16e':'num','Z16f':'num','Z16g':'num','Z16h':'num',
+            // Aa class
+            'Aa1':'phon','Aa5':'phon','Aa8':'phon','Aa11':'phon','Aa13':'phon',
+            'Aa14':'phon','Aa15':'phon','Aa16':'phon','Aa17':'phon','Aa20':'phon',
+            'Aa21':'phon','Aa27':'phon','Aa28':'phon',
+            // Deity figures:all logographic
+            'C1':'log','C2':'log','C2a':'log','C2b':'log','C2c':'log',
+            'C3':'log','C4':'log','C5':'log','C6':'log','C7':'log','C8':'log',
+            'C9':'log','C10':'log','C10a':'log','C11':'log','C12':'log',
+            'C13':'log','C14':'log','C15':'log','C16':'log','C17':'log',
+            'C18':'log','C19':'log','C20':'log','C21':'log','C22':'log',
+            'C23':'log','C24':'log',
+            // Man/woman determinatives
+            'A1':'det','A2':'det','A3':'det','A4':'det','A5':'det','A5a':'det',
+            'A6':'det','A6a':'det','A6b':'det','A7':'det','A8':'det','A9':'det',
+            'A10':'det','A13':'det','A14':'det','A14a':'det','A15':'det',
+            'A16':'det','A17':'det','A17a':'det','A17b':'det','A18':'det','A19':'det',
+            'A20':'det','A21':'det','A22':'log','A23':'log','A24':'det',
+            'A25':'det','A26':'det','A29':'det','A30':'det','A32':'det',
+            'A33':'det','A34':'det','A35':'det','A36':'det','A37':'det',
+            'A40':'det','A40a':'det','A41':'log','A42':'log','A42a':'log',
+            'A43':'log','A43a':'log','A44':'log','A45':'log','A45a':'log',
+            'A46':'log','A47':'det','A48':'det','A49':'det','A50':'det',
+            'A51':'det','A52':'det','A53':'det','A54':'det','A55':'det',
+            'B1':'det','B2':'det','B3':'det','B4':'det','B5':'det','B6':'det','B7':'det',
+            // Animals:mostly phonemic when used as phonograms
+            'E1':'phon','E2':'phon','E7':'phon','E15':'det','E16':'det',
+            'E17':'det','E20':'log','E22':'phon','E23':'phon','E25':'log',
+            'E26':'log','E32':'log','E33':'det',
+            // ═══════════════════════════════════════════════════════════════
+            // EXTENDED CLASSIFICATION — all remaining Gardiner codes
+            // Cross-referenced against Gardiner (1957), Faulkner (1962),
+            // Allen (2014) and Unicode 17.0 Hieroglyph Chart annotations
+            // ═══════════════════════════════════════════════════════════════
+            // A:human figures (extended)
+            'A11':'det','A12':'det','A27':'phon','A28':'phon','A31':'det',
+            'A38':'det','A39':'det','A59':'det',
+            // Aa:unclassified signs (all phonograms)
+            'Aa2':'phon','Aa3':'phon','Aa4':'phon','Aa6':'phon','Aa7':'phon',
+            'Aa9':'phon','Aa10':'phon','Aa12':'phon','Aa18':'phon','Aa19':'phon',
+            'Aa22':'phon','Aa23':'phon','Aa24':'phon','Aa25':'phon','Aa26':'phon',
+            'Aa29':'phon','Aa30':'phon','Aa31':'phon',
+            // D:body parts (phonograms unless noted)
+            'D1':'phon','D2':'phon','D3':'phon','D5':'phon','D6':'phon',
+            'D7':'det', 'D8':'phon','D9':'det', 'D11':'phon','D12':'phon',
+            'D13':'phon','D14':'phon','D15':'phon','D16':'phon','D17':'phon',
+            'D18':'phon','D20':'phon','D22':'phon','D23':'phon','D24':'phon',
+            'D25':'phon','D26':'phon','D27':'phon','D27a':'phon','D29':'phon',
+            'D30':'phon','D31':'phon','D32':'phon','D33':'phon','D34':'phon',
+            'D34a':'phon','D35':'phon','D37':'phon','D38':'phon','D39':'phon',
+            'D40':'phon','D41':'phon','D42':'phon','D43':'phon','D44':'phon',
+            'D45':'phon','D46a':'phon','D47':'phon','D48':'phon','D49':'phon',
+            'D50':'phon','D51':'phon','D52':'phon','D53':'phon','D56':'phon',
+            'D57':'phon','D59':'phon','D60':'phon','D61':'phon','D62':'phon',
+            'D63':'phon',
+            // E:mammals (extended)
+            'E3':'phon','E4':'det','E5':'phon','E6':'det','E8':'det',
+            'E9':'phon','E9a':'phon','E10':'phon','E11':'phon','E12':'det',
+            'E13':'phon','E14':'det','E16a':'det','E17a':'det','E18':'phon',
+            'E19':'det','E20a':'log','E21':'log','E24':'phon','E27':'phon',
+            'E28':'phon','E29':'phon','E30':'phon','E31':'phon','E34a':'phon',
+            'E36':'det','E37':'det','E38':'det',
+            // F:mammal parts (all phonograms unless noted)
+            'F1':'phon','F2':'phon','F3':'phon','F4':'phon','F5':'phon',
+            'F6':'phon','F7':'phon','F8':'phon','F9':'phon','F10':'phon',
+            'F11':'phon','F12':'phon','F13':'phon','F14':'phon','F15':'phon',
+            'F16':'phon','F17':'phon','F18':'phon','F19':'phon','F20':'phon',
+            'F21':'phon','F24':'phon','F25':'phon','F26':'phon','F27':'phon',
+            'F28':'phon','F29':'phon','F30':'phon','F31':'phon','F33':'phon','F37':'phon',
+            'F38':'phon','F39':'phon','F40':'phon','F41':'phon','F42':'phon',
+            'F43':'phon','F44':'phon','F45':'phon','F46':'phon','F47':'phon',
+            'F48':'phon','F49':'phon','F50':'phon','F51':'phon','F52':'phon',
+            // G:birds (extended)
+            'G2':'phon','G3':'phon','G4':'det','G5':'log','G6':'log','G6a':'log',
+            'G7':'log','G7a':'log','G7b':'log','G8':'log','G9':'phon','G10':'log',
+            'G11':'log','G12':'log','G13':'phon','G15':'log','G17a':'phon',
+            'G18':'phon','G19':'phon','G20':'phon','G21':'phon','G22':'phon',
+            'G23':'phon','G24':'phon','G30':'phon','G31':'phon','G32':'phon',
+            'G33':'phon','G34':'phon','G35':'phon','G41':'phon','G42':'phon',
+            'G44':'phon','G45':'phon','G46':'phon','G47':'phon','G48':'phon',
+            'G49':'phon',
+            // H:bird parts
+            'H1':'phon','H2':'phon','H3':'phon','H4':'phon','H7':'det',
+            // I:reptiles
+            'I1':'det','I2':'phon','I3':'phon','I4':'phon','I5':'phon',
+            'I5a':'phon','I6':'phon','I7':'phon','I11a':'phon','I13':'log','I15':'phon',
+            // K:fish
+            'K1':'phon','K2':'det','K3':'phon','K4':'phon','K5':'phon',
+            'K6':'phon','K7':'det',
+            // L:insects/arachnids (extended)
+            'L3':'phon','L4':'phon','L5':'phon','L6':'phon',
+            // M:plants (extended)
+            'M5':'phon','M6':'phon','M7':'phon','M8':'phon','M10':'phon',
+            'M11':'phon','M12':'phon','M14':'phon','M15':'phon','M18':'phon',
+            'M19':'phon','M22':'phon','M24':'phon','M25':'phon','M26':'phon',
+            'M27':'phon','M28':'phon','M30':'phon','M31':'phon','M32':'phon',
+            'M34':'phon','M35':'phon','M37':'phon','M38':'phon','M39':'phon',
+            'M41':'phon','M42':'phon','M43':'phon','M44':'phon',
+            // N:sky/earth/water (extended)
+            'N2':'det','N3':'det','N7':'phon','N9':'phon','N10':'phon',
+            'N11':'phon','N12':'phon','N13':'phon','N19':'phon','N20':'phon',
+            'N23':'phon','N31':'phon','N32':'phon','N33a':'det','N38':'phon',
+            'N39':'phon','N42':'det',
+            // O:buildings (extended)
+            'O2':'phon','O3':'log','O5':'det','O8':'log','O9':'log','O10':'log',
+            'O12':'det','O13':'phon','O14':'phon','O15':'det','O16':'phon',
+            'O17':'log','O18':'det','O19':'phon','O20':'log','O21':'det',
+            'O22':'phon','O26':'phon','O27':'det','O30':'log','O31':'log',
+            'O32':'det','O33':'det','O35':'det','O37':'phon','O38':'phon',
+            'O39':'phon','O40':'det','O41':'det','O42':'det','O43':'det',
+            'O44':'det','O45':'det','O46':'det','O48':'det','O51':'det',
+            // P:ships
+            'P1a':'det','P2':'det','P3':'det','P4':'det','P6':'det',
+            'P7':'det','P8':'det','P9':'det','P10':'det',
+            // Q:domestic furniture (extended)
+            'Q2':'phon','Q4':'det','Q5':'det',
+            // R:temple furniture (extended)
+            'R1':'det','R2':'det','R3':'det','R6':'det','R9':'det',
+            'R15':'log','R16':'det','R17':'det','R18':'det','R19':'det',
+            'R20':'log','R21':'log','R22':'phon','R23':'phon','R24':'log','R25':'log',
+            // S:crowns/dress/staves (extended)
+            'S4':'det','S6':'det','S10':'phon','S11':'phon','S12':'det',
+            'S13':'phon','S14':'det','S14a':'det','S15':'det','S16':'det',
+            'S17':'det','S18':'det','S19':'log','S20':'log','S21':'det',
+            'S22':'phon','S23':'phon','S24':'phon','S25':'det','S30':'phon',
+            'S31':'phon','S32':'phon','S33':'det','S35':'det','S36':'det',
+            'S37':'det','S39':'phon','S41':'phon',
+            // T:warfare/hunting (extended)
+            'T4':'phon','T5':'phon','T6':'phon','T7':'det','T7a':'det',
+            'T8':'phon','T8a':'det','T9a':'phon','T10':'phon','T12':'phon',
+            'T15':'det','T16':'det','T17':'det','T18':'phon','T19':'phon',
+            'T20':'phon','T23':'phon','T24':'phon','T25':'phon','T27':'det',
+            'T28':'phon','T29':'det','T30':'det','T31':'phon','T32':'phon',
+            'T33':'det','T34':'phon','T35':'phon',
+            // U:agriculture/crafts (extended)
+            'U2':'phon','U3':'phon','U4':'phon','U5':'phon','U7':'phon',
+            'U8':'phon','U9':'det','U10':'log','U11':'log','U12':'log',
+            'U13':'phon','U14':'phon','U15':'phon','U16':'det','U17':'phon',
+            'U18':'phon','U20':'phon','U23':'phon','U24':'det','U25':'det',
+            'U26':'det','U27':'det','U29':'phon','U30':'phon','U31':'det',
+            'U32':'det','U33':'phon','U34':'phon','U35':'phon','U37':'det',
+            'U39':'phon','U40':'phon','U41':'det',
+            // V:rope/fiber/baskets (extended)
+            'V2':'det','V3':'det','V4':'phon','V8':'phon','V11':'phon',
+            'V14':'phon','V15':'phon','V17':'det','V18':'det','V19':'det',
+            'V21':'phon','V22':'phon','V23':'phon','V25':'phon','V26':'phon',
+            'V27':'phon','V32':'phon','V33':'det','V34':'det','V35':'det',
+            'V36':'phon','V37':'det','V38':'det',
+            // W:vessels (extended)
+            'W1':'det','W2':'phon','W4':'det','W5':'log','W6':'det',
+            'W7':'det','W8':'det','W9':'phon','W10a':'phon','W12':'phon',
+            'W13':'det','W15':'det','W16':'det','W17':'phon','W18':'phon',
+            'W20':'det','W21':'det','W23':'det',
+            // X:bread/cakes (extended)
+            'X2':'phon','X3':'phon','X4':'det','X5':'det','X6':'det','X7':'det',
+            // Y:writing/games (extended)
+            'Y2':'det','Y4':'det','Y6':'det','Y7':'det','Y8':'det',
+            // Z:strokes/hieratic (extended)
+            'Z5':'det','Z6':'det','Z8':'det','Z10':'phon',
+  'A32a':'det',
+  'A56':'det',
+  'A57':'log',
+  'A58':'det',
+  'A60':'log',
+  'A61':'log',
+  'A62':'log',
+  'A63':'det',
+  'A64':'det',
+  'A65':'log',
+  'A66':'log',
+  'A67':'det',
+  'A68':'log',
+  'A69':'det',
+  'A70':'log',
+  'B5a':'log',
+  'B8':'det',
+  'B9':'log',
+  'D8a':'phon',
+  'D31a':'log',
+  'D48a':'det',
+  'D50a':'det',
+  'D50b':'det',
+  'D50c':'det',
+  'D50d':'det',
+  'D50e':'det',
+  'D50f':'det',
+  'D50g':'det',
+  'D50h':'det',
+  'D50i':'det',
+  'D52a':'phon',
+  'D54a':'log',
+  'D64':'log',
+  'D65':'log',
+  'D66':'det',
+  'D67':'det',
+  'D67a':'det',
+  'D67b':'det',
+  'D67c':'det',
+  'D67d':'det',
+  'D67e':'det',
+  'D67f':'det',
+  'D67g':'det',
+  'D67h':'det',
+  'E28a':'log',
+  'F1a':'phon',
+  'F13a':'det',
+  'F21a':'log',
+  'F31a':'phon',
+  'F37a':'log',
+  'F38a':'det',
+  'F45a':'phon',
+  'F46a':'log',
+  'F47a':'log',
+  'F51a':'det',
+  'F51b':'log',
+  'F51c':'det',
+  'F53':'phon',
+  'G11a':'det',
+  'G20a':'phon',
+  'G36a':'det',
+  'G37a':'det',
+  'G45a':'phon',
+  'H6a':'phon',
+  'K8':'det',
+  'L2a':'log',
+  'L6a':'det',
+  'L8':'phon',
+  'M1a':'det',
+  'M1b':'phon',
+  'M3a':'phon',
+  'M10a':'det',
+  'M12a':'det',
+  'M12b':'det',
+  'M12c':'det',
+  'M12d':'det',
+  'M12e':'det',
+  'M12f':'det',
+  'M12g':'det',
+  'M12h':'det',
+  'M15a':'log',
+  'M16a':'log',
+  'M17a':'phon',
+  'M22a':'phon',
+  'M24a':'log',
+  'M28a':'log',
+  'M31a':'det',
+  'M33a':'det',
+  'M33b':'det',
+  'M40a':'phon',
+  'N18a':'phon',
+  'N18b':'det',
+  'N25a':'det',
+  'N34a':'log',
+  'N37a':'phon',
+  'NL1':'log',
+  'NL2':'log',
+  'NL3':'log',
+  'NL4':'log',
+  'NL5':'log',
+  'NL5a':'log',
+  'NL6':'log',
+  'NL7':'log',
+  'NL8':'log',
+  'NL9':'log',
+  'NL10':'log',
+  'NL11':'log',
+  'NL12':'log',
+  'NL13':'log',
+  'NL14':'log',
+  'NL15':'log',
+  'NL16':'log',
+  'NL17':'log',
+  'NL17a':'log',
+  'NL18':'log',
+  'NL19':'log',
+  'NL20':'log',
+  'NU1':'log',
+  'NU2':'log',
+  'NU3':'log',
+  'NU4':'log',
+  'NU5':'log',
+  'NU6':'log',
+  'NU7':'log',
+  'NU8':'log',
+  'NU9':'log',
+  'NU10':'log',
+  'NU10a':'log',
+  'NU11':'log',
+  'NU11a':'log',
+  'NU12':'log',
+  'NU13':'log',
+  'NU14':'log',
+  'NU15':'log',
+  'NU16':'log',
+  'NU17':'log',
+  'NU18':'log',
+  'NU18a':'log',
+  'NU19':'log',
+  'NU20':'log',
+  'NU21':'log',
+  'NU22':'log',
+  'NU22a':'log',
+  'O1a':'log',
+  'O5a':'det',
+  'O6a':'det',
+  'O6b':'det',
+  'O6c':'det',
+  'O6d':'det',
+  'O6e':'det',
+  'O6f':'det',
+  'O10a':'log',
+  'O10b':'det',
+  'O10c':'det',
+  'O19a':'log',
+  'O20a':'det',
+  'O24a':'det',
+  'O25a':'det',
+  'O29a':'phon',
+  'O30a':'det',
+  'O33a':'det',
+  'O36a':'det',
+  'O36b':'det',
+  'O36c':'det',
+  'O36d':'det',
+  'O50a':'det',
+  'O50b':'det',
+  'P3a':'det',
+  'R2a':'log',
+  'R3a':'det',
+  'R3b':'det',
+  'R10a':'log',
+  'R16a':'log',
+  'R26':'phon',
+  'R27':'log',
+  'R28':'log',
+  'R29':'log',
+  'S2a':'log',
+  'S6a':'log',
+  'S14b':'det',
+  'S17a':'phon',
+  'S26a':'log',
+  'S26b':'det',
+  'S35a':'det',
+  'S46':'phon',
+  'T3a':'phon',
+  'T11a':'det',
+  'T16a':'det',
+  'T32a':'phon',
+  'T33a':'det',
+  'T36':'det',
+  'U6a':'det',
+  'U6b':'det',
+  'U23a':'phon',
+  'U29a':'phon',
+  'U32a':'det',
+  'U42':'log',
+  'V1a':'det',
+  'V1b':'det',
+  'V1c':'det',
+  'V1d':'det',
+  'V1e':'det',
+  'V1f':'det',
+  'V1g':'det',
+  'V1h':'det',
+  'V1i':'det',
+  'V2a':'phon',
+  'V7a':'det',
+  'V11a':'det',
+  'V11b':'det',
+  'V11c':'det',
+  'V12a':'phon',
+  'V12b':'det',
+  'V20a':'det',
+  'V20b':'det',
+  'V20c':'det',
+  'V20d':'det',
+  'V20e':'det',
+  'V20f':'det',
+  'V20g':'det',
+  'V20h':'det',
+  'V20i':'det',
+  'V20j':'det',
+  'V20k':'det',
+  'V20l':'det',
+  'V23a':'phon',
+  'V28a':'phon',
+  'V29a':'phon',
+  'V30a':'det',
+  'V37a':'phon',
+  'V40':'det',
+  'V40a':'det',
+  'W3a':'det',
+  'W9a':'det',
+  'W14a':'det',
+  'W17a':'phon',
+  'W18a':'det',
+  'W24a':'det',
+  'X4a':'phon',
+  'X4b':'phon',
+  'X6a':'det',
+  'X8a':'det',
+  'Z2a':'det',
+  'Z2b':'det',
+  'Z2c':'det',
+  'Z2d':'det',
+  'Z3b':'det',
+  'Z5a':'det',
+  'Z12':'phon',
+  'Z13':'det',
+  'Z14':'det',
+  'Aa7a':'det',
+  'Aa7b':'det',
+  'Aa32':'log',
+  'V11d':'det',
+  'O29b':'det',
+  'V7b':'phon',
+  'V33a':'det',
+};
+
+        // Gardiner code → canonical Egyptological transliteration
+        // PRIMARY SOURCES (in order of authority):
+        //   1. Unicode Standard 17.0 (2025) — U+13000–U+1342F Egyptian Hieroglyphs block
+        //      Character annotations:phonemogram, logogram, classifier values
+        //   2. Buurman et al. (1988/1997) Manuel de Codage, CCER — Appendices B & C
+        //      http://www.catchpenny.org/codage/ — the official phonetic value table
+        //   3. Gardiner, A.H. (1957) Egyptian Grammar, 3rd ed. — sign descriptions
+        //   4. Allen, J.P. (2000/2010) Middle Egyptian — phonemic values
+        //   5. Faulkner, R.O. (1962) Concise Dictionary of Middle Egyptian — word forms
+        //
+        // ENCODING PHILOSOPHY:
+        //   • Phonogram signs → their primary consonantal value (MdC convention)
+        //   • Ideograms with a canonical word reading → that reading
+        //   • Pure silent determinatives → descriptive label in angled brackets
+        //   • Unicode 17.0 logogram annotations supplement but do NOT override MdC
+        //     uniliteral values (e.g. N37=š not 'ꞽw', G43=w not 'm')
+        //   • Where CCER Appendix B gives multiple values, the PRIMARY is used.
+        //   • Transliteration uses proper Egyptological diacritics (ꜣ ꜥ ḥ ḫ ẖ š ṯ ḏ).
+        const gardinerToPhonetic = {
+            // ── 25 uniliterals ────────────────────────────────────────────────────
+            'G1' :'ꜣ',    // Egyptian vulture  (MdC A)
+            'M17':'i',    // reed              (MdC i)
+            'M17a':'i',   // reed variant
+            'Z4' :'y',    // two strokes       (MdC y)
+            'Z4a':'y',    // two strokes variant
+            'D36':'ꜥ',    // forearm           (MdC a)
+            'G43':'w',    // quail chick       (MdC w)
+            'D58':'b',    // foot              (MdC b)
+            'Q3' :'p',    // stool             (MdC p)
+            'I9' :'f',    // horned viper      (MdC f)
+            'G17':'m',    // owl               (MdC m)
+            'N35':'n',    // water ripple      (MdC n)
+            'D21':'r',    // mouth             (MdC r)
+            'O4' :'h',    // reed shelter      (MdC h)
+            'V28':'ḥ',    // twisted wick      (MdC H)
+            'Aa1':'ḫ',    // placenta          (MdC x)
+            'F32':'ẖ',    // belly with teats  (MdC X)
+            'S29':'s',    // folded cloth      (MdC s)
+            'O34':'z',    // door bolt         (MdC z)
+            'N37':'š',    // pool              (MdC S)
+            'N29':'q',    // hill slope        (MdC q)
+            'V31':'k',    // basket with handle(MdC k)
+            'W11':'g',    // stand for jug     (MdC g)
+            'X1' :'t',    // bread loaf        (MdC t)
+            'V13':'ṯ',    // tethering rope    (MdC T)
+            'D46':'d',    // hand              (MdC d)
+            'I10':'ḏ',    // cobra             (MdC D)
+
+            // ── A:Men and their occupations ─────────────────────────────────────
+            // CCER:A12=mšꜥ, A15=ḫr, A17=Ẑrd, A21=sr, A33=mniw, A38=qiz, A47=iry
+            // A50=špsi, A51=špsi
+            'A1' :'s',     // seated man — det. man/person; 1sg pronoun i/wi
+            'A2' :'r',     // hand to mouth — det. eat/drink/speak
+            'A3' :'ḥms',   // man on heel — det. sit, ḥms
+            'A4' :'dwꜣ',   // man arms raised — det. adoration, dwꜣ
+            'A5' :'imn',   // man hiding — det. hide, imn
+            'A5a':'imn',
+            'A6' :'wꜥb',   // man purifying — det. purity, wꜥb
+            'A6a':'wꜥb',
+            'A6b':'wꜥb',
+            'A7' :'nḏm',   // fatigued man — det. weary, nḏm
+            'A8' :'ḥnw',   // man performing ḥnw — det. jubilation
+            'A9' :'fꜣi',   // man with basket — det. carry, fꜣi
+            'A10':'sḳdw',  // man with oar — det. sail
+            'A11':'ḫnms',  // man with scepter — det. friend, ḫnms
+            'A12':'mšꜥ',   // man with bow — det. army, mšꜥ (CCER:mSa)
+            'A13':'ḫfty',  // man bound — det. enemy, ḫfty
+            'A14':'mwt',   // man with bleeding head — det. die, mwt
+            'A14a':'mwt',
+            'A15':'ḫr',    // man falling — det. fall, ḫr (CCER:xr)
+            'A16':'ksi',   // man bowing — det. bow, ksi
+            'A17':'šri',   // child — det. young, šri (CCER:Xrd = ẖrd)
+            'A17a':'šri',
+            'A17b':'šri',   // child variant (Unicode 17 A17b = U+13015)
+            'A18':'ẖrd',   // child with red crown — ẖrd
+            'A19':'i3w',   // old man with stick — det. old, i3w
+            'A20':'i3w',
+            'A21':'sr',    // man with stick and cloth — det. noble, sr (CCER:sr)
+            'A22':'twt',   // statue — det. statue, twt
+            'A23':'ity',   // king with mace — det. sovereign, ity
+            'A24':'ḥwi',   // man striking — det. strike, ḥwi
+            'A25':'ḥwi',
+            'A26':'nis',   // man beckoning — det. call, nis
+            'A27':'in',    // man running — in (particle "by")
+            'A28':'kꜣ',    // man arms raised — kꜣ (also det. high, rejoice)
+            'A29':'tni',   // man upside down — det. upside down
+            'A30':'i3w',   // man arms outstretched — det. praise, i3w
+            'A31':'ḥni',   // man arms turned back
+            'A32':'ibi',   // man dancing — det. dance, ibi (CCER:ibi)
+            'A33':'mniw',  // man with stick and bundle — det. herdsman (CCER:mniw)
+            'A34':'ḫwsi',  // man pounding — det. pound
+            'A35':'qd',    // man building wall — det. build, qd
+            'A36':'ꜥfty',  // man at brewery — det. brewer, ꜥfty
+            'A37':'ꜥfty',
+            'A38':'qis',   // man with two emblems — Cusae, qiz (CCER:qiz)
+            'A39':'qis',
+            'A40':'nṯr',   // seated god — det. god, nṯr
+            'A40a':'nṯr',
+            'A41':'ꞽ',     // seated king w/ flail — logogram 1sg pronoun ꞽ (Unicode 17.0); as det. of nsw when following that word
+            'A42':'n(y)-sw.t', // seated king with flail — classifier king (nsw)
+            'A42a':'ꞽ',   // seated king variant — logogram 1sg pronoun ꞽ (Unicode 17.0)
+            'A43':'nsw',
+            'A43a':'nsw',
+            'A44':'nsw',
+            'A45':'bity',  // king with red crown — bity (king of Lower Egypt)
+            'A45a':'bity',
+            'A46':'bity',
+            'A47':'iry',   // man with knife — iry (CCER:iry)
+            'A48':'iry',
+            'A49':'ꜥꜣmw',  // foreigner with stick — det. foreigner
+            'A50':'špsi',  // noble on chair — det. revered, špsi (CCER:Sps)
+            'A51':'špsi',  // noble with flagellum (CCER:Spsi)
+            'A52':'šps',   // kneeling noble — det. revered deceased
+            'A53':'ḥsy',   // upright mummy — det. mummy/form
+            'A54':'mwt',   // recumbent mummy — det. dead, mwt
+            'A55':'sḏr',   // mummy on bed — det. lie down, sḏr
+            'A59':'dr',    // man threatening — det. drive off, dr
+
+            // ── B:Women ─────────────────────────────────────────────────────────
+            'B1' :'st',   // seated woman — det. woman, st
+            'B2' :'iꜣt',  // pregnant woman — iꜣt
+            'B3' :'msi',  // woman giving birth — msi
+            'B4' :'mst',  // woman nursing — mst
+            'B5' :'rdit', // woman with hand to mouth — rdit
+            'B6' :'ḥmt',  // seated woman nursing — ḥmt (wife, woman)
+            'B7' :'ḥmt',  // woman with flagellum — ḥmt
+
+            // ── C:Anthropomorphic deities ────────────────────────────────────────
+            'C1' :'rꜥ',    // Re-Harakhty (sun disk on head) — rꜥ
+            'C2' :'itmw',  // Atum (pschent crown) — itmw
+            'C2a':'itmw',  // Atum variant (C2a) — itmw
+            'C2b':'itmw',  // Atum variant (C2b) — itmw
+            'C2c':'itmw',  // Atum variant (C2c) — itmw
+            'C3' :'Ḏḥwty',// Thoth (ibis-headed) — Ḏḥwty
+            'C4' :'Ḫnmw', // Khnum (ram-headed) — Ḫnmw  ← corrected from mnṯw
+            'C5' :'nfr-tm',// Nefertum (lotus crown) — nfr-tm  ← corrected from imn
+            'C6' :'Wsir',  // Osiris (mummiform, crook+flail) — Wsir  ← corrected from nfr-tm
+            'C7' :'sp3',   // Sopdu — sp3
+            'C8' :'ḥꜥpy',  // Hapy (Nile god) — ḥꜥpy
+            'C9' :'nit',   // Neith — nit
+            'C10':'mꜣꜥt',  // Maat (woman with feather) — mꜣꜥt  ← corrected from ḥwt-ḥr
+            'C10a':'mꜣꜥt', // Maat variant — mꜣꜥt  ← corrected from ḥwt-ḥr
+            'C11':'ḥḥ',    // Heh (seated god with notched palms, million) — ḥḥ  ← corrected from nb
+            'C12':'inpw',  // Anubis (jackal-headed) — inpw
+            // ── Extended C-series deity figures ──────────────────────────────────
+            // Source:Gardiner supplementary list; JSesh/CCER extended codes;
+            //         cross-verified against Unicode 12.0 character names.
+            'C13':'Ḫnsw',  // Khonsu (moon god, crook+flail) — Ḫnsw
+            'C14':'Ḫpri',  // Khepri (scarab-headed seated god) — Ḫpri
+            'C15':'nfr-tm',// Nefertum variant (different posture) — nfr-tm
+            'C16':'Inḥr',  // Onuris/Anhur (feathered crown) — Inḥr
+            'C17':'Gb',    // Geb — Gb
+            'C18':'Wsir',  // Osiris — Wsir
+            'C19':'Wsir',  // Osiris with atef crown — Wsir
+            'C20':'Mnw',   // Min — Mnw
+            'C21':'Sḫmt',  // Sekhmet (lion-headed woman) — Sḫmt
+            'C22':'Ptḥ',   // Ptah (mummiform, was-scepter) — Ptḥ
+            'C23':'Skr',   // Sokar/Ptah-Sokar (hawk-headed mummiform) — Skr
+            'C24':'Bꜣstt', // Bastet (cat-headed woman) — Bꜣstt
+
+            // ── D:Body parts ────────────────────────────────────────────────────
+            'D1' :'tp',   // head — tp (upon, first)
+            'D2' :'ḥr',   // face — ḥr
+            'D3' :'šnꜥ',  // hair — šnꜥ
+            'D4' :'ir',   // eye — ir
+            'D5' :'wḏꜣ',  // painted eye — wḏꜣ
+            'D6' :'ir',   // eye with paint — ir
+            'D7' :'šnꜥ',  // eye with cosmetic detail — šnꜥ (variant)
+            'D8' :'irt',  // eye with markings — irt
+            'D9' :'rmi',  // weeping eye — rmi (weep)
+            'D10':'wḏꜣt', // wḏꜣt-eye — wḏꜣt
+            'D11':'ꜥnḏ',  // pupil variant — ꜥnḏ
+            'D12':'irt',  // pupil — irt
+            'D13':'hr',   // eyebrow — hr
+            'D14':'sp',   // half eye — sp (one side)
+            'D15':'sp',   // half eye variant — sp
+            'D16':'ꜥnt',  // cheek — ꜥnt
+            'D17':'sšt',  // cheek variant — sšt
+            'D18':'qnbt', // ear — qnbt
+            'D19':'fnḏ',  // nose — fnḏ
+            'D20':'fnḏ',  // nose with eye — fnḏ
+            'D21':'r',    // mouth — r
+            'D22':'rꜥ',   // mouth with stroke — rꜥ
+            'D23':'rꜥ',   // variant mouth — rꜥ
+            'D24':'spt',  // lips — spt
+            'D25':'spt',  // lips with teeth — spt
+            'D26':'mẖ',   // teat — mẖ (spit)
+            'D27':'sns',  // breast — sns
+            'D27a':'sns', // breast variant — sns
+            'D28':'kꜣ',   // arms in kꜣ-posture — kꜣ
+            'D29':'ḥꜥ',   // combination of arms — ḥꜥ
+            'D30':'ḥꜥ',   // arms variant — ḥꜥ
+            'D31':'ꜥ',    // arm with palm down — ꜥ
+            'D32':'ꜥ',    // arm variant — ꜥ
+            'D33':'ḥm',   // oar — ḥm
+            'D34':'ꜣms',  // spear — ꜣms
+            'D34a':'ꜣms', // spear variant — ꜣms
+            'D35':'n',    // negation arm — n (not)
+            'D36':'ꜥ',    // forearm — ꜥ (ayin)
+            'D37':'di',   // forearm with bread — di (give)
+            'D38':'imi',  // forearm with flat loaf — imi
+            'D39':'ini',  // forearm with jar — ini (bring)
+            'D40':'nḥm',  // forearm with stick — nḥm (take away)
+            'D41':'ḏsr',  // forearm with palm down — ḏsr (sacred)
+            'D42':'mḥ',   // forearm with cubit rod — mḥ (cubit)
+            'D43':'ꜥ',    // arm with shield — ꜥ
+            'D44':'ꜥb',   // arm with scepter — ꜥb
+            'D45':'ḏsr',  // arm with flagellum — ḏsr
+            'D46':'d',    // hand — d
+            'D46a':'d',   // hand variant — d
+            'D47':'ḏ',    // fist — ḏ
+            'D48':'sp',   // palm without thumb — sp
+            'D49':'dr',   // fist with finger — dr
+            'D50':'ꜥ',    // finger — ꜥ
+            'D51':'ꜥ',    // finger pointing up — ꜥ
+            'D52':'mt',   // phallus — mt
+            'D53':'mt',   // phallus with liquid — mt
+            'D54':'rd',   // walking legs — rd (also "go")
+            'D55':'iw',   // legs walking backward — iw
+            'D56':'psd',  // leg — psd
+            'D57':'psd',  // leg variant — psd
+            'D58':'b',    // foot — b
+            'D59':'b',    // foot variant — b
+            'D60':'wbt',  // pure foot — wbt
+            'D61':'ṯbt',  // sandaled foot — ṯbt
+            'D62':'rd',   // leg with vessel — rd
+            'D63':'rd',   // legs with vessel — rd
+
+            // ── E:Mammals ───────────────────────────────────────────────────────
+            'E1' :'kꜣ',   // bull — kꜣ
+            'E2' :'kꜣ',   // bull charging — kꜣ
+            'E3' :'Ab',   // calf — Ab
+            'E4' :'ḏndnt',// calf with uraeus — ḏndnt
+            'E5' :'wr',   // cow suckling calf — wr
+            'E6' :'ꜣbd',  // horse — ꜣbd
+            'E7' :'ꜥꜣ',   // donkey — ꜥꜣ
+            'E8' :'ḫr',   // kid — ḫr
+            'E9' :'sꜣ',   // pig — sꜣ
+            'E10':'Ab',   // ram — Ab (also Khnum)
+            'E11':'bꜣ',   // ram of Mendes — bꜣ
+            'E12':'šꜣ',   // pig — šꜣ
+            'E13':'mꜣi',  // cat — mꜣi
+            'E14':'sꜣb',  // dog — sꜣb
+            'E15':'inpw', // lying dog (Anubis sign) — inpw (Unicode 17.0:ꞽnp.w)
+            'E16':'inpw', // lying jackal — inpw (Anubis)
+            'E17':'inpw', // lying jackal on shrine — inpw (Anubis)
+            'E18':'wn',   // running hound — wn
+            'E19':'ꜥbd',  // hedgehog — ꜥbd
+            'E20':'stš',  // Seth animal — stš (Set)
+            'E21':'stš',  // Seth animal walking — stš
+            'E22':'miw',  // lion — miw (cat sound)
+            'E23':'rw',   // lion recumbent — rw
+            'E24':'mꜣi',  // lion walking — mꜣi
+            'E25':'rwtj', // two lions back-to-back — rwtj (Ruty, the horizon lions; NOT hippopotamus)
+            'E26':'Abw',  // elephant — Abw
+            'E27':'bꜣ',   // giraffe — bꜣ (soul, also mmy)
+            'E28':'mmy',  // giraffe — mmy
+            'E29':'ꜥnb',  // oryx — ꜥnb
+            'E30':'mꜣ',   // ibex — mꜣ
+            'E31':'sr',   // ram — sr (noble)
+            'E32':'bꜣ',   // baboon — bꜣ
+            'E33':'ky',   // monkey — ky
+            'E34':'wn',   // hare — wn
+
+            // ── F:Parts of mammals ──────────────────────────────────────────────
+            'F1' :'ḥꜣt',  // head of ox — ḥꜣt (fore, front)
+            'F2' :'ḥꜣt',  // head of ox front-facing — ḥꜣt
+            'F3' :'ḥꜣt',  // head of leopard — ḥꜣt
+            'F4' :'ḥꜣt',  // forepart of lion — ḥꜣt
+            'F5' :'km',   // head of black bull — km
+            'F6' :'tp',   // skull — tp
+            'F7' :'tp',   // head and neck of animal — tp
+            'F8' :'wsr',  // neck of animal — wsr (mighty)
+            'F9' :'f',    // horned viper variant — f
+            'F10':'wsr',  // animal neck with head — wsr
+            'F11':'ꜣbw',  // animal head on tall neck — ꜣbw
+            'F12':'wsr',  // animal neck — wsr
+            'F13':'db',   // horns — db
+            'F14':'wp',   // horns with palm — wp (open, separate)
+            'F15':'wp',   // horn variant — wp
+            'F16':'šsp',  // palm rib — šsp (span)
+            'F17':'ꜣt',   // animal belly — ꜣt
+            'F18':'ꜣt',   // animal belly variant — ꜣt
+            'F19':'isr',  // backbone with ribs — isr
+            'F20':'fnḏ',  // nose of animal — fnḏ
+            'F21':'msDr', // ear of animal — msDr (ear)
+            'F22':'wḥm',  // hind leg — wḥm (repeat)
+            'F23':'ḫpš',  // foreleg — ḫpš (strong foreleg)
+            'F24':'ḥꜣ',   // tail — ḥꜣ (behind)
+            'F25':'sꜣ',   // hide with tail — sꜣ
+            'F26':'bꜣ',   // panther head — bꜣ
+            'F27':'km',   // hide of animal — km (black)
+            'F28':'ms',   // hide of animal with tail — ms (bear, give birth)
+            'F29':'sti',   // belly with teats — sti (pour out, shoot; Unicode 17.0:phonemogram st)
+            'F30':'nḏm',  // vessel with liquid — nḏm (pleasant)
+            'F31':'ms',   // three fox skins — ms
+            'F32':'ẖ',    // placenta/belly with tail — ẖ (belly, womb; MdC X)
+            'F33':'sd',   // tail — sd
+            'F34':'ib',   // heart — ib
+            'F35':'nfr',  // windpipe + heart — nfr (good, beautiful)
+            'F36':'smꜣ',  // lung — smꜣ (unite)
+            'F37':'ꜥb',   // spine with ribs — ꜥb
+            'F38':'iꜥb',  // spine — iꜥb (combine)
+            'F39':'ꜥb',   // vertebrae — ꜥb
+            'F40':'wꜣs',  // spine with cord — wꜣs
+            'F41':'ꜣbt',  // ribs — ꜣbt
+            'F42':'imꜣḥ', // rib — imꜣḥ (honored)
+            'F43':'ꜣpd',  // backbone — ꜣpd
+            'F44':'mꜣi',  // forepart of lion — mꜣi
+            'F45':'ḥꜣ',   // uterus — ḥꜣ
+            'F46':'inḥ',  // intestines — inḥ
+            'F47':'ꜥb',   // intestines variant — ꜥb
+            'F48':'ꜥb',   // intestines variant — ꜥb
+            'F49':'ẖt',   // abdomen — ẖt
+            'F50':'ẖt',   // abdomen variant — ẖt
+            'F51':'ẖt',   // body/belly — ẖt
+            'F52':'mt',   // phallus — mt
+
+            // ── G:Birds ─────────────────────────────────────────────────────────
+            // CCER:G1=A, G2=AA, G4=tyw, G14=mwt, G16=nbty, G17=m, G18=mm,
+            //   G21=nH, G22=Db, G23=rxyt, G25=Ax, G27=dSr, G28=gm, G29=bA,
+            //   G32=baHi, G35=aq, G36=wr, G37=nDs, G38=gb, G39=zA, G40=pA,
+            //   G41=xn, G42=wSA, G43=w, G44=ww, G46=mAw, G47=TA, G54=snD
+            'G1' :'ꜣ',    // Egyptian vulture — ꜣ (aleph); also phonetic G2
+            'G2' :'ꜣꜣ',   // two vultures — ꜣꜣ (CCER:AA)
+            'G3' :'ꜣ',    // vulture with flail — ꜣ
+            'G4' :'tyw',  // buzzard — tyw (CCER:tyw)
+            'G5' :'Ḥr',   // falcon — Ḥr (Horus)
+            'G6' :'Ḥr',
+            'G7' :'Ḥr',
+            'G7a':'Ḥr',
+            'G7b':'Ḥr',
+            'G8' :'BḤdty',// behedety falcon — BḤdty
+            'G9' :'sꜣ',   // falcon in boat — sꜣ
+            'G10':'mꜣꜥt', // falcon on standard with feather — mꜣꜥt (Maat)
+            'G11':'Ḥr',
+            'G12':'Mnṯw', // falcon of Montu — Mnṯw
+            'G13':'nṯr',  // falcon with two plumes — nṯr
+            'G14':'mwt',  // vulture — mwt (mother) (CCER:mwt)
+            'G15':'nḫbt', // vulture with white crown — nḫbt (Nekhbet)
+            'G16':'nbty', // two ladies (vulture + cobra) — nbty (CCER:nbty)
+            'G17':'m',    // owl — m (MdC m)
+            'G17a':'m',
+            'G18':'mm',   // two owls — mm (CCER:mm)
+            'G19':'m',
+            'G20':'m',
+            'G21':'nḥ',   // guinea fowl — nḥ (CCER:nH)
+            'G22':'ḏb',   // hoopoe — ḏb (CCER:Db)
+            'G23':'rḫyt', // hoopoe variant — rḫyt (CCER:rxyt, common people)
+            'G24':'pq',   // hoopoe variant — pq
+            'G25':'ꜣḫ',   // crested ibis — ꜣḫ (transfigured spirit) (CCER:Ax)
+            'G26':'Ḏḥwty',// ibis on standard — Ḏḥwty (Thoth) (CCER:DHwty)
+            'G26a':'Ḏḥwty',
+            'G27':'dšr',  // flamingo — dšr (red) (CCER:dSr)
+            'G28':'gm',   // black ibis — gm (find) (CCER:gm)
+            'G29':'bꜣ',   // jabiru stork — bꜣ (ba-soul) (CCER:bA)
+            'G30':'bꜣ',   // three jabiru storks — bꜣ
+            'G31':'dfḏ',  // heron variant — dfḏ
+            'G32':'bꜣḥi', // heron on perch — bꜣḥi (CCER:baHi = flood, inundate)
+            'G33':'bnw',  // heron — bnw (phoenix/Bennu)
+            'G34':'snb',  // ostrich — snb (healthy) (CCER:snb)
+            'G35':'ꜥq',   // cormorant — ꜥq (CCER:aq = enter)
+            'G36':'wr',   // swallow — wr (great, elder) (CCER:wr)
+            'G37':'nḏs',  // small bird — nḏs (small, poor, bad) (CCER:nDs)
+            'G38':'sꜣ',   // white-fronted goose — sꜣ (protection, amulet) (CCER:gb → NOTE:CCER maps G38=gb; Gardiner has sA "son" for G38/G39. We use sꜣ/g39=zA per Allen)
+            'G39':'zꜣ',   // pintail duck — zꜣ (son; the primary MdC "son" sign) (CCER:zA)
+            'G40':'pꜣ',   // pintail duck flying — pꜣ (the, this) (CCER:pA)
+            'G41':'ḫn',   // pintail duck alighting — ḫn (CCER:xn)
+            'G42':'wšꜣ',  // chick — wšꜣ (CCER:wSA = hungry)
+            'G43':'w',    // quail chick — w (MdC w; Unicode 17.0:phonemogram w)
+            'G43a':'w',
+            'G44':'ww',   // two quail chicks — ww (CCER:ww)
+            'G45':'mꜣ',   // quail chick + arm — mꜣ
+            'G46':'wꜣ',   // quail chick + arm variant — wꜣ (CCER:mAw)
+            'G47':'ṯꜣ',   // duckling — ṯꜣ (CCER:TA)
+            'G48':'ss',   // three ducklings — ss
+            'G49':'ꜣpdw', // nest — ꜣpdw (birds)
+            'G50':'gb',   // two plovers — gb (Geb) (CCER:gb)
+            'G51':'pꜣ',   // hawk swooping — pꜣ
+            'G52':'bꜣ',   // hawk-headed sphinx — bꜣ
+            'G53':'bꜣ',   // ba-bird (human-headed) — bꜣ
+            'G54':'snḏ',  // plucked bird — snḏ (fear) (CCER:snD)
+
+            // ── H:Parts of birds ────────────────────────────────────────────────
+            'H1':'pꜣ',    // head of pintail — pꜣ
+            'H2':'wsr',   // head of crested bird — wsr
+            'H3':'ꜣpd',   // head of spoonbill — ꜣpd (bird)
+            'H4':'snm',   // head of vulture — snm
+            'H5':'šwt',   // wing — šwt (shadow)
+            'H6':'šwt',   // feather — šwt (also mꜣꜥt/shu)
+            'H7':'sꜣ',    // claw — sꜣ
+            'H8':'swḥt',  // egg — swḥt
+
+            // ── I:Reptiles and amphibians ────────────────────────────────────────
+            'I1' :'ḥfꜣ',  // gecko — ḥfꜣ (lizard)
+            'I2' :'sꜣ',   // crocodile on standard — sꜣ
+            'I3' :'km',   // crocodile — km
+            'I4' :'km',   // crocodile with curved tail — km
+            'I5' :'sꜣ',   // lizard — sꜣ
+            'I6' :'km',   // crocodile skin with spines — km (black; used in kmt "Kemet")
+            'I7' :'ꜣḏ',   // frog — ꜣḏ
+            'I8' :'ḥfn',  // tadpole — ḥfn (100,000)
+            'I11':'ḏd',   // cobra erect — ḏd (also wꜣḏ variant)
+            'I12':'wꜣḏ',  // uraeus rearing — wꜣḏ (green, papyrus)
+            'I13':'Ḏd',   // coiled serpent — Ḏd
+            'I14':'mt',   // snake — mt
+            'I15':'sf',   // snake with inflated neck — sf
+
+            // ── K:Fish ──────────────────────────────────────────────────────────
+            'K1' :'in',   // tilapia — in (bring)
+            'K2' :'ꜣbd',  // mullet — ꜣbd
+            'K3' :'ꜣbd',  // mullet variant — ꜣbd
+            'K4' :'ḥꜣ',   // barbel — ḥꜣ
+            'K5' :'bw',   // bolti — bw
+            'K6' :'nšm',  // oxyrhynchus fish — nšm
+            'K7' :'ꜣdf',  // electric catfish — ꜣdf (also rr)
+
+            // ── L:Invertebrates and insects ─────────────────────────────────────
+            'L1' :'ḫpr',  // scarab beetle — ḫpr (become, Khepri)
+            'L2' :'bit',  // bee — bit (king of Lower Egypt)
+            'L3' :'sr',   // fly — sr
+            'L4' :'sr',   // locust — sr
+            'L5' :'sr',   // centipede — sr
+            'L6' :'sꜥr',  // shell — sꜥr
+            'L7' :'ꜥnḏ',  // scorpion — ꜥnḏ
+
+            // ── M:Plants ────────────────────────────────────────────────────────
+            'M1' :'iꜣm',  // tree — iꜣm
+            'M2' :'ḥn',   // plant — ḥn
+            'M3' :'xt',   // wood/stick — xt (tree, wood, fire)
+            'M4' :'rnpt', // palm branch with notches — rnpt (year)
+            'M5' :'rnpt', // palm branch — rnpt
+            'M6' :'rnpt', // palm branch variant — rnpt
+            'M7' :'tr',   // palm branch with notch — tr (season)
+            'M8' :'šꜣ',   // pool with lotus — šꜣ
+            'M9' :'wꜣḏ',  // lotus flower — wꜣḏ
+            'M10':'ḥ',    // lotus bud — ḥ
+            'M11':'ꜥnḫ',  // flower on long stem — ꜥnḫ
+            'M12':'ḥ',    // lotus with stalk — ḥ
+            'M13':'wꜣḏ',  // papyrus scepter — wꜣḏ (green, flourish)
+            'M14':'wꜣḏ',  // papyrus scepter with root — wꜣḏ
+            'M15':'ḥ',    // clump of papyrus — ḥ
+            'M16':'ḥ',    // clump of papyrus variant — ḥ
+            'M17':'i',    // reed — i
+            'M17a':'i',   // reed variant — i
+            'M18':'ii',   // two reeds — ii
+            'M19':'nḏm',  // combination plant — nḏm (pleasant)
+            'M20':'sḫt',  // field of reeds — sḫt (field)
+            'M21':'sm',   // plant — sm (plants)
+            'M22':'nḥbt', // rush — nḥbt
+            'M23':'sw',   // sedge — sw (king of Upper Egypt)
+            'M24':'šmꜥ',  // sedge — šmꜥ (Upper Egypt)
+            'M25':'šmꜥ',  // combination sedge — šmꜥ
+            'M26':'šmꜥ',  // sedge without root — šmꜥ
+            'M27':'nrw',  // composite plant — nrw
+            'M28':'mꜣ',   // bundle of reeds — mꜣ
+            'M29':'nḏm',  // pod — nḏm (pleasant, sweet)
+            'M30':'bꜣq',  // root — bꜣq
+            'M31':'ḏꜣm',  // flower — ḏꜣm
+            'M32':'ḫnmt', // spiral — ḫnmt
+            'M33':'it',   // grains of wheat — it (barley, father)
+            'M34':'ḏꜣmt', // spike of grain — ḏꜣmt
+            'M35':'ꜣr',   // heap of grain — ꜣr
+            'M36':'dt',   // bundle of flax — dt
+            'M37':'ꜥr',   // bundle of flax — ꜥr
+            'M38':'ꜥšꜣ',  // wide bundle — ꜥšꜣ (many)
+            'M39':'ꜣskt', // basket of grain — ꜣskt
+            'M40':'iz',    // bundle of reeds — iz (tomb, chamber) (CCER:iz)
+            'M41':'xt',   // piece of wood — xt
+            'M42':'wn',   // flower — wn (open)
+            'M43':'ꜥnḫ',  // vine on trellis — ꜥnḫ
+            'M44':'nnt',  // thorn — nnt
+
+            // ── N:Sky, earth, water ─────────────────────────────────────────────
+            // CCER:N1=pt, N4=iAdt/idt, N5=hrw/ra/zw, N8=Hnmmt, N9=pzD,
+            //   N11=Abd/iaH, N14=dwA/sbA, N15=dwAt, N16=tA, N18=iw, N20=wDb,
+            //   N24=spAt, N25=xAst, N26=Dw, N27=Axt, N28=xa, N29=q, N30=iAt
+            //   N35=n, N35a=mw, N37=S, N40=Sm, N41=id
+            'N1' :'pt',    // sky — pt (heaven)
+            'N2' :'pt',
+            'N3' :'pt',
+            'N4' :'iꜣdt',  // sky with rain — iꜣdt (dew, mist) (CCER:iAdt/idt)
+            'N5' :'rꜥ',    // sun disk — rꜥ/hrw (CCER:ra=N5; also hrw=day, zw=sun)
+            'N6' :'rꜥ',    // sun with uraeus — rꜥ
+            'N7' :'hrw',   // sun with eye — hrw (day) (CCER:hrw)
+            'N8' :'šwt',   // sunshine — šwt (also Ḥnmmt = sunfolk) (CCER:Hnmmt)
+            'N9' :'psḏ',   // moon disk — psḏ (shine, back of spine) (CCER:pzD)
+            'N10':'psḏ',
+            'N11':'iꜥḥ',   // crescent moon — iꜥḥ (moon; also ꜣbd = month) (CCER:Abd/iaH)
+            'N12':'iꜥḥ',
+            'N13':'mꜣbt',  // star in circle — mꜣbt
+            'N14':'dwꜣ',   // star — dwꜣ (adoration, morning star) (CCER:dwA, sbA)
+            'N15':'dwꜣt',  // star in circle (Duat) — dwꜣt (necropolis, underworld) (CCER:dwAt)
+            'N16':'tꜣ',    // land with grains — tꜣ (earth, land) (CCER:tA)
+            'N17':'tꜣ',
+            'N18':'iw',    // sandbank — iw (island) (CCER:iw — most frequent choice)
+            'N19':'sp',    // two sandbanks — sp (shore)
+            'N20':'wḏb',   // tongue of land — wḏb (bank, nome) (CCER:wDb)
+            'N21':'idb',   // low bank — idb (bank, shore)
+            'N22':'nw',    // desert plateau — nw
+            'N23':'ꜣḥt',   // irrigation canal — ꜣḥt (field, arable land)
+            'N24':'sp3t',  // nome sign — sp3t (nome, region) (CCER:spAt)
+            'N25':'ḫꜣst',  // foreign hill — ḫꜣst (desert, foreign land) (CCER:xAst)
+            'N26':'ḏw',    // two hills — ḏw (mountain) (CCER:Dw)
+            'N27':'ꜣḫt',   // horizon — ꜣḫt (Akhet, horizon) (CCER:Axt)
+            'N28':'ḫꜥ',    // sun rising over hill — ḫꜥ (arise, appear in glory) (CCER:xa)
+            'N29':'q',     // hill slope — q (MdC q)
+            'N30':'iꜣt',   // mound of earth — iꜣt (heap, mound) (CCER:iAt)
+            'N31':'wꜣt',   // road with plants — wꜣt (road, way)
+            'N32':'šn',    // lump of clay — šn
+            'N33':'ꜥšꜣ',   // grain of sand — det. many, numerous
+            'N34':'bꜣ',    // ingot of metal — bꜣ (metal, ore)
+            'N35':'n',     // water ripple — n (MdC n)
+            'N35a':'mw',   // three water ripples — mw (water) (CCER:mw)
+            'N36':'mr',    // canal — mr
+            'N37':'š',     // pool — š (MdC S; Unicode 17.0 logogram 'ꞽw' is secondary reading)
+            'N38':'š',
+            'N39':'š',
+            'N40':'šm',    // pool with vegetation — šm (CCER:Sm = go, move)
+            'N41':'id',    // well with ripple — id (CCER:id = uraeus, poison)
+            'N42':'ḥmt',   // well — ḥmt (woman; also warm/wet)
+
+            // ── O:Buildings and monuments ───────────────────────────────────────
+            'O1' :'pr',   // house — pr (house, go out)
+            'O2' :'pr',   // house with flagpole — pr
+            'O3' :'ḥwt',  // combination of buildings — ḥwt (mansion)
+            'O4' :'h',    // reed shelter — h
+            'O5' :'wꜣbt', // winding enclosure — wꜣbt (pure place)
+            'O6' :'ḥwt',  // enclosure — ḥwt (mansion, temple)
+            'O7' :'ḥwt',  // enclosure variant — ḥwt
+            'O8' :'ḥwt',  // combination enclosure — ḥwt
+            'O9' :'ḥwt',  // combination enclosure variant — ḥwt
+            'O10':'ḥwt',  // enclosure with uraei — ḥwt
+            'O11':'ẖ',    // palace — ẖ
+            'O12':'ẖ',    // palace variant — ẖ
+            'O13':'inb',  // castle — inb (wall)
+            'O14':'inb',  // castle variant — inb
+            'O15':'ipt',  // enclosure with seated man — ipt (harim)
+            'O16':'nfr',  // gateway — nfr
+            'O17':'ꜣst',  // gateway variant — ꜣst
+            'O18':'spꜣ',  // shrine — spꜣ
+            'O19':'pr',   // pyramid on base — pr
+            'O20':'ḥwt',  // combination shrine — ḥwt
+            'O21':'s',    // square building — s
+            'O22':'ḫnt',  // booth with pole — ḫnt (throne room)
+            'O23':'iwnw', // obelisk — iwnw (Heliopolis)
+            'O24':'mr',   // pyramid — mr
+            'O25':'ḏd',   // pillar of djed — ḏd (stable, endure)
+            'O26':'iwn',  // pillar — iwn (pillar)
+            'O27':'s',    // hall of columns — s
+            'O28':'iwn',  // column — iwn
+            'O29':'ꜥ',    // wooden column — ꜥ
+            'O30':'sꜣḥ',  // supporting poles — sꜣḥ
+            'O31':'sb3',  // door — sb3 (star, gate)
+            'O32':'sꜥḥ',  // gateway with battlements — sꜥḥ
+            'O33':'st',   // palace facade — st
+            'O34':'z',    // door bolt — z
+            'O35':'sꜣ',   // combination door bolt — sꜣ
+            'O36':'inb',  // wall — inb
+            'O37':'in',   // falling wall — in
+            'O38':'qnbt', // corner of wall — qnbt
+            'O39':'inr',  // stone — inr (stone)
+            'O40':'stb',  // double staircase — stb (also wꜣs)
+            'O41':'ḥpꜣ',  // double ramp — ḥpꜣ
+            'O42':'šwt',  // fence — šwt
+            'O43':'wꜣt',  // low wall — wꜣt
+            'O44':'itrw', // canal — itrw (river, Nile)
+            'O45':'ipt',  // vaulted building — ipt
+            'O46':'qr',   // dome — qr
+            'O47':'niwt', // village with crossroads — niwt (town, city)
+            'O48':'niwt', // enclosed village — niwt
+            'O49':'niwt', // village with crossroads variant — niwt (det. of towns)
+            'O50':'sp',   // threshing floor — sp
+            'O51':'ꜣt',   // granary — ꜣt
+
+            // ── P:Ships and parts of ships ──────────────────────────────────────
+            'P1' :'dpt',  // boat — dpt
+            'P1a':'wiꜣ',  // ceremonial boat — wiꜣ (solar bark)
+            'P2' :'ḫ3',   // sailing boat — ḫ3
+            'P3' :'ḫnt',  // sacred boat — ḫnt
+            'P4' :'mn',   // rowing boat — mn
+            'P5' :'nfw',  // mast — nfw (breath, breeze)
+            'P6' :'ḥmt',  // oar — ḥmt
+            'P7' :'ḥrw',  // harpoon — ḥrw
+            'P8' :'ḥ3w',  // oar variant — ḥ3w
+            'P9' :'ssmt', // ship's part — ssmt
+            'P10':'dp',   // ship's rudder — dp
+            'P11':'mni',  // mooring post — mni (moor, die)
+
+            // ── Q:Domestic and funerary furniture ───────────────────────────────
+            'Q1' :'st',   // seat — st (place, throne)
+            'Q2' :'ws',   // portable seat — ws
+            'Q3' :'p',    // stool — p
+            'Q4' :'wrs',  // headrest — wrs
+            'Q5' :'hn',   // chest — hn (box)
+            'Q6' :'qrs',  // coffin — qrs (bury)
+            'Q7' :'sḏt',  // brazier with flame — sḏt (flame)
+
+            // ── R:Temple furniture and sacred emblems ────────────────────────────
+            'R1' :'ḫꜣwt', // table with jug and loaves — ḫꜣwt (offering table)
+            'R2' :'ḫꜣwt', // table with bread slices — ḫꜣwt
+            'R3' :'wḥḏw', // low table — wḥḏw (offering table)
+            'R4' :'ḥtp',  // bread loaf on mat — ḥtp (offering, peace, rest)
+            'R5' :'k3p',  // censer — k3p (fumigate)
+            'R6' :'k3p',  // censer variant — k3p
+            'R7' :'sntr', // incense bowl — sntr (incense)
+            'R8' :'nṯr',  // flag on pole — nṯr (god)
+            'R9' :'bd',   // combination R8 + V33 — bd (incense)
+            'R10':'ẖrt-nṯr', // necropolis sign — ẖrt-nṯr
+            'R11':'ḏd',   // djed pillar — ḏd (stable, endure; Busiris)
+            'R12':'i3t',  // standard — i3t
+            'R13':'imnt', // falcon + west emblem — imnt (West)
+            'R14':'imnt', // west emblem — imnt (West)
+            'R15':'i3bt', // east emblem — i3bt (East)
+            'R16':'wḫ',   // scepter with feathers — wḫ (Qus emblem)
+            'R17':'t3-wr',// feathered wig — t3-wr (Abydos nome)
+            'R18':'t3-wr',// variant — t3-wr
+            'R19':'wꜣst', // Thebes emblem — wꜣst (Thebes)
+            'R20':'sšt',  // Seshat emblem — sšt (Seshat)
+            'R21':'sšt',  // Seshat variant — sšt
+            'R22':'ḫm',   // Min emblem — ḫm (shrine; Min)
+            'R23':'ḫm',   // Min emblem variant — ḫm
+            'R24':'nit',  // Neith emblem — nit (Neith)
+            'R25':'nit',  // Neith variant — nit
+
+            // ── S:Crowns, dress, staves ──────────────────────────────────────────
+            'S1' :'ḥḏt',  // white crown — ḥḏt (white crown of Upper Egypt)
+            'S2' :'ḥḏt',  // white crown with basket — ḥḏt
+            'S3' :'n',    // red crown — n (phonetic); det. dšrt (Red Crown)
+            'S4' :'dšrt', // red crown with basket — dšrt
+            'S5' :'sḫmty',// double crown — sḫmty
+            'S6' :'sḫmty',// double crown with basket — sḫmty
+            'S7' :'ḫprš', // blue crown — ḫprš
+            'S8' :'3tf',  // atef crown — 3tf
+            'S9' :'šwty', // double plumes — šwty
+            'S10':'mḏḥ',  // headband — mḏḥ
+            'S11':'wsḫ',  // collar — wsḫ (wide)
+            'S12':'nbw',  // gold collar — nbw (gold)
+            'S13':'nb',   // combination collar + foot — nb
+            'S14':'ḥḏ',   // combination collar + mace — ḥḏ (silver)
+            'S14a':'ḏꜥm', // combination collar + was — ḏꜥm (electrum)
+            'S15':'ṯḥn',  // faience pectoral — ṯḥn (sparkle, faience)
+            'S16':'ṯḥnt', // faience pectoral variant — ṯḥnt
+            'S17':'ṯḥnt', // faience pectoral variant 2 — ṯḥnt
+            'S18':'mnit', // bead necklace — mnit
+            'S19':'sḏꜣwty',// necklace and seal — sḏꜣwty (treasurer)
+            'S20':'ḫtm',  // necklace and seal variant — ḫtm (seal)
+            'S21':'iꜥꜥw', // ring — iꜥꜥw (ring)
+            'S22':'sṯ',   // shoulder knot — sṯ
+            'S23':'dmḏ',  // knotted cloth — dmḏ (unite)
+            'S24':'ṯs',   // knotted belt — ṯs (tie, bind)
+            'S25':'iꜥ3w', // garment with ties — iꜥ3w (guide)
+            'S26':'šndyt',// apron — šndyt
+            'S27':'mnḫt', // strips of cloth — mnḫt (clothing)
+            'S28':'ḥbs',  // cloth with fringe — ḥbs (clothing)
+            'S29':'s',    // folded cloth — s
+            'S30':'sf',   // combination cloth — sf (yesterday)
+            'S31':'smꜣ',  // combination cloth — smꜣ
+            'S32':'siꜣ',  // fringed cloth — siꜣ
+            'S33':'ṯbt',  // sandal — ṯbt
+            'S34':'ꜥnḫ',  // sandal strap — ꜥnḫ (life, live)
+            'S35':'šwt',  // sunshade — šwt (shadow, shade)
+            'S36':'šwt',  // sunshade variant — šwt
+            'S37':'ḫw',   // fan — ḫw (fan)
+            'S38':'ḥqꜣ',  // crook — ḥqꜣ (rule, ruler)
+            'S39':'ꜥwt',  // crook variant — ꜥwt (flock)
+            'S40':'wꜣs',  // was-scepter — wꜣs (power, dominion)
+            'S41':'ḏꜥm',  // scepter with spiral — ḏꜥm (fine gold)
+            'S42':'sḫm',  // sekhem scepter — sḫm (power, might)
+            'S43':'mdw',  // staff — mdw (words, speak)
+            'S44':'3ms',  // staff with flail — 3ms
+            'S45':'nḫꜣḫꜣ',// flail — nḫꜣḫꜣ
+
+            // ── T:Warfare, hunting, butchery ─────────────────────────────────────
+            'T1' :'mn',   // angular mace — mn (mace, endure)
+            'T2' :'sqr',  // mace tilted — sqr (smite)
+            'T3' :'ḥḏ',   // pear-shaped mace — ḥḏ (white, bright)
+            'T4' :'ḥḏ',   // mace variant — ḥḏ
+            'T5' :'ḥḏ',   // combination mace — ḥḏ
+            'T6' :'ḥḏḏ',  // combination double mace — ḥḏḏ
+            'T7' :'mdḥ',  // axe — mdḥ (hew)
+            'T7a':'3qḥw', // axe variant — 3qḥw
+            'T8' :'tp',   // dagger — tp (first, upon, head)
+            'T8a':'b3gsw',// dagger variant — b3gsw
+            'T9' :'pd',   // bow — pd (stretch, pḏt bow)
+            'T9a':'pd',   // bow variant — pd
+            'T10':'pd',   // composite bow — pd
+            'T11':'swn',  // arrow — swn (perish, physician)
+            'T12':'rwd',  // bowstring — rwd (hard, firm)
+            'T13':'rs',   // wood tied — rs (wakeful)
+            'T14':'ꜥ3m',  // throw stick — ꜥ3m (det. foreign)
+            'T15':'ꜥ3m',  // throw stick variant — ꜥ3m
+            'T16':'ḫpš',  // scimitar — ḫpš
+            'T17':'wrrt', // chariot — wrrt
+            'T18':'šms',  // crook with package — šms (follow)
+            'T19':'qs',   // harpoon head — qs (bone, bury)
+            'T20':'qs',   // harpoon head variant — qs
+            'T21':'wꜥ',   // harpoon — wꜥ (one)
+            'T22':'sn',   // arrowhead — sn (brother, smell)
+            'T23':'sn',   // arrowhead variant — sn
+            'T24':'iḥ',   // fishing net — iḥ (net)
+            'T25':'db3',  // reed float — db3 (adorn, replace)
+            'T26':'sḫt',  // bird trap — sḫt (trap, snare)
+            'T27':'sḫt',  // bird trap variant — sḫt
+            'T28':'ẖr',   // butcher's block — ẖr (under, beneath)
+            'T29':'nmt',  // combination block + knife — nmt (place of slaughter)
+            'T30':'dmt',  // knife — dmt (knife)
+            'T31':'sšm',  // knife sharpener — sšm (guide)
+            'T32':'sšm',  // combination sharpener — sšm
+            'T33':'sšm',  // butcher's knife sharpener — sšm (butcher)
+            'T34':'nm',   // butcher's knife — nm (knife)
+            'T35':'nm',   // butcher's knife variant — nm
+
+            // ── U:Agriculture, crafts, professions ───────────────────────────────
+            'U1' :'mꜣ',   // sickle — mꜣ (see, true)
+            'U2' :'mꜣ',   // sickle variant — mꜣ
+            'U3' :'mꜣ',   // combination sickle + eye — mꜣ (see)
+            'U4' :'mꜣꜥ',  // combination sickle + Aa11 — mꜣꜥ (true)
+            'U5' :'mꜣꜥ',  // variant — mꜣꜥ
+            'U6' :'mr',   // hoe — mr (love)
+            'U7' :'mr',   // hoe variant — mr
+            'U8' :'ḥn',   // hoe alternate — ḥn (hoe)
+            'U9' :'bdt',  // grain measure — bdt (emmer; also ḥqꜣt measure)
+            'U10':'it',   // grain measure + grain — it (barley)
+            'U11':'ḥqꜣt', // combination crook + measure — ḥqꜣt (hekat measure)
+            'U12':'ḥqꜣt', // combination finger + measure — ḥqꜣt
+            'U13':'šnꜥ',  // plow — šnꜥ (repel); also hb (plow)
+            'U14':'šnꜥ',  // two branches — šnꜥ
+            'U15':'tm',   // sled — tm (complete)
+            'U16':'biꜣ',  // sled with jackal — biꜣ (wonder, metal)
+            'U17':'grg',  // pick — grg (establish, lie)
+            'U18':'grg',  // pick variant — grg
+            'U19':'nw',   // adze — nw (this, those)
+            'U20':'nw',   // adze variant — nw
+            'U21':'stp',  // adze with block — stp (choose)
+            'U22':'mnḫ',  // chisel — mnḫ (efficient, carve)
+            'U23':'mr',   // chisel — mr (ill, friend)
+            'U24':'ḥmt',  // drill for stone — ḥmt (craft, art)
+            'U25':'ḥmt',  // drill variant — ḥmt
+            'U26':'wb3',  // drill for beads — wb3 (open)
+            'U27':'wb3',  // drill variant — wb3
+            'U28':'ḏ3',   // fire drill — ḏ3
+            'U29':'ḏ3',   // fire drill variant — ḏ3
+            'U30':'t3',   // kiln — t3 (hot, mysterious)
+            'U31':'rtḥty',// baker's rake — rtḥty (baker)
+            'U32':'smn',  // mortar and pestle — smn (press down, establish)
+            'U33':'ti',   // pestle — ti
+            'U34':'ḫsf',  // spindle — ḫsf (repel)
+            'U35':'ḫsf',  // combination spindle — ḫsf
+            'U36':'ḥm',   // club for washing — ḥm (majesty, slave)
+            'U37':'ẖꜥq',  // razor — ẖꜥq (shave)
+            'U38':'mḫ3t', // scale — mḫ3t (scale, balance)
+            'U39':'wṯs',  // scale post — wṯs (raise, lift)
+            'U40':'wṯs',  // scale post variant — wṯs
+            'U41':'tḫ',   // plumb bob — tḫ (plumb bob)
+
+            // ── V:Rope, fiber, baskets, bags ────────────────────────────────────
+            'V1' :'šn',   // rope coil — šn (hundred, encircle)
+            'V2' :'st3',  // combination rope + bolt — st3 (drag)
+            'V3' :'st3',  // rope with extra coils — st3
+            'V4' :'wꜣ',   // lasso — wꜣ (away, far)
+            'V5' :'snṯ',  // looped rope — snṯ (plot)
+            'V6' :'šs',   // cord with loop — šs
+            'V7' :'šn',   // cord looped up — šn
+            'V8' :'šn',   // cord variant — šn
+            'V9' :'šnw',  // round cartouche — šnw (cartouche)
+            'V10':'rn',   // oval cartouche — rn (name)
+            'V11':'dni',  // end of cartouche — dni (restrain)
+            'V12':'sšd',  // string — sšd (headband)
+            'V13':'ṯ',    // tethering rope — ṯ
+            'V14':'ṯ',    // tethering rope variant — ṯ
+            'V15':'iṯ',   // combination rope — iṯ (seize)
+            'V16':'s3',   // hobble — s3 (protection)
+            'V17':'s3',   // herdsman's shelter — s3 (protection)
+            'V18':'s3',   // shelter variant — s3
+            'V19':'mḏt',  // hobble variant — mḏt (stable, shrine)
+            'V20':'mḏ',   // hobble — mḏ (10, stable)
+            'V21':'mḏ',   // combination hobble — mḏ
+            'V22':'mḥ',   // whip — mḥ (fill)
+            'V23':'mḥ',   // whip variant — mḥ
+            'V24':'wḏ',   // cord on stick — wḏ (command, decree)
+            'V25':'wḏ',   // cord on stick variant — wḏ
+            'V26':'ꜥd',   // spool — ꜥd (good condition)
+            'V27':'ꜥd',   // spool variant — ꜥd
+            'V28':'ḥ',    // wick — ḥ
+            'V29':'wꜣḥ',  // swab — wꜣḥ (endure)
+            'V30':'nb',   // basket — nb (lord, all, every)
+            'V31':'k',    // basket with handle — k
+            'V31a':'k',   // basket reversed — k
+            'V32':'msn',  // wicker satchel — msn
+            'V33':'šsr',  // linen bag — šsr (linen)
+            'V34':'šsr',  // linen bag variant — šsr
+            'V35':'šsr',  // linen bag variant 2 — šsr
+            'V36':'ḥn',   // receptacle — ḥn
+            'V37':'idr',  // bandage — idr (bandage, herd)
+            'V38':'wt',   // bandage variant — wt
+            'V39':'tit',  // Isis knot — tit
+
+            // ── W:Vessels ────────────────────────────────────────────────────────
+            'W1' :'mrḥt', // oil jar — mrḥt (oil)
+            'W2' :'b3s',  // oil jar without ties — b3s (Bastet)
+            'W3' :'ḥb',   // alabaster basin — ḥb (feast, mourn)
+            'W4' :'ḥb',   // basin + shrine — ḥb (feast)
+            'W5' :'ẖry-ḥbt',// basin + butcher's block — ẖry-ḥbt (lector priest)
+            'W6' :'wḥt',  // vessel — wḥt (cauldron)
+            'W7' :'3bt',  // granite bowl — 3bt (family)
+            'W8' :'3bt',  // granite bowl variant — 3bt
+            'W9' :'Ẑnm',  // stone jug — Ẑnm (Khnum)
+            'W10':'ḥnw',  // cup — ḥnw (vessel, mistress)
+            'W10a':'b3',  // pot — b3
+            'W11':'g',    // ring stand — g
+            'W12':'g',    // ring stand variant — g
+            'W13':'dšrt', // red pot — dšrt (red pot)
+            'W14':'ḥs',   // tall jar — ḥs (praised)
+            'W15':'qbb',  // tall jar with water — qbb (cool, water)
+            'W16':'qbb',  // combination jar — qbb
+            'W17':'ḫnt',  // jar rack — ḫnt
+            'W18':'ḫnt',  // jar rack variant — ḫnt
+            'W19':'mi',   // milk jug — mi (like, as)
+            'W20':'irtt', // milk jug with leaf — irtt (milk)
+            'W21':'irp',  // wine jars — irp (wine)
+            'W22':'ḥnqt', // beer jugs — ḥnqt (beer)
+            'W23':'ḥnqt', // jug with handles — ḥnqt
+            'W24':'nw',   // bowl — nw (also in, ink)
+            'W25':'in',   // bowl with legs — in (bring, fetch)
+
+            // ── X:Breads and cakes ───────────────────────────────────────────────
+            'X1' :'t',    // bread loaf — t
+            'X2' :'t',    // tall bread loaf — t (det. bread)
+            'X3' :'t',    // bread loaf variant — t
+            'X4' :'fq3',  // bread roll — fq3 (cake, reward)
+            'X5' :'ꜥqw',  // bread roll variant — ꜥqw (provisions)
+            'X6' :'p3t',  // round loaf with mark — p3t (loaf)
+            'X7' :'snw',  // half loaf — snw (offerings)
+            'X8' :'di',   // conical loaf — di (give)
+
+            // ── Y:Writings, games, music ─────────────────────────────────────────
+            'Y1' :'mḏꜣt', // papyrus scroll — mḏꜣt (book, scroll)
+            'Y1v':'mḏꜣt',
+            'Y1a':'mḏꜣt',  // rotated papyrus scroll — logogram mḏꜣ.t (book) (Unicode 17 Y1a) // papyrus scroll vertical — mḏꜣt
+            'Y2' :'mḏꜣt', // scroll variant — mḏꜣt
+            'Y3' :'sš',   // scribal kit — sš (write)
+            'Y4' :'sš',   // scribal kit reversed — sš
+            'Y5' :'mn',   // game board — mn (Amun, remain)
+            'Y6' :'ib3',  // game piece — ib3 (dance, game piece)
+            'Y7' :'bnt',  // harp — bnt (harp)
+            'Y8' :'sššt', // sistrum — sššt (sistrum)
+
+            // ── Z:Strokes and geometric shapes ──────────────────────────────────
+            // CCER:no phonetic code for Z1 (it is an ideogram classifier stroke).
+            // Z4=y (two diagonal strokes), Z7=w (hieratic quail variant), Z9=sw3, Z11=im
+            'Z1' :'|',     // single stroke — ideogram marker / classifier / numeral 1
+            'Z2' :'w',     // triple stroke — det. plurality
+            'Z3' :'w',
+            'Z3a':'w',
+            'Z4' :'y',     // two diagonal strokes — y (MdC y)
+            'Z4a':'y',
+            'Z5' :'s',     // diagonal stroke (hieratic) — replacement for dangerous signs
+            'Z6' :'mwt',   // hieratic det. of A13/A14 — mwt (die)
+            'Z7' :'w',     // hieratic quail chick — w (CCER:w; variant of G43)
+            'Z8' :'šn',    // oval — det. round
+            'Z9' :'sw3',   // crossed sticks — sw3 (pass) (CCER:sw3)
+            'Z10':'sw3',
+            'Z11':'im',    // crossed planks — im (who is in) (CCER:im)
+
+            // ── Aa:Unclassified ─────────────────────────────────────────────────
+            // CCER Appendix B:Aa5=Hp, Aa8=qn, Aa11=mAa, Aa13=im/m, Aa14=im/m,
+            //   Aa15=im/m, Aa16=gs, Aa17=sA, Aa20=apr, Aa21=wDa, Aa27=nD, Aa28=qd
+            'Aa1':'ḫ',     // placenta — ḫ (MdC x)
+            'Aa2':'ḫꜥ',    // pustule — det. bodily growths
+            'Aa3':'ḫꜥ',    // pustule with discharge
+            'Aa4':'b3',    // pot — b3 (variant of W10a)
+            'Aa5':'ḥp',    // part of ship — ḥp (Apis bull; law, rule) (CCER:Hp)
+            'Aa6':'tm3',   // unknown — tm3 (mat)
+            'Aa7':'sqr',   // unknown — sqr (smite) (CCER:Aa7=sqr)
+            'Aa8':'qn',    // irrigation canal shape — qn (brave, complete) (CCER:qn)
+            'Aa9':'ḫwd',   // unknown — ḫwd (rich)
+            'Aa10':'drf',  // unknown — drf (writing)
+            'Aa11':'mꜣꜥ',  // unknown — mꜣꜥ (true, just) (CCER:mAa; J11 in old Aa numbering)
+            'Aa12':'mꜣꜥ',
+            'Aa13':'im',   // unknown — im (in, who is in) (CCER:im/m)
+            'Aa14':'im',
+            'Aa15':'m',    // ribs/Aa15 — secondary phonogram for m (primary is G17 owl)
+            'Aa16':'gs',   // short form — gs (side, half) (CCER:gs; J13)
+            'Aa17':'s3',   // back of something — s3 (back, behind) (CCER:sA; J17)
+            'Aa18':'s3',
+            'Aa19':'ḥryt', // unknown — ḥryt (dread)
+            'Aa20':'ꜥpr',  // unknown — ꜥpr (equip, crew) (CCER:apr; J20)
+            'Aa21':'wḏꜥ',  // unknown — wḏꜥ (judge, decide) (CCER:wDa; J21)
+            'Aa22':'wḏꜥ',
+            'Aa23':'mḏd',  // warp between stakes — mḏd (puncture, adhere) (CCER:Aa23)
+            'Aa24':'mḏd',
+            'Aa25':'sm3',  // unknown — sm3 (stolist priest) (CCER:Aa25)
+            'Aa26':'sbi',  // unknown — sbi (rebel, star)
+            'Aa27':'nḏ',   // unknown — nḏ (ask, protect, avenge) (CCER:nD; J27)
+            'Aa28':'qd',   // builder's tool — qd (build, character, shape) (CCER:qd; J28)
+            'Aa29':'qd',
+            'Aa30':'ẑqr',  // frieze element — det. adorn (CCER:J30=Xkr)
+            'Aa31':'ẑqr',
+
+            // ── Extended:animal variants ─────────────────────────────────────────
+            // All codepoints verified against Unicode 12.0 Egyptian Hieroglyphs block.
+            'E9a' :'šꜣ',   // pig variant — šꜣ
+            'E10' :'bꜣ',   // ram of Mendes (alternate posture) — bꜣ
+            'E16a':'inpw', // couchant jackal variant — inpw (Anubis)
+            'E17a':'inpw', // jackal on shrine variant — inpw
+            'E20a':'stš',  // Seth animal variant — stš
+            'E34a':'wn',   // hare variant — wn
+            'E36' :'šꜣ',   // boar/pig (extended) — šꜣ
+            'E37' :'sꜣb',  // canid variant — sꜣb
+            'E38' :'sꜣb',  // lying canid variant — sꜣb
+
+            // ── Extended:bird variants ───────────────────────────────────────────
+            'G6a' :'Ḥr',   // Horus falcon variant — Ḥr
+            'G43a':'w',    // quail chick variant — w
+
+            // ── Extended:reptile/serpent variants ────────────────────────────────
+            'I5a' :'sꜣ',   // lizard variant — sꜣ
+            'I9a' :'f',    // horned viper variant — f
+            'I10a':'ḏ',    // cobra variant — ḏ
+            'I11a':'ḏd',   // cobra erect variant — ḏd
+
+            // ── Extended:N-series variant ────────────────────────────────────────
+            'N33a':'ꜥšꜣ',  // grain of sand variant — det. many/fine/granular
+
+            // ── Extended:Z15–Z16 numeral stroke signs ────────────────────────────
+            // Source:Gardiner §259; Allen Middle Egyptian ch.9.
+            // Z15–Z15h = individual strokes for digits 1–9 (distinct from Z1 ideogram stroke).
+            // Z15i = additional stroke variant. Z16–Z16h = ten-group strokes for 10–90.
+            // Phonetic values are the Egyptian cardinal number words.
+            'Z15' :'wꜥ',   // 1 stroke — wꜥ (one)
+            'Z15a':'snwy', // 2 strokes — snwy (two)
+            'Z15b':'ḫmt',  // 3 strokes — ḫmt (three)
+            'Z15c':'fdw',  // 4 strokes — fdw (four)
+            'Z15d':'diw',  // 5 strokes — diw (five)
+            'Z15e':'srsw', // 6 strokes — srsw (six)
+            'Z15f':'sfḫ',  // 7 strokes — sfḫ (seven)
+            'Z15g':'ḫmnw', // 8 strokes — ḫmnw (eight)
+            'Z15h':'psḏ',  // 9 strokes — psḏ (nine)
+            'Z15i':'wꜥ',   // 1 stroke variant
+            'Z16' :'mḏ',   // 10 strokes — mḏ (ten)
+            'Z16a':'ḏbꜥ',  // 20 strokes — ḏbꜥ (twenty, lit. "fingers")
+            'Z16b':'mꜣbꜣ', // 30 — mꜣbꜣ
+            'Z16c':'ḥmw',  // 40 — ḥmw
+            'Z16d':'diw',  // 50 — diw
+            'Z16e':'srsw', // 60 — srsw
+            'Z16f':'sfḫ',  // 70 — sfḫ
+            'Z16g':'ḫmnw', // 80 — ḫmnw
+            'Z16h':'psḏw', // 90 — psḏw,
+  'A32a':'rw',
+  'A56':'ḫft.y',
+  'A57':'ḥtp-dꞽ-n.y-sw.t',
+  'A58':'ḫbs',
+  'A60':'stꞽ',
+  'A61':'ꜥnn',
+  'A62':'wr',
+  'A64':'fꜣꞽ',
+  'A65':'ꞽr.y-nṯr',
+  'A66':'ꞽḥy',
+  'A68':'wpw.ty',
+  'A70':'ḥḥ',
+  'B5a':'? | mnḫ.t',
+  'B8':'ḥr.w-nb',
+  'B9':'ꞽḥ.yt',
+  'D8a':'ꜥn',
+  'D31a':'ḥm-kꜣ',
+  'D48a':'ḥnt',
+  'D52a':'sšm',
+  'D54a':'ꞽwꞽ',
+  'D64':'ḏr.t',
+  'D65':'šrꞽ',
+  'D66':'wdꞽ',
+  'E28a':'mꜣ-ḥḏ',
+  'F1a':'ḫnt',
+  'F31a':'ms',
+  'F37a':'šꜥd',
+  'F45a':'m',
+  'F46a':'pẖr',
+  'F47a':'pẖr',
+  'F51a':'ḥꜥ.w',
+  'F51b':'ḥꜥ.w',
+  'F53':'mdw',
+  'G20a':'mr (ꞽm.y-r)',
+  'G45a':'dꞽw',
+  'H6a':'šw',
+  'K8':'nꜥr',
+  'L2a':'n(.y)-sw.t-bꞽ.ty',
+  'L8':'ꜥnḫ',
+  'M1a':'hbny',
+  'M1b':'ꞽm=f',
+  'M3a':'m-ḫt',
+  'M10a':'wdn',
+  'M15a':'mḥ.w',
+  'M16a':'mḥ.w',
+  'M17a':'i',
+  'M22a':'nn',
+  'M24a':'tꜣ',
+  'M28a':'šmꜥ.w',
+  'M31a':'srd',
+  'M33a':'ꞽt',
+  'M33b':'tbtb',
+  'M40a':'ꞽs',
+  'N18a':'ꞽmn',
+  'N34a':'bꞽꜣ',
+  'N37a':'š',
+  'NL1':'ꞽnb-ḥḏ',
+  'NL2':'ḫm/ḫpš/ꞽwꜥ',
+  'NL3':'ꞽmn.tt',
+  'NL4':'n.t-rs.yt',
+  'NL5':'n.t-mḥ.yt',
+  'NL5a':'n.t-mḥ.yt',
+  'NL6':'ḫꜣsw.w',
+  'NL7':'wꜥ-m-ḥww-ꞽmn.ty',
+  'NL8':'wꜥ-m-ḥww-ꞽꜣb.ty',
+  'NL9':'ꜥnḏ.ty',
+  'NL10':'km-wr',
+  'NL11':'ḥsbw',
+  'NL12':'ṯb-nṯr',
+  'NL13':'ḥḳꜣ-ꜥnḏ.w',
+  'NL14':'ḫnt.y-ꞽꜣb.ty',
+  'NL15':'ḏhwty',
+  'NL16':'ḥꜣ.t-mḥ.yt',
+  'NL17':'bḥd.t',
+  'NL17a':'smꜣ-bḥd.t',
+  'NU1':'tꜣ-sty',
+  'NU2':'wṯs-ḥr',
+  'NU3':'nḫn',
+  'NU4':'wꜣs.t',
+  'NU5':'nṯr.wy',
+  'NU6':'ꞽḳr',
+  'NU7':'bꜣ.t',
+  'NU8':'tꜣ-wr',
+  'NU9':'mnw',
+  'NU10':'wꜣḏ.t',
+  'NU10a':'wꜣḏ.t',
+  'NU11':'šꜣ/stẖ/stš',
+  'NU11a':'ḥw-n.t',
+  'NU12':'ꜣtf.t',
+  'NU13':'nḏf.t-ḫnt.t',
+  'NU14':'nḏf.t-pḥ.t',
+  'NU15':'wnw.t',
+  'NU16':'mꜣ-ḥḏ',
+  'NU17':'ꞽnpw.t',
+  'NU18':'dwn-ꜥn.wy',
+  'NU19':'bw-ꞽgꜣꞽ',
+  'NU20':'nꜥr.t-ḫnt.t',
+  'NU21':'nꜥr.t-ph.t',
+  'NU22':'mdnꞽ.t',
+  'NU22a':'mdnꞽ.t',
+  'O1a':'pr-ꜥnḫ',
+  'O10a':'ḥw.t-ꜥnḫ',
+  'O19a':'ꞽtr.t',
+  'O24a':'sḫ.t-rꜥ',
+  'O25a':'nḫn-rꜥ',
+  'O29a':'ꜥꜣ',
+  'O50b':'sp',
+  'R2a':'ḫꜣw.t',
+  'R3a':'ḫnt',
+  'R10a':'ẖr.t-nṯr',
+  'R16a':'nfr-tm',
+  'R26':'smꜣ',
+  'R27':'n.t',
+  'R28':'bꜣ.t',
+  'R29':'ꞽtr.t',
+  'S2a':'šmꜥ.w',
+  'S6a':'mḥ.w',
+  'S17a':'šsm',
+  'S26a':'dꜣꞽ.w',
+  'S46':'k',
+  'T3a':'ḥḏw',
+  'T16a':'ḫpš',
+  'T32a':'sšm',
+  'T36':'ꞽkm',
+  'U23a':'mr',
+  'U29a':'wḏꜣ',
+  'U32a':'smn',
+  'U42':'ms.t',
+  'V2a':'stꜣ/sṯꜣ',
+  'V7a':'ꞽꜣḳs',
+  'V12a':'dḳr',
+  'V12b':'wḏ.w-nṯr.w',
+  'V23a':'mḥ',
+  'V28a':'ḥꜥ',
+  'V29a':'sk',
+  'V37a':'ꞽd',
+  'W17a':'ḫnt',
+  'X4a':'t',
+  'X4b':'sn, fḳꜣ :t | sn, fḳꜣ',
+  'X8a':'t-ḥḏ',
+  'Z12':'ḥw',
+  'Aa7a':'sḳ(r)',
+  'Aa32':'sty'
+}; // end gardinerToPhonetic
         // Includes all categories A through Z and Aa1-Aa31
         const gardinerMap = {
-            "A1":"𓀀","A2":"𓀁","A3":"𓀂","A4":"𓀃","A5":"𓀄","A5a":"𓀅","A6":"𓀆","A6a":"𓀇","A6b":"𓀈","A7":"𓀉",
-            "A8":"𓀊","A9":"𓀋","A10":"𓀌","A11":"𓀍","A12":"𓀎","A13":"𓀏","A14":"𓀐","A14a":"𓀑","A15":"𓀒","A16":"𓀓",
-            "A17":"𓀔","A17a":"𓀕","A18":"𓀖","A19":"𓀗","A20":"𓀘","A21":"𓀙","A22":"𓀚","A23":"𓀛","A24":"𓀜","A25":"𓀝",
-            "A26":"𓀞","A27":"𓀟","A28":"𓀠","A29":"𓀡","A30":"𓀢","A31":"𓀣","A32":"𓀤","A33":"𓀦","A34":"𓀧","A35":"𓀨",
-            "A36":"𓀩","A37":"𓀪","A38":"𓀫","A39":"𓀬","A40":"𓀭","A40a":"𓀮","A41":"𓀯","A42":"𓀰","A42a":"𓀱","A43":"𓀲",
-            "A43a":"𓀳","A44":"𓀴","A45":"𓀵","A45a":"𓀶","A46":"𓀷","A47":"𓀸","A48":"𓀹","A49":"𓀺","A50":"𓀻","A51":"𓀼",
-            "A52":"𓀽","A53":"𓀾","A54":"𓀿","A55":"𓁀","A59":"𓁄",
-            "B1":"𓁐","B2":"𓁑","B3":"𓁒","B4":"𓁓","B5":"𓁔","B6":"𓁖","B7":"𓁗",
-            "C1":"𓁚","C2":"𓁜","C3":"𓁟","C4":"𓁠","C5":"𓁡","C6":"𓁢","C7":"𓁣","C8":"𓁤","C9":"𓁥","C10":"𓁦",
-            "C10a":"𓁧","C11":"𓁨","C12":"𓁩","C17":"𓁮","C18":"𓁯","C19":"𓁰","C20":"𓁱",
-            "D1":"𓁶","D2":"𓁷","D3":"𓁸","D4":"𓁹","D5":"𓁺","D6":"𓁻","D7":"𓁼","D8":"𓁽","D9":"𓁿","D10":"𓂀",
+            "A1":"𓀀","A2":"𓀁","A3":"𓀂","A4":"𓀃","A5":"𓀄","A5a":"𓀅","A6":"𓀆","A6a":"𓀇","A6b":"𓀈","A7":"𓀉","A8":"𓀊","A9":"𓀋","A10":"𓀌",
+            "A11":"𓀍","A12":"𓀎","A13":"𓀏","A14":"𓀐","A14a":"𓀑","A15":"𓀒","A16":"𓀓","A17":"𓀔","A17a":"𓀕","A17b":"𓀕","A18":"𓀖","A19":"𓀗","A20":"𓀘",
+            "A21":"𓀙","A22":"𓀚","A23":"𓀛","A24":"𓀜","A25":"𓀝","A26":"𓀞","A27":"𓀟","A28":"𓀠","A29":"𓀡","A30":"𓀢",
+            "A31":"𓀣","A32":"𓀤","A32a":"𓀥","A33":"𓀦","A34":"𓀧","A35":"𓀨","A36":"𓀩","A37":"𓀪","A38":"𓀫","A39":"𓀬",
+            "A40":"𓀭","A40a":"𓀮","A41":"𓀯","A42":"𓀰","A42a":"𓀱","A43":"𓀲","A43a":"𓀳","A44":"𓀴","A45":"𓀵","A45a":"𓀶","A46":"𓀷","A47":"𓀸","A48":"𓀹","A49":"𓀺","A50":"𓀻",
+            "A51":"𓀼","A52":"𓀽","A53":"𓀾","A54":"𓀿","A55":"𓁀","A56":"𓁁","A57":"𓁂","A58":"𓁃","A59":"𓁄","A60":"𓁅",
+            "A61":"𓁆","A62":"𓁇","A63":"𓁈","A64":"𓁉","A65":"𓁊","A66":"𓁋","A67":"𓁌","A68":"𓁍","A69":"𓁎","A70":"𓁏",
+            
+            "B1":"𓁐","B2":"𓁑","B3":"𓁒","B4":"𓁓","B5":"𓁔","B5a":"𓁕","B6":"𓁖","B7":"𓁗","B8":"𓁘","B9":"𓁙",
+            
+            "C1":"𓁚","C2":"𓁛","C2a":"𓁜","C2b":"𓁝","C2c":"𓁞","C3":"𓁟","C4":"𓁠","C5":"𓁡","C6":"𓁢","C7":"𓁣","C8":"𓁤","C9":"𓁥","C10":"𓁦","C10a":"𓁧",
+            "C11":"𓁨","C12":"𓁩","C13":"𓁪","C14":"𓁫","C15":"𓁬","C16":"𓁭","C17":"𓁮","C18":"𓁯","C19":"𓁰","C20":"𓁱",
+            "C21":"𓁲","C22":"𓁳","C23":"𓁴","C24":"𓁵",
+            
+            "D1":"𓁶","D2":"𓁷","D3":"𓁸","D4":"𓁹","D5":"𓁺","D6":"𓁻","D7":"𓁼","D8":"𓁽","D8a":"𓁾","D9":"𓁿","D10":"𓂀",
             "D11":"𓂁","D12":"𓂂","D13":"𓂃","D14":"𓂄","D15":"𓂅","D16":"𓂆","D17":"𓂇","D18":"𓂈","D19":"𓂉","D20":"𓂊",
-            "D21":"𓂋","D22":"𓂌","D23":"𓂍","D24":"𓂎","D25":"𓂏","D26":"𓂐","D27":"𓂑","D27a":"𓂒","D28":"𓂓","D29":"𓂔",
-            "D30":"𓂕","D31":"𓂖","D32":"𓂘","D33":"𓂙","D34":"𓂚","D34a":"𓂛","D35":"𓂜","D36":"𓂝","D37":"𓂞","D38":"𓂟",
-            "D39":"𓂠","D40":"𓂡","D41":"𓂢","D42":"𓂣","D43":"𓂤","D44":"𓂥","D45":"𓂦","D46":"𓂧","D46a":"𓂨","D47":"𓂩",
-            "D48":"𓂪","D49":"𓂬","D50":"𓂭","D51":"𓂷","D52":"𓂸","D53":"𓂺","D54":"𓂻","D55":"𓂽","D56":"𓂾","D57":"𓂿",
-            "D58":"𓃀","D59":"𓃁","D60":"𓃂","D61":"𓃃","D62":"𓃄","D63":"𓃅",
-            "E1":"𓃒","E2":"𓃓","E3":"𓃔","E4":"𓃕","E5":"𓃖","E6":"𓃗","E7":"𓃘","E8":"𓃙","E9":"𓃚","E10":"𓃛",
-            "E11":"𓃞","E12":"𓃟","E13":"𓃠","E14":"𓃡","E15":"𓃢","E16":"𓃣","E17":"𓃥","E18":"𓃧","E19":"𓃨","E20":"𓃩",
-            "E21":"𓃫","E22":"𓃬","E23":"𓃭","E24":"𓃮","E25":"𓃯","E26":"𓃰","E27":"𓃱","E28":"𓃲","E29":"𓃴","E30":"𓃵",
-            "E31":"𓃶","E32":"𓃷","E33":"𓃸","E34":"𓃹",
-            "F1":"𓃾","F2":"𓄀","F3":"𓄁","F4":"𓄂","F5":"𓄃","F6":"𓄄","F7":"𓄅","F8":"𓄆","F9":"𓄇","F10":"𓄈",
-            "F11":"𓄉","F12":"𓄊","F13":"𓄋","F14":"𓄍","F15":"𓄎","F16":"𓄏","F17":"𓄐","F18":"𓄑","F19":"𓄒","F20":"𓄓",
-            "F21":"𓄔","F22":"𓄖","F23":"𓄗","F24":"𓄘","F25":"𓄙","F26":"𓄚","F27":"𓄛","F28":"𓄜","F29":"𓄝","F30":"𓄞",
-            "F31":"𓄟","F32":"𓄡","F33":"𓄢","F34":"𓄣","F35":"𓄤","F36":"𓄥","F37":"𓄦","F38":"𓄨","F39":"𓄪","F40":"𓄫",
-            "F41":"𓄬","F42":"𓄭","F43":"𓄮","F44":"𓄯","F45":"𓄰","F46":"𓄲","F47":"𓄴","F48":"𓄶","F49":"𓄷","F50":"𓄸",
-            "F51":"𓄹","F52":"𓄽",
-            "G1":"𓄿","G2":"𓅀","G3":"𓅁","G4":"𓅂","G5":"𓅃","G6":"𓅄","G7":"𓅆","G7a":"𓅇","G7b":"𓅈","G8":"𓅉",
-            "G9":"𓅊","G10":"𓅋","G11":"𓅌","G12":"𓅎","G13":"𓅏","G14":"𓅐","G15":"𓅑","G16":"𓅒","G17":"𓅓","G18":"𓅔",
-            "G19":"𓅕","G20":"𓅖","G21":"𓅘","G22":"𓅙","G23":"𓅚","G24":"𓅛","G25":"𓅜","G26":"𓅝","G26a":"𓅞","G27":"𓅟",
-            "G28":"𓅠","G29":"𓅡","G30":"𓅢","G31":"𓅣","G32":"𓅤","G33":"𓅥","G34":"𓅦","G35":"𓅧","G36":"𓅨","G37":"𓅪",
-            "G38":"𓅬","G39":"𓅭","G40":"𓅮","G41":"𓅯","G42":"𓅰","G43":"𓅱","G44":"𓅳","G45":"𓅴","G46":"𓅶","G47":"𓅷",
-            "G48":"𓅸","G49":"𓅹","G50":"𓅺","G51":"𓅻","G52":"𓅼","G53":"𓅽","G54":"𓅾",
-            "H1":"𓅿","H2":"𓆀","H3":"𓆁","H4":"𓆂","H5":"𓆃","H6":"𓆄","H7":"𓆆","H8":"𓆇",
-            "I1":"𓆈","I2":"𓆉","I3":"𓆊","I4":"𓆋","I5":"𓆌","I6":"𓆎","I7":"𓆏","I8":"𓆐","I9":"𓆑","I10":"𓆓",
-            "I11":"𓆕","I12":"𓆗","I13":"𓆘","I14":"𓆙","I15":"𓆚",
-            "K1":"𓆛","K2":"𓆜","K3":"𓆝","K4":"𓆞","K5":"𓆟","K6":"𓆠","K7":"𓆡",
-            "L1":"𓆣","L2":"𓆤","L3":"𓆦","L4":"𓆧","L5":"𓆨","L6":"𓆩","L7":"𓆫",
-            "M1":"𓆭","M2":"𓆰","M3":"𓆱","M4":"𓆳","M5":"𓆴","M6":"𓆵","M7":"𓆶","M8":"𓆷","M9":"𓆸","M10":"𓆹",
-            "M11":"𓆻","M12":"𓆼","M13":"𓇅","M14":"𓇆","M15":"𓇇","M16":"𓇉","M17":"𓇋","M18":"𓇍","M19":"𓇎","M20":"𓇏",
-            "M21":"𓇐","M22":"𓇑","M23":"𓇓","M24":"𓇔","M25":"𓇖","M26":"𓇗","M27":"𓇘","M28":"𓇙","M29":"𓇛","M30":"𓇜",
-            "M31":"𓇝","M32":"𓇟","M33":"𓇠","M34":"𓇣","M35":"𓇤","M36":"𓇥","M37":"𓇦","M38":"𓇧","M39":"𓇨","M40":"𓇩",
+            "D21":"𓂋","D22":"𓂌","D23":"𓂍","D24":"𓂎","D25":"𓂏","D26":"𓂐","D27":"𓂑","D27a":"𓂒","D28":"𓂓","D29":"𓂔","D30":"𓂕",
+            "D31":"𓂖","D31a":"𓂗","D32":"𓂘","D33":"𓂙","D34":"𓂚","D34a":"𓂛","D35":"𓂜","D36":"𓂝","D37":"𓂞","D38":"𓂟","D39":"𓂠","D40":"𓂡",
+            "D41":"𓂢","D42":"𓂣","D43":"𓂤","D44":"𓂥","D45":"𓂦","D46":"𓂧","D46a":"𓂨","D47":"𓂩","D48":"𓂪","D48a":"𓂫","D49":"𓂬","D50":"𓂭","D50a":"𓂮","D50b":"𓂯","D50c":"𓂰","D50d":"𓂱","D50e":"𓂲","D50f":"𓂳","D50g":"𓂴","D50h":"𓂵","D50i":"𓂶",
+            "D51":"𓂷","D52":"𓂸","D52a":"𓂹","D53":"𓂺","D54":"𓂻","D54a":"𓂼","D55":"𓂽","D56":"𓂾","D57":"𓂿","D58":"𓃀","D59":"𓃁","D60":"𓃂",
+            "D61":"𓃃","D62":"𓃄","D63":"𓃅","D64":"𓃆","D65":"𓃇","D66":"𓃈","D67":"𓃉","D67a":"𓃊","D67b":"𓃋","D67c":"𓃌","D67d":"𓃍","D67e":"𓃎","D67f":"𓃏","D67g":"𓃐","D67h":"𓃑",
+            
+            "E1":"𓃒","E2":"𓃓","E3":"𓃔","E4":"𓃕","E5":"𓃖","E6":"𓃗","E7":"𓃘","E8":"𓃙","E8a":"𓃚","E9":"𓃛","E9a":"𓃜","E10":"𓃝",
+            "E11":"𓃞","E12":"𓃟","E13":"𓃠","E14":"𓃡","E15":"𓃢","E16":"𓃣","E16a":"𓃤","E17":"𓃥","E17a":"𓃦","E18":"𓃧","E19":"𓃨","E20":"𓃩","E20a":"𓃪",
+            "E21":"𓃫","E22":"𓃬","E23":"𓃭","E24":"𓃮","E25":"𓃯","E26":"𓃰","E27":"𓃱","E28":"𓃲","E28a":"𓃳","E29":"𓃴","E30":"𓃵",
+            "E31":"𓃶","E32":"𓃷","E33":"𓃸","E34":"𓃹","E34a":"𓃺","E36":"𓃻","E37":"𓃼","E38":"𓃽",
+            
+            "F1":"𓃾","F1a":"𓃿","F2":"𓄀","F3":"𓄁","F4":"𓄂","F5":"𓄃","F6":"𓄄","F7":"𓄅","F8":"𓄆","F9":"𓄇","F10":"𓄈",
+            "F11":"𓄉","F12":"𓄊","F13":"𓄋","F13a":"𓄌","F14":"𓄍","F15":"𓄎","F16":"𓄏","F17":"𓄐","F18":"𓄑","F19":"𓄒","F20":"𓄓",
+            "F21":"𓄔","F21a":"𓄕","F22":"𓄖","F23":"𓄗","F24":"𓄘","F25":"𓄙","F26":"𓄚","F27":"𓄛","F28":"𓄜","F29":"𓄝","F30":"𓄞",
+            "F31":"𓄟","F31a":"𓄠","F32":"𓄡","F33":"𓄢","F34":"𓄣","F35":"𓄤","F36":"𓄥","F37":"𓄦","F37a":"𓄧","F38":"𓄨","F38a":"𓄩","F39":"𓄪","F40":"𓄫",
+            "F41":"𓄬","F42":"𓄭","F43":"𓄮","F44":"𓄯","F45":"𓄰","F45a":"𓄱","F46":"𓄲","F46a":"𓄳","F47":"𓄴","F47a":"𓄵","F48":"𓄶","F49":"𓄷","F50":"𓄸",
+            "F51":"𓄹","F51a":"𓄺","F51b":"𓄻","F51c":"𓄼","F52":"𓄽","F53":"𓄾",
+            
+            "G1":"𓄿","G2":"𓅀","G3":"𓅁","G4":"𓅂","G5":"𓅃","G6":"𓅄","G6a":"𓅅","G7":"𓅆","G7a":"𓅇","G7b":"𓅈","G8":"𓅉","G9":"𓅊","G10":"𓅋",
+            "G11":"𓅌","G11a":"𓅍","G12":"𓅎","G13":"𓅏","G14":"𓅐","G15":"𓅑","G16":"𓅒","G17":"𓅓","G18":"𓅔","G19":"𓅕","G20":"𓅖","G20a":"𓅗",
+            "G21":"𓅘","G22":"𓅙","G23":"𓅚","G24":"𓅛","G25":"𓅜","G26":"𓅝","G26a":"𓅞","G27":"𓅟","G28":"𓅠","G29":"𓅡","G30":"𓅢",
+            "G31":"𓅣","G32":"𓅤","G33":"𓅥","G34":"𓅦","G35":"𓅧","G36":"𓅨","G36a":"𓅩","G37":"𓅪","G37a":"𓅫","G38":"𓅬","G39":"𓅭","G40":"𓅮",
+            "G41":"𓅯","G42":"𓅰","G43":"𓅱","G43a":"𓅲","G44":"𓅳","G45":"𓅴","G45a":"𓅵","G46":"𓅶","G47":"𓅷","G48":"𓅸","G49":"𓅹","G50":"𓅺",
+            "G51":"𓅻","G52":"𓅼","G53":"𓅽","G54":"𓅾",
+            
+            "H1":"𓅿","H2":"𓆀","H3":"𓆁","H4":"𓆂","H5":"𓆃","H6":"𓆄","H6a":"𓆅","H7":"𓆆","H8":"𓆇",
+            
+            "I1":"𓆈","I2":"𓆉","I3":"𓆊","I4":"𓆋","I5":"𓆌","I5a":"𓆍","I6":"𓆎","I7":"𓆏","I8":"𓆐","I9":"𓆑","I9a":"𓆒","I10":"𓆓","I10a":"𓆔",
+            "I11":"𓆕","I11a":"𓆖","I12":"𓆗","I13":"𓆘","I14":"𓆙","I15":"𓆚",
+            
+            "K1":"𓆛","K2":"𓆜","K3":"𓆝","K4":"𓆞","K5":"𓆟","K6":"𓆠","K7":"𓆡","K8":"𓆢",
+            
+            "L1":"𓆣","L2":"𓆤","L2a":"𓆥","L3":"𓆦","L4":"𓆧","L5":"𓆨","L6":"𓆩","L6a":"𓆪","L7":"𓆫","L8":"𓆬",
+            
+            "M1":"𓆭","M1a":"𓆮","M1b":"𓆯","M2":"𓆰","M3":"𓆱","M3a":"𓆲","M4":"𓆳","M5":"𓆴","M6":"𓆵","M7":"𓆶","M8":"𓆷","M9":"𓆸","M10":"𓆹","M10a":"𓆺",
+            "M11":"𓆻","M12":"𓆼","M12a":"𓆽","M12b":"𓆾","M12c":"𓆿","M12d":"𓇀","M12e":"𓇁","M12f":"𓇂","M12g":"𓇃","M12h":"𓇄","M13":"𓇅","M14":"𓇆","M15":"𓇇","M15a":"𓇈","M16":"𓇉","M16a":"𓇊","M17":"𓇋","M17a":"𓇌","M18":"𓇍","M19":"𓇎","M20":"𓇏",
+            "M21":"𓇐","M22":"𓇑","M22a":"𓇒","M23":"𓇓","M24":"𓇔","M24a":"𓇕","M25":"𓇖","M26":"𓇗","M27":"𓇘","M28":"𓇙","M28a":"𓇚","M29":"𓇛","M30":"𓇜",
+            "M31":"𓇝","M31a":"𓇞","M32":"𓇟","M33":"𓇠","M33a":"𓇡","M33b":"𓇢","M34":"𓇣","M35":"𓇤","M36":"𓇥","M37":"𓇦","M38":"𓇧","M39":"𓇨","M40":"𓇩","M40a":"𓇪",
             "M41":"𓇫","M42":"𓇬","M43":"𓇭","M44":"𓇮",
+            
             "N1":"𓇯","N2":"𓇰","N3":"𓇱","N4":"𓇲","N5":"𓇳","N6":"𓇴","N7":"𓇵","N8":"𓇶","N9":"𓇷","N10":"𓇸",
-            "N11":"𓇹","N12":"𓇺","N13":"𓇻","N14":"𓇼","N15":"𓇽","N16":"𓇾","N17":"𓇿","N18":"𓈀","N19":"𓈃","N20":"𓈄",
-            "N21":"𓈅","N22":"𓈆","N23":"𓈇","N24":"𓈈","N25":"𓈉","N26":"𓈋","N27":"𓈌","N28":"𓈍","N29":"𓈎","N30":"𓈏",
-            "N31":"𓈐","N32":"𓈑","N33":"𓈒","N34":"𓈔","N35":"𓈖","N35a":"𓈗","N36":"𓈘","N37":"𓈙","N38":"𓈛","N39":"𓈜",
-            "N40":"𓈝","N41":"𓈞","N42":"𓈟",
-            "O1":"𓉐","O2":"𓉒","O3":"𓉓","O4":"𓉔","O5":"𓉕","O6":"𓉗","O7":"𓉞","O8":"𓉟","O9":"𓉠","O10":"𓉡",
-            "O12":"𓉥","O13":"𓉦","O14":"𓉧","O15":"𓉨","O16":"𓉩","O17":"𓉪","O18":"𓉫","O19":"𓉬","O20":"𓉭","O21":"𓉯",
-            "O22":"𓉱","O23":"𓉲","O24":"𓉳","O25":"𓉴","O26":"𓉶","O27":"𓉸","O28":"𓉹","O29":"𓉺","O30":"𓉽","O31":"𓉿",
-            "O32":"𓊀","O33":"𓊁","O34":"𓊃","O35":"𓊄","O36":"𓊅","O37":"𓊊","O38":"𓊋","O39":"𓊌","O40":"𓊍","O41":"𓊎",
-            "O42":"𓊏","O43":"𓊐","O44":"𓊑","O45":"𓊒","O46":"𓊓","O47":"𓊔","O48":"𓊕","O49":"𓊖","O50":"𓊗","O51":"𓊚",
-            "P1":"𓊛","P1a":"𓊜","P2":"𓊝","P3":"𓊞","P4":"𓊠","P5":"𓊡","P6":"𓊢","P7":"𓊣","P8":"𓊤","P9":"𓊥",
-            "P10":"𓊦","P11":"𓊧",
+            "N11":"𓇹","N12":"𓇺","N13":"𓇻","N14":"𓇼","N15":"𓇽","N16":"𓇾","N17":"𓇿","N18":"𓈀","N18a":"𓈁","N18b":"𓈂","N19":"𓈃","N20":"𓈄",
+            "N21":"𓈅","N22":"𓈆","N23":"𓈇","N24":"𓈈","N25":"𓈉","N25a":"𓈊","N26":"𓈋","N27":"𓈌","N28":"𓈍","N29":"𓈎","N30":"𓈏",
+            "N31":"𓈐","N32":"𓈑","N33":"𓈒","N33a":"𓈓","N34":"𓈔","N34a":"𓈕","N35":"𓈖","N35a":"𓈗","N36":"𓈘","N37":"𓈙","N37a":"𓈚","N38":"𓈛","N39":"𓈜","N40":"𓈝",
+            "N41":"𓈞","N42":"𓈟",
+
+            "NL1":"𓈠","NL2":"𓈡","NL3":"𓈢","NL4":"𓈣","NL5":"𓈤","NL5a":"𓈥","NL6":"𓈦","NL7":"𓈧","NL8":"𓈨","NL9":"𓈩","NL10":"𓈪",
+            "NL11":"𓈫","NL12":"𓈬","NL13":"𓈭","NL14":"𓈮","NL15":"𓈯","NL16":"𓈰","NL17":"𓈱","NL17a":"𓈲","NL18":"𓈳","NL19":"𓈴","NL20":"𓈵",
+
+            "NU1":"𓈶","NU2":"𓈷","NU3":"𓈸","NU4":"𓈹","NU5":"𓈺","NU6":"𓈻","NU7":"𓈼","NU8":"𓈽","NU9":"𓈾","NU10":"𓈿","NU10a":"𓉀",
+            "NU11":"𓉁","NU11a":"𓉂","NU12":"𓉃","NU13":"𓉄","NU14":"𓉅","NU15":"𓉆","NU16":"𓉇","NU17":"𓉈","NU18":"𓉉","NU18a":"𓉊","NU19":"𓉋","NU20":"𓉌","NU21":"𓉍","NU22":"𓉎","NU22a":"𓉏",
+            
+            "O1":"𓉐","O1a":"𓉑","O2":"𓉒","O3":"𓉓","O4":"𓉔","O5":"𓉕","O5a":"𓉖","O6":"𓉗","O6a":"𓉘","O6b":"𓉙","O6c":"𓉚","O6d":"𓉛","O6e":"𓉜","O6f":"𓉝","O7":"𓉞","O8":"𓉟","O9":"𓉠","O10":"𓉡","O10a":"𓉢","O10b":"𓉣","O10c":"𓉤",
+            "O11":"𓉥","O12":"𓉦","O13":"𓉧","O14":"𓉨","O15":"𓉩","O16":"𓉪","O17":"𓉫","O18":"𓉬","O19":"𓉭","O20":"𓉯",
+            "O21":"𓉱","O22":"𓉲","O23":"𓉳","O24":"𓉴","O25":"𓉶","O26":"𓉸","O27":"𓉹","O28":"𓉺","O29":"𓉻","O30":"𓉽",
+            "O31":"𓉿","O32":"𓊀","O33":"𓊁","O34":"𓊃","O35":"𓊄","O36":"𓊅","O37":"𓊊","O38":"𓊋","O39":"𓊌","O40":"𓊍",
+            "O41":"𓊎","O42":"𓊏","O43":"𓊐","O44":"𓊑","O45":"𓊒","O46":"𓊓","O47":"𓊔","O48":"𓊕","O49":"𓊖","O50":"𓊗",
+            "O51":"𓊚",
+            
+            "P1":"𓊛","P1a":"𓊜","P2":"𓊝","P3":"𓊞","P4":"𓊠","P5":"𓊡","P6":"𓊢","P7":"𓊣","P8":"𓊤","P9":"𓊥","P10":"𓊦",
+            "P11":"𓊧",
+            
             "Q1":"𓊨","Q2":"𓊩","Q3":"𓊪","Q4":"𓊫","Q5":"𓊬","Q6":"𓊭","Q7":"𓊮",
+            
             "R1":"𓊯","R2":"𓊰","R3":"𓊲","R4":"𓊵","R5":"𓊶","R6":"𓊷","R7":"𓊸","R8":"𓊹","R9":"𓊺","R10":"𓊻",
             "R11":"𓊽","R12":"𓊾","R13":"𓊿","R14":"𓋀","R15":"𓋁","R16":"𓋂","R17":"𓋄","R18":"𓋅","R19":"𓋆","R20":"𓋇",
             "R21":"𓋈","R22":"𓋉","R23":"𓋊","R24":"𓋋","R25":"𓋌",
+            
             "S1":"𓋑","S2":"𓋒","S3":"𓋔","S4":"𓋕","S5":"𓋖","S6":"𓋗","S7":"𓋙","S8":"𓋚","S9":"𓋛","S10":"𓋜",
-            "S11":"𓋝","S12":"𓋞","S13":"𓋟","S14":"𓋠","S14a":"𓋡","S15":"𓋣","S16":"𓋤","S17":"𓋥","S18":"𓋧","S19":"𓋨",
-            "S20":"𓋩","S21":"𓋪","S22":"𓋫","S23":"𓋬","S24":"𓋭","S25":"𓋮","S26":"𓋯","S27":"𓋲","S28":"𓋳","S29":"𓋴",
-            "S30":"𓋵","S31":"𓋶","S32":"𓋷","S33":"𓋸","S34":"𓋹","S35":"𓋺","S36":"𓋼","S37":"𓋽","S38":"𓋾","S39":"𓋿",
-            "S40":"𓌀","S41":"𓌁","S42":"𓌂","S43":"𓌃","S44":"𓌄","S45":"𓌅",
-            "T1":"𓌇","T2":"𓌈","T3":"𓌉","T4":"𓌋","T5":"𓌌","T6":"𓌍","T7":"𓌎","T7a":"𓌏","T8":"𓌐","T8a":"𓌑",
-            "T9":"𓌒","T9a":"𓌓","T10":"𓌔","T11":"𓌕","T12":"𓌗","T13":"𓌘","T14":"𓌙","T15":"𓌚","T16":"𓌛","T17":"𓌝",
-            "T18":"𓌞","T19":"𓌟","T20":"𓌠","T21":"𓌡","T22":"𓌢","T23":"𓌣","T24":"𓌤","T25":"𓌥","T26":"𓌦","T27":"𓌧",
-            "T28":"𓌨","T29":"𓌩","T30":"𓌪","T31":"𓌫","T32":"𓌬","T33":"𓌮","T34":"𓌰","T35":"𓌱",
+            "S11":"𓋝","S12":"𓋞","S13":"𓋟","S14":"𓋠","S14a":"𓋡","S15":"𓋣","S16":"𓋤","S17":"𓋥","S18":"𓋧","S19":"𓋨","S20":"𓋩",
+            "S21":"𓋪","S22":"𓋫","S23":"𓋬","S24":"𓋭","S25":"𓋮","S26":"𓋯","S27":"𓋲","S28":"𓋳","S29":"𓋴","S30":"𓋵",
+            "S31":"𓋶","S32":"𓋷","S33":"𓋸","S34":"𓋹","S35":"𓋺","S36":"𓋼","S37":"𓋽","S38":"𓋾","S39":"𓋿","S40":"𓌀",
+            "S41":"𓌁","S42":"𓌂","S43":"𓌃","S44":"𓌄","S45":"𓌅",
+            
+            "T1":"𓌇","T2":"𓌈","T3":"𓌉","T4":"𓌋","T5":"𓌌","T6":"𓌍","T7":"𓌎","T7a":"𓌏","T8":"𓌐","T8a":"𓌑","T9":"𓌒","T9a":"𓌓","T10":"𓌔",
+            "T11":"𓌕","T12":"𓌗","T13":"𓌘","T14":"𓌙","T15":"𓌚","T16":"𓌛","T17":"𓌝","T18":"𓌞","T19":"𓌟","T20":"𓌠",
+            "T21":"𓌡","T22":"𓌢","T23":"𓌣","T24":"𓌤","T25":"𓌥","T26":"𓌦","T27":"𓌧","T28":"𓌨","T29":"𓌩","T30":"𓌪",
+            "T31":"𓌫","T32":"𓌬","T33":"𓌮","T34":"𓌰","T35":"𓌱",
+            
             "U1":"𓌳","U2":"𓌴","U3":"𓌵","U4":"𓌶","U5":"𓌷","U6":"𓌸","U7":"𓌻","U8":"𓌼","U9":"𓌽","U10":"𓌾",
             "U11":"𓌿","U12":"𓍀","U13":"𓍁","U14":"𓍂","U15":"𓍃","U16":"𓍄","U17":"𓍅","U18":"𓍆","U19":"𓍇","U20":"𓍈",
             "U21":"𓍉","U22":"𓍊","U23":"𓍋","U24":"𓍍","U25":"𓍎","U26":"𓍏","U27":"𓍐","U28":"𓍑","U29":"𓍒","U30":"𓍔",
             "U31":"𓍕","U32":"𓍖","U33":"𓍘","U34":"𓍙","U35":"𓍚","U36":"𓍛","U37":"𓍜","U38":"𓍝","U39":"𓍞","U40":"𓍟",
             "U41":"𓍠",
-            "V1":"𓍢","V2":"𓍬","V3":"𓍮","V4":"𓍯","V5":"𓍰","V6":"𓍱","V7":"𓍲","V8":"𓍴","V9":"𓍶","V10":"𓍷",
+            
+            "V1":"𓍢","V2":"𓍬","V3":"𓍮","V4":"𓍯","V5":"𓍰","V6":"𓍱","V7":"𓍲","V8":"𓍵","V9":"𓍶","V10":"𓍷",
             "V11":"𓍸","V12":"𓍼","V13":"𓍿","V14":"𓎀","V15":"𓎁","V16":"𓎂","V17":"𓎃","V18":"𓎄","V19":"𓎅","V20":"𓎆",
             "V21":"𓎓","V22":"𓎔","V23":"𓎕","V24":"𓎗","V25":"𓎘","V26":"𓎙","V27":"𓎚","V28":"𓎛","V29":"𓎝","V30":"𓎟",
-            "V31":"𓎡","V31a":"𓎢","V32":"𓎣","V33":"𓎤","V34":"𓎥","V35":"𓎧","V36":"𓎨","V37":"𓎩","V38":"𓎫","V39":"𓎬",
-            "W1":"𓎯","W2":"𓎰","W3":"𓎱","W4":"𓎳","W5":"𓎴","W6":"𓎵","W7":"𓎶","W8":"𓎷","W9":"𓎸","W10":"𓎺",
-            "W10a":"𓎻","W11":"𓎼","W12":"𓎽","W13":"𓎾","W14":"𓎿","W15":"𓏁","W16":"𓏂","W17":"𓏃","W18":"𓏅","W19":"𓏇",
-            "W20":"𓏈","W21":"𓏉","W22":"𓏊","W23":"𓏋","W24":"𓏌","W25":"𓏎",
+            "V31":"𓎡","V31a":"𓎢","V32":"𓎣","V33":"𓎤","V34":"𓎦","V35":"𓎧","V36":"𓎨","V37":"𓎩","V38":"𓎫","V39":"𓎬",
+            
+            "W1":"𓎯","W2":"𓎰","W3":"𓎱","W4":"𓎳","W5":"𓎴","W6":"𓎵","W7":"𓎶","W8":"𓎷","W9":"𓎸","W10":"𓎺","W10a":"𓎻",
+            "W11":"𓎼","W12":"𓎽","W13":"𓎾","W14":"𓎿","W15":"𓏁","W16":"𓏂","W17":"𓏃","W18":"𓏅","W19":"𓏇","W20":"𓏈",
+            "W21":"𓏉","W22":"𓏊","W23":"𓏋","W24":"𓏌","W25":"𓏎",
+            
             "X1":"𓏏","X2":"𓏐","X3":"𓏑","X4":"𓏒","X5":"𓏕","X6":"𓏖","X7":"𓏘","X8":"𓏙",
-            "Y1":"𓏛","Y1v":"𓏜","Y2":"𓏝","Y3":"𓏞","Y4":"𓏟","Y5":"𓏠","Y6":"𓏡","Y7":"𓏢","Y8":"𓏣",
-            "Z1":"𓏤","Z2":"𓏥","Z3":"𓏪","Z3a":"𓏫","Z4":"𓏭","Z4a":"𓏮","Z5":"𓏯","Z6":"𓏱","Z7":"𓏲","Z8":"𓏳",
-            "Z9":"𓏴","Z10":"𓏵","Z11":"𓏶",
+            
+            "Y1":"𓏛","Y1v":"𓏜","Y1a":"𓏜","Y2":"𓏝","Y3":"𓏞","Y4":"𓏟","Y5":"𓏠","Y6":"𓏡","Y7":"𓏢","Y8":"𓏣",
+            
+            "Z1":"𓏤","Z2":"𓏥","Z3":"𓏪","Z3a":"𓏫","Z4":"𓏭","Z4a":"𓏮","Z5":"𓏯","Z6":"𓏱","Z7":"𓏲","Z8":"𓏳","Z9":"𓏴","Z10":"𓏵",
+            "Z11":"𓏶",
+            "Z15":"𓏺","Z15a":"𓏻","Z15b":"𓏼","Z15c":"𓏽","Z15d":"𓏾","Z15e":"𓏿","Z15f":"𓐀","Z15g":"𓐁","Z15h":"𓐂","Z15i":"𓐃",
+            "Z16":"𓐄","Z16a":"𓐅","Z16b":"𓐆","Z16c":"𓐇","Z16d":"𓐈","Z16e":"𓐉","Z16f":"𓐊","Z16g":"𓐋","Z16h":"𓐌",
+
             "Aa1":"𓐍","Aa2":"𓐎","Aa3":"𓐏","Aa4":"𓐐","Aa5":"𓐑","Aa6":"𓐒","Aa7":"𓐓","Aa8":"𓐖","Aa9":"𓐗","Aa10":"𓐘",
             "Aa11":"𓐙","Aa12":"𓐚","Aa13":"𓐛","Aa14":"𓐜","Aa15":"𓐝","Aa16":"𓐞","Aa17":"𓐟","Aa18":"𓐠","Aa19":"𓐡","Aa20":"𓐢",
             "Aa21":"𓐣","Aa22":"𓐤","Aa23":"𓐥","Aa24":"𓐦","Aa25":"𓐧","Aa26":"𓐨","Aa27":"𓐩","Aa28":"𓐪","Aa29":"𓐫","Aa30":"𓐬",
-            "Aa31":"𓐭"
-        };
+            "Aa31":"𓐭",
 
-        const inputField = document.getElementById('input-field');
-        const outputField = document.getElementById('output-field');
-        
-        // Listen for input changes
+  
+  
+  
+  
+
+  
+
+  
+
+  
+  "O19a":"𓉮","O20a":"𓉰","O24a":"𓉵","O25a":"𓉷","O29a":"𓉼","O30a":"𓉾",
+  "O33a":"𓊂","O36a":"𓊆","O36b":"𓊇","O36c":"𓊈","O36d":"𓊉",
+  "O50a":"𓊘","O50b":"𓊙",
+  
+  "P3a":"𓊟",
+  
+  "R2a":"𓊱","R3a":"𓊳","R3b":"𓊴","R10a":"𓊼",
+  "R16a":"𓋃",
+  "R26":"𓋍","R27":"𓋎","R28":"𓋏","R29":"𓋐",
+  
+  "S2a":"𓋓","S6a":"𓋘",
+  "S14b":"𓋢","S17a":"𓋦",
+  "S26a":"𓋰","S26b":"𓋱",
+  "S35a":"𓋻",
+  "S46":"𓌆",
+  
+  "T3a":"𓌊",
+  "T11a":"𓌖","T16a":"𓌜",
+  "T32a":"𓌭","T33a":"𓌯","T36":"𓌲",
+  
+  "U6a":"𓌹","U6b":"𓌺",
+  "U23a":"𓍌","U29a":"𓍓",
+  "U32a":"𓍗",
+  "U42":"𓍡",
+  
+  "V1a":"𓍣","V1b":"𓍤","V1c":"𓍥","V1d":"𓍦","V1e":"𓍧","V1f":"𓍨","V1g":"𓍩","V1h":"𓍪","V1i":"𓍫","V2a":"𓍭","V7a":"𓍳",
+  "V11a":"𓍹","V11b":"𓍺","V11c":"𓍻","V12a":"𓍽","V12b":"𓍾",
+  "V20a":"𓎇","V20b":"𓎈","V20c":"𓎉","V20d":"𓎊","V20e":"𓎋","V20f":"𓎌","V20g":"𓎍","V20h":"𓎎","V20i":"𓎏","V20j":"𓎐","V20k":"𓎑","V20l":"𓎒",
+  "V23a":"𓎖","V28a":"𓎜","V29a":"𓎞","V30a":"𓎠",
+  "V37a":"𓎪","V40":"𓎭","V40a":"𓎮",
+  
+  "W3a":"𓎲","W9a":"𓎹",
+  "W14a":"𓏀","W17a":"𓏄","W18a":"𓏆",
+  "W24a":"𓏍",
+  
+  "X4a":"𓏓","X4b":"𓏔","X6a":"𓏗","X8a":"𓏚",
+  
+  "Z2a":"𓏦","Z2b":"𓏧","Z2c":"𓏨","Z2d":"𓏩","Z3b":"𓏬","Z5a":"𓏰",
+  "Z12":"𓏷","Z13":"𓏸","Z14":"𓏹",
+  "Aa7a":"𓐔",
+  "Aa7b":"𓐕",
+  "Aa32":"𓐮",
+  "V11d":"𓐯",
+  "O29b":"𓉻",
+  "V7b":"𓍴",
+  "V33a":"𓎥",
+  "Aa7b":"𓐕"
+};
+
+        const inputField   = document.getElementById('input-field');
+        const outputField  = document.getElementById('output-field');
+        const phoneticOut  = document.getElementById('phonetic-output');
+
         inputField.addEventListener('input', convertText);
 
         function clearInput() {
@@ -311,7 +2212,11 @@
             inputField.focus();
         }
 
-        // ─── Pre-process: normalise Egyptological diacritics → MdC letters ──────
+        // ─── Pre-process:normalise Egyptological diacritics → MdC letters ──────
+        // Step 1:NFC normalise — collapses NFD combining sequences into precomposed
+        //   forms (e.g. h + combining dot below → ḥ) for consistent matching.
+        // Step 2:Apply phoneticToMdc table (longest-match order) to substitute
+        //   every Egyptological special character with its MdC ASCII equivalent.
         function normalisePhoneticsToMdc(raw) {
             let out = raw.normalize('NFC');
             for (const [from, to] of phoneticToMdc) {
@@ -320,13 +2225,36 @@
             return out;
         }
 
+        // ─── Resolve a normalised Gardiner-code string → { glyph, phonetic } ───
+        function resolveGardiner(raw) {
+            const mc = raw.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+            let norm;
+            if (mc) {
+                const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' :mc[1].toUpperCase();
+                norm = letter + mc[2] + mc[3].toLowerCase();
+            } else {
+                norm = raw.toUpperCase();
+            }
+            const glyph    = gardinerMap[norm] || `[${norm}]`;
+            const phonetic = gardinerToPhonetic[norm] !== undefined
+                ? gardinerToPhonetic[norm]
+                :`⟨${norm}⟩`;
+            return { glyph, phonetic };
+        }
+
         // Build a sorted list of multi-letter MdC phonetic codes (longest first)
         // so the tokeniser can greedily match them before falling back to single letters.
         const mdcPhoneticCodes = Object.keys(mdcMap)
             .filter(k => k.length > 1)
             .sort((a, b) => b.length - a.length);
 
-        // ─── Tokenise input into Gardiner codes, operators, and newlines ────────
+        // ─── Step 1:Tokenise ─────────────────────────────────────────────────
+        // Pattern priority:
+        //   1. Aa-prefixed Gardiner codes (Aa1–Aa31)
+        //   2. Standard Gardiner codes:1-2 uppercase letters + digits + optional suffix
+        //   3. Multi-letter MdC phonetic codes (nfr, Htp, anx, etc.) — matched at runtime
+        //   4. Operators and structural characters
+        //   5. Single MdC letter (uniliteral fallback)
         function tokenise(input) {
             const tokens = [];
             let i = 0;
@@ -337,24 +2265,27 @@
                 if (/^[ \t]/.test(rest)) { i++; continue; }
 
                 // Newline
-                if (rest[0] === '\n') { tokens.push({ type: 'newline' }); i++; continue; }
+                if (rest[0] === '\n') { tokens.push({ type:'newline' }); i++; continue; }
 
-                // Operators and dashes
+                // Operators — : (vstack) * (hgroup) ( ) - are MdC layout controls,
+                // NOT hieroglyph signs. They never enter resolveSign(). Unicode format
+                // controls U+13430–U+1345F are emitted later by nodeToUnicode() for
+                // clipboard export only; the rendering engine uses the parsed AST directly.
                 if (':*()-'.includes(rest[0])) {
-                    tokens.push({ type: 'op', value: rest[0] }); i++; continue;
+                    tokens.push({ type:'op', value:rest[0] }); i++; continue;
                 }
 
-                // Aa-prefixed Gardiner code: Aa + digits + optional letter suffix
+                // Aa-prefixed Gardiner code:Aa + digits + optional letter suffix
                 const aaMatch = rest.match(/^[Aa][Aa](\d+)([a-z]?)/i);
                 if (aaMatch && /^[Aa]{2}/.test(rest)) {
                     const full = rest.match(/^Aa\d+[a-z]?/i);
-                    if (full) { tokens.push({ type: 'sign', value: full[0] }); i += full[0].length; continue; }
+                    if (full) { tokens.push({ type:'sign', value:full[0] }); i += full[0].length; continue; }
                 }
 
-                // Standard Gardiner code: 1-2 letters + digits + optional suffix
+                // Standard Gardiner code:1-2 letters + digits + optional suffix
                 const gcMatch = rest.match(/^[A-Za-z]{1,2}\d+[A-Za-z]?/);
                 if (gcMatch) {
-                    tokens.push({ type: 'sign', value: gcMatch[0] }); i += gcMatch[0].length; continue;
+                    tokens.push({ type:'sign', value:gcMatch[0] }); i += gcMatch[0].length; continue;
                 }
 
                 // Multi-letter MdC phonetic codes (greedy, longest first)
@@ -364,7 +2295,7 @@
                         // Confirm it's not immediately followed by a digit (which would make it a Gardiner code prefix)
                         const after = rest[code.length];
                         if (!after || !/\d/.test(after)) {
-                            tokens.push({ type: 'sign', value: code });
+                            tokens.push({ type:'sign', value:code });
                             i += code.length;
                             matched = true;
                             break;
@@ -375,86 +2306,433 @@
 
                 // Single ASCII letter (uniliteral MdC fallback)
                 if (/[A-Za-z]/.test(rest[0])) {
-                    tokens.push({ type: 'sign', value: rest[0] }); i++; continue;
+                    tokens.push({ type:'sign', value:rest[0] }); i++; continue;
                 }
 
-                // Anything else — skip silently
+                // Anything else — skip silently (punctuation, digits not in code, etc.)
                 i++;
             }
             return tokens;
         }
 
-        // ─── Resolve a sign token (MdC code or Gardiner code) → glyph ──────────
+        // ═══════════════════════════════════════════════════════════════════════
+        // QUADRAT LAYOUT ENGINE
+        // ═══════════════════════════════════════════════════════════════════════
+        //
+        // Unicode 12.0 hieroglyph layout controls (U+13430–U+13438) have no
+        // visual rendering support in any current browser or font. Instead, we
+        // parse the MdC operator tree ourselves and build an SVG/HTML layout
+        // that accurately represents vertical stacking (:) and horizontal
+        // grouping (*) as the Egyptological community intends.
+        //
+        // ARCHITECTURE:
+        //   parse(tokens) → AST of { type, children } nodes
+        //     type:'sequence'  — top-level list of quadrats (space-separated)
+        //           'quadrat'   — a single layout unit rendered as one block
+        //           'vstack'    — colon (:) operator — stack children vertically
+        //           'hgroup'    — asterisk (*) operator — group children side-by-side
+        //           'glyph'     — leaf node:a single hieroglyph character
+        //           'unknown'   — unrecognised code, renders as [CODE]
+        //           'newline'   — line break
+        //
+        //   renderAST(node) → HTML string
+        //     Each vstack becomes a CSS flex-column container sized to fit.
+        //     Each hgroup becomes a CSS flex-row container.
+        //     Glyphs scale uniformly within their quadrat so the tallest
+        //     column in a vstack equals the full quadrat height.
+        // ═══════════════════════════════════════════════════════════════════════
+
+        // ─── Step 2:Resolve a sign token → { glyph, phonetic, type } ──────────
         function resolveSign(value) {
-            // Try MdC map (includes uniliterals and multi-letter codes)
+            // Try MdC single-letter map first (case-sensitive)
             if (mdcMap[value]) {
                 const gc = mdcMap[value];
-                return gardinerMap[gc] || `[${gc}]`;
+                return {
+                    glyph:gardinerMap[gc] || null,
+                    phonetic:mdcToPhonetic[value] || value,
+                    type:gardinerType[gc] || 'phon',
+                    code:gc
+                };
             }
-
             // Try as Gardiner code
-            const mc = value.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
-            let norm;
-            if (mc) {
-                const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' : mc[1].toUpperCase();
-                norm = letter + mc[2] + mc[3].toLowerCase();
-            } else {
-                norm = value.toUpperCase();
-            }
-
-            return gardinerMap[norm] || `[${norm}]`;
+            const { glyph, phonetic } = resolveGardiner(value);
+            const isUnknown = glyph.startsWith('[');
+            const norm = (() => {
+                const mc = value.match(/^([A-Za-z]{1,2})(\d+)([A-Za-z]?)$/);
+                if (mc) {
+                    const letter = mc[1].toLowerCase() === 'aa' ? 'Aa' :mc[1].toUpperCase();
+                    return letter + mc[2] + mc[3].toLowerCase();
+                }
+                return value.toUpperCase();
+            })();
+            return {
+                glyph:isUnknown ? null :glyph,
+                phonetic,
+                type:gardinerType[norm] || (isUnknown ? null :'phon'),
+                code:value,
+                unknown:isUnknown ? value :null
+            };
         }
 
-        function convertText() {
-            const raw = inputField.value;
+        // ─── Step 3:Parse token stream → AST ────────────────────────────────
+        // Grammar (simplified, left-recursive eliminated):
+        //   sequence  = quadrat (' ' quadrat)*
+        //   quadrat   = vstack
+        //   vstack    = hgroup (':' hgroup)*
+        //   hgroup    = atom ('*' atom)*
+        //   atom      = '(' vstack ')' | sign
+        //
+        // We implement this as a recursive descent parser over the flat token array.
 
-            // Step 1: normalise Egyptological phonetic chars to MdC
-            const input = normalisePhoneticsToMdc(raw);
+        function parse(tokens) {
+            let pos = 0;
 
-            // Step 2: tokenise
-            const tokens = tokenise(input);
+            function peek() { return tokens[pos]; }
+            function consume() { return tokens[pos++]; }
+            function atEnd() { return pos >= tokens.length; }
 
-            // Step 3: convert each token to its glyph
-            let result = '';
-            for (const token of tokens) {
-                if (token.type === 'newline') {
-                    result += '\n';
-                } else if (token.type === 'op') {
-                    // Skip formatting operators in V1 (they don't affect output in textarea)
+            // atom = parenthesised group or single sign
+            function parseAtom() {
+                const t = peek();
+                if (!t) return null;
+                if (t.type === 'op' && t.value === '(') {
+                    consume(); // eat '('
+                    const inner = parseVstack();
+                    if (peek() && peek().type === 'op' && peek().value === ')') consume();
+                    // Wrap in enclosure marker for optional visual treatment
+                    return { type:'enclosure', child:inner };
+                }
+                if (t.type === 'sign') {
+                    consume();
+                    const r = resolveSign(t.value);
+                    if (r.unknown) return { type:'unknown', code:r.unknown, phonetic:r.phonetic };
+                    return { type:'glyph', glyph:r.glyph, phonetic:r.phonetic, signType:r.type, code:r.code };
+                }
+                return null;
+            }
+
+            // hgroup = atom ('*' atom)*
+            function parseHgroup() {
+                const first = parseAtom();
+                if (!first) return null;
+                const children = [first];
+                while (!atEnd() && peek().type === 'op' && peek().value === '*') {
+                    consume(); // eat '*'
+                    const next = parseAtom();
+                    if (next) children.push(next);
+                }
+                if (children.length === 1) return children[0];
+                return { type:'hgroup', children };
+            }
+
+            // vstack = hgroup (':' hgroup)*
+            function parseVstack() {
+                const first = parseHgroup();
+                if (!first) return null;
+                const children = [first];
+                while (!atEnd() && peek().type === 'op' && peek().value === ':') {
+                    consume(); // eat ':'
+                    const next = parseHgroup();
+                    if (next) children.push(next);
+                }
+                if (children.length === 1) return children[0];
+                return { type:'vstack', children };
+            }
+
+            // sequence:parse quadrats separated by implicit spaces or explicit '-'
+            // (operators between quadrats don't exist in MdC — each quadrat is
+            // terminated when we hit a newline or run out of tokens without an op)
+            const quadrats = [];
+            const phonLines = [[]]; // phonetic parts, split by newlines
+            const typeLines = [[]]; // sign-type annotations per line
+
+            while (!atEnd()) {
+                const t = peek();
+                if (t.type === 'newline') {
+                    consume();
+                    quadrats.push({ type:'newline' });
+                    phonLines.push([]);
+                    typeLines.push([]);
                     continue;
-                } else if (token.type === 'sign') {
-                    const glyph = resolveSign(token.value);
-                    result += glyph;
+                }
+                if (t.type === 'op' && t.value === '-') {
+                    consume();
+                    phonLines[phonLines.length - 1].push(' ');
+                    continue;
+                }
+                // Skip stray closing parens at top level
+                if (t.type === 'op' && (t.value === ')')) { consume(); continue; }
+
+                const node = parseVstack();
+                if (node) {
+                    quadrats.push(node);
+                    phonLines[phonLines.length - 1].push(getPhonetic(node));
+                    typeLines[typeLines.length - 1].push(...getTypeAnnotations(node));
                 }
             }
 
-            outputField.value = result;
+            return { type:'sequence', quadrats, phonLines, typeLines };
         }
 
+        // ─── Phonetic string extraction from AST node ─────────────────────────
+        function getPhonetic(node) {
+            if (!node) return '';
+            switch (node.type) {
+                case 'glyph':return node.phonetic || '';
+                case 'unknown':return `⟨${node.code}⟩`;
+                case 'enclosure':return `(${getPhonetic(node.child)})`;
+                case 'hgroup':return node.children.map(getPhonetic).join('·');
+                case 'vstack':return node.children.map(getPhonetic).join('·');
+                case 'newline':return '\n';
+                default:return '';
+            }
+        }
+
+        // ─── Sign-type annotations:collect {phon, det, log, num} from AST ──────
+        // Returns array of {phonetic, signType, code} objects for the preview row.
+        function getTypeAnnotations(node) {
+            if (!node) return [];
+            switch (node.type) {
+                case 'glyph':
+                    if (!node.phonetic) return [];
+                    return [{ phonetic:node.phonetic, signType:node.signType || 'phon', code:node.code }];
+                case 'unknown':
+                    return [{ phonetic:`⟨${node.code}⟩`, signType:null, code:node.code }];
+                case 'enclosure':
+                    return getTypeAnnotations(node.child);
+                case 'hgroup':
+                case 'vstack':
+                    return node.children.flatMap(getTypeAnnotations);
+                default:return [];
+            }
+        }
+
+        // ─── Step 4:Render AST → HTML ────────────────────────────────────────
+        // Each quadrat is rendered as a self-contained inline-flex block.
+        // The base glyph size (em units) is set on the sequence container;
+        // vstack/hgroup children scale to fill their allocated space.
+
+        // Base quadrat height in pixels. All stacked/grouped children subdivide this.
+        const GLYPH_SIZE_PX = 64;
+
+        function renderNode(node, availH, availW) {
+            if (!node) return '';
+            switch (node.type) {
+                case 'glyph':
+                    return renderGlyph(node.glyph, availH, availW);
+                case 'unknown':
+                    return `<span class="q-unknown" style="font-size:${Math.round(availH * 0.32)}px;width:${availW}px;height:${availH}px;line-height:${availH}px;">[${node.code}]</span>`;
+                case 'enclosure':
+                    return renderNode(node.child, availH, availW);
+                case 'hgroup':
+                    return renderHgroup(node, availH, availW);
+                case 'vstack':
+                    return renderVstack(node, availH, availW);
+                default:
+                    return '';
+            }
+        }
+
+        function renderGlyph(glyph, h, w) {
+            if (!glyph) return `<span class="q-empty" style="width:${w}px;height:${h}px;"></span>`;
+            // Fill the cell as aggressively as possible.
+            // Noto hieroglyphs sit within ~90% of their em-square, so 0.95× min(h,w)
+            // gets the glyph right up to the cell edges without clipping.
+            const fs = Math.round(Math.min(h, w) * 0.95);
+            return `<span class="q-glyph hieroglyph" style="font-size:${fs}px;width:${w}px;height:${h}px;line-height:${h}px;">${glyph}</span>`;
+        }
+
+        function renderHgroup(node, availH, availW) {
+            const n = node.children.length;
+            const childW = Math.round(availW / n);
+            const inner = node.children.map(c => renderNode(c, availH, childW)).join('');
+            return `<span class="q-hgroup" style="height:${availH}px;width:${availW}px;">${inner}</span>`;
+        }
+
+        function renderVstack(node, availH, availW) {
+            const n = node.children.length;
+            const childH = Math.round(availH / n);
+            const inner = node.children.map(c => renderNode(c, childH, availW)).join('');
+            return `<span class="q-vstack" style="height:${availH}px;width:${availW}px;">${inner}</span>`;
+        }
+
+        // ─── Step 5:Measure quadrat aspect ratio for width allocation ────────
+        // hgroup of N children → N× as wide; vstack → widest child's aspect.
+        function measureAspect(node) {
+            if (!node) return 1;
+            switch (node.type) {
+                case 'glyph':
+                case 'unknown':return 1;
+                case 'enclosure':return measureAspect(node.child);
+                case 'hgroup':return node.children.reduce((s, c) => s + measureAspect(c), 0);
+                case 'vstack':return Math.max(...node.children.map(measureAspect));
+                default:return 1;
+            }
+        }
+
+        // ─── Step 6:Full render pipeline ─────────────────────────────────────
+        function renderSequence(ast, useFormat) {
+            if (!ast || ast.quadrats.length === 0) return '';
+
+            const H = GLYPH_SIZE_PX;
+            const parts = [];
+
+            for (const node of ast.quadrats) {
+                if (node.type === 'newline') {
+                    parts.push('<br>');
+                    continue;
+                }
+                if (!useFormat) {
+                    parts.push(renderFlat(node, H));
+                    continue;
+                }
+                const aspect = measureAspect(node);
+                const W = Math.round(H * aspect);
+                parts.push(
+                    `<span class="q-quadrat" style="width:${W}px;height:${H}px;">${renderNode(node, H, W)}</span>`
+                );
+            }
+            return parts.join('');
+        }
+
+        // Flat render (stacking disabled) — emit glyphs sequentially at full size
+        function renderFlat(node, h) {
+            if (!node) return '';
+            switch (node.type) {
+                case 'glyph':return renderGlyph(node.glyph, h, h);
+                case 'unknown':return `<span class="q-unknown" style="font-size:${Math.round(h*0.32)}px;line-height:${h}px;">[${node.code}]</span>`;
+                case 'enclosure':return renderFlat(node.child, h);
+                case 'hgroup':return node.children.map(c => renderFlat(c, h)).join('');
+                case 'vstack':return node.children.map(c => renderFlat(c, h)).join('');
+                default:return '';
+            }
+        }
+
+        // ─── Unicode copy-string builder (for clipboard) ──────────────────────
+        // Even though browsers can't render U+13430 stacking, we still copy the
+        // proper Unicode sequence so pastes into future-capable software work.
+        function buildUnicodeString(ast, useFormat) {
+            let out = '';
+            for (const node of ast.quadrats) {
+                if (node.type === 'newline') { out += '\n'; continue; }
+                out += nodeToUnicode(node, useFormat);
+            }
+            return out;
+        }
+
+        function nodeToUnicode(node, useFormat) {
+            if (!node) return '';
+            switch (node.type) {
+                case 'glyph':return node.glyph || '';
+                case 'unknown':return `[${node.code}]`;
+                case 'enclosure':
+                    return useFormat
+                        ? '\u{13437}' + nodeToUnicode(node.child, useFormat) + '\u{13438}'
+                        :nodeToUnicode(node.child, useFormat);
+                case 'hgroup':
+                    return node.children.map((c, i) =>
+                        (i > 0 && useFormat ? '\u{13431}' :'') + nodeToUnicode(c, useFormat)
+                    ).join('');
+                case 'vstack':
+                    return node.children.map((c, i) =>
+                        (i > 0 && useFormat ? '\u{13430}' :'') + nodeToUnicode(c, useFormat)
+                    ).join('');
+                default:return '';
+            }
+        }
+
+        // ─── Main converter ───────────────────────────────────────────────────────
+        function convertText() {
+            const raw       = inputField.value;
+            const useFormat = document.getElementById('format-controls').checked;
+
+            // Step 1:swap any Egyptological phonetic chars → MdC equivalents
+            const input = normalisePhoneticsToMdc(raw);
+
+            // Step 2:tokenise
+            const tokens = tokenise(input);
+
+            // Step 3:parse into AST
+            const ast = parse(tokens);
+
+            // Step 4:render HTML layout
+            const html = renderSequence(ast, useFormat);
+
+            // Step 5:build Unicode copy string
+            const unicodeStr = buildUnicodeString(ast, useFormat);
+
+            // ── Render hieroglyphs into the output <div> ──────────────────────
+            if (!html) {
+                outputField.innerHTML = '<span class="output-placeholder">𓇋𓅱𓏏</span>';
+            } else {
+                outputField.innerHTML = `<span class="q-sequence">${html}</span>`;
+            }
+
+            // Store Unicode string for copy
+            outputField.dataset.raw = unicodeStr;
+
+            // ── Render phonetic preview ───────────────────────────────────────
+            const phonStr = ast.phonLines.map(line => line.join('')).join('\n').trim();
+            if (!phonStr) {
+                phoneticOut.innerHTML = '<span class="output-placeholder">Phonetic preview will appear here…</span>';
+            } else {
+                phoneticOut.textContent = phonStr;
+            }
+
+            // ── Render sign-type badge row ────────────────────────────────────
+            const typeOut = document.getElementById('type-output');
+            const allAnnotations = ast.typeLines ? ast.typeLines.flat() :[];
+            if (allAnnotations.length === 0 || !phonStr) {
+                typeOut.innerHTML = '';
+            } else {
+                // Group consecutive signs of the same type for cleaner display
+                const typeLabels = { phon:'Phon.', det:'Det.', log:'Log.', num:'Num.' };
+                const typeColors = { phon:'var(--gold)', det:'var(--cyan)', log:'#c9a0dc', num:'#90ee90' };
+                const badges = allAnnotations.map(ann => {
+                    if (!ann.signType) return `<span class="type-badge type-unknown">?</span>`;
+                    const label = typeLabels[ann.signType] || ann.signType;
+                    const color = typeColors[ann.signType] || 'var(--text)';
+                    const title = `${ann.code}:${ann.phonetic} — ${label}`;
+                    return `<span class="type-badge type-${ann.signType}" title="${title}" style="border-color:${color};color:${color};">${label}</span>`;
+                });
+                typeOut.innerHTML = `<div class="type-badge-row">${badges.join('')}</div>`;
+            }
+        }
+
+        // ─── Copy hieroglyphs from the div ────────────────────────────────────────
         function copyToClipboard() {
-            if (!outputField.value) return;
+            const text = outputField.dataset.raw;
+            if (!text || outputField.querySelector('.output-placeholder')) return;
 
-            // Standard fallback copy method
-            outputField.select();
-            outputField.setSelectionRange(0, 99999); 
-            document.execCommand('copy');
-            
-            // Remove selection
-            window.getSelection().removeAllRanges();
+            navigator.clipboard.writeText(text).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            });
 
-            // Provide visual feedback
             const btn = document.getElementById('copy-btn');
             const originalHTML = btn.innerHTML;
-            
-            btn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span id="copy-text">Copied!</span>`;
+            btn.innerHTML = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Copied!</span>`;
             btn.style.backgroundColor = 'var(--cyan-dim)';
             btn.style.borderColor = 'var(--cyan)';
-
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.backgroundColor = '';
                 btn.style.borderColor = '';
             }, 2000);
+        }
+
+        // ─── Toggle Embedded Reference Window ──────────────────────────────────
+        function toggleReferenceWindow() {
+            const section = document.querySelector('.reference-window-section');
+            const btn = document.querySelector('.reference-toggle-btn');
+            section.classList.toggle('collapsed');
+            btn.textContent = section.classList.contains('collapsed') ? '▶ Expand' :'▼ Collapse';
         }
     </script>
 </body>
