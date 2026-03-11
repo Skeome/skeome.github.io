@@ -1,6 +1,11 @@
 /* Transliterator Styles - Aligned with Wiki Theme */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 /* Hieroglyph Font */
 .hieroglyph {
     font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', Arial, sans-serif;
@@ -15,6 +20,16 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .transliterator-container {
+        padding: 1rem 0.5rem;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
 }
 
 /* Header */
@@ -71,19 +86,54 @@
     line-height: 1.5;
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .features-box li::before {
     content: "•";
     color: var(--gold);
     font-weight: bold;
-    margin-right: 0.8rem;
+    margin-right: 0;
     flex-shrink: 0;
 }
 
 .features-box strong {
     color: var(--text-bright);
     font-weight: 600;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (max-width: 640px) {
+    .features-box {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .features-box h3 {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .features-box li {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        word-break: break-word;
+        min-width: 0;
+    }
+
+    .features-box ul {
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-box li {
+        font-size: 0.75rem;
+        word-spacing: -0.05em;
+    }
 }
 
 /* Main Grid */
@@ -119,15 +169,12 @@
     opacity: 0.9;
 }
 
-.input-header {
+.input-header,
+.output-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 0.5rem;
-}
-
-.input-header label {
-    margin-bottom: 0;
 }
 
 .input-header button {
@@ -154,7 +201,7 @@ textarea {
     border-radius: 0.3rem;
     resize: none;
     width: 100%;
-    height: 250px;
+    height: 250px; /* Locked height for symmetry */
     box-sizing: border-box;
     transition: border-color 0.3s;
     font-size: 0.9rem;
@@ -172,15 +219,10 @@ textarea::placeholder {
 }
 
 #output-field {
-    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
     text-align: center;
     background-color: rgba(15,13,8,0.95);
     padding: 1.2rem;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    text-shadow: 0 0 20px var(--gold-glow);
     width: 100%;
     height: 250px;
     box-sizing: border-box;
@@ -190,6 +232,122 @@ textarea::placeholder {
     border: 1px solid rgba(212,175,55,0.2);
     border-radius: 0.3rem;
     overflow-y: auto;
+    cursor: default;
+    user-select: text;
+}
+
+/* ── Quadrat Layout Engine Styles ─────────────────────────────────── */
+
+.q-sequence {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    row-gap: 12px;
+}
+
+.q-quadrat {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.q-vstack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.q-hgroup {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.q-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-shadow: 0 0 20px var(--gold-glow);
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+    font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+}
+
+.q-unknown {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-dim);
+    font-family: 'VT323', monospace;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.output-placeholder {
+    color: var(--cyan-dim);
+    opacity: 0.4;
+    font-size: 3.5rem;
+    pointer-events: none;
+    font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', sans-serif;
+}
+
+/* ── Phonetic Preview Panel ──────────────────────────────────────────── */
+.phonetic-preview-panel {
+    background: rgba(0, 209, 255, 0.03);
+    border: 1px solid rgba(0, 209, 255, 0.15);
+    border-radius: 0.3rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.phonetic-preview-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+    padding-bottom: 0.4rem;
+}
+
+.phonetic-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.phonetic-hint {
+    font-family: 'VT323', monospace;
+    font-size: 0.75rem;
+    color: var(--cyan-dim);
+    opacity: 0.6;
+}
+
+.phonetic-output {
+    font-family: 'Crimson Pro', 'Gentium Plus', Georgia, serif;
+    font-size: 1.4rem;
+    color: var(--text-bright);
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    min-height: 2rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    /* Egyptological diacritics render better with these settings */
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1;
 }
 
 /* Action Bar */
@@ -362,57 +520,217 @@ textarea::placeholder {
     letter-spacing: 0.05em;
 }
 
-/* ── Phonetic Preview Panel ──────────────────────────────────────────── */
-.phonetic-preview-panel {
-    background: rgba(0, 209, 255, 0.03);
-    border: 1px solid rgba(0, 209, 255, 0.15);
-    border-radius: 0.3rem;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
+/* ── Reference mode grid (two-column: MdC + phonetic) ───────────────── */
+.ref-mode-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
 }
 
-.phonetic-preview-header {
+@media (max-width: 720px) {
+    .ref-mode-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ref-mode-block {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ref-mode-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    border-bottom: 1px solid rgba(212,175,55,0.15);
     padding-bottom: 0.4rem;
 }
 
-.phonetic-label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.75rem;
-    color: var(--cyan);
+.ref-mode-hint {
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+    color: var(--cyan-dim);
+    opacity: 0.6;
+    margin: 0 0 0.5rem;
+}
+
+/* Phonetic diacritic cheat sheet — wider items to show glyph + chars */
+.cheat-sheet--phonetic {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.cheat-phonetic-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.cheat-phon {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--text-bright);
     letter-spacing: 0.1em;
+    line-height: 1.2;
+}
+
+.cheat-also {
+    font-family: 'VT323', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan-dim);
+    opacity: 0.55;
+    letter-spacing: 0.04em;
+}
+/* ── Sign-Type Badge Row (V3 addition) ───────────────────────────────────── */
+
+.type-output {
+    margin-top: 0.6rem;
+    min-height: 0;
+    transition: min-height 0.2s;
+}
+
+.type-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.2rem;
+    border: 1px solid;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.type-badge:hover {
+    opacity: 1;
+}
+
+.type-badge.type-phon  { border-color: var(--gold);  color: var(--gold);  background: rgba(212,175,55,0.06); }
+.type-badge.type-det   { border-color: var(--cyan);  color: var(--cyan);  background: rgba(0,209,255,0.06);  }
+.type-badge.type-log   { border-color: #c9a0dc;      color: #c9a0dc;      background: rgba(201,160,220,0.06);}
+.type-badge.type-num   { border-color: #90ee90;      color: #90ee90;      background: rgba(144,238,144,0.06);}
+.type-badge.type-unknown { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.4); }
+
+/* ── Type legend below cheat-sheet ──────────────────────────────────────── */
+.type-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(212,175,55,0.1);
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+}
+
+.type-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    opacity: 0.75;
+}
+
+.type-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* EMBEDDED REFERENCE WINDOW */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.reference-window-section {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: rgba(15,13,8,0.8);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.reference-window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(10,9,6,0.9);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.reference-window-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
+    margin: 0;
     opacity: 0.9;
 }
 
-.phonetic-hint {
+.reference-toggle-btn {
+    background: none;
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--gold);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
     font-family: 'VT323', monospace;
-    font-size: 0.75rem;
-    color: var(--cyan-dim);
-    opacity: 0.6;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-radius: 0.2rem;
+    transition: all 0.2s;
+    text-transform: uppercase;
 }
 
-.phonetic-output {
-    font-family: 'Crimson Pro', 'Gentium Plus', Georgia, serif;
-    font-size: 1.4rem;
-    color: var(--text-bright);
-    letter-spacing: 0.12em;
-    line-height: 1.5;
-    min-height: 2rem;
-    white-space: pre-wrap;
-    word-break: break-word;
-    text-rendering: optimizeLegibility;
-    -webkit-font-feature-settings: "kern" 1, "liga" 1;
-    font-feature-settings: "kern" 1, "liga" 1;
+.reference-toggle-btn:hover {
+    border-color: rgba(212,175,55,0.6);
+    background: rgba(212,175,55,0.1);
+    color: #f0e68c;
 }
 
-.output-placeholder {
-    color: var(--cyan-dim);
-    opacity: 0.4;
-    font-size: 1.4rem;
-    pointer-events: none;
+.reference-window-viewport {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    background: #0a0a0a;
+}
+
+.reference-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #0a0a0a;
+    display: block;
+}
+
+.reference-window-section.collapsed .reference-window-viewport {
+    display: none;
+    height: 0;
+}
+
+.reference-window-section.collapsed {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .reference-window-viewport {
+        height: 500px;
+    }
 }

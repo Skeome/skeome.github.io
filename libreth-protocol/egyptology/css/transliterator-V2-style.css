@@ -1,5 +1,35 @@
 /* Transliterator Styles - Aligned with Wiki Theme */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
+
+/*
+ * Noto Sans Egyptian Hieroglyphs — woff2-first font loading
+ * ─────────────────────────────────────────────────────────
+ * Single @font-face covers the FULL hieroglyph range in one file:
+ *   • Base block   U+13000–13455  (1,079 Gardiner signs)
+ *   • Extended-A   U+13460–143FA  (3,382 Unicode 17.0 signs)
+ *
+ * Source: Google Fonts CDN (fonts.gstatic.com), Noto v30.
+ * This is the exact binary the Google Fonts API serves when you use
+ * the @import approach — but declared here as an explicit @font-face
+ * so the browser fetches the woff2 directly, skipping the extra
+ * CSS API round-trip and without relying on any locally installed font.
+ *
+ * The TTF fallback targets browsers that predate woff2 support
+ * (effectively nothing modern, but included for completeness).
+ */
+@font-face {
+    font-family: 'Noto Sans Egyptian Hieroglyphs';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('https://fonts.gstatic.com/s/notosansegyptianhieroglyphs/v30/vEF42-tODB8RrNDvZSUmRhcQHzx1s7y_F9-j3qSzEcbEYintdVi99Rg.woff2') format('woff2'),
+         url('https://fonts.gstatic.com/s/notosansegyptianhieroglyphs/v30/vEF42-tODB8RrNDvZSUmRhcQHzx1s7y_F9-j3qSzEcbEYindSQ.ttf') format('truetype');
+    unicode-range: U+13000-13455, U+13460-143FA; /* Base block + Extended-A */
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
 
 /* Hieroglyph Font */
 .hieroglyph {
@@ -15,6 +45,16 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 1.5rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .transliterator-container {
+        padding: 1rem 0.5rem;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+    }
 }
 
 /* Header */
@@ -71,19 +111,54 @@
     line-height: 1.5;
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .features-box li::before {
     content: "•";
     color: var(--gold);
     font-weight: bold;
-    margin-right: 0.8rem;
+    margin-right: 0;
     flex-shrink: 0;
 }
 
 .features-box strong {
     color: var(--text-bright);
     font-weight: 600;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (max-width: 640px) {
+    .features-box {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .features-box h3 {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .features-box li {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        word-break: break-word;
+        min-width: 0;
+    }
+
+    .features-box ul {
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-box li {
+        font-size: 0.75rem;
+        word-spacing: -0.05em;
+    }
 }
 
 /* Main Grid */
@@ -231,6 +306,13 @@ textarea::placeholder {
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
     font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+}
+
+/* Extended-A glyphs (U+13460–U+143FF) — subtle teal tint to indicate
+   Unicode 17.0 Extended Set A origin; fades once font is confirmed loaded */
+.q-glyph-ea {
+    position: relative;
+    text-shadow: 0 0 22px rgba(126, 200, 200, 0.55);
 }
 
 .q-unknown {
@@ -534,4 +616,153 @@ textarea::placeholder {
     color: var(--cyan-dim);
     opacity: 0.55;
     letter-spacing: 0.04em;
+}
+/* ── Sign-Type Badge Row (V3 addition) ───────────────────────────────────── */
+
+.type-output {
+    margin-top: 0.6rem;
+    min-height: 0;
+    transition: min-height 0.2s;
+}
+
+.type-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.2rem;
+    border: 1px solid;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.type-badge:hover {
+    opacity: 1;
+}
+
+.type-badge.type-phon  { border-color: var(--gold);  color: var(--gold);  background: rgba(212,175,55,0.06); }
+.type-badge.type-det   { border-color: var(--cyan);  color: var(--cyan);  background: rgba(0,209,255,0.06);  }
+.type-badge.type-log   { border-color: #c9a0dc;      color: #c9a0dc;      background: rgba(201,160,220,0.06);}
+.type-badge.type-num   { border-color: #90ee90;      color: #90ee90;      background: rgba(144,238,144,0.06);}
+.type-badge.type-unknown { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.4); }
+
+/* ── Type legend below cheat-sheet ──────────────────────────────────────── */
+.type-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(212,175,55,0.1);
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+}
+
+.type-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    opacity: 0.75;
+}
+
+.type-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* EMBEDDED REFERENCE WINDOW */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.reference-window-section {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: rgba(15,13,8,0.8);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.reference-window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(10,9,6,0.9);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.reference-window-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.reference-toggle-btn {
+    background: none;
+    border: 1px solid rgba(212,175,55,0.3);
+    color: var(--gold);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-radius: 0.2rem;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.reference-toggle-btn:hover {
+    border-color: rgba(212,175,55,0.6);
+    background: rgba(212,175,55,0.1);
+    color: #f0e68c;
+}
+
+.reference-window-viewport {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    background: #0a0a0a;
+}
+
+.reference-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #0a0a0a;
+    display: block;
+}
+
+.reference-window-section.collapsed .reference-window-viewport {
+    display: none;
+    height: 0;
+}
+
+.reference-window-section.collapsed {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .reference-window-viewport {
+        height: 500px;
+    }
 }

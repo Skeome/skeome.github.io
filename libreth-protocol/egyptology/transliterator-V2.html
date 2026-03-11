@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:wght@400;600&family=VT323&display=swap" rel="stylesheet">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/wiki-style.css">
-    <link rel="stylesheet" href="css/transliterator-V3-style.css">
+    <link rel="stylesheet" href="css/transliterator-V2-style.css">
 </head>
 <body>
 
@@ -26,6 +26,12 @@
                     <li><strong>Intelligent Parsing:</strong> Understands Gardiner codes (M17, G43), MdC uniliterals (i w t), and phonetic word aliases (nfr, Htp, anx). Handles quadrat stacking with <code>:</code> and horizontal grouping with <code>*</code>.</li>
                     <li><strong>Unicode 17.0 Database:</strong> Full coverage of U+13000–U+1342F (1,079 Gardiner signs) plus Hieroglyphs Extended-A (U+13460–U+143FF, 3,382 signs). Input Extended-A by hex code, e.g. <code>EA.13462</code>. All codepoints verified against official Unicode charts.</li>
                 </ul>
+            </div>
+
+            <!-- Extended-A font status notice (hidden once font is confirmed loaded) -->
+            <div id="ea-font-notice" style="display:none;align-items:center;gap:0.6rem;margin-top:0.75rem;padding:0.5rem 0.9rem;background:rgba(126,200,200,0.07);border:1px solid rgba(126,200,200,0.25);border-radius:3px;font-family:'VT323',monospace;font-size:0.9rem;color:#7ec8c8;letter-spacing:0.08em;">
+                <span style="font-size:1.1rem;">⚠</span>
+                <span>Extended-A font loading… EA signs (U+13460–U+143FF) may appear as boxes until the font arrives. If this persists, your browser may be blocking the jsDelivr CDN.</span>
             </div>
         </header>
 
@@ -12437,6 +12443,7 @@
                     phonetic: gardinerToPhonetic[eaCode] || '',
                     type: gardinerType[eaCode] || 'det',
                     code: eaCode,
+                    isExtendedA: true,
                     unknown: g ? null : eaCode
                 };
             }
@@ -12502,7 +12509,7 @@
                     consume();
                     const r = resolveSign(t.value);
                     if (r.unknown) return { type:'unknown', code:r.unknown, phonetic:r.phonetic };
-                    return { type:'glyph', glyph:r.glyph, phonetic:r.phonetic, signType:r.type, code:r.code };
+                    return { type:'glyph', glyph:r.glyph, phonetic:r.phonetic, signType:r.type, code:r.code, isExtendedA:r.isExtendedA||false };
                 }
                 return null;
             }
@@ -12615,7 +12622,7 @@
             if (!node) return '';
             switch (node.type) {
                 case 'glyph':
-                    return renderGlyph(node.glyph, availH, availW);
+                    return renderGlyph(node.glyph, availH, availW, node.isExtendedA);
                 case 'unknown':
                     return `<span class="q-unknown" style="font-size:${Math.round(availH * 0.32)}px;width:${availW}px;height:${availH}px;line-height:${availH}px;">[${node.code}]</span>`;
                 case 'enclosure':
@@ -12629,13 +12636,14 @@
             }
         }
 
-        function renderGlyph(glyph, h, w) {
+        function renderGlyph(glyph, h, w, isExtendedA) {
             if (!glyph) return `<span class="q-empty" style="width:${w}px;height:${h}px;"></span>`;
             // Fill the cell as aggressively as possible.
             // Noto hieroglyphs sit within ~90% of their em-square, so 0.95× min(h,w)
             // gets the glyph right up to the cell edges without clipping.
             const fs = Math.round(Math.min(h, w) * 0.95);
-            return `<span class="q-glyph hieroglyph" style="font-size:${fs}px;width:${w}px;height:${h}px;line-height:${h}px;">${glyph}</span>`;
+            const eaClass = isExtendedA ? ' q-glyph-ea' : '';
+            return `<span class="q-glyph hieroglyph${eaClass}" style="font-size:${fs}px;width:${w}px;height:${h}px;line-height:${h}px;">${glyph}</span>`;
         }
 
         function renderHgroup(node, availH, availW) {
@@ -12695,7 +12703,7 @@
         function renderFlat(node, h) {
             if (!node) return '';
             switch (node.type) {
-                case 'glyph':return renderGlyph(node.glyph, h, h);
+                case 'glyph':return renderGlyph(node.glyph, h, h, node.isExtendedA);
                 case 'unknown':return `<span class="q-unknown" style="font-size:${Math.round(h*0.32)}px;line-height:${h}px;">[${node.code}]</span>`;
                 case 'enclosure':return renderFlat(node.child, h);
                 case 'hgroup':return node.children.map(c => renderFlat(c, h)).join('');
@@ -12822,6 +12830,51 @@
                 btn.style.borderColor = '';
             }, 2000);
         }
+
+        // ─── Extended-A font availability check ──────────────────────────────────
+        // The Extended-A block (U+13460–U+143FF) requires Noto v2.006+.
+        // We use the FontFace API to detect load status and show a notice
+        // if the font hasn't loaded yet (e.g. slow connection or blocked CDN).
+        (function() {
+            const EA_TEST_CP = 0x13462; // A known Extended-A codepoint
+            const EA_TEST_CHAR = String.fromCodePoint(EA_TEST_CP);
+
+            function isEALoaded() {
+                // Use Canvas measureText trick: if Extended-A font is active,
+                // the char renders at a different width than .notdef/.tofu
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = '32px "Noto Sans Egyptian Hieroglyphs"';
+                const eaWidth = ctx.measureText(EA_TEST_CHAR).width;
+                ctx.font = '32px monospace';
+                const fallbackWidth = ctx.measureText(EA_TEST_CHAR).width;
+                return eaWidth !== fallbackWidth;
+            }
+
+            function showEANotice(loaded) {
+                let bar = document.getElementById('ea-font-notice');
+                if (!bar) return;
+                if (loaded) {
+                    bar.style.display = 'none';
+                } else {
+                    bar.style.display = 'flex';
+                }
+            }
+
+            // Check after fonts have had a chance to load
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    showEANotice(isEALoaded());
+                });
+            }
+            // Fallback: check after a short delay
+            setTimeout(() => {
+                const bar = document.getElementById('ea-font-notice');
+                if (bar && bar.style.display !== 'none') {
+                    showEANotice(isEALoaded());
+                }
+            }, 3000);
+        })();
 
         // ─── Toggle Embedded Reference Window ──────────────────────────────────
         function toggleReferenceWindow() {
