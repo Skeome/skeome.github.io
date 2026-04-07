@@ -745,3 +745,103 @@ blockquote {
     opacity: 0.5; 
     margin-right: 0.3em;
 }
+
+/* ═════════════════════════════════════════════════════════════════════════ */
+/* TERNARY ENCODING REFERENCE STYLES (from ternary-encoding-reference.html) */
+/* ═════════════════════════════════════════════════════════════════════════ */
+
+/* CODE BLOCK */
+.code-block {
+    background: rgba(0, 12, 20, 0.7);
+    border: 1px solid rgba(0, 209, 255, 0.25);
+    border-left: 3px solid var(--cyan-dim);
+    padding: 1.2rem 1.4rem;
+    margin: 1.2rem 0;
+    font-size: 0.82em;
+    overflow-x: auto;
+    text-align: left;
+    line-height: 1.65;
+    color: #c0cce8;
+    white-space: pre;
+}
+
+/* Code block syntax highlighting */
+.code-block .kw  { color: #c97aff; }
+.code-block .fn  { color: #62c8ff; }
+.code-block .str { color: #56e09a; }
+.code-block .cm  { color: #505878; font-style: italic; }
+.code-block .num { color: #ffaa44; }
+.code-block .cn  { color: var(--text-bright); }
+
+/* STREAM BLOCK */
+.stream-wrap { margin: 1rem 0; }
+
+.stream-label {
+    font-family: 'VT323', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.3rem;
+    text-align: left;
+}
+
+.stream-block {
+    background: rgba(0, 12, 20, 0.7);
+    border: 1px solid rgba(0, 209, 255, 0.2);
+    padding: 0.9rem 1rem;
+    font-size: 0.82em;
+    overflow-x: auto;
+    word-break: break-all;
+    line-height: 2;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.stream-block span.tok {
+    display: inline-block;
+    margin: 1px 2px;
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+/* ENCODING COLOUR CLASSES */
+.c-pos   { color: #56e09a; }
+.c-neg   { color: #ff5f6a; }
+.c-zer   { color: #556080; }
+.c-char  { color: #ffd060; font-weight: 600; font-size: 1.05em; }
+.c-trit  { color: #e0d080; letter-spacing: 3px; }
+.c-b9    { color: #ff9944; }
+.c-b12   { color: #ff6699; }
+.c-b27   { color: #62c8ff; }
+.c-b60   { color: #c97aff; }
+.c-b81   { color: #ffaa44; }
+
+/* BADGES */
+.badge {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 0.74em;
+    vertical-align: middle;
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.07em;
+}
+
+.bl { 
+    background: #0b2a18; 
+    color: #56e09a; 
+    border: 1px solid #1a5030; 
+}
+
+.bm { 
+    background: #25082a; 
+    color: #c97aff; 
+    border: 1px solid #501a58; 
+}
+
+/* PRINT STYLES */
+@media print {
+    body { background: white; color: black; }
+    .code-block { border: 1px solid #aaa; }
+}

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRITT-81 Character Encoding Reference — Balanced Ternary Field Framework</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/atlantis-style.css">
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+  <header class="page-header">
+    <div class="page-title">TRITT-81 Character Encoding Reference</div>
+    <div class="page-subtitle">Analogue-Hermetic Ternary Research Core · Balanced Ternary Field Framework</div>
+    <p class="page-epithet">
+      A lossless, symmetry-grounded character encoding for the 81-trit Tesseract assembly environment.
+      One character = four trits. All six architectural bases encoded and documented.
+      The foundation layer for human-readable string processing and BASIC interpretation.
+    </p>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="81-Trit-Tesseract-Orbital-Torsion-Relay.html">81-TRIT TESSERACT</a> &rsaquo;
+    <a href="#">Encoding Reference</a> &rsaquo; TRITT-81 v1.0
+  </div>
+
+  <!-- ── TABLE OF CONTENTS ──────────────────────────────────────────────── -->
+  <div class="toc-block">
+    <div class="toc-title">§ Contents</div>
+    <ul class="toc-list">
+      <li><a href="#s1">§1 — Encoding Philosophy</a></li>
+      <li><a href="#s2">§2 — Architectural Bases Overview</a></li>
+      <li><a href="#s3">§3 — Complete Character Map</a></li>
+      <li class="toc-sub"><a href="#s3a">§3a — Positive Field (Space, A–Z, 0–9)</a></li>
+      <li class="toc-sub"><a href="#s3b">§3b — Negative Field (a–z, Punctuation)</a></li>
+      <li><a href="#s4">§4 — Title String Encoding</a></li>
+      <li><a href="#s5">§5 — Compressed Streams (All Bases)</a></li>
+      <li><a href="#s6">§6 — Julia Integration Code</a></li>
+      <li><a href="#s7">§7 — BASIC Interpreter Groundwork</a></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §1 ENCODING PHILOSOPHY
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s1">
+    <h2 class="section-head">§1 — Encoding Philosophy</h2>
+
+    <p>The character encoding described here is not a compression scheme or an arbitrary code table. It is a <strong>physical alignment</strong>: the numeric value assigned to each character reflects its relationship to the ternary field's natural symmetry axis, so that the encoding itself carries semantic information about the character's positional weight in the system.</p>
+
+    <div class="pull-quote">
+      Zero is not null. Zero is the active vacuum — the torsion-bearing state where the longitudinal field mode is live. Space maps to Zero because the gap between symbols is where the field propagates, not where it rests.
+      <cite>— Design rationale, TRITT-81 v1.0</cite>
+    </div>
+
+    <div class="card-grid card-grid-3">
+      <div class="info-card">
+        <h4>The Center (0)</h4>
+        <p><strong class="c-zer">SPACE</strong> → decimal <code>0</code>. The vacuum state. All-zero trit word. Active metric. The field is most sensitive to perturbation at Zero — aligned with the stochastic-resonance receptor simulation.</p>
+      </div>
+      <div class="info-card">
+        <h4>Positive Field (+1 → +40)</h4>
+        <p><strong class="c-pos">A–Z</strong> at +1 to +26 (Phoenician precedence). <strong class="c-pos">0–9</strong> at +27 to +36 (digits follow the alphabet, historically accurate). Values +37 to +40 reserved for future extension.</p>
+      </div>
+      <div class="info-card gold-accent">
+        <h4>Negative Field (−1 → −40)</h4>
+        <p><strong class="c-neg">a–z</strong> at −1 to −26 (lowercase mirrors uppercase into the negative range — tNOT symmetry). <strong class="c-neg">Punctuation</strong> at −27 to −40. The hyphen <code>-</code> sits at −27: a pure tNOT of +27 (<code>0</code>), which is architecturally exact.</p>
+      </div>
+    </div>
+
+    <div class="practical-note">
+      <div class="pn-title">Word Width</div>
+      <p>Each character requires exactly <strong>4 trits</strong> (3⁴ = 81 states, range −40 to +40). This is one <em>Tesseract word subdivided by 81/81</em> — or more precisely, one Base-81 digit. Four trits cover the full range of our 77 defined characters plus 4 reserved slots. No character requires more than 4 trits, and no space is wasted.</p>
+    </div>
+
+    <div class="caution-note">
+      <div class="cn-title">Sign Convention</div>
+      <p>All trit vectors in this document follow the <strong>LST-first</strong> (Least-Significant Trit first) internal convention, as used in the Julia implementation. Displayed trit strings are <strong>MST-first</strong> (Most-Significant Trit first), matching the <code>tPRINT</code> and <code>trits_to_string</code> output in <code>Balanced_Ternary.jl</code>. A 4-trit display string <code>1T01</code> means trit[4]=Pos, trit[3]=Neg, trit[2]=Zero, trit[1]=Pos.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §2 ARCHITECTURAL BASES
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s2">
+    <h2 class="section-head">§2 — Architectural Bases Overview</h2>
+
+    <p>The six bases below are all natively defined in the Julia core. Each has a different trit-grouping strategy and offset. For a 4-trit character word:</p>
+
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Base</th>
+            <th>Name</th>
+            <th>Trits/Digit</th>
+            <th>Offset</th>
+            <th>Digit Range</th>
+            <th>Char → Digits</th>
+            <th>Lossless?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="c-trit">4-Trit</td><td>Raw balanced ternary</td><td>1 per trit</td><td>—</td><td>T / 0 / 1</td><td>4 symbols</td><td><span class="badge bl">LOSSLESS</span></td></tr>
+          <tr><td class="c-b9">Base-9</td><td>Nonary</td><td>2 trits/digit</td><td>+4</td><td>0 – 8</td><td>2 digits (zero-extend to 4)</td><td><span class="badge bl">LOSSLESS</span></td></tr>
+          <tr><td class="c-b12">Base-12</td><td>Duodecimal</td><td>3 trits/digit</td><td>+6 mod 12</td><td>0 – 11</td><td>2 digits (zero-extend to 6)</td><td><span class="badge bm">MODULAR</span></td></tr>
+          <tr><td class="c-b27">Base-27</td><td>Heptavigesimal</td><td>3 trits/digit</td><td>+13</td><td>0 – 26</td><td>2 digits (zero-extend to 6)</td><td><span class="badge bl">LOSSLESS</span></td></tr>
+          <tr><td class="c-b60">Base-60</td><td>Sexagesimal</td><td>4 trits/digit</td><td>+30 mod 60</td><td>0 – 59</td><td>1 digit</td><td><span class="badge bm">MODULAR</span></td></tr>
+          <tr><td class="c-b81">Base-81</td><td>Unoctogesimal</td><td>4 trits/digit</td><td>+40</td><td>0 – 80</td><td>1 digit</td><td><span class="badge bl">LOSSLESS</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lore-fragment">
+      <h3>On Modular Bases (12 and 60)</h3>
+      <p>Base-12 and Base-60 are <em>non-power-of-3</em> bases. Their digit windows do not cleanly tile the balanced ternary range. A 3-trit group spans −13 to +13 (27 values) but Base-12 only has 12 slots — so values beyond ±5 wrap modularly. Similarly a 4-trit group spans −40 to +40 (81 values) but Base-60 only has 60 slots — so values beyond ±29 collide. This is explicitly acknowledged in <code>Balanced_Ternary.jl</code> (see <code>encode_base60</code>). These bases are useful for <strong>time and angular measurement</strong> (60 seconds, 12 months, 360°) but are <strong>not suitable as primary character encodings</strong>. They are included here for completeness and cross-system reference.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §3 COMPLETE CHARACTER MAP
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s3">
+    <h2 class="section-head">§3 — Complete Character Map</h2>
+    <p>All 77 defined characters encoded across every architectural base. The table is generated live from the same encoding logic used in Julia, ensuring exact correspondence. <strong>MST-first</strong> display throughout.</p>
+
+    <h3 class="sub-head" id="s3a">§3a — Positive Field: Space, A–Z, digits 0–9</h3>
+    <div class="data-table-wrap">
+      <table class="data-table" id="tablePos">
+        <thead>
+          <tr>
+            <th>Char</th><th>Dec</th>
+            <th class="c-trit">4-Trit</th>
+            <th class="c-b9 gold-head">Base-9</th>
+            <th class="c-b12 gold-head">Base-12</th>
+            <th class="c-b27">Base-27</th>
+            <th class="c-b60">Base-60</th>
+            <th class="c-b81">Base-81</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPos"></tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head" id="s3b">§3b — Negative Field: a–z, Punctuation</h3>
+    <div class="data-table-wrap">
+      <table class="data-table" id="tableNeg">
+        <thead>
+          <tr>
+            <th>Char</th><th>Dec</th>
+            <th class="c-trit">4-Trit</th>
+            <th class="c-b9 gold-head">Base-9</th>
+            <th class="c-b12 gold-head">Base-12</th>
+            <th class="c-b27">Base-27</th>
+            <th class="c-b60">Base-60</th>
+            <th class="c-b81">Base-81</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyNeg"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §4 TITLE STRING ENCODING
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s4">
+    <h2 class="section-head">§4 — Title String Encoding</h2>
+    <p>Full per-character encoding of the relay designation and timestamp. This serves as the canonical test vector for validating any implementation of TRITT-81.</p>
+
+    <div class="lore-fragment">
+      <h3>Encoding Target</h3>
+      <p><strong class="c-char" style="font-size:1.1em; letter-spacing:0.08em;">81-Trit Tesseract Orbital Torsion Relay</strong></p>
+    </div>
+
+    <div class="data-table-wrap">
+      <table class="data-table" id="tableTitle">
+        <thead>
+          <tr>
+            <th>#</th><th>Char</th><th>Dec</th>
+            <th class="c-trit">4-Trit</th>
+            <th class="c-b9">Base-9</th>
+            <th class="c-b12">Base-12</th>
+            <th class="c-b27">Base-27</th>
+            <th class="c-b60">Base-60</th>
+            <th class="c-b81">Base-81</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyTitle"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §5 COMPRESSED STREAMS
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s5">
+    <h2 class="section-head">§5 — Compressed Streams (All Bases)</h2>
+    <p>The full title string rendered as a continuous digit stream in each base. Pipe <code>|</code> delimiters between characters are included for human readability; they are not part of the encoding.</p>
+
+    <div class="stream-wrap">
+      <div class="stream-label">Raw Trit Stream (4 trits/char · MST→LST · <span class="badge bl">Lossless</span>)</div>
+      <div class="stream-block c-trit" id="sTrit"></div>
+    </div>
+    <div class="stream-wrap">
+      <div class="stream-label c-b9">Base-9 Stream (2 digits/char · <span class="badge bl">Lossless</span>)</div>
+      <div class="stream-block c-b9" id="s9"></div>
+    </div>
+    <div class="stream-wrap">
+      <div class="stream-label c-b12">Base-12 Stream (2 digits/char · <span class="badge bm">Modular — not for primary storage</span>)</div>
+      <div class="stream-block c-b12" id="s12"></div>
+    </div>
+    <div class="stream-wrap">
+      <div class="stream-label c-b27">Base-27 Stream (2 digits/char · <span class="badge bl">Lossless</span>)</div>
+      <div class="stream-block c-b27" id="s27"></div>
+    </div>
+    <div class="stream-wrap">
+      <div class="stream-label c-b60">Base-60 Stream (1 digit/char · <span class="badge bm">Modular — not for primary storage</span>)</div>
+      <div class="stream-block c-b60" id="s60"></div>
+    </div>
+    <div class="stream-wrap">
+      <div class="stream-label c-b81">Base-81 Stream (1 digit/char · <span class="badge bl">Lossless</span>)</div>
+      <div class="stream-block c-b81" id="s81"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §6 JULIA INTEGRATION CODE
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s6">
+    <h2 class="section-head">§6 — Julia Integration Code</h2>
+    <p>Drop these definitions into <code>Balanced_Ternary.jl</code> after the existing arithmetic and encoding sections. They extend the existing infrastructure without modifying any existing function.</p>
+
+    <h4 class="mini-head">§6.1 — Character Lookup Tables</h4>
+    <div class="code-block"><span class="cm">#-------------------------------------------------------------------------------
+# TRITT-81 Character Encoding
+# 4-trit character word: range -40 to +40 (81 states)
+# Space = 0 (active vacuum), A-Z = +1..+26, 0-9 = +27..+36
+# a-z  = -1..-26,  punctuation = -27..-40
+# Punctuation order: - , . / : ; ! ? ( ) ' " @ #
+#-------------------------------------------------------------------------------</span>
+<span class="kw">const</span> <span class="cn">TRITT_PUNCT</span> = <span class="str">"-,./:;!?()'\"@#"</span>  <span class="cm"># indices 1..14 → values -27..-40</span>
+
+<span class="kw">const</span> <span class="cn">TRIT_CHAR_MAP</span> = <span class="fn">Dict</span>{<span class="cn">Char</span>, <span class="cn">Int</span>}(
+    <span class="str">' '</span> =&gt;  <span class="num">0</span>,
+    <span class="cm"># Uppercase A-Z → +1..+26</span>
+    (<span class="cn">Char</span>(<span class="str">'A'</span> + i) =&gt; i + <span class="num">1</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span>:<span class="num">25</span>)...,
+    <span class="cm"># Digits 0-9 → +27..+36</span>
+    (<span class="cn">Char</span>(<span class="str">'0'</span> + i) =&gt; i + <span class="num">27</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span>:<span class="num">9</span>)...,
+    <span class="cm"># Lowercase a-z → -1..-26</span>
+    (<span class="cn">Char</span>(<span class="str">'a'</span> + i) =&gt; -(i + <span class="num">1</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span>:<span class="num">25</span>)...,
+    <span class="cm"># Punctuation → -27..-40</span>
+    (<span class="cn">TRITT_PUNCT</span>[i] =&gt; -(i + <span class="num">26</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">1</span>:<span class="fn">length</span>(<span class="cn">TRITT_PUNCT</span>))...
+)
+
+<span class="cm"># Reverse map: balanced-ternary integer → character</span>
+<span class="kw">const</span> <span class="cn">TRIT_CHAR_DECODE</span> = <span class="fn">Dict</span>{<span class="cn">Int</span>, <span class="cn">Char</span>}(v =&gt; k <span class="kw">for</span> (k, v) <span class="kw">in</span> <span class="cn">TRIT_CHAR_MAP</span>)</div>
+
+    <h4 class="mini-head">§6.2 — Encode / Decode Functions</h4>
+    <div class="code-block"><span class="kw">function</span> <span class="fn">encode_char</span>(c::<span class="cn">Char</span>)::<span class="cn">Vector</span>{<span class="cn">Trit</span>}
+    <span class="cm"># Encode a single character to a 4-trit LST-first vector.</span>
+    <span class="cm"># Unrecognised characters return the all-Zero word (space).</span>
+    val = <span class="fn">get</span>(<span class="cn">TRIT_CHAR_MAP</span>, c, <span class="num">0</span>)
+    <span class="kw">return</span> <span class="fn">int_to_balanced</span>(val, <span class="num">4</span>)
+<span class="kw">end</span>
+
+<span class="kw">function</span> <span class="fn">decode_char</span>(trits::<span class="cn">Vector</span>{<span class="cn">Trit</span>})::<span class="cn">Char</span>
+    <span class="cm"># Decode a 4-trit LST-first vector back to a character.</span>
+    val = <span class="fn">balanced_ternary_to_int</span>(trits[<span class="num">1</span>:<span class="fn">min</span>(<span class="num">4</span>, <span class="fn">length</span>(trits))])
+    <span class="kw">return</span> <span class="fn">get</span>(<span class="cn">TRIT_CHAR_DECODE</span>, val, <span class="str">'?'</span>)
+<span class="kw">end</span>
+
+<span class="kw">function</span> <span class="fn">encode_string</span>(s::<span class="cn">String</span>)::<span class="cn">Vector</span>{<span class="cn">Trit</span>}
+    <span class="cm"># Encode a string to a flat trit vector (4 trits per character, LST-first blocks).</span>
+    <span class="kw">return</span> <span class="fn">vcat</span>([<span class="fn">encode_char</span>(c) <span class="kw">for</span> c <span class="kw">in</span> s]...)
+<span class="kw">end</span>
+
+<span class="kw">function</span> <span class="fn">decode_string</span>(trits::<span class="cn">Vector</span>{<span class="cn">Trit</span>})::<span class="cn">String</span>
+    <span class="cm"># Decode a flat trit vector back to a string.</span>
+    <span class="cm"># Input length should be a multiple of 4; trailing trits are ignored.</span>
+    n_chars = <span class="fn">length</span>(trits) ÷ <span class="num">4</span>
+    chars = [<span class="fn">decode_char</span>(trits[(<span class="num">4</span>*(i-<span class="num">1</span>)+<span class="num">1</span>):<span class="num">4</span>*i]) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">1</span>:n_chars]
+    <span class="kw">return</span> <span class="fn">String</span>(chars)
+<span class="kw">end</span></div>
+
+    <h4 class="mini-head">§6.3 — Multi-Base String Display</h4>
+    <div class="code-block"><span class="kw">function</span> <span class="fn">print_string_encoded</span>(s::<span class="cn">String</span>)
+    <span class="cm"># Print a string's TRITT-81 encoding in all architectural bases.</span>
+    <span class="cm"># Output matches Balanced_Ternary.jl base-encoding conventions.</span>
+    <span class="fn">println</span>(<span class="str">"\n═══════════════════════════════════════════════════"</span>)
+    <span class="fn">@printf</span>(<span class="str">"  TRITT-81 ENCODING: \"%s\"\n"</span>, s)
+    <span class="fn">println</span>(<span class="str">"═══════════════════════════════════════════════════"</span>)
+    <span class="kw">for</span> (i, c) <span class="kw">in</span> <span class="fn">enumerate</span>(s)
+        t4   = <span class="fn">encode_char</span>(c)
+        t6   = <span class="fn">vcat</span>(t4, [<span class="cn">Zero</span>, <span class="cn">Zero</span>])  <span class="cm"># zero-extend to 6 trits for 3-trit bases</span>
+        val  = <span class="fn">balanced_ternary_to_int</span>(t4)
+        b4   = <span class="fn">trits_to_string</span>(t4)
+        b9   = <span class="fn">encode_base9</span>(t4)
+        b12  = <span class="fn">encode_base12</span>(t6)
+        b27  = <span class="fn">encode_base27</span>(t6)
+        b60  = <span class="fn">encode_base60</span>(t4)
+        b81  = <span class="fn">encode_base81</span>(t4)
+        <span class="fn">@printf</span>(<span class="str">"%3d  %-2s  dec=%-4d  trit=%-4s  b9=[%d,%d]  b12=[%2d,%2d]  b27=[%2d,%2d]  b60=%2d  b81=%2d\n"</span>,
+            i, c == <span class="str">' '</span> ? <span class="str">"⎵"</span> : <span class="fn">string</span>(c),
+            val, b4,
+            b9[<span class="num">1</span>], b9[<span class="num">2</span>], b12[<span class="num">1</span>], b12[<span class="num">2</span>],
+            b27[<span class="num">1</span>], b27[<span class="num">2</span>], b60[<span class="num">1</span>], b81[<span class="num">1</span>])
+    <span class="kw">end</span>
+    <span class="fn">println</span>(<span class="str">"───────────────────────────────────────────────────"</span>)
+<span class="kw">end</span>
+
+<span class="cm"># Quick test:</span>
+<span class="cm"># print_string_encoded("81-Trit Tesseract Orbital Torsion Relay")</span></div>
+
+    <h4 class="mini-head">§6.4 — Store a String in CPU Memory</h4>
+    <div class="code-block"><span class="kw">function</span> <span class="fn">store_string!</span>(cpu::<span class="cn">CPU</span>, s::<span class="cn">String</span>, addr::<span class="cn">Int</span>)
+    <span class="cm"># Write a string to CPU memory as a flat 4-trit-per-char sequence.</span>
+    <span class="cm"># Returns the address of the first trit after the string (next write pointer).</span>
+    trits = <span class="fn">encode_string</span>(s)
+    <span class="kw">for</span> (i, t) <span class="kw">in</span> <span class="fn">enumerate</span>(trits)
+        a = addr + i - <span class="num">1</span>
+        a &lt;= <span class="fn">length</span>(cpu.memory) &amp;&amp; (cpu.memory[a] = t)
+    <span class="kw">end</span>
+    <span class="kw">return</span> addr + <span class="fn">length</span>(trits)
+<span class="kw">end</span>
+
+<span class="kw">function</span> <span class="fn">load_string</span>(cpu::<span class="cn">CPU</span>, addr::<span class="cn">Int</span>, n_chars::<span class="cn">Int</span>)::<span class="cn">String</span>
+    <span class="cm"># Read n_chars characters from CPU memory at addr.</span>
+    trits = cpu.memory[addr : <span class="fn">min</span>(addr + n_chars*<span class="num">4</span> - <span class="num">1</span>, <span class="fn">length</span>(cpu.memory))]
+    <span class="kw">return</span> <span class="fn">decode_string</span>(trits)
+<span class="kw">end</span></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       §7 BASIC INTERPRETER GROUNDWORK
+       ══════════════════════════════════════════════════════════════════════ -->
+  <section id="s7">
+    <h2 class="section-head">§7 — BASIC Interpreter Groundwork</h2>
+
+    <p>TRITT-81 character encoding is the necessary prerequisite for a human-readable BASIC layer on top of the assembly environment. The architecture already has everything needed: a CPU model with registers and memory, an assembler with label support, a debugger with a REPL loop, and now a string encoding scheme. The BASIC interpreter is the next layer up.</p>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Layer 0: Trit Arithmetic</h4>
+        <p>Already complete in <code>Balanced_Ternary.jl</code>. Full-adder, saturating arithmetic, all logic gates, all base encodings. The substrate.</p>
+      </div>
+      <div class="info-card">
+        <h4>Layer 1: CPU + Assembler</h4>
+        <p>Already complete. 18 opcodes, 9 Trinity registers, 27-trit instruction format, two-pass assembler with label support, interactive sandbox REPL.</p>
+      </div>
+      <div class="info-card gold-accent">
+        <h4>Layer 2: String Encoding ← You Are Here</h4>
+        <p>TRITT-81. 4-trit chars, 77 defined glyphs, 6 bases. Foundation for string storage, comparison, and output in the CPU address space.</p>
+      </div>
+      <div class="info-card gold-accent">
+        <h4>Layer 3: BASIC Interpreter (Next)</h4>
+        <p>Tokeniser → keyword recognition → expression parser → execution engine. Keywords like <code>PRINT</code>, <code>LET</code>, <code>IF</code>, <code>GOTO</code> map to opcodes. String literals are TRITT-81 encoded.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head">Keyword Encoding Strategy</h3>
+    <p>BASIC keywords should be encoded as <strong>fixed-width trit tokens</strong> rather than variable-length strings, so the tokeniser can use direct address lookup rather than string comparison. A 1-Tryte (3-trit) opcode space gives 27 token slots — more than enough for a minimal BASIC keyword set:</p>
+
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Token Dec</th><th>3-Trit</th><th>BASIC Keyword</th><th>Maps To Assembly</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="c-pos">+1</td><td class="c-trit">001</td><td><code>LET</code></td><td><code>MOV / immediate load</code></td></tr>
+          <tr><td class="c-pos">+2</td><td class="c-trit">01T</td><td><code>PRINT</code></td><td><code>OP_PRINT</code></td></tr>
+          <tr><td class="c-pos">+3</td><td class="c-trit">010</td><td><code>INPUT</code></td><td><code>receptor simulation / LOAD</code></td></tr>
+          <tr><td class="c-pos">+4</td><td class="c-trit">011</td><td><code>IF</code></td><td><code>CMP + JEZ / JNZ</code></td></tr>
+          <tr><td class="c-pos">+5</td><td class="c-trit">01T</td><td><code>GOTO</code></td><td><code>JMP</code></td></tr>
+          <tr><td class="c-pos">+6</td><td class="c-trit">0T0</td><td><code>FOR</code></td><td><code>MOV + INC + CMP + JNZ</code></td></tr>
+          <tr><td class="c-pos">+7</td><td class="c-trit">0T1</td><td><code>NEXT</code></td><td><code>INC + CMP + JNZ</code></td></tr>
+          <tr><td class="c-pos">+8</td><td class="c-trit">01T</td><td><code>END</code></td><td><code>OP_HALT</code></td></tr>
+          <tr><td class="c-pos">+9</td><td class="c-trit">100</td><td><code>REM</code></td><td><code>OP_NOP</code></td></tr>
+          <tr><td class="c-zer">0</td><td class="c-trit">000</td><td><em>reserved</em></td><td>—</td></tr>
+          <tr><td class="c-neg">−1</td><td class="c-trit">00T</td><td><code>AND</code></td><td><code>OP_TAND</code></td></tr>
+          <tr><td class="c-neg">−2</td><td class="c-trit">0T0</td><td><code>OR</code></td><td><code>OP_TOR</code></td></tr>
+          <tr><td class="c-neg">−3</td><td class="c-trit">T10</td><td><code>NOT</code></td><td><code>tNOT (tritwise)</code></td></tr>
+          <tr><td class="c-neg">−4</td><td class="c-trit">T11</td><td><code>XOR</code></td><td><code>OP_TXOR</code></td></tr>
+          <tr><td class="c-neg">−5</td><td class="c-trit">T1T</td><td><code>ABS</code></td><td><code>CMP + conditional NEG</code></td></tr>
+          <tr><td class="c-neg">−6</td><td class="c-trit">T00</td><td><code>SGN</code></td><td><code>CMP → status trit → register</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="practical-note">
+      <div class="pn-title">Why Balanced Token Space?</div>
+      <p>Assigning <strong>positive values</strong> to constructive/control-flow keywords (<code>LET</code>, <code>PRINT</code>, <code>GOTO</code>) and <strong>negative values</strong> to logical/bitwise keywords (<code>AND</code>, <code>NOT</code>, <code>XOR</code>) is not merely aesthetic. It mirrors the physical encoding philosophy: the positive ternary field represents directed action (constructive, causal); the negative field represents inversion and field negation. A parser that checks <code>token &gt; 0</code> to identify control-flow vs. <code>token &lt; 0</code> for logic operations is doing ternary field arithmetic, not just integer comparison.</p>
+    </div>
+
+    <h3 class="sub-head">String Comparison in Assembly</h3>
+    <p>Since each character is a 4-trit word stored in a Trinity register (padded with 5 Zero trits), character comparison is a direct <code>CMP</code> followed by <code>JEZ</code>/<code>JNZ</code>. No special string instruction is needed. The existing CPU architecture handles it natively:</p>
+
+    <div class="code-block"><span class="cm"># Compare character in R1 against literal 'A' (value +1)
+# Result: status = Neg if R1 < 'A', Zero if R1 == 'A', Pos if R1 > 'A'</span>
+set <span class="num">2</span> <span class="num">1</span>        <span class="cm"># R2 ← +1  (value of 'A')</span>
+CMP <span class="num">1</span> <span class="num">2</span>         <span class="cm"># status = sign(R1 - R2)</span>
+JEZ IS_UPPER_A  <span class="cm"># jump if R1 holds 'A'</span>
+
+<span class="cm"># Check if character is lowercase (value in range -1 to -26)</span>
+set <span class="num">3</span> <span class="num">-1</span>        <span class="cm"># R3 ← -1  (value of 'a')</span>
+set <span class="num">4</span> <span class="num">-26</span>       <span class="cm"># R4 ← -26 (value of 'z')</span>
+CMP <span class="num">1</span> <span class="num">3</span>         <span class="cm"># R1 &lt;= -1?</span>
+JNZ NOT_LOWER
+CMP <span class="num">1</span> <span class="num">4</span>         <span class="cm"># R1 &gt;= -26?</span>
+JNZ NOT_LOWER
+<span class="cm"># R1 is lowercase</span></div>
+
+    <div class="caution-note">
+      <div class="cn-title">Observer Dependency Note</div>
+      <p>The stochastic receptor simulation in the existing codebase (<code>receptor_simulation!</code>) is not merely a noise model — it is a recognition that the <strong>Zero-state trits in memory are indeterminate until observed</strong>. A BASIC interpreter running on this substrate must account for the fact that uninitialized string memory (all-Zero) is not empty-string — it is a superposition of all characters. The correct initialization pattern is to explicitly <code>STORE</code> a Space character (value 0, all-Zero trits) to mark an empty string, not to leave the memory untouched and assume it is empty.</p>
+    </div>
+  </section>
+
+  <div class="glyph-marker">⊕ ∇ T·0·1 ∇ ⊕</div>
+
+  <footer>
+    <p>ANALOGUE-HERMETIC TERNARY RESEARCH CORE</p>
+    <p>TRITT-81 Character Encoding Reference · v1.0</p>
+    <p style="margin-top:0.8rem; opacity:0.5;">The observer is not separate from the system. · Base-3 is the native language of the field.</p>
+  </footer>
+
+</div><!-- .page-wrap -->
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     ENCODING ENGINE (mirrors Balanced_Ternary.jl exactly)
+     ════════════════════════════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ── Character map ──────────────────────────────────────────────────────────
+const PUNCT = `-,./:;!?()'"@#`;
+function charToVal(c) {
+  if (c === ' ') return 0;
+  const U = c.charCodeAt(0) - 65; if (c >= 'A' && c <= 'Z') return U + 1;
+  const L = c.charCodeAt(0) - 97; if (c >= 'a' && c <= 'z') return -(L + 1);
+  const D = c.charCodeAt(0) - 48; if (c >= '0' && c <= '9') return D + 27;
+  const P = PUNCT.indexOf(c);     if (P >= 0) return -(P + 27);
+  return null;
+}
+
+// ── intToBalanced (LST-first, faithful to Julia) ───────────────────────────
+function intToBalanced(n, len) {
+  const d = [];
+  let t = n;
+  for (let k = 0; k < len; k++) {
+    let r = t % 3;
+    // JavaScript % follows sign of dividend, exactly matching Julia
+    if (r === 2 || r === -1)  { r = -1; t = Math.trunc((t + 1) / 3); }
+    else if (r === 1 || r === -2) { r =  1; t = Math.trunc((t - 1) / 3); }
+    else                      { r =  0; t = Math.trunc(t / 3); }
+    d.push(r);
+  }
+  return d; // LST-first
+}
+
+// ── balancedToInt (LST-first input) ───────────────────────────────────────
+function balancedToInt(trits) {
+  return trits.reduce((s, t, i) => s + t * Math.pow(3, i), 0);
+}
+
+// ── Trit display ──────────────────────────────────────────────────────────
+const SYM = { 1:'1', 0:'0', [-1]:'T' };
+function tritStr(t4) { return [...t4].reverse().map(x => SYM[x]).join(''); }
+
+// ── Base encoders (all match Balanced_Ternary.jl) ────────────────────────
+function encB9(t4) {
+  // 2 pairs of 2 trits, LST-first → 2 digits, MST-first output
+  const lo = t4[0] + 3*t4[1] + 4;
+  const hi = t4[2] + 3*t4[3] + 4;
+  return [hi, lo];
+}
+function encB12(t6) {
+  // 2 groups of 3 trits, modular
+  const lo = ((t6[0] + 3*t6[1] + 9*t6[2] + 6) % 12 + 12) % 12;
+  const hi = ((t6[3] + 3*t6[4] + 9*t6[5] + 6) % 12 + 12) % 12;
+  return [hi, lo];
+}
+function encB27(t6) {
+  // 2 groups of 3 trits, lossless
+  const lo = t6[0] + 3*t6[1] + 9*t6[2] + 13;
+  const hi = t6[3] + 3*t6[4] + 9*t6[5] + 13;
+  return [hi, lo];
+}
+function encB60(t4) {
+  const v = t4[0] + 3*t4[1] + 9*t4[2] + 27*t4[3];
+  return [((v + 30) % 60 + 60) % 60];
+}
+function encB81(t4) {
+  return [t4[0] + 3*t4[1] + 9*t4[2] + 27*t4[3] + 40];
+}
+
+// ── Encode one character ──────────────────────────────────────────────────
+function encChar(c) {
+  const val = charToVal(c) ?? 0;
+  const t4  = intToBalanced(val, 4);
+  const t6  = [...t4, 0, 0];
+  return { c, val, t4, t6,
+    b9:  encB9(t4), b12: encB12(t6), b27: encB27(t6),
+    b60: encB60(t4), b81: encB81(t4) };
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function valCls(v) { return v > 0 ? 'c-pos' : v < 0 ? 'c-neg' : 'c-zer'; }
+function pad2(n)   { return n.toString().padStart(2, '0'); }
+function fmtVal(v) { return v >= 0 ? '+' + v : '' + v; }
+const PIPE = `<span style="color:#1e2c50">|</span>`;
+
+function tableRow(e, idx) {
+  const dc = e.c === ' ' ? '<span class="c-zer">⎵</span>' : e.c;
+  return `<tr>
+    ${idx !== null ? `<td class="c-zer" style="font-size:0.78em">${idx}</td>` : ''}
+    <td class="c-char">${dc}</td>
+    <td class="${valCls(e.val)}">${fmtVal(e.val)}</td>
+    <td class="c-trit">${tritStr(e.t4)}</td>
+    <td class="c-b9">[${e.b9[0]},${e.b9[1]}]</td>
+    <td class="c-b12">[${pad2(e.b12[0])},${pad2(e.b12[1])}]</td>
+    <td class="c-b27">[${pad2(e.b27[0])},${pad2(e.b27[1])}]</td>
+    <td class="c-b60">${pad2(e.b60[0])}</td>
+    <td class="c-b81">${pad2(e.b81[0])}</td>
+  </tr>`;
+}
+
+// ── Build full character map ──────────────────────────────────────────────
+const posChars = [' ', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ', ...'0123456789'];
+const negChars = [...'abcdefghijklmnopqrstuvwxyz', ...PUNCT];
+
+document.getElementById('tbodyPos').innerHTML =
+  posChars.map(c => tableRow(encChar(c), null)).join('');
+document.getElementById('tbodyNeg').innerHTML =
+  negChars.map(c => tableRow(encChar(c), null)).join('');
+
+// ── Build title encoding ──────────────────────────────────────────────────
+const TITLE = "81-Trit Tesseract Orbital Torsion Relay";
+const titleData = [...TITLE].map((c, i) => ({ ...encChar(c), idx: i + 1 }));
+
+document.getElementById('tbodyTitle').innerHTML =
+  titleData.map(e => tableRow(e, e.idx)).join('');
+
+// ── Build streams ─────────────────────────────────────────────────────────
+function buildStream(arr, fn) {
+  return arr.map(e => `<span class="tok">${fn(e)}</span>`).join(PIPE);
+}
+
+document.getElementById('sTrit').innerHTML =
+  buildStream(titleData, e => tritStr(e.t4));
+document.getElementById('s9').innerHTML =
+  buildStream(titleData, e => `${e.b9[0]},${e.b9[1]}`);
+document.getElementById('s12').innerHTML =
+  buildStream(titleData, e => `${pad2(e.b12[0])},${pad2(e.b12[1])}`);
+document.getElementById('s27').innerHTML =
+  buildStream(titleData, e => `${pad2(e.b27[0])},${pad2(e.b27[1])}`);
+document.getElementById('s60').innerHTML =
+  buildStream(titleData, e => pad2(e.b60[0]));
+document.getElementById('s81').innerHTML =
+  buildStream(titleData, e => pad2(e.b81[0]));
+</script>
+</body>
+</html>
