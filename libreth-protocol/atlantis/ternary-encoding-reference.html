@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRITT-81 Character Encoding Reference — Balanced Ternary Field Framework</title>
+  <title>TRIT-81 Character Encoding Reference — Balanced Ternary Field Framework</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/atlantis-style.css">
 </head>
@@ -12,7 +12,7 @@
 
   <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
   <header class="page-header">
-    <div class="page-title">TRITT-81 Character Encoding Reference</div>
+    <div class="page-title">TRIT-81 Character Encoding Reference</div>
     <div class="page-subtitle">Analogue-Hermetic Ternary Research Core · Balanced Ternary Field Framework</div>
     <p class="page-epithet">
       A lossless, symmetry-grounded character encoding for the 81-trit Tesseract assembly environment.
@@ -23,7 +23,7 @@
 
   <div class="breadcrumb">
     <a href="81-Trit-Tesseract-Orbital-Torsion-Relay.html">81-TRIT TESSERACT</a> &rsaquo;
-    <a href="#">Encoding Reference</a> &rsaquo; TRITT-81 v1.0
+    <a href="#">Encoding Reference</a> &rsaquo; TRIT-81 v1.0
   </div>
 
   <!-- ── TABLE OF CONTENTS ──────────────────────────────────────────────── -->
@@ -54,7 +54,7 @@
 
     <div class="pull-quote">
       Zero is not null. Zero is the active vacuum — the torsion-bearing state where the longitudinal field mode is live. Space maps to Zero because the gap between symbols is where the field propagates, not where it rests.
-      <cite>— Design rationale, TRITT-81 v1.0</cite>
+      <cite>— Design rationale, TRIT-81 v1.0</cite>
     </div>
 
     <div class="card-grid card-grid-3">
@@ -176,7 +176,7 @@
        ══════════════════════════════════════════════════════════════════════ -->
   <section id="s4">
     <h2 class="section-head">§4 — Title String Encoding</h2>
-    <p>Full per-character encoding of the relay designation and timestamp. This serves as the canonical test vector for validating any implementation of TRITT-81.</p>
+    <p>Full per-character encoding of the relay designation and timestamp. This serves as the canonical test vector for validating any implementation of TRIT-81.</p>
 
     <div class="lore-fragment">
       <h3>Encoding Target</h3>
@@ -247,13 +247,13 @@
 
     <h4 class="mini-head">§6.1 — Character Lookup Tables</h4>
     <div class="code-block"><span class="cm">#-------------------------------------------------------------------------------
-# TRITT-81 Character Encoding
+# TRIT-81 Character Encoding
 # 4-trit character word: range -40 to +40 (81 states)
 # Space = 0 (active vacuum), A-Z = +1..+26, 0-9 = +27..+36
 # a-z  = -1..-26,  punctuation = -27..-40
 # Punctuation order: - , . / : ; ! ? ( ) ' " @ #
 #-------------------------------------------------------------------------------</span>
-<span class="kw">const</span> <span class="cn">TRITT_PUNCT</span> = <span class="str">"-,./:;!?()'\"@#"</span>  <span class="cm"># indices 1..14 → values -27..-40</span>
+<span class="kw">const</span> <span class="cn">TRIT_PUNCT</span> = <span class="str">"-,./:;!?()'\"@#"</span>  <span class="cm"># indices 1..14 → values -27..-40</span>
 
 <span class="kw">const</span> <span class="cn">TRIT_CHAR_MAP</span> = <span class="fn">Dict</span>{<span class="cn">Char</span>, <span class="cn">Int</span>}(
     <span class="str">' '</span> =&gt;  <span class="num">0</span>,
@@ -264,7 +264,7 @@
     <span class="cm"># Lowercase a-z → -1..-26</span>
     (<span class="cn">Char</span>(<span class="str">'a'</span> + i) =&gt; -(i + <span class="num">1</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span>:<span class="num">25</span>)...,
     <span class="cm"># Punctuation → -27..-40</span>
-    (<span class="cn">TRITT_PUNCT</span>[i] =&gt; -(i + <span class="num">26</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">1</span>:<span class="fn">length</span>(<span class="cn">TRITT_PUNCT</span>))...
+    (<span class="cn">TRIT_PUNCT</span>[i] =&gt; -(i + <span class="num">26</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="num">1</span>:<span class="fn">length</span>(<span class="cn">TRIT_PUNCT</span>))...
 )
 
 <span class="cm"># Reverse map: balanced-ternary integer → character</span>
@@ -299,10 +299,10 @@
 
     <h4 class="mini-head">§6.3 — Multi-Base String Display</h4>
     <div class="code-block"><span class="kw">function</span> <span class="fn">print_string_encoded</span>(s::<span class="cn">String</span>)
-    <span class="cm"># Print a string's TRITT-81 encoding in all architectural bases.</span>
+    <span class="cm"># Print a string's TRIT-81 encoding in all architectural bases.</span>
     <span class="cm"># Output matches Balanced_Ternary.jl base-encoding conventions.</span>
     <span class="fn">println</span>(<span class="str">"\n═══════════════════════════════════════════════════"</span>)
-    <span class="fn">@printf</span>(<span class="str">"  TRITT-81 ENCODING: \"%s\"\n"</span>, s)
+    <span class="fn">@printf</span>(<span class="str">"  TRIT-81 ENCODING: \"%s\"\n"</span>, s)
     <span class="fn">println</span>(<span class="str">"═══════════════════════════════════════════════════"</span>)
     <span class="kw">for</span> (i, c) <span class="kw">in</span> <span class="fn">enumerate</span>(s)
         t4   = <span class="fn">encode_char</span>(c)
@@ -353,7 +353,7 @@
   <section id="s7">
     <h2 class="section-head">§7 — BASIC Interpreter Groundwork</h2>
 
-    <p>TRITT-81 character encoding is the necessary prerequisite for a human-readable BASIC layer on top of the assembly environment. The architecture already has everything needed: a CPU model with registers and memory, an assembler with label support, a debugger with a REPL loop, and now a string encoding scheme. The BASIC interpreter is the next layer up.</p>
+    <p>TRIT-81 character encoding is the necessary prerequisite for a human-readable BASIC layer on top of the assembly environment. The architecture already has everything needed: a CPU model with registers and memory, an assembler with label support, a debugger with a REPL loop, and now a string encoding scheme. The BASIC interpreter is the next layer up.</p>
 
     <div class="card-grid">
       <div class="info-card">
@@ -366,11 +366,11 @@
       </div>
       <div class="info-card gold-accent">
         <h4>Layer 2: String Encoding ← You Are Here</h4>
-        <p>TRITT-81. 4-trit chars, 77 defined glyphs, 6 bases. Foundation for string storage, comparison, and output in the CPU address space.</p>
+        <p>TRIT-81. 4-trit chars, 77 defined glyphs, 6 bases. Foundation for string storage, comparison, and output in the CPU address space.</p>
       </div>
       <div class="info-card gold-accent">
         <h4>Layer 3: BASIC Interpreter (Next)</h4>
-        <p>Tokeniser → keyword recognition → expression parser → execution engine. Keywords like <code>PRINT</code>, <code>LET</code>, <code>IF</code>, <code>GOTO</code> map to opcodes. String literals are TRITT-81 encoded.</p>
+        <p>Tokeniser → keyword recognition → expression parser → execution engine. Keywords like <code>PRINT</code>, <code>LET</code>, <code>IF</code>, <code>GOTO</code> map to opcodes. String literals are TRIT-81 encoded.</p>
       </div>
     </div>
 
@@ -387,18 +387,18 @@
           <tr><td class="c-pos">+2</td><td class="c-trit">01T</td><td><code>PRINT</code></td><td><code>OP_PRINT</code></td></tr>
           <tr><td class="c-pos">+3</td><td class="c-trit">010</td><td><code>INPUT</code></td><td><code>receptor simulation / LOAD</code></td></tr>
           <tr><td class="c-pos">+4</td><td class="c-trit">011</td><td><code>IF</code></td><td><code>CMP + JEZ / JNZ</code></td></tr>
-          <tr><td class="c-pos">+5</td><td class="c-trit">01T</td><td><code>GOTO</code></td><td><code>JMP</code></td></tr>
-          <tr><td class="c-pos">+6</td><td class="c-trit">0T0</td><td><code>FOR</code></td><td><code>MOV + INC + CMP + JNZ</code></td></tr>
-          <tr><td class="c-pos">+7</td><td class="c-trit">0T1</td><td><code>NEXT</code></td><td><code>INC + CMP + JNZ</code></td></tr>
-          <tr><td class="c-pos">+8</td><td class="c-trit">01T</td><td><code>END</code></td><td><code>OP_HALT</code></td></tr>
+          <tr><td class="c-pos">+5</td><td class="c-trit">1TT</td><td><code>GOTO</code></td><td><code>JMP</code></td></tr>
+          <tr><td class="c-pos">+6</td><td class="c-trit">1T0</td><td><code>FOR</code></td><td><code>MOV + INC + CMP + JNZ</code></td></tr>
+          <tr><td class="c-pos">+7</td><td class="c-trit">1T1</td><td><code>NEXT</code></td><td><code>INC + CMP + JNZ</code></td></tr>
+          <tr><td class="c-pos">+8</td><td class="c-trit">10T</td><td><code>END</code></td><td><code>OP_HALT</code></td></tr>
           <tr><td class="c-pos">+9</td><td class="c-trit">100</td><td><code>REM</code></td><td><code>OP_NOP</code></td></tr>
           <tr><td class="c-zer">0</td><td class="c-trit">000</td><td><em>reserved</em></td><td>—</td></tr>
           <tr><td class="c-neg">−1</td><td class="c-trit">00T</td><td><code>AND</code></td><td><code>OP_TAND</code></td></tr>
-          <tr><td class="c-neg">−2</td><td class="c-trit">0T0</td><td><code>OR</code></td><td><code>OP_TOR</code></td></tr>
-          <tr><td class="c-neg">−3</td><td class="c-trit">T10</td><td><code>NOT</code></td><td><code>tNOT (tritwise)</code></td></tr>
-          <tr><td class="c-neg">−4</td><td class="c-trit">T11</td><td><code>XOR</code></td><td><code>OP_TXOR</code></td></tr>
-          <tr><td class="c-neg">−5</td><td class="c-trit">T1T</td><td><code>ABS</code></td><td><code>CMP + conditional NEG</code></td></tr>
-          <tr><td class="c-neg">−6</td><td class="c-trit">T00</td><td><code>SGN</code></td><td><code>CMP → status trit → register</code></td></tr>
+          <tr><td class="c-neg">−2</td><td class="c-trit">0T1</td><td><code>OR</code></td><td><code>OP_TOR</code></td></tr>
+          <tr><td class="c-neg">−3</td><td class="c-trit">0T0</td><td><code>NOT</code></td><td><code>tNOT (tritwise)</code></td></tr>
+          <tr><td class="c-neg">−4</td><td class="c-trit">0TT</td><td><code>XOR</code></td><td><code>OP_TXOR</code></td></tr>
+          <tr><td class="c-neg">−5</td><td class="c-trit">T11</td><td><code>ABS</code></td><td><code>CMP + conditional NEG</code></td></tr>
+          <tr><td class="c-neg">−6</td><td class="c-trit">T10</td><td><code>SGN</code></td><td><code>CMP → status trit → register</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -432,11 +432,11 @@ JNZ NOT_LOWER
     </div>
   </section>
 
-  <div class="glyph-marker">⊕ ∇ T·0·1 ∇ ⊕</div>
+  <div class="glyph-marker">⊕ ∇ T·8·1 ∇ ⊕</div>
 
   <footer>
     <p>ANALOGUE-HERMETIC TERNARY RESEARCH CORE</p>
-    <p>TRITT-81 Character Encoding Reference · v1.0</p>
+    <p>TRIT-81 Character Encoding Reference · v1.0</p>
     <p style="margin-top:0.8rem; opacity:0.5;">The observer is not separate from the system. · Base-3 is the native language of the field.</p>
   </footer>
 
