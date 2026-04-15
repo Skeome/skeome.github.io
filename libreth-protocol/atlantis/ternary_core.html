@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ternary Core Workbench — TAL + TRINE + CPU Emulator</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/atlantis-style.css">
+  <style>
+    .workbench { max-width: 1180px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+    .status-bar {
+      margin: 1rem 0 1.25rem;
+      border: 1px solid rgba(0, 209, 255, 0.35);
+      background: rgba(0, 30, 46, 0.35);
+      border-radius: 6px;
+      padding: .7rem .9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .8rem;
+      font-size: .8rem;
+    }
+    .status-pill { color: #111; background: #f7ce62; border-radius: 999px; padding: .15rem .55rem; }
+    .status-pill.ready { background: #56e09a; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: .55rem; margin-bottom: .8rem; }
+    .tab-btn {
+      cursor: pointer;
+      border: 1px solid rgba(0, 209, 255, 0.4);
+      color: var(--cyan);
+      background: rgba(0, 20, 28, 0.45);
+      border-radius: 5px;
+      padding: .45rem .75rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .76rem;
+      letter-spacing: .04em;
+    }
+    .tab-btn.active { color: #071116; background: var(--cyan); border-color: var(--cyan); }
+
+    .tab-panel {
+      display: none;
+      text-align: left;
+      border: 1px solid rgba(0, 209, 255, 0.25);
+      background: rgba(0, 10, 20, 0.42);
+      border-radius: 7px;
+      padding: 1rem;
+    }
+    .tab-panel.active { display: block; }
+
+    .grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; }
+    @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+    textarea, input[type="text"], input[type="number"] {
+      width: 100%;
+      color: var(--text-bright);
+      background: rgba(0, 15, 25, 0.72);
+      border: 1px solid rgba(0, 209, 255, 0.35);
+      border-radius: 5px;
+      padding: .65rem .75rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+    textarea { min-height: 320px; resize: vertical; }
+    .row { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .7rem; }
+    .btn {
+      cursor: pointer;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold);
+      background: rgba(26, 22, 8, .7);
+      border-radius: 5px;
+      padding: .45rem .7rem;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .75rem;
+    }
+    .btn.secondary { border-color: rgba(0, 209, 255, 0.45); color: var(--cyan); background: rgba(0, 22, 30, .7); }
+
+    .out {
+      margin-top: .7rem;
+      border: 1px solid rgba(0, 209, 255, .25);
+      background: rgba(3, 8, 14, .82);
+      border-radius: 6px;
+      padding: .7rem;
+      min-height: 230px;
+      max-height: 420px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: 'Roboto Mono', monospace;
+      font-size: .74rem;
+      line-height: 1.38;
+      color: #9ed8ff;
+    }
+
+    .card {
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      border-radius: 6px;
+      background: rgba(24, 16, 6, 0.35);
+      padding: .75rem;
+      margin-bottom: .8rem;
+    }
+    .card h4 { margin: 0 0 .5rem 0; color: var(--gold); font-size: .82rem; letter-spacing: .04em; }
+
+    table.regs { width: 100%; border-collapse: collapse; font-size: .73rem; }
+    table.regs th, table.regs td { border: 1px solid #1a2532; padding: .33rem .45rem; text-align: left; }
+    table.regs th { color: var(--cyan); background: rgba(0, 209, 255, .08); }
+    table.regs td:nth-child(1) { width: 62px; color: var(--gold); }
+
+    .small { font-size: .72rem; opacity: .9; }
+    .muted { color: #8ea7bc; }
+    .right { text-align: right; }
+  </style>
+</head>
+<body>
+<div class="page-wrap workbench">
+  <header class="page-header">
+    <div class="page-title">Ternary Core Workbench</div>
+    <div class="page-subtitle">Browser Runtime for TAL v3.1 + TRINE v1.1 + CPU Introspection</div>
+    <p class="page-epithet">
+      Runs your uploaded <code>tal.py</code> and <code>trine_v2.py</code> directly in-browser via Pyodide,
+      with no server-side execution required.
+    </p>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="81-Trit-Tesseract-Orbital-Torsion-Relay.html">81-TRIT TESSERACT</a> &rsaquo;
+    <a href="#">Ternary Core Workbench</a> &rsaquo; Web Runtime
+  </div>
+
+  <div class="status-bar">
+    <div>
+      Runtime: <strong id="runtimeLabel">Pyodide (loading…)</strong>
+      <span class="small muted">| modules: tal.py + trine_v2.py + Balanced_Ternary_v3_1.jl</span>
+    </div>
+    <span id="runtimePill" class="status-pill">BOOTING</span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="cpu">CPU Emulator</button>
+    <button class="tab-btn" data-tab="tal">T-AL Runner</button>
+    <button class="tab-btn" data-tab="trine">TRINE Workbench</button>
+    <button class="tab-btn" data-tab="refs">References</button>
+  </div>
+
+  <section id="tab-cpu" class="tab-panel active">
+    <div class="grid">
+      <div>
+        <h3 class="sub-head">CPU Program (T-AL Assembly)</h3>
+        <textarea id="cpuSource">; CPU emulator quick sample
+LOADI R1 12
+LOADI R2 -4
+ADD R3 R1 R2
+PRINT R3
+HALT</textarea>
+        <div class="row">
+          <button class="btn" id="cpuLoadBtn">Assemble + Load</button>
+          <button class="btn secondary" id="cpuStepBtn">Step 1</button>
+          <button class="btn secondary" id="cpuRunBtn">Run to HALT</button>
+          <button class="btn secondary" id="cpuResetBtn">Reset CPU</button>
+          <label class="small muted">Max cycles
+            <input id="cpuCycles" type="number" min="1" max="1000000" value="20000" style="width:110px; margin-left:6px;">
+          </label>
+        </div>
+        <div id="cpuOutput" class="out"></div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h4>Execution Snapshot</h4>
+          <div class="small" id="cpuMeta">No program loaded.</div>
+        </div>
+        <div class="card">
+          <h4>Registers (R0..R26)</h4>
+          <div style="max-height:430px; overflow:auto;">
+            <table class="regs">
+              <thead><tr><th>Reg</th><th>Value</th></tr></thead>
+              <tbody id="regTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-tal" class="tab-panel">
+    <h3 class="sub-head">T-AL Runner (one-shot assemble + execute)</h3>
+    <div class="grid">
+      <div>
+        <textarea id="talSource">; TAL runner sample
+LOADI R1 7
+LOADI R2 8
+MUL R4 R1 R2
+PRINT R4
+HALT</textarea>
+        <div class="row">
+          <button class="btn" id="talRunBtn">Run TAL Program</button>
+          <label class="small muted">Trace
+            <input id="talTrace" type="checkbox" style="margin-left:6px; vertical-align:middle;">
+          </label>
+          <label class="small muted">Max cycles
+            <input id="talMaxCycles" type="number" min="1" max="2000000" value="100000" style="width:110px; margin-left:6px;">
+          </label>
+        </div>
+      </div>
+      <div>
+        <div class="out" id="talOutput"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-trine" class="tab-panel">
+    <h3 class="sub-head">TRINE v1.1</h3>
+    <div class="grid">
+      <div>
+        <textarea id="trineSource">fn main() {
+  let a = 14;
+  let b = -5;
+  let c = a + b;
+  println("TRINE c:", c);
+  println("TRITS:", trits(c, 9));
+}
+main();</textarea>
+        <div class="row">
+          <button class="btn" id="trineRunBtn">Run (Tree-walk)</button>
+          <button class="btn secondary" id="trineEmitBtn">Emit TAL</button>
+          <button class="btn secondary" id="trineRunTalBtn">Run via TAL</button>
+          <label class="small muted">Trace
+            <input id="trineTrace" type="checkbox" style="margin-left:6px; vertical-align:middle;">
+          </label>
+        </div>
+      </div>
+      <div>
+        <div class="out" id="trineOutput"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-refs" class="tab-panel">
+    <h3 class="sub-head">Local Source Mirrors</h3>
+    <p class="small">Loaded by the browser runtime from <code>/libreth-protocol/atlantis/ternary-core/</code>.</p>
+    <ul style="margin-left:1.2rem; line-height:1.9;">
+      <li><a href="ternary-core/tal.py" target="_blank" rel="noopener">tal.py</a></li>
+      <li><a href="ternary-core/trine_v2.py" target="_blank" rel="noopener">trine_v2.py</a></li>
+      <li><a href="ternary-core/Balanced_Ternary_v3_1.jl" target="_blank" rel="noopener">Balanced_Ternary_v3_1.jl</a></li>
+    </ul>
+    <p class="small muted">Tip: if startup takes ~5-20s, that is normal for first-load Pyodide bootstrap.</p>
+  </section>
+</div>
+
+<script type="module">
+  import { loadPyodide } from 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.mjs';
+
+  const ui = {
+    runtimeLabel: document.getElementById('runtimeLabel'),
+    runtimePill: document.getElementById('runtimePill'),
+    cpuOutput: document.getElementById('cpuOutput'),
+    cpuMeta: document.getElementById('cpuMeta'),
+    regTableBody: document.getElementById('regTableBody'),
+    talOutput: document.getElementById('talOutput'),
+    trineOutput: document.getElementById('trineOutput')
+  };
+
+  let pyodide = null;
+  let runtimeReady = false;
+
+  function setRuntimeStatus(label, ready = false) {
+    ui.runtimeLabel.textContent = label;
+    ui.runtimePill.textContent = ready ? 'READY' : 'BOOTING';
+    ui.runtimePill.classList.toggle('ready', ready);
+  }
+
+  function appendOut(el, text) {
+    el.textContent += text;
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function clearOut(el) {
+    el.textContent = '';
+  }
+
+  function renderRegisters(regs = []) {
+    ui.regTableBody.innerHTML = regs.map((v, i) => `<tr><td>R${i}</td><td>${v}</td></tr>`).join('');
+  }
+
+  function formatInstr(instr) {
+    if (!instr) return '—';
+    const f = instr;
+    return `${f.name} | dst=R${f.dst} src1=R${f.src1} src2=R${f.src2} src3=R${f.src3} imm=${f.imm}`;
+  }
+
+  async function initRuntime() {
+    setRuntimeStatus('Loading Pyodide core…');
+    pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/' });
+
+    pyodide.setStdout({ batched: (s) => {
+      appendOut(ui.cpuOutput, s + '\n');
+      appendOut(ui.talOutput, s + '\n');
+      appendOut(ui.trineOutput, s + '\n');
+    }});
+    pyodide.setStderr({ batched: (s) => {
+      appendOut(ui.cpuOutput, `[stderr] ${s}\n`);
+      appendOut(ui.talOutput, `[stderr] ${s}\n`);
+      appendOut(ui.trineOutput, `[stderr] ${s}\n`);
+    }});
+
+    setRuntimeStatus('Fetching local source mirrors…');
+    const [talSrc, trineSrc, juliaSrc] = await Promise.all([
+      fetch('ternary-core/tal.py').then(r => r.text()),
+      fetch('ternary-core/trine_v2.py').then(r => r.text()),
+      fetch('ternary-core/Balanced_Ternary_v3_1.jl').then(r => r.text())
+    ]);
+
+    pyodide.FS.writeFile('/tal.py', talSrc);
+    pyodide.FS.writeFile('/trine_v2.py', trineSrc);
+    pyodide.FS.writeFile('/Balanced_Ternary_v3_1.jl', juliaSrc);
+
+    setRuntimeStatus('Initializing TAL/TRINE bridge…');
+    await pyodide.runPythonAsync(`
+import sys, json, traceback
+sys.path.insert(0, '/')
+
+import tal
+import trine_v2 as trine
+
+WEB_STATE = {'cpu': None, 'receptor': None, 'labels': {}, 'program_loaded': False}
+
+def _snapshot():
+    cpu = WEB_STATE.get('cpu')
+    if cpu is None:
+        return {'loaded': False, 'running': False, 'pc': 0, 'status': '0', 'instr': None, 'regs': []}
+
+    regs = [tal.reg_int(cpu.get_reg(i)) for i in range(tal.N_REGS)]
+    instr_data = None
+    if 1 <= cpu.pc <= len(cpu.memory):
+        try:
+            dec = tal.decode_instr(cpu.read_word(cpu.pc), cpu.pc)
+            op, dst, s1, s2, s3, sub, flags, imm, _imm_trits = dec
+            instr_data = {
+                'opcode': int(op),
+                'name': tal.OPCODE_NAMES.get(int(op), f'OP_{int(op)}'),
+                'dst': int(dst),
+                'src1': int(s1),
+                'src2': int(s2),
+                'src3': int(s3),
+                'sub': int(sub),
+                'imm': int(imm),
+            }
+        except Exception:
+            instr_data = None
+
+    return {
+        'loaded': True,
+        'running': bool(cpu.running),
+        'pc': int(cpu.pc),
+        'status': tal.TRIT_SYM[cpu.status],
+        'instr': instr_data,
+        'regs': regs,
+        'labels': WEB_STATE.get('labels', {})
+    }
+
+def tal_load_program(src):
+    lines = src.splitlines()
+    code, labels, errs = tal.assemble_program(lines)
+    if errs:
+        return {'ok': False, 'errors': errs}
+    cpu = tal.CPU()
+    tal.load_program(cpu, code)
+    WEB_STATE['cpu'] = cpu
+    WEB_STATE['labels'] = labels
+    WEB_STATE['program_loaded'] = True
+    WEB_STATE['receptor'] = tal.ReceptorInterface(tal.SimulatedBackend())
+    return {'ok': True, 'snapshot': _snapshot(), 'instr_count': len(code) // tal.INSTR_LEN}
+
+def tal_step(trace=False):
+    cpu = WEB_STATE.get('cpu')
+    if cpu is None:
+        return {'ok': False, 'error': 'No TAL program loaded'}
+    alive = tal.execute(cpu, receptor=WEB_STATE.get('receptor'), trace=bool(trace))
+    return {'ok': True, 'alive': bool(alive), 'snapshot': _snapshot()}
+
+def tal_run(trace=False, max_cycles=100000):
+    cpu = WEB_STATE.get('cpu')
+    if cpu is None:
+        return {'ok': False, 'error': 'No TAL program loaded'}
+    tal.run(cpu, max_cycles=int(max_cycles), receptor=WEB_STATE.get('receptor'), trace=bool(trace))
+    return {'ok': True, 'snapshot': _snapshot()}
+
+def tal_reset_cpu():
+    cpu = WEB_STATE.get('cpu')
+    if cpu is None:
+        return {'ok': False, 'error': 'No TAL program loaded'}
+    cpu.reset()
+    return {'ok': True, 'snapshot': _snapshot()}
+
+def tal_run_oneshot(src, trace=False, max_cycles=100000):
+    lines = src.splitlines()
+    code, labels, errs = tal.assemble_program(lines)
+    if errs:
+        return {'ok': False, 'errors': errs}
+    cpu = tal.CPU()
+    tal.load_program(cpu, code)
+    receptor = tal.ReceptorInterface(tal.SimulatedBackend())
+    tal.run(cpu, max_cycles=int(max_cycles), receptor=receptor, trace=bool(trace))
+    regs = [tal.reg_int(cpu.get_reg(i)) for i in range(tal.N_REGS)]
+    return {'ok': True, 'instr_count': len(code)//tal.INSTR_LEN, 'pc': int(cpu.pc), 'status': tal.TRIT_SYM[cpu.status], 'labels': labels, 'regs': regs}
+
+def trine_run_tree(src, trace=False):
+    rc = trine.run_source(src, filename='<web>', trace=bool(trace))
+    return {'ok': True, 'rc': int(rc)}
+
+def trine_emit_tal(src):
+    out = trine.emit_tal(src, filename='<web>')
+    return {'ok': True, 'tal': out}
+
+def trine_run_via_tal(src, trace=False):
+    rc = trine.run_via_tal(src, filename='<web>', trace=bool(trace), receptor=tal.ReceptorInterface(tal.SimulatedBackend()))
+    return {'ok': True, 'rc': int(rc)}
+
+def bridge_call(fn_name, payload_json):
+    data = json.loads(payload_json)
+    try:
+        fn = globals()[fn_name]
+        result = fn(**data)
+        return json.dumps(result)
+    except Exception as e:
+        return json.dumps({'ok': False, 'error': str(e), 'traceback': traceback.format_exc()})
+    `);
+
+    runtimeReady = true;
+    setRuntimeStatus('Pyodide ready (TAL/TRINE loaded)', true);
+  }
+
+  async function bridge(fnName, payload = {}) {
+    if (!runtimeReady) throw new Error('Runtime not ready yet.');
+    pyodide.globals.set('WEB_FN', fnName);
+    pyodide.globals.set('WEB_PAYLOAD', JSON.stringify(payload));
+    const raw = await pyodide.runPythonAsync(`bridge_call(WEB_FN, WEB_PAYLOAD)`);
+    const res = JSON.parse(raw);
+    if (!res.ok) {
+      const detail = res.traceback ? `\n${res.traceback}` : '';
+      throw new Error((res.error || 'Unknown bridge error') + detail);
+    }
+    return res;
+  }
+
+  function updateCpuUI(snap) {
+    if (!snap || !snap.loaded) {
+      ui.cpuMeta.textContent = 'No program loaded.';
+      renderRegisters([]);
+      return;
+    }
+    ui.cpuMeta.textContent = `PC=${snap.pc} | STATUS=${snap.status} | RUNNING=${snap.running} | NEXT=${formatInstr(snap.instr)}`;
+    renderRegisters(snap.regs || []);
+  }
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    });
+  });
+
+  // CPU actions
+  document.getElementById('cpuLoadBtn').addEventListener('click', async () => {
+    clearOut(ui.cpuOutput);
+    try {
+      const src = document.getElementById('cpuSource').value;
+      const res = await bridge('tal_load_program', { src });
+      appendOut(ui.cpuOutput, `Loaded ${res.instr_count} instruction(s).\n`);
+      updateCpuUI(res.snapshot);
+    } catch (e) {
+      appendOut(ui.cpuOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  document.getElementById('cpuStepBtn').addEventListener('click', async () => {
+    try {
+      const res = await bridge('tal_step', { trace: false });
+      updateCpuUI(res.snapshot);
+    } catch (e) {
+      appendOut(ui.cpuOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  document.getElementById('cpuRunBtn').addEventListener('click', async () => {
+    try {
+      const maxCycles = Number(document.getElementById('cpuCycles').value || 20000);
+      const res = await bridge('tal_run', { trace: false, max_cycles: maxCycles });
+      updateCpuUI(res.snapshot);
+    } catch (e) {
+      appendOut(ui.cpuOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  document.getElementById('cpuResetBtn').addEventListener('click', async () => {
+    try {
+      const res = await bridge('tal_reset_cpu', {});
+      clearOut(ui.cpuOutput);
+      updateCpuUI(res.snapshot);
+    } catch (e) {
+      appendOut(ui.cpuOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  // TAL one-shot
+  document.getElementById('talRunBtn').addEventListener('click', async () => {
+    clearOut(ui.talOutput);
+    try {
+      const src = document.getElementById('talSource').value;
+      const trace = document.getElementById('talTrace').checked;
+      const maxCycles = Number(document.getElementById('talMaxCycles').value || 100000);
+      const res = await bridge('tal_run_oneshot', { src, trace, max_cycles: maxCycles });
+      appendOut(ui.talOutput, `Done. instructions=${res.instr_count} PC=${res.pc} STATUS=${res.status}\n`);
+      appendOut(ui.talOutput, `R1=${res.regs[1]} R2=${res.regs[2]} R3=${res.regs[3]} R4=${res.regs[4]}\n`);
+      appendOut(ui.talOutput, `labels=${Object.keys(res.labels || {}).join(', ') || '(none)'}\n`);
+    } catch (e) {
+      appendOut(ui.talOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  // TRINE actions
+  document.getElementById('trineRunBtn').addEventListener('click', async () => {
+    clearOut(ui.trineOutput);
+    try {
+      const src = document.getElementById('trineSource').value;
+      const trace = document.getElementById('trineTrace').checked;
+      const res = await bridge('trine_run_tree', { src, trace });
+      appendOut(ui.trineOutput, `\n[tree-walk rc=${res.rc}]\n`);
+    } catch (e) {
+      appendOut(ui.trineOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  document.getElementById('trineEmitBtn').addEventListener('click', async () => {
+    clearOut(ui.trineOutput);
+    try {
+      const src = document.getElementById('trineSource').value;
+      const res = await bridge('trine_emit_tal', { src });
+      appendOut(ui.trineOutput, res.tal + '\n');
+    } catch (e) {
+      appendOut(ui.trineOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  document.getElementById('trineRunTalBtn').addEventListener('click', async () => {
+    clearOut(ui.trineOutput);
+    try {
+      const src = document.getElementById('trineSource').value;
+      const trace = document.getElementById('trineTrace').checked;
+      const res = await bridge('trine_run_via_tal', { src, trace });
+      appendOut(ui.trineOutput, `\n[run-via-tal rc=${res.rc}]\n`);
+    } catch (e) {
+      appendOut(ui.trineOutput, `[error] ${e.message}\n`);
+    }
+  });
+
+  initRuntime().catch(err => {
+    setRuntimeStatus('Runtime failed: ' + err.message, false);
+    appendOut(ui.cpuOutput, `[boot error] ${err.message}\n`);
+    appendOut(ui.talOutput, `[boot error] ${err.message}\n`);
+    appendOut(ui.trineOutput, `[boot error] ${err.message}\n`);
+  });
+</script>
+</body>
+</html>
