@@ -31,7 +31,10 @@ import math
 import argparse
 import time
 import glob
-import readline  # enables arrow-key history in REPL (Unix/macOS)
+try:
+    import readline  # enables arrow-key history in REPL (Unix/macOS)
+except ImportError:
+    pass  # readline not available in Pyodide or Windows
 from copy import deepcopy
 from typing import Optional, List, Dict, Tuple
 from dataclasses import dataclass, field

@@ -38,7 +38,15 @@ Author : Skeome  (v1.1 native bootstrap, Skeome)
 
 from __future__ import annotations
 
-import sys, os, re, math, readline, curses, textwrap, traceback, argparse
+import sys, os, re, math, textwrap, traceback, argparse
+try:
+    import readline
+except ImportError:
+    pass  # readline not available in Pyodide
+try:
+    import curses
+except ImportError:
+    curses = None  # curses not available in Pyodide
 from typing import Any, Dict, List, Optional, Tuple, Union
 from dataclasses import dataclass, field as dc_field
 from enum   import IntEnum, auto
