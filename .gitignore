@@ -1,4 +1,4 @@
-*.md
-*.pdf
+libreth-protocol/egyptology/*.md
+libreth-protocol/egyptology/*.pdf
 hieroglyph-unicode-list.html
 none.html

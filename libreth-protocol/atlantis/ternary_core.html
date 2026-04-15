@@ -7,6 +7,7 @@
   <link rel="icon" href="data:,">
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/atlantis-style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     .workbench { max-width: 1180px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
     .status-bar {
@@ -109,6 +110,86 @@
     .small { font-size: .72rem; opacity: .9; }
     .muted { color: #8ea7bc; }
     .right { text-align: right; }
+
+    /* Markdown rendering styles */
+    #refContent h1, #refContent h2, #refContent h3, #refContent h4, #refContent h5, #refContent h6 {
+      color: var(--cyan);
+      margin-top: 1.2rem;
+      margin-bottom: 0.6rem;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+    #refContent h1 { font-size: 1.1rem; }
+    #refContent h2 { font-size: 0.95rem; border-bottom: 1px solid rgba(0, 209, 255, 0.3); padding-bottom: 0.3rem; }
+    #refContent h3 { font-size: 0.88rem; color: var(--gold); }
+    #refContent h4, #refContent h5, #refContent h6 { font-size: 0.8rem; color: #9ed8ff; }
+    #refContent p, #refContent li { line-height: 1.6; color: #b0c3d6; font-size: 0.8rem; }
+    #refContent ul, #refContent ol { margin-left: 1.2rem; margin-bottom: 0.8rem; }
+    #refContent li { margin-bottom: 0.4rem; }
+    #refContent code {
+      background: rgba(0, 15, 25, 0.72);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      color: #56e09a;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.77rem;
+    }
+    #refContent pre {
+      background: rgba(3, 8, 14, 0.82);
+      border: 1px solid rgba(0, 209, 255, 0.25);
+      border-radius: 6px;
+      padding: 0.8rem;
+      overflow-x: auto;
+      margin-bottom: 0.8rem;
+    }
+    #refContent pre code {
+      background: none;
+      padding: 0;
+      color: #9ed8ff;
+      font-size: 0.74rem;
+    }
+    #refContent table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0;
+      font-size: 0.78rem;
+    }
+    #refContent table th, #refContent table td {
+      border: 1px solid rgba(0, 209, 255, 0.3);
+      padding: 0.5rem;
+      text-align: left;
+    }
+    #refContent table th {
+      background: rgba(0, 209, 255, 0.1);
+      color: var(--cyan);
+      font-weight: 500;
+    }
+    #refContent table td {
+      color: #b0c3d6;
+    }
+    #refContent blockquote {
+      border-left: 3px solid var(--gold);
+      padding-left: 1rem;
+      margin-left: 0;
+      color: #a0b0c0;
+      font-style: italic;
+      font-size: 0.78rem;
+    }
+    #refContent hr {
+      border: none;
+      height: 1px;
+      background: rgba(0, 209, 255, 0.2);
+      margin: 1.5rem 0;
+    }
+    #refContent a {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(0, 209, 255, 0.5);
+    }
+    #refContent a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
   </style>
 </head>
 <body>
@@ -236,14 +317,10 @@ main();</textarea>
   </section>
 
   <section id="tab-refs" class="tab-panel">
-    <h3 class="sub-head">Local Source Mirrors</h3>
-    <p class="small">Loaded by the browser runtime from <code>/libreth-protocol/atlantis/ternary-core/</code>.</p>
-    <ul style="margin-left:1.2rem; line-height:1.9;">
-      <li><a href="ternary-core/tal.py" target="_blank" rel="noopener">tal.py</a></li>
-      <li><a href="ternary-core/trine_v2.py" target="_blank" rel="noopener">trine_v2.py</a></li>
-      <li><a href="ternary-core/Balanced_Ternary_v3_1.jl" target="_blank" rel="noopener">Balanced_Ternary_v3_1.jl</a></li>
-    </ul>
-    <p class="small muted">Tip: if startup takes ~5-20s, that is normal for first-load Pyodide bootstrap.</p>
+    <h3 class="sub-head">Ternary-AL v3.1 Reference</h3>
+    <div id="refContent" style="overflow-y: auto; max-height: 600px; padding: 1rem 0;">
+      <p class="small muted">Loading reference documentation…</p>
+    </div>
   </section>
 </div>
 
@@ -257,7 +334,8 @@ main();</textarea>
     cpuMeta: document.getElementById('cpuMeta'),
     regTableBody: document.getElementById('regTableBody'),
     talOutput: document.getElementById('talOutput'),
-    trineOutput: document.getElementById('trineOutput')
+    trineOutput: document.getElementById('trineOutput'),
+    refContent: document.getElementById('refContent')
   };
 
   let pyodide = null;
@@ -286,6 +364,39 @@ main();</textarea>
     if (!instr) return '—';
     const f = instr;
     return `${f.name} | dst=R${f.dst} src1=R${f.src1} src2=R${f.src2} src3=R${f.src3} imm=${f.imm}`;
+  }
+
+  async function loadReferenceMarkdown() {
+    try {
+      // Wait for marked to be available
+      let attempts = 0;
+      while (!window.marked && attempts < 50) {
+        await new Promise(r => setTimeout(r, 100));
+        attempts++;
+      }
+      
+      if (!window.marked) {
+        throw new Error('Markdown parser not available');
+      }
+
+      const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+      const response = await fetch(basePath + '/ternary-core/Ternary_AL_v3_1_Reference.md');
+      if (!response.ok) throw new Error(`Failed to load markdown: ${response.status}`);
+      const markdown = await response.text();
+      // Use marked.parse() for newer API, fallback to marked()
+      const html = typeof window.marked.parse === 'function' 
+        ? window.marked.parse(markdown) 
+        : window.marked(markdown);
+      ui.refContent.innerHTML = html;
+    } catch (e) {
+      ui.refContent.innerHTML = `<p class="small muted" style="color: #ff6b6b;">[Error loading reference] ${e.message}</p>
+        <p class="small" style="color: #b0c3d6;">Local source files available at:</p>
+        <ul style="margin-left:1.2rem; line-height:1.9; color: #9ed8ff;">
+          <li><a href="ternary-core/tal.py" target="_blank" rel="noopener" style="color: var(--cyan);">tal.py</a></li>
+          <li><a href="ternary-core/trine_v2.py" target="_blank" rel="noopener" style="color: var(--cyan);">trine_v2.py</a></li>
+          <li><a href="ternary-core/Balanced_Ternary_v3_1.jl" target="_blank" rel="noopener" style="color: var(--cyan);">Balanced_Ternary_v3_1.jl</a></li>
+        </ul>`;
+    }
   }
 
   async function initRuntime() {
@@ -565,6 +676,9 @@ def bridge_call(fn_name, payload_json):
     appendOut(ui.talOutput, `[boot error] ${err.message}\n`);
     appendOut(ui.trineOutput, `[boot error] ${err.message}\n`);
   });
+
+  // Load reference documentation
+  loadReferenceMarkdown();
 </script>
 
 <div class="flex flex-wrap justify-center gap-6" style="margin-top: 3rem; padding: 0 1rem;">
