@@ -304,10 +304,12 @@ main();</textarea>
     }});
 
     setRuntimeStatus('Fetching local source mirrors…');
+    // Use absolute paths for GitHub Pages compatibility
+    const basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     const [talSrc, trineSrc, juliaSrc] = await Promise.all([
-      fetch('ternary-core/tal.py').then(r => r.text()),
-      fetch('ternary-core/trine_v2.py').then(r => r.text()),
-      fetch('ternary-core/Balanced_Ternary_v3_1.jl').then(r => r.text())
+      fetch(basePath + '/ternary-core/tal.py').then(r => r.text()),
+      fetch(basePath + '/ternary-core/trine_v2.py').then(r => r.text()),
+      fetch(basePath + '/ternary-core/Balanced_Ternary_v3_1.jl').then(r => r.text())
     ]);
 
     pyodide.FS.writeFile('/tal.py', talSrc);
