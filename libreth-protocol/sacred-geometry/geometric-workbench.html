@@ -360,7 +360,7 @@
                 // Touch state
                 this._touch = {
                     startX: 0, startY: 0, startTime: 0,
-                    moved: false, panning: false, longPressTimer: null,
+                    moved: false, panning: false, longPressTimer: null, longPressFired: false,
                     pinchStartDist: 0, pinchStartZoom: 1,
                     pinchStartWorld: null, pinchStartPanX: 0, pinchStartPanY: 0
                 };
@@ -378,10 +378,12 @@
                     t.startTime = Date.now();
                     t.moved   = false;
                     t.panning = false;
+                    t.longPressFired = false;
 
                     // Long-press → right-click equivalent
                     t.longPressTimer = setTimeout(() => {
                         if (!t.moved) {
+                            t.longPressFired = true;
                             this._showLongPressRipple(t.startX, t.startY);
                             if (navigator.vibrate) navigator.vibrate(40);
                             this._triggerRightClick(t.startX, t.startY);
@@ -464,7 +466,7 @@
                 clearTimeout(t.longPressTimer);
 
                 // Finger lifted and it was a clean tap (no drag, no long-press)
-                if (e.changedTouches.length >= 1 && !t.moved && e.touches.length === 0) {
+                if (e.changedTouches.length >= 1 && !t.moved && !t.longPressFired && e.touches.length === 0) {
                     const touch = e.changedTouches[0];
                     const rect  = this.canvas.getBoundingClientRect();
                     const sx = touch.clientX - rect.left;
