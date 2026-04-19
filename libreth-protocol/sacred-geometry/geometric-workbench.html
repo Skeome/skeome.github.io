@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Workbench</title>
+    <link rel="stylesheet" href="./css/sg.css">
+</head>
+<body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="container">
+        <div class="sidebar">
+            <button class="sidebar-close-btn" id="sidebarCloseBtn">✕ &nbsp;Close Panel</button>
+            <div class="section">
+                <div class="section-title">Tools</div>
+                <div class="tool-group">
+                    <button id="toolPoint" class="active">Point</button>
+                    <button id="toolLine">Line</button>
+                </div>
+                <div class="tool-group">
+                    <button id="toolPan">Pan</button>
+                    <button id="toolSelect">Select</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Colors</div>
+                <div class="color-picker">
+                    <div class="color-swatch selected" data-color="#ffffff" style="background: #ffffff;"></div>
+                    <div class="color-swatch" data-color="#ff0000" style="background: #ff0000;"></div>
+                    <div class="color-swatch" data-color="#00ff00" style="background: #00ff00;"></div>
+                    <div class="color-swatch" data-color="#0000ff" style="background: #0000ff;"></div>
+                    <div class="color-swatch" data-color="#ffff00" style="background: #ffff00;"></div>
+                    <div class="color-swatch" data-color="#ff00ff" style="background: #ff00ff;"></div>
+                    <div class="color-swatch" data-color="#00ffff" style="background: #00ffff;"></div>
+                    <div class="color-swatch" data-color="#ff8800" style="background: #ff8800;"></div>
+                    <div class="color-swatch" data-color="#ff0088" style="background: #ff0088;"></div>
+                    <div class="color-swatch" data-color="#00ff88" style="background: #00ff88;"></div>
+                    <div class="color-swatch" data-color="#0088ff" style="background: #0088ff;"></div>
+                    <div class="color-swatch" data-color="#88ff00" style="background: #88ff00;"></div>
+                    <div class="color-swatch" data-color="#8800ff" style="background: #8800ff;"></div>
+                    <div class="color-swatch" data-color="#ff88ff" style="background: #ff88ff;"></div>
+                    <div class="color-swatch" data-color="#88ffff" style="background: #88ffff;"></div>
+                    <div class="color-swatch" data-color="#888888" style="background: #888888;"></div>
+                    <div class="color-swatch" data-color="#cccccc" style="background: #cccccc;"></div>
+                </div>
+                <input type="color" id="customColor" value="#ffffff">
+            </div>
+
+            <div class="section">
+                <div class="section-title">View</div>
+                <div class="tool-group">
+                    <button id="zoomIn">Zoom +</button>
+                    <button id="zoomOut">Zoom -</button>
+                </div>
+                <div class="tool-group">
+                    <button id="resetView">Reset View</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Edit</div>
+                <div class="tool-group">
+                    <button id="undoBtn">Undo</button>
+                    <button id="redoBtn">Redo</button>
+                </div>
+                <div class="tool-group">
+                    <button id="clearLayer">Clear Layer</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Layers</div>
+                <div class="input-group">
+                    <input type="text" id="newLayerName" placeholder="New layer name">
+                    <button id="addLayer">Add Layer</button>
+                </div>
+                <div class="layer-list" id="layerList"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Manual Entry</div>
+                <div class="input-group">
+                    <input type="number" id="pointX" placeholder="X coordinate" step="1">
+                    <input type="number" id="pointY" placeholder="Y coordinate" step="1">
+                    <button id="addPointBtn">Add Point</button>
+                </div>
+                <div class="symmetry-control">
+                    <label>
+                        <input type="checkbox" id="symmetryToggle">
+                        4-Way Symmetry
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Line Tool</div>
+                <div class="line-tool-control">
+                    <div style="font-size: 10px; color: var(--gold-dim); margin-bottom: 8px;">
+                        Click 2 points on canvas (any visible layer), or enter point numbers:
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="linePointFrom" placeholder="From point #" step="1" min="1">
+                        <input type="number" id="linePointTo" placeholder="To point #" step="1" min="1">
+                        <button id="drawLineBtn">Draw Line</button>
+                    </div>
+                    <div id="lineToolStatus" class="line-tool-status"></div>
+                    <div class="symmetry-control">
+                        <label>
+                            <input type="checkbox" id="lineSymmetryToggle">
+                            4-Way Line Symmetry
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">All Points</div>
+                <div class="points-list" id="pointsList">
+                    <div class="empty-list">No points</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Statistics</div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Points</div>
+                        <div class="stat-value" id="pointCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Lines</div>
+                        <div class="stat-value" id="lineCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Zoom</div>
+                        <div class="stat-value" id="zoomLevel">1.0x</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Layers</div>
+                        <div class="stat-value" id="layerCount">1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Navigation</div>
+                <div class="tool-group">
+                    <a href="../node-03b.html" class="nav-link">Back to Hub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open panel">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="zoom-info">
+                <span id="zoomInfo">Zoom: 1.0x</span>
+            </div>
+            <div id="pointTooltip" class="point-tooltip" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        class GeometricWorkbench {
+            constructor() {
+                this.canvas = document.getElementById('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                
+                if (!this.ctx) {
+                    console.error('Failed to get canvas context');
+                    return;
+                }
+
+                // State - initialize BEFORE setupCanvas
+                this.tool = 'point';
+                this.currentColor = '#ffffff';
+                this.zoom = 0.2;
+                this.panX = 0;
+                this.panY = 0;
+                this.isDrawing = false;
+                this.lineStart = null;
+                this.isPanning = false;
+                this.panStart = null;
+
+                // Layer system - initialize BEFORE setupCanvas
+                this.layers = [{ id: Date.now(), name: 'Base Layer', visible: true, elements: [], history: [], historyIndex: -1 }];
+                this.activeLayerId = this.layers[0].id;
+                
+                // Cursor tracking for zoom
+                this.cursorX = 0;
+                this.cursorY = 0;
+                
+                // Right-click context
+                this.lastRightClickWorld = null;
+
+                // Symmetry mode
+                this.symmetryEnabled = false;
+                this.lineSymmetryEnabled = false;
+
+                // Point ID tracking (for numbering)
+                this.nextPointId = 1;
+                
+                // Track most recent line for highlighting
+                this.mostRecentLineIndex = -1;
+
+                // Line tool state
+                this.lineToolPoint1 = null;
+                this.lineToolPoint2 = null;
+
+                // UI Elements
+                this.tools = {
+                    point: document.getElementById('toolPoint'),
+                    line: document.getElementById('toolLine'),
+                    pan: document.getElementById('toolPan'),
+                    select: document.getElementById('toolSelect')
+                };
+
+                // Now setup canvas (which calls draw)
+                this.setupCanvas();
+                this.setupEventListeners();
+                this.updateLayerUI();
+                this.updatePointsList();
+                this.draw();
+                
+                console.log('GeometricWorkbench initialized', { canvas: this.canvas, context: this.ctx });
+            }
+
+            setupCanvas() {
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+                // Continuously redraw to show hover effects and animations
+                this.animationFrameId = requestAnimationFrame(() => this.animate());
+            }
+
+            resizeCanvas() {
+                const container = this.canvas.parentElement;
+                this.canvas.width = container.clientWidth;
+                this.canvas.height = container.clientHeight;
+                console.log('Canvas resized:', { width: this.canvas.width, height: this.canvas.height });
+                this.draw();
+            }
+            
+            animate() {
+                // Keep redrawing for smooth interactions
+                this.draw();
+                this.animationFrameId = requestAnimationFrame(() => this.animate());
+            }
+
+            setupEventListeners() {
+                // Tool buttons
+                Object.entries(this.tools).forEach(([toolName, button]) => {
+                    button.addEventListener('click', () => this.selectTool(toolName));
+                });
+
+                // Color selection
+                document.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.addEventListener('click', () => this.selectColor(swatch.dataset.color));
+                });
+
+                document.getElementById('customColor').addEventListener('change', (e) => {
+                    this.selectColor(e.target.value);
+                });
+
+                // Canvas events
+                this.canvas.addEventListener('mousedown', (e) => this.onCanvasMouseDown(e));
+                this.canvas.addEventListener('mousemove', (e) => this.onCanvasMouseMove(e));
+                this.canvas.addEventListener('mouseup', (e) => this.onCanvasMouseUp(e));
+                this.canvas.addEventListener('wheel', (e) => this.onCanvasWheel(e));
+
+                // Zoom controls
+                document.getElementById('zoomIn').addEventListener('click', () => this.zoomAtCursor(1.2));
+                document.getElementById('zoomOut').addEventListener('click', () => this.zoomAtCursor(0.8));
+                document.getElementById('resetView').addEventListener('click', () => this.resetView());
+
+                // Edit controls
+                document.getElementById('undoBtn').addEventListener('click', () => this.undo());
+                document.getElementById('redoBtn').addEventListener('click', () => this.redo());
+                document.getElementById('clearLayer').addEventListener('click', () => this.clearLayer());
+
+                // Layer management
+                document.getElementById('addLayer').addEventListener('click', () => this.addLayer());
+                document.getElementById('newLayerName').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addLayer();
+                });
+                
+                // Right-click context menu
+                this.canvas.addEventListener('contextmenu', (e) => this.onCanvasRightClick(e));
+
+                // Manual point entry
+                document.getElementById('addPointBtn').addEventListener('click', () => this.addPointManually());
+                document.getElementById('pointX').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addPointManually();
+                });
+                document.getElementById('pointY').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addPointManually();
+                });
+
+                // Symmetry toggle
+                document.getElementById('symmetryToggle').addEventListener('change', (e) => {
+                    this.symmetryEnabled = e.target.checked;
+                });
+
+                // Line symmetry toggle
+                const lineSymmetryToggle = document.getElementById('lineSymmetryToggle');
+                if (lineSymmetryToggle) {
+                    lineSymmetryToggle.addEventListener('change', (e) => {
+                        this.lineSymmetryEnabled = e.target.checked;
+                    });
+                }
+
+                // Line tool
+                document.getElementById('drawLineBtn').addEventListener('click', () => this.drawLineFromInputs());
+                document.getElementById('linePointFrom').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.drawLineFromInputs();
+                });
+                document.getElementById('linePointTo').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.drawLineFromInputs();
+                });
+
+                // ── Mobile sidebar toggle ──────────────────────────────────
+                const menuToggle   = document.getElementById('menuToggle');
+                const sidebarEl    = document.querySelector('.sidebar');
+                const overlay      = document.getElementById('sidebarOverlay');
+                const closeBtn     = document.getElementById('sidebarCloseBtn');
+
+                const openSidebar  = () => {
+                    sidebarEl.classList.add('mobile-open');
+                    overlay.classList.add('visible');
+                    menuToggle.classList.add('is-open');
+                    menuToggle.setAttribute('aria-label', 'Close panel');
+                };
+                const closeSidebar = () => {
+                    sidebarEl.classList.remove('mobile-open');
+                    overlay.classList.remove('visible');
+                    menuToggle.classList.remove('is-open');
+                    menuToggle.setAttribute('aria-label', 'Open panel');
+                };
+                const toggleSidebar = () => sidebarEl.classList.contains('mobile-open') ? closeSidebar() : openSidebar();
+
+                menuToggle.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', closeSidebar);
+                closeBtn.addEventListener('click', closeSidebar);
+
+                // ── Touch events ──────────────────────────────────────────
+                this.setupTouchListeners();
+            }
+
+            // ── Touch Support ─────────────────────────────────────────────
+            setupTouchListeners() {
+                const opts = { passive: false };
+                this.canvas.addEventListener('touchstart',  e => this.onTouchStart(e),  opts);
+                this.canvas.addEventListener('touchmove',   e => this.onTouchMove(e),   opts);
+                this.canvas.addEventListener('touchend',    e => this.onTouchEnd(e),    opts);
+                this.canvas.addEventListener('touchcancel', e => this.onTouchCancel(e), opts);
+                // Touch state
+                this._touch = {
+                    startX: 0, startY: 0, startTime: 0,
+                    moved: false, panning: false, longPressTimer: null,
+                    pinchStartDist: 0, pinchStartZoom: 1,
+                    pinchStartWorld: null, pinchStartPanX: 0, pinchStartPanY: 0
+                };
+            }
+
+            onTouchStart(e) {
+                e.preventDefault();
+                const t = this._touch;
+
+                if (e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const rect  = this.canvas.getBoundingClientRect();
+                    t.startX = touch.clientX - rect.left;
+                    t.startY = touch.clientY - rect.top;
+                    t.startTime = Date.now();
+                    t.moved   = false;
+                    t.panning = false;
+
+                    // Long-press → right-click equivalent
+                    t.longPressTimer = setTimeout(() => {
+                        if (!t.moved) {
+                            this._showLongPressRipple(t.startX, t.startY);
+                            if (navigator.vibrate) navigator.vibrate(40);
+                            this._triggerRightClick(t.startX, t.startY);
+                        }
+                    }, 550);
+
+                } else if (e.touches.length === 2) {
+                    clearTimeout(t.longPressTimer);
+                    t.panning = false;
+                    const t1 = e.touches[0], t2 = e.touches[1];
+                    const rect = this.canvas.getBoundingClientRect();
+                    t.pinchStartDist  = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+                    t.pinchStartZoom  = this.zoom;
+                    t.pinchStartPanX  = this.panX;
+                    t.pinchStartPanY  = this.panY;
+                    const midX = (t1.clientX + t2.clientX) / 2 - rect.left;
+                    const midY = (t1.clientY + t2.clientY) / 2 - rect.top;
+                    t.pinchStartWorld = this.screenToWorld(midX, midY);
+                }
+            }
+
+            onTouchMove(e) {
+                e.preventDefault();
+                const t = this._touch;
+                const rect = this.canvas.getBoundingClientRect();
+
+                if (e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const sx = touch.clientX - rect.left;
+                    const sy = touch.clientY - rect.top;
+                    this.cursorX = sx;
+                    this.cursorY = sy;
+
+                    const dist = Math.hypot(sx - t.startX, sy - t.startY);
+                    if (dist > 8 && !t.moved) {
+                        t.moved   = true;
+                        t.panning = true;
+                        clearTimeout(t.longPressTimer);
+                        this.panStart = { x: sx, y: sy };
+                    }
+
+                    if (t.panning) {
+                        const dx = (sx - this.panStart.x) / this.zoom;
+                        const dy = (sy - this.panStart.y) / this.zoom;
+                        this.panX -= dx;
+                        this.panY -= dy;
+                        this.panStart = { x: sx, y: sy };
+                        this.draw();
+                    } else if (this.tool === 'line' && this.lineToolPoint1) {
+                        this.draw(); // live preview
+                    }
+
+                } else if (e.touches.length === 2) {
+                    clearTimeout(t.longPressTimer);
+                    const t1 = e.touches[0], t2 = e.touches[1];
+                    const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+                    const midX = (t1.clientX + t2.clientX) / 2 - rect.left;
+                    const midY = (t1.clientY + t2.clientY) / 2 - rect.top;
+
+                    // Zoom relative to pinch start
+                    const factor   = dist / t.pinchStartDist;
+                    const newZoom  = Math.max(0.01, Math.min(t.pinchStartZoom * factor, 500));
+                    this.zoom      = newZoom;
+                    this.cursorX   = midX;
+                    this.cursorY   = midY;
+
+                    // Keep the world point that was under the initial midpoint
+                    // still under the current midpoint (handles both zoom + pan)
+                    const cx = this.canvas.width  / 2;
+                    const cy = this.canvas.height / 2;
+                    this.panX = t.pinchStartWorld.x - (midX - cx) / this.zoom;
+                    this.panY = t.pinchStartWorld.y - (midY - cy) / this.zoom;
+                    this.draw();
+                }
+            }
+
+            onTouchEnd(e) {
+                e.preventDefault();
+                const t = this._touch;
+                clearTimeout(t.longPressTimer);
+
+                // Finger lifted and it was a clean tap (no drag, no long-press)
+                if (e.changedTouches.length >= 1 && !t.moved && e.touches.length === 0) {
+                    const touch = e.changedTouches[0];
+                    const rect  = this.canvas.getBoundingClientRect();
+                    const sx = touch.clientX - rect.left;
+                    const sy = touch.clientY - rect.top;
+                    this._triggerTap(sx, sy);
+                }
+
+                // If one finger still down after 2-finger gesture, reset for pan
+                if (e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const rect  = this.canvas.getBoundingClientRect();
+                    t.startX  = touch.clientX - rect.left;
+                    t.startY  = touch.clientY - rect.top;
+                    t.moved   = false;
+                    t.panning = false;
+                }
+                if (e.touches.length === 0) {
+                    t.panning = false;
+                    this.isPanning = false;
+                }
+            }
+
+            onTouchCancel(e) {
+                clearTimeout(this._touch.longPressTimer);
+                this._touch.panning = false;
+                this.isPanning = false;
+            }
+
+            // Simulate a left-click tap at screen position
+            _triggerTap(sx, sy) {
+                const { x: worldX, y: worldY } = this.screenToWorld(sx, sy);
+
+                if (this.tool === 'point') {
+                    const snapped = this.snapToGrid(worldX, worldY);
+                    this.addPointWithSymmetry(snapped.x, snapped.y);
+                    this.draw();
+
+                } else if (this.tool === 'line') {
+                    const tolerance = 30 / this.zoom;
+                    const pointAtCoord = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    if (pointAtCoord) {
+                        if (!this.lineToolPoint1) {
+                            this.lineToolPoint1 = pointAtCoord;
+                            this.updateLineToolStatus();
+                        } else if (pointAtCoord.pointId === this.lineToolPoint1.pointId) {
+                            this.lineToolPoint1 = null;
+                            this.lineToolPoint2 = null;
+                            this.updateLineToolStatus();
+                            this.draw();
+                        } else {
+                            this.lineToolPoint2 = pointAtCoord;
+                            this.addLineWithSymmetry(
+                                this.lineToolPoint1.x, this.lineToolPoint1.y,
+                                this.lineToolPoint2.x, this.lineToolPoint2.y
+                            );
+                            this.saveState();
+                            this.lineToolPoint1 = null;
+                            this.lineToolPoint2 = null;
+                            this.updateLineToolStatus();
+                            this.draw();
+                        }
+                    }
+                }
+                // Pan tool: taps do nothing extra
+            }
+
+            // Simulate a right-click at screen position
+            _triggerRightClick(sx, sy) {
+                if (this.tool === 'line' && this.lineToolPoint1) {
+                    this.lineToolPoint1 = null;
+                    this.lineToolPoint2 = null;
+                    this.updateLineToolStatus();
+                    this.draw();
+                    return;
+                }
+                const { x: worldX, y: worldY } = this.screenToWorld(sx, sy);
+                const tolerance = 30 / this.zoom;
+                const element   = this.findElementAtPoint(worldX, worldY, tolerance);
+                if (element) {
+                    const layer = this.getActiveLayer();
+                    layer.elements.splice(element.index, 1);
+                    if (element.type === 'point') this.renumberPointsGlobally();
+                    this.saveState();
+                    this.updatePointsList();
+                    this.draw();
+                }
+            }
+
+            // Briefly show a gold ring at the long-press point
+            _showLongPressRipple(sx, sy) {
+                const indicator = document.createElement('div');
+                indicator.className = 'longpress-indicator';
+                indicator.style.left = sx + 'px';
+                indicator.style.top  = sy + 'px';
+                this.canvas.parentElement.appendChild(indicator);
+                indicator.addEventListener('animationend', () => indicator.remove());
+            }
+
+            selectTool(toolName) {
+                this.tool = toolName;
+                Object.values(this.tools).forEach(btn => btn.classList.remove('active'));
+                this.tools[toolName].classList.add('active');
+                
+                // Reset line tool state when switching away
+                if (toolName !== 'line') {
+                    this.lineToolPoint1 = null;
+                    this.lineToolPoint2 = null;
+                    document.getElementById('lineToolStatus').textContent = '';
+                }
+            }
+
+            selectColor(color) {
+                this.currentColor = color;
+                document.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.classList.toggle('selected', swatch.dataset.color === color);
+                });
+                document.getElementById('customColor').value = color;
+            }
+
+            snapToGrid(worldX, worldY) {
+                // Snap to nearest 1-unit grid intersection
+                const snappedX = Math.round(worldX);
+                const snappedY = Math.round(worldY);
+                return { x: snappedX, y: snappedY };
+            }
+
+            addPointManually() {
+                const xInput = document.getElementById('pointX');
+                const yInput = document.getElementById('pointY');
+                const x = parseFloat(xInput.value);
+                const y = parseFloat(yInput.value);
+
+                if (isNaN(x) || isNaN(y)) {
+                    alert('Please enter valid coordinates');
+                    return;
+                }
+
+                this.addPointWithSymmetry(x, y);
+                xInput.value = '';
+                yInput.value = '';
+            }
+
+            addPointWithSymmetry(x, y) {
+                const layer = this.getActiveLayer();
+                const points = [{ x, y }];
+
+                if (this.symmetryEnabled) {
+                    // Add 4-way symmetric points around origin
+                    if (x !== 0 || y !== 0) {
+                        points.push({ x: -x, y: y });
+                        points.push({ x: x, y: -y });
+                        points.push({ x: -x, y: -y });
+                    }
+                }
+
+                // Remove duplicates (e.g., if x or y is 0)
+                const unique = [];
+                const seen = new Set();
+                points.forEach(p => {
+                    const key = `${p.x},${p.y}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        unique.push(p);
+                    }
+                });
+
+                // Add all unique points
+                unique.forEach(p => {
+                    layer.elements.push({
+                        type: 'point',
+                        pointId: this.nextPointId++,
+                        x: p.x,
+                        y: p.y,
+                        color: this.currentColor,
+                        size: 6
+                    });
+                });
+
+                this.saveState();
+                this.updatePointsList();
+                this.draw();
+            }
+
+            getPointByPointId(pointId) {
+                // Search all layers for this point ID
+                for (let layer of this.layers) {
+                    const point = layer.elements.find(e => e.type === 'point' && e.pointId === pointId);
+                    if (point) {
+                        return { ...point, layerId: layer.id, layerName: layer.name };
+                    }
+                }
+                return null;
+            }
+
+            getPointAtCoordinate(worldX, worldY, tolerance = 30) {
+                // Find nearest point within tolerance across all visible layers
+                let closest = null;
+                let closestDist = tolerance;
+
+                this.layers.forEach(layer => {
+                    if (!layer.visible) return;
+                    
+                    layer.elements.forEach(element => {
+                        if (element.type === 'point') {
+                            const dist = Math.hypot(element.x - worldX, element.y - worldY);
+                            if (dist < closestDist) {
+                                closestDist = dist;
+                                closest = { ...element, layerId: layer.id, layerName: layer.name };
+                            }
+                        }
+                    });
+                });
+
+                return closest;
+            }
+
+            renumberPointsGlobally() {
+                // Collect all points from all layers
+                const allPoints = [];
+                this.layers.forEach(layer => {
+                    layer.elements.forEach(element => {
+                        if (element.type === 'point') {
+                            allPoints.push(element);
+                        }
+                    });
+                });
+
+                // Sort by current pointId to maintain order
+                allPoints.sort((a, b) => a.pointId - b.pointId);
+
+                // Reassign IDs sequentially
+                allPoints.forEach((point, index) => {
+                    point.pointId = index + 1;
+                });
+
+                // Reset nextPointId to be one more than the highest ID
+                this.nextPointId = allPoints.length + 1;
+            }
+
+            addLineWithSymmetry(p1x, p1y, p2x, p2y) {
+                // Add a line (with optional 4-way symmetry)
+                const layer = this.getActiveLayer();
+                const lines = [{ x1: p1x, y1: p1y, x2: p2x, y2: p2y }];
+
+                if (this.lineSymmetryEnabled) {
+                    // Add 4-way symmetric lines around origin
+                    lines.push({ x1: -p1x, y1: p1y, x2: -p2x, y2: p2y });
+                    lines.push({ x1: p1x, y1: -p1y, x2: p2x, y2: -p2y });
+                    lines.push({ x1: -p1x, y1: -p1y, x2: -p2x, y2: -p2y });
+                }
+
+                // Remove duplicates
+                const unique = [];
+                const seen = new Set();
+                lines.forEach(l => {
+                    const key = `${l.x1},${l.y1},${l.x2},${l.y2}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        unique.push(l);
+                    }
+                });
+
+                // Add all unique lines
+                unique.forEach(l => {
+                    layer.elements.push({
+                        type: 'line',
+                        x1: l.x1,
+                        y1: l.y1,
+                        x2: l.x2,
+                        y2: l.y2,
+                        color: this.currentColor,
+                        width: 2,
+                        isRecent: true
+                    });
+                    
+                    // Clear isRecent flag from all other lines
+                    layer.elements.forEach((el, idx) => {
+                        if (el.type === 'line' && idx < layer.elements.length - 1) {
+                            el.isRecent = false;
+                        }
+                    });
+                });
+            }
+
+            drawLineFromInputs() {
+                const fromInput = document.getElementById('linePointFrom');
+                const toInput = document.getElementById('linePointTo');
+                const fromId = parseInt(fromInput.value);
+                const toId = parseInt(toInput.value);
+
+                if (isNaN(fromId) || isNaN(toId)) {
+                    alert('Please enter valid point numbers');
+                    return;
+                }
+
+                const point1 = this.getPointByPointId(fromId);
+                const point2 = this.getPointByPointId(toId);
+
+                if (!point1) {
+                    alert(`Point ${fromId} not found`);
+                    return;
+                }
+                if (!point2) {
+                    alert(`Point ${toId} not found`);
+                    return;
+                }
+                if (fromId === toId) {
+                    alert('Cannot draw a line to the same point');
+                    return;
+                }
+
+                this.addLineWithSymmetry(point1.x, point1.y, point2.x, point2.y);
+
+                this.saveState();
+                fromInput.value = '';
+                toInput.value = '';
+                this.lineToolPoint1 = null;
+                this.lineToolPoint2 = null;
+                this.updateLineToolStatus();
+                this.draw();
+            }
+
+            updateLineToolStatus() {
+                const status = document.getElementById('lineToolStatus');
+                if (!this.lineToolPoint1 && !this.lineToolPoint2) {
+                    status.textContent = 'Click a point to start...';
+                    status.style.color = 'var(--gold-dim)';
+                } else if (this.lineToolPoint1 && !this.lineToolPoint2) {
+                    const layerInfo = this.lineToolPoint1.layerName && this.lineToolPoint1.layerName !== this.getActiveLayer().name 
+                        ? ` (${this.lineToolPoint1.layerName})`
+                        : '';
+                    status.textContent = `Point ${this.lineToolPoint1.pointId}${layerInfo} → tap next point, or re-tap / long-press to cancel`;
+                    status.style.color = 'var(--gold)';
+                }
+            }
+
+            updatePointsList() {
+                const pointsList = document.getElementById('pointsList');
+                
+                // Collect all points from all layers
+                const allPoints = [];
+                this.layers.forEach(layer => {
+                    layer.elements.forEach(element => {
+                        if (element.type === 'point') {
+                            allPoints.push({ ...element, layerId: layer.id, layerName: layer.name });
+                        }
+                    });
+                });
+
+                if (allPoints.length === 0) {
+                    pointsList.innerHTML = '<div class="empty-list">No points</div>';
+                    return;
+                }
+
+                pointsList.innerHTML = '';
+                // Display in ascending order by pointId (ID 1 first)
+                const sortedPoints = [...allPoints].sort((a, b) => a.pointId - b.pointId);
+                
+                sortedPoints.forEach((point) => {
+                    const item = document.createElement('div');
+                    item.className = 'point-item';
+                    const layerInfo = point.layerName ? ` [${point.layerName}]` : '';
+                    item.innerHTML = `<span class="point-number">Point ${point.pointId}</span>
+                                      <span class="point-coords">(${point.x}, ${point.y})${layerInfo}</span>
+                                      <button class="delete-point-btn" data-point-id="${point.pointId}">×</button>`;
+                    
+                    item.querySelector('.delete-point-btn').addEventListener('click', () => {
+                        // Find and remove the point by pointId globally
+                        const layer = this.layers.find(l => l.id === point.layerId);
+                        if (layer) {
+                            const pointIndex = layer.elements.findIndex(e => e.pointId === point.pointId);
+                            if (pointIndex !== -1) {
+                                layer.elements.splice(pointIndex, 1);
+                                this.renumberPointsGlobally();
+                                this.saveState();
+                                this.updatePointsList();
+                                this.draw();
+                            }
+                        }
+                    });
+
+                    pointsList.appendChild(item);
+                });
+            }
+
+            getActiveLayer() {
+                return this.layers.find(l => l.id === this.activeLayerId);
+            }
+
+            addLayer() {
+                const nameInput = document.getElementById('newLayerName');
+                const name = nameInput.value.trim() || `Layer ${this.layers.length + 1}`;
+                const layer = {
+                    id: Date.now(),
+                    name,
+                    visible: true,
+                    elements: [],
+                    history: [],
+                    historyIndex: -1
+                };
+                this.layers.push(layer);
+                this.activeLayerId = layer.id;
+                nameInput.value = '';
+                this.updateLayerUI();
+                this.draw();
+            }
+
+            removeLayer(layerId) {
+                if (this.layers.length === 1) {
+                    alert('Cannot remove the last layer');
+                    return;
+                }
+                this.layers = this.layers.filter(l => l.id !== layerId);
+                if (this.activeLayerId === layerId) {
+                    this.activeLayerId = this.layers[0].id;
+                }
+                this.updateLayerUI();
+                this.draw();
+            }
+
+            toggleLayerVisibility(layerId) {
+                const layer = this.layers.find(l => l.id === layerId);
+                if (layer) {
+                    layer.visible = !layer.visible;
+                    this.updateLayerUI();
+                    this.draw();
+                }
+            }
+
+            moveLayerUp(layerId) {
+                const index = this.layers.findIndex(l => l.id === layerId);
+                if (index < this.layers.length - 1) {
+                    [this.layers[index], this.layers[index + 1]] = [this.layers[index + 1], this.layers[index]];
+                    this.updateLayerUI();
+                    this.draw();
+                }
+            }
+
+            moveLayerDown(layerId) {
+                const index = this.layers.findIndex(l => l.id === layerId);
+                if (index > 0) {
+                    [this.layers[index], this.layers[index - 1]] = [this.layers[index - 1], this.layers[index]];
+                    this.updateLayerUI();
+                    this.draw();
+                }
+            }
+
+            updateLayerUI() {
+                const layerList = document.getElementById('layerList');
+                layerList.innerHTML = '';
+
+                [...this.layers].reverse().forEach(layer => {
+                    const item = document.createElement('div');
+                    item.className = 'layer-item' + (layer.id === this.activeLayerId ? ' active' : '');
+
+                    const eye = document.createElement('div');
+                    eye.className = 'layer-eye';
+                    eye.textContent = layer.visible ? '👁' : '🚫';
+                    eye.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggleLayerVisibility(layer.id);
+                    });
+
+                    const name = document.createElement('div');
+                    name.className = 'layer-name';
+                    name.textContent = layer.name;
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'layer-delete';
+                    deleteBtn.textContent = '×';
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.removeLayer(layer.id);
+                    });
+
+                    const moveUpBtn = document.createElement('button');
+                    moveUpBtn.className = 'layer-move-btn';
+                    moveUpBtn.textContent = '↑';
+                    moveUpBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.moveLayerUp(layer.id);
+                    });
+
+                    const moveDownBtn = document.createElement('button');
+                    moveDownBtn.className = 'layer-move-btn';
+                    moveDownBtn.textContent = '↓';
+                    moveDownBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.moveLayerDown(layer.id);
+                    });
+
+                    item.appendChild(eye);
+                    item.appendChild(name);
+                    item.appendChild(moveUpBtn);
+                    item.appendChild(moveDownBtn);
+                    item.appendChild(deleteBtn);
+                    item.addEventListener('click', () => {
+                        this.activeLayerId = layer.id;
+                        this.updateLayerUI();
+                        this.updatePointsList();
+                        this.draw();
+                    });
+
+                    layerList.appendChild(item);
+                });
+
+                document.getElementById('layerCount').textContent = this.layers.length;
+            }
+
+            saveState() {
+                const layer = this.getActiveLayer();
+                layer.history = layer.history.slice(0, layer.historyIndex + 1);
+                layer.history.push(JSON.stringify(layer.elements));
+                layer.historyIndex++;
+                this.updateStats();
+            }
+
+            undo() {
+                const layer = this.getActiveLayer();
+                if (layer.historyIndex > 0) {
+                    layer.historyIndex--;
+                    layer.elements = JSON.parse(layer.history[layer.historyIndex]);
+                    this.draw();
+                    this.updateStats();
+                }
+            }
+
+            redo() {
+                const layer = this.getActiveLayer();
+                if (layer.historyIndex < layer.history.length - 1) {
+                    layer.historyIndex++;
+                    layer.elements = JSON.parse(layer.history[layer.historyIndex]);
+                    this.draw();
+                    this.updateStats();
+                }
+            }
+
+            clearLayer() {
+                if (confirm('Clear all elements in this layer?')) {
+                    const layer = this.getActiveLayer();
+                    layer.elements = [];
+                    this.saveState();
+                    this.draw();
+                }
+            }
+
+            screenToWorld(screenX, screenY) {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                // At zoom 1.0, 1 world unit = 1 screen pixel
+                const worldX = (screenX - centerX) / this.zoom + this.panX;
+                const worldY = (screenY - centerY) / this.zoom + this.panY;
+                return { x: worldX, y: worldY };
+            }
+
+            worldToScreen(worldX, worldY) {
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                // At zoom 1.0, 1 world unit = 1 screen pixel
+                const screenX = (worldX - this.panX) * this.zoom + centerX;
+                const screenY = (worldY - this.panY) * this.zoom + centerY;
+                return { x: screenX, y: screenY };
+            }
+
+            onCanvasMouseDown(e) {
+                // Ignore right-clicks - they're handled by onCanvasRightClick
+                if (e.button === 2) return;
+                
+                const rect = this.canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left;
+                const screenY = e.clientY - rect.top;
+                const { x: worldX, y: worldY } = this.screenToWorld(screenX, screenY);
+
+                if (this.tool === 'point') {
+                    const snapped = this.snapToGrid(worldX, worldY);
+                    this.addPointWithSymmetry(snapped.x, snapped.y);
+                    this.draw();
+                } else if (this.tool === 'line') {
+                    // Try to snap to a nearby point first
+                    const tolerance = 30 / this.zoom;
+                    const pointAtCoord = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    
+                    if (pointAtCoord) {
+                        if (!this.lineToolPoint1) {
+                            this.lineToolPoint1 = pointAtCoord;
+                            this.updateLineToolStatus();
+                        } else if (pointAtCoord.pointId === this.lineToolPoint1.pointId) {
+                            // Clicked starting point again — abort
+                            this.lineToolPoint1 = null;
+                            this.lineToolPoint2 = null;
+                            this.updateLineToolStatus();
+                            this.draw();
+                        } else {
+                            // Complete the line
+                            this.lineToolPoint2 = pointAtCoord;
+                            this.addLineWithSymmetry(this.lineToolPoint1.x, this.lineToolPoint1.y, this.lineToolPoint2.x, this.lineToolPoint2.y);
+                            this.saveState();
+                            this.lineToolPoint1 = null;
+                            this.lineToolPoint2 = null;
+                            this.updateLineToolStatus();
+                            this.draw();
+                        }
+                    }
+                } else if (this.tool === 'pan') {
+                    this.isPanning = true;
+                    this.panStart = { x: screenX, y: screenY };
+                }
+            }
+
+            onCanvasMouseMove(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left;
+                const screenY = e.clientY - rect.top;
+                
+                // Track cursor for zoom
+                this.cursorX = screenX;
+                this.cursorY = screenY;
+
+                // Check for point hover to show tooltip
+                const { x: worldX, y: worldY } = this.screenToWorld(screenX, screenY);
+                const tolerance = 20 / this.zoom;
+                const hoveredPoint = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                
+                const tooltip = document.getElementById('pointTooltip');
+                if (hoveredPoint) {
+                    tooltip.textContent = `Point ${hoveredPoint.pointId}: (${hoveredPoint.x}, ${hoveredPoint.y})`;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = (screenX + 10) + 'px';
+                    tooltip.style.top = (screenY - 30) + 'px';
+                } else {
+                    tooltip.style.display = 'none';
+                }
+
+                if (this.tool === 'pan' && this.isPanning) {
+                    const dx = (screenX - this.panStart.x) / this.zoom;
+                    const dy = (screenY - this.panStart.y) / this.zoom;
+                    this.panX -= dx;
+                    this.panY -= dy;
+                    this.panStart = { x: screenX, y: screenY };
+                    this.draw();
+                } else if (this.tool === 'line' && this.lineToolPoint1) {
+                    // Show preview line from point1 to cursor
+                    const { x: worldX, y: worldY } = this.screenToWorld(screenX, screenY);
+                    const tolerance = 30 / this.zoom;
+                    const snapPoint = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    
+                    // Mark draw() in next frame to show preview
+                    if (snapPoint || true) this.draw(); // Always redraw to show moving preview
+                } else if (this.tool === 'line' && this.isDrawing && this.lineStart) {
+                    this.draw();
+                    const { x: worldX, y: worldY } = this.screenToWorld(screenX, screenY);
+                    const snapped = this.snapToGrid(worldX, worldY);
+                    const s1 = this.worldToScreen(this.lineStart.x, this.lineStart.y);
+                    const s2 = this.worldToScreen(snapped.x, snapped.y);
+                    this.drawLineOnScreen(s1.x, s1.y, s2.x, s2.y, this.currentColor, 2);
+                }
+            }
+
+            onCanvasMouseUp(e) {
+                this.isPanning = false;
+            }
+
+            onCanvasWheel(e) {
+                e.preventDefault();
+                const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+                
+                // Get cursor position for zoom pivot
+                const rect = this.canvas.getBoundingClientRect();
+                this.cursorX = e.clientX - rect.left;
+                this.cursorY = e.clientY - rect.top;
+                
+                this.zoomAtCursor(zoomFactor);
+            }
+
+            zoomAtCursor(factor) {
+                // Get world coordinates at cursor before zoom
+                const worldBeforeZoom = this.screenToWorld(this.cursorX, this.cursorY);
+                
+                // Apply zoom
+                this.zoom *= factor;
+                this.zoom = Math.max(0.01, Math.min(this.zoom, 500));
+                
+                // Get world coordinates at cursor after zoom
+                const worldAfterZoom = this.screenToWorld(this.cursorX, this.cursorY);
+                
+                // Adjust pan to keep cursor point fixed
+                this.panX += worldBeforeZoom.x - worldAfterZoom.x;
+                this.panY += worldBeforeZoom.y - worldAfterZoom.y;
+                
+                this.draw();
+                this.updateStats();
+            }
+
+            zoom2x(factor) {
+                this.zoom *= factor;
+                this.zoom = Math.max(0.01, Math.min(this.zoom, 500));
+                this.draw();
+                this.updateStats();
+            }
+
+            resetView() {
+                this.zoom = 0.2;
+                this.panX = 0;
+                this.panY = 0;
+                this.draw();
+                this.updateStats();
+            }
+            
+            findElementAtPoint(worldX, worldY, tolerance = 20) {
+                // Find the closest element within tolerance (in world units)
+                const layer = this.getActiveLayer();
+                let closest = null;
+                let closestDist = tolerance;
+
+                layer.elements.forEach((element, index) => {
+                    if (element.type === 'point') {
+                        const dist = Math.hypot(element.x - worldX, element.y - worldY);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closest = { type: 'point', index, element };
+                        }
+                    } else if (element.type === 'line') {
+                        // Distance from point to line segment
+                        const dist = this.distanceToLineSegment(worldX, worldY, element.x1, element.y1, element.x2, element.y2);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closest = { type: 'line', index, element };
+                        }
+                    }
+                });
+
+                return closest;
+            }
+            
+            distanceToLineSegment(px, py, x1, y1, x2, y2) {
+                const A = px - x1;
+                const B = py - y1;
+                const C = x2 - x1;
+                const D = y2 - y1;
+
+                const dot = A * C + B * D;
+                const lenSq = C * C + D * D;
+                let param = -1;
+                if (lenSq !== 0) param = dot / lenSq;
+
+                let xx, yy;
+                if (param < 0) {
+                    xx = x1;
+                    yy = y1;
+                } else if (param > 1) {
+                    xx = x2;
+                    yy = y2;
+                } else {
+                    xx = x1 + param * C;
+                    yy = y1 + param * D;
+                }
+
+                const dx = px - xx;
+                const dy = py - yy;
+                return Math.hypot(dx, dy);
+            }
+            
+            onCanvasRightClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // If line tool is active and mid-draw, right-click aborts instead of deleting
+                if (this.tool === 'line' && this.lineToolPoint1) {
+                    this.lineToolPoint1 = null;
+                    this.lineToolPoint2 = null;
+                    this.updateLineToolStatus();
+                    this.draw();
+                    return;
+                }
+                
+                const rect = this.canvas.getBoundingClientRect();
+                const screenX = e.clientX - rect.left;
+                const screenY = e.clientY - rect.top;
+                const { x: worldX, y: worldY } = this.screenToWorld(screenX, screenY);
+                
+                // Find nearest element (tolerance scaled by zoom)
+                const tolerance = 30 / this.zoom;
+                const element = this.findElementAtPoint(worldX, worldY, tolerance);
+                
+                if (element) {
+                    const layer = this.getActiveLayer();
+                    layer.elements.splice(element.index, 1);
+                    
+                    // Renumber points if a point was deleted
+                    if (element.type === 'point') {
+                        this.renumberPointsGlobally();
+                    }
+                    
+                    this.saveState();
+                    this.updatePointsList();
+                    this.draw();
+                }
+            }
+
+            drawGridlines() {
+                // Determine which grid levels to show based on zoom
+                // Grid hierarchy: 1, 10, 100, 500, 2520
+                let gridLevels = [];
+                
+                if (this.zoom >= 2) {
+                    gridLevels.push({ spacing: 1, opacity: 0.08, width: 0.5 });      // 1-unit grid
+                }
+                if (this.zoom >= 0.2) {
+                    gridLevels.push({ spacing: 10, opacity: 0.12, width: 0.8 });     // 10-unit grid
+                }
+                if (this.zoom >= 0.05) {
+                    gridLevels.push({ spacing: 100, opacity: 0.18, width: 1 });      // 100-unit grid
+                }
+                if (this.zoom >= 0.02) {
+                    gridLevels.push({ spacing: 500, opacity: 0.22, width: 1.2 });    // 500-unit grid
+                }
+
+                const centerX = this.canvas.width / 2;
+                const centerY = this.canvas.height / 2;
+                const viewWidth = this.canvas.width / this.zoom;
+                const viewHeight = this.canvas.height / this.zoom;
+                const minWorldX = this.panX - viewWidth / 2;
+                const maxWorldX = this.panX + viewWidth / 2;
+                const minWorldY = this.panY - viewHeight / 2;
+                const maxWorldY = this.panY + viewHeight / 2;
+
+                this.ctx.save();
+
+                // Draw each grid level
+                gridLevels.forEach(level => {
+                    this.ctx.strokeStyle = `rgba(100, 100, 100, ${level.opacity})`;
+                    this.ctx.lineWidth = level.width;
+                    this.ctx.beginPath();
+
+                    const minXGrid = Math.floor(minWorldX / level.spacing) * level.spacing;
+                    const maxXGrid = Math.ceil(maxWorldX / level.spacing) * level.spacing;
+                    const minYGrid = Math.floor(minWorldY / level.spacing) * level.spacing;
+                    const maxYGrid = Math.ceil(maxWorldY / level.spacing) * level.spacing;
+
+                    for (let x = minXGrid; x <= maxXGrid; x += level.spacing) {
+                        const sx = (x - this.panX) * this.zoom + centerX;
+                        this.ctx.moveTo(sx, 0);
+                        this.ctx.lineTo(sx, this.canvas.height);
+                    }
+                    for (let y = minYGrid; y <= maxYGrid; y += level.spacing) {
+                        const sy = (y - this.panY) * this.zoom + centerY;
+                        this.ctx.moveTo(0, sy);
+                        this.ctx.lineTo(this.canvas.width, sy);
+                    }
+                    this.ctx.stroke();
+                });
+
+                // Draw 2520x2520 reference square - always visible and prominent
+                this.ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
+                this.ctx.lineWidth = 2;
+                const topLeft = this.worldToScreen(-1260, -1260);
+                const squareSize = 2520 * this.zoom;
+                this.ctx.strokeRect(topLeft.x, topLeft.y, squareSize, squareSize);
+
+                this.ctx.restore();
+            }
+
+            draw() {
+                if (!this.ctx) {
+                    console.error('No canvas context available');
+                    return;
+                }
+                
+                this.ctx.fillStyle = '#0a0a0a';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                this.drawGridlines();
+
+                // Draw lines first (so they appear under points)
+                this.layers.forEach(layer => {
+                    if (!layer.visible) return;
+
+                    layer.elements.forEach((element) => {
+                        if (element.type === 'line') {
+                            let color = element.color;
+                            let opacity = 0.5;
+                            
+                            // Most recent line is gold
+                            if (element.isRecent) {
+                                color = '#d4af37';
+                                opacity = 1.0;
+                            }
+                            
+                            const s1 = this.worldToScreen(element.x1, element.y1);
+                            const s2 = this.worldToScreen(element.x2, element.y2);
+                            
+                            // Convert hex to rgba with opacity
+                            let strokeColor = color;
+                            if (color.startsWith('#')) {
+                                const rgb = this.hexToRgb(color);
+                                const alpha = Math.round(opacity * 255);
+                                strokeColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+                            }
+                            
+                            this.drawLineOnScreen(s1.x, s1.y, s2.x, s2.y, strokeColor, element.width);
+                        }
+                    });
+                });
+
+                // Draw points on top
+                this.layers.forEach(layer => {
+                    if (!layer.visible) return;
+
+                    layer.elements.forEach((element) => {
+                        if (element.type === 'point') {
+                            const screen = this.worldToScreen(element.x, element.y);
+                            this.drawPointOnScreen(screen.x, screen.y, element.color, element.size);
+                        }
+                    });
+                });
+
+                // Draw line tool preview
+                if (this.tool === 'line' && this.lineToolPoint1) {
+                    const s1 = this.worldToScreen(this.lineToolPoint1.x, this.lineToolPoint1.y);
+                    const s2 = { x: this.cursorX, y: this.cursorY };
+                    
+                    // Check if cursor is near another point
+                    const { x: worldX, y: worldY } = this.screenToWorld(this.cursorX, this.cursorY);
+                    const tolerance = 30 / this.zoom;
+                    const snapPoint = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    
+                    if (snapPoint && snapPoint.pointId !== this.lineToolPoint1.pointId) {
+                        const s2Snapped = this.worldToScreen(snapPoint.x, snapPoint.y);
+                        this.drawLineOnScreen(s1.x, s1.y, s2Snapped.x, s2Snapped.y, 'rgba(212, 175, 55, 1)', 2);
+                    } else {
+                        this.drawLineOnScreen(s1.x, s1.y, s2.x, s2.y, `rgba(212, 175, 55, 0.5)`, 2);
+                    }
+                }
+
+                document.getElementById('zoomInfo').textContent = `Zoom: ${(this.zoom * 5).toFixed(2)}x`;
+                this.updateStats();
+            }
+            
+            drawLineOnScreen(sx1, sy1, sx2, sy2, color, width) {
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = Math.max(1, width * this.zoom);
+                this.ctx.beginPath();
+                this.ctx.moveTo(sx1, sy1);
+                this.ctx.lineTo(sx2, sy2);
+                this.ctx.stroke();
+            }
+
+            drawPointOnScreen(sx, sy, color, size) {
+                // Scale point size logarithmically for precision work
+                // At high zoom levels, keep points tiny (1.5-3px) for precise placement
+                const scaledSize = Math.max(1.5, Math.min(3.5, 1.5 + Math.log10(Math.max(1, this.zoom))));
+                this.ctx.fillStyle = color;
+                this.ctx.beginPath();
+                this.ctx.arc(sx, sy, scaledSize, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
+
+            hexToRgb(hex) {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : { r: 255, g: 255, b: 255 };
+            }
+
+            updateStats() {
+                const layer = this.getActiveLayer();
+                const points = layer.elements.filter(e => e.type === 'point').length;
+                const lines = layer.elements.filter(e => e.type === 'line').length;
+                document.getElementById('pointCount').textContent = points;
+                document.getElementById('lineCount').textContent = lines;
+                document.getElementById('zoomLevel').textContent = (this.zoom * 5).toFixed(2) + 'x';
+                this.updatePointsList();
+            }
+        }
+
+        // Initialize when DOM is ready
+        let workbench = null;
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing workbench');
+            try {
+                workbench = new GeometricWorkbench();
+            } catch (error) {
+                console.error('Failed to initialize workbench:', error);
+            }
+        });
+    </script>
+</body>
+</html>
