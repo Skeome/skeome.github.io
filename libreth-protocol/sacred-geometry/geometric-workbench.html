@@ -360,7 +360,7 @@
                 // Touch state
                 this._touch = {
                     startX: 0, startY: 0, startTime: 0,
-                    moved: false, panning: false, longPressTimer: null, longPressFired: false,
+                    moved: false, panning: false, longPressTimer: null, longPressFired: false, multiTouchOccurred: false,
                     pinchStartDist: 0, pinchStartZoom: 1,
                     pinchStartWorld: null, pinchStartPanX: 0, pinchStartPanY: 0
                 };
@@ -379,6 +379,7 @@
                     t.moved   = false;
                     t.panning = false;
                     t.longPressFired = false;
+                    t.multiTouchOccurred = false;
 
                     // Long-press → right-click equivalent
                     t.longPressTimer = setTimeout(() => {
@@ -393,6 +394,7 @@
                 } else if (e.touches.length === 2) {
                     clearTimeout(t.longPressTimer);
                     t.panning = false;
+                    t.multiTouchOccurred = true;
                     const t1 = e.touches[0], t2 = e.touches[1];
                     const rect = this.canvas.getBoundingClientRect();
                     t.pinchStartDist  = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
@@ -466,7 +468,7 @@
                 clearTimeout(t.longPressTimer);
 
                 // Finger lifted and it was a clean tap (no drag, no long-press)
-                if (e.changedTouches.length >= 1 && !t.moved && !t.longPressFired && e.touches.length === 0) {
+                if (e.changedTouches.length >= 1 && !t.moved && !t.longPressFired && !t.multiTouchOccurred && e.touches.length === 0) {
                     const touch = e.changedTouches[0];
                     const rect  = this.canvas.getBoundingClientRect();
                     const sx = touch.clientX - rect.left;
