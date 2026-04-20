@@ -16,6 +16,7 @@
                 <div class="tool-group">
                     <button id="toolPoint" class="active">Point</button>
                     <button id="toolLine">Line</button>
+                    <button id="toolCircle">Circle</button>
                 </div>
                 <div class="tool-group">
                     <button id="toolPan">Pan</button>
@@ -115,6 +116,27 @@
             </div>
 
             <div class="section">
+                <div class="section-title">Circle Tool</div>
+                <div class="line-tool-control">
+                    <div style="font-size: 10px; color: var(--gold-dim); margin-bottom: 8px;">
+                        Click center then radius point, or enter point numbers:
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="circleCenter" placeholder="Center point #" step="1" min="1">
+                        <input type="number" id="circleRadius" placeholder="Radius point #" step="1" min="1">
+                        <button id="drawCircleBtn">Draw Circle</button>
+                    </div>
+                    <div id="circleToolStatus" class="line-tool-status"></div>
+                    <div class="symmetry-control">
+                        <label>
+                            <input type="checkbox" id="circleSymmetryToggle">
+                            4-Way Circle Symmetry
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
                 <div class="section-title">All Points</div>
                 <div class="points-list" id="pointsList">
                     <div class="empty-list">No points</div>
@@ -131,6 +153,10 @@
                     <div class="stat-item">
                         <div class="stat-label">Lines</div>
                         <div class="stat-value" id="lineCount">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Circles</div>
+                        <div class="stat-value" id="circleCount">0</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-label">Zoom</div>
@@ -212,10 +238,15 @@
                 this.lineToolPoint1 = null;
                 this.lineToolPoint2 = null;
 
+                // Circle tool state
+                this.circleToolCenter = null;
+                this.circleSymmetryEnabled = false;
+
                 // UI Elements
                 this.tools = {
                     point: document.getElementById('toolPoint'),
                     line: document.getElementById('toolLine'),
+                    circle: document.getElementById('toolCircle'),
                     pan: document.getElementById('toolPan'),
                     select: document.getElementById('toolSelect')
                 };
@@ -320,6 +351,18 @@
                 });
                 document.getElementById('linePointTo').addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') this.drawLineFromInputs();
+                });
+
+                // Circle tool
+                document.getElementById('drawCircleBtn').addEventListener('click', () => this.drawCircleFromInputs());
+                document.getElementById('circleCenter').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.drawCircleFromInputs();
+                });
+                document.getElementById('circleRadius').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.drawCircleFromInputs();
+                });
+                document.getElementById('circleSymmetryToggle').addEventListener('change', (e) => {
+                    this.circleSymmetryEnabled = e.target.checked;
                 });
 
                 // ── Mobile sidebar toggle ──────────────────────────────────
@@ -431,7 +474,7 @@
                         const dx = (sx - this.panStart.x) / this.zoom;
                         const dy = (sy - this.panStart.y) / this.zoom;
                         this.panX -= dx;
-                        this.panY -= dy;
+                        this.panY += dy;
                         this.panStart = { x: sx, y: sy };
                         this.draw();
                     } else if (this.tool === 'line' && this.lineToolPoint1) {
@@ -457,7 +500,7 @@
                     const cx = this.canvas.width  / 2;
                     const cy = this.canvas.height / 2;
                     this.panX = t.pinchStartWorld.x - (midX - cx) / this.zoom;
-                    this.panY = t.pinchStartWorld.y - (midY - cy) / this.zoom;
+                    this.panY = t.pinchStartWorld.y + (midY - cy) / this.zoom;
                     this.draw();
                 }
             }
@@ -531,6 +574,26 @@
                             this.draw();
                         }
                     }
+                } else if (this.tool === 'circle') {
+                    const tolerance = 30 / this.zoom;
+                    const pointAtCoord = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    if (pointAtCoord) {
+                        if (!this.circleToolCenter) {
+                            this.circleToolCenter = pointAtCoord;
+                            this.updateCircleToolStatus();
+                        } else if (pointAtCoord.pointId === this.circleToolCenter.pointId) {
+                            this.circleToolCenter = null;
+                            this.updateCircleToolStatus();
+                            this.draw();
+                        } else {
+                            const r = Math.hypot(pointAtCoord.x - this.circleToolCenter.x, pointAtCoord.y - this.circleToolCenter.y);
+                            this.addCircleWithSymmetry(this.circleToolCenter.x, this.circleToolCenter.y, r);
+                            this.saveState();
+                            this.circleToolCenter = null;
+                            this.updateCircleToolStatus();
+                            this.draw();
+                        }
+                    }
                 }
                 // Pan tool: taps do nothing extra
             }
@@ -541,6 +604,12 @@
                     this.lineToolPoint1 = null;
                     this.lineToolPoint2 = null;
                     this.updateLineToolStatus();
+                    this.draw();
+                    return;
+                }
+                if (this.tool === 'circle' && this.circleToolCenter) {
+                    this.circleToolCenter = null;
+                    this.updateCircleToolStatus();
                     this.draw();
                     return;
                 }
@@ -577,6 +646,11 @@
                     this.lineToolPoint1 = null;
                     this.lineToolPoint2 = null;
                     document.getElementById('lineToolStatus').textContent = '';
+                }
+                // Reset circle tool state when switching away
+                if (toolName !== 'circle') {
+                    this.circleToolCenter = null;
+                    document.getElementById('circleToolStatus').textContent = '';
                 }
             }
 
@@ -752,6 +826,82 @@
                     });
                 });
             }
+
+            addCircleWithSymmetry(cx, cy, r) {
+                const layer = this.getActiveLayer();
+                const circles = [{ cx, cy, r }];
+
+                if (this.circleSymmetryEnabled) {
+                    circles.push({ cx: -cx, cy,  r });
+                    circles.push({ cx,  cy: -cy, r });
+                    circles.push({ cx: -cx, cy: -cy, r });
+                }
+
+                // Remove duplicates
+                const unique = [];
+                const seen = new Set();
+                circles.forEach(c => {
+                    const key = `${c.cx},${c.cy},${c.r}`;
+                    if (!seen.has(key)) { seen.add(key); unique.push(c); }
+                });
+
+                unique.forEach(c => {
+                    // Clear isRecent from all existing circles first
+                    layer.elements.forEach(el => { if (el.type === 'circle') el.isRecent = false; });
+                    layer.elements.push({
+                        type: 'circle',
+                        cx: c.cx, cy: c.cy, r: c.r,
+                        color: this.currentColor,
+                        width: 2,
+                        isRecent: true
+                    });
+                });
+            }
+
+            drawCircleFromInputs() {
+                const centerInput = document.getElementById('circleCenter');
+                const radiusInput = document.getElementById('circleRadius');
+                const centerId = parseInt(centerInput.value);
+                const radiusId = parseInt(radiusInput.value);
+
+                if (isNaN(centerId) || isNaN(radiusId)) {
+                    alert('Please enter valid point numbers');
+                    return;
+                }
+                if (centerId === radiusId) {
+                    alert('Center and radius point must be different');
+                    return;
+                }
+
+                const centerPt = this.getPointByPointId(centerId);
+                const radiusPt = this.getPointByPointId(radiusId);
+
+                if (!centerPt) { alert(`Point ${centerId} not found`); return; }
+                if (!radiusPt) { alert(`Point ${radiusId} not found`); return; }
+
+                const r = Math.hypot(radiusPt.x - centerPt.x, radiusPt.y - centerPt.y);
+                this.addCircleWithSymmetry(centerPt.x, centerPt.y, r);
+                this.saveState();
+                centerInput.value = '';
+                radiusInput.value = '';
+                this.circleToolCenter = null;
+                this.updateCircleToolStatus();
+                this.draw();
+            }
+
+            updateCircleToolStatus() {
+                const status = document.getElementById('circleToolStatus');
+                if (!this.circleToolCenter) {
+                    status.textContent = 'Click a center point...';
+                    status.style.color = 'var(--gold-dim)';
+                } else {
+                    const layerInfo = this.circleToolCenter.layerName && this.circleToolCenter.layerName !== this.getActiveLayer().name
+                        ? ` (${this.circleToolCenter.layerName})` : '';
+                    status.textContent = `Center: Point ${this.circleToolCenter.pointId}${layerInfo} → tap radius point, or re-tap / long-press to cancel`;
+                    status.style.color = 'var(--gold)';
+                }
+            }
+
 
             drawLineFromInputs() {
                 const fromInput = document.getElementById('linePointFrom');
@@ -1020,7 +1170,7 @@
                 const centerY = this.canvas.height / 2;
                 // At zoom 1.0, 1 world unit = 1 screen pixel
                 const worldX = (screenX - centerX) / this.zoom + this.panX;
-                const worldY = (screenY - centerY) / this.zoom + this.panY;
+                const worldY = -((screenY - centerY) / this.zoom) + this.panY;
                 return { x: worldX, y: worldY };
             }
 
@@ -1029,7 +1179,7 @@
                 const centerY = this.canvas.height / 2;
                 // At zoom 1.0, 1 world unit = 1 screen pixel
                 const screenX = (worldX - this.panX) * this.zoom + centerX;
-                const screenY = (worldY - this.panY) * this.zoom + centerY;
+                const screenY = -(worldY - this.panY) * this.zoom + centerY;
                 return { x: screenX, y: screenY };
             }
 
@@ -1072,6 +1222,28 @@
                             this.draw();
                         }
                     }
+                } else if (this.tool === 'circle') {
+                    const tolerance = 30 / this.zoom;
+                    const pointAtCoord = this.getPointAtCoordinate(worldX, worldY, tolerance);
+                    if (pointAtCoord) {
+                        if (!this.circleToolCenter) {
+                            this.circleToolCenter = pointAtCoord;
+                            this.updateCircleToolStatus();
+                        } else if (pointAtCoord.pointId === this.circleToolCenter.pointId) {
+                            // Clicked center again — abort
+                            this.circleToolCenter = null;
+                            this.updateCircleToolStatus();
+                            this.draw();
+                        } else {
+                            // Complete the circle
+                            const r = Math.hypot(pointAtCoord.x - this.circleToolCenter.x, pointAtCoord.y - this.circleToolCenter.y);
+                            this.addCircleWithSymmetry(this.circleToolCenter.x, this.circleToolCenter.y, r);
+                            this.saveState();
+                            this.circleToolCenter = null;
+                            this.updateCircleToolStatus();
+                            this.draw();
+                        }
+                    }
                 } else if (this.tool === 'pan') {
                     this.isPanning = true;
                     this.panStart = { x: screenX, y: screenY };
@@ -1106,7 +1278,7 @@
                     const dx = (screenX - this.panStart.x) / this.zoom;
                     const dy = (screenY - this.panStart.y) / this.zoom;
                     this.panX -= dx;
-                    this.panY -= dy;
+                    this.panY += dy;
                     this.panStart = { x: screenX, y: screenY };
                     this.draw();
                 } else if (this.tool === 'line' && this.lineToolPoint1) {
@@ -1197,6 +1369,14 @@
                             closestDist = dist;
                             closest = { type: 'line', index, element };
                         }
+                    } else if (element.type === 'circle') {
+                        // Distance from cursor to the circle's circumference
+                        const distToCenter = Math.hypot(worldX - element.cx, worldY - element.cy);
+                        const dist = Math.abs(distToCenter - element.r);
+                        if (dist < closestDist) {
+                            closestDist = dist;
+                            closest = { type: 'circle', index, element };
+                        }
                     }
                 });
 
@@ -1240,6 +1420,13 @@
                     this.lineToolPoint1 = null;
                     this.lineToolPoint2 = null;
                     this.updateLineToolStatus();
+                    this.draw();
+                    return;
+                }
+                // If circle tool is active and mid-draw, right-click aborts instead of deleting
+                if (this.tool === 'circle' && this.circleToolCenter) {
+                    this.circleToolCenter = null;
+                    this.updateCircleToolStatus();
                     this.draw();
                     return;
                 }
@@ -1324,7 +1511,7 @@
                 // Draw 2520x2520 reference square - always visible and prominent
                 this.ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
                 this.ctx.lineWidth = 2;
-                const topLeft = this.worldToScreen(-1260, -1260);
+                const topLeft = this.worldToScreen(-1260, 1260);
                 const squareSize = 2520 * this.zoom;
                 this.ctx.strokeRect(topLeft.x, topLeft.y, squareSize, squareSize);
 
@@ -1364,11 +1551,20 @@
                             let strokeColor = color;
                             if (color.startsWith('#')) {
                                 const rgb = this.hexToRgb(color);
-                                const alpha = Math.round(opacity * 255);
                                 strokeColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
                             }
                             
                             this.drawLineOnScreen(s1.x, s1.y, s2.x, s2.y, strokeColor, element.width);
+                        }
+                        if (element.type === 'circle') {
+                            let color = element.color;
+                            let opacity = element.isRecent ? 1.0 : 0.5;
+                            if (element.isRecent) color = '#d4af37';
+                            const rgb = this.hexToRgb(color);
+                            const strokeColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+                            const center = this.worldToScreen(element.cx, element.cy);
+                            const radiusScreen = element.r * this.zoom;
+                            this.drawCircleOnScreen(center.x, center.y, radiusScreen, strokeColor, element.width);
                         }
                     });
                 });
@@ -1403,6 +1599,26 @@
                     }
                 }
 
+                // Draw circle tool preview
+                if (this.tool === 'circle' && this.circleToolCenter) {
+                    const center = this.worldToScreen(this.circleToolCenter.x, this.circleToolCenter.y);
+                    const { x: worldX, y: worldY } = this.screenToWorld(this.cursorX, this.cursorY);
+                    const tolerance = 30 / this.zoom;
+                    const snapPoint = this.getPointAtCoordinate(worldX, worldY, tolerance);
+
+                    let radiusScreen;
+                    if (snapPoint && snapPoint.pointId !== this.circleToolCenter.pointId) {
+                        const snapScreen = this.worldToScreen(snapPoint.x, snapPoint.y);
+                        radiusScreen = Math.hypot(snapScreen.x - center.x, snapScreen.y - center.y);
+                        this.drawCircleOnScreen(center.x, center.y, radiusScreen, 'rgba(212, 175, 55, 1)', 2);
+                    } else {
+                        radiusScreen = Math.hypot(this.cursorX - center.x, this.cursorY - center.y);
+                        this.drawCircleOnScreen(center.x, center.y, radiusScreen, 'rgba(212, 175, 55, 0.5)', 2);
+                    }
+                    // Draw a faint radius line
+                    this.drawLineOnScreen(center.x, center.y, this.cursorX, this.cursorY, 'rgba(212, 175, 55, 0.25)', 1);
+                }
+
                 document.getElementById('zoomInfo').textContent = `Zoom: ${(this.zoom * 5).toFixed(2)}x`;
                 this.updateStats();
             }
@@ -1413,6 +1629,14 @@
                 this.ctx.beginPath();
                 this.ctx.moveTo(sx1, sy1);
                 this.ctx.lineTo(sx2, sy2);
+                this.ctx.stroke();
+            }
+
+            drawCircleOnScreen(sx, sy, radiusScreen, color, width) {
+                this.ctx.strokeStyle = color;
+                this.ctx.lineWidth = Math.max(1, width * this.zoom);
+                this.ctx.beginPath();
+                this.ctx.arc(sx, sy, Math.max(0.5, radiusScreen), 0, Math.PI * 2);
                 this.ctx.stroke();
             }
 
@@ -1437,10 +1661,12 @@
 
             updateStats() {
                 const layer = this.getActiveLayer();
-                const points = layer.elements.filter(e => e.type === 'point').length;
-                const lines = layer.elements.filter(e => e.type === 'line').length;
+                const points  = layer.elements.filter(e => e.type === 'point').length;
+                const lines   = layer.elements.filter(e => e.type === 'line').length;
+                const circles = layer.elements.filter(e => e.type === 'circle').length;
                 document.getElementById('pointCount').textContent = points;
                 document.getElementById('lineCount').textContent = lines;
+                document.getElementById('circleCount').textContent = circles;
                 document.getElementById('zoomLevel').textContent = (this.zoom * 5).toFixed(2) + 'x';
                 this.updatePointsList();
             }
