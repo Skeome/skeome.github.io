@@ -1501,7 +1501,7 @@
                         this.ctx.lineTo(sx, this.canvas.height);
                     }
                     for (let y = minYGrid; y <= maxYGrid; y += level.spacing) {
-                        const sy = (y - this.panY) * this.zoom + centerY;
+                        const sy = -(y - this.panY) * this.zoom + centerY;
                         this.ctx.moveTo(0, sy);
                         this.ctx.lineTo(this.canvas.width, sy);
                     }
