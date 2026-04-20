@@ -778,8 +778,18 @@
                     point.pointId = index + 1;
                 });
 
-                // Reset nextPointId to be one more than the highest ID
                 this.nextPointId = allPoints.length + 1;
+            }
+
+            // Sync nextPointId from whatever IDs currently exist (e.g. after undo/redo)
+            syncNextPointId() {
+                let max = 0;
+                this.layers.forEach(layer => {
+                    layer.elements.forEach(el => {
+                        if (el.type === 'point' && el.pointId > max) max = el.pointId;
+                    });
+                });
+                this.nextPointId = max + 1;
             }
 
             addLineWithSymmetry(p1x, p1y, p2x, p2y) {
@@ -1141,6 +1151,7 @@
                 if (layer.historyIndex > 0) {
                     layer.historyIndex--;
                     layer.elements = JSON.parse(layer.history[layer.historyIndex]);
+                    this.syncNextPointId();
                     this.draw();
                     this.updateStats();
                 }
@@ -1151,6 +1162,7 @@
                 if (layer.historyIndex < layer.history.length - 1) {
                     layer.historyIndex++;
                     layer.elements = JSON.parse(layer.history[layer.historyIndex]);
+                    this.syncNextPointId();
                     this.draw();
                     this.updateStats();
                 }
@@ -1160,6 +1172,7 @@
                 if (confirm('Clear all elements in this layer?')) {
                     const layer = this.getActiveLayer();
                     layer.elements = [];
+                    this.renumberPointsGlobally();
                     this.saveState();
                     this.draw();
                 }
